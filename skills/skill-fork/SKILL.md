@@ -68,7 +68,7 @@ After user confirmation:
 5. Update each child's frontmatter (name, description, tools)
 6. Register children in the registry with `forked_from: parent-name`
 7. Update parent with `forked_into: [child-1, child-2, ...]`
-8. Set parent status to `deprecated` with `replacement_skill` pointing to children
+8. Set parent status to `deprecated` with `replacement_skill` naming the primary child (note others in `deprecation_reason`)
 9. Run `skill-health` validation on each child
 
 ### 4. Post-Fork Verification

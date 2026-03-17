@@ -19,27 +19,24 @@ Display all skills and their relationships as an ASCII directed graph:
 
 ```
 SKILL NETWORK
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                  skill-registry (100)
-                  ┌──────┼──────────┬──────────┐
-                  │      │          │          │
-                  ▼      ▼          ▼          ▼
-          skill-health  skill-dashboard  skill-test  skill-analyze
-              │              │                │
-              ▼              ▼                │
-          skill-scaffold ◄───┘                │
-              │                               │
-              ▼                               ▼
-          skill-fork              skill-analyze ◄──┘
-              │
-              ▼
-          skill-network
-              │
-              ▼
-          skill-export
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                       skill-registry (100)
+       ┌────┬────┬────┬────┼────┬──────┬──────┐
+       │    │    │    │    │    │      │      │
+       ▼    ▼    ▼    ▼    ▼    ▼      ▼      ▼
+     health dash test anlz fork net  export scaffold
+       │         │              │             │
+       │         └──► analyze   │             │
+       └──► dashboard           │             │
+                          ┌─────┘             │
+                          ▼                   │
+                     scaffold ◄───────────────┘
+                          │
+                          ▼
+                     skill-fork
 
 Legend: ─▶ depends_on   (100) = composite score
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Nodes: 9    Edges: 14    Orphans: 0    Max depth: 4
 ```
 
@@ -73,10 +70,13 @@ skill-registry is referenced by:
   ├─ skill-dashboard
   ├─ skill-scaffold
   ├─ skill-test
-  └─ skill-analyze
+  ├─ skill-analyze
+  ├─ skill-fork
+  ├─ skill-network
+  └─ skill-export
 
-Direct dependents: 5    Total (transitive): 8
-⚠ HIGH IMPACT — changes affect 83% of the network
+Direct dependents: 8    Total (transitive): 8
+⚠ HIGH IMPACT — changes affect 100% of the network
 ```
 
 ### 4. Orphan Detection

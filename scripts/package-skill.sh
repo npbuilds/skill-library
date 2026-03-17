@@ -22,7 +22,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 PLUGIN_VERSION="unknown"
 if [ -f "$PLUGIN_DIR/.claude-plugin/plugin.json" ]; then
-  PLUGIN_VERSION=$(python3 -c "import json; print(json.load(open('$PLUGIN_DIR/.claude-plugin/plugin.json'))['version'])" 2>/dev/null || echo "unknown")
+  PLUGIN_VERSION=$(python3 -c "import json, sys; print(json.load(open(sys.argv[1]))['version'])" "$PLUGIN_DIR/.claude-plugin/plugin.json" 2>/dev/null || echo "unknown")
 fi
 
 # Get metrics
@@ -136,4 +136,12 @@ READMEEOF
 FILE_COUNT=$(find "$EXPORT_DIR" -type f | wc -l | tr -d ' ')
 TOTAL_SIZE=$(du -sh "$EXPORT_DIR" 2>/dev/null | cut -f1 | tr -d ' ')
 
-echo "{\"skill\": \"$SKILL_NAME\", \"export_dir\": \"$EXPORT_DIR\", \"files\": $FILE_COUNT, \"size\": \"$TOTAL_SIZE\"}"
+python3 -c "
+import json, sys
+print(json.dumps({
+    'skill': sys.argv[1],
+    'export_dir': sys.argv[2],
+    'files': int(sys.argv[3]),
+    'size': sys.argv[4]
+}))
+" "$SKILL_NAME" "$EXPORT_DIR" "$FILE_COUNT" "$TOTAL_SIZE"
