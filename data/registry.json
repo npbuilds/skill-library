@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plugin_version": "0.4.0",
+  "plugin_version": "1.0.0",
   "last_scan": "2026-03-17T00:00:00Z",
   "skills": {
     "skill-registry": {
@@ -44,7 +44,10 @@
         "skill-dashboard",
         "skill-scaffold",
         "skill-test",
-        "skill-analyze"
+        "skill-analyze",
+        "skill-fork",
+        "skill-network",
+        "skill-export"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -74,6 +77,11 @@
           "date": "2026-03-17",
           "action": "updated",
           "note": "Phase 4 \u2014 added skill-test and skill-analyze to referenced_by"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 5 \u2014 added skill-fork, skill-network, skill-export to referenced_by"
         }
       ]
     },
@@ -117,7 +125,8 @@
         "skill-dashboard"
       ],
       "referenced_by": [
-        "skill-scaffold"
+        "skill-scaffold",
+        "skill-fork"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -137,6 +146,11 @@
           "date": "2026-03-17",
           "action": "updated",
           "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
         }
       ]
     },
@@ -243,7 +257,9 @@
         "skill-health",
         "skill-dashboard"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "skill-fork"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -257,6 +273,11 @@
           "date": "2026-03-17",
           "action": "created",
           "note": "Phase 3 \u2014 The Builder, skill creation factory"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
         }
       ]
     },
@@ -372,6 +393,173 @@
           "note": "Phase 4 \u2014 The Oracle, Anthropic API-powered analysis"
         }
       ]
+    },
+    "skill-fork": {
+      "name": "skill-fork",
+      "description": "Fork a complex skill into smaller, focused child skills when it exceeds health thresholds or has mixed responsibilities.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-fork/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 421,
+        "body_words": 368,
+        "description_words": 41,
+        "section_count": 3,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 54,
+        "estimated_tokens_body": 830,
+        "estimated_tokens_total": 884,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [
+        "skill-registry",
+        "skill-scaffold",
+        "skill-health"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 5 \u2014 The Splitter, skill decomposition"
+        }
+      ]
+    },
+    "skill-network": {
+      "name": "skill-network",
+      "description": "Visualize the skill network as an ASCII dependency graph showing how skills connect, trace dependency chains, and detect orphans.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-network/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 360,
+        "body_words": 315,
+        "description_words": 34,
+        "section_count": 2,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 45,
+        "estimated_tokens_body": 882,
+        "estimated_tokens_total": 927,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 97,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 97,
+      "depends_on": [
+        "skill-registry"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 5 \u2014 The Cartographer, network visualization"
+        }
+      ]
+    },
+    "skill-export": {
+      "name": "skill-export",
+      "description": "Export skills as portable packages for sharing, backup, or migration between environments.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-export/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 303,
+        "body_words": 252,
+        "description_words": 39,
+        "section_count": 5,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 51,
+        "estimated_tokens_body": 626,
+        "estimated_tokens_total": 677,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [
+        "skill-registry"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 5 \u2014 The Courier, skill export and packaging"
+        }
+      ]
     }
   },
   "network": {
@@ -382,7 +570,10 @@
         "skill-dashboard",
         "skill-scaffold",
         "skill-test",
-        "skill-analyze"
+        "skill-analyze",
+        "skill-fork",
+        "skill-network",
+        "skill-export"
       ]
     },
     "shared_references": {}
