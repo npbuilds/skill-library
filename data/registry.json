@@ -100,7 +100,8 @@
       "manual_notes": null,
       "composite_score": 100,
       "depends_on": [
-        "skill-registry"
+        "skill-registry",
+        "skill-dashboard"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -157,7 +158,9 @@
       "depends_on": [
         "skill-registry"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "skill-health"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],

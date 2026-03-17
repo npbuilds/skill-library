@@ -80,7 +80,7 @@ Detect when two skills have overlapping trigger descriptions that could cause fa
 
 ## Auto-Score Computation
 
-Compute `auto_score` (0-100) from metrics. Read `skill-dashboard/references/rating-rubric.md` for the detailed scoring pseudocode — it is the canonical definition.
+Compute `auto_score` (0-100) from metrics. Read `skills/skill-dashboard/references/rating-rubric.md` for the detailed scoring pseudocode — it is the canonical definition.
 
 After computing auto_score, update composite_score:
 - If manual_rating is null: `composite_score = auto_score`
