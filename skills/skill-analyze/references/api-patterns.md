@@ -14,7 +14,7 @@ fi
 
 ## Token Counting
 
-Use the messages API to count tokens precisely. Send the content as a user message and inspect the usage field in the response.
+Use the dedicated token counting endpoint to get exact counts without generating a response.
 
 ```python
 import anthropic

@@ -43,7 +43,7 @@ Are all expected elements present?
 | Score | Criteria |
 |-------|----------|
 | 100 | All `expect_contains` items present |
-| Score | Proportional to items found vs expected |
+| 1-99 | `round(100 * items_found / items_expected)` |
 | 0 | None of the expected items found |
 
 ## Per-Test Score

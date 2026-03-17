@@ -32,7 +32,7 @@ Structural tests verify file integrity without requiring any API calls.
 
 ## Behavioral Testing
 
-Behavioral tests verify that a skill triggers correctly and produces expected output. Requires the Anthropic API via the `skill-analyze` skill or the `skill-tester` agent.
+Behavioral tests verify that a skill triggers correctly and produces expected output. Two approaches: the `skill-tester` agent (no API needed — evaluates by reasoning about descriptions) or the `skill-analyze` skill (requires Anthropic API for deeper analysis).
 
 ### Test Case Format
 
@@ -66,7 +66,7 @@ test_cases:
 2. Launch the `skill-tester` agent (see `agents/skill-tester.md`)
 3. The agent runs each test case prompt and evaluates the response
 4. Collect results: pass/fail per test case, with explanation for failures
-5. Write results summary back to registry as `test_results` field
+5. Append results summary to the skill's registry changelog and update `manual_notes` if needed
 
 ### Evaluation Criteria
 
