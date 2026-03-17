@@ -28,13 +28,17 @@ FRONTMATTER_WORDS=$(echo "$FRONTMATTER" | wc -w | tr -d ' ')
 BODY_WORDS=$((TOTAL_WORDS - FRONTMATTER_WORDS - 2))
 if [ "$BODY_WORDS" -lt 0 ]; then BODY_WORDS=0; fi
 
-# Section count (## headings)
-SECTION_COUNT=$(grep -c '^## ' "$SKILL_PATH" 2>/dev/null || echo 0)
+# Section count (## headings, excluding those inside fenced code blocks)
+SECTION_COUNT=$(awk '
+  /^```/ { in_code = (in_code == 0) ? 1 : 0; next }
+  in_code == 0 && /^## / { count++ }
+  END { print count+0 }
+' "$SKILL_PATH")
 
 # Extract description from frontmatter (handles multi-line YAML descriptions)
 DESC_WORDS=$(echo "$FRONTMATTER" | awk '
   /^description:/ {
-    sub(/^description:[[:space:]]*>?[[:space:]]*/, "")
+    sub(/^description:[[:space:]]*[>|]?[[:space:]]*/, "")
     if (length($0) > 0) print
     in_desc = 1
     next
@@ -74,11 +78,20 @@ if [ -z "$SKILL_NAME" ]; then
   SKILL_NAME=$(basename "$SKILL_DIR")
 fi
 
+# Escape strings for safe JSON output (handle ", \, and control chars)
+json_escape() {
+  printf '%s' "$1" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null \
+    || printf '"%s"' "$1"
+}
+
 # Output JSON
+ESCAPED_NAME=$(json_escape "$SKILL_NAME")
+ESCAPED_PATH=$(json_escape "$SKILL_PATH")
+
 cat <<EOF
 {
-  "name": "$SKILL_NAME",
-  "path": "$SKILL_PATH",
+  "name": $ESCAPED_NAME,
+  "path": $ESCAPED_PATH,
   "word_count": $TOTAL_WORDS,
   "body_words": $BODY_WORDS,
   "description_words": $DESC_WORDS,

@@ -6,6 +6,7 @@
 set -euo pipefail
 
 DATA_DIR="${1:?Usage: migrate-registry.sh /path/to/data/}"
+DATA_DIR="${DATA_DIR%/}"  # strip trailing slash
 REGISTRY="$DATA_DIR/registry.json"
 MIGRATIONS_DIR="$DATA_DIR/migrations"
 
@@ -19,32 +20,39 @@ if [ ! -d "$MIGRATIONS_DIR" ]; then
   exit 0
 fi
 
-# Read current schema version
+# Read current schema version (pass path via argument to avoid injection)
 CURRENT_VERSION=$(python3 -c "
 import json, sys
-with open('$REGISTRY') as f:
+with open(sys.argv[1]) as f:
     data = json.load(f)
 print(data.get('schema_version', 1))
-" 2>/dev/null || echo 1)
+" "$REGISTRY" 2>/dev/null || echo 1)
 
 echo "Current registry schema version: $CURRENT_VERSION"
 
 # Find and run pending migrations
+# Loop until no more migrations match, to handle chained migrations correctly
 APPLIED=0
-for migration in "$MIGRATIONS_DIR"/v*_to_v*.sh; do
-  [ -f "$migration" ] || continue
+FOUND_MIGRATION=true
 
-  # Extract version numbers from filename
-  BASENAME=$(basename "$migration")
-  FROM_VER=$(echo "$BASENAME" | sed 's/v\([0-9]*\)_to_v\([0-9]*\)\.sh/\1/')
-  TO_VER=$(echo "$BASENAME" | sed 's/v\([0-9]*\)_to_v\([0-9]*\)\.sh/\2/')
+while $FOUND_MIGRATION; do
+  FOUND_MIGRATION=false
 
-  if [ "$FROM_VER" -eq "$CURRENT_VERSION" ]; then
-    echo "Applying migration: $BASENAME (v$FROM_VER → v$TO_VER)"
+  # Look for a migration matching the current version
+  # Quote the directory but leave the glob unquoted so shell expands it
+  for migration in "$MIGRATIONS_DIR"/v"${CURRENT_VERSION}"_to_v*.sh; do
+    [ -f "$migration" ] || continue
+
+    BASENAME=$(basename "$migration")
+    TO_VER=$(echo "$BASENAME" | sed 's/v[0-9]*_to_v\([0-9]*\)\.sh/\1/')
+
+    echo "Applying migration: $BASENAME (v$CURRENT_VERSION → v$TO_VER)"
     bash "$migration" "$REGISTRY"
     CURRENT_VERSION=$TO_VER
     APPLIED=$((APPLIED + 1))
-  fi
+    FOUND_MIGRATION=true
+    break  # restart the while loop to find next migration
+  done
 done
 
 if [ "$APPLIED" -eq 0 ]; then
