@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "plugin_version": "0.1.0",
+  "last_scan": "2026-03-17T00:00:00Z",
+  "skills": {
+    "skill-registry": {
+      "name": "skill-registry",
+      "description": "Manage the skill registry \u2014 the central catalog of all skills in the mycelial network.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-registry/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 853,
+        "body_words": 784,
+        "description_words": 56,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 73,
+        "estimated_tokens_body": 1565,
+        "estimated_tokens_total": 1638,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 85,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 85,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 1 bootstrap \u2014 first skill registered"
+        }
+      ]
+    }
+  },
+  "network": {
+    "domains": {
+      "infrastructure": [
+        "skill-registry"
+      ]
+    },
+    "shared_references": {}
+  }
+}
