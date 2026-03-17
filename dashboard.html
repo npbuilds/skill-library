@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>skill-infra dashboard</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a25;
+    --border: #2a2a3a;
+    --text: #e0e0e8;
+    --text-dim: #808098;
+    --accent: #7c6ff0;
+    --accent-dim: #5a50b0;
+    --green: #4ade80;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --cyan: #22d3ee;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "SF Mono", "Fira Code", "JetBrains Mono", monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header h1 { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
+  .header h1 span { color: var(--accent); }
+  .header .meta { font-size: 12px; color: var(--text-dim); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .card h2 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+
+  .big-number { font-size: 48px; font-weight: 700; line-height: 1; }
+  .big-label { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+  .skill-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+
+  .skill-table th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .skill-table th:hover { color: var(--accent); }
+  .skill-table th.sorted { color: var(--accent); }
+
+  .skill-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .skill-table tr:hover td { background: var(--surface2); }
+  .skill-name { font-weight: 600; color: var(--cyan); }
+
+  .health-dot {
+    display: inline-block; width: 8px; height: 8px;
+    border-radius: 50%; margin-right: 6px;
+  }
+  .health-dot.healthy { background: var(--green); }
+  .health-dot.warning { background: var(--yellow); }
+  .health-dot.critical { background: var(--red); }
+
+  .score-bar {
+    display: inline-block; height: 6px; border-radius: 3px;
+    background: var(--accent); vertical-align: middle; margin-right: 8px;
+  }
+
+  .token-bar-bg {
+    width: 100%; height: 8px; background: var(--surface2);
+    border-radius: 4px; overflow: hidden; margin-top: 8px;
+  }
+  .token-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+
+  .token-breakdown {
+    display: flex; justify-content: space-between;
+    margin-top: 12px; font-size: 11px; color: var(--text-dim); text-align: center;
+  }
+  .token-breakdown span { flex: 1; }
+
+  .network-container { position: relative; min-height: 400px; }
+
+  .network-node {
+    position: absolute; padding: 8px 14px; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 6px;
+    font-size: 11px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s; z-index: 2; white-space: nowrap;
+  }
+  .network-node:hover { border-color: var(--accent); transform: scale(1.05); }
+  .network-node .node-score { font-size: 10px; color: var(--text-dim); margin-left: 6px; }
+
+  .network-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+  .network-svg line { stroke: var(--border); stroke-width: 1.5; }
+  .network-svg line.highlighted { stroke: var(--accent); stroke-width: 2; }
+
+  .detail-panel {
+    display: none; background: var(--surface);
+    border: 1px solid var(--accent-dim); border-radius: 8px;
+    padding: 20px; margin-top: 20px;
+  }
+  .detail-panel.visible { display: block; }
+  .detail-panel h3 { font-size: 16px; color: var(--cyan); margin-bottom: 4px; }
+  .detail-panel .desc { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.5; }
+
+  .detail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+  .detail-metric { background: var(--surface2); border-radius: 6px; padding: 12px; }
+  .detail-metric .dm-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); }
+  .detail-metric .dm-value { font-size: 18px; font-weight: 700; margin-top: 4px; }
+
+  .deps-list { font-size: 12px; color: var(--text-dim); margin-top: 12px; }
+  .dep-link { color: var(--accent); cursor: pointer; }
+  .dep-link:hover { text-decoration: underline; }
+
+  .changelog { margin-top: 12px; font-size: 11px; color: var(--text-dim); }
+  .changelog-entry { padding: 4px 0; border-left: 2px solid var(--border); padding-left: 10px; margin-bottom: 4px; }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; }
+    .grid.three { grid-template-columns: 1fr; }
+    .detail-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>skill-infra</span> dashboard</h1>
+  <div class="meta" id="meta">loading...</div>
+</div>
+
+<div class="grid three" id="stats"></div>
+
+<div class="card" style="margin-bottom: 20px;">
+  <h2>Token Budget</h2>
+  <div id="token-budget"></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Skill Leaderboard</h2>
+    <table class="skill-table" id="leaderboard"></table>
+  </div>
+  <div class="card">
+    <h2>Network</h2>
+    <div class="network-container" id="network"></div>
+  </div>
+</div>
+
+<div class="detail-panel" id="detail"></div>
+
+<script>
+(async function() {
+  var REGISTRY;
+  try {
+    var resp = await fetch('./data/registry.json');
+    REGISTRY = await resp.json();
+  } catch(e) {
+    document.getElementById('meta').textContent = 'Error: ' + e.message;
+    return;
+  }
+
+  var skills = REGISTRY.skills;
+  var skillNames = Object.keys(skills);
+  var skillList = Object.values(skills);
+
+  document.getElementById('meta').innerHTML =
+    'v' + REGISTRY.plugin_version + ' &middot; ' +
+    skillNames.length + ' skills &middot; ' +
+    'schema v' + REGISTRY.schema_version + ' &middot; ' +
+    new Date().toLocaleDateString();
+
+  var totalMeta = 0, totalScore = 0, healthyCount = 0;
+  for (var i = 0; i < skillList.length; i++) {
+    totalMeta += skillList[i].metrics.estimated_tokens_metadata;
+    totalScore += skillList[i].composite_score;
+    if (skillList[i].health_status === 'healthy') healthyCount++;
+  }
+  var avgScore = (totalScore / skillList.length).toFixed(1);
+
+  var statsHTML = '';
+  var statItems = [
+    { n: skillNames.length, l: 'skills registered', c: 'accent' },
+    { n: avgScore, l: 'avg composite score', c: healthyCount === skillList.length ? 'green' : 'yellow' },
+    { n: totalMeta, l: 'metadata tokens (always loaded)', c: totalMeta < 600 ? 'green' : totalMeta < 900 ? 'yellow' : 'red' }
+  ];
+  for (var i = 0; i < statItems.length; i++) {
+    var s = statItems[i];
+    statsHTML += '<div class="card"><div class="big-number" style="color:var(--' + s.c + ')">' + s.n + '</div><div class="big-label">' + s.l + '</div></div>';
+  }
+  document.getElementById('stats').innerHTML = statsHTML;
+
+  var budgetPct = Math.min(100, (totalMeta / 600) * 100);
+  var budgetColor = budgetPct < 70 ? 'var(--green)' : budgetPct < 90 ? 'var(--yellow)' : 'var(--red)';
+  var tokenHTML = '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim)">';
+  tokenHTML += '<span>' + totalMeta + ' / 600 tokens</span>';
+  tokenHTML += '<span>' + budgetPct.toFixed(0) + '%</span></div>';
+  tokenHTML += '<div class="token-bar-bg"><div class="token-bar-fill" style="width:' + budgetPct + '%;background:' + budgetColor + '"></div></div>';
+  tokenHTML += '<div class="token-breakdown">';
+  for (var i = 0; i < skillList.length; i++) {
+    var short = skillList[i].name.replace('skill-', '');
+    tokenHTML += '<span>' + short + '<br><strong style="color:var(--text)">' + skillList[i].metrics.estimated_tokens_metadata + '</strong></span>';
+  }
+  tokenHTML += '</div>';
+  document.getElementById('token-budget').innerHTML = tokenHTML;
+
+  var sortKey = 'composite_score';
+  var sortDir = -1;
+
+  function getVal(skill, key) {
+    if (key === 'name') return skill.name;
+    if (skill.metrics && skill.metrics[key] !== undefined) return skill.metrics[key];
+    if (skill[key] !== undefined) return skill[key];
+    return 0;
+  }
+
+  function renderLeaderboard() {
+    var sorted = skillList.slice().sort(function(a, b) {
+      var av = getVal(a, sortKey), bv = getVal(b, sortKey);
+      if (typeof av === 'string') return sortDir * av.localeCompare(bv);
+      return sortDir * (av - bv);
+    });
+
+    var cols = [
+      { key: 'name', label: 'Skill' },
+      { key: 'composite_score', label: 'Score' },
+      { key: 'body_words', label: 'Words' },
+      { key: 'estimated_tokens_total', label: 'Tokens' },
+      { key: 'health_status', label: 'Health' }
+    ];
+
+    var html = '<thead><tr>';
+    for (var c = 0; c < cols.length; c++) {
+      var col = cols[c];
+      var cls = col.key === sortKey ? ' class="sorted"' : '';
+      var arrow = col.key === sortKey ? (sortDir === -1 ? ' \u2193' : ' \u2191') : '';
+      html += '<th' + cls + ' data-key="' + col.key + '">' + col.label + arrow + '</th>';
+    }
+    html += '</tr></thead><tbody>';
+
+    for (var i = 0; i < sorted.length; i++) {
+      var sk = sorted[i];
+      html += '<tr data-skill="' + sk.name + '" style="cursor:pointer">';
+      html += '<td class="skill-name">' + sk.name + '</td>';
+      html += '<td><span class="score-bar" style="width:' + (sk.composite_score * 0.6) + 'px"></span>' + sk.composite_score + '</td>';
+      html += '<td>' + sk.metrics.body_words + '</td>';
+      html += '<td>' + sk.metrics.estimated_tokens_total.toLocaleString() + '</td>';
+      html += '<td><span class="health-dot ' + sk.health_status + '"></span>' + sk.health_status + '</td>';
+      html += '</tr>';
+    }
+    html += '</tbody>';
+    document.getElementById('leaderboard').innerHTML = html;
+
+    document.querySelectorAll('#leaderboard th').forEach(function(th) {
+      th.addEventListener('click', function() {
+        var key = this.getAttribute('data-key');
+        if (sortKey === key) sortDir *= -1;
+        else { sortKey = key; sortDir = -1; }
+        renderLeaderboard();
+      });
+    });
+    document.querySelectorAll('#leaderboard tbody tr').forEach(function(tr) {
+      tr.addEventListener('click', function() { showDetail(this.getAttribute('data-skill')); });
+    });
+  }
+
+  renderLeaderboard();
+
+  function renderNetwork() {
+    var container = document.getElementById('network');
+    var width = container.offsetWidth;
+    var height = 400;
+    var levels = {}, visited = {};
+    var roots = skillNames.filter(function(n) { return skills[n].depends_on.length === 0; });
+    var queue = roots.map(function(r) { return { name: r, level: 0 }; });
+
+    while (queue.length > 0) {
+      var item = queue.shift();
+      if (visited[item.name]) { if (item.level > levels[item.name]) levels[item.name] = item.level; continue; }
+      visited[item.name] = true;
+      levels[item.name] = item.level;
+      var refs = skills[item.name].referenced_by || [];
+      for (var i = 0; i < refs.length; i++) {
+        if (skills[refs[i]]) queue.push({ name: refs[i], level: item.level + 1 });
+      }
+    }
+
+    var maxLevel = 0, levelGroups = {};
+    for (var name in levels) {
+      if (levels[name] > maxLevel) maxLevel = levels[name];
+      if (!levelGroups[levels[name]]) levelGroups[levels[name]] = [];
+      levelGroups[levels[name]].push(name);
+    }
+
+    var positions = {};
+    for (var lv in levelGroups) {
+      var names = levelGroups[lv];
+      var y = 30 + (parseInt(lv) / Math.max(1, maxLevel)) * (height - 80);
+      for (var i = 0; i < names.length; i++) {
+        positions[names[i]] = { x: (width / (names.length + 1)) * (i + 1), y: y };
+      }
+    }
+
+    var svgLines = '';
+    for (var n = 0; n < skillNames.length; n++) {
+      var deps = skills[skillNames[n]].depends_on;
+      for (var d = 0; d < deps.length; d++) {
+        if (positions[skillNames[n]] && positions[deps[d]]) {
+          svgLines += '<line x1="' + positions[deps[d]].x + '" y1="' + (positions[deps[d]].y + 14) +
+            '" x2="' + positions[skillNames[n]].x + '" y2="' + (positions[skillNames[n]].y - 6) +
+            '" data-from="' + deps[d] + '" data-to="' + skillNames[n] + '"/>';
+        }
+      }
+    }
+
+    container.style.height = height + 'px';
+    var html = '<svg class="network-svg" viewBox="0 0 ' + width + ' ' + height + '">' + svgLines + '</svg>';
+    for (var n = 0; n < skillNames.length; n++) {
+      var p = positions[skillNames[n]];
+      if (!p) continue;
+      html += '<div class="network-node" style="left:' + (p.x - 40) + 'px;top:' + p.y + 'px" data-skill="' + skillNames[n] + '">' +
+        skillNames[n].replace('skill-', '') + '<span class="node-score">' + skills[skillNames[n]].composite_score + '</span></div>';
+    }
+    container.innerHTML = html;
+
+    container.querySelectorAll('.network-node').forEach(function(node) {
+      node.addEventListener('click', function() { showDetail(this.getAttribute('data-skill')); });
+      node.addEventListener('mouseenter', function() {
+        var nm = this.getAttribute('data-skill');
+        document.querySelectorAll('.network-svg line').forEach(function(l) {
+          if (l.getAttribute('data-from') === nm || l.getAttribute('data-to') === nm) l.classList.add('highlighted');
+        });
+      });
+      node.addEventListener('mouseleave', function() {
+        document.querySelectorAll('.network-svg line').forEach(function(l) { l.classList.remove('highlighted'); });
+      });
+    });
+  }
+
+  renderNetwork();
+  window.addEventListener('resize', renderNetwork);
+
+  function showDetail(name) {
+    var s = skills[name], m = s.metrics;
+    var panel = document.getElementById('detail');
+    panel.className = 'detail-panel visible';
+
+    var metrics = [
+      { l: 'Score', v: s.composite_score, c: s.composite_score >= 97 ? 'green' : s.composite_score >= 70 ? 'yellow' : 'red' },
+      { l: 'Body Words', v: m.body_words, c: m.body_words <= 1500 ? 'green' : m.body_words <= 2000 ? 'yellow' : 'red' },
+      { l: 'Total Tokens', v: m.estimated_tokens_total.toLocaleString(), c: 'accent' },
+      { l: 'Meta Tokens', v: m.estimated_tokens_metadata, c: 'cyan' },
+      { l: 'Sections', v: m.section_count, c: 'accent' },
+      { l: 'References', v: m.reference_files, c: 'accent' },
+      { l: 'Health', v: s.health_status, c: s.health_status === 'healthy' ? 'green' : s.health_status === 'warning' ? 'yellow' : 'red' },
+      { l: 'Status', v: s.status, c: s.status === 'active' ? 'green' : 'yellow' }
+    ];
+
+    var html = '<h3>' + s.name + '</h3><div class="desc">' + s.description + '</div><div class="detail-grid">';
+    for (var i = 0; i < metrics.length; i++) {
+      html += '<div class="detail-metric"><div class="dm-label">' + metrics[i].l + '</div><div class="dm-value" style="color:var(--' + metrics[i].c + ')">' + metrics[i].v + '</div></div>';
+    }
+    html += '</div>';
+
+    if (s.depends_on.length) {
+      html += '<div class="deps-list">Depends on: ';
+      html += s.depends_on.map(function(d) { return '<span class="dep-link" data-skill="' + d + '">' + d + '</span>'; }).join(', ');
+      html += '</div>';
+    }
+    if (s.referenced_by.length) {
+      html += '<div class="deps-list">Referenced by: ';
+      html += s.referenced_by.map(function(d) { return '<span class="dep-link" data-skill="' + d + '">' + d + '</span>'; }).join(', ');
+      html += '</div>';
+    }
+
+    html += '<div class="changelog"><strong style="color:var(--text)">Changelog</strong>';
+    for (var i = 0; i < s.changelog.length; i++) {
+      html += '<div class="changelog-entry">' + s.changelog[i].date + ' \u2014 ' + s.changelog[i].action + ': ' + s.changelog[i].note + '</div>';
+    }
+    html += '</div>';
+
+    panel.innerHTML = html;
+    panel.querySelectorAll('.dep-link').forEach(function(link) {
+      link.addEventListener('click', function() { showDetail(this.getAttribute('data-skill')); });
+    });
+    panel.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  window.showDetail = showDetail;
+})();
+</script>
+</body>
+</html>
