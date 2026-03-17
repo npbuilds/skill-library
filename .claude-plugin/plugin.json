@@ -1,7 +1,7 @@
 {
   "name": "skill-infra",
   "description": "Skill infrastructure plugin — a mycelial network of skills that manage skills. Provides registry, health checks, dashboards, scaffolding, testing, analysis, forking, visualization, and export.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Nirav"
   }

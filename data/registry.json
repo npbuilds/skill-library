@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plugin_version": "0.1.0",
+  "plugin_version": "0.2.0",
   "last_scan": "2026-03-17T00:00:00Z",
   "skills": {
     "skill-registry": {
@@ -39,7 +39,10 @@
       "manual_notes": null,
       "composite_score": 85,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "skill-health",
+        "skill-dashboard"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -53,6 +56,121 @@
           "date": "2026-03-17",
           "action": "created",
           "note": "Phase 1 bootstrap \u2014 first skill registered"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 2 \u2014 added referenced_by relationships"
+        }
+      ]
+    },
+    "skill-health": {
+      "name": "skill-health",
+      "description": "Run health checks on skills to detect issues: oversized SKILL.md, poor trigger descriptions, missing progressive disclosure, excessive token usage, trigger conflicts.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-health/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 723,
+        "body_words": 664,
+        "description_words": 46,
+        "section_count": 6,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 1285,
+        "estimated_tokens_total": 1345,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 92,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 92,
+      "depends_on": [
+        "skill-registry"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 2 \u2014 quality infrastructure"
+        }
+      ]
+    },
+    "skill-dashboard": {
+      "name": "skill-dashboard",
+      "description": "Display skill dashboards: token efficiency breakdown, skill quality ratings, health overview, and rating leaderboard.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-dashboard/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 510,
+        "body_words": 462,
+        "description_words": 37,
+        "section_count": 2,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 49,
+        "estimated_tokens_body": 1465,
+        "estimated_tokens_total": 1514,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 88,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 88,
+      "depends_on": [
+        "skill-registry"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 2 \u2014 dashboards and ratings"
         }
       ]
     }
@@ -60,7 +178,9 @@
   "network": {
     "domains": {
       "infrastructure": [
-        "skill-registry"
+        "skill-registry",
+        "skill-health",
+        "skill-dashboard"
       ]
     },
     "shared_references": {}
