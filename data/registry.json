@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plugin_version": "0.2.0",
+  "plugin_version": "0.3.0",
   "last_scan": "2026-03-17T00:00:00Z",
   "skills": {
     "skill-registry": {
@@ -41,7 +41,8 @@
       "depends_on": [],
       "referenced_by": [
         "skill-health",
-        "skill-dashboard"
+        "skill-dashboard",
+        "skill-scaffold"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -61,6 +62,11 @@
           "date": "2026-03-17",
           "action": "updated",
           "note": "Phase 2 \u2014 added referenced_by relationships"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
         }
       ]
     },
@@ -75,8 +81,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 723,
-        "body_words": 664,
+        "word_count": 720,
+        "body_words": 661,
         "description_words": 46,
         "section_count": 6,
         "reference_files": 1,
@@ -84,8 +90,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 60,
-        "estimated_tokens_body": 1285,
-        "estimated_tokens_total": 1345,
+        "estimated_tokens_body": 1292,
+        "estimated_tokens_total": 1352,
         "precise_tokens": null
       },
       "health_status": "healthy",
@@ -103,7 +109,9 @@
         "skill-registry",
         "skill-dashboard"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "skill-scaffold"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -117,6 +125,11 @@
           "date": "2026-03-17",
           "action": "created",
           "note": "Phase 2 \u2014 quality infrastructure"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
         }
       ]
     },
@@ -159,7 +172,8 @@
         "skill-registry"
       ],
       "referenced_by": [
-        "skill-health"
+        "skill-health",
+        "skill-scaffold"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -174,6 +188,68 @@
           "date": "2026-03-17",
           "action": "created",
           "note": "Phase 2 \u2014 dashboards and ratings"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+        }
+      ]
+    },
+    "skill-scaffold": {
+      "name": "skill-scaffold",
+      "description": "Create new skills from templates with guided requirements gathering, automatic file creation, registry integration, and post-creation health validation.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-scaffold/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 614,
+        "body_words": 559,
+        "description_words": 43,
+        "section_count": 2,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 3,
+        "estimated_tokens_metadata": 56,
+        "estimated_tokens_body": 1145,
+        "estimated_tokens_total": 1201,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 97,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 97,
+      "depends_on": [
+        "skill-registry",
+        "skill-health",
+        "skill-dashboard"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 3 \u2014 The Builder, skill creation factory"
         }
       ]
     }
@@ -183,7 +259,8 @@
       "infrastructure": [
         "skill-registry",
         "skill-health",
-        "skill-dashboard"
+        "skill-dashboard",
+        "skill-scaffold"
       ]
     },
     "shared_references": {}
