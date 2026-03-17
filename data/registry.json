@@ -216,8 +216,8 @@
         "script_files": 0,
         "template_files": 3,
         "estimated_tokens_metadata": 56,
-        "estimated_tokens_body": 1145,
-        "estimated_tokens_total": 1201,
+        "estimated_tokens_body": 1149,
+        "estimated_tokens_total": 1205,
         "precise_tokens": null
       },
       "health_status": "healthy",
