@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "plugin_version": "0.3.0",
+  "plugin_version": "0.4.0",
   "last_scan": "2026-03-17T00:00:00Z",
   "skills": {
     "skill-registry": {
@@ -42,7 +42,9 @@
       "referenced_by": [
         "skill-health",
         "skill-dashboard",
-        "skill-scaffold"
+        "skill-scaffold",
+        "skill-test",
+        "skill-analyze"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -67,6 +69,11 @@
           "date": "2026-03-17",
           "action": "updated",
           "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+        },
+        {
+          "date": "2026-03-17",
+          "action": "updated",
+          "note": "Phase 4 \u2014 added skill-test and skill-analyze to referenced_by"
         }
       ]
     },
@@ -252,6 +259,119 @@
           "note": "Phase 3 \u2014 The Builder, skill creation factory"
         }
       ]
+    },
+    "skill-test": {
+      "name": "skill-test",
+      "description": "Test skills for structural correctness and behavioral accuracy with test cases, evaluation rubrics, and version benchmarking.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-test/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 546,
+        "body_words": 492,
+        "description_words": 41,
+        "section_count": 4,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 54,
+        "estimated_tokens_body": 1092,
+        "estimated_tokens_total": 1146,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [
+        "skill-registry",
+        "skill-analyze"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 4 \u2014 The Prover, structural and behavioral testing"
+        }
+      ]
+    },
+    "skill-analyze": {
+      "name": "skill-analyze",
+      "description": "Analyze skills using the Anthropic API for precise token counting, description quality evaluation, content review, and decomposition suggestions.",
+      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-analyze/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 560,
+        "body_words": 510,
+        "description_words": 39,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 51,
+        "estimated_tokens_body": 1032,
+        "estimated_tokens_total": 1083,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-17",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [
+        "skill-registry"
+      ],
+      "referenced_by": [
+        "skill-test"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure"
+      ],
+      "created": "2026-03-17",
+      "last_modified": "2026-03-17",
+      "changelog": [
+        {
+          "date": "2026-03-17",
+          "action": "created",
+          "note": "Phase 4 \u2014 The Oracle, Anthropic API-powered analysis"
+        }
+      ]
     }
   },
   "network": {
@@ -260,7 +380,9 @@
         "skill-registry",
         "skill-health",
         "skill-dashboard",
-        "skill-scaffold"
+        "skill-scaffold",
+        "skill-test",
+        "skill-analyze"
       ]
     },
     "shared_references": {}
