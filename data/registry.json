@@ -34,10 +34,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 85,
+      "auto_score": 100,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 100,
       "depends_on": [],
       "referenced_by": [
         "skill-health",
@@ -95,10 +95,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 92,
+      "auto_score": 100,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 92,
+      "composite_score": 100,
       "depends_on": [
         "skill-registry"
       ],
@@ -150,10 +150,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 88,
+      "auto_score": 97,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 88,
+      "composite_score": 97,
       "depends_on": [
         "skill-registry"
       ],

@@ -43,6 +43,6 @@ Used to compute auto_score deductions from the base of 100:
 |--------|--------|---------------|----------|
 | Token efficiency | 30% | body ≤ 1,500 words | body ≥ 5,000 words |
 | Progressive disclosure | 20% | Has references/ when body > 1,000 | Body > 1,500 with no references/ |
-| Description quality | 20% | 20-60 words, has trigger verbs | < 10 or > 100 words |
+| Description quality | 20% | 20-60 words, has trigger verbs | < 15 or > 100 words |
 | Structure | 15% | 3-6 sections | < 2 or > 8 sections |
 | Documentation | 15% | Has references/ or examples/ | Large skill with no supporting files |
