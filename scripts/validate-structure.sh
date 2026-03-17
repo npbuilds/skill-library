@@ -28,11 +28,12 @@ add_issue() {
 # Check 1: SKILL.md exists
 if [ ! -f "$SKILL_MD" ]; then
   add_issue "critical" "SKILL.md not found in $SKILL_DIR"
-  # Can't continue without the file
+  # Can't continue without the file — escape path for JSON output
+  ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$SKILL_DIR")
   cat <<EOF
 {
   "valid": false,
-  "skill_directory": "$SKILL_DIR",
+  "skill_directory": $ESCAPED_DIR,
   "issue_count": $ISSUE_COUNT,
   "issues": [$ISSUES]
 }

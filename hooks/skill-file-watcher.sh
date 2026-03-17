@@ -98,8 +98,8 @@ if [ -f "$PLUGIN_ROOT/data/registry.json" ]; then
 import json, sys
 with open(sys.argv[1]) as f:
     reg = json.load(f)
-print('true' if '$SKILL_NAME' in reg.get('skills', {}) else 'false')
-" "$PLUGIN_ROOT/data/registry.json" 2>/dev/null || echo "false")
+print('true' if sys.argv[2] in reg.get('skills', {}) else 'false')
+" "$PLUGIN_ROOT/data/registry.json" "$SKILL_NAME" 2>/dev/null || echo "false")
 
   if [ "$HAS_ENTRY" = "true" ]; then
     echo "  Registry entry exists — metrics may need refresh via skill-registry sync"

@@ -44,7 +44,7 @@ Replace template placeholders with gathered requirements:
 - `{{SKILL_SUBTITLE}}` — short tagline (derive from description)
 - `{{DESCRIPTION}}` — full description text
 - `{{TOOLS}}` — comma-separated tool list
-- `{{SECTIONS}}` — generate initial section structure based on type
+- `{{DESCRIPTION_EXPANDED}}` — one-sentence expanded explanation for the body intro
 
 For the description, ensure it:
 - Is 20-60 words
