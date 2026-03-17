@@ -1,435 +1,1352 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>skill-infra dashboard</title>
+<title>skill-infra // terminal</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+
+  /* ═══════════════════════════════════════════
+     THEME SYSTEM
+     ═══════════════════════════════════════════ */
   :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a25;
-    --border: #2a2a3a;
-    --text: #e0e0e8;
-    --text-dim: #808098;
-    --accent: #7c6ff0;
-    --accent-dim: #5a50b0;
-    --green: #4ade80;
-    --yellow: #fbbf24;
-    --red: #f87171;
-    --cyan: #22d3ee;
+    --font: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    --radius: 4px;
+    --transition: 0.2s ease;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  [data-theme="dark"] {
+    --bg-0: #0c0c10;
+    --bg-1: #111117;
+    --bg-2: #18181f;
+    --bg-3: #1f1f28;
+    --bg-4: #282833;
+    --border: #2c2c3a;
+    --border-hi: #3e3e52;
+    --text-0: #f0f0f5;
+    --text-1: #c8c8d4;
+    --text-2: #8888a0;
+    --text-3: #5c5c72;
+    --prompt: #7b6fef;
+    --prompt-dim: #5a4fc0;
+    --prompt-glow: rgba(123,111,239,0.12);
+    --green: #50fa7b;
+    --green-dim: rgba(80,250,123,0.15);
+    --yellow: #f1fa8c;
+    --yellow-dim: rgba(241,250,140,0.12);
+    --red: #ff5555;
+    --red-dim: rgba(255,85,85,0.12);
+    --cyan: #8be9fd;
+    --cyan-dim: rgba(139,233,253,0.1);
+    --orange: #ffb86c;
+    --pink: #ff79c6;
+    --comment: #6272a4;
+    --selection: rgba(68,71,90,0.6);
+    --glow: 0 0 20px rgba(123,111,239,0.08);
+    --scanline-opacity: 0.03;
+    --crt-flicker: crt-flicker 0.15s infinite;
+  }
+
+  [data-theme="light"] {
+    --bg-0: #fafaf9;
+    --bg-1: #f3f3f1;
+    --bg-2: #eaeae6;
+    --bg-3: #e0e0db;
+    --bg-4: #d4d4cf;
+    --border: #c8c8c0;
+    --border-hi: #b0b0a8;
+    --text-0: #1a1a1f;
+    --text-1: #33333d;
+    --text-2: #6b6b78;
+    --text-3: #9b9ba8;
+    --prompt: #6c5ce7;
+    --prompt-dim: #5a4bd6;
+    --prompt-glow: rgba(108,92,231,0.08);
+    --green: #16a34a;
+    --green-dim: rgba(22,163,74,0.1);
+    --yellow: #ca8a04;
+    --yellow-dim: rgba(202,138,4,0.08);
+    --red: #dc2626;
+    --red-dim: rgba(220,38,38,0.08);
+    --cyan: #0891b2;
+    --cyan-dim: rgba(8,145,178,0.08);
+    --orange: #ea580c;
+    --pink: #db2777;
+    --comment: #8b8fa3;
+    --selection: rgba(108,92,231,0.08);
+    --glow: 0 1px 3px rgba(0,0,0,0.06);
+    --scanline-opacity: 0;
+    --crt-flicker: none;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESET & BASE
+     ═══════════════════════════════════════════ */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: "SF Mono", "Fira Code", "JetBrains Mono", monospace;
-    background: var(--bg);
-    color: var(--text);
+    font-family: var(--font);
+    background: var(--bg-0);
+    color: var(--text-1);
+    font-size: 13px;
+    line-height: 1.6;
     min-height: 100vh;
-    padding: 24px;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .header {
+  /* CRT scanline overlay — dark mode only */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,var(--scanline-opacity)) 2px,
+      rgba(0,0,0,var(--scanline-opacity)) 4px
+    );
+  }
+
+  ::selection { background: var(--selection); }
+
+  /* ═══════════════════════════════════════════
+     LAYOUT
+     ═══════════════════════════════════════════ */
+  .app { display: flex; min-height: 100vh; }
+
+  /* ─── Sidebar ─── */
+  .sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--bg-1);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+
+  .sidebar-header {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 32px;
-    padding-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  .sidebar-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-0);
+    letter-spacing: -0.3px;
+  }
+  .sidebar-title .prompt-char { color: var(--prompt); }
+  .sidebar-title .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: var(--prompt);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .sidebar-version {
+    font-size: 10px;
+    color: var(--text-3);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .theme-toggle {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-2);
+    font-family: var(--font);
+    font-size: 14px;
+    width: 32px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover { border-color: var(--prompt); color: var(--text-0); }
+
+  /* ─── Search ─── */
+  .search-wrap {
+    padding: 10px 18px;
     border-bottom: 1px solid var(--border);
   }
 
-  .header h1 { font-size: 20px; font-weight: 600; letter-spacing: 0.5px; }
-  .header h1 span { color: var(--accent); }
-  .header .meta { font-size: 12px; color: var(--text-dim); }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-
-  .grid.three { grid-template-columns: 1fr 1fr 1fr; }
-
-  .card {
-    background: var(--surface);
+  .search-input {
+    width: 100%;
+    background: var(--bg-0);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: var(--radius);
+    padding: 7px 10px 7px 28px;
+    color: var(--text-0);
+    font-family: var(--font);
+    font-size: 12px;
+    outline: none;
+    transition: border-color var(--transition);
+  }
+  .search-input:focus { border-color: var(--prompt); }
+  .search-input::placeholder { color: var(--text-3); }
+
+  .search-wrap { position: relative; }
+  .search-wrap::before {
+    content: '>';
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--prompt);
+    font-size: 12px;
+    font-weight: 700;
+    pointer-events: none;
   }
 
-  .card h2 {
-    font-size: 11px;
+  /* ─── Filters ─── */
+  .filter-bar {
+    padding: 8px 18px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-btn {
+    font-family: var(--font);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: all var(--transition);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-dim);
+    letter-spacing: 0.5px;
+  }
+  .filter-btn:hover { border-color: var(--prompt); color: var(--text-1); }
+  .filter-btn.active { background: var(--prompt); border-color: var(--prompt); color: #fff; }
+
+  /* ─── Skill List ─── */
+  .skill-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+  }
+
+  .skill-list::-webkit-scrollbar { width: 4px; }
+  .skill-list::-webkit-scrollbar-track { background: transparent; }
+  .skill-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .skill-item {
+    padding: 10px 18px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all 0.1s;
+    position: relative;
+  }
+  .skill-item:hover { background: var(--bg-2); }
+  .skill-item.active {
+    background: var(--prompt-glow);
+    border-left-color: var(--prompt);
+  }
+
+  .skill-item-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cyan);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-healthy { background: var(--green); box-shadow: 0 0 4px var(--green); }
+  .dot-warning { background: var(--yellow); box-shadow: 0 0 4px var(--yellow); }
+  .dot-critical { background: var(--red); box-shadow: 0 0 4px var(--red); }
+
+  [data-theme="light"] .dot-healthy { box-shadow: none; }
+  [data-theme="light"] .dot-warning { box-shadow: none; }
+  [data-theme="light"] .dot-critical { box-shadow: none; }
+
+  .skill-item-desc {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 3px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .skill-item-meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+    font-size: 10px;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+
+  .badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-action { background: var(--prompt-glow); color: var(--prompt); border: 1px solid rgba(123,111,239,0.25); }
+  .badge-knowledge { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(139,233,253,0.2); }
+  .badge-orchestrator { background: var(--yellow-dim); color: var(--orange); border: 1px solid rgba(255,184,108,0.2); }
+
+  /* ═══════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════ */
+  .main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-1);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .tab {
+    padding: 12px 18px;
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: transparent;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all var(--transition);
+    margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--text-1); }
+  .tab.active { color: var(--prompt); border-bottom-color: var(--prompt); }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+  }
+
+  .content::-webkit-scrollbar { width: 6px; }
+  .content::-webkit-scrollbar-track { background: transparent; }
+  .content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* ═══════════════════════════════════════════
+     TERMINAL PANELS
+     ═══════════════════════════════════════════ */
+  .panel {
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: var(--glow);
+  }
+
+  .panel-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .panel-bar-dots {
+    display: flex;
+    gap: 5px;
+  }
+  .panel-bar-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .panel-bar-dots span:nth-child(1) { background: var(--red); }
+  .panel-bar-dots span:nth-child(2) { background: var(--yellow); }
+  .panel-bar-dots span:nth-child(3) { background: var(--green); }
+
+  [data-theme="light"] .panel-bar-dots span:nth-child(1) { background: #e0e0db; }
+  [data-theme="light"] .panel-bar-dots span:nth-child(2) { background: #e0e0db; }
+  [data-theme="light"] .panel-bar-dots span:nth-child(3) { background: #e0e0db; }
+
+  .panel-body { padding: 16px; }
+
+  /* ─── Stats Row ─── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
     margin-bottom: 16px;
   }
 
-  .big-number { font-size: 48px; font-weight: 700; line-height: 1; }
-  .big-label { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+  .stat {
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    box-shadow: var(--glow);
+  }
 
-  .skill-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .stat-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
 
-  .skill-table th {
+  .stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .stat-sub {
+    font-size: 10px;
+    color: var(--text-3);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* ─── Progress bar ─── */
+  .progress-track {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  .token-chips {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .token-chip {
+    text-align: center;
+    padding: 8px 4px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all var(--transition);
+    font-size: 10px;
+    color: var(--text-3);
+    font-weight: 500;
+  }
+  .token-chip:hover { border-color: var(--prompt); }
+  .token-chip strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-0);
+    margin-top: 2px;
+  }
+
+  /* ─── Table ─── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .tbl th {
     text-align: left;
     font-size: 10px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-dim);
+    letter-spacing: 0.8px;
+    color: var(--text-3);
     padding: 8px 12px;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
     user-select: none;
+    transition: color var(--transition);
   }
+  .tbl th:hover { color: var(--prompt); }
+  .tbl th.sorted { color: var(--prompt); }
 
-  .skill-table th:hover { color: var(--accent); }
-  .skill-table th.sorted { color: var(--accent); }
-
-  .skill-table td {
-    padding: 10px 12px;
+  .tbl td {
+    padding: 9px 12px;
     border-bottom: 1px solid var(--border);
+    color: var(--text-1);
+  }
+  .tbl tr { transition: background 0.1s; cursor: pointer; }
+  .tbl tbody tr:hover td { background: var(--bg-2); }
+  .tbl .t-name { font-weight: 600; color: var(--cyan); }
+
+  .score-pip {
+    display: inline-block;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--prompt);
     vertical-align: middle;
+    margin-right: 6px;
   }
 
-  .skill-table tr:hover td { background: var(--surface2); }
-  .skill-name { font-weight: 600; color: var(--cyan); }
+  /* ═══════════════════════════════════════════
+     NETWORK
+     ═══════════════════════════════════════════ */
+  .net-wrap { position: relative; min-height: 420px; }
 
-  .health-dot {
-    display: inline-block; width: 8px; height: 8px;
-    border-radius: 50%; margin-right: 6px;
+  .net-node {
+    position: absolute;
+    padding: 6px 12px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-1);
+    cursor: pointer;
+    z-index: 2;
+    white-space: nowrap;
+    transition: all 0.15s;
   }
-  .health-dot.healthy { background: var(--green); }
-  .health-dot.warning { background: var(--yellow); }
-  .health-dot.critical { background: var(--red); }
+  .net-node:hover { border-color: var(--prompt); transform: translateY(-2px); box-shadow: var(--glow); }
+  .net-node.active { border-color: var(--cyan); background: var(--cyan-dim); color: var(--cyan); }
+  .net-node .n-score { font-size: 10px; color: var(--text-3); margin-left: 5px; font-weight: 500; }
 
-  .score-bar {
-    display: inline-block; height: 6px; border-radius: 3px;
-    background: var(--accent); vertical-align: middle; margin-right: 8px;
+  .net-svg { position: absolute; inset: 0; z-index: 1; }
+  .net-svg line { stroke: var(--border); stroke-width: 1.5; transition: all 0.2s; }
+  .net-svg line.hi { stroke: var(--prompt); stroke-width: 2.5; }
+
+  /* ═══════════════════════════════════════════
+     DETAIL VIEW
+     ═══════════════════════════════════════════ */
+  .detail-hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
   }
 
-  .token-bar-bg {
-    width: 100%; height: 8px; background: var(--surface2);
-    border-radius: 4px; overflow: hidden; margin-top: 8px;
+  .detail-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
   }
-  .token-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
 
-  .token-breakdown {
-    display: flex; justify-content: space-between;
-    margin-top: 12px; font-size: 11px; color: var(--text-dim); text-align: center;
+  .detail-hero h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-0);
+    text-transform: none;
+    letter-spacing: -0.3px;
+    margin-bottom: 2px;
   }
-  .token-breakdown span { flex: 1; }
+  .detail-hero h2 .nickname { color: var(--comment); font-weight: 400; font-size: 14px; }
+  .detail-hero .detail-desc { font-size: 12px; color: var(--text-2); line-height: 1.5; }
 
-  .network-container { position: relative; min-height: 400px; }
-
-  .network-node {
-    position: absolute; padding: 8px 14px; background: var(--surface2);
-    border: 1px solid var(--border); border-radius: 6px;
-    font-size: 11px; font-weight: 600; cursor: pointer;
-    transition: all 0.2s; z-index: 2; white-space: nowrap;
+  .detail-actions {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
   }
-  .network-node:hover { border-color: var(--accent); transform: scale(1.05); }
-  .network-node .node-score { font-size: 10px; color: var(--text-dim); margin-left: 6px; }
 
-  .network-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-  .network-svg line { stroke: var(--border); stroke-width: 1.5; }
-  .network-svg line.highlighted { stroke: var(--accent); stroke-width: 2; }
-
-  .detail-panel {
-    display: none; background: var(--surface);
-    border: 1px solid var(--accent-dim); border-radius: 8px;
-    padding: 20px; margin-top: 20px;
+  .btn {
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    color: var(--text-1);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
   }
-  .detail-panel.visible { display: block; }
-  .detail-panel h3 { font-size: 16px; color: var(--cyan); margin-bottom: 4px; }
-  .detail-panel .desc { font-size: 12px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.5; }
+  .btn:hover { border-color: var(--prompt); color: var(--text-0); }
+  .btn-primary { background: var(--prompt); border-color: var(--prompt); color: #fff; }
+  .btn-primary:hover { background: var(--prompt-dim); }
 
-  .detail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .detail-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
 
-  .detail-metric { background: var(--surface2); border-radius: 6px; padding: 12px; }
-  .detail-metric .dm-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); }
-  .detail-metric .dm-value { font-size: 18px; font-weight: 700; margin-top: 4px; }
+  .dm {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+  }
+  .dm-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text-3); }
+  .dm-value { font-size: 20px; font-weight: 800; margin-top: 3px; letter-spacing: -0.5px; }
+  .dm-sub { font-size: 9px; color: var(--text-3); margin-top: 2px; font-weight: 500; }
 
-  .deps-list { font-size: 12px; color: var(--text-dim); margin-top: 12px; }
-  .dep-link { color: var(--accent); cursor: pointer; }
-  .dep-link:hover { text-decoration: underline; }
+  .section-title {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--comment);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .section-title::before { content: '# '; color: var(--prompt); }
 
-  .changelog { margin-top: 12px; font-size: 11px; color: var(--text-dim); }
-  .changelog-entry { padding: 4px 0; border-left: 2px solid var(--border); padding-left: 10px; margin-bottom: 4px; }
+  .section { margin-bottom: 20px; }
 
-  @media (max-width: 900px) {
-    .grid { grid-template-columns: 1fr; }
-    .grid.three { grid-template-columns: 1fr; }
-    .detail-grid { grid-template-columns: repeat(2, 1fr); }
+  .dep-grid { display: flex; gap: 16px; flex-wrap: wrap; }
+  .dep-col { flex: 1; min-width: 160px; }
+  .dep-col h4 {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
+
+  .dep-link {
+    display: block;
+    padding: 6px 10px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--cyan);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .dep-link:hover { border-color: var(--prompt); background: var(--bg-3); }
+  .dep-link.none { color: var(--text-3); cursor: default; font-style: italic; font-weight: 400; }
+  .dep-link.none:hover { border-color: var(--border); background: var(--bg-2); }
+
+  .tag-list { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-2);
+  }
+
+  /* ─── Changelog Timeline ─── */
+  .timeline { position: relative; padding-left: 18px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    bottom: 4px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .tl-entry { position: relative; margin-bottom: 14px; }
+  .tl-entry::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 6px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--prompt);
+  }
+
+  .tl-date { font-size: 10px; color: var(--text-3); font-weight: 500; }
+  .tl-action { font-size: 11px; font-weight: 700; color: var(--prompt); }
+  .tl-note { font-size: 11px; color: var(--text-2); margin-top: 1px; }
+
+  /* ═══════════════════════════════════════════
+     MODAL
+     ═══════════════════════════════════════════ */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 50;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+  }
+  .modal-bg.open { display: flex; }
+
+  [data-theme="light"] .modal-bg { background: rgba(0,0,0,0.3); }
+
+  .modal {
+    background: var(--bg-1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 580px;
+    max-width: 92vw;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .modal-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .modal-head h3 { font-size: 14px; font-weight: 700; color: var(--text-0); }
+  .modal-head p { font-size: 11px; color: var(--text-3); margin-top: 4px; }
+
+  .modal-code {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+  }
+  .modal-code pre {
+    background: var(--bg-0);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    font-family: var(--font);
+    font-size: 11px;
+    color: var(--text-1);
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.6;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .modal-foot {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  /* ─── Toast ─── */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--green);
+    color: #000;
+    padding: 10px 18px;
+    border-radius: var(--radius);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 700;
+    z-index: 100;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.25s ease;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ─── Empty state ─── */
+  .empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-3);
+  }
+  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+  .empty p { font-size: 12px; }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 960px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .detail-metrics { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .app { flex-direction: column; }
+    .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; max-height: 45vh; }
+    .content { padding: 16px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
   }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1><span>skill-infra</span> dashboard</h1>
-  <div class="meta" id="meta">loading...</div>
+<div class="app">
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div>
+        <div class="sidebar-title"><span class="prompt-char">~</span> skill-infra<span class="cursor"></span></div>
+        <div class="sidebar-version" id="version">loading...</div>
+      </div>
+      <button class="theme-toggle" id="theme-btn" title="Toggle light/dark mode">
+        <span id="theme-icon">&#x2600;</span>
+      </button>
+    </div>
+    <div class="search-wrap">
+      <input class="search-input" id="search" placeholder=" grep skills..." autocomplete="off" spellcheck="false">
+    </div>
+    <div class="filter-bar" id="filters"></div>
+    <div class="skill-list" id="skill-list"></div>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main">
+    <div class="topbar">
+      <button class="tab active" data-tab="overview">overview</button>
+      <button class="tab" data-tab="network">network</button>
+      <button class="tab" data-tab="detail" id="detail-tab" style="display:none"></button>
+    </div>
+    <div class="content">
+      <div class="tab-pane active" id="pane-overview"></div>
+      <div class="tab-pane" id="pane-network"></div>
+      <div class="tab-pane" id="pane-detail">
+        <div class="empty"><div class="empty-icon">_</div><p>Select a skill from the sidebar</p></div>
+      </div>
+    </div>
+  </main>
 </div>
 
-<div class="grid three" id="stats"></div>
+<div class="toast" id="toast"></div>
 
-<div class="card" style="margin-bottom: 20px;">
-  <h2>Token Budget</h2>
-  <div id="token-budget"></div>
-</div>
-
-<div class="grid">
-  <div class="card">
-    <h2>Skill Leaderboard</h2>
-    <table class="skill-table" id="leaderboard"></table>
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modal-title"></h3>
+      <p id="modal-desc"></p>
+    </div>
+    <div class="modal-code"><pre id="modal-pre"></pre></div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal()">esc</button>
+      <button class="btn btn-primary" id="modal-copy">copy</button>
+    </div>
   </div>
-  <div class="card">
-    <h2>Network</h2>
-    <div class="network-container" id="network"></div>
-  </div>
 </div>
-
-<div class="detail-panel" id="detail"></div>
 
 <script>
 (async function() {
-  var REGISTRY;
+
+  /* ── Load Data ── */
+  var R;
   try {
-    var resp = await fetch('./data/registry.json');
-    REGISTRY = await resp.json();
+    R = await (await fetch('./data/registry.json')).json();
   } catch(e) {
-    document.getElementById('meta').textContent = 'Error: ' + e.message;
+    document.getElementById('version').textContent = 'ERR: ' + e.message;
     return;
   }
 
-  var skills = REGISTRY.skills;
-  var skillNames = Object.keys(skills);
-  var skillList = Object.values(skills);
+  var S = R.skills, names = Object.keys(S), list = Object.values(S);
+  var current = null, filter = 'all', query = '';
 
-  document.getElementById('meta').innerHTML =
-    'v' + REGISTRY.plugin_version + ' &middot; ' +
-    skillNames.length + ' skills &middot; ' +
-    'schema v' + REGISTRY.schema_version + ' &middot; ' +
-    new Date().toLocaleDateString();
+  var icons = {
+    'skill-registry':  { e: '\uD83D\uDDFA\uFE0F', bg: 'var(--prompt-glow)' },
+    'skill-health':    { e: '\uD83E\uDE7A', bg: 'var(--green-dim)' },
+    'skill-dashboard': { e: '\uD83D\uDCCA', bg: 'var(--yellow-dim)' },
+    'skill-scaffold':  { e: '\uD83C\uDFD7\uFE0F', bg: 'var(--cyan-dim)' },
+    'skill-test':      { e: '\uD83E\uDDEA', bg: 'var(--red-dim)' },
+    'skill-analyze':   { e: '\uD83D\uDD2E', bg: 'var(--prompt-glow)' },
+    'skill-fork':      { e: '\u2702\uFE0F', bg: 'var(--yellow-dim)' },
+    'skill-network':   { e: '\uD83C\uDF10', bg: 'var(--cyan-dim)' },
+    'skill-export':    { e: '\uD83D\uDCE6', bg: 'var(--green-dim)' }
+  };
 
-  var totalMeta = 0, totalScore = 0, healthyCount = 0;
-  for (var i = 0; i < skillList.length; i++) {
-    totalMeta += skillList[i].metrics.estimated_tokens_metadata;
-    totalScore += skillList[i].composite_score;
-    if (skillList[i].health_status === 'healthy') healthyCount++;
+  var nicks = {
+    'skill-registry':'The Map','skill-health':'The Doctor','skill-dashboard':'The Observatory',
+    'skill-scaffold':'The Builder','skill-test':'The Prover','skill-analyze':'The Oracle',
+    'skill-fork':'The Splitter','skill-network':'The Cartographer','skill-export':'The Courier'
+  };
+
+  /* ── Theme Toggle ── */
+  var theme = localStorage.getItem('si-theme') || 'dark';
+  applyTheme(theme);
+
+  document.getElementById('theme-btn').onclick = function() {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    applyTheme(theme);
+    localStorage.setItem('si-theme', theme);
+  };
+
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('theme-icon').innerHTML = t === 'dark' ? '&#x2600;' : '&#x263D;';
   }
-  var avgScore = (totalScore / skillList.length).toFixed(1);
 
-  var statsHTML = '';
-  var statItems = [
-    { n: skillNames.length, l: 'skills registered', c: 'accent' },
-    { n: avgScore, l: 'avg composite score', c: healthyCount === skillList.length ? 'green' : 'yellow' },
-    { n: totalMeta, l: 'metadata tokens (always loaded)', c: totalMeta < 600 ? 'green' : totalMeta < 900 ? 'yellow' : 'red' }
+  /* ── Version Bar ── */
+  document.getElementById('version').textContent =
+    'v' + R.plugin_version + ' // ' + names.length + ' skills // schema v' + R.schema_version;
+
+  /* ── Filters ── */
+  var types = {};
+  list.forEach(function(s) { types[s.type] = true; });
+  var fHTML = '<button class="filter-btn active" data-f="all">all</button>';
+  Object.keys(types).forEach(function(t) { fHTML += '<button class="filter-btn" data-f="type:' + t + '">' + t + '</button>'; });
+  fHTML += '<button class="filter-btn" data-f="issues">issues</button>';
+  document.getElementById('filters').innerHTML = fHTML;
+
+  document.querySelectorAll('.filter-btn').forEach(function(b) {
+    b.onclick = function() {
+      document.querySelectorAll('.filter-btn').forEach(function(x) { x.classList.remove('active'); });
+      this.classList.add('active');
+      filter = this.dataset.f;
+      renderList();
+    };
+  });
+
+  /* ── Search ── */
+  document.getElementById('search').oninput = function() { query = this.value.toLowerCase(); renderList(); };
+
+  /* ── Skill List ── */
+  function renderList() {
+    var filtered = list.filter(function(s) {
+      if (filter !== 'all') {
+        if (filter.startsWith('type:') && s.type !== filter.split(':')[1]) return false;
+        if (filter === 'issues' && s.health_status === 'healthy') return false;
+      }
+      if (query && s.name.toLowerCase().indexOf(query) === -1 &&
+          s.description.toLowerCase().indexOf(query) === -1) return false;
+      return true;
+    });
+
+    var h = '';
+    if (!filtered.length) h = '<div style="padding:16px 18px;color:var(--text-3);font-size:11px">no matches</div>';
+    filtered.forEach(function(s) {
+      var ac = current === s.name ? ' active' : '';
+      h += '<div class="skill-item' + ac + '" data-s="' + s.name + '">';
+      h += '<div class="skill-item-name"><span class="dot dot-' + s.health_status + '"></span>' + s.name + '</div>';
+      h += '<div class="skill-item-desc">' + s.description + '</div>';
+      h += '<div class="skill-item-meta"><span class="badge badge-' + s.type + '">' + s.type + '</span>';
+      h += '<span>' + s.composite_score + ' pts</span><span>' + s.metrics.estimated_tokens_total + ' tok</span></div>';
+      h += '</div>';
+    });
+    document.getElementById('skill-list').innerHTML = h;
+    document.querySelectorAll('.skill-item').forEach(function(el) {
+      el.onclick = function() { select(this.dataset.s); };
+    });
+  }
+  renderList();
+
+  function select(name) {
+    current = name;
+    renderList();
+    renderDetail(name);
+    switchTab('detail');
+  }
+
+  /* ── Tab Switching ── */
+  function switchTab(t) {
+    document.querySelectorAll('.tab').forEach(function(x) { x.classList.remove('active'); });
+    document.querySelectorAll('.tab-pane').forEach(function(x) { x.classList.remove('active'); });
+    document.querySelector('[data-tab="' + t + '"]').classList.add('active');
+    document.getElementById('pane-' + t).classList.add('active');
+    if (t === 'detail') document.getElementById('detail-tab').style.display = '';
+    if (t === 'network') setTimeout(renderNetwork, 30);
+  }
+
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.onclick = function() { switchTab(this.dataset.tab); };
+  });
+
+  /* ══════════════════════════════════════
+     OVERVIEW TAB
+     ══════════════════════════════════════ */
+  var totalMeta = 0, totalScore = 0, healthy = 0, totalTok = 0;
+  list.forEach(function(s) {
+    totalMeta += s.metrics.estimated_tokens_metadata;
+    totalScore += s.composite_score;
+    totalTok += s.metrics.estimated_tokens_total;
+    if (s.health_status === 'healthy') healthy++;
+  });
+  var avg = (totalScore / list.length).toFixed(1);
+
+  var ov = '';
+
+  // stats
+  ov += '<div class="stats-grid">';
+  var ss = [
+    { l: 'skills', v: names.length, c: 'prompt', sub: healthy + '/' + names.length + ' healthy' },
+    { l: 'avg score', v: avg, c: 'green', sub: 'composite rating' },
+    { l: 'meta tokens', v: totalMeta, c: totalMeta < 600 ? 'green' : 'yellow', sub: 'always loaded' },
+    { l: 'total tokens', v: totalTok.toLocaleString(), c: 'cyan', sub: 'all skills triggered' }
   ];
-  for (var i = 0; i < statItems.length; i++) {
-    var s = statItems[i];
-    statsHTML += '<div class="card"><div class="big-number" style="color:var(--' + s.c + ')">' + s.n + '</div><div class="big-label">' + s.l + '</div></div>';
-  }
-  document.getElementById('stats').innerHTML = statsHTML;
+  ss.forEach(function(s) {
+    ov += '<div class="stat"><div class="stat-label">' + s.l + '</div>';
+    ov += '<div class="stat-value" style="color:var(--' + s.c + ')">' + s.v + '</div>';
+    ov += '<div class="stat-sub">' + s.sub + '</div></div>';
+  });
+  ov += '</div>';
 
-  var budgetPct = Math.min(100, (totalMeta / 600) * 100);
-  var budgetColor = budgetPct < 70 ? 'var(--green)' : budgetPct < 90 ? 'var(--yellow)' : 'var(--red)';
-  var tokenHTML = '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-dim)">';
-  tokenHTML += '<span>' + totalMeta + ' / 600 tokens</span>';
-  tokenHTML += '<span>' + budgetPct.toFixed(0) + '%</span></div>';
-  tokenHTML += '<div class="token-bar-bg"><div class="token-bar-fill" style="width:' + budgetPct + '%;background:' + budgetColor + '"></div></div>';
-  tokenHTML += '<div class="token-breakdown">';
-  for (var i = 0; i < skillList.length; i++) {
-    var short = skillList[i].name.replace('skill-', '');
-    tokenHTML += '<span>' + short + '<br><strong style="color:var(--text)">' + skillList[i].metrics.estimated_tokens_metadata + '</strong></span>';
-  }
-  tokenHTML += '</div>';
-  document.getElementById('token-budget').innerHTML = tokenHTML;
+  // token budget panel
+  var pct = Math.min(100, (totalMeta / 600) * 100);
+  var pc = pct < 70 ? 'var(--green)' : pct < 90 ? 'var(--yellow)' : 'var(--red)';
+  ov += '<div class="panel"><div class="panel-bar"><div class="panel-bar-dots"><span></span><span></span><span></span></div>token budget &mdash; 600 target</div>';
+  ov += '<div class="panel-body">';
+  ov += '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-2);font-weight:600">';
+  ov += '<span>' + totalMeta + ' / 600</span><span>' + pct.toFixed(0) + '%</span></div>';
+  ov += '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%;background:' + pc + '"></div></div>';
+  ov += '<div class="token-chips">';
+  list.forEach(function(s) {
+    ov += '<div class="token-chip" data-s="' + s.name + '">' + s.name.replace('skill-','') + '<strong>' + s.metrics.estimated_tokens_metadata + '</strong></div>';
+  });
+  ov += '</div></div></div>';
 
-  var sortKey = 'composite_score';
-  var sortDir = -1;
+  // leaderboard
+  ov += '<div class="panel"><div class="panel-bar"><div class="panel-bar-dots"><span></span><span></span><span></span></div>leaderboard</div>';
+  ov += '<div class="panel-body"><table class="tbl" id="tbl"></table></div></div>';
 
-  function getVal(skill, key) {
-    if (key === 'name') return skill.name;
-    if (skill.metrics && skill.metrics[key] !== undefined) return skill.metrics[key];
-    if (skill[key] !== undefined) return skill[key];
+  document.getElementById('pane-overview').innerHTML = ov;
+
+  // wire token chips
+  document.querySelectorAll('.token-chip').forEach(function(c) { c.onclick = function() { select(this.dataset.s); }; });
+
+  // leaderboard sorting
+  var sortKey = 'composite_score', sortDir = -1;
+
+  function gv(s, k) {
+    if (k === 'name') return s.name;
+    if (s.metrics && s.metrics[k] !== undefined) return s.metrics[k];
+    if (s[k] !== undefined) return s[k];
     return 0;
   }
 
-  function renderLeaderboard() {
-    var sorted = skillList.slice().sort(function(a, b) {
-      var av = getVal(a, sortKey), bv = getVal(b, sortKey);
-      if (typeof av === 'string') return sortDir * av.localeCompare(bv);
-      return sortDir * (av - bv);
+  function renderTable() {
+    var sorted = list.slice().sort(function(a, b) {
+      var av = gv(a, sortKey), bv = gv(b, sortKey);
+      return typeof av === 'string' ? sortDir * av.localeCompare(bv) : sortDir * (av - bv);
     });
 
     var cols = [
-      { key: 'name', label: 'Skill' },
-      { key: 'composite_score', label: 'Score' },
-      { key: 'body_words', label: 'Words' },
-      { key: 'estimated_tokens_total', label: 'Tokens' },
-      { key: 'health_status', label: 'Health' }
+      { k: 'name', l: 'skill' }, { k: 'composite_score', l: 'score' },
+      { k: 'body_words', l: 'words' }, { k: 'estimated_tokens_total', l: 'tokens' },
+      { k: 'health_status', l: 'health' }
     ];
 
-    var html = '<thead><tr>';
-    for (var c = 0; c < cols.length; c++) {
-      var col = cols[c];
-      var cls = col.key === sortKey ? ' class="sorted"' : '';
-      var arrow = col.key === sortKey ? (sortDir === -1 ? ' \u2193' : ' \u2191') : '';
-      html += '<th' + cls + ' data-key="' + col.key + '">' + col.label + arrow + '</th>';
-    }
-    html += '</tr></thead><tbody>';
-
-    for (var i = 0; i < sorted.length; i++) {
-      var sk = sorted[i];
-      html += '<tr data-skill="' + sk.name + '" style="cursor:pointer">';
-      html += '<td class="skill-name">' + sk.name + '</td>';
-      html += '<td><span class="score-bar" style="width:' + (sk.composite_score * 0.6) + 'px"></span>' + sk.composite_score + '</td>';
-      html += '<td>' + sk.metrics.body_words + '</td>';
-      html += '<td>' + sk.metrics.estimated_tokens_total.toLocaleString() + '</td>';
-      html += '<td><span class="health-dot ' + sk.health_status + '"></span>' + sk.health_status + '</td>';
-      html += '</tr>';
-    }
-    html += '</tbody>';
-    document.getElementById('leaderboard').innerHTML = html;
-
-    document.querySelectorAll('#leaderboard th').forEach(function(th) {
-      th.addEventListener('click', function() {
-        var key = this.getAttribute('data-key');
-        if (sortKey === key) sortDir *= -1;
-        else { sortKey = key; sortDir = -1; }
-        renderLeaderboard();
-      });
+    var h = '<thead><tr>';
+    cols.forEach(function(c) {
+      var cl = c.k === sortKey ? ' class="sorted"' : '';
+      var ar = c.k === sortKey ? (sortDir === -1 ? ' \u2193' : ' \u2191') : '';
+      h += '<th' + cl + ' data-k="' + c.k + '">' + c.l + ar + '</th>';
     });
-    document.querySelectorAll('#leaderboard tbody tr').forEach(function(tr) {
-      tr.addEventListener('click', function() { showDetail(this.getAttribute('data-skill')); });
+    h += '</tr></thead><tbody>';
+
+    sorted.forEach(function(s) {
+      h += '<tr data-s="' + s.name + '">';
+      h += '<td class="t-name">' + s.name + '</td>';
+      h += '<td><span class="score-pip" style="width:' + (s.composite_score * 0.5) + 'px"></span>' + s.composite_score + '</td>';
+      h += '<td>' + s.metrics.body_words + '</td>';
+      h += '<td>' + s.metrics.estimated_tokens_total.toLocaleString() + '</td>';
+      h += '<td><span class="dot dot-' + s.health_status + '" style="vertical-align:middle;margin-right:4px"></span>' + s.health_status + '</td>';
+      h += '</tr>';
+    });
+    h += '</tbody>';
+    document.getElementById('tbl').innerHTML = h;
+
+    document.querySelectorAll('#tbl th').forEach(function(th) {
+      th.onclick = function() {
+        var k = this.dataset.k;
+        if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = -1; }
+        renderTable();
+      };
+    });
+    document.querySelectorAll('#tbl tbody tr').forEach(function(tr) {
+      tr.onclick = function() { select(this.dataset.s); };
     });
   }
+  renderTable();
 
-  renderLeaderboard();
-
+  /* ══════════════════════════════════════
+     NETWORK TAB
+     ══════════════════════════════════════ */
   function renderNetwork() {
-    var container = document.getElementById('network');
-    var width = container.offsetWidth;
-    var height = 400;
-    var levels = {}, visited = {};
-    var roots = skillNames.filter(function(n) { return skills[n].depends_on.length === 0; });
-    var queue = roots.map(function(r) { return { name: r, level: 0 }; });
+    var el = document.getElementById('pane-network');
+    el.innerHTML = '<div class="panel"><div class="panel-bar"><div class="panel-bar-dots"><span></span><span></span><span></span></div>dependency graph</div><div class="panel-body"><div class="net-wrap" id="net"></div></div></div>';
 
-    while (queue.length > 0) {
-      var item = queue.shift();
-      if (visited[item.name]) { if (item.level > levels[item.name]) levels[item.name] = item.level; continue; }
-      visited[item.name] = true;
-      levels[item.name] = item.level;
-      var refs = skills[item.name].referenced_by || [];
-      for (var i = 0; i < refs.length; i++) {
-        if (skills[refs[i]]) queue.push({ name: refs[i], level: item.level + 1 });
+    var c = document.getElementById('net');
+    var w = c.offsetWidth; if (!w) return;
+    var h = 420;
+    var levels = {}, vis = {};
+    var roots = names.filter(function(n) { return S[n].depends_on.length === 0; });
+    var q = roots.map(function(r) { return { n: r, l: 0 }; });
+
+    while (q.length) {
+      var it = q.shift();
+      if (vis[it.n]) { if (it.l > levels[it.n]) levels[it.n] = it.l; continue; }
+      vis[it.n] = true; levels[it.n] = it.l;
+      (S[it.n].referenced_by || []).forEach(function(r) { if (S[r]) q.push({ n: r, l: it.l + 1 }); });
+    }
+
+    var maxL = 0, groups = {};
+    for (var n in levels) {
+      if (levels[n] > maxL) maxL = levels[n];
+      if (!groups[levels[n]]) groups[levels[n]] = [];
+      groups[levels[n]].push(n);
+    }
+
+    var pos = {};
+    for (var lv in groups) {
+      var ns = groups[lv];
+      var y = 30 + (parseInt(lv) / Math.max(1, maxL)) * (h - 70);
+      for (var i = 0; i < ns.length; i++) {
+        pos[ns[i]] = { x: (w / (ns.length + 1)) * (i + 1), y: y };
       }
     }
 
-    var maxLevel = 0, levelGroups = {};
-    for (var name in levels) {
-      if (levels[name] > maxLevel) maxLevel = levels[name];
-      if (!levelGroups[levels[name]]) levelGroups[levels[name]] = [];
-      levelGroups[levels[name]].push(name);
-    }
-
-    var positions = {};
-    for (var lv in levelGroups) {
-      var names = levelGroups[lv];
-      var y = 30 + (parseInt(lv) / Math.max(1, maxLevel)) * (height - 80);
-      for (var i = 0; i < names.length; i++) {
-        positions[names[i]] = { x: (width / (names.length + 1)) * (i + 1), y: y };
-      }
-    }
-
-    var svgLines = '';
-    for (var n = 0; n < skillNames.length; n++) {
-      var deps = skills[skillNames[n]].depends_on;
-      for (var d = 0; d < deps.length; d++) {
-        if (positions[skillNames[n]] && positions[deps[d]]) {
-          svgLines += '<line x1="' + positions[deps[d]].x + '" y1="' + (positions[deps[d]].y + 14) +
-            '" x2="' + positions[skillNames[n]].x + '" y2="' + (positions[skillNames[n]].y - 6) +
-            '" data-from="' + deps[d] + '" data-to="' + skillNames[n] + '"/>';
+    var svg = '';
+    names.forEach(function(n) {
+      S[n].depends_on.forEach(function(d) {
+        if (pos[n] && pos[d]) {
+          svg += '<line x1="' + pos[d].x + '" y1="' + (pos[d].y + 12) +
+            '" x2="' + pos[n].x + '" y2="' + (pos[n].y - 4) +
+            '" data-from="' + d + '" data-to="' + n + '"/>';
         }
-      }
-    }
+      });
+    });
 
-    container.style.height = height + 'px';
-    var html = '<svg class="network-svg" viewBox="0 0 ' + width + ' ' + height + '">' + svgLines + '</svg>';
-    for (var n = 0; n < skillNames.length; n++) {
-      var p = positions[skillNames[n]];
-      if (!p) continue;
-      html += '<div class="network-node" style="left:' + (p.x - 40) + 'px;top:' + p.y + 'px" data-skill="' + skillNames[n] + '">' +
-        skillNames[n].replace('skill-', '') + '<span class="node-score">' + skills[skillNames[n]].composite_score + '</span></div>';
-    }
-    container.innerHTML = html;
+    c.style.height = h + 'px';
+    var html = '<svg class="net-svg" viewBox="0 0 ' + w + ' ' + h + '">' + svg + '</svg>';
+    names.forEach(function(n) {
+      var p = pos[n]; if (!p) return;
+      var ac = current === n ? ' active' : '';
+      html += '<div class="net-node' + ac + '" style="left:' + (p.x - 45) + 'px;top:' + p.y + 'px" data-s="' + n + '">' +
+        n.replace('skill-','') + '<span class="n-score">' + S[n].composite_score + '</span></div>';
+    });
+    c.innerHTML = html;
 
-    container.querySelectorAll('.network-node').forEach(function(node) {
-      node.addEventListener('click', function() { showDetail(this.getAttribute('data-skill')); });
-      node.addEventListener('mouseenter', function() {
-        var nm = this.getAttribute('data-skill');
-        document.querySelectorAll('.network-svg line').forEach(function(l) {
-          if (l.getAttribute('data-from') === nm || l.getAttribute('data-to') === nm) l.classList.add('highlighted');
+    c.querySelectorAll('.net-node').forEach(function(node) {
+      node.onclick = function() { select(this.dataset.s); };
+      node.onmouseenter = function() {
+        var nm = this.dataset.s;
+        document.querySelectorAll('.net-svg line').forEach(function(l) {
+          if (l.dataset.from === nm || l.dataset.to === nm) l.classList.add('hi');
         });
-      });
-      node.addEventListener('mouseleave', function() {
-        document.querySelectorAll('.network-svg line').forEach(function(l) { l.classList.remove('highlighted'); });
-      });
+      };
+      node.onmouseleave = function() {
+        document.querySelectorAll('.net-svg line').forEach(function(l) { l.classList.remove('hi'); });
+      };
     });
   }
 
-  renderNetwork();
-  window.addEventListener('resize', renderNetwork);
+  window.addEventListener('resize', function() {
+    if (document.getElementById('pane-network').classList.contains('active')) renderNetwork();
+  });
 
-  function showDetail(name) {
-    var s = skills[name], m = s.metrics;
-    var panel = document.getElementById('detail');
-    panel.className = 'detail-panel visible';
+  /* ══════════════════════════════════════
+     DETAIL TAB
+     ══════════════════════════════════════ */
+  function renderDetail(name) {
+    var s = S[name]; if (!s) return;
+    var m = s.metrics;
+    var ic = icons[name] || { e: '\u2699', bg: 'var(--bg-3)' };
+    var nick = nicks[name] || '';
 
-    var metrics = [
-      { l: 'Score', v: s.composite_score, c: s.composite_score >= 97 ? 'green' : s.composite_score >= 70 ? 'yellow' : 'red' },
-      { l: 'Body Words', v: m.body_words, c: m.body_words <= 1500 ? 'green' : m.body_words <= 2000 ? 'yellow' : 'red' },
-      { l: 'Total Tokens', v: m.estimated_tokens_total.toLocaleString(), c: 'accent' },
-      { l: 'Meta Tokens', v: m.estimated_tokens_metadata, c: 'cyan' },
-      { l: 'Sections', v: m.section_count, c: 'accent' },
-      { l: 'References', v: m.reference_files, c: 'accent' },
-      { l: 'Health', v: s.health_status, c: s.health_status === 'healthy' ? 'green' : s.health_status === 'warning' ? 'yellow' : 'red' },
-      { l: 'Status', v: s.status, c: s.status === 'active' ? 'green' : 'yellow' }
+    document.getElementById('detail-tab').style.display = '';
+    document.getElementById('detail-tab').textContent = s.name;
+
+    var h = '';
+
+    // hero
+    h += '<div class="detail-hero">';
+    h += '<div class="detail-icon" style="background:' + ic.bg + '">' + ic.e + '</div>';
+    h += '<div><h2>' + s.name + (nick ? ' <span class="nickname">&mdash; ' + nick + '</span>' : '') + '</h2>';
+    h += '<div class="detail-desc">' + s.description + '</div></div></div>';
+
+    // actions
+    h += '<div class="detail-actions">';
+    h += '<button class="btn btn-primary" onclick="exportDesktop(\'' + name + '\')">copy for claude desktop</button>';
+    h += '<button class="btn" onclick="exportAll()">export all</button>';
+    h += '<button class="btn" onclick="copyJSON(\'' + name + '\')">{ } json</button>';
+    h += '</div>';
+
+    // metrics
+    var ms = [
+      { l: 'score', v: s.composite_score, c: s.composite_score >= 97 ? 'green' : s.composite_score >= 70 ? 'yellow' : 'red', sub: 'auto: ' + s.auto_score + (s.manual_rating ? ' // manual: ' + s.manual_rating + '/5' : '') },
+      { l: 'body words', v: m.body_words, c: m.body_words <= 1500 ? 'green' : m.body_words <= 2000 ? 'yellow' : 'red', sub: m.word_count + ' total' },
+      { l: 'tokens', v: m.estimated_tokens_total.toLocaleString(), c: 'prompt', sub: 'meta:' + m.estimated_tokens_metadata + ' + body:' + m.estimated_tokens_body },
+      { l: 'sections', v: m.section_count, c: 'cyan', sub: m.reference_files + ' refs // ' + m.template_files + ' tpl' },
+      { l: 'health', v: s.health_status, c: s.health_status === 'healthy' ? 'green' : 'yellow', sub: s.issues.length ? s.issues.length + ' issues' : 'clean' },
+      { l: 'type', v: s.type, c: 'cyan', sub: s.source },
+      { l: 'status', v: s.status, c: s.status === 'active' ? 'green' : 'yellow', sub: s.created },
+      { l: 'invoke', v: s.invocation, c: 'orange', sub: s.context_mode }
     ];
 
-    var html = '<h3>' + s.name + '</h3><div class="desc">' + s.description + '</div><div class="detail-grid">';
-    for (var i = 0; i < metrics.length; i++) {
-      html += '<div class="detail-metric"><div class="dm-label">' + metrics[i].l + '</div><div class="dm-value" style="color:var(--' + metrics[i].c + ')">' + metrics[i].v + '</div></div>';
-    }
-    html += '</div>';
-
-    if (s.depends_on.length) {
-      html += '<div class="deps-list">Depends on: ';
-      html += s.depends_on.map(function(d) { return '<span class="dep-link" data-skill="' + d + '">' + d + '</span>'; }).join(', ');
-      html += '</div>';
-    }
-    if (s.referenced_by.length) {
-      html += '<div class="deps-list">Referenced by: ';
-      html += s.referenced_by.map(function(d) { return '<span class="dep-link" data-skill="' + d + '">' + d + '</span>'; }).join(', ');
-      html += '</div>';
-    }
-
-    html += '<div class="changelog"><strong style="color:var(--text)">Changelog</strong>';
-    for (var i = 0; i < s.changelog.length; i++) {
-      html += '<div class="changelog-entry">' + s.changelog[i].date + ' \u2014 ' + s.changelog[i].action + ': ' + s.changelog[i].note + '</div>';
-    }
-    html += '</div>';
-
-    panel.innerHTML = html;
-    panel.querySelectorAll('.dep-link').forEach(function(link) {
-      link.addEventListener('click', function() { showDetail(this.getAttribute('data-skill')); });
+    h += '<div class="detail-metrics">';
+    ms.forEach(function(mi) {
+      h += '<div class="dm"><div class="dm-label">' + mi.l + '</div>';
+      h += '<div class="dm-value" style="color:var(--' + mi.c + ')">' + mi.v + '</div>';
+      h += '<div class="dm-sub">' + mi.sub + '</div></div>';
     });
-    panel.scrollIntoView({ behavior: 'smooth' });
+    h += '</div>';
+
+    // deps
+    h += '<div class="section"><div class="section-title">dependencies</div><div class="dep-grid">';
+    h += '<div class="dep-col"><h4>depends on (' + s.depends_on.length + ')</h4>';
+    if (!s.depends_on.length) h += '<div class="dep-link none">root node</div>';
+    else s.depends_on.forEach(function(d) { h += '<div class="dep-link" data-nav="' + d + '">' + d + '</div>'; });
+    h += '</div>';
+
+    h += '<div class="dep-col"><h4>referenced by (' + s.referenced_by.length + ')</h4>';
+    if (!s.referenced_by.length) h += '<div class="dep-link none">leaf node</div>';
+    else s.referenced_by.forEach(function(d) { h += '<div class="dep-link" data-nav="' + d + '">' + d + '</div>'; });
+    h += '</div></div></div>';
+
+    // tags
+    if (s.tags && s.tags.length) {
+      h += '<div class="section"><div class="section-title">tags</div><div class="tag-list">';
+      s.tags.forEach(function(t) { h += '<span class="tag">' + t + '</span>'; });
+      h += '</div></div>';
+    }
+
+    // changelog
+    h += '<div class="section"><div class="section-title">changelog</div><div class="timeline">';
+    s.changelog.slice().reverse().forEach(function(e) {
+      h += '<div class="tl-entry"><div class="tl-date">' + e.date + '</div>';
+      h += '<div class="tl-action">' + e.action + '</div>';
+      h += '<div class="tl-note">' + e.note + '</div></div>';
+    });
+    h += '</div></div>';
+
+    document.getElementById('pane-detail').innerHTML = h;
+    document.querySelectorAll('[data-nav]').forEach(function(el) {
+      el.onclick = function() { select(this.dataset.nav); };
+    });
   }
 
-  window.showDetail = showDetail;
+  /* ══════════════════════════════════════
+     EXPORT FUNCTIONS
+     ══════════════════════════════════════ */
+  function genDesktop(s) {
+    var t = '## ' + s.name;
+    if (nicks[s.name]) t += ' \u2014 ' + nicks[s.name];
+    t += '\n\n**Trigger:** ' + s.description + '\n\n';
+    t += '**Type:** ' + s.type + ' | **Status:** ' + s.status + '\n\n';
+    if (s.depends_on.length) t += '**Depends on:** ' + s.depends_on.join(', ') + '\n\n';
+    t += '**Metrics:**\n';
+    t += '- Body: ' + s.metrics.body_words + ' words (' + s.metrics.estimated_tokens_body + ' tokens)\n';
+    t += '- Score: ' + s.composite_score + '/100\n';
+    t += '- Health: ' + s.health_status + '\n';
+    if (s.tags && s.tags.length) t += '- Tags: ' + s.tags.join(', ') + '\n';
+    t += '\n**Source:** `' + s.location + '`\n';
+    t += '*(Read the SKILL.md at this path for full instructions)*\n';
+    return t;
+  }
+
+  window.exportDesktop = function(name) {
+    showModal('export // ' + name, 'Paste into a Claude Desktop Project\'s custom instructions.', genDesktop(S[name]));
+  };
+
+  window.exportAll = function() {
+    var t = '# skill-infra // Custom Instructions\n';
+    t += '# v' + R.plugin_version + ' // ' + names.length + ' skills\n\n';
+    t += 'You have the following skill knowledge available.\n\n---\n\n';
+    list.forEach(function(s) { t += genDesktop(s) + '\n---\n\n'; });
+    showModal('export // all skills', 'All ' + names.length + ' skills formatted for Claude Desktop.', t);
+  };
+
+  window.copyJSON = function(name) {
+    showModal('json // ' + name, 'Raw registry entry.', JSON.stringify(S[name], null, 2));
+  };
+
+  /* ── Modal ── */
+  function showModal(title, desc, content) {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-desc').textContent = desc;
+    document.getElementById('modal-pre').textContent = content;
+    document.getElementById('modal').classList.add('open');
+    document.getElementById('modal-copy').onclick = function() {
+      navigator.clipboard.writeText(content).then(function() {
+        toast('copied to clipboard');
+        closeModal();
+      }).catch(function() {
+        var ta = document.createElement('textarea');
+        ta.value = content; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); document.body.removeChild(ta);
+        toast('copied to clipboard');
+        closeModal();
+      });
+    };
+  }
+
+  window.closeModal = function() {
+    document.getElementById('modal').classList.remove('open');
+  };
+
+  document.getElementById('modal').onclick = function(e) { if (e.target === this) closeModal(); };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  /* ── Toast ── */
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(function() { el.classList.remove('show'); }, 2200);
+  }
+
 })();
 </script>
 </body>
