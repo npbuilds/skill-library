@@ -62,9 +62,12 @@ EXAMPLE_COUNT=$(count_files "$SKILL_DIR/examples")
 SCRIPT_COUNT=$(count_files "$SKILL_DIR/scripts")
 TEMPLATE_COUNT=$(count_files "$SKILL_DIR/templates")
 
-# Token estimation (~4 chars per token)
-CHAR_COUNT=$(wc -c < "$SKILL_PATH" | tr -d ' ')
-EST_TOKENS_BODY=$((CHAR_COUNT / 4))
+# Token estimation (~4 chars per token) — body only, excluding frontmatter
+BODY_CHARS=$(awk '
+  /^---$/ { count++; next }
+  count >= 2 { print }
+' "$SKILL_PATH" | wc -c | tr -d ' ')
+EST_TOKENS_BODY=$((BODY_CHARS / 4))
 
 # Metadata tokens: description is always loaded (~1.3 tokens per word for natural language)
 META_TOKENS=$(( (DESC_WORDS * 13 + 9) / 10 ))

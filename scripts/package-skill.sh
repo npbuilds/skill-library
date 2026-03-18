@@ -32,7 +32,8 @@ if [ -z "$METRICS_JSON" ]; then
   exit 1
 fi
 
-# Create export directory
+# Clean and create export directory (rm first to avoid cp -r nesting on re-runs)
+rm -rf "$EXPORT_DIR"
 mkdir -p "$EXPORT_DIR"
 
 # Copy SKILL.md

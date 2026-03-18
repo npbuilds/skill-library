@@ -902,6 +902,12 @@
   var S = R.skills, names = Object.keys(S), list = Object.values(S);
   var current = null, filter = 'all', query = '';
 
+  /* ── HTML escape helper (XSS prevention) ── */
+  function esc(s) {
+    if (s == null) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
   var icons = {
     'skill-registry':  { e: '\uD83D\uDDFA\uFE0F', bg: 'var(--prompt-glow)' },
     'skill-health':    { e: '\uD83E\uDE7A', bg: 'var(--green-dim)' },
@@ -975,10 +981,10 @@
     if (!filtered.length) h = '<div style="padding:16px 18px;color:var(--text-3);font-size:11px">no matches</div>';
     filtered.forEach(function(s) {
       var ac = current === s.name ? ' active' : '';
-      h += '<div class="skill-item' + ac + '" data-s="' + s.name + '">';
-      h += '<div class="skill-item-name"><span class="dot dot-' + s.health_status + '"></span>' + s.name + '</div>';
-      h += '<div class="skill-item-desc">' + s.description + '</div>';
-      h += '<div class="skill-item-meta"><span class="badge badge-' + s.type + '">' + s.type + '</span>';
+      h += '<div class="skill-item' + ac + '" data-s="' + esc(s.name) + '">';
+      h += '<div class="skill-item-name"><span class="dot dot-' + esc(s.health_status) + '"></span>' + esc(s.name) + '</div>';
+      h += '<div class="skill-item-desc">' + esc(s.description) + '</div>';
+      h += '<div class="skill-item-meta"><span class="badge badge-' + esc(s.type) + '">' + esc(s.type) + '</span>';
       h += '<span>' + s.composite_score + ' pts</span><span>' + s.metrics.estimated_tokens_total + ' tok</span></div>';
       h += '</div>';
     });
@@ -1020,7 +1026,7 @@
     totalTok += s.metrics.estimated_tokens_total;
     if (s.health_status === 'healthy') healthy++;
   });
-  var avg = (totalScore / list.length).toFixed(1);
+  var avg = list.length ? (totalScore / list.length).toFixed(1) : '0.0';
 
   var ov = '';
 
@@ -1049,7 +1055,7 @@
   ov += '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%;background:' + pc + '"></div></div>';
   ov += '<div class="token-chips">';
   list.forEach(function(s) {
-    ov += '<div class="token-chip" data-s="' + s.name + '">' + s.name.replace('skill-','') + '<strong>' + s.metrics.estimated_tokens_metadata + '</strong></div>';
+    ov += '<div class="token-chip" data-s="' + esc(s.name) + '">' + esc(s.name.replace('skill-','')) + '<strong>' + s.metrics.estimated_tokens_metadata + '</strong></div>';
   });
   ov += '</div></div></div>';
 
@@ -1093,12 +1099,12 @@
     h += '</tr></thead><tbody>';
 
     sorted.forEach(function(s) {
-      h += '<tr data-s="' + s.name + '">';
-      h += '<td class="t-name">' + s.name + '</td>';
+      h += '<tr data-s="' + esc(s.name) + '">';
+      h += '<td class="t-name">' + esc(s.name) + '</td>';
       h += '<td><span class="score-pip" style="width:' + (s.composite_score * 0.5) + 'px"></span>' + s.composite_score + '</td>';
       h += '<td>' + s.metrics.body_words + '</td>';
       h += '<td>' + s.metrics.estimated_tokens_total.toLocaleString() + '</td>';
-      h += '<td><span class="dot dot-' + s.health_status + '" style="vertical-align:middle;margin-right:4px"></span>' + s.health_status + '</td>';
+      h += '<td><span class="dot dot-' + esc(s.health_status) + '" style="vertical-align:middle;margin-right:4px"></span>' + esc(s.health_status) + '</td>';
       h += '</tr>';
     });
     h += '</tbody>';
@@ -1170,8 +1176,8 @@
     names.forEach(function(n) {
       var p = pos[n]; if (!p) return;
       var ac = current === n ? ' active' : '';
-      html += '<div class="net-node' + ac + '" style="left:' + (p.x - 45) + 'px;top:' + p.y + 'px" data-s="' + n + '">' +
-        n.replace('skill-','') + '<span class="n-score">' + S[n].composite_score + '</span></div>';
+      html += '<div class="net-node' + ac + '" style="left:' + (p.x - 45) + 'px;top:' + p.y + 'px" data-s="' + esc(n) + '">' +
+        esc(n.replace('skill-','')) + '<span class="n-score">' + S[n].composite_score + '</span></div>';
     });
     c.innerHTML = html;
 
@@ -1210,23 +1216,24 @@
     // hero
     h += '<div class="detail-hero">';
     h += '<div class="detail-icon" style="background:' + ic.bg + '">' + ic.e + '</div>';
-    h += '<div><h2>' + s.name + (nick ? ' <span class="nickname">&mdash; ' + nick + '</span>' : '') + '</h2>';
-    h += '<div class="detail-desc">' + s.description + '</div></div></div>';
+    h += '<div><h2>' + esc(s.name) + (nick ? ' <span class="nickname">&mdash; ' + esc(nick) + '</span>' : '') + '</h2>';
+    h += '<div class="detail-desc">' + esc(s.description) + '</div></div></div>';
 
-    // actions
+    // actions (use data attributes to avoid onclick injection)
     h += '<div class="detail-actions">';
-    h += '<button class="btn btn-primary" onclick="exportDesktop(\'' + name + '\')">copy for claude desktop</button>';
-    h += '<button class="btn" onclick="exportAll()">export all</button>';
-    h += '<button class="btn" onclick="copyJSON(\'' + name + '\')">{ } json</button>';
+    h += '<button class="btn btn-primary" data-action="export-desktop" data-skill="' + esc(name) + '">copy for claude desktop</button>';
+    h += '<button class="btn" data-action="export-all">export all</button>';
+    h += '<button class="btn" data-action="copy-json" data-skill="' + esc(name) + '">{ } json</button>';
     h += '</div>';
 
     // metrics
+    var issues = s.issues || [];
     var ms = [
       { l: 'score', v: s.composite_score, c: s.composite_score >= 97 ? 'green' : s.composite_score >= 70 ? 'yellow' : 'red', sub: 'auto: ' + s.auto_score + (s.manual_rating ? ' // manual: ' + s.manual_rating + '/5' : '') },
       { l: 'body words', v: m.body_words, c: m.body_words <= 1500 ? 'green' : m.body_words <= 2000 ? 'yellow' : 'red', sub: m.word_count + ' total' },
       { l: 'tokens', v: m.estimated_tokens_total.toLocaleString(), c: 'prompt', sub: 'meta:' + m.estimated_tokens_metadata + ' + body:' + m.estimated_tokens_body },
       { l: 'sections', v: m.section_count, c: 'cyan', sub: m.reference_files + ' refs // ' + m.template_files + ' tpl' },
-      { l: 'health', v: s.health_status, c: s.health_status === 'healthy' ? 'green' : 'yellow', sub: s.issues.length ? s.issues.length + ' issues' : 'clean' },
+      { l: 'health', v: s.health_status, c: s.health_status === 'healthy' ? 'green' : 'yellow', sub: issues.length ? issues.length + ' issues' : 'clean' },
       { l: 'type', v: s.type, c: 'cyan', sub: s.source },
       { l: 'status', v: s.status, c: s.status === 'active' ? 'green' : 'yellow', sub: s.created },
       { l: 'invoke', v: s.invocation, c: 'orange', sub: s.context_mode }
@@ -1234,41 +1241,56 @@
 
     h += '<div class="detail-metrics">';
     ms.forEach(function(mi) {
-      h += '<div class="dm"><div class="dm-label">' + mi.l + '</div>';
-      h += '<div class="dm-value" style="color:var(--' + mi.c + ')">' + mi.v + '</div>';
-      h += '<div class="dm-sub">' + mi.sub + '</div></div>';
+      h += '<div class="dm"><div class="dm-label">' + esc(mi.l) + '</div>';
+      h += '<div class="dm-value" style="color:var(--' + mi.c + ')">' + esc(mi.v) + '</div>';
+      h += '<div class="dm-sub">' + esc(mi.sub) + '</div></div>';
     });
     h += '</div>';
 
-    // deps
+    // deps (with null safety)
+    var deps = s.depends_on || [];
+    var refs = s.referenced_by || [];
     h += '<div class="section"><div class="section-title">dependencies</div><div class="dep-grid">';
-    h += '<div class="dep-col"><h4>depends on (' + s.depends_on.length + ')</h4>';
-    if (!s.depends_on.length) h += '<div class="dep-link none">root node</div>';
-    else s.depends_on.forEach(function(d) { h += '<div class="dep-link" data-nav="' + d + '">' + d + '</div>'; });
+    h += '<div class="dep-col"><h4>depends on (' + deps.length + ')</h4>';
+    if (!deps.length) h += '<div class="dep-link none">root node</div>';
+    else deps.forEach(function(d) { h += '<div class="dep-link" data-nav="' + esc(d) + '">' + esc(d) + '</div>'; });
     h += '</div>';
 
-    h += '<div class="dep-col"><h4>referenced by (' + s.referenced_by.length + ')</h4>';
-    if (!s.referenced_by.length) h += '<div class="dep-link none">leaf node</div>';
-    else s.referenced_by.forEach(function(d) { h += '<div class="dep-link" data-nav="' + d + '">' + d + '</div>'; });
+    h += '<div class="dep-col"><h4>referenced by (' + refs.length + ')</h4>';
+    if (!refs.length) h += '<div class="dep-link none">leaf node</div>';
+    else refs.forEach(function(d) { h += '<div class="dep-link" data-nav="' + esc(d) + '">' + esc(d) + '</div>'; });
     h += '</div></div></div>';
 
     // tags
-    if (s.tags && s.tags.length) {
+    var tags = s.tags || [];
+    if (tags.length) {
       h += '<div class="section"><div class="section-title">tags</div><div class="tag-list">';
-      s.tags.forEach(function(t) { h += '<span class="tag">' + t + '</span>'; });
+      tags.forEach(function(t) { h += '<span class="tag">' + esc(t) + '</span>'; });
       h += '</div></div>';
     }
 
-    // changelog
+    // changelog (with null safety)
+    var cl = (s.changelog || []).slice().reverse();
     h += '<div class="section"><div class="section-title">changelog</div><div class="timeline">';
-    s.changelog.slice().reverse().forEach(function(e) {
-      h += '<div class="tl-entry"><div class="tl-date">' + e.date + '</div>';
-      h += '<div class="tl-action">' + e.action + '</div>';
-      h += '<div class="tl-note">' + e.note + '</div></div>';
+    cl.forEach(function(e) {
+      h += '<div class="tl-entry"><div class="tl-date">' + esc(e.date) + '</div>';
+      h += '<div class="tl-action">' + esc(e.action) + '</div>';
+      h += '<div class="tl-note">' + esc(e.note) + '</div></div>';
     });
     h += '</div></div>';
 
     document.getElementById('pane-detail').innerHTML = h;
+
+    // Wire action buttons via data attributes (safe from injection)
+    document.querySelectorAll('[data-action]').forEach(function(btn) {
+      btn.onclick = function() {
+        var action = this.dataset.action;
+        var skill = this.dataset.skill;
+        if (action === 'export-desktop') exportDesktop(skill);
+        else if (action === 'export-all') exportAll();
+        else if (action === 'copy-json') copyJSON(skill);
+      };
+    });
     document.querySelectorAll('[data-nav]').forEach(function(el) {
       el.onclick = function() { select(this.dataset.nav); };
     });
@@ -1316,16 +1338,21 @@
     document.getElementById('modal-pre').textContent = content;
     document.getElementById('modal').classList.add('open');
     document.getElementById('modal-copy').onclick = function() {
-      navigator.clipboard.writeText(content).then(function() {
-        toast('copied to clipboard');
-        closeModal();
-      }).catch(function() {
+      function fallbackCopy() {
         var ta = document.createElement('textarea');
         ta.value = content; document.body.appendChild(ta); ta.select();
         document.execCommand('copy'); document.body.removeChild(ta);
         toast('copied to clipboard');
         closeModal();
-      });
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(content).then(function() {
+          toast('copied to clipboard');
+          closeModal();
+        }).catch(fallbackCopy);
+      } else {
+        fallbackCopy();
+      }
     };
   }
 
@@ -1340,11 +1367,13 @@
   });
 
   /* ── Toast ── */
+  var toastTimer;
   function toast(msg) {
+    clearTimeout(toastTimer);
     var el = document.getElementById('toast');
     el.textContent = msg;
     el.classList.add('show');
-    setTimeout(function() { el.classList.remove('show'); }, 2200);
+    toastTimer = setTimeout(function() { el.classList.remove('show'); }, 2200);
   }
 
 })();

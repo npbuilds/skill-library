@@ -16,7 +16,7 @@ PLUGIN_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 if [ "${1:-}" = "--serve" ]; then
   echo "Serving dashboard at http://localhost:8765/dashboard.html"
-  cd "$PLUGIN_DIR" && python3 -m http.server 8765
+  cd "$PLUGIN_DIR" && python3 -m http.server 8765 --bind 127.0.0.1
 else
   echo "Dashboard: $PLUGIN_DIR/dashboard.html"
   echo "Note: Must be served via HTTP (fetch requires it)."

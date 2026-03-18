@@ -11,6 +11,7 @@ SKILL_DIR="${SKILL_DIR%/}"  # strip trailing slash
 SKILL_MD="$SKILL_DIR/SKILL.md"
 ISSUES=""
 ISSUE_COUNT=0
+HAS_CRITICAL="false"
 
 add_issue() {
   local severity="$1"
@@ -23,6 +24,9 @@ add_issue() {
   escaped_msg=$(printf '%s' "$message" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$message")
   ISSUES="$ISSUES{\"severity\": \"$severity\", \"message\": $escaped_msg}"
   ISSUE_COUNT=$((ISSUE_COUNT + 1))
+  if [ "$severity" = "critical" ]; then
+    HAS_CRITICAL="true"
+  fi
 }
 
 # Check 1: SKILL.md exists
@@ -142,14 +146,8 @@ if [ "$HAS_TITLE" -eq 0 ]; then
   add_issue "info" "No # title heading found after frontmatter"
 fi
 
-# Determine overall validity
+# Determine overall validity (tracked via HAS_CRITICAL boolean in add_issue)
 VALID="true"
-HAS_CRITICAL=$(echo "[$ISSUES]" | python3 -c "
-import json, sys
-issues = json.loads(sys.stdin.read())
-print('true' if any(i['severity'] == 'critical' for i in issues) else 'false')
-" 2>/dev/null || echo "false")
-
 if [ "$HAS_CRITICAL" = "true" ]; then
   VALID="false"
 fi
