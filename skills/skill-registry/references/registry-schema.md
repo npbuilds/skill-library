@@ -5,7 +5,7 @@
 ```json
 {
   "schema_version": 1,
-  "plugin_version": "0.1.0",
+  "plugin_version": "1.0.0",
   "last_scan": "2026-03-17T12:00:00Z",
   "skills": { "<skill-slug>": { ... } },
   "network": {
@@ -46,7 +46,7 @@
 | `script_files` | int | Files in scripts/ |
 | `template_files` | int | Files in templates/ |
 | `estimated_tokens_metadata` | int | Tokens for description (always loaded) |
-| `estimated_tokens_body` | int | Tokens for full SKILL.md |
+| `estimated_tokens_body` | int | Tokens for SKILL.md body (excluding frontmatter) |
 | `estimated_tokens_total` | int | metadata + body |
 | `precise_tokens` | int|null | Exact count via Anthropic API (when available) |
 
@@ -105,8 +105,8 @@
     "invocation": "both",
     "version": "1.0.0",
     "metrics": {
-      "word_count": 853,
-      "body_words": 784,
+      "word_count": 752,
+      "body_words": 683,
       "description_words": 56,
       "section_count": 4,
       "reference_files": 1,
@@ -114,13 +114,13 @@
       "script_files": 0,
       "template_files": 0,
       "estimated_tokens_metadata": 73,
-      "estimated_tokens_body": 1565,
-      "estimated_tokens_total": 1638,
+      "estimated_tokens_body": 1349,
+      "estimated_tokens_total": 1422,
       "precise_tokens": null
     },
     "health_status": "healthy",
     "issues": [],
-    "last_checked": "2026-03-17",
+    "last_checked": "2026-03-17T00:00:00Z",
     "status": "active",
     "deprecated_date": null,
     "replacement_skill": null,

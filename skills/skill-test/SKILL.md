@@ -63,7 +63,7 @@ test_cases:
 ### Running Behavioral Tests
 
 1. Read the test case file for the target skill
-2. Launch the `skill-tester` agent (see `agents/skill-tester.md`)
+2. Use the Agent tool to launch the `skill-tester` agent (from `agents/skill-tester.md`)
 3. The agent runs each test case prompt and evaluates the response
 4. Collect results: pass/fail per test case, with explanation for failures
 5. Append results summary to the skill's registry changelog and update `manual_notes` if needed

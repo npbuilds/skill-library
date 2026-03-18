@@ -3,7 +3,7 @@ name: skill-infra-upgrade
 description: >
   Upgrade the skill-infra plugin as a whole unit. Runs a self-audit, checks for schema
   migrations, re-validates all skills, recomputes all scores, and reports the upgrade status.
-allowed-tools: Read, Write, Bash, Glob, Grep, Agent
+tools: Read, Write, Bash, Glob, Grep, Agent
 ---
 
 # /skill-infra-upgrade

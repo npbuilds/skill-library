@@ -1,0 +1,31 @@
+# Test cases for skill-registry
+# Run via: skill-test behavioral testing workflow
+skill: skill-registry
+test_cases:
+  - name: "triggers on browse request"
+    prompt: "Show me all my skills"
+    expect_trigger: true
+    expect_contains:
+      - "registry"
+      - "table"
+
+  - name: "triggers on search request"
+    prompt: "Find all skills with health warnings"
+    expect_trigger: true
+    expect_contains:
+      - "health"
+      - "warning"
+
+  - name: "triggers on add request"
+    prompt: "Register this new skill in the catalog"
+    expect_trigger: true
+    expect_contains:
+      - "registry"
+
+  - name: "does not trigger on unrelated request"
+    prompt: "Write a Python function to sort a list"
+    expect_trigger: false
+
+  - name: "does not trigger on skill creation"
+    prompt: "Create a new skill from scratch"
+    expect_trigger: false

@@ -32,7 +32,7 @@ Analyze skills for quality, efficiency, and structural correctness. Produces hea
 
 ### Deep Audit
 
-For thorough analysis beyond metric thresholds, launch the `skill-auditor` agent:
+For thorough analysis beyond metric thresholds, use the Agent tool to launch the `skill-auditor` agent (from `agents/skill-auditor.md`):
 - Reads every file in the skill directory
 - Checks for broken reference links
 - Verifies script executability
@@ -75,7 +75,7 @@ Detect when two skills have overlapping trigger descriptions that could cause fa
 4. Flag conflicting pairs as WARNING with both skill names
 5. Suggest differentiation:
    - Make triggers more specific (add qualifying context)
-   - Use `user-invocable` or `disable-model-invocation` to restrict activation
+   - Differentiate description keywords so skills don't overlap
    - Rename skill to clarify scope
 
 ## Auto-Score Computation
@@ -108,7 +108,7 @@ HEALTH CHECK — skill-registry
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Status:  ✓ healthy
 Score:   85/100
-Tokens:  73 (meta) + 1,565 (body) = 1,638
+Tokens:  73 (meta) + 1,457 (body) = 1,530
 Words:   853 total, 784 body
 Issues:  none
 

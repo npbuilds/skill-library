@@ -43,11 +43,11 @@ Register a new skill in the catalog.
 
 1. Verify the SKILL.md file exists at the given path
 2. Run `scripts/analyze-skill.sh <path>` to compute metrics
-3. Parse YAML frontmatter from SKILL.md to extract: name, description, tools, context, user-invocable, disable-model-invocation
+3. Parse YAML frontmatter from SKILL.md to extract: name, description, tools
 4. Determine skill type from content analysis:
-   - **knowledge**: has `user-invocable: false` or no tools list
-   - **orchestrator**: has `context: fork` or launches agents
-   - **action**: has `disable-model-invocation: true` or has tools list (default)
+   - **knowledge**: no `tools:` field in frontmatter (passive, read-only)
+   - **orchestrator**: body mentions launching agents or multi-phase workflows
+   - **action**: has `tools:` field in frontmatter (default)
 5. Determine source:
    - **self**: skill is inside this plugin's `skills/` directory
    - **custom**: skill is in a user-created plugin or project
@@ -108,21 +108,11 @@ Discover all SKILL.md files and reconcile with registry.
 4. Update `last_scan` timestamp in registry root
 5. Report: skills added, skills updated, skills missing
 
-For a full system-wide scan (including all installed plugins), launch the `registry-scanner` agent which handles the broader filesystem search.
+For a full system-wide scan (including all installed plugins), use the Agent tool to launch the `registry-scanner` agent (from `agents/registry-scanner.md`) which handles the broader filesystem search.
 
 ## Auto-Score Computation
 
-Compute `auto_score` (0-100) from metrics:
-
-| Factor | Weight | Scoring |
-|--------|--------|---------|
-| Token efficiency | 30 | 100 if body <1500 words, linear decrease to 0 at 5000 |
-| Progressive disclosure | 20 | 100 if has references/ when body >1000 words, 50 if no references needed, 0 if body >1500 with no references |
-| Description quality | 20 | 100 if description 20-60 words, penalties for too short (<15) or too long (>100) |
-| Structure | 15 | 100 if 3-6 sections, penalties for too few (<2) or too many (>8) |
-| Documentation | 15 | 100 if has examples or references, 70 if standalone but small, 40 if large with no supporting files |
-
-Composite score: `auto_score * 0.7 + (manual_rating / 5 * 100) * 0.3` (if manual_rating is null, composite = auto_score)
+Read `skills/skill-dashboard/references/rating-rubric.md` for the canonical scoring pseudocode and weights. In brief: auto_score (0-100) is a weighted blend of token efficiency, progressive disclosure, description quality, structure, and documentation. Composite score blends auto (70%) with manual rating (30%) when available.
 
 ## Output Formatting
 

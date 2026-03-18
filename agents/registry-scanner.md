@@ -1,8 +1,9 @@
 ---
-model: haiku
+name: registry-scanner
 description: >
   Scans for SKILL.md files across plugin directories and registers any that are missing
   from the registry. Discovers external and marketplace skills automatically.
+model: haiku
 tools: Read, Bash, Glob, Grep
 ---
 

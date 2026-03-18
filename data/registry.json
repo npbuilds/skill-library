@@ -5,7 +5,7 @@
   "skills": {
     "skill-registry": {
       "name": "skill-registry",
-      "description": "Manage the skill registry \u2014 the central catalog of all skills in the mycelial network.",
+      "description": "Manage the skill registry — the central catalog of all skills in the mycelial network.",
       "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-registry/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -14,8 +14,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 853,
-        "body_words": 784,
+        "word_count": 752,
+        "body_words": 683,
         "description_words": 56,
         "section_count": 4,
         "reference_files": 1,
@@ -23,13 +23,13 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 73,
-        "estimated_tokens_body": 1457,
-        "estimated_tokens_total": 1530,
+        "estimated_tokens_body": 1349,
+        "estimated_tokens_total": 1422,
         "precise_tokens": null
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -61,33 +61,33 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 1 bootstrap \u2014 first skill registered"
+          "note": "Phase 1 bootstrap — first skill registered"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 2 \u2014 added referenced_by relationships"
+          "note": "Phase 2 — added referenced_by relationships"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+          "note": "Phase 3 — added skill-scaffold to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 4 \u2014 added skill-test and skill-analyze to referenced_by"
+          "note": "Phase 4 — added skill-test and skill-analyze to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 \u2014 added skill-fork, skill-network, skill-export to referenced_by"
+          "note": "Phase 5 — added skill-fork, skill-network, skill-export to referenced_by"
         }
       ]
     },
     "skill-health": {
       "name": "skill-health",
-      "description": "Run health checks on skills to detect issues: oversized SKILL.md, poor trigger descriptions, missing progressive disclosure, excessive token usage, trigger conflicts.",
+      "description": "Run health checks on skills to detect issues: oversized SKILL.md, poor trigger descriptions, missing progressive disclosure, excessive token usage, trigger conflicts between skills, or structural problems.",
       "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-health/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -96,8 +96,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 720,
-        "body_words": 661,
+        "word_count": 727,
+        "body_words": 668,
         "description_words": 46,
         "section_count": 6,
         "reference_files": 1,
@@ -105,13 +105,13 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 60,
-        "estimated_tokens_body": 1185,
-        "estimated_tokens_total": 1245,
+        "estimated_tokens_body": 1195,
+        "estimated_tokens_total": 1255,
         "precise_tokens": null
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -140,17 +140,17 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 2 \u2014 quality infrastructure"
+          "note": "Phase 2 — quality infrastructure"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+          "note": "Phase 3 — added skill-scaffold to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+          "note": "Phase 5 — added skill-fork to referenced_by"
         }
       ]
     },
@@ -165,8 +165,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 510,
-        "body_words": 462,
+        "word_count": 512,
+        "body_words": 464,
         "description_words": 37,
         "section_count": 2,
         "reference_files": 2,
@@ -180,7 +180,7 @@
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -208,18 +208,18 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 2 \u2014 dashboards and ratings"
+          "note": "Phase 2 — dashboards and ratings"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+          "note": "Phase 3 — added skill-scaffold to referenced_by"
         }
       ]
     },
     "skill-scaffold": {
       "name": "skill-scaffold",
-      "description": "Create new skills from templates with guided requirements gathering, automatic file creation, registry integration, and post-creation health validation.",
+      "description": "Create new skills from templates with guided requirements gathering.",
       "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-scaffold/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -243,7 +243,7 @@
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -272,18 +272,18 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 3 \u2014 The Builder, skill creation factory"
+          "note": "Phase 3 — The Builder, skill creation factory"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+          "note": "Phase 5 — added skill-fork to referenced_by"
         }
       ]
     },
     "skill-test": {
       "name": "skill-test",
-      "description": "Test skills for structural correctness and behavioral accuracy with test cases, evaluation rubrics, and version benchmarking.",
+      "description": "Test skills for structural correctness and behavioral accuracy.",
       "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-test/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -292,8 +292,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 562,
-        "body_words": 508,
+        "word_count": 567,
+        "body_words": 513,
         "description_words": 41,
         "section_count": 4,
         "reference_files": 2,
@@ -301,13 +301,13 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 54,
-        "estimated_tokens_body": 1031,
-        "estimated_tokens_total": 1085,
+        "estimated_tokens_body": 1037,
+        "estimated_tokens_total": 1091,
         "precise_tokens": null
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -333,7 +333,7 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 4 \u2014 The Prover, structural and behavioral testing"
+          "note": "Phase 4 — The Prover, structural and behavioral testing"
         }
       ]
     },
@@ -363,7 +363,7 @@
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -390,13 +390,13 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 4 \u2014 The Oracle, Anthropic API-powered analysis"
+          "note": "Phase 4 — The Oracle, Anthropic API-powered analysis"
         }
       ]
     },
     "skill-fork": {
       "name": "skill-fork",
-      "description": "Fork a complex skill into smaller, focused child skills when it exceeds health thresholds or has mixed responsibilities.",
+      "description": "Fork a complex skill into smaller, focused child skills.",
       "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-fork/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -420,7 +420,7 @@
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -447,13 +447,13 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 \u2014 The Splitter, skill decomposition"
+          "note": "Phase 5 — The Splitter, skill decomposition"
         }
       ]
     },
     "skill-network": {
       "name": "skill-network",
-      "description": "Visualize the skill network as an ASCII dependency graph showing how skills connect, trace dependency chains, and detect orphans.",
+      "description": "Visualize the skill network as an ASCII dependency graph.",
       "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-network/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -477,7 +477,7 @@
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -502,13 +502,13 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 \u2014 The Cartographer, network visualization"
+          "note": "Phase 5 — The Cartographer, network visualization"
         }
       ]
     },
     "skill-export": {
       "name": "skill-export",
-      "description": "Export skills as portable packages for sharing, backup, or migration between environments.",
+      "description": "Export skills as portable packages for sharing or backup.",
       "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-export/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -532,7 +532,7 @@
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-03-17",
+      "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -557,7 +557,7 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 \u2014 The Courier, skill export and packaging"
+          "note": "Phase 5 — The Courier, skill export and packaging"
         }
       ]
     }

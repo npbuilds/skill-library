@@ -46,6 +46,12 @@ while $FOUND_MIGRATION; do
     BASENAME=$(basename "$migration")
     TO_VER=$(echo "$BASENAME" | sed 's/v[0-9]*_to_v\([0-9]*\)\.sh/\1/')
 
+    # Validate TO_VER is numeric
+    if ! echo "$TO_VER" | grep -qE '^[0-9]+$'; then
+      echo "Warning: skipping $BASENAME — could not parse target version" >&2
+      continue
+    fi
+
     echo "Applying migration: $BASENAME (v$CURRENT_VERSION → v$TO_VER)"
     bash "$migration" "$REGISTRY"
     CURRENT_VERSION=$TO_VER

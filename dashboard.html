@@ -881,7 +881,7 @@
     </div>
     <div class="modal-code"><pre id="modal-pre"></pre></div>
     <div class="modal-foot">
-      <button class="btn" onclick="closeModal()">esc</button>
+      <button class="btn" id="modal-close">esc</button>
       <button class="btn btn-primary" id="modal-copy">copy</button>
     </div>
   </div>
@@ -981,7 +981,7 @@
     if (!filtered.length) h = '<div style="padding:16px 18px;color:var(--text-3);font-size:11px">no matches</div>';
     filtered.forEach(function(s) {
       var ac = current === s.name ? ' active' : '';
-      h += '<div class="skill-item' + ac + '" data-s="' + esc(s.name) + '">';
+      h += '<div class="skill-item' + ac + '" data-s="' + esc(s.name) + '" tabindex="0" role="button">';
       h += '<div class="skill-item-name"><span class="dot dot-' + esc(s.health_status) + '"></span>' + esc(s.name) + '</div>';
       h += '<div class="skill-item-desc">' + esc(s.description) + '</div>';
       h += '<div class="skill-item-meta"><span class="badge badge-' + esc(s.type) + '">' + esc(s.type) + '</span>';
@@ -991,6 +991,7 @@
     document.getElementById('skill-list').innerHTML = h;
     document.querySelectorAll('.skill-item').forEach(function(el) {
       el.onclick = function() { select(this.dataset.s); };
+      el.onkeydown = function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(this.dataset.s); } };
     });
   }
   renderList();
@@ -1134,7 +1135,7 @@
     var w = c.offsetWidth; if (!w) return;
     var h = 420;
     var levels = {}, vis = {};
-    var roots = names.filter(function(n) { return S[n].depends_on.length === 0; });
+    var roots = names.filter(function(n) { return (S[n].depends_on || []).length === 0; });
     var q = roots.map(function(r) { return { n: r, l: 0 }; });
 
     while (q.length) {
@@ -1143,6 +1144,11 @@
       vis[it.n] = true; levels[it.n] = it.l;
       (S[it.n].referenced_by || []).forEach(function(r) { if (S[r]) q.push({ n: r, l: it.l + 1 }); });
     }
+
+    // M6 fix: place any skills missed by BFS (cycles or disconnected) at level 0
+    names.forEach(function(n) {
+      if (levels[n] === undefined) levels[n] = 0;
+    });
 
     var maxL = 0, groups = {};
     for (var n in levels) {
@@ -1176,7 +1182,7 @@
     names.forEach(function(n) {
       var p = pos[n]; if (!p) return;
       var ac = current === n ? ' active' : '';
-      html += '<div class="net-node' + ac + '" style="left:' + (p.x - 45) + 'px;top:' + p.y + 'px" data-s="' + esc(n) + '">' +
+      html += '<div class="net-node' + ac + '" style="left:' + p.x + 'px;top:' + p.y + 'px;transform:translateX(-50%)" data-s="' + esc(n) + '">' +
         esc(n.replace('skill-','')) + '<span class="n-score">' + S[n].composite_score + '</span></div>';
     });
     c.innerHTML = html;
@@ -1361,6 +1367,7 @@
   };
 
   document.getElementById('modal').onclick = function(e) { if (e.target === this) closeModal(); };
+  document.getElementById('modal-close').onclick = function() { closeModal(); };
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();

@@ -41,7 +41,13 @@ DESC_WORDS=$(echo "$FRONTMATTER" | awk '
 ' | wc -w | tr -d ' ')
 
 META_TOKENS=$(( (DESC_WORDS * 13 + 9) / 10 ))
-BODY_TOKENS=$(estimate_tokens "$SKILL_MD")
+
+# Body tokens: count only the body (after frontmatter), not the full file
+BODY_CHARS=$(awk '
+  /^---$/ { count++; next }
+  count >= 2 { print }
+' "$SKILL_MD" | wc -c | tr -d ' ')
+BODY_TOKENS=$((BODY_CHARS / 4))
 
 # Compute tokens for each subdirectory
 compute_dir_tokens() {

@@ -1,5 +1,8 @@
 ---
 name: skill-auditor
+description: >
+  Deep quality audit agent. Analyzes content quality, structural integrity,
+  and trigger effectiveness beyond simple metric thresholds.
 model: sonnet
 tools: Read, Glob, Grep, Bash
 ---
@@ -46,9 +49,8 @@ For each skill, perform these checks:
 
 ### 5. Frontmatter Completeness
 - Required: `name`, `description`
-- Check if `tools:` is listed (recommended for action skills)
-- Check if `context:` should be `fork` (skills that launch heavy agents)
-- Check for `disable-model-invocation: true` if skill is user-invocable only
+- Optional: `tools` (recommended for action skills that use tools)
+- Check if skill launches agents — if so, `tools` should include `Agent`
 
 ## Output Format
 

@@ -1,8 +1,9 @@
 ---
-model: sonnet
+name: skill-tester
 description: >
   Behavioral test runner for skills. Evaluates whether a skill triggers correctly
   on test prompts and produces expected output. Scores responses using the eval rubric.
+model: sonnet
 tools: Read, Bash, Grep, Glob
 ---
 

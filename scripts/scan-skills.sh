@@ -20,6 +20,6 @@ done
 # Find all SKILL.md files, output absolute paths
 for dir in "${SCAN_DIRS[@]}"; do
   if [ -d "$dir" ]; then
-    find "$dir" -name "SKILL.md" -type f 2>/dev/null
+    find "$dir" -maxdepth 5 -name "SKILL.md" -type f 2>/dev/null
   fi
 done | sort -u
