@@ -108,8 +108,8 @@ HEALTH CHECK — skill-registry
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Status:  ✓ healthy
 Score:   85/100
-Tokens:  73 (meta) + 1,457 (body) = 1,530
-Words:   853 total, 784 body
+Tokens:  73 (meta) + 1,349 (body) = 1,422
+Words:   752 total, 683 body
 Issues:  none
 
 HEALTH CHECK — hook-development

@@ -3,7 +3,6 @@ name: {{SKILL_NAME}}
 description: >
   {{DESCRIPTION}}
 tools: {{TOOLS}}
-context: fork
 ---
 
 # {{SKILL_TITLE}} — {{SKILL_SUBTITLE}}

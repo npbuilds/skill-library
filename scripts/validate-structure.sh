@@ -21,7 +21,7 @@ add_issue() {
   fi
   # Escape the message for JSON
   local escaped_msg
-  escaped_msg=$(printf '%s' "$message" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$message")
+  escaped_msg=$(printf '%s' "$message" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$(printf '%s' "$message" | sed 's/\\/\\\\/g; s/"/\\"/g')")
   ISSUES="$ISSUES{\"severity\": \"$severity\", \"message\": $escaped_msg}"
   ISSUE_COUNT=$((ISSUE_COUNT + 1))
   if [ "$severity" = "critical" ]; then
@@ -33,7 +33,7 @@ add_issue() {
 if [ ! -f "$SKILL_MD" ]; then
   add_issue "critical" "SKILL.md not found in $SKILL_DIR"
   # Can't continue without the file — escape path for JSON output
-  ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$SKILL_DIR")
+  ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$(printf '%s' "$SKILL_DIR" | sed 's/\\/\\\\/g; s/"/\\"/g')")
   cat <<EOF
 {
   "valid": false,
@@ -153,7 +153,7 @@ if [ "$HAS_CRITICAL" = "true" ]; then
 fi
 
 # Escape directory for JSON
-ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$SKILL_DIR")
+ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$(printf '%s' "$SKILL_DIR" | sed 's/\\/\\\\/g; s/"/\\"/g')")
 
 cat <<EOF
 {

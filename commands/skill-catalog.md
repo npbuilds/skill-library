@@ -1,4 +1,5 @@
 ---
+name: skill-catalog
 description: Browse and search the skill catalog with filtering
 argument-hint: "Optional filter: domain:<tag>, type:<action|knowledge|orchestrator>, health:<healthy|warning|critical>, source:<self|custom|external>"
 ---

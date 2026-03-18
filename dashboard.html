@@ -949,7 +949,7 @@
   var types = {};
   list.forEach(function(s) { types[s.type] = true; });
   var fHTML = '<button class="filter-btn active" data-f="all">all</button>';
-  Object.keys(types).forEach(function(t) { fHTML += '<button class="filter-btn" data-f="type:' + t + '">' + t + '</button>'; });
+  Object.keys(types).forEach(function(t) { fHTML += '<button class="filter-btn" data-f="type:' + esc(t) + '">' + esc(t) + '</button>'; });
   fHTML += '<button class="filter-btn" data-f="issues">issues</button>';
   document.getElementById('filters').innerHTML = fHTML;
 
@@ -973,7 +973,7 @@
         if (filter === 'issues' && s.health_status === 'healthy') return false;
       }
       if (query && s.name.toLowerCase().indexOf(query) === -1 &&
-          s.description.toLowerCase().indexOf(query) === -1) return false;
+          (s.description || '').toLowerCase().indexOf(query) === -1) return false;
       return true;
     });
 
@@ -985,7 +985,8 @@
       h += '<div class="skill-item-name"><span class="dot dot-' + esc(s.health_status) + '"></span>' + esc(s.name) + '</div>';
       h += '<div class="skill-item-desc">' + esc(s.description) + '</div>';
       h += '<div class="skill-item-meta"><span class="badge badge-' + esc(s.type) + '">' + esc(s.type) + '</span>';
-      h += '<span>' + s.composite_score + ' pts</span><span>' + s.metrics.estimated_tokens_total + ' tok</span></div>';
+      var m = s.metrics || {};
+      h += '<span>' + (s.composite_score || 0) + ' pts</span><span>' + (m.estimated_tokens_total || 0) + ' tok</span></div>';
       h += '</div>';
     });
     document.getElementById('skill-list').innerHTML = h;
@@ -1022,9 +1023,10 @@
      ══════════════════════════════════════ */
   var totalMeta = 0, totalScore = 0, healthy = 0, totalTok = 0;
   list.forEach(function(s) {
-    totalMeta += s.metrics.estimated_tokens_metadata;
-    totalScore += s.composite_score;
-    totalTok += s.metrics.estimated_tokens_total;
+    var m = s.metrics || {};
+    totalMeta += m.estimated_tokens_metadata || 0;
+    totalScore += s.composite_score || 0;
+    totalTok += m.estimated_tokens_total || 0;
     if (s.health_status === 'healthy') healthy++;
   });
   var avg = list.length ? (totalScore / list.length).toFixed(1) : '0.0';
@@ -1056,7 +1058,7 @@
   ov += '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%;background:' + pc + '"></div></div>';
   ov += '<div class="token-chips">';
   list.forEach(function(s) {
-    ov += '<div class="token-chip" data-s="' + esc(s.name) + '">' + esc(s.name.replace('skill-','')) + '<strong>' + s.metrics.estimated_tokens_metadata + '</strong></div>';
+    ov += '<div class="token-chip" data-s="' + esc(s.name) + '">' + esc(s.name.replace('skill-','')) + '<strong>' + ((s.metrics || {}).estimated_tokens_metadata || 0) + '</strong></div>';
   });
   ov += '</div></div></div>';
 
@@ -1100,11 +1102,12 @@
     h += '</tr></thead><tbody>';
 
     sorted.forEach(function(s) {
+      var sm = s.metrics || {};
       h += '<tr data-s="' + esc(s.name) + '">';
       h += '<td class="t-name">' + esc(s.name) + '</td>';
-      h += '<td><span class="score-pip" style="width:' + (s.composite_score * 0.5) + 'px"></span>' + s.composite_score + '</td>';
-      h += '<td>' + s.metrics.body_words + '</td>';
-      h += '<td>' + s.metrics.estimated_tokens_total.toLocaleString() + '</td>';
+      h += '<td><span class="score-pip" style="width:' + ((s.composite_score || 0) * 0.5) + 'px"></span>' + (s.composite_score || 0) + '</td>';
+      h += '<td>' + (sm.body_words || 0) + '</td>';
+      h += '<td>' + (sm.estimated_tokens_total || 0).toLocaleString() + '</td>';
       h += '<td><span class="dot dot-' + esc(s.health_status) + '" style="vertical-align:middle;margin-right:4px"></span>' + esc(s.health_status) + '</td>';
       h += '</tr>';
     });
@@ -1168,7 +1171,7 @@
 
     var svg = '';
     names.forEach(function(n) {
-      S[n].depends_on.forEach(function(d) {
+      (S[n].depends_on || []).forEach(function(d) {
         if (pos[n] && pos[d]) {
           svg += '<line x1="' + pos[d].x + '" y1="' + (pos[d].y + 12) +
             '" x2="' + pos[n].x + '" y2="' + (pos[n].y - 4) +
@@ -1210,7 +1213,7 @@
      ══════════════════════════════════════ */
   function renderDetail(name) {
     var s = S[name]; if (!s) return;
-    var m = s.metrics;
+    var m = s.metrics || {};
     var ic = icons[name] || { e: '\u2699', bg: 'var(--bg-3)' };
     var nick = nicks[name] || '';
 
@@ -1307,12 +1310,14 @@
      ══════════════════════════════════════ */
   function genDesktop(s) {
     var t = '## ' + s.name;
+    var m = s.metrics || {};
+    var deps = s.depends_on || [];
     if (nicks[s.name]) t += ' \u2014 ' + nicks[s.name];
-    t += '\n\n**Trigger:** ' + s.description + '\n\n';
+    t += '\n\n**Trigger:** ' + (s.description || '') + '\n\n';
     t += '**Type:** ' + s.type + ' | **Status:** ' + s.status + '\n\n';
-    if (s.depends_on.length) t += '**Depends on:** ' + s.depends_on.join(', ') + '\n\n';
+    if (deps.length) t += '**Depends on:** ' + deps.join(', ') + '\n\n';
     t += '**Metrics:**\n';
-    t += '- Body: ' + s.metrics.body_words + ' words (' + s.metrics.estimated_tokens_body + ' tokens)\n';
+    t += '- Body: ' + (m.body_words || 0) + ' words (' + (m.estimated_tokens_body || 0) + ' tokens)\n';
     t += '- Score: ' + s.composite_score + '/100\n';
     t += '- Health: ' + s.health_status + '\n';
     if (s.tags && s.tags.length) t += '- Tags: ' + s.tags.join(', ') + '\n';

@@ -1,4 +1,5 @@
 ---
+name: skill-status
 description: Quick health overview of all registered skills
 ---
 

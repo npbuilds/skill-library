@@ -70,7 +70,7 @@ compute_dir_tokens() {
     fi
     # Escape the filename for JSON
     local escaped_name
-    escaped_name=$(printf '%s' "$rel_path" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$rel_path")
+    escaped_name=$(printf '%s' "$rel_path" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$(printf '%s' "$rel_path" | sed 's/\\/\\\\/g; s/"/\\"/g')")
     file_details="$file_details{\"file\": $escaped_name, \"tokens\": $tokens}"
   done < <(find "$dir" -type f ! -name '.gitkeep' -print0 2>/dev/null)
 
@@ -96,7 +96,7 @@ TEMPLATE_FILES="${TEMPLATE_RESULT#*|}"
 TOTAL_ALL=$((META_TOKENS + BODY_TOKENS + REF_TOKENS + EXAMPLE_TOKENS + SCRIPT_TOKENS + TEMPLATE_TOKENS))
 
 # Escape skill dir for JSON
-ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$SKILL_DIR")
+ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$(printf '%s' "$SKILL_DIR" | sed 's/\\/\\\\/g; s/"/\\"/g')")
 
 cat <<EOF
 {

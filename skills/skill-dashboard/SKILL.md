@@ -29,7 +29,7 @@ TOKEN EFFICIENCY DASHBOARD
 ══════════════════════════════════════════════════════════════
                           Meta    Body    Total   Budget
   hook-development          82   4,061    4,143   ██████████ ⚠
-  skill-registry            73   1,565    1,638   ████░░░░░░
+  skill-registry            73   1,349    1,422   ████░░░░░░
   skill-health              78   1,200    1,278   ███░░░░░░░
   example-skill             35     420      455   █░░░░░░░░░
 

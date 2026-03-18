@@ -84,7 +84,7 @@ fi
 # Escape strings for safe JSON output (handle ", \, and control chars)
 json_escape() {
   printf '%s' "$1" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null \
-    || printf '"%s"' "$1"
+    || printf '"%s"' "$(printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g')"
 }
 
 # Output JSON

@@ -97,8 +97,8 @@ ANALYSIS — skill-registry
 API Status:  ✓ connected
 
 Token Count:
-  Heuristic:  1,638
-  Precise:    1,712  (heuristic is 4.3% under)
+  Heuristic:  1,422
+  Precise:    1,490  (heuristic is 4.6% under)
 
 Description Quality:
   Specificity:    9/10 — clear trigger phrases
@@ -111,5 +111,5 @@ Content Review:
   ⚠ Consider moving the auto-score table to a reference file
 
 Decomposition:
-  Not needed — skill is well-scoped (4 sections, 784 body words)
+  Not needed — skill is well-scoped (4 sections, 683 body words)
 ```

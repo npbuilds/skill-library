@@ -1,4 +1,5 @@
 ---
+name: skill-rate
 description: Rate a skill with a manual score and optional notes
 argument-hint: "<skill-name> <1-5> [optional notes]"
 ---

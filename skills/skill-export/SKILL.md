@@ -54,8 +54,8 @@ The `manifest.json` describes the package for automated installation:
     "source": "custom"
   },
   "metrics": {
-    "body_words": 784,
-    "estimated_tokens_total": 1638,
+    "body_words": 683,
+    "estimated_tokens_total": 1422,
     "auto_score": 100
   },
   "dependencies": {
