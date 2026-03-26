@@ -1,12 +1,12 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-03-17T00:00:00Z",
+  "last_scan": "2026-03-22T00:00:00Z",
   "skills": {
     "skill-registry": {
       "name": "skill-registry",
-      "description": "Manage the skill registry — the central catalog of all skills in the mycelial network.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-registry/SKILL.md",
+      "description": "Manage the skill registry \u2014 the central catalog of all skills in the mycelial network.",
+      "location": "skills/infrastructure/skill-registry/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -47,13 +47,16 @@
         "skill-analyze",
         "skill-fork",
         "skill-network",
-        "skill-export"
+        "skill-export",
+        "design-orchestrator",
+        "meta-observer"
       ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -61,34 +64,40 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 1 bootstrap — first skill registered"
+          "note": "Phase 1 bootstrap \u2014 first skill registered"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 2 — added referenced_by relationships"
+          "note": "Phase 2 \u2014 added referenced_by relationships"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 — added skill-scaffold to referenced_by"
+          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 4 — added skill-test and skill-analyze to referenced_by"
+          "note": "Phase 4 \u2014 added skill-test and skill-analyze to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 — added skill-fork, skill-network, skill-export to referenced_by"
+          "note": "Phase 5 \u2014 added skill-fork, skill-network, skill-export to referenced_by"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-health": {
       "name": "skill-health",
       "description": "Run health checks on skills to detect issues: oversized SKILL.md, poor trigger descriptions, missing progressive disclosure, excessive token usage, trigger conflicts between skills, or structural problems.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-health/SKILL.md",
+      "location": "skills/infrastructure/skill-health/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -132,7 +141,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -140,24 +150,30 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 2 — quality infrastructure"
+          "note": "Phase 2 \u2014 quality infrastructure"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 — added skill-scaffold to referenced_by"
+          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 — added skill-fork to referenced_by"
+          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-dashboard": {
       "name": "skill-dashboard",
       "description": "Display skill dashboards: token efficiency breakdown, skill quality ratings, health overview, and rating leaderboard.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-dashboard/SKILL.md",
+      "location": "skills/infrastructure/skill-dashboard/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -200,7 +216,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -208,19 +225,25 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 2 — dashboards and ratings"
+          "note": "Phase 2 \u2014 dashboards and ratings"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 — added skill-scaffold to referenced_by"
+          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-scaffold": {
       "name": "skill-scaffold",
       "description": "Create new skills from templates with guided requirements gathering.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-scaffold/SKILL.md",
+      "location": "skills/infrastructure/skill-scaffold/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -264,7 +287,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -272,19 +296,25 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 3 — The Builder, skill creation factory"
+          "note": "Phase 3 \u2014 The Builder, skill creation factory"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 — added skill-fork to referenced_by"
+          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-test": {
       "name": "skill-test",
       "description": "Test skills for structural correctness and behavioral accuracy.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-test/SKILL.md",
+      "location": "skills/infrastructure/skill-test/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -325,7 +355,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -333,14 +364,20 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 4 — The Prover, structural and behavioral testing"
+          "note": "Phase 4 \u2014 The Prover, structural and behavioral testing"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-analyze": {
       "name": "skill-analyze",
       "description": "Analyze skills using the Anthropic API for precise token counting, description quality evaluation, content review, and decomposition suggestions.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-analyze/SKILL.md",
+      "location": "skills/infrastructure/skill-analyze/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -382,7 +419,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -390,14 +428,20 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 4 — The Oracle, Anthropic API-powered analysis"
+          "note": "Phase 4 \u2014 The Oracle, Anthropic API-powered analysis"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-fork": {
       "name": "skill-fork",
       "description": "Fork a complex skill into smaller, focused child skills.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-fork/SKILL.md",
+      "location": "skills/infrastructure/skill-fork/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -439,7 +483,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -447,14 +492,20 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 — The Splitter, skill decomposition"
+          "note": "Phase 5 \u2014 The Splitter, skill decomposition"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-network": {
       "name": "skill-network",
       "description": "Visualize the skill network as an ASCII dependency graph.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-network/SKILL.md",
+      "location": "skills/infrastructure/skill-network/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -494,7 +545,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -502,14 +554,20 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 — The Cartographer, network visualization"
+          "note": "Phase 5 \u2014 The Cartographer, network visualization"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
         }
-      ]
+      ],
+      "parent": null
     },
     "skill-export": {
       "name": "skill-export",
       "description": "Export skills as portable packages for sharing or backup.",
-      "location": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/skill-export/SKILL.md",
+      "location": "skills/infrastructure/skill-export/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
       "source": "self",
@@ -549,7 +607,8 @@
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:infrastructure"
+        "domain:infrastructure",
+        "level:tool"
       ],
       "created": "2026-03-17",
       "last_modified": "2026-03-17",
@@ -557,7 +616,2650 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 — The Courier, skill export and packaging"
+          "note": "Phase 5 \u2014 The Courier, skill export and packaging"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+        }
+      ],
+      "parent": null
+    },
+    "color-theory": {
+      "name": "color-theory",
+      "description": "Color theory foundations for design decisions \u2014 palettes, harmony, contrast, and accessibility.",
+      "location": "skills/design/visual-communication/color-theory/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 779,
+        "body_words": 739,
+        "description_words": 34,
+        "section_count": 6,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 45,
+        "estimated_tokens_body": 1265,
+        "estimated_tokens_total": 1310,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-19T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "design-orchestrator",
+        "visual-communication"
+      ],
+      "shares_references_with": [
+        "design-principles",
+        "visual-perception"
+      ],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "layer:knowledge",
+        "level:foundational",
+        "subdomain:visual-communication"
+      ],
+      "created": "2026-03-19",
+      "last_modified": "2026-03-19",
+      "changelog": [
+        {
+          "date": "2026-03-19",
+          "action": "created",
+          "note": "Knowledge layer \u2014 color theory foundations for the art design system"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+        }
+      ],
+      "parent": "visual-communication"
+    },
+    "design-principles": {
+      "name": "design-principles",
+      "description": "Core visual design principles \u2014 contrast, alignment, proximity, repetition, Gestalt, and hierarchy.",
+      "location": "skills/design/visual-communication/design-principles/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1175,
+        "body_words": 1136,
+        "description_words": 33,
+        "section_count": 5,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 43,
+        "estimated_tokens_body": 1878,
+        "estimated_tokens_total": 1921,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-19T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "design-orchestrator",
+        "visual-communication"
+      ],
+      "shares_references_with": [
+        "color-theory",
+        "visual-perception"
+      ],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "layer:knowledge",
+        "level:foundational",
+        "subdomain:visual-communication"
+      ],
+      "created": "2026-03-19",
+      "last_modified": "2026-03-19",
+      "changelog": [
+        {
+          "date": "2026-03-19",
+          "action": "created",
+          "note": "Knowledge layer \u2014 visual design principles for the art design system"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+        }
+      ],
+      "parent": "visual-communication"
+    },
+    "visual-perception": {
+      "name": "visual-perception",
+      "description": "How human vision processes visual information \u2014 attention, readability, visual weight, and motion.",
+      "location": "skills/design/visual-communication/visual-perception/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1161,
+        "body_words": 1119,
+        "description_words": 36,
+        "section_count": 6,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 47,
+        "estimated_tokens_body": 1847,
+        "estimated_tokens_total": 1894,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-19T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "design-orchestrator",
+        "visual-communication"
+      ],
+      "shares_references_with": [
+        "color-theory",
+        "design-principles"
+      ],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "layer:knowledge",
+        "level:foundational",
+        "subdomain:visual-communication"
+      ],
+      "created": "2026-03-19",
+      "last_modified": "2026-03-19",
+      "changelog": [
+        {
+          "date": "2026-03-19",
+          "action": "created",
+          "note": "Knowledge layer \u2014 visual perception science for the art design system"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+        }
+      ],
+      "parent": "visual-communication"
+    },
+    "meta-observer": {
+      "name": "meta-observer",
+      "description": "Observe the skill library as a whole \u2014 surface gaps in domain coverage, track maturity across domains, identify cross-domain connections, detect structural issues, and recommend what to build next.",
+      "location": "skills/_meta/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "observer",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 449,
+        "body_words": 392,
+        "description_words": 51,
+        "section_count": 4,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 67,
+        "estimated_tokens_body": 670,
+        "estimated_tokens_total": 737,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-21T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "skill-registry"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:meta"
+      ],
+      "parent": null,
+      "created": "2026-03-21",
+      "last_modified": "2026-03-21",
+      "changelog": [
+        {
+          "date": "2026-03-21",
+          "action": "created",
+          "note": "Meta Observer \u2014 library self-awareness and gap detection"
+        }
+      ]
+    },
+    "visual-communication": {
+      "name": "visual-communication",
+      "description": "Direct the visual communication subdomain \u2014 route design questions to the right specialist skill, define the learning curriculum, and resolve conflicts between visual design principles.",
+      "location": "skills/design/visual-communication/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 500,
+        "body_words": 440,
+        "description_words": 51,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 67,
+        "estimated_tokens_body": 792,
+        "estimated_tokens_total": 859,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-21T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "color-theory",
+        "design-principles",
+        "visual-perception",
+        "design-orchestrator"
+      ],
+      "referenced_by": [
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:visual-communication",
+        "level:director"
+      ],
+      "parent": "design-orchestrator",
+      "created": "2026-03-21",
+      "last_modified": "2026-03-21",
+      "changelog": [
+        {
+          "date": "2026-03-21",
+          "action": "created",
+          "note": "Visual Communication Director \u2014 routes visual design questions to specialist skills"
+        }
+      ]
+    },
+    "design-orchestrator": {
+      "name": "design-orchestrator",
+      "description": "Orchestrate artistic design decisions across visual projects.",
+      "location": "skills/design/design-orchestrator/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1044,
+        "body_words": 982,
+        "description_words": 49,
+        "section_count": 4,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 64,
+        "estimated_tokens_body": 1838,
+        "estimated_tokens_total": 1902,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-18T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [
+        "skill-registry",
+        "color-theory",
+        "design-principles",
+        "visual-perception",
+        "visual-communication",
+        "typography",
+        "brand-identity",
+        "brand-foundations",
+        "visual-identity",
+        "brand-voice",
+        "type-fundamentals",
+        "type-pairing",
+        "responsive-type"
+      ],
+      "referenced_by": [
+        "visual-communication",
+        "typography",
+        "brand-identity"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "level:orchestrator"
+      ],
+      "created": "2026-03-18",
+      "last_modified": "2026-03-18",
+      "changelog": [
+        {
+          "date": "2026-03-18",
+          "action": "created",
+          "note": "Art Design Orchestrator \u2014 creative director for visual design decisions"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+        },
+        {
+          "date": "2026-03-21",
+          "action": "updated",
+          "note": "Renamed from art-design-orchestrator, moved to design/ hierarchy"
+        }
+      ],
+      "parent": null
+    },
+    "typography": {
+      "name": "typography",
+      "description": "Direct the typography subdomain \u2014 route type-related questions to the right specialist skill, define the curriculum from anatomy to pairing to responsive scaling, and resolve conflicts between readability and aesthetic goals.",
+      "location": "skills/design/typography/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 549,
+        "body_words": 491,
+        "description_words": 49,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 64,
+        "estimated_tokens_body": 923,
+        "estimated_tokens_total": 987,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-21T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "type-fundamentals",
+        "type-pairing",
+        "responsive-type",
+        "design-orchestrator"
+      ],
+      "referenced_by": [
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:typography",
+        "level:director"
+      ],
+      "parent": "design-orchestrator",
+      "created": "2026-03-21",
+      "last_modified": "2026-03-21",
+      "changelog": [
+        {
+          "date": "2026-03-21",
+          "action": "created",
+          "note": "Typography Director \u2014 routes type questions to specialist skills"
+        }
+      ]
+    },
+    "type-fundamentals": {
+      "name": "type-fundamentals",
+      "description": "Typography foundations \u2014 typeface anatomy, classification systems, and legibility principles. Covers x-height, stroke contrast, serifs vs sans-serifs, monospaced vs proportional, optical sizing, and the core properties that determine how a typeface feels and performs.",
+      "location": "skills/design/typography/type-fundamentals/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 807,
+        "body_words": 767,
+        "description_words": 34,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 45,
+        "estimated_tokens_body": 1250,
+        "estimated_tokens_total": 1295,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-21T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "typography",
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:typography",
+        "level:foundational",
+        "layer:knowledge"
+      ],
+      "parent": "typography",
+      "created": "2026-03-21",
+      "last_modified": "2026-03-21",
+      "changelog": [
+        {
+          "date": "2026-03-21",
+          "action": "created",
+          "note": "Typography knowledge skill \u2014 type-fundamentals"
+        }
+      ]
+    },
+    "type-pairing": {
+      "name": "type-pairing",
+      "description": "Typeface pairing methodology \u2014 how to combine fonts for harmony, contrast, and hierarchy. Covers the contrast principle, superfamily strategy, mood matching, and common pairing patterns.",
+      "location": "skills/design/typography/type-pairing/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 874,
+        "body_words": 830,
+        "description_words": 38,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 50,
+        "estimated_tokens_body": 1257,
+        "estimated_tokens_total": 1307,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-21T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "typography",
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:typography",
+        "level:foundational",
+        "layer:knowledge"
+      ],
+      "parent": "typography",
+      "created": "2026-03-21",
+      "last_modified": "2026-03-21",
+      "changelog": [
+        {
+          "date": "2026-03-21",
+          "action": "created",
+          "note": "Typography knowledge skill \u2014 type-pairing"
+        }
+      ]
+    },
+    "responsive-type": {
+      "name": "responsive-type",
+      "description": "Responsive typography \u2014 how type behaves across screen sizes, devices, and contexts. Covers fluid type scaling, viewport-based sizing, optical adjustments at different sizes, mobile-first type strategy, and line length management.",
+      "location": "skills/design/typography/responsive-type/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 874,
+        "body_words": 824,
+        "description_words": 44,
+        "section_count": 6,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 58,
+        "estimated_tokens_body": 1271,
+        "estimated_tokens_total": 1329,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-21T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "typography",
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:typography",
+        "level:foundational",
+        "layer:knowledge"
+      ],
+      "parent": "typography",
+      "created": "2026-03-21",
+      "last_modified": "2026-03-21",
+      "changelog": [
+        {
+          "date": "2026-03-21",
+          "action": "created",
+          "note": "Typography knowledge skill \u2014 responsive-type"
+        }
+      ]
+    },
+    "brand-identity": {
+      "name": "brand-identity",
+      "description": "Direct the brand-identity subdomain \u2014 route brand questions to the right specialist skill, define the relationship between brand strategy and visual execution, and resolve conflicts between brand consistency and creative expression.",
+      "location": "skills/design/brand-identity/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 698,
+        "body_words": 640,
+        "description_words": 49,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 64,
+        "estimated_tokens_body": 1165,
+        "estimated_tokens_total": 1229,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "brand-foundations",
+        "visual-identity",
+        "brand-voice",
+        "design-orchestrator"
+      ],
+      "referenced_by": [
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:brand-identity",
+        "level:director"
+      ],
+      "parent": "design-orchestrator",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Brand Identity Director"
+        }
+      ]
+    },
+    "brand-foundations": {
+      "name": "brand-foundations",
+      "description": "Brand strategy fundamentals \u2014 positioning, values, audience definition, personality frameworks, and competitive differentiation. The strategic layer that informs all visual and verbal brand decisions.",
+      "location": "skills/design/brand-identity/brand-foundations/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 992,
+        "body_words": 956,
+        "description_words": 30,
+        "section_count": 6,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 39,
+        "estimated_tokens_body": 1560,
+        "estimated_tokens_total": 1599,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "brand-identity",
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:brand-identity",
+        "level:foundational",
+        "layer:knowledge"
+      ],
+      "parent": "brand-identity",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Brand knowledge skill \u2014 brand-foundations"
+        }
+      ]
+    },
+    "visual-identity": {
+      "name": "visual-identity",
+      "description": "Visual identity systems \u2014 logo design principles, brand color systems, imagery direction, iconography, and how to build a cohesive visual language from brand strategy.",
+      "location": "skills/design/brand-identity/visual-identity/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1250,
+        "body_words": 1209,
+        "description_words": 35,
+        "section_count": 6,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 46,
+        "estimated_tokens_body": 1915,
+        "estimated_tokens_total": 1961,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "brand-identity",
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:brand-identity",
+        "level:foundational",
+        "layer:knowledge"
+      ],
+      "parent": "brand-identity",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Brand knowledge skill \u2014 visual-identity"
+        }
+      ]
+    },
+    "brand-voice": {
+      "name": "brand-voice",
+      "description": "Brand voice and tone \u2014 how a brand communicates verbally. Covers voice definition, tone modulation across contexts, messaging frameworks, vocabulary systems, and content guidelines.",
+      "location": "skills/design/brand-identity/brand-voice/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1287,
+        "body_words": 1248,
+        "description_words": 33,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 43,
+        "estimated_tokens_body": 1903,
+        "estimated_tokens_total": 1946,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "brand-identity",
+        "design-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:design",
+        "subdomain:brand-identity",
+        "level:foundational",
+        "layer:knowledge"
+      ],
+      "parent": "brand-identity",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Brand knowledge skill \u2014 brand-voice"
+        }
+      ]
+    },
+    "world-bible": {
+      "name": "world-bible",
+      "description": "Foundational axioms and constraints of the world — the single source of truth for what is real, what is possible, and what is hidden. Reference when building civilizations, writing lore, or checking consistency.",
+      "location": "skills/worldbuilding/world-bible/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 0,
+        "body_words": 0,
+        "description_words": 38,
+        "section_count": 6,
+        "reference_files": 3,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 50,
+        "estimated_tokens_body": 1600,
+        "estimated_tokens_total": 1450,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "lore-writer",
+        "naming-system"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "layer:knowledge",
+        "level:foundational"
+      ],
+      "parent": null,
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Worldbuilding domain — foundational world axioms and constraints"
+        }
+      ]
+    },
+    "lore-writer": {
+      "name": "lore-writer",
+      "description": "Produce in-universe artifacts — documents that exist inside the world, written in a specific voice and format. Use when creating lore documents, intercepted communications, historical accounts, field reports, myths, or any text artifact that belongs to the world itself.",
+      "location": "skills/worldbuilding/lore-writer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 0,
+        "body_words": 0,
+        "description_words": 42,
+        "section_count": 5,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 55,
+        "estimated_tokens_body": 1200,
+        "estimated_tokens_total": 1255,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [
+        "world-bible",
+        "naming-system"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "layer:action",
+        "level:foundational"
+      ],
+      "parent": null,
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Worldbuilding domain — produces in-universe artifacts in multiple voice registers"
+        }
+      ]
+    },
+    "naming-system": {
+      "name": "naming-system",
+      "description": "Linguistic foundations for naming people, places, institutions, and concepts within each civilization. Reference to ensure names from the same culture share phonetic patterns and names from different cultures sound audibly distinct.",
+      "location": "skills/worldbuilding/naming-system/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 0,
+        "body_words": 0,
+        "description_words": 32,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 42,
+        "estimated_tokens_body": 1100,
+        "estimated_tokens_total": 1142,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [
+        "world-bible"
+      ],
+      "referenced_by": [
+        "lore-writer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "layer:knowledge",
+        "level:foundational"
+      ],
+      "parent": null,
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Worldbuilding domain — phonetic naming systems for cultural distinctiveness"
+        }
+      ]
+    },
+    "game-theory-orchestrator": {
+      "name": "game-theory-orchestrator",
+      "description": "Orchestrate game-theoretic analysis across strategic problems. Use when the user needs to analyze strategic interactions, find equilibria, design mechanisms or incentives, model evolutionary dynamics, evaluate information structures, or apply formal game theory to real-world scenarios.",
+      "location": "skills/game-theory/game-theory-orchestrator/SKILL.md",
+      "plugin": "game-theory",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1250,
+        "body_words": 1190,
+        "description_words": 42,
+        "section_count": 6,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 55,
+        "estimated_tokens_body": 2200,
+        "estimated_tokens_total": 2255,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "strategic-foundations",
+        "mechanism-design",
+        "evolutionary-dynamics",
+        "information-economics",
+        "computational-strategy"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "level:orchestrator"
+      ],
+      "parent": null,
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Game theory domain — Phase 1 vertical slice"
+        }
+      ]
+    },
+    "strategic-foundations": {
+      "name": "strategic-foundations",
+      "description": "Direct the strategic foundations subdomain — route game theory questions to the right specialist skill, define the learning curriculum, and resolve conflicts between analytical frameworks.",
+      "location": "skills/game-theory/strategic-foundations/SKILL.md",
+      "plugin": "game-theory",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 850,
+        "body_words": 800,
+        "description_words": 32,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 42,
+        "estimated_tokens_body": 1500,
+        "estimated_tokens_total": 1542,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "classical-games",
+        "cooperative-games",
+        "game-solver"
+      ],
+      "referenced_by": [
+        "game-theory-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:strategic-foundations",
+        "level:director"
+      ],
+      "parent": "game-theory-orchestrator",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Game theory domain — Phase 1 vertical slice"
+        }
+      ]
+    },
+    "classical-games": {
+      "name": "classical-games",
+      "description": "Classical game theory foundations for strategic analysis. Reference when modeling strategic interactions, finding Nash equilibria, analyzing sequential games, evaluating mixed strategies, or understanding equilibrium refinements.",
+      "location": "skills/game-theory/strategic-foundations/classical-games/SKILL.md",
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1350,
+        "body_words": 1290,
+        "description_words": 30,
+        "section_count": 7,
+        "reference_files": 3,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 40,
+        "estimated_tokens_body": 2400,
+        "estimated_tokens_total": 2440,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "strategic-foundations",
+        "game-solver"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:strategic-foundations",
+        "level:foundational"
+      ],
+      "parent": "strategic-foundations",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Game theory domain — Phase 1 vertical slice"
+        }
+      ]
+    },
+    "cooperative-games": {
+      "name": "cooperative-games",
+      "description": "Cooperative game theory foundations for coalition analysis, fair allocation, bargaining, and matching. Reference when evaluating how groups should form, how to fairly divide value, or how to design stable matching systems.",
+      "location": "skills/game-theory/strategic-foundations/cooperative-games/SKILL.md",
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1400,
+        "body_words": 1340,
+        "description_words": 34,
+        "section_count": 7,
+        "reference_files": 3,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 45,
+        "estimated_tokens_body": 2500,
+        "estimated_tokens_total": 2545,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "strategic-foundations",
+        "game-solver"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:strategic-foundations",
+        "level:foundational"
+      ],
+      "parent": "strategic-foundations",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Game theory domain — Phase 1 vertical slice"
+        }
+      ]
+    },
+    "game-solver": {
+      "name": "game-solver",
+      "description": "Analyze strategic situations through a game-theoretic lens. Use when the user describes a competitive, cooperative, or mixed-motive scenario and needs it formalized as a game, solved for equilibria, or interpreted as strategic advice.",
+      "location": "skills/game-theory/strategic-foundations/game-solver/SKILL.md",
+      "plugin": "game-theory",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1100,
+        "body_words": 1050,
+        "description_words": 36,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 47,
+        "estimated_tokens_body": 1950,
+        "estimated_tokens_total": 1997,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "classical-games",
+        "cooperative-games"
+      ],
+      "referenced_by": [
+        "strategic-foundations"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:strategic-foundations",
+        "level:tool"
+      ],
+      "parent": "strategic-foundations",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Game theory domain — Phase 1 vertical slice"
+        }
+      ]
+    },
+    "mechanism-design": {
+      "name": "mechanism-design",
+      "description": "Direct the mechanism design subdomain — route questions about auction design, market rules, matching systems, voting mechanisms, incentive structures, and contract design to the right specialist skill.",
+      "location": "skills/game-theory/mechanism-design/SKILL.md",
+      "plugin": "game-theory",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 900,
+        "body_words": 850,
+        "description_words": 30,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 40,
+        "estimated_tokens_body": 1600,
+        "estimated_tokens_total": 1640,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "auction-theory",
+        "matching-markets",
+        "social-choice",
+        "mechanism-designer"
+      ],
+      "referenced_by": [
+        "game-theory-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:mechanism-design",
+        "level:director"
+      ],
+      "parent": "game-theory-orchestrator",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Stub director — scope definition for Phase 2"
+        },
+        {
+          "date": "2026-03-22",
+          "action": "updated",
+          "note": "Phase 2 — full director with routing, curriculum, conflict resolution"
+        }
+      ]
+    },
+    "auction-theory": {
+      "name": "auction-theory",
+      "description": "Auction theory foundations for understanding and designing competitive allocation mechanisms. Reference when analyzing auction formats, computing optimal bidding strategies, evaluating revenue properties, or designing new auctions.",
+      "location": "skills/game-theory/mechanism-design/auction-theory/SKILL.md",
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1400,
+        "body_words": 1350,
+        "description_words": 28,
+        "section_count": 8,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 37,
+        "estimated_tokens_body": 2500,
+        "estimated_tokens_total": 2537,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": ["mechanism-design", "mechanism-designer"],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:foundational"],
+      "parent": "mechanism-design",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+    },
+    "matching-markets": {
+      "name": "matching-markets",
+      "description": "Market design foundations for matching and allocation without prices. Reference when designing or analyzing matching systems, two-sided markets, assignment mechanisms, or allocation rules.",
+      "location": "skills/game-theory/mechanism-design/matching-markets/SKILL.md",
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1200,
+        "body_words": 1150,
+        "description_words": 28,
+        "section_count": 7,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 37,
+        "estimated_tokens_body": 2100,
+        "estimated_tokens_total": 2137,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": ["mechanism-design", "mechanism-designer"],
+      "shares_references_with": ["cooperative-games"],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:foundational"],
+      "parent": "mechanism-design",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+    },
+    "social-choice": {
+      "name": "social-choice",
+      "description": "Social choice theory foundations for understanding collective decision-making and its limits. Reference when analyzing voting systems, evaluating fairness of aggregation rules, or understanding impossibility theorems.",
+      "location": "skills/game-theory/mechanism-design/social-choice/SKILL.md",
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1350,
+        "body_words": 1300,
+        "description_words": 26,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 35,
+        "estimated_tokens_body": 2400,
+        "estimated_tokens_total": 2435,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": ["mechanism-design", "mechanism-designer"],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:foundational"],
+      "parent": "mechanism-design",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+    },
+    "mechanism-designer": {
+      "name": "mechanism-designer",
+      "description": "Design incentive-compatible mechanisms for specific allocation, auction, voting, or governance problems. Use when the user needs to create rules for a strategic situation.",
+      "location": "skills/game-theory/mechanism-design/mechanism-designer/SKILL.md",
+      "plugin": "game-theory",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1200,
+        "body_words": 1150,
+        "description_words": 26,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 35,
+        "estimated_tokens_body": 2100,
+        "estimated_tokens_total": 2135,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": ["auction-theory", "matching-markets", "social-choice"],
+      "referenced_by": ["mechanism-design"],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:tool"],
+      "parent": "mechanism-design",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+    },
+    "evolutionary-dynamics": {
+      "name": "evolutionary-dynamics",
+      "description": "Direct the evolutionary dynamics subdomain — route questions about evolutionary game theory, population dynamics, ESS, replicator dynamics, fitness landscapes, and biological or cultural strategy to the right specialist skill.",
+      "location": "skills/game-theory/evolutionary-dynamics/SKILL.md",
+      "plugin": "game-theory",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 900,
+        "body_words": 850,
+        "description_words": 34,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 45,
+        "estimated_tokens_body": 1600,
+        "estimated_tokens_total": 1645,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "evolutionary-games",
+        "population-dynamics",
+        "evo-simulator"
+      ],
+      "referenced_by": [
+        "game-theory-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:evolutionary-dynamics",
+        "level:director"
+      ],
+      "parent": "game-theory-orchestrator",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Stub director — scope definition for Phase 2"
+        },
+        {
+          "date": "2026-03-22",
+          "action": "updated",
+          "note": "Phase 2 — full director with routing, curriculum, conflict resolution"
+        }
+      ]
+    },
+    "evolutionary-games": {
+      "name": "evolutionary-games",
+      "description": "Evolutionary game theory foundations for understanding strategy evolution in populations. Reference when analyzing ESS, interpreting classical games through an evolutionary lens, or understanding cooperation emergence.",
+      "location": "skills/game-theory/evolutionary-dynamics/evolutionary-games/SKILL.md",
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1400,
+        "body_words": 1350,
+        "description_words": 28,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 37,
+        "estimated_tokens_body": 2500,
+        "estimated_tokens_total": 2537,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": ["evolutionary-dynamics", "evo-simulator"],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:evolutionary-dynamics", "level:foundational"],
+      "parent": "evolutionary-dynamics",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — evolutionary dynamics subdomain"}]
+    },
+    "population-dynamics": {
+      "name": "population-dynamics",
+      "description": "Population dynamics foundations for evolutionary game theory. Reference when analyzing replicator equations, phase portraits, fixation probabilities, stochastic dynamics, or convergence properties.",
+      "location": "skills/game-theory/evolutionary-dynamics/population-dynamics/SKILL.md",
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1500,
+        "body_words": 1450,
+        "description_words": 26,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 35,
+        "estimated_tokens_body": 2700,
+        "estimated_tokens_total": 2735,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 100,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": ["evolutionary-dynamics", "evo-simulator"],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:evolutionary-dynamics", "level:foundational"],
+      "parent": "evolutionary-dynamics",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — evolutionary dynamics subdomain"}]
+    },
+    "evo-simulator": {
+      "name": "evo-simulator",
+      "description": "Simulate evolutionary game dynamics — run replicator equations, compute fixation probabilities, visualize phase portraits and population trajectories, and analyze evolutionary stability computationally.",
+      "location": "skills/game-theory/evolutionary-dynamics/evo-simulator/SKILL.md",
+      "plugin": "game-theory",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1100,
+        "body_words": 1050,
+        "description_words": 26,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 35,
+        "estimated_tokens_body": 1950,
+        "estimated_tokens_total": 1985,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": ["evolutionary-games", "population-dynamics"],
+      "referenced_by": ["evolutionary-dynamics"],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:evolutionary-dynamics", "level:tool"],
+      "parent": "evolutionary-dynamics",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — evolutionary dynamics subdomain"}]
+    },
+    "information-economics": {
+      "name": "information-economics",
+      "description": "Direct the information economics subdomain — route questions about signaling, screening, adverse selection, moral hazard, Bayesian persuasion, information design, cheap talk, and strategic communication.",
+      "location": "skills/game-theory/information-economics/SKILL.md",
+      "plugin": "game-theory",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 200,
+        "body_words": 170,
+        "description_words": 26,
+        "section_count": 2,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 35,
+        "estimated_tokens_body": 350,
+        "estimated_tokens_total": 385,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 95,
+      "composite_score": 95,
+      "depends_on": ["signaling-screening", "bayesian-persuasion", "info-designer"],
+      "referenced_by": ["game-theory-orchestrator"],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:information-economics", "level:director"],
+      "parent": "game-theory-orchestrator",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {"date": "2026-03-22", "action": "created", "note": "Stub director — scope definition for Phase 3"},
+        {"date": "2026-03-22", "action": "updated", "note": "Phase 3 — full director with routing, curriculum, conflict resolution"}
+      ]
+    },
+    "signaling-screening": {
+      "name": "signaling-screening",
+      "description": "Classical information economics — signaling, screening, adverse selection, moral hazard, and contract theory.",
+      "location": "skills/game-theory/information-economics/signaling-screening/SKILL.md",
+      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
+      "metrics": {"word_count": 1500, "section_count": 6, "reference_files": 1, "estimated_tokens_total": 2735},
+      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
+      "auto_score": 100, "composite_score": 100,
+      "depends_on": [], "referenced_by": ["information-economics", "info-designer"], "shares_references_with": [],
+      "forked_from": null, "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:information-economics", "level:foundational"],
+      "parent": "information-economics", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — information economics subdomain"}]
+    },
+    "bayesian-persuasion": {
+      "name": "bayesian-persuasion",
+      "description": "Modern information design and strategic communication — Bayesian persuasion, cheap talk, disclosure theory.",
+      "location": "skills/game-theory/information-economics/bayesian-persuasion/SKILL.md",
+      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
+      "metrics": {"word_count": 1400, "section_count": 7, "reference_files": 1, "estimated_tokens_total": 2537},
+      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
+      "auto_score": 100, "composite_score": 100,
+      "depends_on": [], "referenced_by": ["information-economics", "info-designer"], "shares_references_with": [],
+      "forked_from": null, "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:information-economics", "level:foundational"],
+      "parent": "information-economics", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — information economics subdomain"}]
+    },
+    "info-designer": {
+      "name": "info-designer",
+      "description": "Design optimal information disclosure policies for strategic settings — platforms, regulators, organizations.",
+      "location": "skills/game-theory/information-economics/info-designer/SKILL.md",
+      "plugin": "game-theory", "type": "action", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
+      "metrics": {"word_count": 1000, "section_count": 4, "reference_files": 0, "estimated_tokens_total": 1840},
+      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
+      "auto_score": 95, "composite_score": 95,
+      "depends_on": ["signaling-screening", "bayesian-persuasion"], "referenced_by": ["information-economics"], "shares_references_with": [],
+      "forked_from": null, "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:information-economics", "level:tool"],
+      "parent": "information-economics", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — information economics subdomain"}]
+    },
+    "computational-strategy": {
+      "name": "computational-strategy",
+      "description": "Direct the computational strategy subdomain — algorithmic game theory, behavioral game theory, learning in games, and AI-era game theory.",
+      "location": "skills/game-theory/computational-strategy/SKILL.md",
+      "plugin": "game-theory", "type": "director", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
+      "metrics": {"word_count": 950, "section_count": 5, "reference_files": 0, "estimated_tokens_total": 1740},
+      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
+      "auto_score": 95, "composite_score": 95,
+      "depends_on": ["algorithmic-game-theory", "behavioral-game-theory", "learning-in-games"],
+      "referenced_by": ["game-theory-orchestrator"], "shares_references_with": [],
+      "forked_from": null, "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:director"],
+      "parent": "game-theory-orchestrator", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "changelog": [
+        {"date": "2026-03-22", "action": "created", "note": "Stub director — scope definition for Phase 3"},
+        {"date": "2026-03-22", "action": "updated", "note": "Phase 3 — full director with routing, curriculum, conflict resolution"}
+      ]
+    },
+    "algorithmic-game-theory": {
+      "name": "algorithmic-game-theory",
+      "description": "Algorithmic game theory — PPAD-completeness, price of anarchy/stability, congestion games, potential games, algorithmic mechanism design.",
+      "location": "skills/game-theory/computational-strategy/algorithmic-game-theory/SKILL.md",
+      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
+      "metrics": {"word_count": 1400, "section_count": 6, "reference_files": 1, "estimated_tokens_total": 2533},
+      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
+      "auto_score": 100, "composite_score": 100,
+      "depends_on": [], "referenced_by": ["computational-strategy"], "shares_references_with": [],
+      "forked_from": null, "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:foundational"],
+      "parent": "computational-strategy", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — computational strategy subdomain"}]
+    },
+    "behavioral-game-theory": {
+      "name": "behavioral-game-theory",
+      "description": "Behavioral game theory — level-k thinking, QRE, social preferences, experimental evidence of human strategic behavior.",
+      "location": "skills/game-theory/computational-strategy/behavioral-game-theory/SKILL.md",
+      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
+      "metrics": {"word_count": 1400, "section_count": 5, "reference_files": 1, "estimated_tokens_total": 2535},
+      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
+      "auto_score": 100, "composite_score": 100,
+      "depends_on": [], "referenced_by": ["computational-strategy"], "shares_references_with": [],
+      "forked_from": null, "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:foundational"],
+      "parent": "computational-strategy", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — computational strategy subdomain"}]
+    },
+    "learning-in-games": {
+      "name": "learning-in-games",
+      "description": "Learning dynamics in games — fictitious play, no-regret learning, MARL, self-play, mean field games, convergence results.",
+      "location": "skills/game-theory/computational-strategy/learning-in-games/SKILL.md",
+      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
+      "metrics": {"word_count": 1500, "section_count": 6, "reference_files": 1, "estimated_tokens_total": 2735},
+      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
+      "auto_score": 100, "composite_score": 100,
+      "depends_on": [], "referenced_by": ["computational-strategy"], "shares_references_with": [],
+      "forked_from": null, "forked_into": [],
+      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:foundational"],
+      "parent": "computational-strategy", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — computational strategy subdomain"}]
+    },
+    "data-science-orchestrator": {
+      "name": "data-science-orchestrator",
+      "description": "Orchestrate data science analysis across the full project lifecycle. Use when the user needs to clean or prepare data, perform exploratory analysis, engineer features, run statistical tests, build or evaluate models, design causal studies, create visualizations, monitor deployed models, or apply responsible AI principles. Routes to the right specialist skill based on where the user is in the data science workflow.",
+      "location": "skills/data-science/data-science-orchestrator/SKILL.md",
+      "plugin": "data-science",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1382,
+        "body_words": 1300,
+        "description_words": 70,
+        "section_count": 7,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 91,
+        "estimated_tokens_body": 2561,
+        "estimated_tokens_total": 2652,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "data-cleaning",
+        "feature-engineering",
+        "statistical-testing",
+        "causal-inference",
+        "model-evaluation",
+        "time-series",
+        "chart-selection",
+        "drift-detection",
+        "responsible-ai",
+        "biostatistics"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "level:orchestrator"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "data-cleaning": {
+      "name": "data-cleaning",
+      "description": "Data cleaning and preprocessing strategies for analytical datasets. Reference when handling missing values, detecting outliers, deduplicating records, validating data types, or establishing reproducible cleaning pipelines. Use when preparing any dataset for analysis or modeling.",
+      "location": "skills/data-science/data-wrangling/data-cleaning/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1982,
+        "body_words": 1920,
+        "description_words": 45,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 59,
+        "estimated_tokens_body": 3782,
+        "estimated_tokens_total": 3841,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [],
+      "referenced_by": [
+        "data-science-orchestrator",
+        "feature-engineering"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:data-wrangling",
+        "level:foundation"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "feature-engineering": {
+      "name": "feature-engineering",
+      "description": "Feature engineering strategies for machine learning and statistical modeling. Reference when encoding categorical variables, creating interaction features, transforming numeric distributions, engineering temporal features, or selecting the most predictive feature subset. Use when building or improving model inputs.",
+      "location": "skills/data-science/data-wrangling/feature-engineering/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1922,
+        "body_words": 1860,
+        "description_words": 48,
+        "section_count": 9,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 62,
+        "estimated_tokens_body": 3664,
+        "estimated_tokens_total": 3726,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "data-cleaning"
+      ],
+      "referenced_by": [
+        "data-science-orchestrator",
+        "model-evaluation"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:data-wrangling",
+        "level:foundation"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "statistical-testing": {
+      "name": "statistical-testing",
+      "description": "Statistical hypothesis testing frameworks for data analysis. Reference when choosing between parametric and non-parametric tests, designing hypothesis tests, computing power and effect sizes, correcting for multiple comparisons, or deciding between Bayesian and frequentist approaches. Use when any analysis needs rigorous statistical inference.",
+      "location": "skills/data-science/statistical-analysis/statistical-testing/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 2075,
+        "body_words": 2010,
+        "description_words": 52,
+        "section_count": 9,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 68,
+        "estimated_tokens_body": 3960,
+        "estimated_tokens_total": 4028,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [],
+      "referenced_by": [
+        "data-science-orchestrator",
+        "causal-inference",
+        "model-evaluation",
+        "time-series",
+        "drift-detection",
+        "biostatistics"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:statistical-analysis",
+        "level:foundation"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "causal-inference": {
+      "name": "causal-inference",
+      "description": "Causal inference methods for estimating treatment effects from observational data. Reference when designing quasi-experiments, selecting causal identification strategies, validating causal assumptions, or interpreting treatment effect estimates. Use when the question is \"does X cause Y\" rather than \"does X predict Y.\"",
+      "location": "skills/data-science/statistical-analysis/causal-inference/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1966,
+        "body_words": 1900,
+        "description_words": 50,
+        "section_count": 10,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 65,
+        "estimated_tokens_body": 3743,
+        "estimated_tokens_total": 3808,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "statistical-testing"
+      ],
+      "referenced_by": [
+        "data-science-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:statistical-analysis",
+        "level:intermediate"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "model-evaluation": {
+      "name": "model-evaluation",
+      "description": "Model evaluation and selection frameworks for machine learning. Reference when choosing performance metrics, designing validation strategies, comparing models statistically, assessing calibration, or auditing models for fairness. Use when deciding which model to deploy or how to measure model quality.",
+      "location": "skills/data-science/modeling/model-evaluation/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1890,
+        "body_words": 1830,
+        "description_words": 48,
+        "section_count": 8,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 62,
+        "estimated_tokens_body": 3605,
+        "estimated_tokens_total": 3667,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "statistical-testing",
+        "feature-engineering"
+      ],
+      "referenced_by": [
+        "data-science-orchestrator",
+        "drift-detection",
+        "responsible-ai",
+        "time-series"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:modeling",
+        "level:foundation"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "time-series": {
+      "name": "time-series",
+      "description": "Time series analysis and forecasting methods from classical statistics to foundation models. Reference when decomposing temporal patterns, selecting forecasting models, handling seasonality, evaluating forecast accuracy, or deciding between classical and modern approaches. Use when the data has a temporal dimension and the goal is understanding or predicting trends.",
+      "location": "skills/data-science/modeling/time-series/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1834,
+        "body_words": 1770,
+        "description_words": 50,
+        "section_count": 9,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 65,
+        "estimated_tokens_body": 3487,
+        "estimated_tokens_total": 3552,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "statistical-testing",
+        "model-evaluation"
+      ],
+      "referenced_by": [
+        "data-science-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:modeling",
+        "level:intermediate"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "chart-selection": {
+      "name": "chart-selection",
+      "description": "Data visualization chart selection and design principles. Reference when choosing chart types for specific messages, designing accessible visualizations, avoiding misleading patterns, or applying direct labeling and annotation strategies. Use when communicating data insights visually to any audience.",
+      "location": "skills/data-science/visualization/chart-selection/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1783,
+        "body_words": 1720,
+        "description_words": 47,
+        "section_count": 8,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 61,
+        "estimated_tokens_body": 3388,
+        "estimated_tokens_total": 3449,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [],
+      "referenced_by": [
+        "data-science-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:visualization",
+        "level:foundation"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "drift-detection": {
+      "name": "drift-detection",
+      "description": "Model and data drift detection for production ML systems. Reference when designing monitoring pipelines, selecting drift detection methods, setting alert thresholds, diagnosing performance degradation, or deciding when to retrain models. Use when ML models are deployed and need ongoing quality assurance.",
+      "location": "skills/data-science/ml-engineering/drift-detection/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 2031,
+        "body_words": 1960,
+        "description_words": 52,
+        "section_count": 10,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 68,
+        "estimated_tokens_body": 3861,
+        "estimated_tokens_total": 3929,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "model-evaluation",
+        "statistical-testing"
+      ],
+      "referenced_by": [
+        "data-science-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:ml-engineering",
+        "level:intermediate"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "responsible-ai": {
+      "name": "responsible-ai",
+      "description": "Responsible AI governance, fairness metrics, and bias mitigation for ML systems. Reference when auditing models for fairness, selecting appropriate fairness criteria, implementing bias mitigation strategies, creating model cards, or ensuring compliance with AI governance frameworks like the EU AI Act or NIST AI RMF. Use when any model affects human decisions.",
+      "location": "skills/data-science/frontier/responsible-ai/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 2058,
+        "body_words": 1990,
+        "description_words": 55,
+        "section_count": 9,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 72,
+        "estimated_tokens_body": 3920,
+        "estimated_tokens_total": 3992,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "model-evaluation"
+      ],
+      "referenced_by": [
+        "data-science-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:frontier",
+        "level:intermediate"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Data science skill suite MVP"
+        }
+      ]
+    },
+    "biostatistics": {
+      "name": "biostatistics",
+      "description": "Biostatistics methods for clinical trials, epidemiology, and life sciences research. Reference when designing clinical trials, performing survival analysis, evaluating diagnostic tests, computing epidemiological measures, conducting meta-analyses, handling multiplicity in clinical endpoints, or navigating FDA/EMA regulatory statistical requirements. Use when the data involves patient outcomes, censored time-to-event data, or regulatory submissions.",
+      "location": "skills/data-science/statistical-analysis/biostatistics/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 2207,
+        "body_words": 2140,
+        "description_words": 62,
+        "section_count": 10,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 81,
+        "estimated_tokens_body": 4216,
+        "estimated_tokens_total": 4297,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "statistical-testing"
+      ],
+      "referenced_by": [
+        "data-science-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:statistical-analysis",
+        "level:intermediate"
+      ],
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Biostatistics skill added to data science suite"
         }
       ]
     }
@@ -574,6 +3276,65 @@
         "skill-fork",
         "skill-network",
         "skill-export"
+      ],
+      "design": [
+        "design-orchestrator",
+        "visual-communication",
+        "color-theory",
+        "design-principles",
+        "visual-perception",
+        "typography",
+        "type-fundamentals",
+        "type-pairing",
+        "responsive-type",
+        "brand-identity",
+        "brand-foundations",
+        "visual-identity",
+        "brand-voice"
+      ],
+      "meta": [
+        "meta-observer"
+      ],
+      "worldbuilding": [
+        "world-bible",
+        "lore-writer",
+        "naming-system"
+      ],
+      "game-theory": [
+        "game-theory-orchestrator",
+        "strategic-foundations",
+        "classical-games",
+        "cooperative-games",
+        "game-solver",
+        "mechanism-design",
+        "auction-theory",
+        "matching-markets",
+        "social-choice",
+        "mechanism-designer",
+        "evolutionary-dynamics",
+        "evolutionary-games",
+        "population-dynamics",
+        "evo-simulator",
+        "information-economics",
+        "signaling-screening",
+        "bayesian-persuasion",
+        "info-designer",
+        "computational-strategy",
+        "algorithmic-game-theory",
+        "behavioral-game-theory",
+        "learning-in-games"
+      ],
+      "data-science": [
+        "data-science-orchestrator",
+        "data-cleaning",
+        "feature-engineering",
+        "statistical-testing",
+        "causal-inference",
+        "model-evaluation",
+        "time-series",
+        "chart-selection",
+        "drift-detection",
+        "responsible-ai"
       ]
     },
     "shared_references": {}

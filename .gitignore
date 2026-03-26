@@ -9,3 +9,4 @@ Thumbs.db
 *.tmp
 *.bak
 data/backups/
+__pycache__/

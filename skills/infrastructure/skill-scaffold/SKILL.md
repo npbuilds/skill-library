@@ -18,7 +18,7 @@ Create new skills from templates with guided requirements gathering, automatic f
 Ask the user for (or infer from context):
 
 - **Skill name** (kebab-case, e.g., `my-new-skill`)
-- **Skill type**: knowledge, action, or orchestrator
+- **Skill type**: knowledge, action, director, or orchestrator
 - **Description**: 20-60 words, must include trigger phrases
 - **Tools needed**: which tools the skill will use (action/orchestrator only)
 - **Target plugin**: which plugin directory to create in (default: this plugin's `skills/`)
@@ -33,6 +33,7 @@ Read the appropriate template from `templates/`:
 |------|----------|-------------|
 | knowledge | `templates/knowledge-skill.md` | Passive reference, no tools, no side effects |
 | action | `templates/action-skill.md` | User-invoked, has tools, produces side effects |
+| director | `templates/director-skill.md` | Subdomain manager, routes to child skills, resolves conflicts |
 | orchestrator | `templates/orchestrator-skill.md` | Multi-phase, forks agents, complex coordination |
 
 ### 3. Customize Template
@@ -52,12 +53,29 @@ For the description, ensure it:
 - Includes specific trigger phrases ("Use when the user asks to...", "Use when...")
 - Written in third person
 
-### 4. Create Files
+### 4. Determine Placement
+
+Ask the user (or infer) where this skill belongs in the hierarchy:
+
+- **Which domain?** (e.g., `design`, `infrastructure`, `culinary`, or a new domain)
+- **Which subdomain/director?** (optional — only if the domain has directors)
+
+Placement rules:
+```
+skills/<domain>/<skill-name>/                    # Skills at domain level
+skills/<domain>/<director-name>/<skill-name>/    # Skills under a director
+skills/<domain>/<orchestrator-name>/             # Orchestrators at domain root
+skills/<domain>/<director-name>/                 # Directors contain child skills
+```
+
+For director skills, the directory they create will contain child skills nested inside.
+
+### 5. Create Files
 
 Create the skill directory and files:
 
 ```
-skills/<skill-name>/
+skills/<domain>/[<director>/]<skill-name>/
 ├── SKILL.md              # From customized template
 ├── references/           # Always create (for future progressive disclosure)
 │   └── .gitkeep
@@ -68,8 +86,9 @@ skills/<skill-name>/
 For action and orchestrator skills, also consider creating:
 - `examples/` — if the skill involves complex output formats
 - `scripts/` — if the skill delegates to shell scripts
+- `agents/` — if the orchestrator delegates to specialist agents
 
-### 5. Register
+### 6. Register
 
 After file creation, register the new skill in the registry:
 
@@ -78,19 +97,19 @@ After file creation, register the new skill in the registry:
 3. Set `source` based on location:
    - Inside this plugin's `skills/` → `self`
    - Inside another plugin → `custom`
-4. Set initial `auto_score` from the rating rubric (read `skills/skill-dashboard/references/rating-rubric.md`)
+4. Set initial `auto_score` from the rating rubric (read `skills/infrastructure/skill-dashboard/references/rating-rubric.md`)
 5. Add relationship: `depends_on: ["skill-registry"]` (all skills depend on the registry)
 6. Update `network.domains` if the user specifies a domain tag
 
-### 6. Validate
+### 7. Validate
 
 Run post-creation checks:
 
 1. Run `scripts/validate-structure.sh` on the new skill directory
-2. Check metrics against health thresholds (read `skills/skill-health/references/health-thresholds.md`)
+2. Check metrics against health thresholds (read `skills/infrastructure/skill-health/references/health-thresholds.md`)
 3. Report any issues found
 
-### 7. Present Result
+### 8. Present Result
 
 Show the user what was created:
 
