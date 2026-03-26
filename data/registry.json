@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-03-22T00:00:00Z",
+  "last_scan": "2026-03-25T00:00:00Z",
   "skills": {
     "skill-registry": {
       "name": "skill-registry",
-      "description": "Manage the skill registry \u2014 the central catalog of all skills in the mycelial network.",
+      "description": "Manage the skill registry — the central catalog of all skills in the mycelial network.",
       "location": "skills/infrastructure/skill-registry/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -49,7 +49,8 @@
         "skill-network",
         "skill-export",
         "design-orchestrator",
-        "meta-observer"
+        "meta-observer",
+        "infrastructure-orchestrator"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -64,32 +65,32 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 1 bootstrap \u2014 first skill registered"
+          "note": "Phase 1 bootstrap — first skill registered"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 2 \u2014 added referenced_by relationships"
+          "note": "Phase 2 — added referenced_by relationships"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+          "note": "Phase 3 — added skill-scaffold to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 4 \u2014 added skill-test and skill-analyze to referenced_by"
+          "note": "Phase 4 — added skill-test and skill-analyze to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 \u2014 added skill-fork, skill-network, skill-export to referenced_by"
+          "note": "Phase 5 — added skill-fork, skill-network, skill-export to referenced_by"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -135,7 +136,8 @@
       ],
       "referenced_by": [
         "skill-scaffold",
-        "skill-fork"
+        "skill-fork",
+        "infrastructure-orchestrator"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -150,22 +152,22 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 2 \u2014 quality infrastructure"
+          "note": "Phase 2 — quality infrastructure"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+          "note": "Phase 3 — added skill-scaffold to referenced_by"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+          "note": "Phase 5 — added skill-fork to referenced_by"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -210,7 +212,8 @@
       ],
       "referenced_by": [
         "skill-health",
-        "skill-scaffold"
+        "skill-scaffold",
+        "infrastructure-orchestrator"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -225,17 +228,17 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 2 \u2014 dashboards and ratings"
+          "note": "Phase 2 — dashboards and ratings"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+          "note": "Phase 3 — added skill-scaffold to referenced_by"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -281,7 +284,8 @@
         "skill-dashboard"
       ],
       "referenced_by": [
-        "skill-fork"
+        "skill-fork",
+        "infrastructure-orchestrator"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -296,17 +300,17 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 3 \u2014 The Builder, skill creation factory"
+          "note": "Phase 3 — The Builder, skill creation factory"
         },
         {
           "date": "2026-03-17",
           "action": "updated",
-          "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+          "note": "Phase 5 — added skill-fork to referenced_by"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -350,7 +354,9 @@
         "skill-registry",
         "skill-analyze"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "infrastructure-orchestrator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -364,12 +370,12 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 4 \u2014 The Prover, structural and behavioral testing"
+          "note": "Phase 4 — The Prover, structural and behavioral testing"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -413,7 +419,8 @@
         "skill-registry"
       ],
       "referenced_by": [
-        "skill-test"
+        "skill-test",
+        "infrastructure-orchestrator"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -428,12 +435,12 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 4 \u2014 The Oracle, Anthropic API-powered analysis"
+          "note": "Phase 4 — The Oracle, Anthropic API-powered analysis"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -478,7 +485,9 @@
         "skill-scaffold",
         "skill-health"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "infrastructure-orchestrator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -492,12 +501,12 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 \u2014 The Splitter, skill decomposition"
+          "note": "Phase 5 — The Splitter, skill decomposition"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -540,7 +549,9 @@
       "depends_on": [
         "skill-registry"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "infrastructure-orchestrator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -554,12 +565,12 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 \u2014 The Cartographer, network visualization"
+          "note": "Phase 5 — The Cartographer, network visualization"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
@@ -602,7 +613,9 @@
       "depends_on": [
         "skill-registry"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "infrastructure-orchestrator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -616,19 +629,19 @@
         {
           "date": "2026-03-17",
           "action": "created",
-          "note": "Phase 5 \u2014 The Courier, skill export and packaging"
+          "note": "Phase 5 — The Courier, skill export and packaging"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": null
     },
     "color-theory": {
       "name": "color-theory",
-      "description": "Color theory foundations for design decisions \u2014 palettes, harmony, contrast, and accessibility.",
+      "description": "Color theory foundations for design decisions — palettes, harmony, contrast, and accessibility.",
       "location": "skills/design/visual-communication/color-theory/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -684,19 +697,19 @@
         {
           "date": "2026-03-19",
           "action": "created",
-          "note": "Knowledge layer \u2014 color theory foundations for the art design system"
+          "note": "Knowledge layer — color theory foundations for the art design system"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": "visual-communication"
     },
     "design-principles": {
       "name": "design-principles",
-      "description": "Core visual design principles \u2014 contrast, alignment, proximity, repetition, Gestalt, and hierarchy.",
+      "description": "Core visual design principles — contrast, alignment, proximity, repetition, Gestalt, and hierarchy.",
       "location": "skills/design/visual-communication/design-principles/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -752,19 +765,19 @@
         {
           "date": "2026-03-19",
           "action": "created",
-          "note": "Knowledge layer \u2014 visual design principles for the art design system"
+          "note": "Knowledge layer — visual design principles for the art design system"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": "visual-communication"
     },
     "visual-perception": {
       "name": "visual-perception",
-      "description": "How human vision processes visual information \u2014 attention, readability, visual weight, and motion.",
+      "description": "How human vision processes visual information — attention, readability, visual weight, and motion.",
       "location": "skills/design/visual-communication/visual-perception/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -820,19 +833,19 @@
         {
           "date": "2026-03-19",
           "action": "created",
-          "note": "Knowledge layer \u2014 visual perception science for the art design system"
+          "note": "Knowledge layer — visual perception science for the art design system"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         }
       ],
       "parent": "visual-communication"
     },
     "meta-observer": {
       "name": "meta-observer",
-      "description": "Observe the skill library as a whole \u2014 surface gaps in domain coverage, track maturity across domains, identify cross-domain connections, detect structural issues, and recommend what to build next.",
+      "description": "Observe the skill library as a whole — surface gaps in domain coverage, track maturity across domains, identify cross-domain connections, detect structural issues, and recommend what to build next.",
       "location": "skills/_meta/SKILL.md",
       "plugin": "skill-infra",
       "type": "observer",
@@ -882,13 +895,13 @@
         {
           "date": "2026-03-21",
           "action": "created",
-          "note": "Meta Observer \u2014 library self-awareness and gap detection"
+          "note": "Meta Observer — library self-awareness and gap detection"
         }
       ]
     },
     "visual-communication": {
       "name": "visual-communication",
-      "description": "Direct the visual communication subdomain \u2014 route design questions to the right specialist skill, define the learning curriculum, and resolve conflicts between visual design principles.",
+      "description": "Direct the visual communication subdomain — route design questions to the right specialist skill, define the learning curriculum, and resolve conflicts between visual design principles.",
       "location": "skills/design/visual-communication/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -945,7 +958,7 @@
         {
           "date": "2026-03-21",
           "action": "created",
-          "note": "Visual Communication Director \u2014 routes visual design questions to specialist skills"
+          "note": "Visual Communication Director — routes visual design questions to specialist skills"
         }
       ]
     },
@@ -1017,12 +1030,12 @@
         {
           "date": "2026-03-18",
           "action": "created",
-          "note": "Art Design Orchestrator \u2014 creative director for visual design decisions"
+          "note": "Art Design Orchestrator — creative director for visual design decisions"
         },
         {
           "date": "2026-03-21",
           "action": "updated",
-          "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+          "note": "Schema v2 migration — added parent, level, and subdomain fields"
         },
         {
           "date": "2026-03-21",
@@ -1034,7 +1047,7 @@
     },
     "typography": {
       "name": "typography",
-      "description": "Direct the typography subdomain \u2014 route type-related questions to the right specialist skill, define the curriculum from anatomy to pairing to responsive scaling, and resolve conflicts between readability and aesthetic goals.",
+      "description": "Direct the typography subdomain — route type-related questions to the right specialist skill, define the curriculum from anatomy to pairing to responsive scaling, and resolve conflicts between readability and aesthetic goals.",
       "location": "skills/design/typography/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -1091,13 +1104,13 @@
         {
           "date": "2026-03-21",
           "action": "created",
-          "note": "Typography Director \u2014 routes type questions to specialist skills"
+          "note": "Typography Director — routes type questions to specialist skills"
         }
       ]
     },
     "type-fundamentals": {
       "name": "type-fundamentals",
-      "description": "Typography foundations \u2014 typeface anatomy, classification systems, and legibility principles. Covers x-height, stroke contrast, serifs vs sans-serifs, monospaced vs proportional, optical sizing, and the core properties that determine how a typeface feels and performs.",
+      "description": "Typography foundations — typeface anatomy, classification systems, and legibility principles. Covers x-height, stroke contrast, serifs vs sans-serifs, monospaced vs proportional, optical sizing, and the core properties that determine how a typeface feels and performs.",
       "location": "skills/design/typography/type-fundamentals/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -1151,13 +1164,13 @@
         {
           "date": "2026-03-21",
           "action": "created",
-          "note": "Typography knowledge skill \u2014 type-fundamentals"
+          "note": "Typography knowledge skill — type-fundamentals"
         }
       ]
     },
     "type-pairing": {
       "name": "type-pairing",
-      "description": "Typeface pairing methodology \u2014 how to combine fonts for harmony, contrast, and hierarchy. Covers the contrast principle, superfamily strategy, mood matching, and common pairing patterns.",
+      "description": "Typeface pairing methodology — how to combine fonts for harmony, contrast, and hierarchy. Covers the contrast principle, superfamily strategy, mood matching, and common pairing patterns.",
       "location": "skills/design/typography/type-pairing/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -1211,13 +1224,13 @@
         {
           "date": "2026-03-21",
           "action": "created",
-          "note": "Typography knowledge skill \u2014 type-pairing"
+          "note": "Typography knowledge skill — type-pairing"
         }
       ]
     },
     "responsive-type": {
       "name": "responsive-type",
-      "description": "Responsive typography \u2014 how type behaves across screen sizes, devices, and contexts. Covers fluid type scaling, viewport-based sizing, optical adjustments at different sizes, mobile-first type strategy, and line length management.",
+      "description": "Responsive typography — how type behaves across screen sizes, devices, and contexts. Covers fluid type scaling, viewport-based sizing, optical adjustments at different sizes, mobile-first type strategy, and line length management.",
       "location": "skills/design/typography/responsive-type/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -1271,13 +1284,13 @@
         {
           "date": "2026-03-21",
           "action": "created",
-          "note": "Typography knowledge skill \u2014 responsive-type"
+          "note": "Typography knowledge skill — responsive-type"
         }
       ]
     },
     "brand-identity": {
       "name": "brand-identity",
-      "description": "Direct the brand-identity subdomain \u2014 route brand questions to the right specialist skill, define the relationship between brand strategy and visual execution, and resolve conflicts between brand consistency and creative expression.",
+      "description": "Direct the brand-identity subdomain — route brand questions to the right specialist skill, define the relationship between brand strategy and visual execution, and resolve conflicts between brand consistency and creative expression.",
       "location": "skills/design/brand-identity/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -1340,7 +1353,7 @@
     },
     "brand-foundations": {
       "name": "brand-foundations",
-      "description": "Brand strategy fundamentals \u2014 positioning, values, audience definition, personality frameworks, and competitive differentiation. The strategic layer that informs all visual and verbal brand decisions.",
+      "description": "Brand strategy fundamentals — positioning, values, audience definition, personality frameworks, and competitive differentiation. The strategic layer that informs all visual and verbal brand decisions.",
       "location": "skills/design/brand-identity/brand-foundations/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -1394,13 +1407,13 @@
         {
           "date": "2026-03-22",
           "action": "created",
-          "note": "Brand knowledge skill \u2014 brand-foundations"
+          "note": "Brand knowledge skill — brand-foundations"
         }
       ]
     },
     "visual-identity": {
       "name": "visual-identity",
-      "description": "Visual identity systems \u2014 logo design principles, brand color systems, imagery direction, iconography, and how to build a cohesive visual language from brand strategy.",
+      "description": "Visual identity systems — logo design principles, brand color systems, imagery direction, iconography, and how to build a cohesive visual language from brand strategy.",
       "location": "skills/design/brand-identity/visual-identity/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -1454,13 +1467,13 @@
         {
           "date": "2026-03-22",
           "action": "created",
-          "note": "Brand knowledge skill \u2014 visual-identity"
+          "note": "Brand knowledge skill — visual-identity"
         }
       ]
     },
     "brand-voice": {
       "name": "brand-voice",
-      "description": "Brand voice and tone \u2014 how a brand communicates verbally. Covers voice definition, tone modulation across contexts, messaging frameworks, vocabulary systems, and content guidelines.",
+      "description": "Brand voice and tone — how a brand communicates verbally. Covers voice definition, tone modulation across contexts, messaging frameworks, vocabulary systems, and content guidelines.",
       "location": "skills/design/brand-identity/brand-voice/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -1514,7 +1527,7 @@
         {
           "date": "2026-03-22",
           "action": "created",
-          "note": "Brand knowledge skill \u2014 brand-voice"
+          "note": "Brand knowledge skill — brand-voice"
         }
       ]
     },
@@ -1556,7 +1569,8 @@
       "depends_on": [],
       "referenced_by": [
         "lore-writer",
-        "naming-system"
+        "naming-system",
+        "worldbuilding-orchestrator"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -1616,7 +1630,9 @@
         "world-bible",
         "naming-system"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "worldbuilding-orchestrator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -1675,7 +1691,8 @@
         "world-bible"
       ],
       "referenced_by": [
-        "lore-writer"
+        "lore-writer",
+        "worldbuilding-orchestrator"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -2102,15 +2119,28 @@
       "manual_notes": null,
       "composite_score": 100,
       "depends_on": [],
-      "referenced_by": ["mechanism-design", "mechanism-designer"],
+      "referenced_by": [
+        "mechanism-design",
+        "mechanism-designer"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:foundational"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:mechanism-design",
+        "level:foundational"
+      ],
       "parent": "mechanism-design",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 2 — mechanism design subdomain"
+        }
+      ]
     },
     "matching-markets": {
       "name": "matching-markets",
@@ -2148,15 +2178,30 @@
       "manual_notes": null,
       "composite_score": 100,
       "depends_on": [],
-      "referenced_by": ["mechanism-design", "mechanism-designer"],
-      "shares_references_with": ["cooperative-games"],
+      "referenced_by": [
+        "mechanism-design",
+        "mechanism-designer"
+      ],
+      "shares_references_with": [
+        "cooperative-games"
+      ],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:foundational"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:mechanism-design",
+        "level:foundational"
+      ],
       "parent": "mechanism-design",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 2 — mechanism design subdomain"
+        }
+      ]
     },
     "social-choice": {
       "name": "social-choice",
@@ -2194,15 +2239,28 @@
       "manual_notes": null,
       "composite_score": 100,
       "depends_on": [],
-      "referenced_by": ["mechanism-design", "mechanism-designer"],
+      "referenced_by": [
+        "mechanism-design",
+        "mechanism-designer"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:foundational"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:mechanism-design",
+        "level:foundational"
+      ],
       "parent": "mechanism-design",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 2 — mechanism design subdomain"
+        }
+      ]
     },
     "mechanism-designer": {
       "name": "mechanism-designer",
@@ -2239,16 +2297,32 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 95,
-      "depends_on": ["auction-theory", "matching-markets", "social-choice"],
-      "referenced_by": ["mechanism-design"],
+      "depends_on": [
+        "auction-theory",
+        "matching-markets",
+        "social-choice"
+      ],
+      "referenced_by": [
+        "mechanism-design"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:mechanism-design", "level:tool"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:mechanism-design",
+        "level:tool"
+      ],
       "parent": "mechanism-design",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — mechanism design subdomain"}]
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 2 — mechanism design subdomain"
+        }
+      ]
     },
     "evolutionary-dynamics": {
       "name": "evolutionary-dynamics",
@@ -2353,15 +2427,28 @@
       "manual_notes": null,
       "composite_score": 100,
       "depends_on": [],
-      "referenced_by": ["evolutionary-dynamics", "evo-simulator"],
+      "referenced_by": [
+        "evolutionary-dynamics",
+        "evo-simulator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:evolutionary-dynamics", "level:foundational"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:evolutionary-dynamics",
+        "level:foundational"
+      ],
       "parent": "evolutionary-dynamics",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — evolutionary dynamics subdomain"}]
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 2 — evolutionary dynamics subdomain"
+        }
+      ]
     },
     "population-dynamics": {
       "name": "population-dynamics",
@@ -2399,15 +2486,28 @@
       "manual_notes": null,
       "composite_score": 100,
       "depends_on": [],
-      "referenced_by": ["evolutionary-dynamics", "evo-simulator"],
+      "referenced_by": [
+        "evolutionary-dynamics",
+        "evo-simulator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:evolutionary-dynamics", "level:foundational"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:evolutionary-dynamics",
+        "level:foundational"
+      ],
       "parent": "evolutionary-dynamics",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — evolutionary dynamics subdomain"}]
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 2 — evolutionary dynamics subdomain"
+        }
+      ]
     },
     "evo-simulator": {
       "name": "evo-simulator",
@@ -2444,16 +2544,31 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 95,
-      "depends_on": ["evolutionary-games", "population-dynamics"],
-      "referenced_by": ["evolutionary-dynamics"],
+      "depends_on": [
+        "evolutionary-games",
+        "population-dynamics"
+      ],
+      "referenced_by": [
+        "evolutionary-dynamics"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:evolutionary-dynamics", "level:tool"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:evolutionary-dynamics",
+        "level:tool"
+      ],
       "parent": "evolutionary-dynamics",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 2 — evolutionary dynamics subdomain"}]
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 2 — evolutionary dynamics subdomain"
+        }
+      ]
     },
     "information-economics": {
       "name": "information-economics",
@@ -2485,121 +2600,366 @@
       "status": "active",
       "auto_score": 95,
       "composite_score": 95,
-      "depends_on": ["signaling-screening", "bayesian-persuasion", "info-designer"],
-      "referenced_by": ["game-theory-orchestrator"],
+      "depends_on": [
+        "signaling-screening",
+        "bayesian-persuasion",
+        "info-designer"
+      ],
+      "referenced_by": [
+        "game-theory-orchestrator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:information-economics", "level:director"],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:information-economics",
+        "level:director"
+      ],
       "parent": "game-theory-orchestrator",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
       "changelog": [
-        {"date": "2026-03-22", "action": "created", "note": "Stub director — scope definition for Phase 3"},
-        {"date": "2026-03-22", "action": "updated", "note": "Phase 3 — full director with routing, curriculum, conflict resolution"}
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Stub director — scope definition for Phase 3"
+        },
+        {
+          "date": "2026-03-22",
+          "action": "updated",
+          "note": "Phase 3 — full director with routing, curriculum, conflict resolution"
+        }
       ]
     },
     "signaling-screening": {
       "name": "signaling-screening",
       "description": "Classical information economics — signaling, screening, adverse selection, moral hazard, and contract theory.",
       "location": "skills/game-theory/information-economics/signaling-screening/SKILL.md",
-      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
-      "metrics": {"word_count": 1500, "section_count": 6, "reference_files": 1, "estimated_tokens_total": 2735},
-      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
-      "auto_score": 100, "composite_score": 100,
-      "depends_on": [], "referenced_by": ["information-economics", "info-designer"], "shares_references_with": [],
-      "forked_from": null, "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:information-economics", "level:foundational"],
-      "parent": "information-economics", "created": "2026-03-22", "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — information economics subdomain"}]
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1500,
+        "section_count": 6,
+        "reference_files": 1,
+        "estimated_tokens_total": 2735
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 100,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "information-economics",
+        "info-designer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:information-economics",
+        "level:foundational"
+      ],
+      "parent": "information-economics",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 3 — information economics subdomain"
+        }
+      ]
     },
     "bayesian-persuasion": {
       "name": "bayesian-persuasion",
       "description": "Modern information design and strategic communication — Bayesian persuasion, cheap talk, disclosure theory.",
       "location": "skills/game-theory/information-economics/bayesian-persuasion/SKILL.md",
-      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
-      "metrics": {"word_count": 1400, "section_count": 7, "reference_files": 1, "estimated_tokens_total": 2537},
-      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
-      "auto_score": 100, "composite_score": 100,
-      "depends_on": [], "referenced_by": ["information-economics", "info-designer"], "shares_references_with": [],
-      "forked_from": null, "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:information-economics", "level:foundational"],
-      "parent": "information-economics", "created": "2026-03-22", "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — information economics subdomain"}]
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1400,
+        "section_count": 7,
+        "reference_files": 1,
+        "estimated_tokens_total": 2537
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 100,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "information-economics",
+        "info-designer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:information-economics",
+        "level:foundational"
+      ],
+      "parent": "information-economics",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 3 — information economics subdomain"
+        }
+      ]
     },
     "info-designer": {
       "name": "info-designer",
       "description": "Design optimal information disclosure policies for strategic settings — platforms, regulators, organizations.",
       "location": "skills/game-theory/information-economics/info-designer/SKILL.md",
-      "plugin": "game-theory", "type": "action", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
-      "metrics": {"word_count": 1000, "section_count": 4, "reference_files": 0, "estimated_tokens_total": 1840},
-      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
-      "auto_score": 95, "composite_score": 95,
-      "depends_on": ["signaling-screening", "bayesian-persuasion"], "referenced_by": ["information-economics"], "shares_references_with": [],
-      "forked_from": null, "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:information-economics", "level:tool"],
-      "parent": "information-economics", "created": "2026-03-22", "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — information economics subdomain"}]
+      "plugin": "game-theory",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1000,
+        "section_count": 4,
+        "reference_files": 0,
+        "estimated_tokens_total": 1840
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 95,
+      "composite_score": 95,
+      "depends_on": [
+        "signaling-screening",
+        "bayesian-persuasion"
+      ],
+      "referenced_by": [
+        "information-economics"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:information-economics",
+        "level:tool"
+      ],
+      "parent": "information-economics",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 3 — information economics subdomain"
+        }
+      ]
     },
     "computational-strategy": {
       "name": "computational-strategy",
       "description": "Direct the computational strategy subdomain — algorithmic game theory, behavioral game theory, learning in games, and AI-era game theory.",
       "location": "skills/game-theory/computational-strategy/SKILL.md",
-      "plugin": "game-theory", "type": "director", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
-      "metrics": {"word_count": 950, "section_count": 5, "reference_files": 0, "estimated_tokens_total": 1740},
-      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
-      "auto_score": 95, "composite_score": 95,
-      "depends_on": ["algorithmic-game-theory", "behavioral-game-theory", "learning-in-games"],
-      "referenced_by": ["game-theory-orchestrator"], "shares_references_with": [],
-      "forked_from": null, "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:director"],
-      "parent": "game-theory-orchestrator", "created": "2026-03-22", "last_modified": "2026-03-22",
+      "plugin": "game-theory",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 950,
+        "section_count": 5,
+        "reference_files": 0,
+        "estimated_tokens_total": 1740
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 95,
+      "composite_score": 95,
+      "depends_on": [
+        "algorithmic-game-theory",
+        "behavioral-game-theory",
+        "learning-in-games"
+      ],
+      "referenced_by": [
+        "game-theory-orchestrator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:computational-strategy",
+        "level:director"
+      ],
+      "parent": "game-theory-orchestrator",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
       "changelog": [
-        {"date": "2026-03-22", "action": "created", "note": "Stub director — scope definition for Phase 3"},
-        {"date": "2026-03-22", "action": "updated", "note": "Phase 3 — full director with routing, curriculum, conflict resolution"}
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Stub director — scope definition for Phase 3"
+        },
+        {
+          "date": "2026-03-22",
+          "action": "updated",
+          "note": "Phase 3 — full director with routing, curriculum, conflict resolution"
+        }
       ]
     },
     "algorithmic-game-theory": {
       "name": "algorithmic-game-theory",
       "description": "Algorithmic game theory — PPAD-completeness, price of anarchy/stability, congestion games, potential games, algorithmic mechanism design.",
       "location": "skills/game-theory/computational-strategy/algorithmic-game-theory/SKILL.md",
-      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
-      "metrics": {"word_count": 1400, "section_count": 6, "reference_files": 1, "estimated_tokens_total": 2533},
-      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
-      "auto_score": 100, "composite_score": 100,
-      "depends_on": [], "referenced_by": ["computational-strategy"], "shares_references_with": [],
-      "forked_from": null, "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:foundational"],
-      "parent": "computational-strategy", "created": "2026-03-22", "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — computational strategy subdomain"}]
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1400,
+        "section_count": 6,
+        "reference_files": 1,
+        "estimated_tokens_total": 2533
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 100,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "computational-strategy"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:computational-strategy",
+        "level:foundational"
+      ],
+      "parent": "computational-strategy",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 3 — computational strategy subdomain"
+        }
+      ]
     },
     "behavioral-game-theory": {
       "name": "behavioral-game-theory",
       "description": "Behavioral game theory — level-k thinking, QRE, social preferences, experimental evidence of human strategic behavior.",
       "location": "skills/game-theory/computational-strategy/behavioral-game-theory/SKILL.md",
-      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
-      "metrics": {"word_count": 1400, "section_count": 5, "reference_files": 1, "estimated_tokens_total": 2535},
-      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
-      "auto_score": 100, "composite_score": 100,
-      "depends_on": [], "referenced_by": ["computational-strategy"], "shares_references_with": [],
-      "forked_from": null, "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:foundational"],
-      "parent": "computational-strategy", "created": "2026-03-22", "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — computational strategy subdomain"}]
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1400,
+        "section_count": 5,
+        "reference_files": 1,
+        "estimated_tokens_total": 2535
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 100,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "computational-strategy"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:computational-strategy",
+        "level:foundational"
+      ],
+      "parent": "computational-strategy",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 3 — computational strategy subdomain"
+        }
+      ]
     },
     "learning-in-games": {
       "name": "learning-in-games",
       "description": "Learning dynamics in games — fictitious play, no-regret learning, MARL, self-play, mean field games, convergence results.",
       "location": "skills/game-theory/computational-strategy/learning-in-games/SKILL.md",
-      "plugin": "game-theory", "type": "knowledge", "source": "self", "context_mode": "inline", "invocation": "both", "version": "1.0.0",
-      "metrics": {"word_count": 1500, "section_count": 6, "reference_files": 1, "estimated_tokens_total": 2735},
-      "health_status": "healthy", "issues": [], "last_checked": "2026-03-22T00:00:00Z", "status": "active",
-      "auto_score": 100, "composite_score": 100,
-      "depends_on": [], "referenced_by": ["computational-strategy"], "shares_references_with": [],
-      "forked_from": null, "forked_into": [],
-      "tags": ["domain:game-theory", "subdomain:computational-strategy", "level:foundational"],
-      "parent": "computational-strategy", "created": "2026-03-22", "last_modified": "2026-03-22",
-      "changelog": [{"date": "2026-03-22", "action": "created", "note": "Phase 3 — computational strategy subdomain"}]
+      "plugin": "game-theory",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1500,
+        "section_count": 6,
+        "reference_files": 1,
+        "estimated_tokens_total": 2735
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-22T00:00:00Z",
+      "status": "active",
+      "auto_score": 100,
+      "composite_score": 100,
+      "depends_on": [],
+      "referenced_by": [
+        "computational-strategy"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:game-theory",
+        "subdomain:computational-strategy",
+        "level:foundational"
+      ],
+      "parent": "computational-strategy",
+      "created": "2026-03-22",
+      "last_modified": "2026-03-22",
+      "changelog": [
+        {
+          "date": "2026-03-22",
+          "action": "created",
+          "note": "Phase 3 — computational strategy subdomain"
+        }
+      ]
     },
     "data-science-orchestrator": {
       "name": "data-science-orchestrator",
@@ -2648,7 +3008,11 @@
         "responsible-ai",
         "biostatistics"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "statistical-analysis",
+        "modeling",
+        "data-wrangling"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -3260,6 +3624,492 @@
           "date": "2026-03-22",
           "action": "created",
           "note": "Biostatistics skill added to data science suite"
+        }
+      ]
+    },
+    "statistical-analysis": {
+      "name": "statistical-analysis",
+      "description": "Direct the statistical analysis subdomain — route inference questions to the right specialist skill, define the learning curriculum, and resolve conflicts between analytical frameworks.",
+      "location": "skills/data-science/statistical-analysis/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 650,
+        "body_words": 600,
+        "description_words": 30,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 900,
+        "estimated_tokens_total": 960,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "data-science-orchestrator"
+      ],
+      "referenced_by": [
+        "statistical-testing",
+        "causal-inference",
+        "biostatistics"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:statistical-analysis",
+        "level:director"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
+        }
+      ]
+    },
+    "modeling": {
+      "name": "modeling",
+      "description": "Direct the modeling subdomain — route prediction and forecasting questions to the right specialist skill, define the learning curriculum, and resolve conflicts between model complexity and interpretability.",
+      "location": "skills/data-science/modeling/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 580,
+        "body_words": 530,
+        "description_words": 32,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 795,
+        "estimated_tokens_total": 855,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "data-science-orchestrator"
+      ],
+      "referenced_by": [
+        "model-evaluation",
+        "time-series"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:modeling",
+        "level:director"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
+        }
+      ]
+    },
+    "data-wrangling": {
+      "name": "data-wrangling",
+      "description": "Direct the data wrangling subdomain — route data preparation questions to the right specialist skill, define the learning curriculum, and resolve conflicts between cleaning aggressiveness and information preservation.",
+      "location": "skills/data-science/data-wrangling/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 560,
+        "body_words": 510,
+        "description_words": 34,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 765,
+        "estimated_tokens_total": 825,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "data-science-orchestrator"
+      ],
+      "referenced_by": [
+        "data-cleaning",
+        "feature-engineering"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:data-wrangling",
+        "level:director"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
+        }
+      ]
+    },
+    "infrastructure-orchestrator": {
+      "name": "infrastructure-orchestrator",
+      "description": "Orchestrate skill library management across the full lifecycle. Use when the user wants to create a new skill, audit the library, build a domain from scratch, run diagnostics, export skills, or perform any multi-step operation that involves coordinating multiple infrastructure tools.",
+      "location": "skills/infrastructure/infrastructure-orchestrator/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 850,
+        "body_words": 800,
+        "description_words": 52,
+        "section_count": 6,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 1200,
+        "estimated_tokens_total": 1260,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [],
+      "referenced_by": [
+        "skill-registry",
+        "skill-health",
+        "skill-scaffold",
+        "skill-test",
+        "skill-analyze",
+        "skill-fork",
+        "skill-network",
+        "skill-export",
+        "skill-dashboard"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure",
+        "level:orchestrator"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
+        }
+      ]
+    },
+    "worldbuilding-orchestrator": {
+      "name": "worldbuilding-orchestrator",
+      "description": "Orchestrate worldbuilding projects across all creative layers. Use when the user wants to build a world, design civilizations, create lore, develop naming conventions, establish physical rules, or produce any creative artifact that requires coordinating consistency, voice, naming, and narrative depth.",
+      "location": "skills/worldbuilding/worldbuilding-orchestrator/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 900,
+        "body_words": 850,
+        "description_words": 50,
+        "section_count": 6,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 1275,
+        "estimated_tokens_total": 1335,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [],
+      "referenced_by": [
+        "world-bible",
+        "lore-writer",
+        "naming-system",
+        "geography-ecology",
+        "cultures-societies",
+        "magic-systems"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:orchestrator"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
+        }
+      ]
+    },
+    "geography-ecology": {
+      "name": "geography-ecology",
+      "description": "Physical world design — terrain, climate, biomes, resource distribution, and how geography shapes civilization. Reference when placing civilizations, designing trade routes, or building any aspect of the world that derives from the physical landscape.",
+      "location": "skills/worldbuilding/geography-ecology/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 700,
+        "body_words": 660,
+        "description_words": 36,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 990,
+        "estimated_tokens_total": 1050,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "world-bible"
+      ],
+      "referenced_by": [
+        "worldbuilding-orchestrator",
+        "cultures-societies"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:foundational"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
+        }
+      ]
+    },
+    "cultures-societies": {
+      "name": "cultures-societies",
+      "description": "Design civilizations, cultures, social structures, and institutions with internal consistency. Reference when building a people's values, governance, customs, religion, economy, or any social system that defines how a group organizes itself.",
+      "location": "skills/worldbuilding/cultures-societies/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 750,
+        "body_words": 710,
+        "description_words": 34,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 1065,
+        "estimated_tokens_total": 1125,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "world-bible",
+        "geography-ecology"
+      ],
+      "referenced_by": [
+        "worldbuilding-orchestrator",
+        "lore-writer",
+        "naming-system"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:foundational"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
+        }
+      ]
+    },
+    "magic-systems": {
+      "name": "magic-systems",
+      "description": "Design hard, soft, and hybrid fantasy systems with internal consistency, meaningful costs, clear limitations, and deep implications for the world. Reference when creating magic, advanced technology, or any system that makes this world not-Earth.",
+      "location": "skills/worldbuilding/magic-systems/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 800,
+        "body_words": 760,
+        "description_words": 38,
+        "section_count": 6,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 60,
+        "estimated_tokens_body": 1140,
+        "estimated_tokens_total": 1200,
+        "precise_tokens": null
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-25T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 95,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 95,
+      "depends_on": [
+        "world-bible"
+      ],
+      "referenced_by": [
+        "worldbuilding-orchestrator",
+        "cultures-societies",
+        "geography-ecology"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:foundational"
+      ],
+      "created": "2026-03-25",
+      "last_modified": "2026-03-25",
+      "changelog": [
+        {
+          "date": "2026-03-25",
+          "action": "created",
+          "note": "Diagnostic fix — added missing structural layer"
         }
       ]
     }

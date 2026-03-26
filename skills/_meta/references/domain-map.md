@@ -2,7 +2,7 @@
 
 Current hierarchy of the skill library. Regenerate this file when the structure changes.
 
-Last updated: 2026-03-22
+Last updated: 2026-03-25
 
 ```
 skills/
@@ -12,7 +12,10 @@ skills/
 │       ├── domain-map.md               (this file)
 │       └── maturity-model.md
 │
-├── infrastructure/                     Domain: infrastructure  |  Maturity: Level 2
+├── infrastructure/                     Domain: infrastructure  |  Maturity: Level 4
+│   ├── infrastructure-orchestrator/    [orchestrator]  The Architect — coordinates lifecycle ops
+│   │   └── references/
+│   │       └── workflow-patterns.md    Common multi-skill orchestration patterns
 │   ├── skill-registry/                 [action]  Manage the skill catalog
 │   ├── skill-health/                   [action]  Quality and health checks
 │   ├── skill-dashboard/                [action]  Visual reports and ratings
@@ -23,22 +26,96 @@ skills/
 │   ├── skill-network/                  [action]  Dependency graph visualization
 │   └── skill-export/                   [action]  Package skills for sharing
 │
-├── design/                             Domain: design  |  Maturity: Level 4
+├── design/                             Domain: design  |  Maturity: Level 5
 │   ├── design-orchestrator/            [orchestrator]  Creative Director
 │   │   ├── agents/                     6 specialist agents
 │   │   └── references/
 │   │
-│   └── visual-communication/           [director]  Dept Head — routes visual design questions
-│       ├── color-theory/               [knowledge]  Palettes, harmony, contrast, accessibility
-│       ├── design-principles/          [knowledge]  Contrast, alignment, proximity, Gestalt
-│       └── visual-perception/          [knowledge]  Attention, readability, visual weight
+│   ├── visual-communication/           [director]  Dept Head — routes visual design questions
+│   │   ├── color-theory/               [knowledge]  Palettes, harmony, contrast, accessibility
+│   │   ├── design-principles/          [knowledge]  Contrast, alignment, proximity, Gestalt
+│   │   └── visual-perception/          [knowledge]  Attention, readability, visual weight
+│   │
+│   ├── typography/                     [director]  Dept Head — routes type questions
+│   │   ├── type-fundamentals/          [knowledge]  Anatomy, classification, history
+│   │   ├── type-pairing/              [knowledge]  Combination logic, contrast, harmony
+│   │   └── responsive-type/           [knowledge]  Fluid scales, viewport adaptation
+│   │
+│   └── brand-identity/                [director]  Dept Head — routes brand questions
+│       ├── brand-foundations/          [knowledge]  Positioning, values, audience
+│       ├── visual-identity/           [knowledge]  Logo, color system, visual language
+│       └── brand-voice/               [knowledge]  Tone, style, verbal identity
 │
-├── worldbuilding/                      Domain: worldbuilding  |  Maturity: Level 2
-│   ├── world-bible/                    [knowledge]  Axioms, magic systems, revelation layers
+├── data-science/                       Domain: data-science  |  Maturity: Level 5
+│   ├── data-science-orchestrator/      [orchestrator]  The Analyst — routes analytical questions
+│   │   └── references/
+│   │       ├── delegation-rules.md     Subdomain routing logic
+│   │       └── domain-taxonomy.md      Full subfield map
+│   │
+│   ├── data-wrangling/                [director]  Dept Head — routes data preparation questions
+│   │   ├── data-cleaning/             [knowledge]  Missing values, outliers, dedup, validation
+│   │   │   └── references/
+│   │   │       └── imputation-guide.md
+│   │   └── feature-engineering/       [knowledge]  Encoding, transforms, feature creation/selection
+│   │       └── references/
+│   │           └── encoding-catalog.md
+│   │
+│   ├── statistical-analysis/          [director]  Dept Head — routes inference questions
+│   │   ├── statistical-testing/       [knowledge]  Hypothesis tests, power, multiple comparisons
+│   │   │   └── references/
+│   │   │       └── test-selection-flowchart.md
+│   │   ├── causal-inference/          [knowledge]  Treatment effects, quasi-experiments, identification
+│   │   │   └── references/
+│   │   │       └── method-comparison.md
+│   │   └── biostatistics/             [knowledge]  Survival, clinical trials, meta-analysis, regulatory
+│   │       └── references/
+│   │           ├── survival-methods.md
+│   │           └── regulatory-standards.md
+│   │
+│   ├── modeling/                      [director]  Dept Head — routes prediction questions
+│   │   ├── model-evaluation/          [knowledge]  Metrics, validation, comparison, calibration
+│   │   │   └── references/
+│   │   │       └── metrics-catalog.md
+│   │   └── time-series/               [knowledge]  Forecasting, seasonality, temporal modeling
+│   │       └── references/
+│   │           └── model-selection-guide.md
+│   │
+│   ├── visualization/                 [subdomain — no director yet]
+│   │   └── chart-selection/           [knowledge]  Chart types, design principles, accessibility
+│   │       └── references/
+│   │           └── chart-decision-matrix.md
+│   │
+│   ├── ml-engineering/                [subdomain — no director yet]
+│   │   └── drift-detection/           [knowledge]  Production monitoring, drift types, retraining
+│   │       └── references/
+│   │           └── detection-methods.md
+│   │
+│   └── frontier/                      [subdomain — no director yet]
+│       └── responsible-ai/            [knowledge]  Fairness metrics, bias, governance, model cards
+│           └── references/
+│               └── fairness-metrics.md
+│
+├── worldbuilding/                      Domain: worldbuilding  |  Maturity: Level 3
+│   ├── worldbuilding-orchestrator/     [orchestrator]  The Demiurge — coordinates world creation
+│   │   └── references/
+│   │       └── build-sequences.md      Canonical build orders
+│   ├── world-bible/                    [knowledge]  Axioms, constraints, revelation architecture
+│   │   └── references/
+│   │       ├── world-axioms.md
+│   │       ├── revelation-layers.md
+│   │       └── faction-conflict-web.md
 │   ├── lore-writer/                    [action]  In-universe artifact generation
-│   └── naming-system/                  [knowledge]  Phonetic naming for cultures
+│   │   └── references/
+│   │       ├── voice-registry.md
+│   │       └── artifact-format.md
+│   ├── naming-system/                  [knowledge]  Phonetic naming for cultures
+│   │   └── references/
+│   │       └── culture-sound-palettes.md
+│   ├── geography-ecology/              [knowledge]  Terrain, climate, biomes, resource distribution
+│   ├── cultures-societies/             [knowledge]  Social structures, governance, economy, religion
+│   └── magic-systems/                  [knowledge]  Fantasy system design methodology
 │
-└── game-theory/                        Domain: game-theory  |  Maturity: Level 4
+└── game-theory/                        Domain: game-theory  |  Maturity: Level 5
     ├── game-theory-orchestrator/       [orchestrator]  The Strategist — formalizes and routes
     │   └── references/
     │       ├── delegation-rules.md     Subdomain routing logic
@@ -46,82 +123,47 @@ skills/
     │
     ├── strategic-foundations/           [director]  Routes classical, cooperative, and applied analysis
     │   ├── classical-games/            [knowledge]  Nash, extensive form, refinements, canonical games
-    │   │   └── references/
-    │   │       ├── canonical-games.md  Named games catalog with payoffs and applications
-    │   │       ├── solution-concepts.md Formal definitions, hierarchy, selection criteria
-    │   │       └── sources.md          Bibliography — Osborne & Rubinstein, Fudenberg & Tirole, etc.
     │   ├── cooperative-games/          [knowledge]  Shapley, core, bargaining, matching, fair division
-    │   │   └── references/
-    │   │       ├── solution-concepts-cooperative.md  Core, Shapley, nucleolus, bargaining formal defs
-    │   │       ├── matching-and-fairness.md          Gale-Shapley, school choice, kidney exchange, cake-cutting
-    │   │       └── sources.md          Bibliography — Maschler/Solan/Zamir, Roth & Sotomayor, etc.
     │   └── game-solver/                [action]  Formalize situations → find equilibria → interpret
-    │       └── references/
-    │           └── formalization-patterns.md  Real-world-to-game mappings
     │
     ├── mechanism-design/               [director]  Routes auctions, markets, voting, incentives
-    │   ├── auction-theory/            [knowledge]  Formats, revenue equivalence, optimal auctions, winner's curse
-    │   │   └── references/
-    │   │       ├── auction-formats.md Multi-item, combinatorial, GSP, reserve prices
-    │   │       └── sources.md         Bibliography — Krishna, Milgrom, Myerson, etc.
+    │   ├── auction-theory/            [knowledge]  Formats, revenue equivalence, optimal auctions
     │   ├── matching-markets/          [knowledge]  DA, TTC, market design, real-world deployments
-    │   │   └── references/
-    │   │       ├── market-design-cases.md  NRMP, NYC schools, kidney exchange, spectrum auctions
-    │   │       └── sources.md         Bibliography — Roth & Sotomayor, Abdulkadiroglu & Sonmez, etc.
     │   ├── social-choice/             [knowledge]  Arrow, Gibbard-Satterthwaite, voting rules
-    │   │   └── references/
-    │   │       └── sources.md         Bibliography — Arrow, Moulin, etc.
     │   └── mechanism-designer/        [action]  Design incentive-compatible mechanisms
-    │       └── references/
-    │           └── design-patterns.md Common problems and mechanism solutions
     │
     ├── evolutionary-dynamics/         [director]  Routes ESS, replicator dynamics, population games
-    │   ├── evolutionary-games/        [knowledge]  ESS, hawk-dove, cooperation evolution, canonical evo games
-    │   │   └── references/
-    │   │       └── sources.md         Bibliography — Maynard Smith, Weibull, Sandholm, etc.
-    │   ├── population-dynamics/       [knowledge]  Replicator equations, phase portraits, Moran, stochastic
-    │   │   └── references/
-    │   │       └── sources.md         Bibliography — Sandholm, Hofbauer & Sigmund, Nowak, etc.
+    │   ├── evolutionary-games/        [knowledge]  ESS, hawk-dove, cooperation evolution
+    │   ├── population-dynamics/       [knowledge]  Replicator equations, phase portraits, stochastic
     │   └── evo-simulator/             [action]  Simulate evolutionary dynamics computationally
-    │       └── references/
-    │           └── simulation-parameters.md  Defaults, model selection, trajectory patterns
     │
     ├── information-economics/         [director]  Routes signaling, screening, persuasion, disclosure
-    │   ├── signaling-screening/       [knowledge]  Spence signaling, Rothschild-Stiglitz, adverse selection, moral hazard
-    │   │   └── references/
-    │   │       └── sources.md         Bibliography — Bolton & Dewatripont, Fudenberg & Tirole, etc.
-    │   ├── bayesian-persuasion/       [knowledge]  Kamenica-Gentzkow, cheap talk, disclosure, information design
-    │   │   └── references/
-    │   │       └── sources.md         Bibliography — Kamenica & Gentzkow, Crawford & Sobel, etc.
+    │   ├── signaling-screening/       [knowledge]  Spence signaling, adverse selection, moral hazard
+    │   ├── bayesian-persuasion/       [knowledge]  Kamenica-Gentzkow, cheap talk, information design
     │   └── info-designer/             [action]  Design optimal information disclosure policies
     │
-    └── computational-strategy/        [director]  Routes algorithmic GT, behavioral GT, learning in games
-        ├── algorithmic-game-theory/   [knowledge]  PPAD, price of anarchy, congestion games, potential games
-        │   └── references/
-        │       └── sources.md         Bibliography — Nisan et al., Roughgarden, etc.
-        ├── behavioral-game-theory/    [knowledge]  Level-k, QRE, social preferences, experimental evidence
-        │   └── references/
-        │       └── sources.md         Bibliography — Camerer, Crawford et al., etc.
-        └── learning-in-games/         [knowledge]  Fictitious play, no-regret, MARL, self-play, mean field
-            └── references/
-                └── sources.md         Bibliography — Fudenberg & Levine, Cesa-Bianchi & Lugosi, etc.
+    └── computational-strategy/        [director]  Routes algorithmic GT, behavioral GT, learning
+        ├── algorithmic-game-theory/   [knowledge]  PPAD, price of anarchy, congestion games
+        ├── behavioral-game-theory/    [knowledge]  Level-k, QRE, social preferences, experimental
+        └── learning-in-games/         [knowledge]  Fictitious play, no-regret, MARL, self-play
 ```
 
 ## Domain Summary
 
-| Domain | Skills | Orchestrator | Directors | Knowledge | Action | Maturity |
-|--------|--------|-------------|-----------|-----------|--------|----------|
-| infrastructure | 9 | No | No | 0 | 9 | Level 3 |
-| design | 5 | Yes | 1 | 3 | 0 | Level 4 |
-| worldbuilding | 3 | No | No | 2 | 1 | Level 2 |
-| game-theory | 22 | Yes | 5 | 12 | 4 | Level 5 |
-| _meta | 1 | N/A | N/A | N/A | N/A | N/A |
+| Domain | Skills | Orchestrator | Directors | Knowledge | Action | Observer | Maturity |
+|--------|--------|-------------|-----------|-----------|--------|----------|----------|
+| infrastructure | 10 | Yes | No | 0 | 9 | 0 | Level 4 |
+| design | 13 | Yes | 3 | 9 | 0 | 0 | Level 5 |
+| data-science | 13 | Yes | 3 | 10 | 0 | 0 | Level 5 |
+| worldbuilding | 7 | Yes | No | 5 | 1 | 0 | Level 3 |
+| game-theory | 22 | Yes | 5 | 12 | 4 | 0 | Level 5 |
+| _meta | 1 | N/A | N/A | N/A | N/A | 1 | N/A |
 
-## Gaps Detected
+**Total: 66 skills** (36 knowledge, 14 action, 8 director, 4 orchestrator, 1 observer, 3 new directors)
 
-- **infrastructure**: No orchestrator (acceptable — these are flat tools, not layered knowledge)
-- **design**: No typography subdomain (referenced by typography-agent in design-orchestrator)
-- **design**: No brand-identity subdomain (referenced by brand-agent in design-orchestrator)
-- **design**: No interaction-design subdomain (referenced by ui-design-agent)
-- **worldbuilding**: No orchestrator or director (low maturity)
-- **game-theory**: All 5 subdomains complete. No stub directors remain. Future expansions: repeated/dynamic games, combinatorial game theory, quantum game theory
+## Gaps Remaining
+
+- **worldbuilding**: No directors yet (6 knowledge skills could use a creative-fundamentals director once 1-2 more skills are added)
+- **data-science**: Three subdomains (visualization, ml-engineering, frontier) have only 1 skill each — too thin for directors
+- **infrastructure**: All action skills, no knowledge layer (acceptable — these are tools, not knowledge)
+- **game-theory**: Complete. Future expansions: repeated/dynamic games, combinatorial game theory
