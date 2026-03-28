@@ -177,7 +177,7 @@
         "template_files": 0,
         "estimated_tokens_total": 3391
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
@@ -229,7 +229,7 @@
         "template_files": 0,
         "estimated_tokens_total": 4209
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
@@ -1360,7 +1360,7 @@
         "template_files": 0,
         "estimated_tokens_total": 3930
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
@@ -1415,7 +1415,7 @@
         "estimated_tokens_body": 3550,
         "estimated_tokens_total": 3625
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
@@ -1649,7 +1649,7 @@
         "estimated_tokens_body": 2879,
         "estimated_tokens_total": 2961
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
@@ -1887,7 +1887,7 @@
         "estimated_tokens_body": 2641,
         "estimated_tokens_total": 2723
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
@@ -1948,7 +1948,7 @@
         "estimated_tokens_body": 2697,
         "estimated_tokens_total": 2775
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
@@ -3729,10 +3729,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 76,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator",
@@ -3859,10 +3859,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 66,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 71,
       "depends_on": [
         "world-bible",
         "physical-world"
@@ -5622,7 +5622,7 @@
         "estimated_tokens_total": 4028,
         "precise_tokens": null
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
@@ -6061,7 +6061,7 @@
         "estimated_tokens_total": 4297,
         "precise_tokens": null
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
@@ -6454,10 +6454,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 78,
       "depends_on": [
         "world-bible",
         "magic-system-design",
@@ -6585,10 +6585,10 @@
       "deprecated_date": "2026-03-26",
       "replacement_skill": "magic-system-design",
       "deprecation_reason": "Merged into magic-system-design which includes Sanderson laws, cost patterns, and propagation test",
-      "auto_score": 62,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 62,
+      "composite_score": 66,
       "depends_on": [
         "systems-craft"
       ],
@@ -8339,10 +8339,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 66,
       "depends_on": [
         "world-bible",
         "magic-system-design",
@@ -8398,10 +8398,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 66,
       "depends_on": [
         "world-bible",
         "cultures-societies",
@@ -8616,7 +8616,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-27T02:38:26Z",
       "status": "active",
@@ -8710,7 +8710,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "alt-data-monitoring",
@@ -8718,7 +8720,7 @@
         "rebalancing-logic"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -8812,7 +8814,7 @@
         "estimated_tokens_body": 4224,
         "estimated_tokens_total": 4287
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -8866,7 +8868,7 @@
         "estimated_tokens_body": 3934,
         "estimated_tokens_total": 3999
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -8920,7 +8922,7 @@
         "estimated_tokens_body": 3236,
         "estimated_tokens_total": 3361
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -8995,7 +8997,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 70,
-      "depends_on": [],
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "alternatives",
@@ -9006,7 +9010,7 @@
         "fixed-income"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -9100,7 +9104,7 @@
         "estimated_tokens_body": 4288,
         "estimated_tokens_total": 4354
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -9154,7 +9158,7 @@
         "estimated_tokens_body": 4460,
         "estimated_tokens_total": 4532
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -9262,7 +9266,7 @@
         "estimated_tokens_body": 3484,
         "estimated_tokens_total": 3550
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -9381,7 +9385,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "energy-security",
@@ -9389,7 +9395,7 @@
         "secular-themes"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -9483,7 +9489,7 @@
         "estimated_tokens_body": 4217,
         "estimated_tokens_total": 4289
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -9602,7 +9608,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "liquidity-topology",
@@ -9610,7 +9618,7 @@
         "passive-flow-dynamics"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -9819,11 +9827,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 66,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
-      "depends_on": [],
+      "composite_score": 70,
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "asset-allocation",
@@ -9832,7 +9842,7 @@
         "tax-optimization"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -10099,7 +10109,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "market-psychology",
@@ -10107,7 +10119,7 @@
         "sentiment-signals"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -10320,7 +10332,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 70,
-      "depends_on": [],
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "fiscal-regime",
@@ -10328,7 +10342,7 @@
         "monetary-regime"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -10422,7 +10436,7 @@
         "estimated_tokens_body": 4286,
         "estimated_tokens_total": 4354
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -10476,7 +10490,7 @@
         "estimated_tokens_body": 4625,
         "estimated_tokens_total": 4700
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -10537,11 +10551,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
-      "depends_on": [],
+      "composite_score": 72,
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "correlation-regimes",
@@ -10550,7 +10566,7 @@
         "tail-risk"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -10698,7 +10714,7 @@
         "estimated_tokens_body": 4257,
         "estimated_tokens_total": 4326
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
@@ -10813,11 +10829,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
-      "depends_on": [],
+      "composite_score": 72,
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "complexity-premium",
@@ -10826,7 +10844,7 @@
         "spinoffs-restructuring"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -11093,7 +11111,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "archon"
+      ],
       "referenced_by": [
         "archon",
         "intrinsic-value",
@@ -11101,7 +11121,7 @@
         "second-level-thinking"
       ],
       "shares_references_with": [],
-      "parent": null,
+      "parent": "archon",
       "tags": [
         "domain:investing",
         "level:director",
@@ -11539,10 +11559,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 66,
       "depends_on": [
         "worldbuilding-orchestrator"
       ],
@@ -11599,10 +11619,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 66,
       "depends_on": [
         "worldbuilding-orchestrator"
       ],
@@ -11660,10 +11680,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 66,
       "depends_on": [
         "worldbuilding-orchestrator"
       ],
