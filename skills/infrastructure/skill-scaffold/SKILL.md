@@ -4,7 +4,7 @@ description: >
   Create new skills from templates with guided requirements gathering. Use when the user wants
   to scaffold a new skill, create a skill from scratch, generate a skill skeleton, or bootstrap
   a new action, knowledge, or orchestrator skill with proper structure and registry integration.
-tools: Read, Write, Bash, Glob, Grep
+tools: Read, Write, Bash, Glob, Grep, Agent, WebSearch, WebFetch
 ---
 
 # Skill Scaffold — The Builder
@@ -24,6 +24,29 @@ Ask the user for (or infer from context):
 - **Target plugin**: which plugin directory to create in (default: this plugin's `skills/`)
 
 If the user provides a brief request like "create a skill for X", infer reasonable defaults and confirm before proceeding.
+
+### 1.5. Domain Research (Optional)
+
+Before building a skill, research the domain to ensure the skill is grounded in real knowledge rather than assumptions. This step uses the Spelunker research system (`skills/research/spelunker/SKILL.md`).
+
+**When to run domain research:**
+- Building a **knowledge skill** in a domain you're unfamiliar with — always research
+- Building a **new domain** from scratch — always research (deep mode)
+- Building an **action skill** that requires domain-specific methodology — research the methodology
+- Building **infrastructure or meta skills** — skip (no domain knowledge needed)
+- User explicitly requests skipping research — skip
+
+**How to invoke:**
+1. Formulate a research question: "What are the core concepts, established frameworks, key terminology, and common misconceptions in [domain/subdomain]?"
+2. Route to Spelunker at `quick` or `standard` depth depending on familiarity
+3. Use the research findings to:
+   - Populate knowledge skill content with verified information (not assumptions)
+   - Identify the right sub-skill boundaries (what deserves its own skill vs. what's a section)
+   - Ensure terminology matches domain conventions
+   - Surface common misconceptions to address in the skill's reference material
+4. Include a `Research Provenance` note in the created skill's references, noting what was researched and key sources consulted
+
+**Default behavior:** If the domain is unfamiliar and the skill type is knowledge, prompt the user: "This is a new domain. Would you like me to research [topic] before building the skill?"
 
 ### 2. Select Template
 

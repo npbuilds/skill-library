@@ -49,6 +49,20 @@ fi
 DELIMITER_COUNT=$(awk '/^---$/ { count++ } END { print count+0 }' "$SKILL_MD")
 if [ "$DELIMITER_COUNT" -lt 2 ]; then
   add_issue "critical" "Missing YAML frontmatter delimiters (found $DELIMITER_COUNT, need 2)"
+  # Can't extract frontmatter without delimiters — output and exit
+  ESCAPED_DIR=$(printf '%s' "$SKILL_DIR" | python3 -c "import json,sys; print(json.dumps(sys.stdin.read()), end='')" 2>/dev/null || printf '"%s"' "$(printf '%s' "$SKILL_DIR" | sed 's/\\/\\\\/g; s/"/\\"/g')")
+  cat <<EARLYEOF
+{
+  "valid": false,
+  "skill_directory": $ESCAPED_DIR,
+  "body_words": 0,
+  "section_count": 0,
+  "description_words": 0,
+  "issue_count": $ISSUE_COUNT,
+  "issues": [$ISSUES]
+}
+EARLYEOF
+  exit 1
 fi
 
 # Extract frontmatter for further checks
@@ -103,7 +117,35 @@ if [ "$DESC_WORDS" -gt 0 ]; then
   fi
 fi
 
-# Check 6: section count
+# Infer skill type for budget enforcement
+SKILL_TYPE="knowledge"  # default
+DIR_NAME=$(basename "$SKILL_DIR")
+CONTENT_LOWER=$(tr '[:upper:]' '[:lower:]' < "$SKILL_MD")
+
+if echo "$DIR_NAME" | grep -qE "orchestrator|archon|bacchus|prose-orchestrator|spelunker|master-artificer"; then
+  SKILL_TYPE="orchestrator"
+elif echo "$CONTENT_LOWER" | grep -qE "routing table|child skills"; then
+  SKILL_TYPE="director"
+elif echo "$CONTENT_LOWER" | grep -qE "observer|monitor.*trigger"; then
+  SKILL_TYPE="observer"
+elif echo "$FRONTMATTER" | grep -qi "tools:"; then
+  # Has tools declared — likely action unless it routes
+  if ! echo "$CONTENT_LOWER" | grep -qE "routing table|child skills"; then
+    SKILL_TYPE="action"
+  fi
+fi
+
+# Type-aware budget caps (from STYLE_GUIDE.md)
+case "$SKILL_TYPE" in
+  orchestrator) MAX_WORDS=2500; MAX_SECTIONS=15 ;;
+  director)     MAX_WORDS=1800; MAX_SECTIONS=12 ;;
+  knowledge)    MAX_WORDS=3000; MAX_SECTIONS=20 ;;
+  action)       MAX_WORDS=2500; MAX_SECTIONS=12 ;;
+  observer)     MAX_WORDS=1200; MAX_SECTIONS=8 ;;
+  *)            MAX_WORDS=3000; MAX_SECTIONS=20 ;;
+esac
+
+# Check 6: section count (type-aware)
 SECTION_COUNT=$(awk '
   /^```/ { in_code = (in_code == 0) ? 1 : 0; next }
   in_code == 0 && /^## / { count++ }
@@ -112,20 +154,21 @@ SECTION_COUNT=$(awk '
 
 if [ "$SECTION_COUNT" -lt 2 ]; then
   add_issue "warning" "Too few sections ($SECTION_COUNT, minimum 2)"
-elif [ "$SECTION_COUNT" -gt 8 ]; then
-  add_issue "warning" "Too many sections ($SECTION_COUNT, maximum 8)"
+elif [ "$SECTION_COUNT" -gt "$MAX_SECTIONS" ]; then
+  add_issue "warning" "Too many sections for $SKILL_TYPE ($SECTION_COUNT, max $MAX_SECTIONS)"
 fi
 
-# Check 7: body word count
+# Check 7: body word count (type-aware)
 TOTAL_WORDS=$(wc -w < "$SKILL_MD" | tr -d ' ')
 FRONTMATTER_WORDS=$(echo "$FRONTMATTER" | wc -w | tr -d ' ')
 BODY_WORDS=$((TOTAL_WORDS - FRONTMATTER_WORDS - 2))
 if [ "$BODY_WORDS" -lt 0 ]; then BODY_WORDS=0; fi
 
-if [ "$BODY_WORDS" -gt 5000 ]; then
-  add_issue "critical" "Body far too large ($BODY_WORDS words, maximum 5000)"
-elif [ "$BODY_WORDS" -gt 2000 ]; then
-  add_issue "warning" "Body exceeds recommended size ($BODY_WORDS words, recommended under 2000)"
+CRITICAL_WORDS=$((MAX_WORDS + MAX_WORDS / 2))  # 150% of max = critical
+if [ "$BODY_WORDS" -gt "$CRITICAL_WORDS" ]; then
+  add_issue "critical" "Body far too large for $SKILL_TYPE ($BODY_WORDS words, max $MAX_WORDS)"
+elif [ "$BODY_WORDS" -gt "$MAX_WORDS" ]; then
+  add_issue "warning" "Body exceeds budget for $SKILL_TYPE ($BODY_WORDS words, max $MAX_WORDS)"
 fi
 
 # Check 8: progressive disclosure (large body without references/)

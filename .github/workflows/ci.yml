@@ -1,0 +1,154 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install pytest
+          pip install -e mcp-server/
+
+      - name: Run unit tests
+        working-directory: mcp-server
+        run: pytest tests/ -v
+
+  validate:
+    name: Registry & Skill Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate registry JSON
+        run: python3 -c "
+import json
+with open('data/registry.json') as f:
+    json.load(f)
+print('Registry JSON: valid')
+"
+
+      - name: Check all registered skills exist
+        run: |
+          python3 << 'EOF'
+          import json, os, sys
+          with open('data/registry.json') as f:
+              reg = json.load(f)
+          missing = []
+          for name, entry in reg.get('skills', {}).items():
+              loc = entry.get('location', '')
+              if loc and not os.path.exists(loc):
+                  missing.append(f'{name}: {loc}')
+          if missing:
+              print('Missing skill files:')
+              for m in missing:
+                  print(f'  {m}')
+              sys.exit(1)
+          print(f'All {len(reg["skills"])} skill locations verified')
+          EOF
+
+      - name: Check for broken dependencies
+        run: |
+          python3 << 'EOF'
+          import json, sys
+          with open('data/registry.json') as f:
+              reg = json.load(f)
+          skills = reg.get('skills', {})
+          broken = []
+          for name, entry in skills.items():
+              for dep in entry.get('depends_on', []):
+                  if dep not in skills:
+                      broken.append(f'{name} -> {dep}')
+              parent = entry.get('parent')
+              if parent and parent not in skills:
+                  broken.append(f'{name} -> parent:{parent}')
+          if broken:
+              print('Broken references:')
+              for b in broken:
+                  print(f'  {b}')
+              sys.exit(1)
+          print(f'All dependencies resolved ({len(skills)} skills checked)')
+          EOF
+
+      - name: Validate skill structure (spot check)
+        run: |
+          python3 << 'EOF'
+          import json, random, subprocess, sys
+          with open('data/registry.json') as f:
+              reg = json.load(f)
+          skills = list(reg.get('skills', {}).items())
+          sample = random.sample(skills, min(10, len(skills)))
+          failures = []
+          for name, entry in sample:
+              loc = entry.get('location', '')
+              if not loc:
+                  continue
+              # location is like "skills/domain/name/SKILL.md", we need the directory
+              skill_dir = str('/'.join(loc.split('/')[:-1]))
+              result = subprocess.run(
+                  ['bash', 'scripts/validate-structure.sh', skill_dir],
+                  capture_output=True, text=True
+              )
+              try:
+                  data = json.loads(result.stdout)
+                  if not data.get('valid', False):
+                      crits = [i["message"] for i in data.get("issues", []) if i["severity"] == "critical"]
+                      failures.append(f'{name}: {crits}')
+              except json.JSONDecodeError:
+                  failures.append(f'{name}: validation script returned non-JSON')
+          if failures:
+              print(f'Structure validation failed ({len(failures)}/{len(sample)}):')
+              for f in failures:
+                  print(f'  {f}')
+              sys.exit(1)
+          print(f'Structure validation passed ({len(sample)} skills spot-checked)')
+          EOF
+
+      - name: Score distribution check
+        run: |
+          python3 << 'EOF'
+          import json, sys
+          with open('data/registry.json') as f:
+              reg = json.load(f)
+          scores = [s.get('composite_score', 0) for s in reg['skills'].values()]
+          if not scores:
+              print('ERROR: No skills found in registry')
+              sys.exit(1)
+          avg = sum(scores) / len(scores)
+          low = [n for n, s in reg['skills'].items() if s.get('composite_score', 0) < 30]
+          print(f'Score distribution: min={min(scores)}, max={max(scores)}, avg={avg:.1f}')
+          print(f'Skills below 30 (critical): {len(low)}')
+          if low:
+              for name in low:
+                  print(f'  {name}: {reg["skills"][name].get("composite_score", 0)}')
+              sys.exit(1)
+          EOF
+
+      - name: Verify score recalibration is idempotent
+        run: |
+          output=$(python3 scripts/recalibrate_scores.py --dry-run 2>&1)
+          echo "$output"
+          if echo "$output" | grep -q "No score changes needed"; then
+            echo "Scores are in sync"
+          else
+            echo "::error::Scores are out of sync — run: python3 scripts/recalibrate_scores.py"
+            exit 1
+          fi

@@ -35,15 +35,23 @@ Determine which worldbuilding skill(s) apply. Most requests touch multiple skill
 
 | Request Type | Primary Skill | Supporting Skills | Why |
 |-------------|--------------|-------------------|-----|
-| Define physics, magic, fundamental rules | `world-bible` | — | Axioms come first; everything derives from them |
-| Create a civilization, culture, faction | `world-bible` | `naming-system` | Culture design needs axioms + phonetic identity |
-| Write in-universe documents, lore | `lore-writer` | `world-bible`, `naming-system` | Lore must be consistent and use correct names |
-| Name characters, places, institutions | `naming-system` | `world-bible` | Names must reflect the culture's sound palette |
-| Design political/faction dynamics | `world-bible` | — | Faction conflict web lives in the bible |
-| Consistency check across artifacts | `world-bible` | All others | The bible is the authority; check everything against it |
+| Define physics, fundamental rules | `world-bible` | — | Axioms come first; everything derives from them |
+| Design magic/fantasy system | `magic-system-design` | `world-bible` | Design methodology; results go in world-bible |
+| Design geography, physical world | `geography-ecology` | `world-bible` | Terrain, climate, resource distribution |
+| Design ecosystems, flora, fauna | `ecology-design` | `geography-ecology`, `world-bible` | Getz 10-niche model, food webs |
+| Create a civilization, culture | `cultures-societies` | `naming-system`, `world-bible` | Seven pillars of culture design |
+| Design religions, belief systems | `religion-design` | `cultures-societies`, `world-bible` | Organizational patterns, deity design |
+| Name characters, places, institutions | `naming-system` | `world-bible`, `cultures-societies` | Phonetic palettes per culture |
+| Write in-universe documents, lore | `lore-writer` | `world-bible`, `naming-system` | 7 voices, artifact format |
+| Build history, timelines | `history-builder` | `world-bible`, `lore-writer` | Fractal zoom, non-chronological |
+| Track who knows what | `character-belief-tracker` | `world-bible`, `lore-writer` | Belief graph against revelation layers |
+| Design factions, organizations | `faction-design` | `cultures-societies`, `world-bible` | Pyramid technique, SUPREME method |
+| Design political dynamics, conflict web | `world-bible` | `faction-design`, `cultures-societies` | Faction conflict web |
+| Design technology levels, innovation | `technology-progression` | `magic-system-design`, `world-bible` | Tech trees, fantasy system disruption |
+| Control pacing, tension curves | `narrative-pacing` | `lore-writer`, `world-bible` | Storyteller archetypes, revelation spiral pacing |
+| Trace consequences of an axiom | `extrapolation-engine` | `world-bible` | "And Then What?" drill, domain cascade |
+| Consistency check across artifacts | `world-bible` | All others | The bible is the authority |
 | "Build me a world from scratch" | All, in sequence | — | Full pipeline (see Phase 3) |
-| Design geography, ecology | `world-bible` | — | Physical world constraints |
-| Create cultural practices, rituals, customs | `world-bible` | `naming-system`, `lore-writer` | Culture → names → artifacts |
 
 **Classification decision tree:**
 
@@ -62,32 +70,62 @@ Worldbuilding has hard dependencies. You cannot name a culture before you define
 
 **Full World Pipeline (from scratch):**
 
-1. **Core axioms** (world-bible)
+1. **Core axioms** (`world-bible`)
    - Scale, physics, resources, scarcity
-   - The fantasy system (source, cost, limits, access)
    - Tone and atmosphere
 
-2. **Geography and ecology** (world-bible)
+2. **Fantasy system** (`magic-system-design` → results stored in `world-bible`)
+   - Source, cost, limits, access, interaction with physics
+   - Propagation test across all domains
+
+3. **Geography and ecology** (`geography-ecology` + `ecology-design`)
    - Physical world: continents, climates, biomes
-   - Resource distribution (drives trade, conflict, civilization placement)
+   - Resource distribution, trade route potential
+   - Ecosystems: 10 Getz niches, fantasy ecology interactions
 
-3. **Civilizations** (world-bible + naming-system)
-   - For each civilization: values, structure, relationship to the fantasy system
+4. **Civilizations** (`cultures-societies` + `naming-system`)
+   - For each civilization: seven pillars (governance, economy, religion, social structure, military, knowledge, art)
    - Sound palette: phoneme inventory, syllable rules, naming conventions
-   - Generate test names to validate the palette
 
-4. **Faction conflict web** (world-bible)
+5. **Religion and mythology** (`religion-design`)
+   - Organizational pattern, scale model, deity portfolios
+   - Relationship between religion and the fantasy system
+
+6. **Faction conflict web** (`world-bible`)
    - Relationships between civilizations and factions
    - Surface relationships vs. hidden realities
    - Trigger events that would transform relationships
 
-5. **Revelation architecture** (world-bible)
-   - Layer 0 (surface) through Layer 3 (deep truth)
-   - What each faction knows, believes incorrectly, and is hiding
+7. **Factions and politics** (`faction-design` + `world-bible`)
+   - Faction anatomy: want, vulnerability, internal tension, public face
+   - Faction relationships: alliances, rivalries, dependencies, triggers
+   - Power vacuum analysis
 
-6. **Artifacts** (lore-writer)
-   - In-universe documents that bring the world to life
-   - Each artifact written from a specific perspective and revelation layer
+8. **Technology** (`technology-progression`)
+   - Tech levels across 5 domains (materials, energy, information, transport, medicine)
+   - Fantasy system as technology disruptor
+
+9. **History** (`history-builder`)
+   - Periods, events, and scenes via fractal zoom
+   - Master timeline with gaps tracked explicitly
+
+10. **Revelation architecture** (`world-bible` + `character-belief-tracker`)
+    - Layer 0 (surface) through Layer 3 (deep truth)
+    - Belief graph: who knows what, who believes what incorrectly
+
+11. **Extrapolation pass** (`extrapolation-engine`)
+    - Run the "And Then What?" drill on each major axiom
+    - Trace consequences across 8 domains, check for missed implications
+    - Test interaction effects between axioms
+
+12. **Pacing design** (`narrative-pacing`)
+    - Choose storyteller archetype (Cassandra/Phoebe/Randy)
+    - Map revelation spiral timing
+    - Plan artifact sequence by voice type for rhythm
+
+13. **Artifacts** (`lore-writer`)
+    - In-universe documents in 7 voice registers
+    - Each artifact from a specific perspective and revelation layer
 
 **Single Artifact Pipeline:**
 
@@ -103,11 +141,22 @@ Route to the appropriate skill, passing accumulated context.
 
 **Available worldbuilding skills:**
 
-| Skill | Path | What It Does |
+| Skill | Type | What It Does |
 |-------|------|-------------|
-| World Bible | `skills/worldbuilding/world-bible/SKILL.md` | Defines and enforces world axioms |
-| Lore Writer | `skills/worldbuilding/lore-writer/SKILL.md` | Produces in-universe artifacts |
-| Naming System | `skills/worldbuilding/naming-system/SKILL.md` | Creates culturally coherent names |
+| `world-bible` | knowledge | Foundational axioms and constraints — the single source of truth |
+| `magic-system-design` | knowledge | Fantasy system design methodology — source, cost, limits, access |
+| `geography-ecology` | knowledge | Physical world — terrain, climate, biomes, resource distribution |
+| `ecology-design` | knowledge | Complete ecosystems — Getz 10-niche model, food webs |
+| `cultures-societies` | knowledge | Civilization design — seven pillars of culture |
+| `religion-design` | knowledge | Religion design — organizational patterns, deity portfolios |
+| `naming-system` | knowledge | Phonetic palettes and naming conventions per culture |
+| `lore-writer` | action | Produces in-universe artifacts in 7 voice registers |
+| `history-builder` | action | Non-chronological history building via fractal zoom |
+| `character-belief-tracker` | action | Tracks who knows what against revelation layers |
+| `narrative-pacing` | knowledge | Tension curves, storyteller archetypes, pacing by artifact type |
+| `technology-progression` | knowledge | Tech trees, innovation pathways, fantasy system disruption |
+| `faction-design` | knowledge | Pyramid technique, SUPREME method, power vacuums |
+| `extrapolation-engine` | knowledge | "And Then What?" drill, cascading consequences across domains |
 
 When delegating, always pass:
 - Current world-bible state (relevant axioms)
@@ -135,14 +184,18 @@ After creation completes:
 
 ## Knowledge Layer
 
-All worldbuilding knowledge lives in three places:
+All worldbuilding knowledge lives in these locations:
 
 | Source | What's There | When to Check |
 |--------|-------------|---------------|
-| `world-bible/references/` | Axioms, revelation layers, faction web, world constraints | Before any creative decision |
+| `world-bible/references/` | Axioms, revelation layers, faction web, Wrede taxonomy, OnlyWorlds ontology, generation pipeline | Before any creative decision |
+| `magic-system-design/references/` | Cost structure patterns | When designing the fantasy system |
+| `ecology-design/references/` | Getz 10-niche model detail | When designing ecosystems |
+| `religion-design/references/` | Religion design patterns, deity portfolio framework | When designing belief systems |
 | `naming-system/references/` | Culture sound palettes | Before creating any proper noun |
 | `lore-writer/references/` | Voice registry, artifact format, output conventions | Before writing any in-universe document |
 | `artifacts/` | All produced lore documents | Before writing new artifacts (consistency check) |
+| `artifacts/meta/` | Belief graph, master timeline | Before any narrative decision |
 
 **Always check the world-bible first.** It is the single source of truth. Nothing contradicts it. When axioms need to change, they change in the bible first and propagate outward.
 

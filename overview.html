@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Library — Project Overview</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --blue: #58a6ff;
+    --purple: #bc8cff;
+    --cyan: #79c0ff;
+    --orange: #ffa657;
+    --pink: #ff7b72;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; line-height: 1.6; }
+
+  .header { padding: 32px 40px 24px; border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--blue); letter-spacing: -0.5px; }
+  .header p { color: var(--muted); margin-top: 6px; font-size: 12px; }
+  .header .pill { display: inline-block; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; margin-right: 8px; font-size: 11px; color: var(--muted); }
+
+  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+  .sidebar { border-right: 1px solid var(--border); padding: 24px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .sidebar-section { padding: 0 16px 16px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .sidebar-section h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 10px; }
+  .nav-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; cursor: pointer; color: var(--muted); font-size: 12px; transition: all 0.15s; }
+  .nav-item:hover, .nav-item.active { background: var(--surface2); color: var(--text); }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .main { padding: 32px 40px; overflow-y: auto; }
+
+  .section { margin-bottom: 48px; display: none; }
+  .section.active { display: block; }
+  .section h2 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+
+  /* STAT CARDS */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+  .stat-card .num { font-size: 36px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+  .stat-card .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-card .sub { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+  /* ARCHITECTURE DIAGRAM */
+  .arch { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 32px; margin-bottom: 32px; }
+  .arch-flow { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; }
+  .arch-stage { flex-shrink: 0; }
+  .arch-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; text-align: center; font-size: 11px; }
+  .arch-box .title { font-weight: 700; font-size: 12px; color: var(--blue); }
+  .arch-box .subtitle { color: var(--muted); font-size: 10px; margin-top: 2px; }
+  .arch-box .items { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+  .arch-box .item { background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; font-size: 10px; color: var(--muted); text-align: left; }
+  .arch-arrow { display: flex; align-items: center; padding: 0 12px; color: var(--muted); font-size: 18px; align-self: center; }
+  .arch-title { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+
+  /* DOMAIN CARDS */
+  .domain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .domain-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; position: relative; overflow: hidden; }
+  .domain-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .domain-card.lvl5::before { background: var(--green); }
+  .domain-card.lvl4::before { background: var(--blue); }
+  .domain-card.lvl3::before { background: var(--yellow); }
+  .domain-card.lvl2::before { background: var(--orange); }
+  .domain-card.lvl1::before { background: var(--red); }
+  .domain-card.issue::before { background: var(--red); }
+  .domain-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .domain-count { font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+  .type-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+  .type-badge { font-size: 10px; padding: 2px 7px; border-radius: 4px; }
+  .type-orch { background: rgba(188,140,255,0.15); color: var(--purple); border: 1px solid rgba(188,140,255,0.3); }
+  .type-dir { background: rgba(88,166,255,0.15); color: var(--blue); border: 1px solid rgba(88,166,255,0.3); }
+  .type-know { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+  .type-action { background: rgba(255,166,87,0.15); color: var(--orange); border: 1px solid rgba(255,166,87,0.3); }
+  .type-obs { background: rgba(121,192,255,0.15); color: var(--cyan); border: 1px solid rgba(121,192,255,0.3); }
+  .maturity-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 8px; overflow: hidden; }
+  .maturity-fill { height: 100%; border-radius: 2px; transition: width 0.3s; }
+  .domain-meta { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); }
+  .issue-tag { display: inline-block; background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); border-radius: 4px; font-size: 10px; padding: 2px 7px; margin-top: 6px; }
+  .warn-tag { display: inline-block; background: rgba(210,153,34,0.15); color: var(--yellow); border: 1px solid rgba(210,153,34,0.3); border-radius: 4px; font-size: 10px; padding: 2px 7px; margin-top: 6px; }
+
+  /* HIERARCHY VIZ */
+  .hier-section { margin-bottom: 28px; }
+  .hier-section h3 { font-size: 12px; color: var(--muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .hier-tree { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; font-size: 11px; font-family: monospace; line-height: 2; overflow-x: auto; }
+  .tree-orch { color: var(--purple); font-weight: 700; }
+  .tree-dir { color: var(--blue); }
+  .tree-know { color: var(--green); }
+  .tree-action { color: var(--orange); }
+  .tree-obs { color: var(--cyan); }
+  .tree-indent1 { padding-left: 20px; }
+  .tree-indent2 { padding-left: 40px; }
+  .tree-line { color: var(--border); }
+
+  /* ISSUES PANEL */
+  .issues-grid { display: flex; flex-direction: column; gap: 12px; }
+  .issue-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; }
+  .issue-sev { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .issue-sev.critical { background: var(--red); box-shadow: 0 0 8px var(--red); }
+  .issue-sev.warning { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); }
+  .issue-sev.info { background: var(--blue); box-shadow: 0 0 8px var(--blue); }
+  .issue-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .issue-body { font-size: 11px; color: var(--muted); line-height: 1.6; }
+  .issue-fix { margin-top: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 6px 10px; font-size: 10px; color: var(--cyan); }
+  .issue-fix::before { content: '$ '; color: var(--muted); }
+  .sev-label { font-size: 10px; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; }
+  .sev-label.critical { background: rgba(248,81,73,0.15); color: var(--red); }
+  .sev-label.warning { background: rgba(210,153,34,0.15); color: var(--yellow); }
+  .sev-label.info { background: rgba(88,166,255,0.15); color: var(--blue); }
+
+  /* DATA FLOW */
+  .flow { display: flex; flex-direction: column; gap: 12px; }
+  .flow-row { display: flex; align-items: stretch; gap: 12px; }
+  .flow-node { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; flex: 1; }
+  .flow-node h4 { font-size: 12px; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+  .flow-node p { font-size: 11px; color: var(--muted); }
+  .flow-node .tools { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+  .flow-node .tool { font-size: 10px; background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; color: var(--muted); }
+  .flow-arrow-v { display: flex; justify-content: center; align-items: center; color: var(--muted); font-size: 16px; padding: 4px 0; }
+  .flow-connector { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 16px; flex-shrink: 0; width: 24px; }
+
+  /* GAPS */
+  .gap-list { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .gap-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 1px solid var(--border); }
+  .gap-row:last-child { border-bottom: none; }
+  .gap-query { font-size: 12px; color: var(--text); }
+  .gap-count { font-size: 11px; background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid rgba(248,81,73,0.3); border-radius: 4px; padding: 2px 8px; }
+  .gap-zero { background: rgba(248,81,73,0.15); color: var(--red); }
+
+  /* ANALYTICS */
+  .usage-list { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 20px; }
+  .usage-row { display: flex; align-items: center; gap: 12px; padding: 10px 18px; border-bottom: 1px solid var(--border); }
+  .usage-row:last-child { border-bottom: none; }
+  .usage-name { font-size: 12px; color: var(--text); min-width: 200px; }
+  .usage-bar-wrap { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .usage-bar { height: 100%; background: var(--blue); border-radius: 2px; }
+  .usage-count { font-size: 11px; color: var(--muted); min-width: 30px; text-align: right; }
+  .usage-type { font-size: 10px; color: var(--muted); min-width: 80px; }
+
+  /* TOOLTIP */
+  .tooltip { position: relative; display: inline-block; }
+  .tooltip::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 4px); left: 50%; transform: translateX(-50%); background: var(--surface2); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; font-size: 10px; color: var(--muted); white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 100; }
+  .tooltip:hover::after { opacity: 1; }
+
+  /* LEGEND */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: static; height: auto; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .domain-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⬡ Skill Library — Project Overview</h1>
+  <p style="margin-top: 8px;">
+    <span class="pill">194 skills</span>
+    <span class="pill">11 domains</span>
+    <span class="pill">FastMCP server</span>
+    <span class="pill">7 tools</span>
+    <span class="pill">Last scan: 2026-03-28</span>
+  </p>
+</div>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <h3>Navigation</h3>
+      <div class="nav-item active" onclick="show('overview')">
+        <div class="nav-dot" style="background:var(--blue)"></div> System Overview
+      </div>
+      <div class="nav-item" onclick="show('architecture')">
+        <div class="nav-dot" style="background:var(--purple)"></div> Architecture
+      </div>
+      <div class="nav-item" onclick="show('domains')">
+        <div class="nav-dot" style="background:var(--green)"></div> Domains
+      </div>
+      <div class="nav-item" onclick="show('hierarchy')">
+        <div class="nav-dot" style="background:var(--cyan)"></div> Skill Hierarchy
+      </div>
+      <div class="nav-item" onclick="show('issues')">
+        <div class="nav-dot" style="background:var(--red)"></div> Issues &amp; Fixes
+        <span style="margin-left:auto; background: rgba(248,81,73,0.2); color: var(--red); font-size: 10px; padding: 1px 6px; border-radius: 4px;">4</span>
+      </div>
+      <div class="nav-item" onclick="show('dataflow')">
+        <div class="nav-dot" style="background:var(--orange)"></div> Data Flow
+      </div>
+      <div class="nav-item" onclick="show('analytics')">
+        <div class="nav-dot" style="background:var(--yellow)"></div> Analytics
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Quick Stats</h3>
+      <div style="font-size: 11px; color: var(--muted); line-height: 2;">
+        <div>Orchestrators: <span style="color:var(--purple)">10</span></div>
+        <div>Directors: <span style="color:var(--blue)">33</span></div>
+        <div>Knowledge: <span style="color:var(--green)">117</span></div>
+        <div>Actions: <span style="color:var(--orange)">26</span></div>
+        <div>Observers: <span style="color:var(--cyan)">2</span></div>
+        <div style="border-top: 1px solid var(--border); margin-top: 6px; padding-top: 6px;">
+          Zero metrics: <span style="color:var(--red)">52</span>
+        </div>
+        <div>Missing network: <span style="color:var(--red)">sommelier</span></div>
+        <div>Gaps logged: <span style="color:var(--yellow)">5</span></div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Domain Maturity</h3>
+      <div style="font-size: 11px; color: var(--muted); line-height: 2.2;">
+        <div style="display:flex; justify-content:space-between;"><span>game-theory</span> <span style="color:var(--green)">Lv5 ████████</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>data-science</span> <span style="color:var(--green)">Lv5 ████████</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>design</span> <span style="color:var(--green)">Lv5 ████████</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>investing</span> <span style="color:var(--blue)">Lv5 ████████</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>writing</span> <span style="color:var(--blue)">Lv4 ██████░░</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>sommelier</span> <span style="color:var(--blue)">Lv4 ██████░░</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>infrastructure</span> <span style="color:var(--blue)">Lv4 ██████░░</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>worldbuilding</span> <span style="color:var(--yellow)">Lv3 ████░░░░</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>research</span> <span style="color:var(--yellow)">Lv3 ████░░░░</span></div>
+        <div style="display:flex; justify-content:space-between;"><span>artifacts</span> <span style="color:var(--orange)">Lv2 ██░░░░░░</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- OVERVIEW -->
+    <div class="section active" id="overview">
+      <h2>System Overview</h2>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="num" style="color:var(--blue)">194</div>
+          <div class="label">Total Skills</div>
+          <div class="sub">Across 11 domains</div>
+        </div>
+        <div class="stat-card">
+          <div class="num" style="color:var(--green)">142</div>
+          <div class="label">Metrics Computed</div>
+          <div class="sub" style="color:var(--red)">52 still zero ⚠</div>
+        </div>
+        <div class="stat-card">
+          <div class="num" style="color:var(--purple)">7</div>
+          <div class="label">MCP Tools</div>
+          <div class="sub">FastMCP server</div>
+        </div>
+        <div class="stat-card">
+          <div class="num" style="color:var(--yellow)">5</div>
+          <div class="label">Gap Searches</div>
+          <div class="sub">Unresolved coverage</div>
+        </div>
+      </div>
+
+      <h2>What This Project Is</h2>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+        <p style="color: var(--muted); font-size: 12px; line-height: 1.9; max-width: 720px;">
+          A <strong style="color:var(--text)">personal skill library management system</strong> that exposes domain expertise to Claude Desktop via MCP.
+          You author skills as structured Markdown files (<code style="color:var(--cyan)">SKILL.md</code>), register them in a central JSON registry,
+          and a <strong style="color:var(--text)">FastMCP server</strong> surfaces them to Claude as searchable, loadable tools.
+          When Claude encounters a question matching a domain, it calls <code style="color:var(--cyan)">search_skills()</code> → <code style="color:var(--cyan)">get_skill()</code>
+          to load the relevant methodology, then applies it.
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px;">
+          <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 12px;">
+            <div style="color:var(--purple); font-size: 11px; font-weight: 700; margin-bottom: 6px;">SKILL.md FILES</div>
+            <div style="font-size: 11px; color: var(--muted);">Authored Markdown with YAML frontmatter. Hierarchical: orchestrators → directors → knowledge/action.</div>
+          </div>
+          <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 12px;">
+            <div style="color:var(--blue); font-size: 11px; font-weight: 700; margin-bottom: 6px;">REGISTRY.JSON</div>
+            <div style="font-size: 11px; color: var(--muted);">Central index of all 194 skills. Stores metadata, metrics, health, dependencies, scores, and network topology.</div>
+          </div>
+          <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 12px;">
+            <div style="color:var(--green); font-size: 11px; font-weight: 700; margin-bottom: 6px;">MCP SERVER</div>
+            <div style="font-size: 11px; color: var(--muted);">FastMCP Python server exposes 7 tools to Claude Desktop. Reloads registry on every call — zero restart needed.</div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Skill Type Hierarchy</h2>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px; overflow-x: auto;">
+        <div style="display: flex; align-items: center; gap: 0; min-width: 700px;">
+          <div style="background: rgba(188,140,255,0.1); border: 1px solid rgba(188,140,255,0.4); border-radius: 6px; padding: 12px 16px; text-align: center; min-width: 130px;">
+            <div style="color:var(--purple); font-weight:700; font-size:12px;">ORCHESTRATOR</div>
+            <div style="color:var(--muted); font-size:10px; margin-top:4px;">10 skills</div>
+            <div style="color:var(--muted); font-size:10px;">Coordinates domain.<br>Routes to directors.</div>
+          </div>
+          <div style="color:var(--muted); padding: 0 12px; font-size: 20px;">→</div>
+          <div style="background: rgba(88,166,255,0.1); border: 1px solid rgba(88,166,255,0.4); border-radius: 6px; padding: 12px 16px; text-align: center; min-width: 130px;">
+            <div style="color:var(--blue); font-weight:700; font-size:12px;">DIRECTOR</div>
+            <div style="color:var(--muted); font-size:10px; margin-top:4px;">33 skills</div>
+            <div style="color:var(--muted); font-size:10px;">Manages subdomain.<br>Routes to knowledge.</div>
+          </div>
+          <div style="color:var(--muted); padding: 0 12px; font-size: 20px;">→</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.4); border-radius: 6px; padding: 10px 16px; text-align: center; min-width: 130px;">
+              <div style="color:var(--green); font-weight:700; font-size:12px;">KNOWLEDGE</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">117 skills — methodology,<br>frameworks, domain expertise</div>
+            </div>
+            <div style="background: rgba(255,166,87,0.1); border: 1px solid rgba(255,166,87,0.4); border-radius: 6px; padding: 10px 16px; text-align: center; min-width: 130px;">
+              <div style="color:var(--orange); font-weight:700; font-size:12px;">ACTION</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">26 skills — procedural,<br>solving, generating</div>
+            </div>
+          </div>
+          <div style="color:var(--muted); padding: 0 12px; font-size: 20px;"></div>
+          <div style="background: rgba(121,192,255,0.1); border: 1px solid rgba(121,192,255,0.4); border-radius: 6px; padding: 12px 16px; text-align: center; min-width: 130px;">
+            <div style="color:var(--cyan); font-weight:700; font-size:12px;">OBSERVER</div>
+            <div style="color:var(--muted); font-size:10px; margin-top:4px;">2 skills</div>
+            <div style="color:var(--muted); font-size:10px;">Meta surveillance.<br>Library health.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="section" id="architecture">
+      <h2>System Architecture</h2>
+
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 28px; margin-bottom: 24px;">
+        <div class="arch-title">Full Pipeline</div>
+        <div style="display: flex; align-items: stretch; gap: 0; overflow-x: auto; min-width: 800px;">
+
+          <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; min-width:140px;">
+            <div style="font-size:10px; color:var(--muted); text-align:center; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Author</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 12px;">
+              <div style="color:var(--purple); font-size:11px; font-weight:700;">SKILL.md</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">YAML frontmatter<br>Markdown body<br>references/ dir<br>agents/ dir</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; padding:0 10px; color:var(--muted);">→</div>
+
+          <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; min-width:160px;">
+            <div style="font-size:10px; color:var(--muted); text-align:center; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Validate</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 12px;">
+              <div style="color:var(--yellow); font-size:11px; font-weight:700;">skill-file-watcher.sh</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">PostToolUse hook<br>validate-structure.sh<br>analyze-skill.sh<br>health → ✓ ⚠ ✗</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; padding:0 10px; color:var(--muted);">→</div>
+
+          <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; min-width:160px;">
+            <div style="font-size:10px; color:var(--muted); text-align:center; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Register</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 12px;">
+              <div style="color:var(--blue); font-size:11px; font-weight:700;">registry.json</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">sync-registry.py<br>refresh-registry.sh<br>recalibrate_scores.py<br>194 entries</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; padding:0 10px; color:var(--muted);">→</div>
+
+          <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; min-width:160px;">
+            <div style="font-size:10px; color:var(--muted); text-align:center; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Serve</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 12px;">
+              <div style="color:var(--green); font-size:11px; font-weight:700;">mcp-server/server.py</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">FastMCP<br>7 tools<br>Hot reload<br>fcntl locking</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; padding:0 10px; color:var(--muted);">→</div>
+
+          <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; min-width:140px;">
+            <div style="font-size:10px; color:var(--muted); text-align:center; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Consume</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 12px;">
+              <div style="color:var(--cyan); font-size:11px; font-weight:700;">Claude Desktop</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">Calls MCP tools<br>Loads skills<br>Applies methodology<br>Logs feedback</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; padding:0 10px; color:var(--muted);">→</div>
+
+          <div style="display:flex; flex-direction:column; gap:8px; flex-shrink:0; min-width:140px;">
+            <div style="font-size:10px; color:var(--muted); text-align:center; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;">Analytics</div>
+            <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 12px;">
+              <div style="color:var(--orange); font-size:11px; font-weight:700;">JSONL Logs</div>
+              <div style="color:var(--muted); font-size:10px; margin-top:4px;">usage.jsonl<br>feedback.jsonl<br>gaps.jsonl<br>cli.py stats</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <h2>MCP Server Tools</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px;">
+          <div style="color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px;">list_skills(domain?, type?, subdomain?)</div>
+          <div style="font-size:11px; color:var(--muted);">Browse all skills with optional filters. Returns names, types, descriptions, health, scores. Also lists available domains/subdomains.</div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px;">
+          <div style="color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px;">search_skills(query)</div>
+          <div style="font-size:11px; color:var(--muted);">Keyword search across names, descriptions, and tags. Logs zero/thin results to gaps.jsonl for coverage tracking.</div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px;">
+          <div style="color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px;">get_skill(name, include_references?)</div>
+          <div style="font-size:11px; color:var(--muted);">Read full SKILL.md + reference docs + agent definitions. Logs usage. Three-tier path resolution (relative → absolute → search).</div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px;">
+          <div style="color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px;">get_skill_details(name)</div>
+          <div style="font-size:11px; color:var(--muted);">Metadata only (no file reads). Returns health, score, tags, dependencies, metrics. Fast preview before deciding to load.</div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px;">
+          <div style="color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px;">get_system_overview()</div>
+          <div style="font-size:11px; color:var(--muted);">Bird's-eye library health. Per-domain maturity, gaps, orphan detection, broken references, recommendations. <span style="color:var(--red)">⚠ Misses sommelier (bug)</span></div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px;">
+          <div style="color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px;">record_skill_feedback(name, rating, note?)</div>
+          <div style="font-size:11px; color:var(--muted);">Rate 1-5 with optional note. Appends to feedback.jsonl with file locking. Feeds recalibrate_scores.py.</div>
+        </div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; grid-column: 1 / -1;">
+          <div style="color:var(--blue); font-size:12px; font-weight:700; margin-bottom:4px;">get_skill_stats(skill_name?)</div>
+          <div style="font-size:11px; color:var(--muted);">Usage analytics — most/least used skills, never-used detection, feedback averages, gap queries. Per-skill: first use, last use, 7-day repeat count.</div>
+        </div>
+      </div>
+
+      <h2>Hook Automation</h2>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+        <div style="display: flex; align-items: flex-start; gap: 16px;">
+          <div style="background: rgba(210,153,34,0.1); border: 1px solid rgba(210,153,34,0.3); border-radius: 6px; padding: 10px 14px; flex-shrink: 0;">
+            <div style="color:var(--yellow); font-size:11px; font-weight:700;">PostToolUse Hook</div>
+            <div style="color:var(--muted); font-size:10px;">Triggers on Write tool</div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding-top:8px;">→</div>
+          <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex-shrink: 0;">
+            <div style="color:var(--text); font-size:11px; font-weight:700;">skill-file-watcher.sh</div>
+            <div style="color:var(--muted); font-size:10px;">Detects SKILL.md writes</div>
+          </div>
+          <div style="color:var(--muted); font-size:18px; padding-top:8px;">→</div>
+          <div style="display:flex; flex-direction:column; gap:6px; flex-shrink:0;">
+            <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size:10px; color:var(--muted);">① validate-structure.sh — checks YAML, sections, token budget</div>
+            <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size:10px; color:var(--muted);">② analyze-skill.sh — word count, sections, tokens</div>
+            <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size:10px; color:var(--muted);">③ health check → ✓ healthy / ⚠ warning / ✗ critical</div>
+            <div style="background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size:10px; color:var(--muted);">④ refresh-registry.sh or sync-registry.py --apply</div>
+          </div>
+        </div>
+        <div style="margin-top: 14px; font-size: 11px; color: var(--muted); line-height: 1.8;">
+          <strong style="color:var(--text)">Health thresholds:</strong> &lt;2000 words → healthy | 2000-5000 → warning | &gt;5000 → critical | invalid structure → critical
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMAINS -->
+    <div class="section" id="domains">
+      <h2>Domain Breakdown</h2>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Level 5 — Full structure</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Level 4 — Mature</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Level 3 — Developing</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Level 2 — Early</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Issues</div>
+      </div>
+      <div class="domain-grid">
+
+        <div class="domain-card lvl5">
+          <div class="domain-name">game-theory</div>
+          <div class="domain-count">22 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-dir">5 directors</span>
+            <span class="type-badge type-know">12 knowledge</span>
+            <span class="type-badge type-action">4 action</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:100%;background:var(--green)"></div></div>
+          <div class="domain-meta"><span>Level 5/5</span><span>avg score 70.7</span></div>
+          <div class="warn-tag">7 skills with zero body_words</div>
+        </div>
+
+        <div class="domain-card lvl5">
+          <div class="domain-name">data-science</div>
+          <div class="domain-count">14 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-dir">3 directors</span>
+            <span class="type-badge type-know">10 knowledge</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:100%;background:var(--green)"></div></div>
+          <div class="domain-meta"><span>Level 5/5</span><span>avg score 71.4</span></div>
+        </div>
+
+        <div class="domain-card lvl5">
+          <div class="domain-name">design</div>
+          <div class="domain-count">17 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-dir">3 directors</span>
+            <span class="type-badge type-know">12 knowledge</span>
+            <span class="type-badge type-obs">1 observer</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:100%;background:var(--green)"></div></div>
+          <div class="domain-meta"><span>Level 5/5</span><span>avg score 69.6</span></div>
+        </div>
+
+        <div class="domain-card lvl5">
+          <div class="domain-name">investing</div>
+          <div class="domain-count">47 skills — largest domain</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-dir">10 directors</span>
+            <span class="type-badge type-know">36 knowledge</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:100%;background:var(--green)"></div></div>
+          <div class="domain-meta"><span>Level 5/5</span><span>avg score 55.6</span></div>
+        </div>
+
+        <div class="domain-card lvl4">
+          <div class="domain-name">writing</div>
+          <div class="domain-count">24 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-dir">4 directors</span>
+            <span class="type-badge type-know">14 knowledge</span>
+            <span class="type-badge type-action">5 action</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:80%;background:var(--blue)"></div></div>
+          <div class="domain-meta"><span>Level 4/5</span><span>avg score 53.7</span></div>
+          <div class="warn-tag">16 skills with zero body_words</div>
+        </div>
+
+        <div class="domain-card issue">
+          <div class="domain-name">sommelier</div>
+          <div class="domain-count">36 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-dir">8 directors</span>
+            <span class="type-badge type-know">25 knowledge</span>
+            <span class="type-badge type-action">2 action</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:80%;background:var(--red)"></div></div>
+          <div class="domain-meta"><span>Level 4/5</span><span>avg score 66.1</span></div>
+          <div class="issue-tag">MISSING from network.domains</div>
+          <div class="warn-tag">17 skills with zero body_words</div>
+        </div>
+
+        <div class="domain-card lvl4">
+          <div class="domain-name">infrastructure</div>
+          <div class="domain-count">10 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-action">9 action</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:80%;background:var(--blue)"></div></div>
+          <div class="domain-meta"><span>Level 4/5</span><span>avg score 71.2</span></div>
+          <div style="font-size:10px; color:var(--muted); margin-top:6px;">All-action by design — procedural tools only</div>
+        </div>
+
+        <div class="domain-card lvl3">
+          <div class="domain-name">worldbuilding</div>
+          <div class="domain-count">16 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-know">12 knowledge</span>
+            <span class="type-badge type-action">3 action</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:60%;background:var(--yellow)"></div></div>
+          <div class="domain-meta"><span>Level 3/5</span><span>avg score 61.4</span></div>
+          <div class="warn-tag">12 skills with zero body_words</div>
+          <div style="font-size:10px; color:var(--yellow); margin-top:6px;">Gap: No directors yet</div>
+        </div>
+
+        <div class="domain-card lvl3">
+          <div class="domain-name">research</div>
+          <div class="domain-count">4 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-action">3 action</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:60%;background:var(--yellow)"></div></div>
+          <div class="domain-meta"><span>Level 3/5</span><span>avg score 71.8</span></div>
+          <div style="font-size:10px; color:var(--yellow); margin-top:6px;">Gap: No directors, no knowledge layer</div>
+        </div>
+
+        <div class="domain-card lvl2">
+          <div class="domain-name">artifacts</div>
+          <div class="domain-count">3 skills</div>
+          <div class="type-row">
+            <span class="type-badge type-orch">1 orchestrator</span>
+            <span class="type-badge type-know">2 knowledge</span>
+          </div>
+          <div class="maturity-bar"><div class="maturity-fill" style="width:40%;background:var(--orange)"></div></div>
+          <div class="domain-meta"><span>Level 2/5</span><span>avg score 76.7</span></div>
+        </div>
+
+        <div class="domain-card" style="border-color: var(--border);">
+          <div class="domain-name" style="color:var(--cyan)">_meta</div>
+          <div class="domain-count">1 skill</div>
+          <div class="type-row">
+            <span class="type-badge type-obs">1 observer</span>
+          </div>
+          <div style="font-size:10px; color:var(--muted); margin-top:8px;">Library health surveillance — tracks gaps, drift, and quality across all domains.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HIERARCHY -->
+    <div class="section" id="hierarchy">
+      <h2>Skill Hierarchy (Key Domains)</h2>
+      <p style="color: var(--muted); font-size: 11px; margin-bottom: 20px;">Showing orchestrator → director → knowledge/action trees for the 3 most active domains.</p>
+
+      <div class="hier-section">
+        <h3 style="color:var(--purple)">sommelier (36 skills)</h3>
+        <div class="hier-tree">
+<span class="tree-orch">bacchus</span> <span style="color:var(--muted)">— master sommelier orchestrator</span>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">tasting-evaluation</span> <span style="color:var(--muted)">— CMS deductive grid + WSET SAT</span>
+<div class="tree-indent1"><span style="color:var(--muted)">│  ├─ </span><span class="tree-know">deductive-method</span> · <span class="tree-know">fault-diagnosis</span> · <span class="tree-know">quality-assessment</span> · <span class="tree-know">aroma-lexicon</span></div>
+</div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">regions-terroir</span> <span style="color:var(--muted)">— wine geography + appellation law</span>
+<div class="tree-indent1"><span style="color:var(--muted)">│  ├─ </span><span class="tree-know">old-world-atlas</span> · <span class="tree-know">new-world-atlas</span> · <span class="tree-know">terroir-science</span> · <span class="tree-know">appellation-law</span></div>
+</div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">food-pairing</span> <span style="color:var(--muted)">— pairing science + bridge ingredients</span>
+<div class="tree-indent1"><span style="color:var(--muted)">│  ├─ </span><span class="tree-know">pairing-science</span> · <span class="tree-know">regional-traditions</span> · <span class="tree-know">bridge-ingredients</span></div>
+</div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">grape-varieties</span> · <span class="tree-dir">winemaking</span> · <span class="tree-dir">cellar-management</span> · <span class="tree-dir">wine-market</span> · <span class="tree-dir">sommelier-lab</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">└─ </span><span class="tree-action">blind-tasting-trainer</span> · <span class="tree-action">pairing-advisor</span></div>
+        </div>
+      </div>
+
+      <div class="hier-section">
+        <h3 style="color:var(--green)">investing (47 skills — largest)</h3>
+        <div class="hier-tree">
+<span class="tree-orch">archon</span> <span style="color:var(--muted)">— master investment intelligence orchestrator</span>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">macro-regime</span> · <span class="tree-dir">factor-investing</span> · <span class="tree-dir">equity-analysis</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">options-derivatives</span> · <span class="tree-dir">fixed-income</span> · <span class="tree-dir">alternative-assets</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">behavioral-finance</span> · <span class="tree-dir">portfolio-construction</span> · <span class="tree-dir">risk-management</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">market-microstructure</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">└─ </span><span style="color:var(--muted)">36 knowledge skills across all directors</span></div>
+        </div>
+      </div>
+
+      <div class="hier-section">
+        <h3 style="color:var(--blue)">game-theory (22 skills)</h3>
+        <div class="hier-tree">
+<span class="tree-orch">game-theory-orchestrator</span>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">strategic-foundations</span> — <span class="tree-know">classical-games</span> · <span class="tree-know">solution-concepts</span> · <span class="tree-know">extensive-form</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">information-games</span> — <span class="tree-know">signaling-screening</span> · <span class="tree-know">bayesian-persuasion</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">mechanism-design</span> — <span class="tree-know">auction-theory</span> · <span class="tree-know">matching-markets</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">evolutionary-games</span> · <span class="tree-dir">behavioral-extensions</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">└─ </span><span class="tree-action">game-solver</span> · <span class="tree-action">mechanism-designer</span> · <span class="tree-action">equilibrium-analyzer</span> · <span class="tree-action">payoff-modeler</span></div>
+        </div>
+      </div>
+
+      <div class="hier-section">
+        <h3 style="color:var(--orange)">writing (24 skills)</h3>
+        <div class="hier-tree">
+<span class="tree-orch">writing-orchestrator</span>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">prose-craft</span> — <span class="tree-know">diction</span> · <span class="tree-know">prose-rhythm</span> · <span class="tree-know">concrete-detail</span> · <span class="tree-know">scene-craft</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">narrative-structure</span> — <span class="tree-know">pacing</span> · <span class="tree-know">point-of-view</span> · <span class="tree-know">tension-release</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">├─ </span><span class="tree-dir">voice-style</span> · <span class="tree-dir">creative-nonfiction</span></div>
+<div class="tree-indent1"><span style="color:var(--muted)">└─ </span><span class="tree-action">prose-writer</span> · <span class="tree-action">style-mutator</span> · <span class="tree-action">outline-builder</span> · <span class="tree-action">critique-engine</span> · <span class="tree-action">opening-hook</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISSUES -->
+    <div class="section" id="issues">
+      <h2>Issues &amp; Fixes</h2>
+      <div class="issues-grid">
+
+        <div class="issue-card">
+          <div class="issue-sev critical"></div>
+          <div style="flex:1">
+            <div class="sev-label critical">CRITICAL</div>
+            <div class="issue-title">sommelier missing from network.domains</div>
+            <div class="issue-body">
+              registry.json's <code>network.domains</code> object contains 10 domains but is missing <code>sommelier</code>. This means <code>get_system_overview()</code> never reports on 36 sommelier skills — the entire domain is invisible to the library health check. The skills are registered in <code>registry.skills</code> but not wired into the network topology.
+              <br><br>
+              <strong style="color:var(--text)">Root cause:</strong> The sommelier domain was added after the network topology was last built. <code>sync-registry.py</code> adds skills to the <code>skills</code> map but doesn't update <code>network.domains</code>.
+            </div>
+            <div class="issue-fix">python3 scripts/sync-registry.py --apply  # rebuilds network.domains</div>
+          </div>
+        </div>
+
+        <div class="issue-card">
+          <div class="issue-sev critical"></div>
+          <div style="flex:1">
+            <div class="sev-label critical">CRITICAL</div>
+            <div class="issue-title">52 skills have zero body_words in registry</div>
+            <div class="issue-body">
+              52 skills show <code>body_words: 0</code> and <code>estimated_tokens_total: 0</code> in registry.json. Affected domains:
+              <br>• sommelier: 17 skills (new domain, metrics never run)
+              <br>• writing: 16 skills (recently added)
+              <br>• worldbuilding: 12 skills (recently added)
+              <br>• game-theory: 7 skills (recently added)
+              <br><br>
+              This means health scoring, maturity calculation, and token budget enforcement all run on stale zeros. The skills <em>exist on disk</em> — metrics just haven't been computed.
+            </div>
+            <div class="issue-fix">bash scripts/refresh-registry.sh $(python3 -c "import json; r=json.load(open('data/registry.json')); print(' '.join(k for k,v in r['skills'].items() if v['metrics']['body_words']==0))")</div>
+          </div>
+        </div>
+
+        <div class="issue-card">
+          <div class="issue-sev warning"></div>
+          <div style="flex:1">
+            <div class="sev-label warning">WARNING</div>
+            <div class="issue-title">dashboard.html deleted — no visual dashboard</div>
+            <div class="issue-body">
+              The interactive dashboard was deleted (shown in git status as <code> D dashboard.html</code>). This was the primary visual interface for browsing the skill library. The deletion appears intentional (terminal aesthetic redesign was in progress per commit history), but no replacement exists.
+              <br><br>
+              A new dashboard would need to read <code>data/registry.json</code> + <code>data/usage.jsonl</code> to show skill health, usage heatmap, and domain maturity.
+            </div>
+            <div class="issue-fix">git show HEAD~5:dashboard.html &gt; dashboard-backup.html  # recover old version</div>
+          </div>
+        </div>
+
+        <div class="issue-card">
+          <div class="issue-sev warning"></div>
+          <div style="flex:1">
+            <div class="sev-label warning">WARNING</div>
+            <div class="issue-title">35+ untracked files — new domains not committed</div>
+            <div class="issue-body">
+              Git status shows 35+ untracked files including entire new domain folders:
+              <br>• <code>skills/worldbuilding/</code> — character-belief-tracker, ecology-design, extrapolation-engine, faction-design, history-builder, magic-system-design, narrative-pacing, religion-design, technology-progression
+              <br>• <code>skills/sommelier/</code> — full 36-skill domain
+              <br>• <code>skills/writing/</code>, <code>skills/research/</code>, <code>skills/investing/</code>
+              <br>• <code>mcp-server/cli.py</code>, <code>mcp-server/shared.py</code>, <code>mcp-server/pyproject.toml</code>
+              <br>• <code>data/feedback.jsonl</code>, <code>data/gaps.jsonl</code>, <code>data/usage.jsonl</code>
+              <br><br>
+              These represent weeks of work that's registered but not version-controlled.
+            </div>
+            <div class="issue-fix">git add skills/ mcp-server/ data/ scripts/ &amp;&amp; git commit -m "feat: add new domains and mcp improvements"</div>
+          </div>
+        </div>
+
+        <div class="issue-card">
+          <div class="issue-sev info"></div>
+          <div style="flex:1">
+            <div class="sev-label info">INFO</div>
+            <div class="issue-title">5 gap searches with zero results</div>
+            <div class="issue-body">
+              The gaps.jsonl log shows 5 searches that returned no results from Claude Desktop, indicating coverage gaps:
+              <br>• <code>"algorithmic art"</code> — no creative coding / generative art skill
+              <br>• <code>"web artifacts builder"</code> — no web/frontend skill
+              <br>• <code>"theme factory"</code> — no visual theming skill
+              <br>• <code>"web research deep search"</code> — research domain is thin (4 skills)
+              <br>• <code>"researcher agent"</code> — no agent-focused research skill
+              <br><br>
+              These are real user needs that the library currently can't serve.
+            </div>
+            <div class="issue-fix">python3 mcp-server/cli.py gaps  # view full gap report</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DATA FLOW -->
+    <div class="section" id="dataflow">
+      <h2>Data Flow — How a Skill Gets Used</h2>
+
+      <div class="flow">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Request Path</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(88,166,255,0.2); border:1px solid var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--blue); flex-shrink:0;">1</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--text); font-size:12px;">User asks Claude a question</span>
+                <span style="color:var(--muted); font-size:11px; margin-left:12px;">e.g. "Evaluate this Burgundy wine"</span>
+              </div>
+            </div>
+            <div style="padding-left:12px; color:var(--muted);">↓</div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(88,166,255,0.2); border:1px solid var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--blue); flex-shrink:0;">2</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--cyan); font-size:12px; font-family:monospace;">search_skills("wine evaluation")</span>
+                <span style="color:var(--muted); font-size:11px; margin-left:12px;">→ matches: bacchus, tasting-evaluation, deductive-method</span>
+              </div>
+            </div>
+            <div style="padding-left:12px; color:var(--muted);">↓</div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(88,166,255,0.2); border:1px solid var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--blue); flex-shrink:0;">3</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--cyan); font-size:12px; font-family:monospace;">get_skill("bacchus")</span>
+                <span style="color:var(--muted); font-size:11px; margin-left:12px;">→ loads SKILL.md + references + agent definitions → logs to usage.jsonl</span>
+              </div>
+            </div>
+            <div style="padding-left:12px; color:var(--muted);">↓</div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(88,166,255,0.2); border:1px solid var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--blue); flex-shrink:0;">4</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--text); font-size:12px;">Claude applies skill methodology</span>
+                <span style="color:var(--muted); font-size:11px; margin-left:12px;">Uses CMS deductive grid, WSET SAT framework to answer</span>
+              </div>
+            </div>
+            <div style="padding-left:12px; color:var(--muted);">↓</div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(88,166,255,0.2); border:1px solid var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--blue); flex-shrink:0;">5</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--cyan); font-size:12px; font-family:monospace;">record_skill_feedback("bacchus", 4, "great deductive structure")</span>
+                <span style="color:var(--muted); font-size:11px; margin-left:12px;">→ feedback.jsonl → recalibrate_scores.py adjusts composite score</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;">Write Path (Authoring a New Skill)</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(255,166,87,0.2); border:1px solid var(--orange); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--orange); flex-shrink:0;">A</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--text); font-size:12px;">Write SKILL.md via Claude Code (Write tool)</span>
+              </div>
+            </div>
+            <div style="padding-left:12px; color:var(--muted);">↓ PostToolUse hook fires</div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(255,166,87,0.2); border:1px solid var(--orange); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--orange); flex-shrink:0;">B</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--yellow); font-size:12px;">skill-file-watcher.sh validates structure + computes metrics</span>
+                <span style="color:var(--muted); font-size:11px; margin-left:12px;">→ outputs ✓ / ⚠ / ✗ to terminal</span>
+              </div>
+            </div>
+            <div style="padding-left:12px; color:var(--muted);">↓</div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:24px; height:24px; background:rgba(255,166,87,0.2); border:1px solid var(--orange); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:var(--orange); flex-shrink:0;">C</div>
+              <div style="background:var(--surface2); border:1px solid var(--border); border-radius:6px; padding:10px 14px; flex:1;">
+                <span style="color:var(--blue); font-size:12px;">refresh-registry.sh or sync-registry.py --apply updates registry.json</span>
+                <span style="color:var(--muted); font-size:11px; margin-left:12px;">→ skill is now live and discoverable via MCP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYTICS -->
+    <div class="section" id="analytics">
+      <h2>Usage Analytics</h2>
+
+      <h3 style="font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;">Most Used Skills (from usage.jsonl)</h3>
+      <div class="usage-list">
+        <div class="usage-row"><span class="usage-name">game-theory-orchestrator</span><span class="usage-type" style="color:var(--purple)">orchestrator</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:100%"></div></div><span class="usage-count">5</span></div>
+        <div class="usage-row"><span class="usage-name">master-artificer</span><span class="usage-type" style="color:var(--purple)">orchestrator</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:60%"></div></div><span class="usage-count">3</span></div>
+        <div class="usage-row"><span class="usage-name">game-solver</span><span class="usage-type" style="color:var(--orange)">action</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:80%"></div></div><span class="usage-count">4</span></div>
+        <div class="usage-row"><span class="usage-name">visual-composer</span><span class="usage-type" style="color:var(--green)">knowledge</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:60%"></div></div><span class="usage-count">3</span></div>
+        <div class="usage-row"><span class="usage-name">spelunker</span><span class="usage-type" style="color:var(--purple)">orchestrator</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:40%"></div></div><span class="usage-count">2</span></div>
+        <div class="usage-row"><span class="usage-name">design-orchestrator</span><span class="usage-type" style="color:var(--purple)">orchestrator</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:60%"></div></div><span class="usage-count">3</span></div>
+        <div class="usage-row"><span class="usage-name">diction</span><span class="usage-type" style="color:var(--green)">knowledge</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:40%"></div></div><span class="usage-count">2</span></div>
+        <div class="usage-row"><span class="usage-name">concrete-detail</span><span class="usage-type" style="color:var(--green)">knowledge</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:40%"></div></div><span class="usage-count">2</span></div>
+        <div class="usage-row"><span class="usage-name">prose-rhythm</span><span class="usage-type" style="color:var(--green)">knowledge</span><div class="usage-bar-wrap"><div class="usage-bar" style="width:40%"></div></div><span class="usage-count">2</span></div>
+      </div>
+
+      <h3 style="font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; margin-top:24px;">Coverage Gaps (from gaps.jsonl)</h3>
+      <div class="gap-list">
+        <div class="gap-row"><span class="gap-query">"algorithmic art"</span><span class="gap-count gap-zero">0 results</span></div>
+        <div class="gap-row"><span class="gap-query">"web artifacts builder"</span><span class="gap-count gap-zero">0 results</span></div>
+        <div class="gap-row"><span class="gap-query">"theme factory"</span><span class="gap-count gap-zero">0 results</span></div>
+        <div class="gap-row"><span class="gap-query">"web research deep search"</span><span class="gap-count gap-zero">0 results</span></div>
+        <div class="gap-row"><span class="gap-query">"researcher agent"</span><span class="gap-count gap-zero">0 results</span></div>
+      </div>
+
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 24px;">
+        <div style="font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 12px;">Feedback Status</div>
+        <div style="font-size: 12px; color: var(--muted);">
+          <code style="color:var(--yellow)">feedback.jsonl</code> is empty — no skills have been rated yet.
+          <br><br>
+          Once you start using <code style="color:var(--cyan)">record_skill_feedback()</code> after each session, <code style="color:var(--cyan)">scripts/recalibrate_scores.py</code> can blend manual ratings into composite scores to drive quality improvements.
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<script>
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>

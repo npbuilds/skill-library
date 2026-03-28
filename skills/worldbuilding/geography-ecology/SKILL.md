@@ -96,6 +96,8 @@ Now ask: given these mountains, rivers, resources, and barriers — what kind of
 
 ## Ecology
 
+For deep ecosystem design (the Getz 10-niche model, complete food webs, fantasy ecology), reference the `ecology-design` skill. This section covers the basics of how ecology shapes civilization.
+
 ### The Food Web Shapes the World
 
 What lives in a region determines what people eat, wear, build with, and worship:

@@ -73,10 +73,19 @@ DESCRIPTION=$(awk '
   END { sub(/^ /, "", desc); print desc }
 ' "$SKILL_DIR/SKILL.md")
 
-BODY_WORDS=$(echo "$METRICS_JSON" | python3 -c "import json,sys; print(json.load(sys.stdin)['body_words'])")
-EST_TOKENS=$(echo "$METRICS_JSON" | python3 -c "import json,sys; print(json.load(sys.stdin)['estimated_tokens_total'])")
+BODY_WORDS=$(echo "$METRICS_JSON" | python3 -c "import json,sys; print(json.load(sys.stdin)['body_words'])" 2>/dev/null)
+if [ -z "$BODY_WORDS" ]; then
+  echo "ERROR: Failed to parse body_words from metrics" >&2
+  exit 1
+fi
+EST_TOKENS=$(echo "$METRICS_JSON" | python3 -c "import json,sys; print(json.load(sys.stdin)['estimated_tokens_total'])" 2>/dev/null)
+if [ -z "$EST_TOKENS" ]; then
+  echo "ERROR: Failed to parse estimated_tokens_total from metrics" >&2
+  exit 1
+fi
 
 # Generate manifest.json
+EXPORT_DATE=$(date +%Y-%m-%d)
 python3 -c "
 import json, sys
 
@@ -102,11 +111,11 @@ manifest = {
     'exported_from': {
         'plugin': 'skill-infra',
         'plugin_version': sys.argv[5],
-        'export_date': '$(date +%Y-%m-%d)'
+        'export_date': sys.argv[6]
     }
 }
 print(json.dumps(manifest, indent=2))
-" "$SKILL_NAME" "$DESCRIPTION" "$BODY_WORDS" "$EST_TOKENS" "$PLUGIN_VERSION" > "$EXPORT_DIR/manifest.json"
+" "$SKILL_NAME" "$DESCRIPTION" "$BODY_WORDS" "$EST_TOKENS" "$PLUGIN_VERSION" "$EXPORT_DATE" > "$EXPORT_DIR/manifest.json"
 
 # Generate README.md
 cat > "$EXPORT_DIR/README.md" << READMEEOF

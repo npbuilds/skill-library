@@ -506,156 +506,6 @@
     margin-top: 2px;
   }
 
-  /* ─── Domain Summary ─── */
-  .domain-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 12px;
-  }
-  .domain-row:last-child { border-bottom: none; }
-  .domain-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .domain-name {
-    width: 120px;
-    font-weight: 700;
-    color: var(--text-0);
-    flex-shrink: 0;
-  }
-  .domain-bar-track {
-    flex: 1;
-    height: 16px;
-    background: var(--bg-3);
-    border-radius: 3px;
-    overflow: hidden;
-    position: relative;
-  }
-  .domain-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.6s ease;
-    min-width: 2px;
-  }
-  .domain-stats {
-    width: 180px;
-    text-align: right;
-    color: var(--text-2);
-    font-size: 11px;
-    flex-shrink: 0;
-  }
-  .domain-stats strong { color: var(--text-0); font-weight: 700; }
-
-  /* ─── Domain-Grouped Token Chips ─── */
-  .domain-group-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 12px;
-    margin-top: 10px;
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    cursor: pointer;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--text-1);
-    transition: all var(--transition);
-    user-select: none;
-  }
-  .domain-group-header:first-child { margin-top: 0; }
-  .domain-group-header:hover { border-color: var(--prompt); }
-  .domain-group-header .dg-arrow {
-    transition: transform 0.2s;
-    color: var(--text-3);
-    font-size: 10px;
-  }
-  .domain-group-header.open .dg-arrow { transform: rotate(90deg); }
-  .domain-group-chips {
-    display: none;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 6px;
-    padding: 8px 0;
-  }
-  .domain-group-header.open + .domain-group-chips { display: grid; }
-
-  /* ─── Score Distribution ─── */
-  .score-dist {
-    display: flex;
-    align-items: flex-end;
-    gap: 3px;
-    height: 36px;
-    margin-top: 6px;
-  }
-  .score-dist-bar {
-    flex: 1;
-    border-radius: 2px 2px 0 0;
-    min-height: 2px;
-    position: relative;
-    transition: height 0.4s ease;
-  }
-  .score-dist-bar::after {
-    content: attr(data-count);
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--text-2);
-  }
-  .score-dist-labels {
-    display: flex;
-    gap: 3px;
-    margin-top: 2px;
-  }
-  .score-dist-labels span {
-    flex: 1;
-    text-align: center;
-    font-size: 8px;
-    color: var(--text-3);
-    font-weight: 600;
-  }
-
-  /* ─── Domain Badge (leaderboard) ─── */
-  .domain-badge {
-    font-size: 10px;
-    font-weight: 600;
-    padding: 1px 6px;
-    border-radius: 3px;
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-  }
-
-  /* ─── Network Legend ─── */
-  .net-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 12px 0 0;
-    border-top: 1px solid var(--border);
-    margin-top: 8px;
-  }
-  .net-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 10px;
-    color: var(--text-2);
-    font-weight: 600;
-  }
-  .net-legend-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1.5px solid;
-  }
-
   /* ─── Table ─── */
   .tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
   .tbl th {
@@ -1052,39 +902,6 @@
   var S = R.skills, names = Object.keys(S), list = Object.values(S);
   var current = null, filter = 'all', query = '';
 
-  /* ── Domain utilities ── */
-  var domainColors = {
-    'infrastructure': { color: 'var(--cyan)', raw: '--cyan' },
-    'design':         { color: 'var(--pink)', raw: '--pink' },
-    'game-theory':    { color: 'var(--orange)', raw: '--orange' },
-    'worldbuilding':  { color: 'var(--green)', raw: '--green' },
-    'data-science':   { color: 'var(--prompt)', raw: '--prompt' },
-    'meta':           { color: 'var(--text-3)', raw: '--text-3' }
-  };
-  var defaultDomainColor = { color: 'var(--text-2)', raw: '--text-2' };
-
-  function getDomain(skill) {
-    var tags = skill.tags || [];
-    for (var i = 0; i < tags.length; i++) {
-      if (tags[i].indexOf('domain:') === 0) return tags[i].split(':')[1];
-    }
-    return 'other';
-  }
-
-  function getDomainColor(domain) {
-    return domainColors[domain] || defaultDomainColor;
-  }
-
-  function groupByDomain() {
-    var groups = {};
-    list.forEach(function(s) {
-      var d = getDomain(s);
-      if (!groups[d]) groups[d] = [];
-      groups[d].push(s);
-    });
-    return groups;
-  }
-
   /* ── HTML escape helper (XSS prevention) ── */
   function esc(s) {
     if (s == null) return '';
@@ -1216,77 +1033,20 @@
 
   var ov = '';
 
-  // score distribution histogram
-  var scores = list.map(function(s) { return s.composite_score || 0; });
-  var minScore = Math.min.apply(null, scores), maxScore = Math.max.apply(null, scores);
-  var buckets = [
-    { label: '0-59', min: 0, max: 59, count: 0, color: 'var(--red)' },
-    { label: '60-74', min: 60, max: 74, count: 0, color: 'var(--orange)' },
-    { label: '75-89', min: 75, max: 89, count: 0, color: 'var(--yellow)' },
-    { label: '90-99', min: 90, max: 99, count: 0, color: 'var(--green)' },
-    { label: '100', min: 100, max: 100, count: 0, color: 'var(--cyan)' }
-  ];
-  scores.forEach(function(sc) {
-    for (var i = 0; i < buckets.length; i++) {
-      if (sc >= buckets[i].min && sc <= buckets[i].max) { buckets[i].count++; break; }
-    }
-  });
-  var maxBucket = Math.max.apply(null, buckets.map(function(b) { return b.count; }));
-
   // stats
   ov += '<div class="stats-grid">';
-  ov += '<div class="stat"><div class="stat-label">skills</div>';
-  ov += '<div class="stat-value" style="color:var(--prompt)">' + names.length + '</div>';
-  ov += '<div class="stat-sub">' + healthy + '/' + names.length + ' healthy</div></div>';
-
-  ov += '<div class="stat"><div class="stat-label">avg score</div>';
-  ov += '<div class="stat-value" style="color:var(--green)">' + avg + '</div>';
-  ov += '<div class="stat-sub">range: ' + minScore + ' – ' + maxScore + '</div>';
-  ov += '<div class="score-dist">';
-  buckets.forEach(function(b) {
-    var h = maxBucket ? Math.max(4, (b.count / maxBucket) * 32) : 4;
-    ov += '<div class="score-dist-bar" style="height:' + h + 'px;background:' + b.color + '" data-count="' + b.count + '"></div>';
+  var ss = [
+    { l: 'skills', v: names.length, c: 'prompt', sub: healthy + '/' + names.length + ' healthy' },
+    { l: 'avg score', v: avg, c: 'green', sub: 'composite rating' },
+    { l: 'meta tokens', v: totalMeta, c: totalMeta < 600 ? 'green' : 'yellow', sub: 'always loaded' },
+    { l: 'total tokens', v: totalTok.toLocaleString(), c: 'cyan', sub: 'all skills triggered' }
+  ];
+  ss.forEach(function(s) {
+    ov += '<div class="stat"><div class="stat-label">' + s.l + '</div>';
+    ov += '<div class="stat-value" style="color:var(--' + s.c + ')">' + s.v + '</div>';
+    ov += '<div class="stat-sub">' + s.sub + '</div></div>';
   });
   ov += '</div>';
-  ov += '<div class="score-dist-labels">';
-  buckets.forEach(function(b) { ov += '<span>' + b.label + '</span>'; });
-  ov += '</div></div>';
-
-  ov += '<div class="stat"><div class="stat-label">meta tokens</div>';
-  ov += '<div class="stat-value" style="color:var(' + (totalMeta < 600 ? '--green' : '--yellow') + ')">' + totalMeta + '</div>';
-  ov += '<div class="stat-sub">always loaded</div></div>';
-
-  ov += '<div class="stat"><div class="stat-label">total tokens</div>';
-  ov += '<div class="stat-value" style="color:var(--cyan)">' + totalTok.toLocaleString() + '</div>';
-  ov += '<div class="stat-sub">all skills triggered</div></div>';
-  ov += '</div>';
-
-  // domain summary panel
-  var domainGroups = groupByDomain();
-  var domainStats = Object.keys(domainGroups).map(function(d) {
-    var skills = domainGroups[d];
-    var tok = 0, sc = 0;
-    skills.forEach(function(s) {
-      tok += (s.metrics || {}).estimated_tokens_total || 0;
-      sc += s.composite_score || 0;
-    });
-    return { name: d, count: skills.length, tokens: tok, avgScore: (sc / skills.length).toFixed(0) };
-  }).sort(function(a, b) { return b.tokens - a.tokens; });
-  var maxDomainTok = Math.max.apply(null, domainStats.map(function(d) { return d.tokens; }));
-
-  ov += '<div class="panel"><div class="panel-bar"><div class="panel-bar-dots"><span></span><span></span><span></span></div>domains</div>';
-  ov += '<div class="panel-body">';
-  domainStats.forEach(function(d) {
-    var dc = getDomainColor(d.name);
-    var barW = maxDomainTok ? (d.tokens / maxDomainTok) * 100 : 0;
-    ov += '<div class="domain-row">';
-    ov += '<div class="domain-dot" style="background:' + dc.color + '"></div>';
-    ov += '<div class="domain-name">' + esc(d.name) + '</div>';
-    ov += '<div class="domain-bar-track"><div class="domain-bar-fill" style="width:' + barW + '%;background:' + dc.color + '"></div></div>';
-    ov += '<div class="domain-stats"><strong>' + d.count + '</strong> skills &middot; avg <strong>' + d.avgScore + '</strong> &middot; ' + d.tokens.toLocaleString() + ' tok</div>';
-    ov += '</div>';
-  });
-  ov += '</div></div>';
 
   // token budget panel
   var pct = Math.min(100, (totalMeta / 600) * 100);
@@ -1296,29 +1056,9 @@
   ov += '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-2);font-weight:600">';
   ov += '<span>' + totalMeta + ' / 600</span><span>' + pct.toFixed(0) + '%</span></div>';
   ov += '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%;background:' + pc + '"></div></div>';
-  ov += '<div class="token-chips-grouped">';
-  var sortedDomains = Object.keys(domainGroups).sort(function(a, b) {
-    var ta = 0, tb = 0;
-    domainGroups[a].forEach(function(s) { ta += (s.metrics || {}).estimated_tokens_metadata || 0; });
-    domainGroups[b].forEach(function(s) { tb += (s.metrics || {}).estimated_tokens_metadata || 0; });
-    return tb - ta;
-  });
-  sortedDomains.forEach(function(d) {
-    var skills = domainGroups[d].slice().sort(function(a, b) {
-      return ((b.metrics || {}).estimated_tokens_metadata || 0) - ((a.metrics || {}).estimated_tokens_metadata || 0);
-    });
-    var dTok = 0;
-    skills.forEach(function(s) { dTok += (s.metrics || {}).estimated_tokens_metadata || 0; });
-    var dc = getDomainColor(d);
-    ov += '<div class="domain-group-header" data-domain="' + esc(d) + '" style="border-left:3px solid ' + dc.color + '">';
-    ov += '<span>' + esc(d) + ' <span style="color:var(--text-3);font-weight:500">' + skills.length + ' skills</span></span>';
-    ov += '<span><span style="color:var(--text-0)">' + dTok + '</span> meta tok <span class="dg-arrow">&#9654;</span></span>';
-    ov += '</div>';
-    ov += '<div class="domain-group-chips">';
-    skills.forEach(function(s) {
-      ov += '<div class="token-chip" data-s="' + esc(s.name) + '">' + esc(s.name.replace('skill-','')) + '<strong>' + ((s.metrics || {}).estimated_tokens_metadata || 0) + '</strong></div>';
-    });
-    ov += '</div>';
+  ov += '<div class="token-chips">';
+  list.forEach(function(s) {
+    ov += '<div class="token-chip" data-s="' + esc(s.name) + '">' + esc(s.name.replace('skill-','')) + '<strong>' + ((s.metrics || {}).estimated_tokens_metadata || 0) + '</strong></div>';
   });
   ov += '</div></div></div>';
 
@@ -1328,18 +1068,14 @@
 
   document.getElementById('pane-overview').innerHTML = ov;
 
-  // wire token chips and domain group headers
+  // wire token chips
   document.querySelectorAll('.token-chip').forEach(function(c) { c.onclick = function() { select(this.dataset.s); }; });
-  document.querySelectorAll('.domain-group-header').forEach(function(h) {
-    h.onclick = function() { this.classList.toggle('open'); };
-  });
 
   // leaderboard sorting
   var sortKey = 'composite_score', sortDir = -1;
 
   function gv(s, k) {
     if (k === 'name') return s.name;
-    if (k === 'domain') return getDomain(s);
     if (s.metrics && s.metrics[k] !== undefined) return s.metrics[k];
     if (s[k] !== undefined) return s[k];
     return 0;
@@ -1352,7 +1088,7 @@
     });
 
     var cols = [
-      { k: 'name', l: 'skill' }, { k: 'domain', l: 'domain' }, { k: 'composite_score', l: 'score' },
+      { k: 'name', l: 'skill' }, { k: 'composite_score', l: 'score' },
       { k: 'body_words', l: 'words' }, { k: 'estimated_tokens_total', l: 'tokens' },
       { k: 'health_status', l: 'health' }
     ];
@@ -1368,10 +1104,7 @@
     sorted.forEach(function(s) {
       var sm = s.metrics || {};
       h += '<tr data-s="' + esc(s.name) + '">';
-      var sDomain = getDomain(s);
-      var sDc = getDomainColor(sDomain);
       h += '<td class="t-name">' + esc(s.name) + '</td>';
-      h += '<td><span class="domain-badge" style="color:' + sDc.color + ';border-color:' + sDc.color + '">' + esc(sDomain) + '</span></td>';
       h += '<td><span class="score-pip" style="width:' + ((s.composite_score || 0) * 0.5) + 'px"></span>' + (s.composite_score || 0) + '</td>';
       h += '<td>' + (sm.body_words || 0) + '</td>';
       h += '<td>' + (sm.estimated_tokens_total || 0).toLocaleString() + '</td>';
@@ -1399,12 +1132,7 @@
      ══════════════════════════════════════ */
   function renderNetwork() {
     var el = document.getElementById('pane-network');
-    var legendHtml = '<div class="net-legend">';
-    Object.keys(domainColors).forEach(function(d) {
-      legendHtml += '<div class="net-legend-item"><div class="net-legend-dot" style="border-color:' + domainColors[d].color + ';background:' + domainColors[d].color + '"></div>' + d + '</div>';
-    });
-    legendHtml += '</div>';
-    el.innerHTML = '<div class="panel"><div class="panel-bar"><div class="panel-bar-dots"><span></span><span></span><span></span></div>dependency graph</div><div class="panel-body"><div class="net-wrap" id="net"></div>' + legendHtml + '</div></div>';
+    el.innerHTML = '<div class="panel"><div class="panel-bar"><div class="panel-bar-dots"><span></span><span></span><span></span></div>dependency graph</div><div class="panel-body"><div class="net-wrap" id="net"></div></div></div>';
 
     var c = document.getElementById('net');
     var w = c.offsetWidth; if (!w) return;
@@ -1457,9 +1185,7 @@
     names.forEach(function(n) {
       var p = pos[n]; if (!p) return;
       var ac = current === n ? ' active' : '';
-      var nDomain = getDomain(S[n]);
-      var nDc = getDomainColor(nDomain);
-      html += '<div class="net-node' + ac + '" style="left:' + p.x + 'px;top:' + p.y + 'px;transform:translateX(-50%);border-color:' + nDc.color + ';border-left:3px solid ' + nDc.color + '" data-s="' + esc(n) + '">' +
+      html += '<div class="net-node' + ac + '" style="left:' + p.x + 'px;top:' + p.y + 'px;transform:translateX(-50%)" data-s="' + esc(n) + '">' +
         esc(n.replace('skill-','')) + '<span class="n-score">' + S[n].composite_score + '</span></div>';
     });
     c.innerHTML = html;

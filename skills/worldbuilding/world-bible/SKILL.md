@@ -13,6 +13,15 @@ Everything in this world derives from constraints. Geography constrains civiliza
 
 This skill holds the non-negotiable rules. Nothing produced by any other worldbuilding skill should contradict what's recorded here. When axioms change, they change here first, and everything downstream adapts.
 
+### Reference Library
+
+- `references/world-axioms.md` — the canonical rules as they crystallize
+- `references/revelation-layers.md` — nested truth structure and revelation spiral
+- `references/faction-conflict-web.md` — faction relationships, vulnerabilities, and triggers
+- `references/wrede-worldbuilding-taxonomy.md` — Patricia Wrede's 58-subcategory master checklist (SFWA standard)
+- `references/onlyworlds-ontology.md` — 22 element types for fictional worlds (the closest thing to a universal schema)
+- `references/generation-pipeline.md` — the order in which world elements constrain each other (Dwarf Fortress / Azgaar methodology)
+
 ## Core Constraints
 
 The hard physics of this world. What works the same as our universe, and what doesn't.

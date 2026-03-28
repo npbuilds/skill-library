@@ -102,8 +102,14 @@ print('true' if sys.argv[2] in reg.get('skills', {}) else 'false')
 " "$PLUGIN_ROOT/data/registry.json" "$SKILL_NAME" 2>/dev/null || echo "false")
 
   if [ "$HAS_ENTRY" = "true" ]; then
-    echo "  Registry entry exists — metrics may need refresh via skill-registry sync"
+    # Auto-refresh registry metrics for this skill
+    bash "$PLUGIN_ROOT/scripts/refresh-registry.sh" "$SKILL_NAME" && \
+      echo "  Registry metrics refreshed for $SKILL_NAME" || \
+      echo "  Registry refresh failed for $SKILL_NAME — run: bash scripts/refresh-registry.sh $SKILL_NAME"
   else
-    echo "  Not yet registered — use skill-registry to add"
+    # Auto-register new skills to prevent registry drift
+    python3 "$PLUGIN_ROOT/scripts/sync-registry.py" --apply 2>/dev/null && \
+      echo "  Auto-registered $SKILL_NAME in registry" || \
+      echo "  Auto-register failed — run: python3 scripts/sync-registry.py --apply"
   fi
 fi

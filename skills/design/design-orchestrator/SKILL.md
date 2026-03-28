@@ -51,29 +51,53 @@ Read `references/style-taxonomy.md` for the full domain catalog.
 | Spatial / Environmental | Signage, exhibition, wayfinding | Scale, materiality, viewer flow |
 | Photography / Composition | Photo direction, styling, grading | Framing, mood, color story |
 
+### Phase 2.5 — Consult Aesthetic Identity
+
+Before setting creative direction, read the user's evolving aesthetic profile:
+
+1. Read `skills/design/aesthetic-identity/references/current-profile.md` for the narrative summary
+2. Check `skills/design/aesthetic-identity/references/dimension-registry.md` for specific dimensional positions
+
+**How the profile shapes Phase 3:**
+- **High-confidence dimensions (>0.7):** pre-populate the Creative Brief with these as defaults. Note them as "from your established aesthetic" so the user knows they can override.
+- **Medium-confidence (0.3–0.7):** use as soft suggestions when the user's brief is vague. "You tend toward warm palettes — shall I start there?"
+- **Low-confidence (<0.3):** ignore, treat as open territory.
+- **If profile is empty:** skip this phase entirely, proceed to Phase 3 with no defaults.
+
+If the user's explicit brief contradicts the profile, **the user's brief wins**. The profile is a gravitational default, not a constraint.
+
 ### Phase 3 — Set Creative Direction
 
-Before delegating, establish the design guardrails:
+Before delegating, establish the design guardrails. Start from the aesthetic identity defaults (if any), then layer in the user's specific brief:
 
 1. **Palette** — select or constrain the color approach
+   - Check profile: Temperature, Chromatic Range, Contrast dimensions
    - Specific hex values, or a mood-based range (warm earth tones, cool monochromes, vibrant saturated, muted pastels)
    - Light vs dark dominant
    - Accent strategy (complementary pop, analogous harmony, monochrome + one accent)
 
 2. **Typography direction** — if applicable
+   - Check profile: Precision, Temporal Register dimensions
    - Serif/sans-serif/mono/display
    - Weight range (thin and airy vs bold and heavy)
    - Hierarchy levels needed
 
 3. **Composition principles** — spatial organization
+   - Check profile: Density, Symmetry, Depth dimensions
    - Grid vs organic flow
    - Density (sparse/minimal vs rich/layered)
    - Focal point strategy
 
-4. **Mood board keywords** — 3-5 adjective anchors that all sub-agents must respect
+4. **Motion direction** — if applicable
+   - Check profile: Motion Feel dimension
+   - Consult `skills/design/motion-design/SKILL.md` for easing and choreography
+   - Duration range, easing personality, stagger approach
+
+5. **Mood board keywords** — 3-5 adjective anchors that all sub-agents must respect
+   - Check profile: mood vocabulary in `current-profile.md`
    - Example: "precise, warm, approachable, modern, grounded"
 
-5. **Anti-patterns** — what to explicitly avoid
+6. **Anti-patterns** — what to explicitly avoid
    - Example: "no gradients, no stock photo aesthetic, no rounded corners"
 
 Document these as a **Creative Brief** that gets passed to every sub-agent.
@@ -113,6 +137,18 @@ After agent(s) return results:
 2. **Present options** — show the user 2-3 direction options when possible, not just one
 3. **Explain the why** — briefly justify key design decisions (this builds the user's design intuition)
 
+### Phase 6 — Observe and Evolve
+
+After the user responds to the output, activate the style-evolution-observer protocol:
+
+1. Read `skills/design/style-evolution-observer/SKILL.md` for the inference protocol
+2. Re-read the Creative Brief from Phase 3 to provide the output's dimensional position (palette, density, motion, mood, composition choices)
+3. Read the user's behavioral signals (accepted? revised? rejected? praised?)
+4. Update the aesthetic-identity profile per the observer's update protocol
+5. Log meaningful changes to `skills/design/aesthetic-identity/references/evolution-log.md`
+
+This phase is silent — it happens in the background without interrupting the user's flow. The user sees the result of evolution in future sessions when Phase 2.5 reads an increasingly accurate profile.
+
 ## Knowledge Layer
 
 Before making creative decisions, consult the relevant subdomain director. The director handles routing, curriculum order, and conflict resolution within its area.
@@ -134,6 +170,15 @@ The director will determine which knowledge skills to load and in what order. Do
 | Color Theory | `skills/design/visual-communication/color-theory/SKILL.md` |
 | Design Principles | `skills/design/visual-communication/design-principles/SKILL.md` |
 | Visual Perception | `skills/design/visual-communication/visual-perception/SKILL.md` |
+| Motion Design | `skills/design/motion-design/SKILL.md` |
+| Illustration Direction | `skills/design/illustration-direction/SKILL.md` |
+
+**Aesthetic identity layer** (consult before setting creative direction):
+
+| Skill | Path | Purpose |
+|-------|------|---------|
+| Aesthetic Identity | `skills/design/aesthetic-identity/SKILL.md` | User's evolving style profile |
+| Style Evolution Observer | `skills/design/style-evolution-observer/SKILL.md` | Post-output feedback inference |
 
 Pass subdomain director paths to sub-agents in the Creative Context Block so they can consult the routing layer as needed.
 

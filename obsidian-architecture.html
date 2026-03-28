@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Library + Obsidian Architecture</title>
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --border: #30363d;
+    --text: #e6edf3; --text-dim: #8b949e; --accent: #58a6ff;
+    --design: #4a8a62; --game: #de4f20; --data: #349253;
+    --world: #8f5567; --infra: #e57f73; --research: #ee9600;
+    --meta: #888888; --writing: #55953d; --artifacts: #ff8c00;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
+  h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.3rem; font-weight: 600; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  h3 { font-size: 1rem; font-weight: 500; color: var(--text-dim); margin-bottom: 0.5rem; }
+
+  .header { padding: 2rem 2rem 1rem; text-align: center; }
+  .header p { color: var(--text-dim); font-size: 0.95rem; }
+
+  .section { padding: 1.5rem 2rem; max-width: 1400px; margin: 0 auto; }
+
+  /* Architecture layers */
+  .arch-container { display: flex; flex-direction: column; gap: 0; align-items: center; }
+  .arch-layer {
+    width: 100%; max-width: 900px; padding: 1.5rem 2rem;
+    border-radius: 12px; position: relative; text-align: center;
+  }
+  .arch-layer h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .arch-layer p { font-size: 0.85rem; color: var(--text-dim); }
+  .layer-obsidian { background: linear-gradient(135deg, #2d1b4e, #1a1040); border: 1px solid #7c3aed; }
+  .layer-obsidian h3 { color: #a78bfa; }
+  .layer-transform { background: linear-gradient(135deg, #3b2a15, #2a1f10); border: 1px solid #f59e0b; }
+  .layer-transform h3 { color: #fbbf24; }
+  .layer-source { background: linear-gradient(135deg, #0c2d48, #0a1929); border: 1px solid #3b82f6; }
+  .layer-source h3 { color: #60a5fa; }
+  .arch-arrow { color: var(--text-dim); font-size: 2rem; line-height: 1; padding: 0.3rem 0; }
+  .arch-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 0.75rem; }
+  .chip { background: rgba(255,255,255,0.08); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; color: var(--text-dim); font-family: monospace; }
+
+  /* Stats cards */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 1.25rem; text-align: center;
+  }
+  .stat-card .num { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+  .stat-card .label { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem; }
+
+  /* Domain bars */
+  .domain-bars { display: flex; flex-direction: column; gap: 0.5rem; }
+  .domain-bar-row { display: flex; align-items: center; gap: 0.75rem; }
+  .domain-bar-label { width: 120px; text-align: right; font-size: 0.8rem; color: var(--text-dim); }
+  .domain-bar-track { flex: 1; height: 24px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; position: relative; }
+  .domain-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 0.75rem; font-weight: 600; min-width: 30px; transition: width 1s ease; }
+  .domain-bar-count { font-size: 0.8rem; color: var(--text-dim); width: 30px; }
+
+  /* Type breakdown */
+  .type-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1rem; }
+  .type-badge {
+    padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem;
+    background: var(--surface); border: 1px solid var(--border);
+  }
+  .type-badge .count { font-weight: 700; font-size: 1.1rem; }
+
+  /* Graph */
+  .graph-container { position: relative; width: 100%; height: 600px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  canvas { display: block; }
+  .graph-legend { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--text-dim); }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .tooltip {
+    position: absolute; background: #1c2128; border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem; border-radius: 8px; font-size: 0.8rem;
+    pointer-events: none; display: none; z-index: 10; white-space: nowrap;
+  }
+
+  /* Bug report */
+  .bug-table { width: 100%; border-collapse: collapse; }
+  .bug-table th, .bug-table td { padding: 0.6rem 1rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .bug-table th { color: var(--text-dim); font-weight: 500; }
+  .bug-sev { font-weight: 700; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; }
+  .sev-crit { background: #b91c1c33; color: #fca5a5; }
+  .sev-high { background: #b4530033; color: #fbbf24; }
+  .sev-med { background: #1e3a5f33; color: #93c5fd; }
+  .sev-low { background: #1f2d1f33; color: #86efac; }
+  .fixed { color: #4ade80; }
+
+  /* Data flow diagram */
+  .flow-grid { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 0; align-items: stretch; margin: 1.5rem 0; }
+  .flow-box { padding: 1rem; border-radius: 8px; font-size: 0.8rem; }
+  .flow-arrow-h { display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-size: 1.5rem; padding: 0 0.5rem; }
+  .flow-src { background: #0c2d4880; border: 1px solid #3b82f6; }
+  .flow-mid { background: #3b2a1580; border: 1px solid #f59e0b; }
+  .flow-dst { background: #2d1b4e80; border: 1px solid #7c3aed; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Skill Library + Obsidian Architecture</h1>
+  <p>How the Obsidian exploration vault layers on top of the skill infrastructure</p>
+</div>
+
+<!-- Section 1: Architecture Layers -->
+<div class="section">
+  <h2>Architecture Layers</h2>
+  <div class="arch-container">
+    <div class="arch-layer layer-obsidian">
+      <h3>Obsidian Exploration Vault</h3>
+      <p>Flat .md files with injected wikilinks, MOCs per domain, and _Index.md</p>
+      <div class="arch-chips">
+        <span class="chip">exports/obsidian-vault/</span>
+        <span class="chip">[[wikilinks]]</span>
+        <span class="chip">Graph View</span>
+        <span class="chip">Backlinks</span>
+        <span class="chip">tag: domain + type</span>
+      </div>
+    </div>
+    <div class="arch-arrow">&#x25BC;</div>
+    <div class="arch-layer layer-transform">
+      <h3>Export Script</h3>
+      <p>scripts/export-obsidian.sh &mdash; reads registry, flattens hierarchy, injects relationships</p>
+      <div class="arch-chips">
+        <span class="chip">flatten SKILL.md &rarr; name.md</span>
+        <span class="chip">inject [[depends_on]]</span>
+        <span class="chip">inject [[referenced_by]]</span>
+        <span class="chip">generate _MOC-*.md</span>
+        <span class="chip">inject tags: [domain, type]</span>
+      </div>
+    </div>
+    <div class="arch-arrow">&#x25BC;</div>
+    <div class="arch-layer layer-source">
+      <h3>Skill Library (Source of Truth)</h3>
+      <p>Nested hierarchy: skills/domain/subdomain/skill/SKILL.md + centralized registry</p>
+      <div class="arch-chips">
+        <span class="chip">skills/&lt;domain&gt;/&lt;sub&gt;/&lt;skill&gt;/SKILL.md</span>
+        <span class="chip">data/registry.json</span>
+        <span class="chip">MCP Server (mcp-server/)</span>
+        <span class="chip">95 skills</span>
+        <span class="chip">9 domains</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data flow detail -->
+  <h3 style="margin-top: 2rem; text-align: center;">Data Flow Detail</h3>
+  <div class="flow-grid">
+    <div class="flow-box flow-src">
+      <strong>registry.json</strong><br>
+      95 skill entries with:<br>
+      &bull; depends_on[]<br>
+      &bull; referenced_by[]<br>
+      &bull; shares_references_with[]<br>
+      &bull; tags, health, score
+    </div>
+    <div class="flow-arrow-h">&rarr;</div>
+    <div class="flow-box flow-mid">
+      <strong>export-obsidian.sh</strong><br>
+      1. Copy SKILL.md as flat file<br>
+      2. Inject YAML tags<br>
+      3. Append [[wikilink]] section<br>
+      4. Generate 9 MOCs<br>
+      5. Generate _Index.md<br>
+      6. Copy .obsidian/ config
+    </div>
+    <div class="flow-arrow-h">&rarr;</div>
+    <div class="flow-box flow-dst">
+      <strong>Obsidian Vault</strong><br>
+      95 skill .md files<br>
+      9 domain MOC files<br>
+      1 _Index.md<br>
+      .obsidian/ (graph colors,<br>
+      app config)
+    </div>
+  </div>
+</div>
+
+<!-- Section 2: Bug Report -->
+<div class="section">
+  <h2>Bugs Found & Fixed</h2>
+  <table class="bug-table">
+    <tr><th>#</th><th>Severity</th><th>Bug</th><th>Status</th></tr>
+    <tr>
+      <td>1</td>
+      <td><span class="bug-sev sev-crit">CRITICAL</span></td>
+      <td>Shell vars not <code>export</code>ed &mdash; Python heredoc gets empty strings for all paths</td>
+      <td class="fixed">FIXED</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><span class="bug-sev sev-high">HIGH</span></td>
+      <td><code>path:</code> queries in graph.json won't work in flat vault &mdash; all domain colors broken</td>
+      <td class="fixed">FIXED &rarr; tag: queries</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><span class="bug-sev sev-high">HIGH</span></td>
+      <td>graph.json missing color groups for <code>artifacts</code> and <code>writing</code> domains</td>
+      <td class="fixed">FIXED &rarr; all 9 domains</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><span class="bug-sev sev-med">MEDIUM</span></td>
+      <td>Index used <code>len(skills)</code> (registry total) not actually-exported count</td>
+      <td class="fixed">FIXED &rarr; exported_skills</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><span class="bug-sev sev-low">LOW</span></td>
+      <td>Final stats <code>grep -v '^_'</code> doesn't work with full paths from <code>ls</code></td>
+      <td class="fixed">FIXED &rarr; find</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><span class="bug-sev sev-low">LOW</span></td>
+      <td>Graph uses <code>path:_meta</code> but domain tag is <code>meta</code> (no underscore)</td>
+      <td class="fixed">FIXED &rarr; tag:#meta</td>
+    </tr>
+  </table>
+</div>
+
+<!-- Section 3: Stats Dashboard -->
+<div class="section">
+  <h2>Export Stats Dashboard</h2>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="num">95</div><div class="label">Skills Exported</div></div>
+    <div class="stat-card"><div class="num">9</div><div class="label">Domains</div></div>
+    <div class="stat-card"><div class="num">144</div><div class="label">Dependency Edges</div></div>
+    <div class="stat-card"><div class="num">9</div><div class="label">Domain MOCs</div></div>
+    <div class="stat-card"><div class="num">100%</div><div class="label">Healthy</div></div>
+    <div class="stat-card"><div class="num">5</div><div class="label">Skill Types</div></div>
+  </div>
+
+  <h3>Skills by Domain</h3>
+  <div class="domain-bars" id="domain-bars"></div>
+
+  <h3 style="margin-top: 1.5rem;">Skills by Type</h3>
+  <div class="type-row">
+    <div class="type-badge"><span class="count">51</span> Knowledge</div>
+    <div class="type-badge"><span class="count">20</span> Action</div>
+    <div class="type-badge"><span class="count">15</span> Director</div>
+    <div class="type-badge"><span class="count">8</span> Orchestrator</div>
+    <div class="type-badge"><span class="count">1</span> Observer</div>
+  </div>
+</div>
+
+<!-- Section 4: Interactive Graph -->
+<div class="section">
+  <h2>Skill Dependency Graph</h2>
+  <p style="color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1rem;">Hover over nodes to see details. Node size = number of skills that reference it. Lines = depends_on relationships.</p>
+  <div class="graph-container" id="graph-container">
+    <canvas id="graph-canvas"></canvas>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+  <div class="graph-legend" id="graph-legend"></div>
+</div>
+
+<script>
+// --- Data ---
+const DATA = {"nodes":[{"id":"skill-registry","domain":"infrastructure","type":"action","score":100,"refs":11,"deps":0},{"id":"skill-health","domain":"infrastructure","type":"action","score":100,"refs":3,"deps":2},{"id":"skill-dashboard","domain":"infrastructure","type":"action","score":97,"refs":3,"deps":1},{"id":"skill-scaffold","domain":"infrastructure","type":"action","score":97,"refs":2,"deps":4},{"id":"skill-test","domain":"infrastructure","type":"action","score":100,"refs":1,"deps":2},{"id":"skill-analyze","domain":"infrastructure","type":"action","score":100,"refs":2,"deps":1},{"id":"skill-fork","domain":"infrastructure","type":"action","score":100,"refs":1,"deps":3},{"id":"skill-network","domain":"infrastructure","type":"action","score":97,"refs":1,"deps":1},{"id":"skill-export","domain":"infrastructure","type":"action","score":100,"refs":1,"deps":1},{"id":"color-theory","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"design-principles","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"visual-perception","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"meta-observer","domain":"meta","type":"observer","score":95,"refs":0,"deps":1},{"id":"visual-communication","domain":"design","type":"director","score":95,"refs":1,"deps":4},{"id":"design-orchestrator","domain":"design","type":"orchestrator","score":100,"refs":3,"deps":13},{"id":"typography","domain":"design","type":"director","score":95,"refs":1,"deps":4},{"id":"type-fundamentals","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"type-pairing","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"responsive-type","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"brand-identity","domain":"design","type":"director","score":95,"refs":1,"deps":4},{"id":"brand-foundations","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"visual-identity","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"brand-voice","domain":"design","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"world-bible","domain":"worldbuilding","type":"knowledge","score":100,"refs":3,"deps":0},{"id":"lore-writer","domain":"worldbuilding","type":"action","score":100,"refs":1,"deps":2},{"id":"naming-system","domain":"worldbuilding","type":"knowledge","score":100,"refs":2,"deps":1},{"id":"game-theory-orchestrator","domain":"game-theory","type":"orchestrator","score":95,"refs":0,"deps":5},{"id":"strategic-foundations","domain":"game-theory","type":"director","score":95,"refs":1,"deps":3},{"id":"classical-games","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"cooperative-games","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"game-solver","domain":"game-theory","type":"action","score":95,"refs":1,"deps":2},{"id":"mechanism-design","domain":"game-theory","type":"director","score":95,"refs":1,"deps":4},{"id":"auction-theory","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"matching-markets","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"social-choice","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"mechanism-designer","domain":"game-theory","type":"action","score":95,"refs":1,"deps":3},{"id":"evolutionary-dynamics","domain":"game-theory","type":"director","score":95,"refs":1,"deps":3},{"id":"evolutionary-games","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"population-dynamics","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"evo-simulator","domain":"game-theory","type":"action","score":95,"refs":1,"deps":2},{"id":"information-economics","domain":"game-theory","type":"director","score":95,"refs":1,"deps":3},{"id":"signaling-screening","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"bayesian-persuasion","domain":"game-theory","type":"knowledge","score":100,"refs":2,"deps":0},{"id":"info-designer","domain":"game-theory","type":"action","score":95,"refs":1,"deps":2},{"id":"computational-strategy","domain":"game-theory","type":"director","score":95,"refs":1,"deps":3},{"id":"algorithmic-game-theory","domain":"game-theory","type":"knowledge","score":100,"refs":1,"deps":0},{"id":"behavioral-game-theory","domain":"game-theory","type":"knowledge","score":100,"refs":1,"deps":0},{"id":"learning-in-games","domain":"game-theory","type":"knowledge","score":100,"refs":1,"deps":0},{"id":"data-science-orchestrator","domain":"data-science","type":"orchestrator","score":95,"refs":3,"deps":10},{"id":"data-cleaning","domain":"data-science","type":"knowledge","score":95,"refs":2,"deps":0},{"id":"feature-engineering","domain":"data-science","type":"knowledge","score":95,"refs":2,"deps":1},{"id":"statistical-testing","domain":"data-science","type":"knowledge","score":95,"refs":6,"deps":0},{"id":"causal-inference","domain":"data-science","type":"knowledge","score":95,"refs":1,"deps":1},{"id":"model-evaluation","domain":"data-science","type":"knowledge","score":95,"refs":4,"deps":2},{"id":"time-series","domain":"data-science","type":"knowledge","score":95,"refs":1,"deps":2},{"id":"chart-selection","domain":"data-science","type":"knowledge","score":95,"refs":1,"deps":0},{"id":"drift-detection","domain":"data-science","type":"knowledge","score":95,"refs":1,"deps":2},{"id":"responsible-ai","domain":"data-science","type":"knowledge","score":95,"refs":1,"deps":1},{"id":"biostatistics","domain":"data-science","type":"knowledge","score":95,"refs":1,"deps":1},{"id":"statistical-analysis","domain":"data-science","type":"director","score":95,"refs":3,"deps":1},{"id":"modeling","domain":"data-science","type":"director","score":95,"refs":2,"deps":1},{"id":"data-wrangling","domain":"data-science","type":"director","score":95,"refs":2,"deps":1},{"id":"infrastructure-orchestrator","domain":"infrastructure","type":"orchestrator","score":95,"refs":9,"deps":0},{"id":"worldbuilding-orchestrator","domain":"worldbuilding","type":"orchestrator","score":95,"refs":6,"deps":0},{"id":"geography-ecology","domain":"worldbuilding","type":"knowledge","score":95,"refs":2,"deps":1},{"id":"cultures-societies","domain":"worldbuilding","type":"knowledge","score":95,"refs":3,"deps":2},{"id":"magic-systems","domain":"worldbuilding","type":"knowledge","score":95,"refs":3,"deps":1},{"id":"master-artificer","domain":"artifacts","type":"orchestrator","score":95,"refs":0,"deps":4},{"id":"visual-composer","domain":"artifacts","type":"knowledge","score":90,"refs":1,"deps":0},{"id":"creative-coding","domain":"artifacts","type":"knowledge","score":90,"refs":1,"deps":0},{"id":"spelunker","domain":"research","type":"orchestrator","score":95,"refs":1,"deps":3},{"id":"claim-decomposer","domain":"research","type":"action","score":95,"refs":1,"deps":0},{"id":"source-triangulator","domain":"research","type":"action","score":95,"refs":1,"deps":0},{"id":"evidence-synthesizer","domain":"research","type":"action","score":95,"refs":1,"deps":0},{"id":"prose-orchestrator","domain":"writing","type":"orchestrator","score":95,"refs":1,"deps":5},{"id":"sentence-craft","domain":"writing","type":"director","score":95,"refs":4,"deps":3},{"id":"prose-rhythm","domain":"writing","type":"knowledge","score":95,"refs":1,"deps":1},{"id":"diction","domain":"writing","type":"knowledge","score":95,"refs":1,"deps":1},{"id":"syntax-patterns","domain":"writing","type":"knowledge","score":95,"refs":1,"deps":1},{"id":"narrative-craft","domain":"writing","type":"director","score":90,"refs":7,"deps":6},{"id":"narrative-arc","domain":"writing","type":"knowledge","score":85,"refs":1,"deps":1},{"id":"scene-craft","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"pacing","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"dialogue","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"point-of-view","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"concrete-detail","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"rhetoric","domain":"writing","type":"director","score":90,"refs":5,"deps":4},{"id":"rhetorical-appeals","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"argument-structure","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"rhetorical-devices","domain":"writing","type":"knowledge","score":85,"refs":1,"deps":1},{"id":"essay-forms","domain":"writing","type":"knowledge","score":90,"refs":1,"deps":1},{"id":"revision-craft","domain":"writing","type":"director","score":90,"refs":3,"deps":2},{"id":"prose-editor","domain":"writing","type":"action","score":90,"refs":1,"deps":1},{"id":"style-analyzer","domain":"writing","type":"action","score":85,"refs":1,"deps":1},{"id":"prose-writer","domain":"writing","type":"action","score":85,"refs":1,"deps":1}],"edges":[{"source":"skill-health","target":"skill-registry"},{"source":"skill-health","target":"skill-dashboard"},{"source":"skill-dashboard","target":"skill-registry"},{"source":"skill-scaffold","target":"skill-registry"},{"source":"skill-scaffold","target":"skill-health"},{"source":"skill-scaffold","target":"skill-dashboard"},{"source":"skill-scaffold","target":"spelunker"},{"source":"skill-test","target":"skill-registry"},{"source":"skill-test","target":"skill-analyze"},{"source":"skill-analyze","target":"skill-registry"},{"source":"skill-fork","target":"skill-registry"},{"source":"skill-fork","target":"skill-scaffold"},{"source":"skill-fork","target":"skill-health"},{"source":"skill-network","target":"skill-registry"},{"source":"skill-export","target":"skill-registry"},{"source":"meta-observer","target":"skill-registry"},{"source":"visual-communication","target":"color-theory"},{"source":"visual-communication","target":"design-principles"},{"source":"visual-communication","target":"visual-perception"},{"source":"visual-communication","target":"design-orchestrator"},{"source":"design-orchestrator","target":"skill-registry"},{"source":"design-orchestrator","target":"color-theory"},{"source":"design-orchestrator","target":"design-principles"},{"source":"design-orchestrator","target":"visual-perception"},{"source":"design-orchestrator","target":"visual-communication"},{"source":"design-orchestrator","target":"typography"},{"source":"design-orchestrator","target":"brand-identity"},{"source":"design-orchestrator","target":"brand-foundations"},{"source":"design-orchestrator","target":"visual-identity"},{"source":"design-orchestrator","target":"brand-voice"},{"source":"design-orchestrator","target":"type-fundamentals"},{"source":"design-orchestrator","target":"type-pairing"},{"source":"design-orchestrator","target":"responsive-type"},{"source":"typography","target":"type-fundamentals"},{"source":"typography","target":"type-pairing"},{"source":"typography","target":"responsive-type"},{"source":"typography","target":"design-orchestrator"},{"source":"brand-identity","target":"brand-foundations"},{"source":"brand-identity","target":"visual-identity"},{"source":"brand-identity","target":"brand-voice"},{"source":"brand-identity","target":"design-orchestrator"},{"source":"lore-writer","target":"world-bible"},{"source":"lore-writer","target":"naming-system"},{"source":"naming-system","target":"world-bible"},{"source":"game-theory-orchestrator","target":"strategic-foundations"},{"source":"game-theory-orchestrator","target":"mechanism-design"},{"source":"game-theory-orchestrator","target":"evolutionary-dynamics"},{"source":"game-theory-orchestrator","target":"information-economics"},{"source":"game-theory-orchestrator","target":"computational-strategy"},{"source":"strategic-foundations","target":"classical-games"},{"source":"strategic-foundations","target":"cooperative-games"},{"source":"strategic-foundations","target":"game-solver"},{"source":"game-solver","target":"classical-games"},{"source":"game-solver","target":"cooperative-games"},{"source":"mechanism-design","target":"auction-theory"},{"source":"mechanism-design","target":"matching-markets"},{"source":"mechanism-design","target":"social-choice"},{"source":"mechanism-design","target":"mechanism-designer"},{"source":"mechanism-designer","target":"auction-theory"},{"source":"mechanism-designer","target":"matching-markets"},{"source":"mechanism-designer","target":"social-choice"},{"source":"evolutionary-dynamics","target":"evolutionary-games"},{"source":"evolutionary-dynamics","target":"population-dynamics"},{"source":"evolutionary-dynamics","target":"evo-simulator"},{"source":"evo-simulator","target":"evolutionary-games"},{"source":"evo-simulator","target":"population-dynamics"},{"source":"information-economics","target":"signaling-screening"},{"source":"information-economics","target":"bayesian-persuasion"},{"source":"information-economics","target":"info-designer"},{"source":"info-designer","target":"signaling-screening"},{"source":"info-designer","target":"bayesian-persuasion"},{"source":"computational-strategy","target":"algorithmic-game-theory"},{"source":"computational-strategy","target":"behavioral-game-theory"},{"source":"computational-strategy","target":"learning-in-games"},{"source":"data-science-orchestrator","target":"data-cleaning"},{"source":"data-science-orchestrator","target":"feature-engineering"},{"source":"data-science-orchestrator","target":"statistical-testing"},{"source":"data-science-orchestrator","target":"causal-inference"},{"source":"data-science-orchestrator","target":"model-evaluation"},{"source":"data-science-orchestrator","target":"time-series"},{"source":"data-science-orchestrator","target":"chart-selection"},{"source":"data-science-orchestrator","target":"drift-detection"},{"source":"data-science-orchestrator","target":"responsible-ai"},{"source":"data-science-orchestrator","target":"biostatistics"},{"source":"feature-engineering","target":"data-cleaning"},{"source":"causal-inference","target":"statistical-testing"},{"source":"model-evaluation","target":"statistical-testing"},{"source":"model-evaluation","target":"feature-engineering"},{"source":"time-series","target":"statistical-testing"},{"source":"time-series","target":"model-evaluation"},{"source":"drift-detection","target":"model-evaluation"},{"source":"drift-detection","target":"statistical-testing"},{"source":"responsible-ai","target":"model-evaluation"},{"source":"biostatistics","target":"statistical-testing"},{"source":"statistical-analysis","target":"data-science-orchestrator"},{"source":"modeling","target":"data-science-orchestrator"},{"source":"data-wrangling","target":"data-science-orchestrator"},{"source":"geography-ecology","target":"world-bible"},{"source":"cultures-societies","target":"world-bible"},{"source":"cultures-societies","target":"geography-ecology"},{"source":"magic-systems","target":"world-bible"},{"source":"master-artificer","target":"visual-composer"},{"source":"master-artificer","target":"creative-coding"},{"source":"master-artificer","target":"visual-communication"},{"source":"master-artificer","target":"typography"},{"source":"spelunker","target":"claim-decomposer"},{"source":"spelunker","target":"source-triangulator"},{"source":"spelunker","target":"evidence-synthesizer"},{"source":"prose-orchestrator","target":"sentence-craft"},{"source":"prose-orchestrator","target":"narrative-craft"},{"source":"prose-orchestrator","target":"rhetoric"},{"source":"prose-orchestrator","target":"revision-craft"},{"source":"prose-orchestrator","target":"prose-writer"},{"source":"sentence-craft","target":"prose-rhythm"},{"source":"sentence-craft","target":"diction"},{"source":"sentence-craft","target":"syntax-patterns"},{"source":"prose-rhythm","target":"sentence-craft"},{"source":"diction","target":"sentence-craft"},{"source":"syntax-patterns","target":"sentence-craft"},{"source":"narrative-craft","target":"narrative-arc"},{"source":"narrative-craft","target":"scene-craft"},{"source":"narrative-craft","target":"pacing"},{"source":"narrative-craft","target":"dialogue"},{"source":"narrative-craft","target":"point-of-view"},{"source":"narrative-craft","target":"concrete-detail"},{"source":"narrative-arc","target":"narrative-craft"},{"source":"scene-craft","target":"narrative-craft"},{"source":"pacing","target":"narrative-craft"},{"source":"dialogue","target":"narrative-craft"},{"source":"point-of-view","target":"narrative-craft"},{"source":"concrete-detail","target":"narrative-craft"},{"source":"rhetoric","target":"rhetorical-appeals"},{"source":"rhetoric","target":"argument-structure"},{"source":"rhetoric","target":"rhetorical-devices"},{"source":"rhetoric","target":"essay-forms"},{"source":"rhetorical-appeals","target":"rhetoric"},{"source":"argument-structure","target":"rhetoric"},{"source":"rhetorical-devices","target":"rhetoric"},{"source":"essay-forms","target":"rhetoric"},{"source":"revision-craft","target":"prose-editor"},{"source":"revision-craft","target":"style-analyzer"},{"source":"prose-editor","target":"revision-craft"},{"source":"style-analyzer","target":"revision-craft"},{"source":"prose-writer","target":"prose-orchestrator"}]};
+
+const DOMAIN_COLORS = {
+  'design': '#4a8a62', 'game-theory': '#de4f20', 'data-science': '#349253',
+  'worldbuilding': '#8f5567', 'infrastructure': '#e57f73', 'research': '#ee9600',
+  'meta': '#888888', 'writing': '#55953d', 'artifacts': '#ff8c00'
+};
+
+const DOMAIN_COUNTS = {};
+DATA.nodes.forEach(n => { DOMAIN_COUNTS[n.domain] = (DOMAIN_COUNTS[n.domain] || 0) + 1; });
+
+// --- Domain bars ---
+const barsEl = document.getElementById('domain-bars');
+const maxCount = Math.max(...Object.values(DOMAIN_COUNTS));
+Object.entries(DOMAIN_COUNTS).sort((a,b) => b[1] - a[1]).forEach(([domain, count]) => {
+  const pct = (count / maxCount * 100).toFixed(0);
+  const color = DOMAIN_COLORS[domain] || '#666';
+  barsEl.innerHTML += `
+    <div class="domain-bar-row">
+      <div class="domain-bar-label">${domain}</div>
+      <div class="domain-bar-track">
+        <div class="domain-bar-fill" style="width:${pct}%;background:${color}">${count}</div>
+      </div>
+    </div>`;
+});
+
+// --- Legend ---
+const legendEl = document.getElementById('graph-legend');
+Object.entries(DOMAIN_COLORS).forEach(([d, c]) => {
+  legendEl.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${c}"></div>${d}</div>`;
+});
+
+// --- Force-directed graph ---
+const container = document.getElementById('graph-container');
+const canvas = document.getElementById('graph-canvas');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+let W, H, dpr;
+function resize() {
+  dpr = window.devicePixelRatio || 1;
+  W = container.clientWidth; H = container.clientHeight;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+resize();
+window.addEventListener('resize', () => { resize(); });
+
+// Initialize node positions in domain clusters
+const domainAngles = {};
+const domainList = Object.keys(DOMAIN_COLORS);
+domainList.forEach((d, i) => { domainAngles[d] = (i / domainList.length) * Math.PI * 2; });
+
+const nodes = DATA.nodes.map((n, i) => {
+  const angle = domainAngles[n.domain] || 0;
+  const r = 120 + Math.random() * 80;
+  return {
+    ...n, idx: i,
+    x: W/2 + Math.cos(angle) * r + (Math.random() - 0.5) * 60,
+    y: H/2 + Math.sin(angle) * r + (Math.random() - 0.5) * 60,
+    vx: 0, vy: 0,
+    radius: 4 + Math.min(n.refs, 12) * 1.5
+  };
+});
+
+const nodeMap = {};
+nodes.forEach(n => { nodeMap[n.id] = n; });
+
+const edges = DATA.edges.filter(e => nodeMap[e.source] && nodeMap[e.target])
+  .map(e => ({ source: nodeMap[e.source], target: nodeMap[e.target] }));
+
+// Simple force simulation
+function simulate() {
+  const alpha = 0.3;
+  // Center force
+  nodes.forEach(n => {
+    n.vx += (W/2 - n.x) * 0.001;
+    n.vy += (H/2 - n.y) * 0.001;
+  });
+  // Repulsion
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      let dx = nodes[j].x - nodes[i].x;
+      let dy = nodes[j].y - nodes[i].y;
+      let d2 = dx*dx + dy*dy + 1;
+      let f = 800 / d2;
+      nodes[i].vx -= dx * f; nodes[i].vy -= dy * f;
+      nodes[j].vx += dx * f; nodes[j].vy += dy * f;
+    }
+  }
+  // Link attraction
+  edges.forEach(e => {
+    let dx = e.target.x - e.source.x;
+    let dy = e.target.y - e.source.y;
+    let d = Math.sqrt(dx*dx + dy*dy) + 1;
+    let f = (d - 80) * 0.005;
+    e.source.vx += dx/d * f; e.source.vy += dy/d * f;
+    e.target.vx -= dx/d * f; e.target.vy -= dy/d * f;
+  });
+  // Domain clustering
+  nodes.forEach(n => {
+    const angle = domainAngles[n.domain] || 0;
+    const cx = W/2 + Math.cos(angle) * 150;
+    const cy = H/2 + Math.sin(angle) * 150;
+    n.vx += (cx - n.x) * 0.003;
+    n.vy += (cy - n.y) * 0.003;
+  });
+  // Apply velocity with damping
+  nodes.forEach(n => {
+    n.vx *= 0.6; n.vy *= 0.6;
+    n.x += n.vx; n.y += n.vy;
+    // Bounds
+    n.x = Math.max(20, Math.min(W - 20, n.x));
+    n.y = Math.max(20, Math.min(H - 20, n.y));
+  });
+}
+
+let hoveredNode = null;
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  // Draw edges
+  edges.forEach(e => {
+    const isHovered = hoveredNode && (e.source === hoveredNode || e.target === hoveredNode);
+    ctx.beginPath();
+    ctx.moveTo(e.source.x, e.source.y);
+    ctx.lineTo(e.target.x, e.target.y);
+    ctx.strokeStyle = isHovered ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = isHovered ? 1.5 : 0.5;
+    ctx.stroke();
+  });
+
+  // Draw nodes
+  nodes.forEach(n => {
+    const color = DOMAIN_COLORS[n.domain] || '#666';
+    const isHovered = n === hoveredNode;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, isHovered ? n.radius + 3 : n.radius, 0, Math.PI * 2);
+    ctx.fillStyle = isHovered ? '#fff' : color;
+    ctx.globalAlpha = isHovered ? 1 : 0.85;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Draw type indicator
+    if (n.type === 'orchestrator') {
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    } else if (n.type === 'director') {
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Labels for larger nodes
+    if (n.refs >= 3 || isHovered) {
+      ctx.fillStyle = isHovered ? '#fff' : 'rgba(255,255,255,0.6)';
+      ctx.font = isHovered ? 'bold 11px -apple-system, sans-serif' : '9px -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.id, n.x, n.y - n.radius - 5);
+    }
+  });
+}
+
+// Animation loop
+let frame = 0;
+function tick() {
+  if (frame < 300) simulate();
+  draw();
+  frame++;
+  requestAnimationFrame(tick);
+}
+tick();
+
+// Mouse hover
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  hoveredNode = null;
+  for (const n of nodes) {
+    const dx = mx - n.x, dy = my - n.y;
+    if (dx*dx + dy*dy < (n.radius + 5) * (n.radius + 5)) {
+      hoveredNode = n;
+      break;
+    }
+  }
+  if (hoveredNode) {
+    tooltip.style.display = 'block';
+    tooltip.style.left = (mx + 15) + 'px';
+    tooltip.style.top = (my - 10) + 'px';
+    tooltip.innerHTML = `<strong>${hoveredNode.id}</strong><br>
+      <span style="color:${DOMAIN_COLORS[hoveredNode.domain]}">${hoveredNode.domain}</span> &middot; ${hoveredNode.type}<br>
+      Score: ${hoveredNode.score}/100 &middot; Refs: ${hoveredNode.refs} &middot; Deps: ${hoveredNode.deps}`;
+    canvas.style.cursor = 'pointer';
+  } else {
+    tooltip.style.display = 'none';
+    canvas.style.cursor = 'default';
+  }
+});
+canvas.addEventListener('mouseleave', () => {
+  hoveredNode = null;
+  tooltip.style.display = 'none';
+});
+</script>
+
+</body>
+</html>

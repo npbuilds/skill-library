@@ -10,3 +10,18 @@ Thumbs.db
 *.bak
 data/backups/
 __pycache__/
+
+# Obsidian volatile state (workspace changes on every session)
+skills/.obsidian/workspace.json
+skills/.obsidian/workspaces.json
+skills/.obsidian/workspace-mobile.json
+
+# Obsidian export output
+exports/
+
+# Debug logs
+firebase-debug.log
+*.log
+
+# Generated output artifacts
+output/

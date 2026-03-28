@@ -1,0 +1,15 @@
+{
+  "useMarkdownLinks": false,
+  "newFileLocation": "current",
+  "newLinkFormat": "shortest",
+  "showUnsupportedFiles": false,
+  "attachmentFolderPath": "_attachments",
+  "defaultViewMode": "preview",
+  "foldHeading": true,
+  "foldIndent": true,
+  "showLineNumber": false,
+  "strictLineBreaks": false,
+  "readableLineLength": true,
+  "showFrontmatter": true,
+  "alwaysUpdateLinks": true
+}

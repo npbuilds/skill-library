@@ -3,6 +3,7 @@ Skill Library MCP Server
 Exposes your skill library to Claude Desktop via the Model Context Protocol.
 """
 
+import fcntl
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -12,40 +13,29 @@ from mcp.server.fastmcp import FastMCP
 # Setup
 # ---------------------------------------------------------------------------
 
-# The project root is one level up from this server file
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
-SKILLS_DIR = PROJECT_ROOT / "skills"
-
-DATA_DIR = PROJECT_ROOT / "data"
-USAGE_LOG = DATA_DIR / "usage.jsonl"
-GAPS_LOG = DATA_DIR / "gaps.jsonl"
-FEEDBACK_LOG = DATA_DIR / "feedback.jsonl"
+from shared import (
+    PROJECT_ROOT, REGISTRY_PATH, SKILLS_DIR, DATA_DIR,
+    USAGE_LOG, GAPS_LOG, FEEDBACK_LOG,
+    load_log,
+)
 
 
 def _log_event(path: Path, event: dict) -> None:
-    """Append a JSON event to a JSONL log file."""
+    """Append a JSON event to a JSONL log file (with file locking)."""
     record = {**event, "timestamp": datetime.now(timezone.utc).isoformat()}
     try:
         with open(path, "a") as f:
-            f.write(json.dumps(record) + "\n")
+            fcntl.flock(f, fcntl.LOCK_EX)
+            try:
+                f.write(json.dumps(record) + "\n")
+                f.flush()
+            finally:
+                fcntl.flock(f, fcntl.LOCK_UN)
     except OSError:
         pass  # Never let logging break a tool call
 
 
-def _load_log(path: Path) -> list[dict]:
-    """Load all events from a JSONL log file."""
-    if not path.exists():
-        return []
-    events = []
-    for line in path.read_text().splitlines():
-        line = line.strip()
-        if line:
-            try:
-                events.append(json.loads(line))
-            except json.JSONDecodeError:
-                continue
-    return events
+_load_log = load_log  # backward-compatible alias
 
 
 mcp = FastMCP(
@@ -77,11 +67,12 @@ def load_registry() -> dict:
         )
 
 
-def resolve_skill_path(entry: dict, skill_name: str) -> str:
+def resolve_skill_path(entry: dict, skill_name: str) -> str | None:
     """Resolve a skill's location to an absolute path.
 
     Registry locations may be relative (from project root) or absolute.
     Falls back to searching the skills directory if the stored path doesn't exist.
+    Returns None if the skill file cannot be found.
     """
     location = entry.get("location", "")
     if location:
@@ -94,13 +85,9 @@ def resolve_skill_path(entry: dict, skill_name: str) -> str:
             return location
     # Last resort: search for the skill by name
     matches = list(SKILLS_DIR.rglob(f"{skill_name}/SKILL.md"))
-    if len(matches) == 1:
+    if matches:
         return str(matches[0])
-    if len(matches) > 1:
-        # Multiple matches — return the first but warn
-        return str(matches[0])
-    # Nothing found anywhere
-    return f"ERROR: skill file not found for '{skill_name}' — check registry location field"
+    return None
 
 
 def read_file_safe(path: str) -> str:
@@ -284,6 +271,9 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
     _log_event(USAGE_LOG, {"skill": skill_name, "type": entry.get("type", "unknown")})
 
     skill_path = resolve_skill_path(entry, skill_name)
+    if skill_path is None:
+        return f"Skill file not found for '{skill_name}' — check registry location field."
+
     content = read_file_safe(skill_path)
     parts = [f"=== SKILL: {skill_name} ===\n\n{content}"]
 
@@ -665,7 +655,7 @@ def get_skill_stats(skill_name: str | None = None) -> str:
             if r is not None:
                 fb_by_skill.setdefault(s, []).append(r)
 
-        for s, ratings in sorted(fb_by_skill.items(), key=lambda x: sum(x[1]) / len(x[1]), reverse=True):
+        for s, ratings in sorted(fb_by_skill.items(), key=lambda x: sum(x[1]) / max(len(x[1]), 1), reverse=True):
             avg = sum(ratings) / len(ratings)
             lines.append(f"  {s}: {avg:.1f}/5 ({len(ratings)} ratings)")
 
