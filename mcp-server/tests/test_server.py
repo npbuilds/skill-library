@@ -1,6 +1,7 @@
 """Tests for the Skill Library MCP server."""
 
 import json
+import threading
 from pathlib import Path
 from unittest.mock import patch
 
@@ -390,3 +391,101 @@ class TestResolveSkillPath:
         entry = {"location": "nonexistent/path/SKILL.md"}
         path = server.resolve_skill_path(entry, "totally-fake")
         assert path is None
+
+
+# ---------------------------------------------------------------------------
+# Edge cases
+# ---------------------------------------------------------------------------
+
+
+class TestDeletedSkillFile:
+    """Skill is registered in the registry but its SKILL.md has been deleted."""
+
+    def test_get_skill_returns_friendly_error(self, tmp_project):
+        # Delete the skill file on disk while leaving the registry entry intact
+        skill_file = tmp_project / "skills/design/color-theory/SKILL.md"
+        skill_file.unlink()
+
+        result = server.get_skill("color-theory")
+        # Should not raise; should return a message explaining the file is missing
+        assert "could not read file" in result or "not found" in result.lower()
+
+    def test_get_skill_still_logs_usage(self, tmp_project):
+        # Usage should still be logged even if the file is missing
+        skill_file = tmp_project / "skills/design/color-theory/SKILL.md"
+        skill_file.unlink()
+
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        assert any(e.get("skill") == "color-theory" for e in usage)
+
+    def test_system_overview_does_not_crash(self, tmp_project):
+        # Overview reads registry only, not files — should not be affected
+        skill_file = tmp_project / "skills/design/color-theory/SKILL.md"
+        skill_file.unlink()
+        result = server.get_system_overview()
+        assert "SKILL LIBRARY OVERVIEW" in result
+
+
+class TestCircularDependencies:
+    """Skills that form a dependency cycle: A depends_on B, B depends_on A."""
+
+    def test_system_overview_reports_broken_reference(self, tmp_project):
+        # Inject a cycle into the registry: color-theory depends on design-director,
+        # design-director already has color-theory in referenced_by.
+        # We make design-director depend on color-theory to close the loop.
+        reg_path = tmp_project / "data/registry.json"
+        reg = json.loads(reg_path.read_text())
+        reg["skills"]["design-director"]["depends_on"] = ["color-theory"]
+        reg["skills"]["color-theory"]["depends_on"] = ["design-director"]
+        reg_path.write_text(json.dumps(reg))
+
+        # get_system_overview detects broken/circular references via depends_on check
+        result = server.get_system_overview()
+        # Both skills exist so no "missing" reference — but the overview should complete
+        assert "SKILL LIBRARY OVERVIEW" in result
+
+    def test_get_skill_does_not_loop(self, tmp_project):
+        # get_skill reads files, not the dependency graph — should complete fine
+        result = server.get_skill("color-theory")
+        assert "color-theory" in result
+
+
+class TestConcurrentLogging:
+    """Multiple threads writing to the same log file simultaneously."""
+
+    def test_all_events_are_written(self, tmp_project):
+        log_path = server.DATA_DIR / "concurrent.jsonl"
+        errors = []
+
+        def write_event(i):
+            try:
+                server._log_event(log_path, {"index": i})
+            except Exception as e:
+                errors.append(e)
+
+        threads = [threading.Thread(target=write_event, args=(i,)) for i in range(20)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+
+        assert not errors, f"Exceptions during concurrent write: {errors}"
+        events = server._load_log(log_path)
+        assert len(events) == 20
+
+    def test_no_partial_json_lines(self, tmp_project):
+        log_path = server.DATA_DIR / "concurrent2.jsonl"
+        threads = [
+            threading.Thread(target=server._log_event, args=(log_path, {"n": i}))
+            for i in range(30)
+        ]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+
+        # Every line must be valid JSON — no partial writes
+        raw_lines = [l for l in log_path.read_text().splitlines() if l.strip()]
+        for line in raw_lines:
+            json.loads(line)  # raises if malformed

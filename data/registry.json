@@ -3589,7 +3589,8 @@
       "manual_notes": null,
       "composite_score": 84,
       "depends_on": [
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "systems-craft"
       ],
       "referenced_by": [
         "lore-writer",
@@ -3614,7 +3615,7 @@
         "level:knowledge",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "systems-craft",
       "created": "2026-03-22",
       "last_modified": "2026-03-26",
       "changelog": [
@@ -3735,7 +3736,8 @@
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator",
-        "cultures-societies"
+        "cultures-societies",
+        "systems-craft"
       ],
       "referenced_by": [
         "lore-writer",
@@ -3749,7 +3751,7 @@
         "level:knowledge",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "systems-craft",
       "created": "2026-03-22",
       "last_modified": "2026-03-22",
       "changelog": [
@@ -3795,7 +3797,8 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "world-bible"
+        "world-bible",
+        "systems-craft"
       ],
       "referenced_by": [
         "lore-writer",
@@ -3815,7 +3818,7 @@
         "level:knowledge",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "systems-craft",
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "changelog": [
@@ -3861,7 +3864,8 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "world-bible"
+        "world-bible",
+        "physical-world"
       ],
       "referenced_by": [
         "lore-writer"
@@ -3876,7 +3880,7 @@
         "level:knowledge",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "physical-world",
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "changelog": [
@@ -3922,7 +3926,8 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "world-bible"
+        "world-bible",
+        "civilizations"
       ],
       "referenced_by": [
         "lore-writer",
@@ -3939,7 +3944,7 @@
         "level:knowledge",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "civilizations",
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "changelog": [
@@ -4045,7 +4050,8 @@
       "depends_on": [
         "world-bible",
         "lore-writer",
-        "religion-design"
+        "religion-design",
+        "civilizations"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -4056,7 +4062,7 @@
         "level:action",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "civilizations",
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "changelog": [
@@ -6455,7 +6461,8 @@
       "depends_on": [
         "world-bible",
         "magic-system-design",
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "physical-world"
       ],
       "referenced_by": [
         "worldbuilding-orchestrator",
@@ -6477,7 +6484,8 @@
           "action": "created",
           "note": "Diagnostic fix \u2014 added missing structural layer"
         }
-      ]
+      ],
+      "parent": "physical-world"
     },
     "cultures-societies": {
       "name": "cultures-societies",
@@ -6518,7 +6526,8 @@
         "world-bible",
         "geography-ecology",
         "magic-system-design",
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "civilizations"
       ],
       "referenced_by": [
         "worldbuilding-orchestrator",
@@ -6542,7 +6551,8 @@
           "action": "created",
           "note": "Diagnostic fix \u2014 added missing structural layer"
         }
-      ]
+      ],
+      "parent": "civilizations"
     },
     "magic-systems": {
       "name": "magic-systems",
@@ -6579,7 +6589,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 62,
-      "depends_on": [],
+      "depends_on": [
+        "systems-craft"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -6602,7 +6614,8 @@
           "action": "deprecated",
           "note": "Content merged into magic-system-design. Use magic-system-design instead."
         }
-      ]
+      ],
+      "parent": "systems-craft"
     },
     "master-artificer": {
       "name": "master-artificer",
@@ -8332,7 +8345,8 @@
       "composite_score": 60,
       "depends_on": [
         "world-bible",
-        "magic-system-design"
+        "magic-system-design",
+        "physical-world"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -8343,7 +8357,7 @@
         "level:knowledge",
         "level:intermediate"
       ],
-      "parent": null,
+      "parent": "physical-world",
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "changelog": [
@@ -8390,7 +8404,8 @@
       "composite_score": 60,
       "depends_on": [
         "world-bible",
-        "cultures-societies"
+        "cultures-societies",
+        "civilizations"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -8401,7 +8416,7 @@
         "level:knowledge",
         "level:intermediate"
       ],
-      "parent": null,
+      "parent": "civilizations",
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "changelog": [
@@ -11493,6 +11508,188 @@
           "note": "Illustration direction \u2014 style taxonomy, icon systems, texture and materiality"
         }
       ]
+    },
+    "physical-world": {
+      "name": "physical-world",
+      "description": "Route questions about the physical environment \u2014 terrain, climate, biomes, ecosystems, and technology. Use when designing geography, building an ecosystem, placing civilizations on a map, defining a tech level, or asking how the physical landscape shapes civilization.",
+      "location": "skills/worldbuilding/physical-world/SKILL.md",
+      "plugin": "skill-worldbuilding",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 428,
+        "body_words": 373,
+        "description_words": 37,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 48,
+        "estimated_tokens_body": 484,
+        "estimated_tokens_total": 556
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-28T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 75,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 75,
+      "depends_on": [
+        "worldbuilding-orchestrator"
+      ],
+      "referenced_by": [
+        "geography-ecology",
+        "ecology-design",
+        "technology-progression"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:director"
+      ],
+      "parent": "worldbuilding-orchestrator",
+      "created": "2026-03-28",
+      "last_modified": "2026-03-28",
+      "changelog": [
+        {
+          "date": "2026-03-28",
+          "action": "created",
+          "note": "Director added to provide routing layer for worldbuilding domain"
+        }
+      ]
+    },
+    "civilizations": {
+      "name": "civilizations",
+      "description": "Route questions about the people and structures of a world \u2014 cultures, factions, religions, and history. Use when designing a civilization's values, building political entities, creating belief systems, writing a timeline, or understanding how groups of people organize and conflict.",
+      "location": "skills/worldbuilding/civilizations/SKILL.md",
+      "plugin": "skill-worldbuilding",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 464,
+        "body_words": 412,
+        "description_words": 40,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 52,
+        "estimated_tokens_body": 535,
+        "estimated_tokens_total": 603
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-28T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 75,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 75,
+      "depends_on": [
+        "worldbuilding-orchestrator"
+      ],
+      "referenced_by": [
+        "cultures-societies",
+        "faction-design",
+        "religion-design",
+        "history-builder"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:director"
+      ],
+      "parent": "worldbuilding-orchestrator",
+      "created": "2026-03-28",
+      "last_modified": "2026-03-28",
+      "changelog": [
+        {
+          "date": "2026-03-28",
+          "action": "created",
+          "note": "Director added to provide routing layer for worldbuilding domain"
+        }
+      ]
+    },
+    "systems-craft": {
+      "name": "systems-craft",
+      "description": "Route questions about the rules and systems that make a world distinct \u2014 magic, metaphysics, naming, and foundational axioms. Use when designing a magic or technology system, creating naming conventions for a culture, or checking a world decision against its core rules.",
+      "location": "skills/worldbuilding/systems-craft/SKILL.md",
+      "plugin": "skill-worldbuilding",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 457,
+        "body_words": 394,
+        "description_words": 42,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 54,
+        "estimated_tokens_body": 512,
+        "estimated_tokens_total": 594
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-03-28T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 75,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 75,
+      "depends_on": [
+        "worldbuilding-orchestrator"
+      ],
+      "referenced_by": [
+        "magic-system-design",
+        "magic-systems",
+        "naming-system",
+        "world-bible"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:director"
+      ],
+      "parent": "worldbuilding-orchestrator",
+      "created": "2026-03-28",
+      "last_modified": "2026-03-28",
+      "changelog": [
+        {
+          "date": "2026-03-28",
+          "action": "created",
+          "note": "Director added to provide routing layer for worldbuilding domain"
+        }
+      ]
     }
   },
   "network": {
@@ -11571,6 +11768,7 @@
       ],
       "worldbuilding": [
         "character-belief-tracker",
+        "civilizations",
         "cultures-societies",
         "ecology-design",
         "extrapolation-engine",
@@ -11582,7 +11780,9 @@
         "magic-systems",
         "naming-system",
         "narrative-pacing",
+        "physical-world",
         "religion-design",
+        "systems-craft",
         "technology-progression",
         "world-bible",
         "worldbuilding-orchestrator"

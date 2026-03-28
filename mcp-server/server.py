@@ -522,6 +522,102 @@ def get_system_overview() -> str:
 
 
 @mcp.tool()
+def update_skill_metadata(
+    skill_name: str,
+    manual_rating: int | None = None,
+    manual_notes: str | None = None,
+    health_status: str | None = None,
+    status: str | None = None,
+    parent: str | None = None,
+) -> str:
+    """Update a skill's metadata fields in the registry.
+
+    Use this to set a manual quality rating, override health status, change
+    a skill's parent, or mark a skill as deprecated. Only the fields you
+    provide are updated — everything else stays the same.
+
+    Args:
+        skill_name: The skill to update (e.g. "color-theory").
+        manual_rating: Manual quality score 1-100 (overrides auto_score in composite).
+        manual_notes: Short note explaining the manual rating.
+        health_status: Override health — "healthy", "warning", or "critical".
+        status: Lifecycle status — "active" or "deprecated".
+        parent: Name of the parent skill (must exist in registry, or pass "" to clear).
+    """
+    VALID_HEALTH = {"healthy", "warning", "critical"}
+    VALID_STATUS = {"active", "deprecated"}
+
+    # Validate inputs before touching the registry
+    if manual_rating is not None and not 1 <= manual_rating <= 100:
+        return "manual_rating must be between 1 and 100."
+    if health_status is not None and health_status not in VALID_HEALTH:
+        return f"health_status must be one of: {', '.join(sorted(VALID_HEALTH))}."
+    if status is not None and status not in VALID_STATUS:
+        return f"status must be one of: {', '.join(sorted(VALID_STATUS))}."
+
+    try:
+        registry = load_registry()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+
+    if skill_name not in skills:
+        return f"Skill '{skill_name}' not found in registry."
+
+    if parent is not None and parent != "" and parent not in skills:
+        return f"Parent '{parent}' not found in registry."
+
+    entry = skills[skill_name]
+    changes = []
+
+    if manual_rating is not None:
+        entry["manual_rating"] = manual_rating
+        # Recompute composite: 60% auto + 40% manual when manual is set
+        auto = entry.get("auto_score", 50)
+        entry["composite_score"] = int(auto * 0.6 + manual_rating * 0.4)
+        changes.append(f"manual_rating={manual_rating}, composite_score={entry['composite_score']}")
+
+    if manual_notes is not None:
+        entry["manual_notes"] = manual_notes
+        changes.append(f"manual_notes set")
+
+    if health_status is not None:
+        entry["health_status"] = health_status
+        changes.append(f"health_status={health_status}")
+
+    if status is not None:
+        entry["status"] = status
+        changes.append(f"status={status}")
+
+    if parent is not None:
+        entry["parent"] = parent if parent != "" else None
+        changes.append(f"parent={'(cleared)' if parent == '' else parent}")
+
+    if not changes:
+        return "No fields provided to update. Pass at least one keyword argument."
+
+    # Write back atomically using a temp file + rename
+    import tempfile, os
+    registry_path = REGISTRY_PATH
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", dir=registry_path.parent, suffix=".tmp", delete=False
+        ) as tmp:
+            json.dump(registry, tmp, indent=2)
+            tmp.write("\n")
+            tmp_path = tmp.name
+        os.replace(tmp_path, registry_path)
+    except OSError as e:
+        try:
+            os.unlink(tmp_path)
+        except Exception:
+            pass
+        return f"Failed to write registry: {e}"
+
+    return f"Updated {skill_name}: {', '.join(changes)}."
+
+
+@mcp.tool()
 def record_skill_feedback(skill_name: str, rating: int, note: str = "") -> str:
     """Record feedback on a skill you just used. Call this when the user shares
     their opinion on a skill's output quality.
