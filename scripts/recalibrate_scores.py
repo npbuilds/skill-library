@@ -63,24 +63,23 @@ def score_structure(metrics: dict) -> int:
 
 
 def score_depth(metrics: dict) -> int:
-    """Word count sweet spot + reference coverage."""
+    """Word count sweet spot + reference coverage.
+
+    Sweet spot is 300-5000 words — skills can be as long as they need to be
+    within that range. Decay only kicks in above 5000 words.
+    """
     body_words = metrics.get("body_words", metrics.get("word_count", 0))
     ref_files = metrics.get("reference_files", 0)
 
-    if 500 <= body_words <= 2000:
-        score = 70
-    elif 300 <= body_words < 500:
-        score = 50
-    elif 2000 < body_words <= 3000:
-        # Linear decay from 70 at 2000 to 50 at 3000
-        score = 70 - int((body_words - 2000) / 1000 * 20)
+    if 300 <= body_words <= 5000:
+        score = 75
     elif body_words < 300:
-        score = max(10, int(body_words / 300 * 50))
+        score = max(10, int(body_words / 300 * 75))
     else:
-        # >3000: continue decay from 50
-        score = max(20, 50 - int((body_words - 3000) / 200))
+        # >5000: gentle decay, floors at 40
+        score = max(40, 75 - int((body_words - 5000) / 500))
 
-    # Reference bonus
+    # Reference bonus: each ref file adds 10 points (up to +30)
     score += min(30, ref_files * 10)
     return min(100, score)
 

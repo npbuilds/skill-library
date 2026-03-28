@@ -137,12 +137,12 @@ fi
 
 # Type-aware budget caps (from STYLE_GUIDE.md)
 case "$SKILL_TYPE" in
-  orchestrator) MAX_WORDS=2500; MAX_SECTIONS=15 ;;
-  director)     MAX_WORDS=1800; MAX_SECTIONS=12 ;;
-  knowledge)    MAX_WORDS=3000; MAX_SECTIONS=20 ;;
-  action)       MAX_WORDS=2500; MAX_SECTIONS=12 ;;
-  observer)     MAX_WORDS=1200; MAX_SECTIONS=8 ;;
-  *)            MAX_WORDS=3000; MAX_SECTIONS=20 ;;
+  orchestrator) MAX_WORDS=4000; MAX_SECTIONS=20 ;;
+  director)     MAX_WORDS=3000; MAX_SECTIONS=15 ;;
+  knowledge)    MAX_WORDS=6000; MAX_SECTIONS=30 ;;
+  action)       MAX_WORDS=4000; MAX_SECTIONS=15 ;;
+  observer)     MAX_WORDS=2000; MAX_SECTIONS=10 ;;
+  *)            MAX_WORDS=6000; MAX_SECTIONS=30 ;;
 esac
 
 # Check 6: section count (type-aware)

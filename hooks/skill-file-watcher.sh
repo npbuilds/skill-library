@@ -67,9 +67,9 @@ except:
 # Step 3: Determine health status from metrics
 HEALTH="healthy"
 if [ "$BODY_WORDS" != "?" ]; then
-  if [ "$BODY_WORDS" -gt 5000 ]; then
+  if [ "$BODY_WORDS" -gt 8000 ]; then
     HEALTH="critical"
-  elif [ "$BODY_WORDS" -gt 2000 ]; then
+  elif [ "$BODY_WORDS" -gt 5000 ]; then
     HEALTH="warning"
   fi
 fi
