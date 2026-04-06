@@ -16,7 +16,6 @@ Usage:
 import json
 import math
 import sys
-import os
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -50,7 +49,7 @@ def read_skill_content(skill):
     """Read the SKILL.md file content."""
     location = skill.get("location", "")
     path = PLUGIN_ROOT / location
-    if path.exists():
+    if path.is_file():
         return path.read_text()
     return ""
 
@@ -266,17 +265,25 @@ def apply_bridges(target_name, candidates, registry, max_bridges=3):
     """Apply the top N bridge suggestions to the registry."""
     skills = registry["skills"]
     applied = []
+    healed = 0
     for c in candidates[:max_bridges]:
         src = target_name
         tgt = c["name"]
-        if tgt not in skills[src].get("depends_on", []):
+        is_new = tgt not in skills[src].get("depends_on", [])
+        if is_new:
             skills[src].setdefault("depends_on", []).append(tgt)
             applied.append(c)
         if src not in skills[tgt].get("referenced_by", []):
             skills[tgt].setdefault("referenced_by", []).append(src)
+            if not is_new:
+                healed += 1
 
-    with open(REGISTRY_PATH, "w") as f:
-        json.dump(registry, f, indent=2)
+    if applied or healed:
+        with open(REGISTRY_PATH, "w") as f:
+            json.dump(registry, f, indent=2)
+
+    if healed:
+        print(f"  (also healed {healed} missing referenced_by back-links)")
 
     return applied
 
