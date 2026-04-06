@@ -95,6 +95,14 @@ print('true' if sys.argv[2] in reg.get('skills', {}) else 'false')
     python3 "$PLUGIN_ROOT/scripts/sync-registry.py" --apply 2>/dev/null && \
       echo "  Auto-registered $SKILL_NAME in registry" || \
       echo "  Auto-register failed — run: python3 scripts/sync-registry.py --apply"
+
+    # Suggest cross-domain bridges for the new skill
+    BRIDGES=$(python3 "$PLUGIN_ROOT/scripts/suggest-bridges.py" "$SKILL_NAME" 2>/dev/null | grep -A2 "^  [0-9]") || true
+    if [ -n "$BRIDGES" ]; then
+      echo "  Bridge suggestions for $SKILL_NAME:"
+      echo "$BRIDGES" | head -12
+      echo "  Run: python3 scripts/suggest-bridges.py $SKILL_NAME --apply"
+    fi
   fi
 
   # Append evolution snapshot for this skill (dashboard time-series)
