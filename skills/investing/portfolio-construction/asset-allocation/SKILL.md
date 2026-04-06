@@ -3,6 +3,10 @@ name: asset-allocation
 description: >
   Strategic and tactical asset allocation frameworks — from classic models (60/40, risk parity, endowment)
   to regime-based positioning, glide path design, liability-driven investing, and rebalancing methodology.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Asset Allocation — The Foundation of Every Portfolio

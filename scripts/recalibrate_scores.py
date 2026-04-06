@@ -6,7 +6,7 @@ Usage:
 
 Factors (each 0-100, weighted):
   Structure (20%):    section count, frontmatter completeness, description quality
-  Depth (25%):        word count sweet spot (500-2000), reference file coverage
+  Depth (25%):        word count sweet spot (300-5000), reference file coverage
   Connectivity (20%): depends_on + referenced_by links (more = higher)
   Freshness (15%):    days since last_modified (decays over 90 days)
   Usage (10%):        load count from usage.jsonl
@@ -19,125 +19,28 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
-USAGE_LOG = PROJECT_ROOT / "data" / "usage.jsonl"
-FEEDBACK_LOG = PROJECT_ROOT / "data" / "feedback.jsonl"
+# Allow running from the project root or from the scripts/ directory
+_here = Path(__file__).resolve().parent
+import importlib.util
 
+_shared_path = _here.parent / "mcp-server" / "shared.py"
+_spec = importlib.util.spec_from_file_location("shared", _shared_path)
+_shared = importlib.util.module_from_spec(_spec)  # type: ignore[arg-type]
+_spec.loader.exec_module(_shared)  # type: ignore[union-attr]
 
-def load_jsonl(path: Path) -> list[dict]:
-    if not path.exists():
-        return []
-    events = []
-    for line in path.read_text().splitlines():
-        line = line.strip()
-        if line:
-            try:
-                events.append(json.loads(line))
-            except json.JSONDecodeError:
-                continue
-    return events
-
-
-def score_structure(metrics: dict) -> int:
-    """Section count + description quality."""
-    section_count = metrics.get("section_count", 0)
-    desc_words = metrics.get("description_words", 0)
-
-    score = 50  # base
-    # Section count: ideal 3-6
-    if 3 <= section_count <= 6:
-        score += 25
-    elif 2 <= section_count <= 8:
-        score += 15
-
-    # Description: ideal 20-60 words
-    if 20 <= desc_words <= 60:
-        score += 25
-    elif 15 <= desc_words <= 100:
-        score += 15
-    else:
-        score += 5
-
-    return score
-
-
-def score_depth(metrics: dict) -> int:
-    """Word count sweet spot + reference coverage.
-
-    Sweet spot is 300-5000 words — skills can be as long as they need to be
-    within that range. Decay only kicks in above 5000 words.
-    """
-    body_words = metrics.get("body_words", metrics.get("word_count", 0))
-    ref_files = metrics.get("reference_files", 0)
-
-    if 300 <= body_words <= 5000:
-        score = 75
-    elif body_words < 300:
-        score = max(10, int(body_words / 300 * 75))
-    else:
-        # >5000: gentle decay, floors at 40
-        score = max(40, 75 - int((body_words - 5000) / 500))
-
-    # Reference bonus: each ref file adds 10 points (up to +30)
-    score += min(30, ref_files * 10)
-    return min(100, score)
-
-
-def score_connectivity(entry: dict) -> int:
-    """Number of dependency + referenced_by links."""
-    deps = len(entry.get("depends_on", []))
-    refs = len(entry.get("referenced_by", []))
-    total = deps + refs
-
-    if total == 0:
-        return 20
-    elif total <= 2:
-        return 40
-    elif total <= 5:
-        return 65
-    elif total <= 10:
-        return 85
-    else:
-        return 100
-
-
-def score_freshness(entry: dict, now: datetime) -> int:
-    """Days since last_modified, with decay."""
-    last_mod = entry.get("last_modified", "2020-01-01")
-    try:
-        mod_date = datetime.fromisoformat(last_mod).replace(tzinfo=timezone.utc)
-        days_old = (now - mod_date).days
-    except (ValueError, TypeError):
-        days_old = 90
-
-    if days_old <= 7:
-        return 100
-    elif days_old <= 30:
-        return 80
-    elif days_old <= 60:
-        return 60
-    elif days_old <= 90:
-        return 40
-    else:
-        return max(20, 40 - int((days_old - 90) / 30) * 5)
-
-
-def score_usage(name: str, usage_counts: Counter, max_usage: int) -> int:
-    """Relative usage frequency."""
-    uses = usage_counts.get(name, 0)
-    if max_usage > 0 and uses > 0:
-        return min(100, int((uses / max_usage) * 80) + 20)
-    return 0
-
-
-def score_feedback(name: str, feedback_ratings: dict[str, list[int]]) -> int:
-    """Average rating mapped to 0-100."""
-    ratings = feedback_ratings.get(name, [])
-    if ratings:
-        avg = sum(ratings) / len(ratings)
-        return int(avg * 20)  # 1-5 -> 20-100
-    return 50  # neutral when no feedback
+# Re-export what we need
+REGISTRY_PATH = _shared.REGISTRY_PATH
+USAGE_LOG = _shared.USAGE_LOG
+FEEDBACK_LOG = _shared.FEEDBACK_LOG
+PROJECT_ROOT = _shared.PROJECT_ROOT
+load_log = _shared.load_log
+atomic_write_registry = _shared.atomic_write_registry
+score_structure = _shared.score_structure
+score_depth = _shared.score_depth
+score_connectivity = _shared.score_connectivity
+score_freshness = _shared.score_freshness
+score_usage = _shared.score_usage
+score_feedback = _shared.score_feedback
 
 
 def main():
@@ -150,16 +53,17 @@ def main():
 
     # Load analytics
     usage_counts: Counter = Counter()
-    for e in load_jsonl(USAGE_LOG):
+    for e in load_log(USAGE_LOG):
         usage_counts[e.get("skill", "")] += 1
 
     feedback_ratings: dict[str, list[int]] = {}
-    for e in load_jsonl(FEEDBACK_LOG):
+    for e in load_log(FEEDBACK_LOG):
         s = e.get("skill", "")
         r = e.get("rating")
         if s and r is not None:
             feedback_ratings.setdefault(s, []).append(r)
 
+    # Compute once before the loop for consistent freshness across all skills
     now = datetime.now(timezone.utc)
     max_usage = max(usage_counts.values()) if usage_counts else 1
 
@@ -168,6 +72,8 @@ def main():
     for name, entry in skills.items():
         metrics = entry.get("metrics", {})
 
+        # Individual scores kept for the breakdown output.
+        # Weights here must match shared.compute_auto_score — update both together.
         s_struct = score_structure(metrics)
         s_depth = score_depth(metrics)
         s_conn = score_connectivity(entry)
@@ -229,10 +135,21 @@ def main():
         print("No score changes needed.")
 
     if not dry_run and changes:
-        with open(REGISTRY_PATH, "w") as f:
-            json.dump(reg, f, indent=2)
-            f.write("\n")
+        try:
+            atomic_write_registry(reg)
+        except OSError as e:
+            print(f"\nError writing registry: {e}", file=sys.stderr)
+            sys.exit(1)
         print(f"\nRegistry updated.")
+
+        # Append evolution snapshot after successful recalibration
+        import subprocess
+        snapshot_script = Path(__file__).resolve().parent / "snapshot_evolution.py"
+        if snapshot_script.exists():
+            subprocess.run(
+                [sys.executable, str(snapshot_script), "--event=recalibrate"],
+                capture_output=True,
+            )
     elif dry_run:
         print("\n(dry run — no changes written)")
 

@@ -5,6 +5,10 @@ description: >
   mechanics, order flow toxicity (VPIN), flash crash anatomy, ETF liquidity illusion, HFT market
   quality, and payment for order flow. Use when evaluating whether a market is genuinely liquid or
   structurally fragile beneath the surface.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Liquidity Topology

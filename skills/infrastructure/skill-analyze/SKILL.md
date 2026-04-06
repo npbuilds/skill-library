@@ -4,7 +4,11 @@ description: >
   Analyze skills using the Anthropic API for precise token counting, description quality
   evaluation, content review, and decomposition suggestions. Use when the user wants deep
   AI-powered analysis of a skill beyond what local heuristics provide, or wants exact token counts.
-tools: Read, Bash, Grep, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Bash Grep Glob
 ---
 
 # Skill Analyze — The Oracle

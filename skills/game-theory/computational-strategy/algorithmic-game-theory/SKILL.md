@@ -5,6 +5,10 @@ description: >
   anarchy/stability, congestion games, potential games, and algorithmic mechanism design. Reference
   when asking whether equilibria can be computed, how much efficiency is lost from selfish behavior,
   or how to design computationally tractable mechanisms.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Algorithmic Game Theory — The Complexity Theorist

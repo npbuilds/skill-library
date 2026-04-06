@@ -5,7 +5,11 @@ description: >
   competitive, cooperative, or mixed-motive scenario and needs it formalized as a game, solved
   for equilibria, or interpreted as strategic advice. Handles business strategy, negotiation,
   political dynamics, technology competition, and fictional world scenarios.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Game Solver — The Analyst

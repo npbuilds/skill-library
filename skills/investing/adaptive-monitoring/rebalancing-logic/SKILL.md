@@ -4,6 +4,10 @@ description: >
   Rebalancing frameworks for maintaining portfolio alignment with target allocations. Reference
   when deciding whether to rebalance, choosing a rebalancing method, managing tax consequences,
   or distinguishing between drift-based and thesis-based portfolio adjustments.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Rebalancing Logic — The Discipline Engine

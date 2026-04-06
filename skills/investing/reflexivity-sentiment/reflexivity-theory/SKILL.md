@@ -4,6 +4,10 @@ description: >
   Soros's theory of reflexivity applied to financial markets. Covers the cognitive and manipulative
   functions, boom-bust dynamics, feedback loops in credit/equity/currency markets, and practical
   frameworks for identifying reflexive regimes and phase transitions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Reflexivity Theory — The Feedback Loop Framework

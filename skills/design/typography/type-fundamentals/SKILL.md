@@ -4,6 +4,10 @@ description: >
   Typography foundations — typeface anatomy, classification systems, and legibility principles.
   Covers x-height, stroke contrast, serifs vs sans-serifs, monospaced vs proportional, optical
   sizing, and the core properties that determine how a typeface feels and performs.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Type Fundamentals — The Anatomy of Letters

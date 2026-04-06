@@ -4,6 +4,10 @@ description: >
   Knowledge skill covering fiscal dominance theory, sovereign debt dynamics, Treasury issuance
   analysis, fiscal-monetary interaction, and the investment implications of government spending
   and debt trajectories. Use when assessing how fiscal policy and debt sustainability affect markets.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Fiscal Regime

@@ -6,6 +6,10 @@ description: >
   states, scroll-driven animation, and performance-aware motion patterns. Consult when
   any artifact or design needs movement — from a single hover effect to a fully
   choreographed experience.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Motion Design — The Grammar of Movement

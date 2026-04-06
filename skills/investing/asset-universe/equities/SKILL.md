@@ -4,6 +4,10 @@ description: >
   Equity investing frameworks — factor investing, sector rotation, geographic allocation,
   earnings analysis, and market structure. Reference when analyzing stocks, building equity
   portfolios, evaluating market conditions, or understanding what drives equity returns.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Equities — The Ownership Premium

@@ -5,7 +5,11 @@ description: >
   visualize phase portraits and population trajectories, and analyze evolutionary stability
   computationally. Use when the user wants to see dynamics in action, validate analytical
   predictions, or explore games too complex for closed-form analysis.
-tools: Read, Write, Bash, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob
 ---
 
 # Evo-Simulator — The Laboratory

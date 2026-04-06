@@ -4,6 +4,10 @@ description: >
   The classical modes of persuasion — ethos, pathos, logos, and kairos. Use when the user is
   writing to persuade and needs to understand which appeal to deploy, when credibility matters
   more than emotion, or how to create genuine urgency without manipulation.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Rhetorical Appeals — The Three (and a Half) Modes of Persuasion

@@ -5,7 +5,11 @@ description: >
   computational complexity of equilibria, behavioral game theory, bounded rationality,
   learning in games, multi-agent reinforcement learning, and AI-era game theory to the right
   specialist skill. Use when computational limits, bounded rationality, or AI agents are central.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Computational Strategy Director — The Realist

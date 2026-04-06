@@ -7,7 +7,11 @@ description: >
   to explore wine creatively, practice for a sommelier exam, understand the
   science behind non-obvious pairings, or speculate on the future of wine
   geography.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Sommelier Lab — The Experiment

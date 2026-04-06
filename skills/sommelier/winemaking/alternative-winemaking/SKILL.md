@@ -6,6 +6,10 @@ description: >
   Use when the user asks about low-intervention wine, wants to understand the
   natural wine movement, or needs to distinguish intentional stylistic choice
   from conventional winemaking fault.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Alternative Winemaking — The Rebel

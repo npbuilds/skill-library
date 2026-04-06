@@ -5,6 +5,10 @@ description: >
   missing values, detecting outliers, deduplicating records, validating data types, or
   establishing reproducible cleaning pipelines. Use when preparing any dataset for analysis
   or modeling.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Data Cleaning — The Foundation

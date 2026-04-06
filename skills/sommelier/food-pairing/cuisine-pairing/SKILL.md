@@ -6,6 +6,10 @@ description: >
   is pairing wine with a specific national or regional cuisine, needs
   cuisine-specific guidance beyond structural principles, or wants to understand
   how cultural food traditions align with particular wine styles.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Cuisine Pairing — The World Table

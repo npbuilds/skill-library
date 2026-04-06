@@ -6,6 +6,10 @@ description: >
   case for collecting what you love to drink. Use when the user wants to build
   an investment-grade cellar, understand which wines hold value, or assess the
   risks and realities of wine as an alternative asset class.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Collecting & Investment — The Cellar Portfolio

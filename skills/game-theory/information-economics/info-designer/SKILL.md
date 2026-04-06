@@ -5,7 +5,11 @@ description: >
   to determine what information to reveal, to whom, and when — for platforms, regulators,
   organizations, or any sender who controls information flow. Produces concrete signal structures
   with commitment and incentive analysis.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Info Designer — The Revealer

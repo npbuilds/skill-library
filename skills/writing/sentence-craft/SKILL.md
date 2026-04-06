@@ -5,7 +5,11 @@ description: >
   skill, define the learning curriculum, and resolve conflicts between rhythm, diction, and syntax
   guidance. Use when the user has a question about how sentences work, wants to improve their
   prose at the line level, or needs to understand why a sentence does or doesn't land.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Sentence Craft Director — The Line Editor's Eye
@@ -83,3 +87,8 @@ When child skills give contradictory guidance:
 - The problem is argumentative or persuasive — that's rhetoric territory
 - The user needs a full editing pass, not just line-level help — that's revision-craft territory
 - The user needs prose *drafted*, not just diagnosed — the orchestrator routes to action skills
+
+## Cross-Domain Connections
+
+- **Design/typography**: Typography is the visual parallel to sentence-craft — both work with rhythm, hierarchy, and whitespace. Type hierarchy (heading → body → caption) mirrors prose structure. Type pairing (serif + sans for contrast) parallels diction choices (Latinate + Anglo-Saxon for texture). Both domains share the principle that contrast creates emphasis and monotony kills attention.
+- **Design/visual-communication/design-principles**: Contrast, repetition, alignment, and proximity are design principles that have direct prose equivalents — antithesis, anaphora, parallel structure, and thematic grouping.

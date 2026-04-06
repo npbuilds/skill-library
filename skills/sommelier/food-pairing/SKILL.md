@@ -6,7 +6,11 @@ description: >
   for a dish. Use when the user wants to match wine to food, understand why a
   pairing works or fails, plan a wine list for a meal, or learn the science
   behind flavor bridges and structural compatibility.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Food Pairing — The Harmonist

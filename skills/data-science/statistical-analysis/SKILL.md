@@ -5,7 +5,11 @@ description: >
   skill, define the learning curriculum, and resolve conflicts between analytical frameworks.
   Use when the user needs hypothesis testing, causal inference, survival analysis, clinical
   trial design, or any question requiring rigorous statistical reasoning.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Statistical Analysis Director

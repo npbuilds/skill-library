@@ -4,6 +4,10 @@ description: >
   Deep expertise in cross-asset correlation regimes — how correlations shift across market
   environments, why diversification fails in crises, and how to identify true diversifiers.
   Use when stress-testing portfolio diversification or analyzing regime-dependent behavior.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Correlation Regimes — When Diversification Works and When It Lies
@@ -377,3 +381,7 @@ Review quarterly and after any major market event
 - **`asset-allocation`** (Portfolio Construction) — consult when designing diversification strategy; allocation decisions must account for regime-conditional correlations, not just unconditional averages
 - **`tail-risk`** (Risk Architecture) — consult when assessing crisis behavior where correlations spike toward one and standard diversification assumptions fail catastrophically
 - **`macro-cycles`** (Regime Intelligence) — consult when understanding why correlations are regime-dependent; the dominant macro driver (growth, inflation, liquidity) determines which assets move together
+
+## Cross-Domain Connections
+
+- **Data-science/modeling/time-series**: Regime-switching models (HMM, Markov-switching GARCH, DCC-GARCH) are advanced time-series methodology. Detecting when correlation regimes have shifted uses the same structural break and change-point detection methods from the time-series skill.

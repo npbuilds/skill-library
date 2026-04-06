@@ -4,6 +4,10 @@ description: >
   Modern quantitative sentiment measurement using options-derived data, flow analysis, NLP-based
   text analysis, and alternative data sources. Covers GEX/DEX, 0DTE dynamics, CFTC positioning,
   social media sentiment, FinBERT, and frameworks for building composite sentiment indicators.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Sentiment Signals — The Quantitative Measurement Layer
@@ -295,3 +299,8 @@ Beyond volume ratios (which measure daily flow), open interest ratios reveal acc
 - **Survivorship of signals**: Some sentiment signals that worked historically may stop working as they become widely known and traded against. The most crowded signals are the most at risk of degradation.
 - **Regime dependence**: Sentiment signals work differently in different macro regimes. In a secular bull market, extreme bullish sentiment readings are less reliable as sell signals. In a bear market, extreme bearish readings may mark intermediate bottoms but not THE bottom.
 - **Confusing sentiment with positioning**: Sentiment (what people believe) and positioning (what people have done) can diverge. Someone who is bearish but fully invested is different from someone who is bearish and 100% cash. Always prefer positioning data over opinion data when both are available.
+
+## Cross-Domain Connections
+
+- **Data-science/data-wrangling/feature-engineering**: Building a sentiment composite is multi-source feature engineering — normalizing heterogeneous signals (VIX, put/call ratios, AAII surveys, NLP scores) into a unified feature space with appropriate weighting and temporal alignment.
+- **Data-science/ml-engineering/drift-detection**: Sentiment signals degrade as they become crowded. Monitoring signal efficacy over time (does extreme fear still predict above-average forward returns?) is drift detection applied to sentiment factors.

@@ -4,7 +4,11 @@ description: >
   Visualize the skill network as an ASCII dependency graph. Use when the user wants to see
   how skills connect, trace dependency chains, find orphaned skills, or understand the
   relationship topology of the mycelial network.
-tools: Read, Bash, Grep, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Bash Grep Glob
 ---
 
 # Skill Network — The Cartographer

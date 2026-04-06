@@ -4,6 +4,10 @@ description: >
   Brand strategy fundamentals — positioning, values, audience definition, personality
   frameworks, and competitive differentiation. The strategic layer that informs all
   visual and verbal brand decisions. Use before any brand execution work.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Brand Foundations — The Strategic Layer

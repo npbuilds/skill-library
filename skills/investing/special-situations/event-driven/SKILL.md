@@ -5,6 +5,10 @@ description: >
   catalyst identification, and distressed investing. Use when the user wants to evaluate a merger
   spread, assess an activist 13D filing, identify upcoming catalysts, or analyze distressed
   debt and bankruptcy situations.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Event-Driven Investing — Catalysts, Arbitrage, and Corporate Change

@@ -4,6 +4,10 @@ description: >
   Alternative data sources and integration frameworks for investment monitoring. Reference when
   evaluating non-traditional data signals, building monitoring dashboards with satellite imagery,
   transaction data, web scraping, NLP sentiment, or geolocation data for investment decisions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Alternative Data Monitoring — The Signal Layer
@@ -534,3 +538,9 @@ Not all alt data signals are created equal. Score each on:
 5. **Neglecting maintenance**: Scrapers break, APIs change, data formats shift — alt data pipelines require ongoing engineering
 6. **Ignoring signal decay**: A signal that worked for 3 years may have already been discovered and arbitraged away
 7. **Insufficient sample size**: Drawing conclusions from 6 months of data when you need 36+ months for statistical reliability
+
+## Cross-Domain Connections
+
+- **Data-science/data-wrangling/feature-engineering**: The alt data value chain (raw → cleaned → signal → integration) IS the feature engineering pipeline. Satellite imagery requires spatial features, NLP requires text embeddings (FinBERT), transaction data requires temporal aggregation — all feature engineering applied to financial signals.
+- **Data-science/statistical-analysis/statistical-testing**: Signal validation requires hypothesis testing with multiple comparison correction. Testing dozens of alt data signals and reporting only the ones that "work" is textbook p-hacking — the statistical-testing skill provides the correction methods (Bonferroni, BH).
+- **Data-science/ml-engineering/drift-detection**: Alt data signal decay is drift — a signal that worked for 3 years degrades as it's discovered and arbitraged. Monitoring signal quality over time uses drift detection methodology.

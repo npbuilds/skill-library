@@ -6,6 +6,10 @@ description: >
   US AVA, and Australian GI. Use when the user needs to understand what a label
   means, what a classification system regulates, or why legal boundaries matter
   for wine identity.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Appellation Law — The Boundaries

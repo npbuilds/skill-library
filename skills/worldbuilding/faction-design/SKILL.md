@@ -5,6 +5,10 @@ description: >
   Reference when creating political entities, organizations, secret societies, or any group
   that acts with purpose in the world. Covers the pyramid technique, SUPREME method, and
   fractal organizational modeling.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Faction Design — The Players
@@ -114,3 +118,8 @@ Power vacuums are excellent narrative catalysts. Defining "what happens if facti
 2. **Factions without vulnerabilities.** An invincible faction creates no tension. Every faction must need something it can't provide for itself.
 3. **Static relationships.** If the alliance between Faction A and Faction B never changes, it's a background fact, not a political dynamic. Relationships should be under pressure.
 4. **Factions that exist only to oppose the protagonist.** If the faction would have no purpose without the hero, it's not a faction — it's an obstacle. Real factions have agendas independent of the plot.
+
+## Cross-Domain Connections
+
+- **Writing/narrative-craft/dialogue**: Faction tensions surface through dialogue subtext. Characters from opposing factions carry ideological conflict into every conversation. Load faction relationships when writing dialogue between politically positioned characters.
+- **Game-theory/strategic-foundations/classical-games**: Faction interactions are games — alliance formation is a coordination game, territory disputes are hawk-dove, trade negotiations are bargaining games. Game-theoretic analysis predicts which faction configurations are stable and which will collapse.

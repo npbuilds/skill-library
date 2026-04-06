@@ -4,7 +4,11 @@ description: >
   Test skills for structural correctness and behavioral accuracy. Use when the user wants to
   validate a skill's file structure, run behavioral test cases against a skill, benchmark two
   skill versions side-by-side, or verify that a skill triggers correctly on expected prompts.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Skill Test — The Prover

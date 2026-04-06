@@ -5,7 +5,11 @@ description: >
   question contains multiple assertions, hidden assumptions, compound predicates, or causal
   chains that need separate verification. Produces a structured claim list with verification
   strategies per claim.
-tools: Read, Write
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write
 ---
 
 # Claim Decomposer — The Splitter

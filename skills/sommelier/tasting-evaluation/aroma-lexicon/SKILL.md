@@ -6,6 +6,10 @@ description: >
   understanding what aromatic observations reveal about grape variety, origin,
   and winemaking, or when improving blind tasting precision and tasting note
   quality.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # The Aroma Lexicon — Noble's Wheel

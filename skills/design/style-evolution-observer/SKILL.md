@@ -6,7 +6,11 @@ description: >
   with dimensional shifts, confidence changes, and discovered dimensions. Activates after
   any creative output (artifact, design, visualization) to capture what was built and how
   the user responded.
-tools: Read, Write, Glob, Grep
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob Grep
 ---
 
 # Style Evolution Observer — The Silent Curator

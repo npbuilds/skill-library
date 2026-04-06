@@ -4,6 +4,10 @@ description: >
   Dialogue craft — subtext, attribution, distinct character voices, and the art of characters
   saying one thing while meaning another. Use when dialogue feels wooden, generic, or on-the-nose,
   or when the user wants to understand how skilled writers make characters sound like themselves.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Dialogue — What Goes Unsaid
@@ -69,3 +73,8 @@ Fixes: have a character who genuinely doesn't know (a newcomer, a child, an outs
 - All characters sound like the author
 - Dialogue is being used as an exposition vehicle
 - The user asks about subtext, dialogue tags, or making characters sound distinct
+
+## Cross-Domain Connections
+
+- **Worldbuilding/faction-design**: Faction tensions surface through dialogue subtext. Characters from rival factions carry competing ideologies into conversation — the subtext IS the political dynamic. Load faction relationships before writing dialogue between politically positioned characters.
+- **Worldbuilding/cultures-societies**: Cultural values constrain what characters can and can't say. A culture that values honor above all produces characters who speak in euphemisms about cowardice. Cultural communication norms shape dialogue conventions.

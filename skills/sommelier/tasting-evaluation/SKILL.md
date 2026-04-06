@@ -5,7 +5,11 @@ description: >
   Sommeliers Deductive Tasting Grid and WSET Systematic Approach to Tasting.
   Use when evaluating a specific wine, practicing blind tasting, identifying
   wine faults, or assessing wine quality using structured scoring frameworks.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Tasting & Evaluation — The Palate

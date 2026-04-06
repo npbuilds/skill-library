@@ -5,7 +5,11 @@ description: >
   adverse selection, moral hazard, Bayesian persuasion, information design, cheap talk,
   and strategic communication to the right specialist skill. Use when asymmetric information
   drives the strategic interaction.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Information Economics Director — The Cryptographer
@@ -80,3 +84,9 @@ When child skills give contradictory guidance:
 - The question is about designing allocation rules (not information rules) → Mechanism Design
 - The question involves evolving populations, not informed agents → Evolutionary Dynamics
 - The question is about computational complexity of information processing → Computational Strategy
+
+## Cross-Domain Connections
+
+- **Investing/reflexivity-sentiment**: Corporate disclosure, earnings guidance, and sell-side research are information design problems. Companies and analysts strategically reveal information to influence market beliefs — the commitment structure determines whether it's persuasion (binding guidance) or cheap talk (non-binding forecasts).
+- **Investing/special-situations/insider-signals**: Insider transactions are costly signals in a Spence signaling framework. Filing requirements make the signal verifiable; capital at risk makes it costly. Information economics provides the theoretical foundation for reading insider behavior.
+- **Investing/value-quality/second-level-thinking**: Adverse selection in equity markets — cheap stocks may be "lemons." Second-level thinking asks whether the market's discount reflects genuine information asymmetry or mispricing.

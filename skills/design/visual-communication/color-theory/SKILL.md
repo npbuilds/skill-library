@@ -4,6 +4,10 @@ description: >
   Color theory foundations for design decisions. Reference when selecting palettes, evaluating
   color harmony, choosing contrast strategies, or understanding how colors interact perceptually.
   Use when any design agent needs to justify or refine color choices.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Color Theory — The Spectrum

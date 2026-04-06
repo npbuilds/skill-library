@@ -6,6 +6,10 @@ description: >
   the user encounters an unfamiliar grape, wants to explore beyond the standard
   varieties, or needs context on the natural wine movement's revival of
   forgotten regional grapes.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Indigenous Varieties — The Forgotten Vines

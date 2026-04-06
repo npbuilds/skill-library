@@ -5,7 +5,11 @@ description: >
   specialist skill, define the learning curriculum, and resolve conflicts between cleaning
   aggressiveness and information preservation. Use when the user needs to clean, transform,
   encode, or engineer features from raw data.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Data Wrangling Director

@@ -4,7 +4,11 @@ description: >
   Export skills as portable packages for sharing or backup. Use when the user wants to
   package a skill for distribution, create a shareable archive, generate a standalone
   skill bundle, or back up specific skills with their references and metadata.
-tools: Read, Write, Bash, Glob, Grep
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep
 ---
 
 # Skill Export — The Courier

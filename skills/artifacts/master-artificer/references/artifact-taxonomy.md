@@ -118,6 +118,16 @@ When classifying hybrids, identify the **primary** archetype (the one that defin
 
 ---
 
+## Go-To Templates
+
+User-approved design systems that can be applied as a starting point. Check `templates/` for full specs.
+
+| Template | Best for | Aesthetic |
+|----------|----------|-----------|
+| [Weathered Cyberpunk](templates/weathered-cyberpunk.md) | Dashboards, data displays, monitoring, briefings | Cool muted palette, monospace typography, faded neon accents, CRT effects, light+dark mode. Sharp edges, geometric precision, atmospheric but data-forward. |
+
+---
+
 ## Classification Signals
 
 | User says... | Likely archetype |

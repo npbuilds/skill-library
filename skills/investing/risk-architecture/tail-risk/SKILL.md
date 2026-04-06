@@ -4,6 +4,10 @@ description: >
   Deep expertise in tail risk management using Nassim Taleb's framework — fat tails,
   antifragility, barbell strategy, convexity, and via negativa. Use when evaluating
   portfolio fragility, structuring tail hedges, or building antifragile positions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Tail Risk — Surviving What Models Say Can't Happen

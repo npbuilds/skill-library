@@ -5,6 +5,10 @@ description: >
   hedge funds, and managed futures. Reference when evaluating illiquid investments, sizing
   alternative allocations, understanding the illiquidity premium, or accessing non-traditional
   return streams.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Alternatives — Beyond Stocks and Bonds

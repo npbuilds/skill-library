@@ -5,6 +5,10 @@ description: >
   evaluate any wine. Use when describing a wine from scratch, practicing blind
   tasting, or building a structured evidence chain from sight through nose
   through palate to a final conclusion about grape, region, and vintage.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # The Deductive Method — The Grid

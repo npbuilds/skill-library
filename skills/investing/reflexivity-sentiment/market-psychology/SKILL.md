@@ -4,6 +4,10 @@ description: >
   Behavioral biases, crowd dynamics, and traditional sentiment indicators applied to investing.
   Covers the fear/greed cycle, herd behavior, contrarian frameworks from Druckenmiller and Buffett,
   and classical sentiment gauges like VIX, put/call ratios, AAII surveys, and margin debt.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Market Psychology — The Crowd and the Contrarian

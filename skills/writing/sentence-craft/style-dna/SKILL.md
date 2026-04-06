@@ -5,6 +5,10 @@ description: >
   compare authors, and identify the specific craft levers that make one writer sound different
   from another. Reference when designing blended voices, analyzing prose style, or understanding
   why a passage sounds the way it does. Feeds into style-mixer and style-mutator.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Style DNA — The Genome of Prose

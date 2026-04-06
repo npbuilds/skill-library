@@ -4,7 +4,11 @@ description: >
   Direct portfolio construction decisions across allocation, factor exposure, hedging, and tax optimization.
   Route questions about building, maintaining, and optimizing investment portfolios to the right specialist skill.
   Use when translating investment views into concrete portfolio positions, sizing, hedging, or rebalancing decisions.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Portfolio Construction — The Architect's Blueprint

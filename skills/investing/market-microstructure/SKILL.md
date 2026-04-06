@@ -5,7 +5,11 @@ description: >
   liquidity dynamics to the appropriate specialist knowledge skill. Use when analyzing how market
   plumbing — index flows, dealer hedging, dark pools, and structural liquidity — affects prices
   independent of fundamentals.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Market Microstructure Director
@@ -80,6 +84,12 @@ When child skills give contradictory guidance:
 ## Scope Boundaries
 
 **This director handles**: All questions where market mechanics, structural flows, or plumbing dynamics affect prices independent of fundamental value — passive fund flows, options dealer hedging, liquidity conditions, and their interactions.
+
+## Cross-Domain Connections
+
+- **Game-theory/mechanism-design/auction-theory**: Market microstructure IS applied auction theory — continuous double auctions, limit order books, and price discovery mechanisms are auction formats. Winner's curse applies to aggressive market orders; revenue equivalence breaks down in fragmented markets with private values.
+- **Game-theory/mechanism-design**: Exchange design (maker-taker fees, order types, circuit breakers) is mechanism design — balancing liquidity provision incentives, price discovery efficiency, and manipulation resistance.
+- **Game-theory/mechanism-design/matching-markets**: Dark pools and crossing networks are matching markets — two-sided platforms matching buyers and sellers without price priority.
 
 **Escalate to the Archon when**:
 - The question is about fundamental valuation or business quality -> Value & Quality

@@ -4,6 +4,10 @@ description: >
   How to build and arrange arguments — Toulmin's warrant, Rogerian empathy, classical structure,
   and the volta/turn in essays. Use when the user needs to organize a persuasive piece, handle
   counterarguments, or understand why an argument isn't landing structurally.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Argument Structure — Building the Case

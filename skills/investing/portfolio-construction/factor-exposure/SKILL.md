@@ -3,6 +3,10 @@ name: factor-exposure
 description: >
   Systematic factor investing frameworks — the robust factors (value, momentum, quality, low vol, size, carry),
   factor timing across regimes, multi-factor construction, smart beta implementation, and factor attribution.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Factor Exposure — Harvesting Systematic Risk Premia
@@ -392,3 +396,8 @@ Factor exposures drift as markets move. Quarterly factor attribution reveals whe
 - Do not use high-cost active managers for factor exposure available cheaply through ETFs
 - Do not ignore factor interactions — owning value + momentum together is different from owning each separately
 - Do not assume factors are static — definitions and efficacy evolve as markets change (e.g., P/B becoming less relevant)
+
+## Cross-Domain Connections
+
+- **Data-science/statistical-analysis/statistical-testing**: Factor validation is hypothesis testing — is this factor's outperformance statistically significant or data-mined? Power analysis determines how much history is needed. The factor zoo problem (hundreds of candidate factors) requires multiple comparison correction.
+- **Data-science/statistical-analysis/causal-inference**: Determining whether factor exposure *causes* returns (vs. spurious correlation) requires causal inference methodology — instrumental variables, natural experiments from index reconstitutions, and sensitivity analysis for confounding.

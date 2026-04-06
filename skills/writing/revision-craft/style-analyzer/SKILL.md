@@ -5,7 +5,11 @@ description: >
   register, vocabulary richness, syntactic patterns, and voice signature. Use when the user wants
   to understand what makes a text's prose distinctive, compare styles, or diagnose style
   inconsistencies.
-tools: Read, Bash, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Bash Glob
 ---
 
 # Style Analyzer — The Prose X-Ray

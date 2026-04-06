@@ -4,7 +4,11 @@ description: >
   Direct the risk architecture subdomain — route questions about position sizing, tail risk,
   correlation regimes, and drawdown psychology to the right specialist skill. Use when managing
   portfolio risk, sizing positions, hedging tail events, or navigating drawdowns.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Risk Architecture Director

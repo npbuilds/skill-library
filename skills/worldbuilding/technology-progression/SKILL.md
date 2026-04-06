@@ -4,6 +4,10 @@ description: >
   Design technology trees, innovation pathways, and the relationship between technology and
   society. Reference when defining what tools exist, what's possible to build, how innovation
   happens, and how technology interacts with the fantasy system.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Technology Progression — The Tools They Build

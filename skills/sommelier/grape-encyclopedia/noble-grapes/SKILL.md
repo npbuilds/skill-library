@@ -1,7 +1,11 @@
 ---
 name: noble-grapes
 description: Navigate the 15 internationally recognized noble grape varieties — 9 reds and 6 whites — with aromatic profiles, structural signatures, classic regions, and common winemaking treatments. Use when identifying a grape from tasting notes, understanding a variety's range across regions, or explaining why a grape behaves the way it does.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Noble Grapes — The Royal Court

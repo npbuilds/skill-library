@@ -6,7 +6,11 @@ description: >
   Use when the user wants to understand how wine is grown or made, how sparkling
   or fortified wines are produced, or what distinguishes natural, orange, or
   biodynamic wine from conventional production.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Winemaking — The Vigneron

@@ -4,6 +4,10 @@ description: >
   Analyze corporate spinoffs, restructurings, and distressed situations for investment opportunities.
   Use when the user wants to evaluate a spinoff, carve-out, split-off, rights offering, bankruptcy
   emergence, or any corporate restructuring that creates forced selling and structural mispricing.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Spinoffs & Restructurings — The Forced-Selling Playbook

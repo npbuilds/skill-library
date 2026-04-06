@@ -5,6 +5,10 @@ description: >
   a sender optimally designs information to influence a receiver's actions, when studying cheap
   talk and strategic communication, or when evaluating disclosure policies. Use when the question
   is about designing what information to reveal, not what action to take.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Bayesian Persuasion — The Information Architect

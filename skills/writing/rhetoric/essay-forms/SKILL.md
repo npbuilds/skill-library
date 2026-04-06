@@ -5,6 +5,10 @@ description: >
   collage/fragment. Use when the user is choosing an essay form, wants to understand how form
   shapes content, or asks about specific essay types. Each form carries its own logic, strengths,
   and constraints.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Essay Forms — The Form Registry

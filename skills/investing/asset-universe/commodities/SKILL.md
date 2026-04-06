@@ -4,6 +4,10 @@ description: >
   Commodity investing frameworks — supply/demand analysis, energy markets, metals, agriculture,
   and futures market structure. Reference when analyzing commodity markets, evaluating inflation
   hedges, understanding roll yield, or positioning within the commodity complex.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Commodities — The Real Economy

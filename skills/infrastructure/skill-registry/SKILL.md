@@ -5,7 +5,11 @@ description: >
   Use when the user wants to browse skills, search the catalog, add or update a skill entry,
   remove a skill, sync the registry with the filesystem, or when any other infrastructure
   skill needs to look up skill metadata, locations, or relationships.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Skill Registry — The Map

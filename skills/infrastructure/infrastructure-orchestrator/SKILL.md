@@ -5,7 +5,11 @@ description: >
   create a new skill, audit the library, build a domain from scratch, run diagnostics, export
   skills, or perform any multi-step operation that involves coordinating multiple infrastructure
   tools — scaffold, registry, health, test, analyze, network, dashboard, export, or fork.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Infrastructure Orchestrator — The Architect

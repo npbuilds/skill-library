@@ -6,7 +6,11 @@ description: >
   dish and wants concrete wine suggestions with reasoning. Also handles reverse
   pairing (user has a wine, wants food suggestions) and flags impossible
   pairings with honest alternatives.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # The Pairing Engine — The Matchmaker

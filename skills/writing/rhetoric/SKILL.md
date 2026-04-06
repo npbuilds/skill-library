@@ -4,7 +4,11 @@ description: >
   Direct the rhetoric subdomain — route persuasion, argument, essay form, and rhetorical device
   questions to the right specialist skill. Use when the user is writing to persuade, constructing
   an argument, choosing an essay form, or wants to deploy rhetorical devices effectively.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Rhetoric Director — The Essayist's Compass
@@ -66,3 +70,7 @@ This order goes from strategy to tactics: choose the right persuasive mode, orga
 - The problem is narrative (scene, pacing, dialogue) without a persuasive aim — that's narrative-craft territory
 - The user needs a full editing pass — that's revision-craft territory
 - The user needs prose drafted — the orchestrator routes to action skills
+
+## Cross-Domain Connections
+
+- **Worldbuilding/cultures-societies**: A culture's value system constrains which rhetorical strategies feel authentic. A collectivist culture emphasizes communal appeals; an honor culture uses shame and glory. Rhetoric written for in-world audiences must respect the target culture's persuasion conventions.

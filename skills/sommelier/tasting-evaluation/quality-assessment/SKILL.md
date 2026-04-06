@@ -6,6 +6,10 @@ description: >
   Parker 100-point, Jancis Robinson 20-point, and Decanter. Use when rating
   a wine, understanding critic scores, or assessing whether a wine is at,
   approaching, or past its peak.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Quality Assessment — The Arbiter
@@ -212,6 +216,11 @@ Some tasters mistake an aggressive, high-VA, brett-heavy, oxidative wine for "co
 The WSET quality ladder and the BLIC framework are designed to assess quality analytically, independent of personal preference. A taster may personally dislike a style (very tannic, high acid, austere) while correctly assessing it as outstanding quality. Keep preference and quality assessment separate. Note both when relevant, but keep them in different analytical categories.
 
 ---
+
+## Cross-Domain Connections
+
+- **Data-science/modeling/model-evaluation**: Wine quality assessment IS multi-dimensional evaluation — the BLIC framework (balance, length, intensity, complexity) is structurally identical to multi-metric model evaluation. Both score on orthogonal dimensions and synthesize into an overall quality judgment. Calibration (is my 90-point wine really better than my 85-point wine?) parallels model calibration.
+- **Data-science/statistical-analysis/statistical-testing**: The statistical significance of critic score premiums (does a 95-point score really predict higher prices?) is testable. Inter-rater reliability between tasters is a statistical question.
 
 ## Learn Block
 

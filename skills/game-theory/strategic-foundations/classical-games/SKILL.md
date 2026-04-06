@@ -5,6 +5,10 @@ description: >
   interactions, finding Nash equilibria, analyzing sequential games, evaluating mixed strategies,
   or understanding equilibrium refinements. Use when any analysis needs the core language and
   results of non-cooperative game theory.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Classical Games — The Foundations
@@ -151,3 +155,9 @@ Read `references/sources.md` for the full bibliography grounding this skill — 
 - Evaluating whether a proposed strategy is robust to opponent responses
 - Understanding why rational agents produce collectively suboptimal outcomes
 - Classifying real-world interactions into known game structures
+
+## Cross-Domain Connections
+
+- **Investing/value-quality/second-level-thinking**: Market consensus IS a Nash equilibrium — the price reflects what everyone expects given what everyone else expects. Second-level thinking (Marks) asks: "What if the consensus equilibrium is wrong?" Contrarian investing is finding non-equilibrium opportunities.
+- **Investing/regime-intelligence**: Cournot/Bertrand competition models determine industry profitability regimes. Understanding whether competitors play quantity games (Cournot) or price games (Bertrand) predicts margins and competitive dynamics.
+- **Investing/market-microstructure/options-mechanics**: Dealer gamma hedging is a repeated game between market makers and directional traders. Pinning effects near expiry are coordination equilibria.

@@ -6,6 +6,10 @@ description: >
   a region tastes distinctive, how to compare wine climates using Winkler and
   Huglin indices, or engage with the ongoing scientific debate about soil mineral
   expression in wine.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Terroir Science — The Earth Speaks

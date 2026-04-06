@@ -5,6 +5,10 @@ description: >
   performance metrics, designing validation strategies, comparing models statistically,
   assessing calibration, or auditing models for fairness. Use when deciding which model
   to deploy or how to measure model quality.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Model Evaluation — The Judge
@@ -198,3 +202,8 @@ Reference this skill when you are:
 - Writing a model card or evaluation report for stakeholders
 
 For detailed metric formulas, ranges, and trade-off analysis, see `references/metrics-catalog.md`.
+
+## Cross-Domain Connections
+
+- **Investing/adaptive-monitoring/performance-attribution**: Model evaluation metrics map to investment performance metrics — calibration (predicted probabilities = true outcomes) parallels risk model calibration (predicted VaR = realized losses). Cross-validation strategies (expanding window, sliding window) ARE walk-forward backtesting of trading strategies.
+- **Investing/risk-architecture/tail-risk**: Evaluating model performance in tails is critical for financial risk — standard metrics (RMSE, accuracy) fail when the cost of errors is asymmetric. Tail-risk evaluation requires metrics that weight extreme outcomes appropriately.

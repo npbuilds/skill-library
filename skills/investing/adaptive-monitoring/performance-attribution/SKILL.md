@@ -4,6 +4,10 @@ description: >
   Performance attribution frameworks for decomposing investment returns into their sources.
   Reference when analyzing what drove portfolio performance, distinguishing skill from luck,
   selecting appropriate benchmarks, or conducting risk-adjusted performance measurement.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Performance Attribution — The Diagnostic Engine
@@ -450,3 +454,8 @@ A practical framework for conducting systematic attribution analysis.
 - Tracking error exceeding mandate by >50%
 - Max drawdown exceeding 75% of drawdown budget
 - Attribution showing returns from unintended sources for 3+ consecutive months
+
+## Cross-Domain Connections
+
+- **Data-science/statistical-analysis/causal-inference**: Performance attribution IS causal decomposition — Brinson-Fachler isolates allocation vs. selection effects using the same logic as difference-in-differences. Factor regression attribution is multivariate causal estimation. Sensitivity analysis from causal-inference diagnoses whether outperformance is robust to alternative explanations.
+- **Data-science/modeling/model-evaluation**: Walk-forward backtesting of attribution models uses expanding-window cross-validation. Calibration assessment (do predicted factor loadings match realized exposures?) maps directly to model evaluation methodology.

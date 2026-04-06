@@ -5,7 +5,11 @@ description: >
   analyze strategic interactions, find equilibria, design mechanisms or incentives, model
   evolutionary dynamics, evaluate information structures, or apply formal game theory to
   real-world scenarios in business, technology, politics, biology, or fiction.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Game Theory Orchestrator — The Strategist

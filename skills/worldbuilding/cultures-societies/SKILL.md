@@ -5,6 +5,10 @@ description: >
   Reference when building a people's values, governance, customs, religion, economy, or any
   social system that defines how a group of people organizes itself. Complements the world-bible
   (which holds axioms) by providing the methodology for culture design.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Cultures & Societies — The Peoples
@@ -134,3 +138,8 @@ Your culture is real enough when you can answer: What would a visitor from a dif
 3. **Values without costs.** "This culture values honor above all." Okay — what does that cost them? What do they sacrifice for honor? What do they fail to see because they're looking through the honor lens?
 4. **No internal dissent.** Every culture has people who disagree with the mainstream. Dissidents, reformers, heretics, criminals, artists. These voices make the culture feel lived-in.
 5. **Fantasy system as decoration.** If magic exists, it reshapes everything — governance, economy, military, religion, social structure. A culture that has magic but is otherwise medieval Europe hasn't thought through the implications.
+
+## Cross-Domain Connections
+
+- **Writing/narrative-craft/dialogue**: Cultural values constrain how characters speak — what's sayable, what's taboo, what requires euphemism. Load cultural communication norms before writing dialogue for characters from this culture.
+- **Writing/rhetoric**: A culture's persuasion conventions shape in-world rhetoric. Collectivist cultures emphasize communal appeals; individualist cultures emphasize personal achievement. In-world speeches should reflect the target audience's cultural values.

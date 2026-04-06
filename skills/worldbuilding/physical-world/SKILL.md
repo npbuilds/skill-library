@@ -1,7 +1,11 @@
 ---
 name: physical-world
 description: Route questions about the physical environment of a world — terrain, climate, biomes, ecosystems, and technology. Use when the user is designing geography, building an ecosystem, placing civilizations on a map, defining a tech level, or asking how the physical landscape shapes the people who live in it.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Physical World — The Stage Beneath the Story

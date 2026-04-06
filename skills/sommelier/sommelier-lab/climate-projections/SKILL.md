@@ -6,6 +6,10 @@ description: >
   high-altitude frontiers emerging as classic regions face heat stress. Use when
   the user wants to understand which regions are winning or losing from climate
   change and what this means for collecting, tasting, and the future of wine.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Climate Projections — The Future Vineyard
@@ -145,3 +149,7 @@ The traditional delicate style — Kabinett and Spätlese at 7–9% alcohol, pur
 Under a warming scenario, the 1990s–2000s may prove to be Champagne's golden era — warm enough for consistent ripeness, cool enough for defining freshness. Whether the late 2020s–2030s still produce wines of the same character is an open question. Non-vintage blends are inherently less vintagespecific; vintage Champagne from the best recent years is worth buying.
 
 *Note: all 2050–2100 projections carry significant uncertainty. Climate models are robust; regional viticulture outcomes involve additional uncertainty from varietal adaptation, human intervention, and regulatory response. Projections marked speculative reflect this compounding uncertainty. The confirmed data (harvest dates, temperature records, acid measurements) are empirically grounded.*
+
+## Cross-Domain Connections
+
+- **Data-science/modeling/time-series**: Climate projections for viticulture are time-series forecasting — trend decomposition of harvest dates, temperature records, and growing degree days. Structural break detection identifies when a region's climate has fundamentally shifted. Foundation models for multi-series forecasting could project across multiple wine regions simultaneously.

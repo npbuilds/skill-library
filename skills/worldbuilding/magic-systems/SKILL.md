@@ -6,6 +6,10 @@ description: >
   advanced technology, metaphysical substrates, or any system that makes this world not-Earth.
   Complements the world-bible (which records the canonical rules) by providing the design
   methodology.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Magic Systems — The Rules of the Impossible

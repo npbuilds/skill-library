@@ -5,7 +5,11 @@ description: >
   the prose-writer can consume. Use when the user wants to design a specific voice for a project,
   character, or piece by combining elements from different authors. The mixer doesn't average —
   it selects which dimensions to pull from each author.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Style Mixer — The Blending Desk

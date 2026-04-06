@@ -5,7 +5,11 @@ description: >
   problems. Use when the user needs to create rules for a strategic situation — choosing an
   auction format, designing a matching system, structuring incentives for a team or platform,
   or building governance rules for an organization or DAO.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Mechanism Designer — The Engineer

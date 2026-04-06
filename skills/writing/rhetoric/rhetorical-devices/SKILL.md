@@ -5,6 +5,10 @@ description: >
   the rhythm-and-pace devices that make prose memorable. Use when the user wants to deploy
   specific devices for emphasis, rhythm, or persuasion. Not an encyclopedia — only the devices
   working prose writers actually use.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Rhetorical Devices — The Workhorses

@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARCHON // Daily Intelligence Briefing // 2026.03.28</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #06070d;
+    --bg-panel: #0b0d18;
+    --bg-panel-hover: #10132a;
+    --border-dim: #1a1d3a;
+    --border-glow: #2a3a6a;
+    --cyan-faded: #3a8a8a;
+    --cyan-bright: #5acece;
+    --cyan-glow: #3acece44;
+    --magenta-faded: #8a3a6a;
+    --magenta-bright: #ce5aaa;
+    --magenta-glow: #ce3aaa33;
+    --amber-faded: #8a7a3a;
+    --amber-bright: #ceb45a;
+    --amber-glow: #ceb43a33;
+    --red-faded: #8a3a3a;
+    --red-bright: #ce5a5a;
+    --green-faded: #3a8a4a;
+    --green-bright: #5ace6a;
+    --text-primary: #a0aab8;
+    --text-dim: #5a6478;
+    --text-bright: #d0dae8;
+    --scanline-opacity: 0.03;
+    --header-gradient-start: #0d1020;
+    --crt-vignette: rgba(0,0,0,0.4);
+  }
+
+  /* === LIGHT THEME === */
+  [data-theme="light"] {
+    --bg-deep: #e8ecf2;
+    --bg-panel: #f0f3f8;
+    --bg-panel-hover: #dce2ec;
+    --border-dim: #c0c8d8;
+    --border-glow: #8898b8;
+    --cyan-faded: #1a7070;
+    --cyan-bright: #0e8a8a;
+    --cyan-glow: #0e8a8a22;
+    --magenta-faded: #8a2a5a;
+    --magenta-bright: #a83880;
+    --magenta-glow: #a8388022;
+    --amber-faded: #7a6a20;
+    --amber-bright: #9a8420;
+    --amber-glow: #9a842022;
+    --red-faded: #983030;
+    --red-bright: #c04040;
+    --green-faded: #1a7830;
+    --green-bright: #208a38;
+    --text-primary: #3a4050;
+    --text-dim: #6a7488;
+    --text-bright: #1a2030;
+    --scanline-opacity: 0.015;
+    --header-gradient-start: #d8dfe8;
+    --crt-vignette: rgba(0,0,0,0.06);
+  }
+
+  /* Light theme overrides for elements using hardcoded colors */
+  [data-theme="light"] .header {
+    background: linear-gradient(180deg, var(--header-gradient-start) 0%, var(--bg-panel) 100%);
+  }
+  [data-theme="light"] .tip::after {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12), 0 0 8px rgba(26,112,112,0.1);
+  }
+  [data-theme="light"] .crt-overlay::after {
+    background: radial-gradient(ellipse at center, transparent 60%, var(--crt-vignette) 100%);
+  }
+  [data-theme="light"] .section::after {
+    opacity: 0.15;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-glow) var(--bg-deep);
+  }
+
+  body {
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* === CRT / SCANLINE OVERLAY === */
+  .crt-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, var(--scanline-opacity)) 2px,
+      rgba(0, 0, 0, var(--scanline-opacity)) 4px
+    );
+  }
+
+  .crt-overlay::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(ellipse at center, transparent 60%, var(--crt-vignette) 100%);
+    pointer-events: none;
+  }
+
+  /* === DIGITAL RAIN CANVAS === */
+  #rain-canvas {
+    display: none;
+  }
+
+  /* CSS-only digital rain effect */
+  .rain-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.06;
+  }
+
+  .rain-col {
+    position: absolute;
+    top: -100%;
+    width: 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    line-height: 1.2;
+    color: var(--cyan-faded);
+    animation: rain-fall linear infinite;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 4px;
+    opacity: 0.5;
+  }
+
+  @keyframes rain-fall {
+    0% { transform: translateY(-10%); }
+    100% { transform: translateY(calc(100vh + 120%)); }
+  }
+
+  /* === MAIN LAYOUT === */
+  .archon-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* === HEADER === */
+  .header {
+    border: 1px solid var(--border-dim);
+    background: linear-gradient(180deg, var(--header-gradient-start) 0%, var(--bg-panel) 100%);
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan-faded), var(--magenta-faded), transparent);
+    animation: header-line 8s ease-in-out infinite;
+  }
+
+  @keyframes header-line {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .logo-glyph {
+    width: 52px;
+    height: 52px;
+    position: relative;
+  }
+
+  .logo-glyph svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 8px var(--cyan-glow));
+  }
+
+  .logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: 8px;
+    background: linear-gradient(135deg, var(--cyan-faded) 0%, var(--cyan-bright) 40%, var(--text-bright) 70%, var(--magenta-faded) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 12px var(--cyan-glow));
+    animation: logo-flicker 6s ease-in-out infinite;
+  }
+
+  @keyframes logo-flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.7; }
+    94% { opacity: 1; }
+    96% { opacity: 0.85; }
+    97% { opacity: 1; }
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-glow);
+    color: var(--text-dim);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+  }
+  .theme-toggle:hover {
+    color: var(--cyan-bright);
+    border-color: var(--cyan-faded);
+    box-shadow: 0 0 8px var(--cyan-glow);
+  }
+
+  .header-meta {
+    text-align: right;
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .header-meta .date {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    color: var(--amber-faded);
+    letter-spacing: 3px;
+  }
+
+  .header-subtitle {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border-dim);
+    padding-top: 10px;
+  }
+
+  /* === REGIME BANNER === */
+  .regime-banner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .regime-card {
+    border: 1px solid var(--border-dim);
+    background: var(--bg-panel);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .regime-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+  }
+
+  .regime-card.stagflation::before { background: var(--red-faded); box-shadow: 0 0 12px var(--red-faded); }
+  .regime-card.risk::before { background: var(--magenta-faded); box-shadow: 0 0 12px var(--magenta-faded); }
+  .regime-card.sentiment::before { background: var(--amber-faded); box-shadow: 0 0 12px var(--amber-faded); }
+
+  .regime-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .regime-value {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .regime-value.stag { color: var(--red-bright); text-shadow: 0 0 20px rgba(206, 90, 90, 0.3); }
+  .regime-value.extreme { color: var(--magenta-bright); text-shadow: 0 0 20px rgba(206, 90, 170, 0.3); }
+  .regime-value.cautious { color: var(--amber-bright); text-shadow: 0 0 20px rgba(206, 180, 90, 0.3); }
+
+  .regime-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  .confidence-bar {
+    width: 100%;
+    height: 3px;
+    background: var(--border-dim);
+    margin-top: 10px;
+    position: relative;
+  }
+
+  .confidence-fill {
+    height: 100%;
+    transition: width 1s ease;
+  }
+
+  /* === SECTION PANELS === */
+  .section {
+    border: 1px solid var(--border-dim);
+    background: var(--bg-panel);
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .section:hover {
+    border-color: var(--border-glow);
+    background: var(--bg-panel-hover);
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-dim);
+    background: rgba(255,255,255,0.01);
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cyan-faded);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title .icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+  }
+
+  .section-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border: 1px solid var(--border-dim);
+    padding: 2px 10px;
+  }
+
+  .section-body {
+    padding: 20px;
+  }
+
+  /* === TABLES === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  th {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-dim);
+  }
+
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid rgba(26, 29, 58, 0.4);
+    vertical-align: middle;
+  }
+
+  tr:hover td {
+    background: rgba(58, 138, 138, 0.04);
+  }
+
+  .val-pos { color: var(--green-bright); }
+  .val-neg { color: var(--red-bright); }
+  .val-neutral { color: var(--text-primary); }
+  .val-highlight { color: var(--cyan-bright); font-weight: 600; }
+  .val-warn { color: var(--amber-bright); }
+  .val-extreme { color: var(--magenta-bright); font-weight: 700; text-shadow: 0 0 10px var(--magenta-glow); }
+
+  .ticker {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-bright);
+    letter-spacing: 1px;
+  }
+
+  /* === MINI SPARK BARS === */
+  .spark-bar {
+    display: inline-block;
+    width: 60px;
+    height: 12px;
+    background: var(--border-dim);
+    position: relative;
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+
+  .spark-fill {
+    height: 100%;
+    position: absolute;
+    top: 0;
+  }
+
+  .spark-fill.pos { left: 50%; background: var(--green-faded); }
+  .spark-fill.neg { right: 50%; background: var(--red-faded); }
+  .spark-fill.center-line {
+    left: 50%;
+    width: 1px;
+    background: var(--text-dim);
+  }
+
+  /* === GAUGE (for VIX, Sentiment) === */
+  .gauge-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .gauge {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: 16px;
+  }
+
+  .gauge-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 12px;
+  }
+
+  .gauge-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .gauge-ring .track {
+    fill: none;
+    stroke: var(--border-dim);
+    stroke-width: 6;
+  }
+
+  .gauge-ring .fill-arc {
+    fill: none;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    transition: stroke-dashoffset 1.5s ease;
+  }
+
+  .gauge-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .gauge-number {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .gauge-unit {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .gauge-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .gauge-sublabel {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* === GRID LAYOUTS === */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+
+  /* === YIELD CURVE SVG === */
+  .yield-curve-container {
+    padding: 16px;
+    text-align: center;
+  }
+
+  .yield-curve-container svg {
+    width: 100%;
+    max-width: 500px;
+    height: 160px;
+  }
+
+  /* === FACTOR BLOCKS === */
+  .factor-block {
+    border: 1px solid var(--border-dim);
+    padding: 14px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  .factor-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .factor-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .factor-sub {
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  /* === COT POSITIONING BARS === */
+  .cot-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+  }
+
+  .cot-label {
+    width: 80px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .cot-bar-track {
+    flex: 1;
+    height: 10px;
+    background: var(--border-dim);
+    position: relative;
+  }
+
+  .cot-bar-center {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--text-dim);
+  }
+
+  .cot-bar-fill {
+    position: absolute;
+    top: 1px;
+    height: 8px;
+  }
+
+  .cot-signal {
+    width: 70px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  /* === PREDICTION SCENARIO CARDS === */
+  .scenario-card {
+    border: 1px solid var(--border-dim);
+    padding: 16px;
+    background: rgba(0,0,0,0.2);
+    position: relative;
+  }
+
+  .scenario-card .prob {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .scenario-card .scenario-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .scenario-card .scenario-detail {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .scenario-card .scenario-detail span {
+    color: var(--text-primary);
+  }
+
+  /* === INSIGHT BLOCKS === */
+  .insight-block {
+    border-left: 2px solid var(--magenta-faded);
+    background: rgba(138, 58, 106, 0.06);
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+
+  .insight-block .insight-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: var(--magenta-faded);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .insight-block .insight-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--magenta-faded);
+    opacity: 0.3;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    border: 1px solid var(--border-dim);
+    background: var(--bg-panel);
+    padding: 16px 20px;
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-top: 20px;
+  }
+
+  .footer .data-sources {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  /* === NEON DIVIDER === */
+  .neon-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan-faded), var(--magenta-faded), transparent);
+    margin: 20px 0;
+    opacity: 0.4;
+  }
+
+  /* === SECTOR HEAT BAR === */
+  .heat-row {
+    display: flex;
+    align-items: center;
+    margin: 4px 0;
+    gap: 8px;
+  }
+
+  .heat-label {
+    width: 110px;
+    font-size: 11px;
+    text-align: right;
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .heat-bar-track {
+    flex: 1;
+    height: 14px;
+    background: var(--border-dim);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .heat-bar-fill {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: width 1s ease;
+  }
+
+  .heat-bar-fill.pos { left: 50%; }
+  .heat-bar-fill.neg { right: 50%; }
+
+  .heat-bar-center {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--text-dim);
+    opacity: 0.5;
+  }
+
+  .heat-val {
+    width: 60px;
+    font-size: 11px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* === CRYPTO CARDS === */
+  .crypto-card {
+    border: 1px solid var(--border-dim);
+    padding: 12px;
+    background: rgba(0,0,0,0.2);
+    text-align: center;
+  }
+
+  .crypto-card .coin-symbol {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--amber-bright);
+    margin-bottom: 4px;
+  }
+
+  .crypto-card .coin-price {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .crypto-card .coin-change {
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  .crypto-card .ath-drop {
+    font-size: 9px;
+    color: var(--red-faded);
+    margin-top: 4px;
+  }
+
+  /* === RECOMMENDATIONS === */
+  .rec-do, .rec-avoid {
+    padding: 14px;
+    margin: 8px 0;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .rec-do {
+    border-left: 3px solid var(--green-faded);
+    background: rgba(58, 138, 74, 0.05);
+  }
+
+  .rec-avoid {
+    border-left: 3px solid var(--red-faded);
+    background: rgba(138, 58, 58, 0.05);
+  }
+
+  .rec-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9px;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .rec-do .rec-label { color: var(--green-faded); }
+  .rec-avoid .rec-label { color: var(--red-faded); }
+
+  .rec-item {
+    margin: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .rec-item::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 900px) {
+    .regime-banner { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .header-top { flex-direction: column; gap: 12px; }
+    .header-meta { text-align: left; }
+    .logo-text { font-size: 22px; letter-spacing: 4px; }
+    .grid-4 { grid-template-columns: 1fr; }
+    .archon-wrapper { padding: 10px; }
+  }
+
+  /* === REDUCED MOTION === */
+  @media (prefers-reduced-motion: reduce) {
+    .logo-text { animation: none; }
+    .header::before { animation: none; opacity: 0.6; }
+    #rain-canvas { display: none; }
+  }
+
+  /* === GLITCH TEXT UTIL === */
+  .glitch {
+    position: relative;
+  }
+
+  /* === STATUS PULSE === */
+  .pulse {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse-anim 2s ease-in-out infinite;
+  }
+
+  .pulse.red { background: var(--red-bright); box-shadow: 0 0 8px var(--red-faded); }
+  .pulse.amber { background: var(--amber-bright); box-shadow: 0 0 8px var(--amber-faded); }
+  .pulse.green { background: var(--green-bright); box-shadow: 0 0 8px var(--green-faded); }
+  .pulse.cyan { background: var(--cyan-bright); box-shadow: 0 0 8px var(--cyan-faded); }
+
+  @keyframes pulse-anim {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* === NOISE TEXTURE === */
+  .section::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* === TOOLTIPS === */
+  .tip {
+    position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--cyan-faded);
+    display: inline;
+  }
+
+  /* On hover, pull the .tip itself to a very high z-index
+     so its pseudo-element children escape the section stacking context */
+  .tip:hover {
+    z-index: 10000;
+  }
+
+  .tip::before,
+  .tip::after {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 10000;
+  }
+
+  /* Tooltip body — position:fixed escapes all stacking contexts */
+  .tip::after {
+    content: attr(data-tip);
+    position: fixed;
+    bottom: auto;
+    top: var(--tip-top, 0);
+    left: var(--tip-left, 0);
+    transform: translateX(-50%) translateY(-100%);
+    width: max-content;
+    max-width: 320px;
+    padding: 10px 14px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    color: var(--text-bright);
+    background: var(--bg-deep);
+    border: 1px solid var(--cyan-faded);
+    box-shadow: 0 0 16px rgba(58, 138, 138, 0.2), inset 0 0 30px rgba(58, 138, 138, 0.03);
+    white-space: normal;
+    text-transform: none;
+  }
+
+  /* Flipped below variant */
+  .tip.tip-below::after {
+    transform: translateX(-50%) translateY(0%);
+    top: var(--tip-top, 0);
+  }
+
+  /* Tooltip arrow */
+  .tip::before {
+    content: '';
+    position: fixed;
+    top: var(--tip-arrow-top, 0);
+    left: var(--tip-left, 0);
+    transform: translateX(-50%) translateY(-100%);
+    border: 6px solid transparent;
+    border-top-color: var(--cyan-faded);
+  }
+
+  /* Flipped below arrow */
+  .tip.tip-below::before {
+    transform: translateX(-50%) translateY(0%);
+    top: var(--tip-arrow-top, 0);
+    border-top-color: transparent;
+    border-bottom-color: var(--cyan-faded);
+  }
+
+  .tip:hover::before,
+  .tip:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Position variants are now handled by JS — see tipPositioner below */
+
+  /* Tooltip inside table cells */
+  td .tip, th .tip {
+    border-bottom-color: var(--border-glow);
+  }
+
+  /* Tooltip in section titles */
+  .section-title .tip {
+    border-bottom-color: rgba(90, 206, 206, 0.3);
+  }
+
+  /* Tooltip in regime cards */
+  .regime-value .tip {
+    border-bottom: none;
+    cursor: help;
+  }
+</style>
+</head>
+<body>
+
+<!-- CRT Scanline Overlay -->
+<div class="crt-overlay"></div>
+
+<!-- CSS Digital Rain Background -->
+<div class="rain-bg" aria-hidden="true">
+  <div class="rain-col" style="left:3%; animation-duration:18s; animation-delay:-2s; color:#3a8a8a;">01アウケサシツテナヒフ0ホマヨラ1リワ</div>
+  <div class="rain-col" style="left:8%; animation-duration:22s; animation-delay:-8s; color:#2a7a7a;">カキスセソタチヌネハ01マミム0メモヤ</div>
+  <div class="rain-col" style="left:14%; animation-duration:16s; animation-delay:-4s; color:#3a6a8a;">0エオカキクケ1コサシスセ0ソタチツテ</div>
+  <div class="rain-col" style="left:20%; animation-duration:25s; animation-delay:-12s; color:#3a8a7a;">トナニヌネノハ0ヒフヘホ1マミムメモ</div>
+  <div class="rain-col" style="left:27%; animation-duration:19s; animation-delay:-6s; color:#2a8a6a;">ヤユヨラリルレロ0ワヲン1アイウエオ</div>
+  <div class="rain-col" style="left:33%; animation-duration:23s; animation-delay:-15s; color:#3a8a8a;">01カキクケコ0サシスセソ1タチツテト</div>
+  <div class="rain-col" style="left:40%; animation-duration:17s; animation-delay:-3s; color:#2a7a7a;">ナニヌネノ0ハヒフヘホ1マミムメモヤ</div>
+  <div class="rain-col" style="left:48%; animation-duration:21s; animation-delay:-9s; color:#3a6a8a;">ユヨラリルレロ0ワヲン1アイウエオカ</div>
+  <div class="rain-col" style="left:55%; animation-duration:20s; animation-delay:-1s; color:#3a8a7a;">キクケコ01サシスセソタ0チツテトナニ</div>
+  <div class="rain-col" style="left:62%; animation-duration:24s; animation-delay:-11s; color:#2a8a6a;">ヌネノハヒフ0ヘホマミ1ムメモヤユヨ</div>
+  <div class="rain-col" style="left:69%; animation-duration:18s; animation-delay:-7s; color:#3a8a8a;">ラリルレロ0ワヲン1アイ0ウエオカキク</div>
+  <div class="rain-col" style="left:76%; animation-duration:22s; animation-delay:-14s; color:#2a7a7a;">ケコサシ01スセソタチツ0テトナニヌネ</div>
+  <div class="rain-col" style="left:83%; animation-duration:15s; animation-delay:-5s; color:#3a6a8a;">ノハヒフヘホ0マミムメ1モヤユヨラリ</div>
+  <div class="rain-col" style="left:90%; animation-duration:20s; animation-delay:-10s; color:#3a8a7a;">ルレロワヲン01アイウ0エオカキクケコ</div>
+  <div class="rain-col" style="left:96%; animation-duration:26s; animation-delay:-16s; color:#2a8a6a;">サシスセソタチ0ツテトナ1ニヌネノハ</div>
+</div>
+
+<!-- Main Content -->
+<div class="archon-wrapper">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">LIGHT MODE</button>
+    <div class="header-top">
+      <div class="logo-block">
+        <div class="logo-glyph">
+          <svg viewBox="0 0 52 52" fill="none">
+            <polygon points="26,2 50,14 50,38 26,50 2,38 2,14" stroke="#3a8a8a" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <polygon points="26,8 44,17 44,35 26,44 8,35 8,17" stroke="#5acece" stroke-width="1" fill="none" opacity="0.4"/>
+            <circle cx="26" cy="26" r="6" fill="none" stroke="#3a8a8a" stroke-width="1.5" opacity="0.8"/>
+            <circle cx="26" cy="26" r="2" fill="#5acece" opacity="0.6"/>
+            <line x1="26" y1="8" x2="26" y2="20" stroke="#3a8a8a" stroke-width="0.5" opacity="0.4"/>
+            <line x1="26" y1="32" x2="26" y2="44" stroke="#3a8a8a" stroke-width="0.5" opacity="0.4"/>
+            <line x1="8" y1="17" x2="20" y2="23" stroke="#3a8a8a" stroke-width="0.5" opacity="0.4"/>
+            <line x1="32" y1="29" x2="44" y2="35" stroke="#3a8a8a" stroke-width="0.5" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="logo-text">ARCHON</div>
+      </div>
+      <div class="header-meta">
+        <div class="date">2026.03.28</div>
+        <div>DAILY INTELLIGENCE BRIEFING</div>
+        <div>GENERATED 22:55 UTC</div>
+        <div>14 DATA FEEDS ACTIVE</div>
+      </div>
+    </div>
+    <div class="header-subtitle">Investment Intelligence System // <span class="tip tip-bottom" data-tip="Classifying the economy into one of four states (goldilocks, reflation, stagflation, deflation) based on the direction of growth and inflation. Based on Ray Dalio's All-Weather framework.">Regime Analysis</span> // <span class="tip tip-bottom" data-tip="Comparing how different asset classes (stocks, bonds, gold, oil, crypto, currencies) move relative to each other to identify hidden risks and opportunities.">Cross-Asset Synthesis</span></div>
+  </div>
+
+  <!-- ===== REGIME / RISK / SENTIMENT BANNER ===== -->
+  <div class="regime-banner">
+    <div class="regime-card stagflation">
+      <div class="regime-label"><span class="tip tip-bottom tip-right" data-tip="The Dalio 2x2 quadrant model classifies the economy by whether growth and inflation are rising or falling. Each quadrant favors different assets. Stagflation is the worst for traditional portfolios.">Macro Regime</span></div>
+      <div class="regime-value stag"><span class="pulse red"></span><span class="tip tip-bottom" data-tip="Stagflation = stagnant growth + inflation. The economy slows while prices keep rising — a toxic combo where stocks fall (no growth) and bonds fall (inflation erodes value). Historically favors commodities, cash, and real assets.">STAGFLATION</span></div>
+      <div class="regime-sub">Growth falling + inflation rising</div>
+      <div class="confidence-bar">
+        <div class="confidence-fill" style="width: 22%; background: var(--red-faded);"></div>
+      </div>
+      <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">Confidence: 22% (boundary regime)</div>
+    </div>
+    <div class="regime-card risk">
+      <div class="regime-label">Risk Level</div>
+      <div class="regime-value extreme"><span class="pulse red"></span>EXTREME</div>
+      <div class="regime-sub">3 risk flags triggered</div>
+      <div class="confidence-bar">
+        <div class="confidence-fill" style="width: 100%; background: var(--magenta-faded);"></div>
+      </div>
+      <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">VIX panic + correlation break + <span class="tip" data-tip="Backwardation = near-term futures cost MORE than longer-dated ones. In VIX, this means traders are paying a premium for immediate protection — a sign of acute fear and hedging demand.">backwardation</span></div>
+    </div>
+    <div class="regime-card sentiment">
+      <div class="regime-label"><span class="tip tip-bottom tip-left" data-tip="A blended score (0-100) combining VIX level, VIX term structure, market breadth, and momentum. 0 = extreme fear, 100 = extreme greed. Extreme readings often signal contrarian opportunities.">Composite Sentiment</span></div>
+      <div class="regime-value cautious"><span class="pulse amber"></span>CAUTIOUS</div>
+      <div class="regime-sub">Score: 43.1 / 100</div>
+      <div class="confidence-bar">
+        <div class="confidence-fill" style="width: 43.1%; background: var(--amber-faded);"></div>
+      </div>
+      <div style="font-size:10px; color:var(--text-dim); margin-top:4px;">VIX fear dominant, breadth resilient</div>
+    </div>
+  </div>
+
+  <!-- ===== GAUGES ROW ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M8 4v4l3 2" stroke="currentColor" stroke-width="1.5"/></svg>
+        Market Vitals
+      </div>
+      <div class="section-tag">Real-Time</div>
+    </div>
+    <div class="section-body">
+      <div class="gauge-row">
+        <!-- VIX Gauge -->
+        <div class="gauge">
+          <div class="gauge-ring">
+            <svg viewBox="0 0 100 100">
+              <circle class="track" cx="50" cy="50" r="45"/>
+              <circle class="fill-arc" cx="50" cy="50" r="45" stroke="var(--red-bright)" style="stroke-dashoffset: calc(283 - 283 * 0.62);"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-number" style="color:var(--red-bright);">31.1</div>
+              <div class="gauge-unit">VIX</div>
+            </div>
+          </div>
+          <div class="gauge-label"><span class="tip" data-tip="The VIX (CBOE Volatility Index) measures expected S&P 500 volatility over 30 days, derived from options prices. Below 15 = calm, 15-20 = normal, 20-30 = elevated, 30+ = panic. Sometimes called the 'fear gauge.'">Volatility</span></div>
+          <div class="gauge-sublabel" style="color:var(--red-faded);">PANIC REGIME</div>
+        </div>
+        <!-- Sentiment Gauge -->
+        <div class="gauge">
+          <div class="gauge-ring">
+            <svg viewBox="0 0 100 100">
+              <circle class="track" cx="50" cy="50" r="45"/>
+              <circle class="fill-arc" cx="50" cy="50" r="45" stroke="var(--amber-bright)" style="stroke-dashoffset: calc(283 - 283 * 0.431);"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-number" style="color:var(--amber-bright);">43.1</div>
+              <div class="gauge-unit">/ 100</div>
+            </div>
+          </div>
+          <div class="gauge-label">Sentiment</div>
+          <div class="gauge-sublabel">CAUTIOUS</div>
+        </div>
+        <!-- Crypto Fear/Greed -->
+        <div class="gauge">
+          <div class="gauge-ring">
+            <svg viewBox="0 0 100 100">
+              <circle class="track" cx="50" cy="50" r="45"/>
+              <circle class="fill-arc" cx="50" cy="50" r="45" stroke="var(--magenta-bright)" style="stroke-dashoffset: calc(283 - 283 * 0.09);"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-number" style="color:var(--magenta-bright);">9</div>
+              <div class="gauge-unit">/ 100</div>
+            </div>
+          </div>
+          <div class="gauge-label"><span class="tip" data-tip="Crypto Fear & Greed Index (0-100) aggregates volatility, momentum, social media, surveys, dominance, and trends. Below 25 = extreme fear (historically good buying zone). Above 75 = extreme greed (historically dangerous).">Crypto F&G</span></div>
+          <div class="gauge-sublabel" style="color:var(--magenta-faded);">EXTREME FEAR</div>
+        </div>
+        <!-- Fed Funds -->
+        <div class="gauge">
+          <div class="gauge-ring">
+            <svg viewBox="0 0 100 100">
+              <circle class="track" cx="50" cy="50" r="45"/>
+              <circle class="fill-arc" cx="50" cy="50" r="45" stroke="var(--cyan-bright)" style="stroke-dashoffset: calc(283 - 283 * 0.73);"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-number" style="color:var(--cyan-bright);">3.64</div>
+              <div class="gauge-unit">%</div>
+            </div>
+          </div>
+          <div class="gauge-label"><span class="tip" data-tip="The Federal Funds Rate is the interest rate banks charge each other overnight. Set by the Federal Reserve, it's the most important rate in the economy — it influences mortgages, credit cards, savings accounts, and the cost of capital for every business.">Fed Funds</span></div>
+          <div class="gauge-sublabel">HELD</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== EQUITY INDICES ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 16 16" fill="none"><polyline points="1,12 5,6 9,9 15,2" stroke="currentColor" stroke-width="1.5"/></svg>
+        Equity Indices
+      </div>
+      <div class="section-tag">YFinance</div>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr><th>Index</th><th>Level</th><th>YTD</th><th>1-Month</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ticker">S&P 500</td>
+            <td class="val-highlight">5,568.85</td>
+            <td class="val-neg">-7.14%</td>
+            <td class="val-neg">-7.45%</td>
+            <td><span class="spark-bar"><span class="spark-fill neg" style="width:14.3%;background:var(--red-faded);"></span><span class="spark-fill center-line"></span></span></td>
+          </tr>
+          <tr>
+            <td class="ticker">Nasdaq</td>
+            <td class="val-highlight">20,948.36</td>
+            <td class="val-neg">-9.84%</td>
+            <td class="val-neg">-7.91%</td>
+            <td><span class="spark-bar"><span class="spark-fill neg" style="width:19.7%;background:var(--red-faded);"></span><span class="spark-fill center-line"></span></span></td>
+          </tr>
+          <tr>
+            <td class="ticker">Russell 2000</td>
+            <td class="val-highlight">2,449.70</td>
+            <td class="val-neg">-2.33%</td>
+            <td class="val-neg">-7.77%</td>
+            <td><span class="spark-bar"><span class="spark-fill neg" style="width:4.7%;background:var(--red-faded);"></span><span class="spark-fill center-line"></span></span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="insight-block" style="margin-top: 16px;">
+        <div class="insight-label"><span class="tip tip-bottom tip-right" data-tip="Breadth measures how many stocks participate in a market move. Divergence = the gap between cap-weighted (dominated by mega-caps like Apple, Microsoft) and equal-weighted (every stock counts the same). When equal-weight outperforms, it means the average stock is doing better than the giants.">BREADTH DIVERGENCE</span></div>
+        <span class="tip tip-bottom tip-right" data-tip="SPY is the S&P 500 ETF weighted by market cap — bigger companies have more influence. When Apple drops 5%, it drags SPY down more than a small company dropping 5%.">SPY</span> (cap-weight) <span class="val-neg">-6.93%</span> vs <span class="tip tip-bottom" data-tip="RSP is the equal-weight S&P 500 ETF — every company gets the same weight regardless of size. Comparing RSP to SPY reveals whether the broad market or just mega-caps are driving returns.">RSP</span> (equal-weight) <span class="val-neg">-2.28%</span> &mdash; a <span class="val-warn">+4.65%</span> gap. Equal-weight leading signals rotation <em>away</em> from mega-cap tech into the broader market. The average stock is holding up far better than the index suggests.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SECTOR ROTATION HEAT MAP ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 16 16" fill="none"><rect x="1" y="8" width="3" height="7" stroke="currentColor" stroke-width="1"/><rect x="6" y="4" width="3" height="11" stroke="currentColor" stroke-width="1"/><rect x="11" y="1" width="3" height="14" stroke="currentColor" stroke-width="1"/></svg>
+        <span class="tip tip-bottom tip-right" data-tip="Sector rotation tracks which industries are leading and lagging. Money flows between sectors based on the economic cycle: early cycle favors tech/discretionary, mid-cycle favors industrials, late cycle favors energy/staples, recession favors utilities/healthcare. Current leadership by Energy suggests late-cycle positioning.">Sector Rotation</span>
+      </div>
+      <div class="section-tag">YTD Performance</div>
+    </div>
+    <div class="section-body">
+      <div class="heat-row">
+        <div class="heat-label">Energy</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill pos" style="width:37%;background:var(--green-bright);opacity:0.7;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-pos">+37.04%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Materials</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill pos" style="width:6%;background:var(--green-faded);opacity:0.7;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-pos">+6.05%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Utilities</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill pos" style="width:5.6%;background:var(--green-faded);opacity:0.7;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-pos">+5.58%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Staples</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill pos" style="width:5.3%;background:var(--green-faded);opacity:0.7;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-pos">+5.26%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Industrials</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill pos" style="width:0.8%;background:var(--green-faded);opacity:0.5;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-neutral">+0.77%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Real Estate</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill neg" style="width:0.9%;background:var(--red-faded);opacity:0.5;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-neg">-0.92%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Healthcare</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill neg" style="width:7.9%;background:var(--red-faded);opacity:0.6;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-neg">-7.88%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Comms</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill neg" style="width:8.4%;background:var(--red-faded);opacity:0.6;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-neg">-8.43%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Technology</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill neg" style="width:10%;background:var(--red-bright);opacity:0.6;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-neg">-9.97%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Cons. Disc.</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill neg" style="width:10.7%;background:var(--red-bright);opacity:0.6;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-neg">-10.71%</div>
+      </div>
+      <div class="heat-row">
+        <div class="heat-label">Financials</div>
+        <div class="heat-bar-track"><div class="heat-bar-fill neg" style="width:13%;background:var(--red-bright);opacity:0.7;"></div><div class="heat-bar-center"></div></div>
+        <div class="heat-val val-neg">-12.96%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CROSS-ASSET + YIELD CURVE ===== -->
+  <div class="grid-2">
+    <!-- Cross-Asset -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Cross-Asset</div>
+        <div class="section-tag">Multi-Source</div>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead><tr><th>Asset</th><th>Price</th><th>YTD</th><th>1M</th></tr></thead>
+          <tbody>
+            <tr><td class="ticker">Oil (USO)</td><td>$124.20</td><td class="val-pos">+80.1%</td><td class="val-pos">+42.5%</td></tr>
+            <tr><td class="ticker">VIX</td><td>31.05</td><td class="val-extreme">+114%</td><td class="val-neg">+56.3%</td></tr>
+            <tr><td class="ticker">Gold (GLD)</td><td>$414.70</td><td class="val-pos">+4.1%</td><td class="val-neg">-15.4%</td></tr>
+            <tr><td class="ticker"><span class="tip tip-right" data-tip="The Dollar Index (DXY) measures the US dollar against a basket of 6 major currencies (Euro, Yen, Pound, CAD, Krona, Franc). A rising DXY means the dollar is strengthening, which tends to pressure commodities, emerging markets, and US exporters.">DXY</span></td><td>100.15</td><td class="val-pos">+1.8%</td><td class="val-pos">+1.8%</td></tr>
+            <tr><td class="ticker"><span class="tip tip-right" data-tip="TLT is the iShares 20+ Year Treasury Bond ETF. It tracks long-duration US government bonds. When interest rates rise, TLT falls (bond prices move inversely to yields). It's often used as a flight-to-safety proxy.">TLT</span></td><td>$85.64</td><td class="val-neg">-0.9%</td><td class="val-neg">-4.4%</td></tr>
+            <tr><td class="ticker"><span class="tip tip-right" data-tip="HYG is the iShares High Yield Corporate Bond ETF — it tracks 'junk bonds' (debt from companies with lower credit ratings). HYG acts as a credit risk barometer: when it drops, it signals rising default fears and tightening financial conditions.">HYG</span></td><td>$78.72</td><td class="val-neg">-1.5%</td><td class="val-neg">-1.9%</td></tr>
+            <tr><td class="ticker">BTC</td><td>$66,733</td><td class="val-neutral">&mdash;</td><td class="val-neg">-0.4%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Yield Curve -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title"><span class="tip tip-bottom" data-tip="The yield curve plots interest rates across different bond maturities (3-month to 30-year). A normal curve slopes upward (longer = higher rates). An inverted curve (short rates > long rates) has predicted every US recession since 1970. When it UN-inverts after being inverted, the recession usually begins.">Yield Curve</span></div>
+        <div class="section-tag">FRED</div>
+      </div>
+      <div class="section-body">
+        <div class="yield-curve-container">
+          <svg viewBox="0 0 500 160">
+            <!-- Grid lines -->
+            <line x1="60" y1="10" x2="60" y2="130" stroke="#1a1d3a" stroke-width="0.5"/>
+            <line x1="170" y1="10" x2="170" y2="130" stroke="#1a1d3a" stroke-width="0.5"/>
+            <line x1="280" y1="10" x2="280" y2="130" stroke="#1a1d3a" stroke-width="0.5"/>
+            <line x1="390" y1="10" x2="390" y2="130" stroke="#1a1d3a" stroke-width="0.5"/>
+            <line x1="460" y1="10" x2="460" y2="130" stroke="#1a1d3a" stroke-width="0.5"/>
+            <!-- Horizontal guides -->
+            <line x1="40" y1="20" x2="480" y2="20" stroke="#1a1d3a" stroke-width="0.5"/>
+            <line x1="40" y1="50" x2="480" y2="50" stroke="#1a1d3a" stroke-width="0.5"/>
+            <line x1="40" y1="80" x2="480" y2="80" stroke="#1a1d3a" stroke-width="0.5"/>
+            <line x1="40" y1="110" x2="480" y2="110" stroke="#1a1d3a" stroke-width="0.5"/>
+            <!-- Y-axis labels -->
+            <text x="35" y="24" font-family="Share Tech Mono" font-size="9" fill="#5a6478" text-anchor="end">5.0%</text>
+            <text x="35" y="54" font-family="Share Tech Mono" font-size="9" fill="#5a6478" text-anchor="end">4.5%</text>
+            <text x="35" y="84" font-family="Share Tech Mono" font-size="9" fill="#5a6478" text-anchor="end">4.0%</text>
+            <text x="35" y="114" font-family="Share Tech Mono" font-size="9" fill="#5a6478" text-anchor="end">3.5%</text>
+            <!-- Curve: 3M=3.607, 2Y=3.796, 5Y=4.07, 10Y=4.44, 30Y=4.982 -->
+            <!-- Map: 3.5=110, 4.0=80, 4.5=50, 5.0=20 (linear: y = 110 - (val-3.5)*60) -->
+            <defs>
+              <linearGradient id="curveGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#3a8a8a"/>
+                <stop offset="100%" stop-color="#ce5aaa"/>
+              </linearGradient>
+              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3a8a8a" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#3a8a8a" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <!-- Area fill -->
+            <path d="M60,103.6 L170,92.2 L280,75.8 L390,53.6 L460,21.1 L460,130 L60,130Z" fill="url(#areaGrad)"/>
+            <!-- Curve line -->
+            <polyline points="60,103.6 170,92.2 280,75.8 390,53.6 460,21.1" fill="none" stroke="url(#curveGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Data points -->
+            <circle cx="60" cy="103.6" r="4" fill="var(--bg-deep)" stroke="var(--cyan-faded)" stroke-width="2"/>
+            <circle cx="170" cy="92.2" r="4" fill="var(--bg-deep)" stroke="var(--cyan-faded)" stroke-width="2"/>
+            <circle cx="280" cy="75.8" r="4" fill="var(--bg-deep)" stroke="var(--cyan-bright)" stroke-width="2"/>
+            <circle cx="390" cy="53.6" r="4" fill="var(--bg-deep)" stroke="var(--magenta-faded)" stroke-width="2"/>
+            <circle cx="460" cy="21.1" r="4" fill="var(--bg-deep)" stroke="var(--magenta-bright)" stroke-width="2"/>
+            <!-- Labels -->
+            <text x="60" y="120" font-family="Orbitron" font-size="8" fill="#5a6478" text-anchor="middle">3M</text>
+            <text x="170" y="120" font-family="Orbitron" font-size="8" fill="#5a6478" text-anchor="middle">2Y</text>
+            <text x="280" y="120" font-family="Orbitron" font-size="8" fill="#5a6478" text-anchor="middle">5Y</text>
+            <text x="390" y="120" font-family="Orbitron" font-size="8" fill="#5a6478" text-anchor="middle">10Y</text>
+            <text x="460" y="120" font-family="Orbitron" font-size="8" fill="#5a6478" text-anchor="middle">30Y</text>
+            <!-- Value labels -->
+            <text x="60" y="97" font-family="Share Tech Mono" font-size="9" fill="var(--cyan-faded)" text-anchor="middle">3.61</text>
+            <text x="170" y="86" font-family="Share Tech Mono" font-size="9" fill="var(--cyan-faded)" text-anchor="middle">3.80</text>
+            <text x="280" y="70" font-family="Share Tech Mono" font-size="9" fill="var(--cyan-bright)" text-anchor="middle">4.07</text>
+            <text x="390" y="47" font-family="Share Tech Mono" font-size="9" fill="var(--magenta-faded)" text-anchor="middle">4.44</text>
+            <text x="460" y="15" font-family="Share Tech Mono" font-size="9" fill="var(--magenta-bright)" text-anchor="middle">4.98</text>
+            <!-- Spread annotation -->
+            <text x="260" y="148" font-family="Rajdhani" font-size="10" fill="#5a6478" text-anchor="middle" letter-spacing="2">NORMAL CURVE // 10Y-2Y SPREAD: +64 BPS</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MACRO INDICATORS ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 16 16" fill="none"><path d="M2 14h12M4 10v4M8 6v8M12 2v12" stroke="currentColor" stroke-width="1.5"/></svg>
+        Macro Indicators
+      </div>
+      <div class="section-tag">FRED API</div>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead><tr><th>Indicator</th><th>Value</th><th>Change</th><th>YoY</th><th>Signal</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tip tip-right" data-tip="Core Personal Consumption Expenditures — the Fed's PREFERRED inflation measure. Strips out volatile food & energy. Above 2% = above the Fed's target. At 3.06%, this is the key reason the Fed can't cut rates aggressively.">Core PCE</span></td><td class="val-highlight">3.06% YoY</td><td>+0.47</td><td>&mdash;</td><td class="val-extreme"><span class="pulse red"></span>HOT</td></tr>
+          <tr><td><span class="tip tip-right" data-tip="Consumer Price Index — the most widely reported inflation measure. Tracks the price of a basket of goods and services bought by urban consumers. Unlike Core PCE, CPI includes food and energy and tends to run slightly higher.">CPI All Urban</span></td><td class="val-highlight">2.66% YoY</td><td>+0.87</td><td>&mdash;</td><td class="val-warn">ELEVATED</td></tr>
+          <tr><td>Unemployment</td><td class="val-highlight">4.4%</td><td class="val-neg">+0.1</td><td class="val-neg">+10%</td><td class="val-warn">SOFTENING</td></tr>
+          <tr><td><span class="tip tip-right" data-tip="The total number of paid US workers excluding farm employees, government workers, and nonprofit employees. A negative monthly change (like -92K) means the economy lost jobs — one of the strongest recession signals when it persists.">Nonfarm Payrolls</span></td><td class="val-highlight">158,466K</td><td class="val-neg">-92K</td><td>+0.1%</td><td class="val-extreme">CONTRACTING</td></tr>
+          <tr><td><span class="tip tip-right" data-tip="M2 Money Supply = cash + checking accounts + savings + money market funds + small CDs. When M2 grows faster than GDP, excess money can fuel inflation. At +4.88% YoY, it's running above the Fed's comfort zone.">M2 Money Supply</span></td><td class="val-highlight">$22.67T</td><td class="val-pos">+198B</td><td class="val-pos">+4.88%</td><td class="val-pos">EXPANDING</td></tr>
+          <tr><td><span class="tip tip-right" data-tip="5-Year Breakeven Inflation Rate = the difference between 5Y Treasury yields and 5Y TIPS yields. It represents the market's EXPECTATION of average annual inflation over the next 5 years. 'Anchored' means the market trusts the Fed will eventually control inflation.">5Y Breakeven</span></td><td>2.56%</td><td>0.00</td><td>-0.78%</td><td class="val-neutral">ANCHORED</td></tr>
+          <tr><td><span class="tip tip-right" data-tip="University of Michigan Consumer Survey — asks regular people what they expect inflation to be. When consumer inflation expectations rise, it can become self-fulfilling (workers demand raises → companies raise prices). The Fed watches this closely as a 'de-anchoring' risk.">Michigan Infl. Exp.</span></td><td>3.4%</td><td class="val-pos">-0.6</td><td class="val-pos">-20.9%</td><td class="val-pos">COOLING</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== RISK DASHBOARD ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 16 16" fill="none"><path d="M8 1L15 13H1L8 1z" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="6" x2="8" y2="9" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="11" r="0.5" fill="currentColor"/></svg>
+        Risk Architecture
+      </div>
+      <div class="section-tag">EXTREME</div>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead><tr><th>Risk Factor</th><th>Reading</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>VIX Level</td><td>31.05</td><td class="val-extreme"><span class="pulse red"></span>PANIC</td></tr>
+          <tr><td><span class="tip tip-right" data-tip="VIX term structure compares near-term vs longer-dated VIX futures. In backwardation, near-term VIX futures cost MORE than longer-dated — traders pay a premium for immediate protection. This is the market equivalent of paying rush shipping on a bulletproof vest.">VIX Term Structure</span></td><td><span class="tip" data-tip="Backwardation means the front-month VIX future is priced 1.78 points ABOVE the further-out future. Normal markets show contango (front < back). Backwardation signals acute near-term fear.">Backwardation (-1.78)</span></td><td class="val-extreme">ACUTE HEDGING</td></tr>
+          <tr><td><span class="tip tip-right" data-tip="The 30-day rolling correlation between stocks (S&P 500) and bonds (Treasuries). In a healthy market, this is negative — when stocks fall, bonds rise (flight to safety). Positive correlation means BOTH fall together, breaking the core assumption of diversified portfolios.">Stock-Bond Corr.</span></td><td>+0.488</td><td class="val-warn"><span class="tip" data-tip="The classic 60% stocks / 40% bonds portfolio relies on negative stock-bond correlation for protection. At +0.49, both legs are falling together — the hedge is gone. This typically happens during inflation regimes when rising rates hurt both stocks AND bonds.">DIVERSIFICATION BROKEN</span></td></tr>
+          <tr><td><span class="tip tip-right" data-tip="Correlation between the S&P 500 and High Yield (junk) bonds. When this is very high (+0.84), credit markets are trading in lockstep with equities — meaning credit stress will amplify any stock decline. There's nowhere to hide in traditional fixed income.">SPX / HYG Corr.</span></td><td>+0.838</td><td class="val-neg">CONTAGION RISK</td></tr>
+          <tr><td>TLT / HYG Corr.</td><td>+0.702</td><td class="val-neg">RATE SENSITIVITY</td></tr>
+        </tbody>
+      </table>
+      <div class="insight-block">
+        <div class="insight-label">GAME THEORY // CORRELATION REGIME</div>
+        Positive stock-bond correlation (+0.49) means the 60/40 portfolio is broken &mdash; both legs fall together. This regime persists during inflation scares. Real assets (commodities, TIPS) or cash become the only effective hedges. The 0.84 SPX/HYG lockstep means credit offers no safe haven either.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FACTOR RETURNS ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="tip tip-bottom tip-right" data-tip="Academic 'risk factors' that explain stock returns beyond the overall market. Developed by Nobel laureate Eugene Fama and Kenneth French. If you know which factors are working, you know which types of stocks are winning — cheap stocks (value), small stocks (size), or trending stocks (momentum).">Factor Returns</span></div>
+      <div class="section-tag"><span class="tip tip-bottom tip-left" data-tip="The Fama-French factor model decomposes stock returns into: Market (beta), Size (small vs large), Value (cheap vs expensive), and Momentum (winners vs losers). Data from Kenneth French's public data library at Dartmouth.">Fama-French</span></div>
+    </div>
+    <div class="section-body">
+      <div class="grid-4" style="margin-bottom: 16px;">
+        <div class="factor-block">
+          <div class="factor-name"><span class="tip tip-bottom tip-right" data-tip="HML = High Minus Low. Measures the return of cheap stocks (high book-to-market) minus expensive stocks (low book-to-market). When HML is positive, 'value' stocks are beating 'growth' stocks. +3% in 30 days is a strong value rotation.">VALUE (HML)</span></div>
+          <div class="factor-value val-pos">+3.01%</div>
+          <div class="factor-sub">30-day // Strong Value</div>
+        </div>
+        <div class="factor-block">
+          <div class="factor-name"><span class="tip tip-bottom" data-tip="UMD = Up Minus Down. Measures the return of stocks that have been rising minus stocks that have been falling. When positive, 'winners keep winning.' +6.86% in 30 days is an exceptionally strong momentum signal — trend-following strategies are working.">MOMENTUM (UMD)</span></div>
+          <div class="factor-value val-pos">+6.86%</div>
+          <div class="factor-sub">30-day // Strong Trend</div>
+        </div>
+        <div class="factor-block">
+          <div class="factor-name"><span class="tip tip-bottom" data-tip="SMB = Small Minus Big. Measures the return of small-cap stocks minus large-cap stocks. When positive, small companies are outperforming big ones. Near zero means no size preference in the market.">SIZE (SMB)</span></div>
+          <div class="factor-value val-neutral">-0.10%</div>
+          <div class="factor-sub">30-day // Neutral</div>
+        </div>
+        <div class="factor-block">
+          <div class="factor-name"><span class="tip tip-bottom tip-left" data-tip="Mkt-RF = Market return minus the Risk-Free rate. This is pure stock market beta — the return you get for owning stocks instead of T-bills. Positive = stocks beat cash. This is the most basic factor: are investors being rewarded for taking risk?">MARKET (Mkt-RF)</span></div>
+          <div class="factor-value val-pos">+1.46%</div>
+          <div class="factor-sub">30-day // Mild Risk-On</div>
+        </div>
+      </div>
+      <div class="insight-block">
+        <div class="insight-label">DATA SCIENCE // FACTOR ANOMALY</div>
+        Value and momentum co-moving is statistically uncommon &mdash; they're historically negatively correlated. When both work simultaneously, it signals a violent sector rotation: the <em>new</em> momentum IS value (energy, materials). This is a regime change signal for factor investors.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== COT POSITIONING ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="tip tip-bottom tip-right" data-tip="The CFTC (Commodity Futures Trading Commission) requires large traders to report their futures positions weekly. This 'Commitments of Traders' data reveals whether speculators (hedge funds) are betting on prices going up (long) or down (short). Extreme positioning often precedes reversals.">CFTC Positioning</span></div>
+      <div class="section-tag"><span class="tip tip-bottom tip-left" data-tip="Published every Friday by the CFTC, the COT report breaks down who holds what in futures markets. 'Net speculative' = hedge fund longs minus shorts. Extreme readings are among the highest-signal contrarian indicators available for free.">Commitments of Traders</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cot-bar-container">
+        <div class="cot-label">Gold</div>
+        <div class="cot-bar-track">
+          <div class="cot-bar-center"></div>
+          <div class="cot-bar-fill" style="left:50%; width:42%; background: var(--amber-bright); opacity:0.7;"></div>
+        </div>
+        <div class="cot-signal val-extreme">EXT. LONG</div>
+      </div>
+      <div class="cot-bar-container">
+        <div class="cot-label">Bitcoin</div>
+        <div class="cot-bar-track">
+          <div class="cot-bar-center"></div>
+          <div class="cot-bar-fill" style="left:50%; width:9%; background: var(--cyan-faded); opacity:0.6;"></div>
+        </div>
+        <div class="cot-signal val-neutral">NEUTRAL</div>
+      </div>
+      <div class="cot-bar-container">
+        <div class="cot-label">Euro FX</div>
+        <div class="cot-bar-track">
+          <div class="cot-bar-center"></div>
+          <div class="cot-bar-fill" style="left:50%; width:1.2%; background: var(--cyan-faded); opacity:0.5;"></div>
+        </div>
+        <div class="cot-signal val-neutral">NEUTRAL</div>
+      </div>
+      <div class="cot-bar-container">
+        <div class="cot-label">E-Mini S&P</div>
+        <div class="cot-bar-track">
+          <div class="cot-bar-center"></div>
+          <div class="cot-bar-fill" style="right:50%; width:4.3%; background: var(--red-faded); opacity:0.6;"></div>
+        </div>
+        <div class="cot-signal val-neutral">NEUTRAL</div>
+      </div>
+      <div class="cot-bar-container">
+        <div class="cot-label">Crude Oil</div>
+        <div class="cot-bar-track">
+          <div class="cot-bar-center"></div>
+          <div class="cot-bar-fill" style="right:50%; width:4.3%; background: var(--red-faded); opacity:0.6;"></div>
+        </div>
+        <div class="cot-signal val-neutral">NEUTRAL</div>
+      </div>
+      <div class="cot-bar-container">
+        <div class="cot-label">VIX</div>
+        <div class="cot-bar-track">
+          <div class="cot-bar-center"></div>
+          <div class="cot-bar-fill" style="right:50%; width:7.3%; background: var(--red-faded); opacity:0.6;"></div>
+        </div>
+        <div class="cot-signal val-neutral">NEUTRAL</div>
+      </div>
+      <div class="cot-bar-container">
+        <div class="cot-label">Yen</div>
+        <div class="cot-bar-track">
+          <div class="cot-bar-center"></div>
+          <div class="cot-bar-fill" style="right:50%; width:19.1%; background: var(--red-bright); opacity:0.6;"></div>
+        </div>
+        <div class="cot-signal val-neg">NET SHORT</div>
+      </div>
+      <div class="insight-block">
+        <div class="insight-label"><span class="tip tip-bottom tip-right" data-tip="Bayesian Persuasion (Kamenica & Gentzkow, 2011) is a game theory framework about how information design shapes beliefs. When everyone already believes the same thing (gold = safe), new bullish information has zero marginal impact — only surprises in the OTHER direction move prices. Applied to markets: crowded trades are vulnerable to reversal because the 'information advantage' is already priced in.">BAYESIAN PERSUASION</span> // CROWDING</div>
+        Gold at 41.7% of OI is an <strong>extreme crowded long</strong>. Per information theory, when everyone holds the same belief, only <em>bearish</em> surprises move the needle &mdash; contrarian sell signal. Meanwhile, crude speculators are net SHORT while price is +80% YTD: classic short-squeeze fuel.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CRYPTO DASHBOARD ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Crypto Market</div>
+      <div class="section-tag">CoinGecko</div>
+    </div>
+    <div class="section-body">
+      <div style="text-align:center; margin-bottom:16px; font-size:11px; color:var(--text-dim);">
+        Total Market Cap: <span class="val-highlight">$2.38T</span> &nbsp;|&nbsp; BTC Dominance: <span class="val-warn">56.1%</span> &nbsp;|&nbsp; 24h Volume: <span class="val-neutral">$58.7B</span> &nbsp;|&nbsp; Fear & Greed: <span class="val-extreme">9 / 100</span>
+      </div>
+      <div class="grid-4" style="gap:10px;">
+        <div class="crypto-card">
+          <div class="coin-symbol">BTC</div>
+          <div class="coin-price">$66,751</div>
+          <div class="coin-change">24h <span class="val-pos">+1.14%</span> &nbsp; 7d <span class="val-neg">-3.12%</span></div>
+          <div class="ath-drop">-47.1% from ATH</div>
+        </div>
+        <div class="crypto-card">
+          <div class="coin-symbol">ETH</div>
+          <div class="coin-price">$2,008</div>
+          <div class="coin-change">24h <span class="val-pos">+1.12%</span> &nbsp; 7d <span class="val-neg">-3.90%</span></div>
+          <div class="ath-drop">-59.4% from ATH</div>
+        </div>
+        <div class="crypto-card">
+          <div class="coin-symbol">SOL</div>
+          <div class="coin-price">$82.68</div>
+          <div class="coin-change">24h <span class="val-pos">+0.23%</span> &nbsp; 7d <span class="val-neg">-5.24%</span></div>
+          <div class="ath-drop">-71.8% from ATH</div>
+        </div>
+        <div class="crypto-card">
+          <div class="coin-symbol">ADA</div>
+          <div class="coin-price">$0.246</div>
+          <div class="coin-change">24h <span class="val-pos">+0.46%</span> &nbsp; 7d <span class="val-neg">-4.20%</span></div>
+          <div class="ath-drop">-92.0% from ATH</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== GOOGLE TRENDS ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="tip tip-bottom tip-right" data-tip="Using Google search volume as a proxy for public sentiment. When 'recession' searches spike, the public is scared. When 'buy stocks' spikes, retail is greedy. Extreme readings in either direction have historically been contrarian signals — mass fear = buying opportunity, mass greed = selling opportunity.">Behavioral Signals</span></div>
+      <div class="section-tag">Google Trends</div>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead><tr><th>Theme</th><th>Key Signal</th><th>Intensity</th><th>Interpretation</th></tr></thead>
+        <tbody>
+          <tr><td>Fear ("recession", "crash")</td><td>Normal</td><td class="val-neutral">0.88x avg</td><td>Not spiking &mdash; possible complacency</td></tr>
+          <tr><td>"How to invest"</td><td class="val-extreme">SURGING</td><td class="val-extreme">4.3x avg</td><td>Retail dip-buying into panic</td></tr>
+          <tr><td>Inflation</td><td class="val-warn">Elevated</td><td class="val-warn">1.6x avg</td><td>Public awareness of price pressure</td></tr>
+          <tr><td>Crypto</td><td>Declining</td><td class="val-neg">0.62x avg</td><td>Retail washed out</td></tr>
+          <tr><td>"Oil price"</td><td class="val-warn">Elevated</td><td class="val-warn">1.3x avg</td><td>Energy awareness rising</td></tr>
+          <tr><td>Housing</td><td>Normal</td><td class="val-neutral">1.0x avg</td><td>No panic</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="neon-divider"></div>
+
+  <!-- ===== YEAR-END PREDICTIONS ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1"/><path d="M8 3v5l4 2" stroke="currentColor" stroke-width="1.5"/></svg>
+        Year-End 2026 Predictions
+      </div>
+      <div class="section-tag">Probability-Weighted</div>
+    </div>
+    <div class="section-body">
+      <div class="grid-4" style="margin-bottom: 20px;">
+        <div class="scenario-card">
+          <div class="prob" style="color:var(--red-bright);">35%</div>
+          <div class="scenario-name" style="color:var(--red-faded);">Stagflation Persists</div>
+          <div class="scenario-detail">
+            S&P: <span>5,200-5,600</span><br>
+            10Y: <span>4.8-5.2%</span><br>
+            Gold: <span>$2,800+</span><br>
+            BTC: <span>$50-60K</span>
+          </div>
+        </div>
+        <div class="scenario-card">
+          <div class="prob" style="color:var(--green-bright);">25%</div>
+          <div class="scenario-name" style="color:var(--green-faded);">Soft Landing</div>
+          <div class="scenario-detail">
+            S&P: <span>6,400-6,800</span><br>
+            10Y: <span>3.8-4.2%</span><br>
+            Gold: <span>$2,400</span><br>
+            BTC: <span>$85-100K</span>
+          </div>
+        </div>
+        <div class="scenario-card">
+          <div class="prob" style="color:var(--magenta-bright);">25%</div>
+          <div class="scenario-name" style="color:var(--magenta-faded);">Recession</div>
+          <div class="scenario-detail">
+            S&P: <span>4,600-5,000</span><br>
+            10Y: <span>3.2-3.6%</span><br>
+            Gold: <span>$3,200+</span><br>
+            BTC: <span>$40-50K</span>
+          </div>
+        </div>
+        <div class="scenario-card">
+          <div class="prob" style="color:var(--amber-bright);">15%</div>
+          <div class="scenario-name" style="color:var(--amber-faded);">Reflation</div>
+          <div class="scenario-detail">
+            S&P: <span>6,000-6,400</span><br>
+            10Y: <span>4.0-4.5%</span><br>
+            Gold: <span>$2,600</span><br>
+            BTC: <span>$75-90K</span>
+          </div>
+        </div>
+      </div>
+
+      <table>
+        <thead><tr><th>Asset</th><th>Current</th><th>Weighted Target</th><th>Implied Move</th></tr></thead>
+        <tbody>
+          <tr><td class="ticker">S&P 500</td><td>5,569</td><td class="val-highlight">~5,550</td><td class="val-neg">Flat (-0.3%)</td></tr>
+          <tr><td class="ticker">10Y Yield</td><td>4.44%</td><td class="val-highlight">~4.25%</td><td class="val-pos">Modest decline</td></tr>
+          <tr><td class="ticker">Gold (spot)</td><td>~$2,700</td><td class="val-highlight">~$2,750</td><td class="val-pos">+2%</td></tr>
+          <tr><td class="ticker">Bitcoin</td><td>$66,733</td><td class="val-highlight">~$65,000</td><td class="val-neg">-3%</td></tr>
+          <tr><td class="ticker">Fed Funds (Dec)</td><td>3.64%</td><td class="val-highlight">~3.25%</td><td class="val-pos">1-2 more cuts</td></tr>
+        </tbody>
+      </table>
+
+      <div class="insight-block">
+        <div class="insight-label">GAME THEORY // <span class="tip tip-bottom" data-tip="A Nash Equilibrium (John Nash, 1950) is a state where no player can improve their outcome by changing strategy alone. In Fed policy: the Fed can't cut (inflation reignites) or hold (recession deepens) without making things worse — so they move minimally. The market can't price in aggressive cuts (inflation risk) or no cuts (recession risk) — so rates stay volatile. Both players are stuck.">NASH EQUILIBRIUM</span></div>
+        The Fed faces a classic two-player game against the market. Core PCE at 3.06% and unemployment at 4.4% (rising) creates a bind: cutting risks re-igniting inflation; holding risks recession. The Nash equilibrium is a <em>grudging, slow</em> cut cycle. Historical base rates from similar setups (VIX >30, positive stock-bond correlation, recently un-inverted curve): S&P 500 median 12-month forward return is +5-8% from panic levels, but with a wide distribution (-15% to +25%). The fat left tail is why the probability-weighted estimate nets to roughly flat.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TACTICAL RECOMMENDATIONS ===== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title">Tactical Recommendations</div>
+      <div class="section-tag">Synthesis</div>
+    </div>
+    <div class="section-body">
+      <div class="grid-2">
+        <div>
+          <div class="rec-do">
+            <div class="rec-label">DATA SAYS: EXECUTE</div>
+            <div class="rec-item">Maintain energy/commodity exposure &mdash; momentum + value aligned, speculative shorts provide squeeze fuel</div>
+            <div class="rec-item">Underweight mega-cap tech &mdash; breadth divergence confirms rotation away from cap-weighted leaders</div>
+            <div class="rec-item">Hold elevated cash &mdash; risk-free rate ~5% annualized; positive stock-bond corr. means bonds don't hedge</div>
+            <div class="rec-item">Watch gold for exit signal &mdash; extreme crowded long at 41.7% OI is a contrarian warning</div>
+          </div>
+        </div>
+        <div>
+          <div class="rec-avoid">
+            <div class="rec-label">DATA SAYS: AVOID</div>
+            <div class="rec-item">Don't buy the dip in growth/tech yet &mdash; VIX backwardation means hedging demand hasn't resolved</div>
+            <div class="rec-item">Don't trust bonds as a hedge &mdash; +0.49 stock-bond correlation means 60/40 is broken</div>
+            <div class="rec-item">Crypto in capitulation &mdash; F&G at 9 is extreme, but can persist for months in macro sell-offs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <div class="data-sources">14 LIVE DATA FEEDS: FRED // YFINANCE // CFTC // FAMA-FRENCH // SEC EDGAR // COINGECKO // GOOGLE TRENDS // VIX TERM STRUCTURE</div>
+    <div>ARCHON INVESTMENT INTELLIGENCE SYSTEM &mdash; GENERATED 2026.03.28 22:55 UTC</div>
+    <div style="margin-top:6px; opacity:0.5;">This briefing is for informational purposes only. Not financial advice. Past performance does not guarantee future results.</div>
+  </div>
+
+</div>
+
+<!-- Theme toggle + Tooltip positioner -->
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'light') {
+    html.removeAttribute('data-theme');
+    btn.textContent = 'LIGHT MODE';
+  } else {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = 'DARK MODE';
+  }
+}
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tips = document.querySelectorAll('.tip');
+  tips.forEach(tip => {
+    tip.addEventListener('mouseenter', () => {
+      const rect = tip.getBoundingClientRect();
+      const style = document.documentElement.style;
+      // Position tooltip above the element by default
+      let top = rect.top - 10;
+      let left = rect.left + rect.width / 2;
+      let arrowTop = rect.top - 4;
+      let flipBelow = false;
+
+      // If too close to top, flip below
+      if (rect.top < 80) {
+        top = rect.bottom + 10;
+        arrowTop = rect.bottom + 4;
+        flipBelow = true;
+      }
+
+      style.setProperty('--tip-top', top + 'px');
+      style.setProperty('--tip-left', left + 'px');
+      style.setProperty('--tip-arrow-top', arrowTop + 'px');
+
+      if (flipBelow) {
+        tip.classList.add('tip-below');
+      } else {
+        tip.classList.remove('tip-below');
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>

@@ -6,7 +6,11 @@ description: >
   tests, build or evaluate models, design causal studies, create visualizations, monitor
   deployed models, or apply responsible AI principles. Routes to the right specialist skill
   based on where the user is in the data science workflow.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Data Science Orchestrator — The Analyst
@@ -148,6 +152,7 @@ After analysis completes:
    - Design: data visualization principles, dashboard design, chart aesthetics
    - Game Theory: strategic implications of findings, incentive design
    - Worldbuilding: data-driven world parameters, realistic simulations
+   - Investing: performance attribution (causal-inference), macro cycles (time-series), factor validation (statistical-testing), alt data signals (feature-engineering), strategy monitoring (drift-detection), risk model calibration (model-evaluation)
 
 ## Knowledge Layer
 

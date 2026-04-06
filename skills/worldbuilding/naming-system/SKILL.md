@@ -5,6 +5,10 @@ description: >
   civilization. Reference when creating proper nouns for any worldbuilding artifact to ensure
   names from the same culture share phonetic patterns and names from different cultures
   sound audibly distinct.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Naming System — The Sound of Cultures
@@ -77,3 +81,7 @@ Read `references/culture-sound-palettes.md` for individual culture definitions a
 3. **No internal consistency.** If one character from a culture is named "Kael" and another is named "Giovannara," they don't sound like they're from the same place. The phoneme inventory should make this impossible.
 4. **Meaningful names that are too obvious.** "Darkblade" for a villain. "Brighthollow" for a utopia. Meaningful names work when they're meaningful *in the culture's language*, not in English. The reader shouldn't be able to decode the meaning without context.
 5. **Ignoring how names erode over time.** Old names from ancient eras should sound different from modern names in the same culture — languages shift. Formal/archaic names are longer and more structured. Common/modern names are worn smooth by daily use.
+
+## Cross-Domain Connections
+
+- **Writing/sentence-craft/diction**: Naming-system defines the phonetic palette; diction governs word choice in prose. When writing from a culture's perspective, the prose diction should harmonize with the culture's sound palette — not use phonemes that feel foreign to the culture's linguistic identity.

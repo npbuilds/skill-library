@@ -5,7 +5,11 @@ description: >
   specialist skill, define the analysis workflow, and resolve conflicts between monitoring approaches.
   Use when the user needs to evaluate portfolio performance, decide on rebalancing, or integrate
   alternative data into their investment process.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Adaptive Monitoring Director

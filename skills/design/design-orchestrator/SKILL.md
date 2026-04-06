@@ -6,7 +6,11 @@ description: >
   or visual identity work. Activates when artistic or aesthetic judgment is needed for any
   visual output — UI mockups, illustrations, branding, data visualizations, presentations,
   or generative art.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Art Design Orchestrator — The Creative Director

@@ -5,6 +5,10 @@ description: >
   Use when the user wants to evaluate holding company discounts, stub trades, closed-end fund
   discounts, multi-class share structures, net-net stocks, or any situation where complexity or
   categorization difficulty creates a valuation gap.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Complexity Premium — Profiting from What Others Cannot Categorize

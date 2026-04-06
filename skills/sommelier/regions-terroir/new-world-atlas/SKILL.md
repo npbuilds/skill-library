@@ -1,7 +1,11 @@
 ---
 name: new-world-atlas
 description: Deep reference for New World wine regions — USA, Australia, New Zealand, South Africa, Argentina, and Chile. Use when the user asks about any New World wine region, appellation, terroir characteristic, or regional style. Covers climate drivers, key sub-regions, benchmark producers, and how New World regions compare to Old World counterparts.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # New World Atlas — The New Frontier

@@ -4,6 +4,10 @@ description: >
   Typeface pairing methodology — how to combine fonts for harmony, contrast, and hierarchy.
   Covers the contrast principle, superfamily strategy, mood matching, and common pairing
   patterns. Use when selecting fonts for a project that needs more than one typeface.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Type Pairing — Combining Typefaces

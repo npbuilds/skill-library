@@ -5,6 +5,10 @@ description: >
   17+ compounds with detection thresholds and sensory descriptors. Use when
   a wine smells or tastes wrong, when deciding whether to send a bottle back,
   or when distinguishing intentional natural wine style from genuine faults.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Fault Diagnosis — The Clinic

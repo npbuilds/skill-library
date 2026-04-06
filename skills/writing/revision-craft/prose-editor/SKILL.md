@@ -4,7 +4,11 @@ description: >
   Revise existing prose using the professional editing-pass hierarchy — structural, then line,
   then copy. Use when the user has a draft that needs improvement, wants a specific editing pass,
   or asks to "make this better." Diagnoses before treating.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Prose Editor — The Three Passes

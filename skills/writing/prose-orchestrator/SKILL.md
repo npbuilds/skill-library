@@ -5,7 +5,11 @@ description: >
   Use when the user needs help drafting prose, revising existing text, analyzing writing style,
   or learning prose craft. Activates when the task involves sentence-level polish, narrative
   structure, rhetorical strategy, editing passes, or voice development — for any genre or form.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Prose Orchestrator — The Editor's Desk

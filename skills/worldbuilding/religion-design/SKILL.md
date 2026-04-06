@@ -5,6 +5,10 @@ description: >
   pantheons, cults, philosophies, or any organized belief system in a world. Covers organizational
   patterns, scale models, deity design, and how religion interacts with politics, war, and
   daily life.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Religion Design — The Stories People Live By

@@ -5,7 +5,11 @@ description: >
   specialist skill, define the learning curriculum, and resolve conflicts between model
   complexity and interpretability. Use when the user needs to build, evaluate, select,
   or forecast with predictive models.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Modeling Director

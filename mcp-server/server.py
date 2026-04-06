@@ -5,6 +5,7 @@ Exposes your skill library to Claude Desktop via the Model Context Protocol.
 
 import fcntl
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from mcp.server.fastmcp import FastMCP
@@ -17,6 +18,10 @@ from shared import (
     PROJECT_ROOT, REGISTRY_PATH, SKILLS_DIR, DATA_DIR,
     USAGE_LOG, GAPS_LOG, FEEDBACK_LOG,
     load_log,
+    atomic_write_registry,
+    compute_auto_score,
+    score_structure, score_depth, score_connectivity,
+    score_freshness, score_usage, score_feedback,
 )
 
 
@@ -51,20 +56,33 @@ mcp = FastMCP(
 )
 
 
+_registry_cache: dict | None = None
+_registry_cache_key: tuple[str, float] = ("", 0.0)
+
+
 def load_registry() -> dict:
-    """Load the registry fresh each time (picks up changes without restart)."""
+    """Load registry, cached by (path, mtime) — picks up changes instantly after writes."""
+    global _registry_cache, _registry_cache_key
     try:
-        with open(REGISTRY_PATH, "r") as f:
-            return json.load(f)
+        stat = REGISTRY_PATH.stat()
+        key = (str(REGISTRY_PATH), stat.st_mtime)
     except FileNotFoundError:
         raise RuntimeError(
             f"Registry not found at {REGISTRY_PATH}. "
             "Make sure data/registry.json exists."
         )
+    if _registry_cache is not None and key == _registry_cache_key:
+        return _registry_cache
+    try:
+        with open(REGISTRY_PATH) as f:
+            data = json.load(f)
     except json.JSONDecodeError as e:
         raise RuntimeError(
             f"Registry has invalid JSON: {e}. Check data/registry.json for syntax errors."
         )
+    _registry_cache = data
+    _registry_cache_key = key
+    return data
 
 
 def resolve_skill_path(entry: dict, skill_name: str) -> str | None:
@@ -188,6 +206,48 @@ def list_skills(
     return "\n".join(lines)
 
 
+def _match_score(name: str, entry: dict, query: str) -> int:
+    """Return a relevance score (0 = no match) for ranked search results."""
+    q = query.lower()
+    score = 0
+
+    # Name matches (highest weight — most specific signal)
+    name_l = name.lower()
+    if name_l == q:
+        score += 100
+    elif name_l.startswith(q + "-") or name_l.endswith("-" + q):
+        score += 80
+    elif f"-{q}-" in name_l:
+        score += 65
+    elif q in name_l:
+        score += 50
+
+    # Description word-boundary matches
+    desc_l = entry.get("description", "").lower()
+    desc_words = set(desc_l.replace(",", " ").replace(".", " ").split())
+    if q in desc_words:
+        score += 40
+    elif q in desc_l:
+        score += 15
+
+    # Tag matches — exact tag value (after colon) scores higher than substring
+    tags = entry.get("tags", [])
+    for tag in tags:
+        tag_val = tag.split(":")[-1].lower()
+        if tag_val == q:
+            score += 35
+            break
+        elif q in tag_val:
+            score += 10
+            break
+
+    # Type match (e.g. query="director")
+    if q == entry.get("type", "").lower():
+        score += 25
+
+    return score
+
+
 @mcp.tool()
 def search_skills(query: str) -> str:
     """Search the skill library by keyword. Matches against skill names, descriptions, and tags.
@@ -202,42 +262,33 @@ def search_skills(query: str) -> str:
     skills = registry.get("skills", {})
     if not skills:
         return "The registry is empty or missing the 'skills' key."
-    query_lower = query.lower()
+
     matches = []
-
     for name, entry in skills.items():
-        searchable = " ".join(
-            [
-                name,
-                entry.get("description", ""),
-                " ".join(entry.get("tags", [])),
-                entry.get("type", ""),
-            ]
-        ).lower()
-
-        if query_lower in searchable:
-            matches.append(
-                {
-                    "name": name,
-                    "type": entry.get("type", "unknown"),
-                    "description": entry.get("description", "").strip(),
-                    "tags": entry.get("tags", []),
-                    "score": entry.get("composite_score"),
-                }
-            )
+        rel = _match_score(name, entry, query)
+        if rel > 0:
+            matches.append({
+                "name": name,
+                "type": entry.get("type", "unknown"),
+                "description": entry.get("description", "").strip(),
+                "tags": entry.get("tags", []),
+                "score": entry.get("composite_score"),
+                "_rel": rel,
+            })
 
     if not matches:
-        # Log the gap — this query found nothing
         _log_event(GAPS_LOG, {"query": query, "result_count": 0})
         return f"No skills found matching '{query}'. Use the list_skills tool to see all available skills."
 
-    # Log low-result searches too (1-2 results may indicate thin coverage)
+    # Sort by relevance desc, then composite score desc
+    matches.sort(key=lambda m: (-m["_rel"], -(m["score"] or 0)))
+
     if len(matches) <= 2:
         _log_event(GAPS_LOG, {"query": query, "result_count": len(matches)})
 
     lines = [f"Found {len(matches)} skill(s) matching '{query}':\n"]
     for m in matches:
-        lines.append(f"  [{m['type']}] {m['name']}  (score: {m['score']})")
+        lines.append(f"  [{m['type']}] {m['name']}  (score: {m['score']}, relevance: {m['_rel']})")
         lines.append(f"    {m['description']}")
         lines.append(f"    tags: {', '.join(m['tags'])}")
         lines.append("")
@@ -281,11 +332,12 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
     if include_references:
         refs_dir = Path(skill_path).parent / "references"
         if refs_dir.exists():
-            ref_files = sorted(refs_dir.glob("*.md"))
+            ref_files = sorted(refs_dir.rglob("*.md"))
             if ref_files:
                 parts.append(f"\n\n=== REFERENCE DOCUMENTS ({len(ref_files)}) ===")
                 for ref_file in ref_files:
-                    parts.append(f"\n--- {ref_file.name} ---\n")
+                    label = ref_file.relative_to(refs_dir)
+                    parts.append(f"\n--- {label} ---\n")
                     parts.append(read_file_safe(str(ref_file)))
 
     # Also read agent files for orchestrator skills
@@ -556,7 +608,7 @@ def update_skill_metadata(
         return f"status must be one of: {', '.join(sorted(VALID_STATUS))}."
 
     try:
-        registry = load_registry()
+        registry = _load_registry_mutable()
     except RuntimeError as e:
         return str(e)
     skills = registry.get("skills", {})
@@ -587,6 +639,12 @@ def update_skill_metadata(
 
     if status is not None:
         entry["status"] = status
+        if status == "active":
+            # Clear stale deprecation metadata so get_skill_details won't show
+            # contradictory data (e.g. status=active + deprecated_date=yesterday).
+            entry["deprecated_date"] = None
+            entry["deprecation_reason"] = None
+            entry["replacement_skill"] = None
         changes.append(f"status={status}")
 
     if parent is not None:
@@ -596,22 +654,9 @@ def update_skill_metadata(
     if not changes:
         return "No fields provided to update. Pass at least one keyword argument."
 
-    # Write back atomically using a temp file + rename
-    import tempfile, os
-    registry_path = REGISTRY_PATH
     try:
-        with tempfile.NamedTemporaryFile(
-            mode="w", dir=registry_path.parent, suffix=".tmp", delete=False
-        ) as tmp:
-            json.dump(registry, tmp, indent=2)
-            tmp.write("\n")
-            tmp_path = tmp.name
-        os.replace(tmp_path, registry_path)
+        atomic_write_registry(registry)
     except OSError as e:
-        try:
-            os.unlink(tmp_path)
-        except Exception:
-            pass
         return f"Failed to write registry: {e}"
 
     return f"Updated {skill_name}: {', '.join(changes)}."
@@ -766,6 +811,854 @@ def get_skill_stats(skill_name: str | None = None) -> str:
             lines.append(f"  \"{q}\" — searched {count} time(s)")
 
     return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Write tools
+# ---------------------------------------------------------------------------
+
+import copy
+import re
+import shutil
+import subprocess
+import tempfile
+from collections import Counter
+from datetime import date
+
+
+_SLUG_RE = re.compile(r"^[a-z][a-z0-9-]*[a-z0-9]$")
+_FILENAME_RE = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9._-]*\.md$")
+_VALID_TYPES = {"knowledge", "director", "orchestrator", "action", "observer"}
+_TEMPLATE_MAP = {
+    "knowledge": "knowledge-skill.md",
+    "action": "action-skill.md",
+    "director": "director-skill.md",
+    "orchestrator": "orchestrator-skill.md",
+    "observer": "knowledge-skill.md",  # fallback — no dedicated template exists
+}
+_SCRIPTS_DIR = PROJECT_ROOT / "scripts"
+_TEMPLATES_DIR = SKILLS_DIR / "infrastructure" / "skill-scaffold" / "templates"
+
+
+def _load_registry_mutable() -> dict:
+    """Return a deep copy of the registry for write tools.
+
+    Write tools must never mutate the cached registry object directly.
+    If a write fails after in-place mutation, the cache would be poisoned
+    with uncommitted changes for the rest of the process lifetime.
+    Deep-copying means mutations only affect the local copy; the cache is
+    invalidated naturally by mtime after a successful atomic write.
+    """
+    return copy.deepcopy(load_registry())
+
+
+def _run_script(
+    script_name: str,
+    *args,
+    timeout: int = 15,
+    errors: list | None = None,
+) -> dict | None:
+    """Run a bash script and return parsed JSON stdout, or None on failure.
+
+    Pass a list as `errors` to capture failure details (stderr or exception
+    message). Callers can then include these in their return strings.
+    """
+    try:
+        result = subprocess.run(
+            ["bash", str(_SCRIPTS_DIR / script_name), *args],
+            capture_output=True, text=True, timeout=timeout,
+        )
+        if errors is not None and result.stderr.strip():
+            errors.append(result.stderr.strip())
+        return json.loads(result.stdout)
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError) as e:
+        if errors is not None:
+            errors.append(str(e))
+        return None
+
+
+def _write_file_atomic(path: Path, content: str) -> None:
+    """Write content to path atomically (temp file in same dir + os.replace)."""
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", dir=path.parent, suffix=".tmp", delete=False
+        ) as tmp:
+            tmp.write(content)
+            tmp_path = tmp.name
+        os.replace(tmp_path, path)
+    except OSError:
+        if tmp_path:
+            try:
+                os.unlink(tmp_path)
+            except Exception:
+                pass
+        raise
+
+
+def _count_refs(refs_dir: Path) -> int:
+    """Count non-.gitkeep files in a references/ directory (recurses into subdirs)."""
+    if not refs_dir.exists():
+        return 0
+    return sum(1 for f in refs_dir.rglob("*") if f.is_file() and f.name != ".gitkeep")
+
+
+def _parse_frontmatter_description(content: str) -> str:
+    """Extract the description value from SKILL.md YAML frontmatter."""
+    in_fm = False
+    fm_lines = []
+    count = 0
+    for line in content.splitlines():
+        if line.strip() == "---":
+            count += 1
+            if count == 1:
+                in_fm = True
+                continue
+            else:
+                break
+        if in_fm:
+            fm_lines.append(line)
+
+    # Find description field (may be multi-line with > or |)
+    desc_lines = []
+    in_desc = False
+    for line in fm_lines:
+        if re.match(r"^description\s*:", line):
+            # Inline value after the colon
+            # Strip the YAML block scalar indicator (> or |) only when it
+            # appears at the end of the line (followed only by whitespace).
+            # This avoids corrupting inline descriptions that start with '>'.
+            rest = re.sub(r"^description\s*:\s*(?:[>|](?=\s*$))?\s*", "", line).strip()
+            if rest:
+                desc_lines.append(rest)
+            in_desc = True
+        elif in_desc:
+            if line.startswith(" ") or line.startswith("\t"):
+                desc_lines.append(line.strip())
+            else:
+                break
+
+    return " ".join(desc_lines).strip()
+
+
+@mcp.tool()
+def scaffold_skill(
+    name: str,
+    skill_type: str,
+    domain: str,
+    description: str,
+    parent: str | None = None,
+    subdomain: str | None = None,
+) -> str:
+    """Create a new skill directory with a SKILL.md scaffold and register it.
+
+    Reads the appropriate template for the skill type, substitutes placeholders,
+    writes the file atomically, computes initial metrics, and adds the skill to
+    the registry and network.domains map.
+
+    Args:
+        name: Slug for the skill (lowercase, hyphens, e.g. "fermentation-chemistry").
+        skill_type: One of "knowledge", "director", "orchestrator", "action", "observer".
+        domain: Existing domain in the registry (e.g. "sommelier", "design").
+        description: 15-100 word description starting with an action verb.
+        parent: Optional parent skill name (must exist and be active in registry).
+        subdomain: Optional subdomain tag (e.g. "tasting-evaluation").
+    """
+    # ── Validation ────────────────────────────────────────────────────────
+    if not _SLUG_RE.match(name):
+        return f"Name '{name}' is not a valid slug. Use lowercase letters, digits, and hyphens only (min 2 chars, no leading/trailing hyphens)."
+
+    if skill_type not in _VALID_TYPES:
+        return f"skill_type must be one of: {', '.join(sorted(_VALID_TYPES))}."
+
+    try:
+        registry = _load_registry_mutable()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+
+    if name in skills:
+        return f"Skill '{name}' already exists in the registry."
+
+    existing = list(SKILLS_DIR.rglob(f"{name}/SKILL.md"))
+    if existing:
+        return f"Skill '{name}' already exists on disk at {existing[0]}."
+
+    domains_map = registry.get("network", {}).get("domains", {})
+    if domain not in domains_map:
+        return f"Domain '{domain}' does not exist. Valid domains: {', '.join(sorted(domains_map))}."
+
+    desc_words = len(description.split())
+    if desc_words < 15:
+        return f"Description is too short ({desc_words} words). Minimum is 15 words."
+    if desc_words > 100:
+        return f"Description is too long ({desc_words} words). Maximum is 100 words."
+
+    if parent is not None:
+        parent_entry = skills.get(parent)
+        if parent_entry is None:
+            return f"Parent '{parent}' not found in registry."
+        if parent_entry.get("status") != "active":
+            return f"Parent '{parent}' is deprecated and cannot be used as a parent."
+
+    # ── Read template ──────────────────────────────────────────────────────
+    template_file = _TEMPLATES_DIR / _TEMPLATE_MAP[skill_type]
+    try:
+        template = template_file.read_text()
+    except OSError as e:
+        return f"Could not read template for type '{skill_type}': {e}"
+
+    observer_note = ""
+    if skill_type == "observer":
+        observer_note = " (Note: no dedicated observer template exists; used knowledge-skill.md as fallback.)"
+
+    title = name.replace("-", " ").title()
+    content = (
+        template
+        .replace("{{SKILL_NAME}}", name)
+        .replace("{{DESCRIPTION}}", description)
+        .replace("{{SKILL_TITLE}}", title)
+        .replace("{{SKILL_SUBTITLE}}", "[Add subtitle]")
+        .replace("{{DESCRIPTION_EXPANDED}}", "[Expand description here]")
+        .replace("{{TOOLS}}", "Bash, Read, Write")
+    )
+
+    # ── Write SKILL.md ─────────────────────────────────────────────────────
+    skill_dir = SKILLS_DIR / domain / name
+    try:
+        skill_dir.mkdir(parents=True, exist_ok=False)
+    except FileExistsError:
+        return f"Directory '{skill_dir}' already exists on disk."
+    except OSError as e:
+        return f"Failed to create skill directory: {e}"
+
+    skill_path = skill_dir / "SKILL.md"
+    try:
+        _write_file_atomic(skill_path, content)
+    except OSError as e:
+        # Clean up the directory we just created
+        try:
+            shutil.rmtree(skill_dir)
+        except Exception:
+            pass
+        return f"Failed to write SKILL.md: {e}"
+
+    # ── Get initial metrics via analyze-skill.sh ───────────────────────────
+    metrics_data = _run_script("analyze-skill.sh", str(skill_path))
+    if metrics_data:
+        metrics = {
+            "word_count": metrics_data.get("word_count", 0),
+            "body_words": metrics_data.get("body_words", 0),
+            "section_count": metrics_data.get("section_count", 0),
+            "reference_files": metrics_data.get("reference_files", 0),
+            "example_files": metrics_data.get("example_files", 0),
+            "script_files": metrics_data.get("script_files", 0),
+            "template_files": metrics_data.get("template_files", 0),
+            "estimated_tokens_total": metrics_data.get("estimated_tokens_total", 0),
+            "description_words": metrics_data.get("description_words", desc_words),
+        }
+    else:
+        metrics = {
+            "word_count": 0, "body_words": 0, "section_count": 0,
+            "reference_files": 0, "example_files": 0, "script_files": 0,
+            "template_files": 0, "estimated_tokens_total": 0,
+            "description_words": desc_words,
+        }
+
+    # ── Build registry entry ───────────────────────────────────────────────
+    today = date.today().isoformat()
+    tags = [f"domain:{domain}", f"level:{skill_type}"]
+    if subdomain:
+        tags.append(f"subdomain:{subdomain}")
+
+    entry: dict = {
+        "name": name,
+        "description": description,
+        "location": f"skills/{domain}/{name}/SKILL.md",
+        "plugin": f"skill-{domain}",
+        "type": skill_type,
+        "source": "self",
+        "context_mode": "inline",
+        "invocation": "both",
+        "version": "1.0.0",
+        "metrics": metrics,
+        "health_status": "healthy",
+        "last_checked": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "status": "active",
+        "deprecated_date": None,
+        "replacement_skill": None,
+        "deprecation_reason": None,
+        "auto_score": 0,
+        "manual_rating": None,
+        "manual_notes": None,
+        "composite_score": 0,
+        "depends_on": [],
+        "referenced_by": [],
+        "shares_references_with": [],
+        "forked_from": None,
+        "forked_into": [],
+        "tags": tags,
+        "created": today,
+        "last_modified": today,
+        "parent": parent,
+    }
+
+    auto = compute_auto_score(entry, Counter(), 0, {})
+    entry["auto_score"] = auto
+    entry["composite_score"] = auto
+
+    # ── Update registry ────────────────────────────────────────────────────
+    skills[name] = entry
+    domains_map[domain].append(name)
+
+    try:
+        atomic_write_registry(registry)
+    except OSError as e:
+        return (
+            f"SKILL.md was written to {skill_path} but the registry update failed: {e}. "
+            f"Run sync-registry.py --apply to recover."
+        )
+
+    # ── Post-write validation ──────────────────────────────────────────────
+    val = _run_script("validate-structure.sh", str(skill_dir))
+    issues_str = ""
+    if val:
+        issues = val.get("issues", [])
+        if issues:
+            lines = [f"\nValidation ({len(issues)} issue(s)):"]
+            for iss in issues:
+                sev = iss.get("severity", "info").upper()
+                lines.append(f"  [{sev}] {iss.get('message', '')}")
+            issues_str = "\n".join(lines)
+
+    return (
+        f"Created skill '{name}' ({skill_type}) in domain '{domain}'.\n"
+        f"  Path:  {skill_path}\n"
+        f"  Score: {auto} (auto)\n"
+        f"  Words: {metrics['body_words']}, tokens: ~{metrics['estimated_tokens_total']}"
+        + (f"\n  Observer note:{observer_note}" if observer_note else "")
+        + issues_str
+    )
+
+
+@mcp.tool()
+def add_reference_doc(
+    skill_name: str,
+    filename: str,
+    content: str,
+) -> str:
+    """Add a markdown reference document to a skill's references/ directory.
+
+    Reference docs provide supplementary material (quick-reference sheets,
+    deep-dives, methodology notes) that keep the main SKILL.md concise.
+    The skill's registry metrics are updated to reflect the new file count.
+
+    Args:
+        skill_name: The skill to add the reference to (e.g. "color-theory").
+        filename: Filename ending in .md (e.g. "quick-reference.md").
+        content: Full markdown content of the reference document.
+    """
+    # ── Validation ────────────────────────────────────────────────────────
+    try:
+        registry = _load_registry_mutable()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+    entry = skills.get(skill_name)
+
+    if not entry:
+        return f"Skill '{skill_name}' not found in registry."
+    if entry.get("status") == "deprecated":
+        return f"Skill '{skill_name}' is deprecated. Cannot add reference docs to deprecated skills."
+
+    if not _FILENAME_RE.match(filename):
+        return (
+            f"Invalid filename '{filename}'. Must end in .md and contain only "
+            "alphanumeric characters, dots, underscores, or hyphens."
+        )
+    if not content.strip():
+        return "Content must not be empty."
+
+    skill_path = resolve_skill_path(entry, skill_name)
+    if skill_path is None:
+        return f"Skill file not found for '{skill_name}'."
+
+    # ── Write file ─────────────────────────────────────────────────────────
+    refs_dir = Path(skill_path).parent / "references"
+    refs_dir_was_new = not refs_dir.exists()
+    refs_dir.mkdir(exist_ok=True)
+    target = refs_dir / filename
+    overwrite_note = " (overwrote existing file)" if target.exists() else ""
+
+    try:
+        _write_file_atomic(target, content)
+    except OSError as e:
+        # If we created the directory and the write failed, remove the empty dir
+        if refs_dir_was_new:
+            try:
+                refs_dir.rmdir()
+            except Exception:
+                pass
+        return f"Failed to write reference file: {e}"
+
+    # ── Update registry metrics ────────────────────────────────────────────
+    new_count = _count_refs(refs_dir)
+    entry.setdefault("metrics", {})["reference_files"] = new_count
+    entry["last_modified"] = date.today().isoformat()
+
+    try:
+        atomic_write_registry(registry)
+    except OSError as e:
+        return f"File written but registry update failed: {e}"
+
+    return (
+        f"Added '{filename}' to {skill_name}/references/{overwrite_note}.\n"
+        f"  Reference files: {new_count}"
+    )
+
+
+@mcp.tool()
+def recalibrate_scores(
+    skill_names: list[str] | None = None,
+    dry_run: bool = False,
+) -> str:
+    """Recompute auto_score and composite_score using the multi-factor model.
+
+    Factors: structure (20%), depth (25%), connectivity (20%),
+    freshness (15%), usage (10%), feedback (10%).
+
+    Never overwrites manual_rating or manual_notes. When manual_rating is set,
+    composite_score = auto*0.6 + manual*0.4; otherwise composite_score = auto_score.
+
+    Args:
+        skill_names: Skills to recalibrate. If omitted, recalibrates all skills.
+        dry_run: If True, compute and return the diff table without writing.
+    """
+    try:
+        registry = _load_registry_mutable()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+
+    if skill_names is not None:
+        unknown = [n for n in skill_names if n not in skills]
+        if unknown:
+            return f"Unknown skill(s): {', '.join(unknown)}."
+        targets = skill_names
+    else:
+        targets = list(skills.keys())
+
+    # Build analytics lookups
+    usage_events = load_log(USAGE_LOG)
+    feedback_events = load_log(FEEDBACK_LOG)
+    usage_counts: Counter = Counter(e.get("skill", "") for e in usage_events)
+    feedback_ratings: dict[str, list[int]] = {}
+    for e in feedback_events:
+        s, r = e.get("skill"), e.get("rating")
+        if s and r is not None:
+            feedback_ratings.setdefault(s, []).append(r)
+    max_usage = max(usage_counts.values(), default=1)
+    now = datetime.now(timezone.utc)  # computed once, consistent across all skills
+
+    changes = []
+    for name in targets:
+        entry = skills[name]
+        metrics = entry.get("metrics", {})
+
+        s_struct = score_structure(metrics)
+        s_depth = score_depth(metrics)
+        s_conn = score_connectivity(entry)
+        s_fresh = score_freshness(entry, now)
+        s_usage = score_usage(name, usage_counts, max_usage)
+        s_fb = score_feedback(name, feedback_ratings)
+
+        new_auto = round(
+            s_struct * 0.20 + s_depth * 0.25 + s_conn * 0.20
+            + s_fresh * 0.15 + s_usage * 0.10 + s_fb * 0.10
+        )
+        manual = entry.get("manual_rating")
+        new_composite = int(new_auto * 0.6 + manual * 0.4) if manual is not None else new_auto
+        old_composite = entry.get("composite_score", 0)
+
+        changes.append({
+            "name": name,
+            "old": old_composite,
+            "new": new_composite,
+            "delta": new_composite - old_composite,
+            "breakdown": [s_struct, s_depth, s_conn, s_fresh, s_usage, s_fb],
+        })
+
+        if not dry_run:
+            entry["auto_score"] = new_auto
+            entry["composite_score"] = new_composite
+
+    changed = [c for c in changes if c["delta"] != 0]
+
+    if not dry_run and changed:
+        try:
+            atomic_write_registry(registry)
+        except OSError as e:
+            return f"Failed to write registry: {e}"
+
+    # Build output
+    changed.sort(key=lambda c: abs(c["delta"]), reverse=True)
+    lines = [
+        f"Recalibrated {len(targets)} skill(s) — {len(changed)} changed"
+        + (" (dry run)" if dry_run else "") + ".\n"
+    ]
+    if changed:
+        lines.append(f"{'Skill':<40} {'Old':>4} {'New':>4} {'Δ':>5}  [S   D   C   F   U  Fb]")
+        lines.append("-" * 75)
+        for c in changed[:30]:
+            b = c["breakdown"]
+            sign = "+" if c["delta"] > 0 else ""
+            lines.append(
+                f"{c['name']:<40} {c['old']:>4} {c['new']:>4} {sign}{c['delta']:>4}  "
+                f"[{b[0]:>3} {b[1]:>3} {b[2]:>3} {b[3]:>3} {b[4]:>3} {b[5]:>3}]"
+            )
+        if len(changed) > 30:
+            lines.append(f"  ... and {len(changed) - 30} more")
+    else:
+        lines.append("No score changes needed.")
+
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def update_skill_content(
+    skill_name: str,
+    new_content: str,
+    change_note: str,
+) -> str:
+    """Replace a skill's SKILL.md content with validation gating.
+
+    Validates the new content against structure rules before writing.
+    Refuses to write if any critical issues are found (e.g. missing frontmatter,
+    invalid description, word count over limit). Updates registry metrics
+    and last_modified after writing.
+
+    Args:
+        skill_name: The skill to update (e.g. "color-theory").
+        new_content: Full new SKILL.md content (complete replacement, not a diff).
+        change_note: Brief description of what changed (for the return summary).
+    """
+    # ── Validation ────────────────────────────────────────────────────────
+    try:
+        registry = _load_registry_mutable()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+    entry = skills.get(skill_name)
+
+    if not entry:
+        return f"Skill '{skill_name}' not found in registry."
+    if entry.get("status") == "deprecated":
+        return f"Skill '{skill_name}' is deprecated. Use update_skill_metadata to change its status first."
+
+    # Parse frontmatter description
+    description = _parse_frontmatter_description(new_content)
+    if not description:
+        return "Could not find a 'description' field in the frontmatter. Ensure SKILL.md has valid YAML frontmatter."
+
+    desc_words = len(description.split())
+    if desc_words < 15:
+        return f"Description in frontmatter is too short ({desc_words} words). Minimum is 15."
+    if desc_words > 100:
+        return f"Description in frontmatter is too long ({desc_words} words). Maximum is 100."
+
+    # Check name in frontmatter
+    name_match = re.search(r"^name\s*:\s*(.+)$", new_content[:500], re.MULTILINE)
+    if name_match:
+        fm_name = name_match.group(1).strip().strip('"\'')
+        if fm_name != skill_name:
+            return f"Frontmatter 'name' field is '{fm_name}' but expected '{skill_name}'. They must match."
+
+    skill_path_str = resolve_skill_path(entry, skill_name)
+    if skill_path_str is None:
+        return f"Skill file not found for '{skill_name}'."
+    skill_path = Path(skill_path_str)
+
+    # ── Pre-validation gate ────────────────────────────────────────────────
+    # Name the inner dir after the skill so validate-structure.sh's
+    # name-matches-directory check doesn't produce a false-positive warning.
+    tmp_parent = None
+    critical_issues = []
+    warnings = []
+    info_notes = []
+    script_errors: list[str] = []
+    try:
+        tmp_parent = Path(tempfile.mkdtemp())
+        tmp_dir = tmp_parent / skill_name
+        tmp_dir.mkdir()
+        (tmp_dir / "SKILL.md").write_text(new_content)
+
+        # Copy existing references/ so the word-count/references warning is accurate
+        refs_src = skill_path.parent / "references"
+        if refs_src.exists():
+            shutil.copytree(refs_src, tmp_dir / "references")
+
+        val = _run_script("validate-structure.sh", str(tmp_dir), errors=script_errors)
+        if val:
+            for iss in val.get("issues", []):
+                sev = iss.get("severity", "info")
+                msg = iss.get("message", "")
+                if sev == "critical":
+                    critical_issues.append(msg)
+                elif sev == "warning":
+                    warnings.append(msg)
+                else:
+                    info_notes.append(msg)
+        else:
+            # Script unavailable or returned non-JSON — proceed but warn
+            detail = f": {script_errors[0]}" if script_errors else ""
+            warnings.append(f"validate-structure.sh could not be run{detail}; content written without validation.")
+    finally:
+        if tmp_parent:
+            try:
+                shutil.rmtree(tmp_parent)
+            except Exception:
+                pass
+
+    if critical_issues:
+        lines = [f"Cannot update '{skill_name}' — {len(critical_issues)} critical issue(s) found:"]
+        for msg in critical_issues:
+            lines.append(f"  [CRITICAL] {msg}")
+        if warnings:
+            lines.append(f"\nAdditional warnings (fix these too):")
+            for msg in warnings:
+                lines.append(f"  [WARNING] {msg}")
+        return "\n".join(lines)
+
+    # ── Write SKILL.md ─────────────────────────────────────────────────────
+    try:
+        _write_file_atomic(skill_path, new_content)
+    except OSError as e:
+        return f"Failed to write SKILL.md: {e}"
+
+    # ── Update registry metrics ────────────────────────────────────────────
+    metrics_data = _run_script("analyze-skill.sh", str(skill_path))
+    if metrics_data:
+        entry["metrics"] = {
+            "word_count": metrics_data.get("word_count", 0),
+            "body_words": metrics_data.get("body_words", 0),
+            "section_count": metrics_data.get("section_count", 0),
+            "reference_files": metrics_data.get("reference_files", 0),
+            "example_files": metrics_data.get("example_files", 0),
+            "script_files": metrics_data.get("script_files", 0),
+            "template_files": metrics_data.get("template_files", 0),
+            "estimated_tokens_total": metrics_data.get("estimated_tokens_total", 0),
+            "description_words": metrics_data.get("description_words", desc_words),
+        }
+
+    entry["description"] = description
+    entry["last_modified"] = date.today().isoformat()
+    entry["health_status"] = "warning" if warnings else "healthy"
+
+    try:
+        atomic_write_registry(registry)
+    except OSError as e:
+        return f"SKILL.md written but registry update failed: {e}"
+
+    metrics = entry.get("metrics", {})
+    result_lines = [
+        f"Updated '{skill_name}': {change_note}",
+        f"  Words: {metrics.get('body_words', '?')}, tokens: ~{metrics.get('estimated_tokens_total', '?')}",
+        f"  Health: {entry['health_status']}",
+    ]
+    if warnings:
+        result_lines.append(f"  Warnings ({len(warnings)}):")
+        for w in warnings:
+            result_lines.append(f"    [WARNING] {w}")
+    if info_notes:
+        result_lines.append(f"  Notes ({len(info_notes)}):")
+        for n in info_notes:
+            result_lines.append(f"    [INFO] {n}")
+
+    return "\n".join(result_lines)
+
+
+@mcp.tool()
+def deprecate_skill(
+    skill_name: str,
+    reason: str,
+    replacement_skill: str | None = None,
+) -> str:
+    """Safely deprecate a skill with orphan and dependent detection.
+
+    Sets status to 'deprecated', records the reason and date, and optionally
+    points to a replacement skill. Scans the registry for dependents (skills
+    with this skill as their parent or in their depends_on) and surfaces them
+    as warnings. Does NOT remove the skill from network.domains (preserves
+    domain maturity history).
+
+    Args:
+        skill_name: The skill to deprecate.
+        reason: Short explanation of why it's being deprecated.
+        replacement_skill: Optional name of the skill that supersedes this one.
+    """
+    if not reason.strip():
+        return "A reason is required for deprecation."
+
+    try:
+        registry = _load_registry_mutable()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+    entry = skills.get(skill_name)
+
+    if not entry:
+        return f"Skill '{skill_name}' not found in registry."
+    if entry.get("status") == "deprecated":
+        return f"Skill '{skill_name}' is already deprecated."
+
+    if replacement_skill is not None:
+        rep_entry = skills.get(replacement_skill)
+        if rep_entry is None:
+            return f"Replacement skill '{replacement_skill}' not found in registry."
+        if rep_entry.get("status") != "active":
+            return f"Replacement skill '{replacement_skill}' is not active."
+
+    # Scan for dependents
+    parent_orphans = [
+        n for n, e in skills.items()
+        if e.get("parent") == skill_name and n != skill_name
+    ]
+    dep_users = [
+        n for n, e in skills.items()
+        if skill_name in e.get("depends_on", []) and n != skill_name
+    ]
+
+    today = date.today().isoformat()
+    entry["status"] = "deprecated"
+    entry["health_status"] = "warning"
+    entry["deprecated_date"] = today
+    entry["deprecation_reason"] = reason
+    entry["replacement_skill"] = replacement_skill
+    entry["last_modified"] = today
+
+    try:
+        atomic_write_registry(registry)
+    except OSError as e:
+        return f"Failed to write registry: {e}"
+
+    lines = [f"Deprecated '{skill_name}'."]
+    lines.append(f"  Reason: {reason}")
+    if replacement_skill:
+        lines.append(f"  Replacement: {replacement_skill}")
+
+    if parent_orphans:
+        lines.append(f"\n  Warning — {len(parent_orphans)} skill(s) have this as their parent:")
+        for n in parent_orphans:
+            lines.append(f"    {n}")
+        lines.append("  Update their 'parent' field with update_skill_metadata.")
+    if dep_users:
+        lines.append(f"\n  Warning — {len(dep_users)} skill(s) depend on this skill:")
+        for n in dep_users:
+            lines.append(f"    {n}")
+        lines.append("  Update their 'depends_on' with add_skill_dependency(remove=True).")
+
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def add_skill_dependency(
+    skill_name: str,
+    depends_on: str,
+    remove: bool = False,
+) -> str:
+    """Add or remove a dependency relationship between two skills.
+
+    Maintains the bidirectional graph atomically: updates both
+    source["depends_on"] and target["referenced_by"] in a single write.
+    Checks for circular dependencies before adding. Both operations are
+    idempotent.
+
+    Args:
+        skill_name: The skill that depends on (or will no longer depend on) another.
+        depends_on: The skill being depended upon.
+        remove: If True, remove the relationship instead of adding it.
+    """
+    try:
+        registry = _load_registry_mutable()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+
+    if skill_name not in skills:
+        return f"Skill '{skill_name}' not found in registry."
+    if depends_on not in skills:
+        return f"Skill '{depends_on}' not found in registry."
+    if skill_name == depends_on:
+        return "A skill cannot depend on itself."
+
+    source = skills[skill_name]
+    target = skills[depends_on]
+    today = date.today().isoformat()
+
+    if not remove:
+        # Idempotency check
+        if depends_on in source.get("depends_on", []):
+            return f"Dependency already exists: {skill_name} → {depends_on}."
+
+        # Circular dependency check (BFS from depends_on).
+        # Mark nodes as visited on enqueue (not dequeue) to prevent a node
+        # from being added to the queue multiple times on dense graphs.
+        visited = {depends_on}
+        queue = []
+        for n in skills.get(depends_on, {}).get("depends_on", []):
+            if n not in visited:
+                visited.add(n)
+                queue.append(n)
+        while queue:
+            node = queue.pop(0)
+            if node == skill_name:
+                return (
+                    f"Adding this dependency would create a cycle: "
+                    f"{skill_name} → {depends_on} → ... → {skill_name}. "
+                    f"Check the depends_on chain starting from '{depends_on}'."
+                )
+            for n in skills.get(node, {}).get("depends_on", []):
+                if n not in visited:
+                    visited.add(n)
+                    queue.append(n)
+
+        source.setdefault("depends_on", []).append(depends_on)
+        target.setdefault("referenced_by", []).append(skill_name)
+        action = f"Added dependency: {skill_name} → {depends_on}."
+    else:
+        # Idempotency check
+        if depends_on not in source.get("depends_on", []):
+            return f"Dependency not found: {skill_name} → {depends_on}."
+
+        source["depends_on"].remove(depends_on)
+        if skill_name in target.get("referenced_by", []):
+            target["referenced_by"].remove(skill_name)
+        action = f"Removed dependency: {skill_name} → {depends_on}."
+
+    source["last_modified"] = today
+    target["last_modified"] = today
+
+    try:
+        atomic_write_registry(registry)
+    except OSError as e:
+        return f"Failed to write registry: {e}"
+
+    # Cross-domain warning
+    def _domain(entry: dict) -> str:
+        for tag in entry.get("tags", []):
+            if tag.startswith("domain:"):
+                return tag.split(":", 1)[1]
+        return ""
+
+    source_domain = _domain(source)
+    target_domain = _domain(target)
+    cross = (
+        f"\n  Note: cross-domain dependency ({source_domain} → {target_domain})."
+        if source_domain and target_domain and source_domain != target_domain
+        else ""
+    )
+
+    return action + cross
 
 
 # ---------------------------------------------------------------------------

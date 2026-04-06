@@ -4,7 +4,11 @@ description: >
   Create new skills from templates with guided requirements gathering. Use when the user wants
   to scaffold a new skill, create a skill from scratch, generate a skill skeleton, or bootstrap
   a new action, knowledge, or orchestrator skill with proper structure and registry integration.
-tools: Read, Write, Bash, Glob, Grep, Agent, WebSearch, WebFetch
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent WebSearch WebFetch
 ---
 
 # Skill Scaffold — The Builder
@@ -153,6 +157,23 @@ Next steps:
   2. Add reference files to references/ as needed
   3. Run /skill-status to verify in the dashboard
 ```
+
+### 9. Suggest Cross-Domain Bridges
+
+After registration, run the bridge suggestion tool to prevent the new skill from being born as an island:
+
+```bash
+python3 scripts/suggest-bridges.py <skill-name>
+```
+
+This uses TF-IDF cosine similarity to find skills in other domains that share meaningful conceptual overlap, boosted by domain adjacency and structural role matching. For each suggested bridge:
+
+1. **Evaluate**: Is the connection conceptually real, or just keyword coincidence?
+2. **Wire**: For valid bridges, add a `Cross-Domain Connections` section to the new skill's SKILL.md with one line per bridge explaining the relationship.
+3. **Reciprocate**: Add a matching reference in the partner skill's SKILL.md.
+4. **Register**: Run with `--apply` to add the edges to the registry, or add them manually.
+
+**The 3-edge rule**: If a new skill can't identify at least 1 cross-domain connection, question whether it belongs where it is. Well-placed skills almost always have natural bridges to other domains.
 
 ## Quality Gate
 

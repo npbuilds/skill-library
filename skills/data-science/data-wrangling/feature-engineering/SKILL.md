@@ -5,6 +5,10 @@ description: >
   encoding categorical variables, creating interaction features, transforming numeric distributions,
   engineering temporal features, or selecting the most predictive feature subset. Use when
   building or improving model inputs.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Feature Engineering — The Signal Extractor
@@ -181,3 +185,8 @@ Activate this skill when:
 - Model performance has plateaued and better features may help more than a better algorithm
 - Preparing data for a model that has specific input requirements (scaling for SVMs, encoding for linear models)
 - Reviewing someone else's feature pipeline for leakage or missed opportunities
+
+## Cross-Domain Connections
+
+- **Investing/adaptive-monitoring/alt-data-monitoring**: Alt data signal extraction IS feature engineering — satellite imagery requires spatial features, earnings calls require NLP features (FinBERT embeddings), transaction data requires temporal aggregation. The alt data value chain (raw → cleaned → signal → integration) maps directly to the feature engineering pipeline.
+- **Investing/reflexivity-sentiment/sentiment-signals**: Building a sentiment composite is multi-source feature engineering — normalizing heterogeneous signals (VIX, put/call ratios, AAII surveys, NLP scores) into a unified feature space with appropriate weighting.

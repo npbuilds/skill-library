@@ -5,7 +5,11 @@ description: >
   findings, evidence maps, and explicit gap reporting. Use when atomic claims have been
   investigated and need to be synthesized into a coherent, honest, user-facing research
   output with auditable confidence assessments.
-tools: Read, Write
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write
 ---
 
 # Evidence Synthesizer — The Assembler

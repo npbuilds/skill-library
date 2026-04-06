@@ -4,7 +4,11 @@ description: >
   Director skill that routes macroeconomic, monetary policy, and fiscal policy questions to the
   appropriate specialist knowledge skill. Use when analyzing the current economic regime, cycle
   positioning, central bank policy, or government debt and spending dynamics.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Regime Intelligence Director

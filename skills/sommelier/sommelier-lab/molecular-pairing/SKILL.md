@@ -7,6 +7,10 @@ description: >
   Use when the user wants to understand the chemistry behind classic pairings,
   discover unexpected combinations, or go beyond structural pairing into flavor
   compound science.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Molecular Pairing — The Chemist
@@ -162,3 +166,7 @@ A pairing that violates the structural framework (e.g., a tannic red with delica
 Aroma perception is highly individual. Roughly 25% of people have reduced sensitivity to TDN (petrol note in Riesling); 50% have reduced sensitivity to certain thiols (the sulfur compounds in Sauvignon Blanc). A pairing bridge built on a compound that a diner cannot perceive provides no benefit.
 
 **Best use of this skill**: generate hypotheses to test, explain existing pairings mechanistically, and find the occasional genuinely surprising combination that repays investigation. Always validate against structural principles before recommending.
+
+## Cross-Domain Connections
+
+- **Data-science/data-wrangling/feature-engineering**: Molecular compound profiles (volatile aroma compounds, phenolics, amino acids) are features in a pairing prediction model. Flavor-sharing hypothesis testing is feature-based similarity matching. The compound overlap methodology is structurally identical to cosine similarity on feature vectors.

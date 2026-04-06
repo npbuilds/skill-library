@@ -5,6 +5,10 @@ description: >
   Reference when analyzing voting systems, evaluating fairness of aggregation rules, understanding
   impossibility theorems, or designing preference aggregation mechanisms. Use when the problem
   involves groups making collective decisions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Social Choice — The Impossibilities
@@ -122,3 +126,8 @@ Read `references/sources.md` for the full bibliography — primary texts (Arrow,
 - Choosing between voting rules for an organization, committee, or governance system
 - DAO and decentralized governance design
 - Any setting where a group must aggregate conflicting preferences
+
+## Cross-Domain Connections
+
+- **Philosophy/political-philosophy**: Social choice theory provides the formal foundation for political philosophy's questions about justice and collective decision-making. Arrow's impossibility theorem mathematically constrains what any "fair" governance system can achieve. Consult `political-philosophy/justice-analyst` for the normative dimension of social choice results.
+- **Worldbuilding/faction-design**: Voting systems and governance mechanisms determine how factions interact in built worlds. Different social choice rules produce radically different political dynamics — consult when designing in-world governance.

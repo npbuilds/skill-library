@@ -5,7 +5,11 @@ description: >
   skill, define the learning curriculum, and resolve conflicts between visual design principles.
   Use when the user has a visual design question and you need to determine which knowledge
   skill (color theory, design principles, or visual perception) to consult.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Visual Communication Director
@@ -67,3 +71,7 @@ When child skills give contradictory guidance:
 - The question involves brand strategy, not just brand visuals
 - The question spans multiple subdomains (e.g., "design a complete app")
 - The user needs a specialist agent launched (only orchestrators launch agents)
+
+## Cross-Domain Connections
+
+- **Writing/rhetoric**: Visual communication is rhetoric made visible. Design principles (contrast, repetition, alignment, proximity) are the visual equivalents of rhetorical devices (antithesis, anaphora, parallelism, juxtaposition). Both domains persuade — one through words, the other through layout and imagery.

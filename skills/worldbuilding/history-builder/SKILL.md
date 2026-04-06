@@ -5,7 +5,11 @@ description: >
   events at any scale, and let the narrative emerge from the gaps. Based on the Microscope RPG
   methodology. Use when creating timelines, defining eras, or building historical depth for
   civilizations.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # History Builder — The Fractal Zoom

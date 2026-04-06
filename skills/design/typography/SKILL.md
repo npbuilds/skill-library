@@ -5,7 +5,11 @@ description: >
   skill, define the curriculum from anatomy to pairing to responsive scaling, and resolve
   conflicts between readability and aesthetic goals. Use when the user has a typography
   question and you need to determine which knowledge skill to consult.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Typography Director
@@ -73,3 +77,8 @@ When child skills give contradictory guidance:
 - The question involves brand-level type decisions (type as brand identity)
 - The question spans multiple subdomains (e.g., "design a complete page" involves layout + type + color)
 - The user needs a specialist agent launched (only orchestrators launch agents)
+
+## Cross-Domain Connections
+
+- **Writing/sentence-craft**: Typography is sentence-craft for the eye. Both domains work with rhythm, hierarchy, and whitespace — prose-rhythm controls temporal pacing through sentence length variation; typography controls spatial pacing through size, weight, and leading. Type hierarchy (H1 → H2 → body → caption) mirrors prose structure (topic sentence → development → detail).
+- **Writing/sentence-craft/prose-rhythm**: Type pairing parallels diction — choosing complementary elements that create contrast without conflict. A serif/sans pair creates the same kind of productive tension as alternating long and short sentences.

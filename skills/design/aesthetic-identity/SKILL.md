@@ -6,6 +6,10 @@ description: >
   to ground design decisions in the user's established (and evolving) identity. Activates
   when setting creative direction, choosing palettes, establishing mood, or when any design
   skill needs a starting point that reflects the user rather than generic defaults.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Aesthetic Identity — The Living Style Fingerprint

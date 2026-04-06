@@ -4,6 +4,10 @@ description: >
   Fixed income investing frameworks — yield curve analysis, credit evaluation, duration
   management, and bond market structure. Reference when analyzing bonds, managing interest
   rate risk, evaluating credit, or understanding what the bond market signals about the economy.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Fixed Income — The Lending Side

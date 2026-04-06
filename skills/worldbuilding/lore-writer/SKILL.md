@@ -5,7 +5,11 @@ description: >
   voice and format. Use when the user wants to create lore documents, intercepted communications,
   historical accounts, field reports, myths, or any text artifact that belongs to the world itself
   rather than describing it from outside.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Lore Writer — The Voices
@@ -114,3 +118,9 @@ The `layer` field is critical — it marks which level of truth this artifact pr
 4. **Consistency with the world-bible is non-negotiable.** Facts can be wrong from the perspective character's point of view, but they must be wrong in a way that's consistent with what that character would believe given the revelation architecture.
 5. **The Iceberg Principle.** Show 10%, imply 90%. Every artifact should contain hyper-specific details — a particular spice in a market, a specific rank in a military hierarchy, a precise unit of measurement — that imply a vast system beneath them without explaining it. The reader trusts that the depth exists because the surface details are too specific to be invented without it. Conversely, never explain a system completely in a single artifact. Leave gaps that make the reader (and the in-world author) feel like they're seeing one window into something larger. The hollow iceberg is valid: you don't need to have built every detail below the surface, you need to make each visible detail so precise that the reader assumes you have.
 6. **Name with intention.** Every proper noun — places, people, titles, units of measurement, institutions — should feel like it belongs to the culture producing the artifact. Reference the naming-system skill for each civilization's sound palette. Names from the same culture should share phonetic patterns. Names from different cultures should sound audibly distinct.
+
+## Cross-Domain Connections
+
+- **Writing/prose-writer**: Lore-writer produces artifacts; prose-writer provides the craft toolkit. Scene-craft applies within epistolary and atmospheric registers. Dialogue principles apply within any artifact containing speech.
+- **Writing/narrative-craft/point-of-view**: Every artifact has a perspective character with limited knowledge. POV craft (psychic distance, narrative reliability) directly governs how that perspective shapes the artifact's voice and omissions.
+- **Writing/sentence-craft/diction**: Voice registers (mythic, clinical, epistolary) are diction choices. The diction skill's register framework maps to lore-writer's voice system — mythic = elevated register, clinical = formal-technical, atmospheric = literary.

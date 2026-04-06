@@ -5,7 +5,11 @@ description: >
   revelation layers. Use when you need to verify what a character would know at a given point
   in the narrative, check for accidental information leaks between revelation layers, or
   map the epistemic state of the world at any moment.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Character Belief Tracker — Who Knows What
@@ -159,3 +163,7 @@ This is computationally simple but narratively powerful. Track it for the 3-5 mo
 - **lore-writer**: Each artifact's `perspective` field should be consistent with the character's belief state
 - **revelation-layers.md**: The source of truth for what's real at each layer
 - **consistency-checker** (when built): Will use this graph to validate artifacts
+
+## Cross-Domain Connections
+
+- **Writing/narrative-craft/point-of-view**: A character's belief layer determines their narrative reliability. A character at Layer 0 (surface beliefs) narrating through close-third POV creates dramatic irony when the reader knows Layer 2 truths. Belief states ARE POV constraints.

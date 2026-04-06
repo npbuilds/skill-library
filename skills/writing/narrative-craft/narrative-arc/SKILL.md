@@ -4,6 +4,10 @@ description: >
   Story structure frameworks — three-act, kishotenketsu, Truby's organic steps, and non-linear
   techniques. Use when the user asks about plot structure, story architecture, how to organize
   a narrative, or why a story feels shapeless. Presents frameworks as lenses, not rules.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Narrative Arc — The Shape of Story

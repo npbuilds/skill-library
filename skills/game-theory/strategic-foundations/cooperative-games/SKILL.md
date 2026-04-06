@@ -5,6 +5,10 @@ description: >
   matching. Reference when evaluating how groups should form, how to fairly divide value,
   how to structure negotiations, or how to design stable matching systems. Use when analysis
   requires binding agreements, coalition reasoning, or normative fairness concepts.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Cooperative Games — The Coalitions
@@ -150,3 +154,8 @@ Read `references/sources.md` for the full bibliography grounding this skill — 
 - Designing matching markets (school choice, residency matching, organ allocation)
 - Measuring voting power or influence in weighted committees
 - Any situation where binding agreements are possible and fairness matters
+
+## Cross-Domain Connections
+
+- **Philosophy/political-philosophy**: Fair division and the Shapley value formalize questions about distributive justice. The core of a cooperative game tells you which allocations are stable — political philosophy asks which are *just*. Consult `political-philosophy/rights-reasoner` for the normative framework behind coalition bargaining.
+- **Philosophy/ethics**: Cooperative game solutions (Nash bargaining, Kalai-Smorodinsky) embed different fairness axioms — each implicitly answers an ethical question about what constitutes a "fair" outcome.

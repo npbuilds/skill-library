@@ -4,6 +4,10 @@ description: >
   Knowledge skill covering the mechanics, market impact, and investment implications of passive
   fund flows — index inclusion effects, ETF creation/redemption, rebalancing calendars, market-cap
   weighting feedback loops, and the degradation of price discovery as passive dominance grows.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Passive Flow Dynamics

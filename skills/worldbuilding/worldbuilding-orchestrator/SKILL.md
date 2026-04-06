@@ -6,7 +6,11 @@ description: >
   physical rules, or produce any creative artifact that requires coordinating world-bible
   consistency, cultural voice, naming coherence, and narrative depth. Activates when the user
   is constructing fictional worlds for games, novels, tabletop RPGs, or any narrative medium.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # Worldbuilding Orchestrator — The Demiurge
@@ -213,3 +217,9 @@ This orchestrator handles **fictional world construction and maintenance**. It d
 - Generate visual art or maps (it produces textual descriptions and specifications)
 - Make creative decisions without the user's input (it proposes and the user decides)
 - Evaluate the world's quality as fiction (it ensures consistency, not literary merit)
+
+## Cross-Domain Connections
+
+- **Writing/narrative-craft**: Worldbuilding produces the substrate that narrative operates on. When the user is both building a world and writing in it, this orchestrator provides consistency constraints that narrative-craft uses as creative parameters. Consult narrative-craft/pacing to align revelation spirals with prose tempo.
+- **Writing/prose-writer**: Lore-writer artifacts need prose craft — scene-craft for rendered moments, dialogue principles for in-world speech, diction for voice-register consistency.
+- **Writing/sentence-craft/diction**: Naming-system establishes linguistic registers per culture. Prose written from a culture's perspective should respect that phonetic and diction palette.

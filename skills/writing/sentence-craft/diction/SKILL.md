@@ -5,6 +5,10 @@ description: >
   word and the almost-right word. Use when diagnosing vague or imprecise language, when the user
   wants to understand word choice at the craft level, or when register and tone feel inconsistent
   across a piece of writing.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Diction — The Right Word

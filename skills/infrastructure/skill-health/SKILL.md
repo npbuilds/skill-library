@@ -5,7 +5,11 @@ description: >
   missing progressive disclosure, excessive token usage, trigger conflicts between skills,
   or structural problems. Use when the user wants to audit skills, check health, optimize
   token efficiency, or find problems in their skill collection.
-tools: Read, Bash, Glob, Grep, Write, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Bash Glob Grep Write Agent
 ---
 
 # Skill Health — The Doctor

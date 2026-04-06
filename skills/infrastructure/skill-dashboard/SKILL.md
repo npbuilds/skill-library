@@ -4,7 +4,11 @@ description: >
   Display skill dashboards: token efficiency breakdown, skill quality ratings, health
   overview, and rating leaderboard. Use when the user asks to see their skill metrics,
   token costs, ratings, efficiency reports, or wants an overview of their skill collection.
-tools: Read, Bash, Glob, Grep
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Bash Glob Grep
 ---
 
 # Skill Dashboard — The Observatory

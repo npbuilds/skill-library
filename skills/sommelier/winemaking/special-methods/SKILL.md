@@ -6,6 +6,10 @@ description: >
   wine. Use when the user asks how Champagne, Prosecco, Port, or Sauternes is
   made, or needs to understand what distinguishes one sparkling or fortified
   style from another.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Special Methods — The Alchemist

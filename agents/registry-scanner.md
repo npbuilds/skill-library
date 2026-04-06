@@ -34,7 +34,7 @@ Classify each SKILL.md as:
 ### 3. Register New Skills
 
 For each new SKILL.md:
-1. Read the frontmatter to extract name, description, tools
+1. Read the frontmatter to extract name, description, allowed-tools
 2. Run `scripts/analyze-skill.sh` to compute metrics
 3. Determine `source` based on path:
    - Path contains current plugin dir → `self`

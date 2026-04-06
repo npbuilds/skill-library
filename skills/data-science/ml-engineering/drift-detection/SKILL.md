@@ -5,6 +5,10 @@ description: >
   pipelines, selecting drift detection methods, setting alert thresholds, diagnosing performance
   degradation, or deciding when to retrain models. Use when ML models are deployed and need
   ongoing quality assurance.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Drift Detection — The Watchdog
@@ -200,3 +204,8 @@ When drift is detected, diagnosis follows a structured path:
 - Systems with upstream data dependencies that may change without notice
 - Regulated environments requiring model performance documentation
 - Models that have not been retrained in more than one quarter — start monitoring immediately
+
+## Cross-Domain Connections
+
+- **Investing/regime-intelligence/macro-cycles**: Concept drift in financial models IS regime change — when macro conditions shift (expansion → contraction), models trained on one regime degrade in another. The drift-detection framework (data drift vs. concept drift) maps to market microstructure changes vs. macro regime shifts.
+- **Investing/adaptive-monitoring/alt-data-monitoring**: Alt data signals decay over time as they're discovered and arbitraged. Signal degradation monitoring is drift detection applied to alpha factors.

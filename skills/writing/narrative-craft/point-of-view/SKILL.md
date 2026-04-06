@@ -4,6 +4,10 @@ description: >
   Narrative perspective — psychic distance, free indirect discourse, unreliable narration, and
   POV mechanics. Use when the user asks about first/third person, narrative distance, head-hopping,
   or how to filter a story through a character's consciousness.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Point of View — The Lens

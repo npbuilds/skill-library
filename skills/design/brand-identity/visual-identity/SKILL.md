@@ -4,6 +4,10 @@ description: >
   Visual identity systems — logo design principles, brand color systems, imagery direction,
   iconography, and how to build a cohesive visual language from brand strategy. The visual
   execution layer that translates positioning into what people see.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Visual Identity — How the Brand Looks

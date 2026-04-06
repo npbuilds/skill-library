@@ -5,6 +5,10 @@ description: >
   Reference when creating the fantasy element of a world — defining its source, cost, limits,
   access, and interaction with physics. Covers the hard/soft spectrum, Sanderson's laws as
   design constraints, and cost structure patterns.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Magic System Design — The Rules of the Impossible

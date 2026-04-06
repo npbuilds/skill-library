@@ -6,6 +6,10 @@ description: >
   Grenache. Use when the user wants to compare regional expressions of a single
   grape, understand terroir's effect on flavor, or develop more nuanced
   expectations about a variety across its global range.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Grape Expression — The Chameleon

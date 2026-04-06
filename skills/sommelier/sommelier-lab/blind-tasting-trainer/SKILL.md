@@ -6,7 +6,11 @@ description: >
   wine profile without revealing identity, walks the user through the deductive
   grid step by step, asks what each observation suggests, then reveals the wine
   with a scored debrief and one memorable diagnostic pattern to remember.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # The Blind Tasting Trainer — The Examiner

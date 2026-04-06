@@ -6,7 +6,11 @@ description: >
   wine correctly, understand professional service protocol, assess whether a
   wine is ready to drink, or manage a wine collection with appropriate storage
   conditions and drinking windows.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Cellar & Service — The Butler

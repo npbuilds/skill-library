@@ -4,7 +4,11 @@ description: >
   Fork a complex skill into smaller, focused child skills. Use when a skill exceeds health
   thresholds (too many sections, too many words, mixed responsibilities), when the user wants
   to decompose a skill, or when skill-health flags a skill as needing decomposition.
-tools: Read, Write, Bash, Glob, Grep
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep
 ---
 
 # Skill Fork — The Splitter

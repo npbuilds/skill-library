@@ -5,7 +5,11 @@ description: >
   matching systems, voting mechanisms, incentive structures, and contract design to the right
   specialist skill. Use when the user needs to design rules or institutions, not just analyze
   an existing strategic interaction.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Mechanism Design Director — The Architect
@@ -79,3 +83,8 @@ When child skills give contradictory guidance:
 - The question involves evolving populations without a designer → Evolutionary Dynamics
 - The question is about strategic information revelation, not mechanism rules → Information Economics
 - The question involves computational feasibility of mechanisms → Computational Strategy (but note: many mechanism design questions have computational dimensions — escalate only when computation is the primary concern)
+
+## Cross-Domain Connections
+
+- **Investing/market-microstructure**: Market structure IS mechanism design — exchanges design order matching rules, fee structures, and access tiers to balance liquidity provision, price discovery, and revenue. Market maker obligations, circuit breakers, and auction vs. continuous trading are all mechanism design decisions.
+- **Investing/portfolio-construction**: Incentive alignment in systematic investing — factor selection rules, rebalancing triggers, and tax-loss harvesting thresholds are mechanisms that must be incentive-compatible with the investor's stated objectives.

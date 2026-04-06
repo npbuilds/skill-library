@@ -6,6 +6,10 @@ description: >
   shifts. Use when the user wants to understand how warming is reshaping wine
   geography, which emerging regions represent the best value opportunity, or how
   generational and cultural shifts are transforming the wine market.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Wine Futures — The Crystal Glass

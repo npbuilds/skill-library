@@ -1,7 +1,11 @@
 ---
 name: old-world-atlas
 description: Deep reference for European wine regions — France, Italy, Spain, Germany, Portugal, Austria, Greece, and Georgia. Use when the user asks about any Old World wine region, appellation, classification system, or regional style. Covers key terroir, grape varieties, classification hierarchies, and benchmark producers for each country.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Old World Atlas — The Ancient Vineyards

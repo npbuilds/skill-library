@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "archon-data"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.0.0",
+    "yfinance>=0.2.0",
+    "requests>=2.31.0",
+    "fredapi>=0.5.0",
+    "pandas>=2.0.0",
+    "pytrends>=4.9.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["collectors", "processors"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

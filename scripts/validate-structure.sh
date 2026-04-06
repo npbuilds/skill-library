@@ -128,8 +128,8 @@ elif echo "$CONTENT_LOWER" | grep -qE "routing table|child skills"; then
   SKILL_TYPE="director"
 elif echo "$CONTENT_LOWER" | grep -qE "observer|monitor.*trigger"; then
   SKILL_TYPE="observer"
-elif echo "$FRONTMATTER" | grep -qi "tools:"; then
-  # Has tools declared — likely action unless it routes
+elif echo "$FRONTMATTER" | grep -qiE "^allowed-tools:|^tools:"; then
+  # Has tools declared (allowed-tools: or legacy tools:) — likely action unless it routes
   if ! echo "$CONTENT_LOWER" | grep -qE "routing table|child skills"; then
     SKILL_TYPE="action"
   fi

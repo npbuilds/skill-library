@@ -4,6 +4,10 @@ description: >
   Control tension curves and narrative rhythm in worldbuilding and storytelling. Reference when
   designing event sequences, plotting revelation spirals, or determining how much pressure to
   apply and when. Derived from RimWorld's storyteller archetypes and narrative design theory.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Narrative Pacing — The Rhythm
@@ -134,3 +138,8 @@ A well-paced artifact sequence alternates between these: visceral → atmospheri
 2. **Breathing room without texture.** Calm periods must deepen the world or characters. Empty calm is just boring.
 3. **Reveals too close together.** Each revelation needs time to marinate. The reader needs to build assumptions on each layer before the next one overturns them.
 4. **Monotone tension.** Tension should oscillate, not flatline at any level. Even in high-tension sequences, create micro-releases.
+
+## Cross-Domain Connections
+
+- **Writing/narrative-craft/pacing**: This skill controls revelation-level pacing (when world-truths emerge). Writing/pacing controls prose-level tempo (scene speed, compression, expansion). Both must harmonize — a slow-burn revelation spiral needs prose pacing that gives the reader room to absorb each layer.
+- **Writing/narrative-craft/narrative-arc**: Storyteller archetypes (Cassandra, Penelope, Randy) are structural complements to traditional narrative arc models (three-act, kishotenketsu, Truby). The storyteller shapes the world's rhythm; the arc shapes the character's journey within it.

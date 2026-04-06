@@ -5,6 +5,10 @@ description: >
   writing lore, checking consistency, or making any creative decision that must respect
   the world's rules. The single source of truth for what is real, what is possible,
   and what is hidden.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # World Bible — The Axioms

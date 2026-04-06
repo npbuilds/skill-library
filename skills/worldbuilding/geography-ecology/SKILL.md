@@ -5,6 +5,10 @@ description: >
   shapes civilization. Reference when placing civilizations, designing trade routes, determining
   natural barriers, or building any aspect of the world that derives from the physical landscape.
   The land shapes the people before the people shape the land.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Geography & Ecology — The Land Beneath

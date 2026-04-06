@@ -2,7 +2,7 @@
 name: {{SKILL_NAME}}
 description: >
   {{DESCRIPTION}}
-tools: {{TOOLS}}
+allowed-tools: {{TOOLS}}
 ---
 
 # {{SKILL_TITLE}} — {{SKILL_SUBTITLE}}

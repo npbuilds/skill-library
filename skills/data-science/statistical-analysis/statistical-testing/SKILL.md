@@ -5,6 +5,10 @@ description: >
   parametric and non-parametric tests, designing hypothesis tests, computing power and effect
   sizes, correcting for multiple comparisons, or deciding between Bayesian and frequentist
   approaches. Use when any analysis needs rigorous statistical inference.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Statistical Testing — The Inference Engine
@@ -192,3 +196,8 @@ Both paradigms answer different questions. The frequentist approach asks: "How s
 - Any analysis where you need to distinguish signal from noise with quantified uncertainty
 - Power calculations and sample size planning before data collection
 - Reviewing or auditing statistical claims in published research
+
+## Cross-Domain Connections
+
+- **Investing/portfolio-construction/factor-exposure**: Factor validation IS hypothesis testing — determining whether a factor's historical outperformance is statistically significant or data-mined. Multiple comparison correction (Bonferroni, BH) is critical for the "factor zoo" problem where hundreds of candidate factors are tested.
+- **Investing/adaptive-monitoring/alt-data-monitoring**: Alternative data signal discovery requires power analysis (how much history do you need?) and multiple hypothesis correction (you're testing dozens of signals — most will be spurious).

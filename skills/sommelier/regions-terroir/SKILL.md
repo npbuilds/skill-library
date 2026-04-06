@@ -6,7 +6,11 @@ description: >
   wine region, learn why a region tastes the way it does, understand how soil
   and climate shape wine, or navigate the legal classification systems governing
   wine production worldwide.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Regions & Terroir — The Cartographer

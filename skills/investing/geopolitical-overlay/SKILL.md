@@ -4,7 +4,11 @@ description: >
   Direct the geopolitical overlay subdomain — route macro-geopolitical investment questions
   to the right specialist skill covering great-power dynamics, energy security, or secular themes.
   Use when the user needs to assess how geopolitical forces shape portfolio positioning.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Geopolitical Overlay Director

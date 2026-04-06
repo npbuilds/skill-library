@@ -6,6 +6,10 @@ description: >
   the design-orchestrator's illustration-agent draws upon. Consult when choosing illustration
   style, defining icon systems, selecting textures, or directing any non-photographic
   visual asset creation.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Illustration Direction — The Visual Language Codex

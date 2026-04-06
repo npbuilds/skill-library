@@ -1,0 +1,1424 @@
+{
+  "bacchus": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "tasting-evaluation": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "deductive-method": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "fault-diagnosis": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "quality-assessment": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "aroma-lexicon": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "regions-terroir": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "old-world-atlas": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "new-world-atlas": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "terroir-science": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "appellation-law": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "grape-encyclopedia": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "noble-grapes": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "indigenous-varieties": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "grape-expression": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "winemaking": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "viticulture": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "vinification": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "special-methods": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 sparkling, fortified, sweet methods"
+    }
+  ],
+  "alternative-winemaking": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "food-pairing": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "pairing-science": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "cuisine-pairing": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "pairing-engine": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "cellar-service": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "service-protocol": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Auto-discovered by sync-registry.py"
+    }
+  ],
+  "cellar-management": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "wine-market": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "wine-economics": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build"
+    }
+  ],
+  "collecting-investment": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 Liv-ex, blue-chip producers, Kurniawan counterfeiting"
+    }
+  ],
+  "wine-futures": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 9 rising regions, climate winners/losers, market trends"
+    }
+  ],
+  "sommelier-lab": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 experimental wing of Bacchus"
+    }
+  ],
+  "synesthetic-notes": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 5-domain translation framework"
+    }
+  ],
+  "blind-tasting-trainer": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 CMS/WSET exam prep trainer"
+    }
+  ],
+  "climate-projections": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 speculative content clearly labeled"
+    }
+  ],
+  "molecular-pairing": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Initial build \u2014 Ahn et al. flavor network + 14 compound table + 5 non-obvious pairings"
+    }
+  ],
+  "skill-registry": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 1 bootstrap \u2014 first skill registered"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 2 \u2014 added referenced_by relationships"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 4 \u2014 added skill-test and skill-analyze to referenced_by"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 5 \u2014 added skill-fork, skill-network, skill-export to referenced_by"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "skill-health": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 2 \u2014 quality infrastructure"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "skill-dashboard": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 2 \u2014 dashboards and ratings"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 3 \u2014 added skill-scaffold to referenced_by"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "skill-scaffold": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 3 \u2014 The Builder, skill creation factory"
+    },
+    {
+      "date": "2026-03-17",
+      "action": "updated",
+      "note": "Phase 5 \u2014 added skill-fork to referenced_by"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    },
+    {
+      "date": "2026-03-26",
+      "action": "updated",
+      "note": "Added Step 1.5 \u2014 Domain Research via Spelunker integration. Added spelunker to depends_on. Added WebSearch, WebFetch, Agent to tools."
+    }
+  ],
+  "skill-test": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 4 \u2014 The Prover, structural and behavioral testing"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "skill-analyze": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 4 \u2014 The Oracle, Anthropic API-powered analysis"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "skill-fork": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 5 \u2014 The Splitter, skill decomposition"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "skill-network": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 5 \u2014 The Cartographer, network visualization"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "skill-export": [
+    {
+      "date": "2026-03-17",
+      "action": "created",
+      "note": "Phase 5 \u2014 The Courier, skill export and packaging"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "color-theory": [
+    {
+      "date": "2026-03-19",
+      "action": "created",
+      "note": "Knowledge layer \u2014 color theory foundations for the art design system"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "design-principles": [
+    {
+      "date": "2026-03-19",
+      "action": "created",
+      "note": "Knowledge layer \u2014 visual design principles for the art design system"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "visual-perception": [
+    {
+      "date": "2026-03-19",
+      "action": "created",
+      "note": "Knowledge layer \u2014 visual perception science for the art design system"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    }
+  ],
+  "meta-observer": [
+    {
+      "date": "2026-03-21",
+      "action": "created",
+      "note": "Meta Observer \u2014 library self-awareness and gap detection"
+    }
+  ],
+  "visual-communication": [
+    {
+      "date": "2026-03-21",
+      "action": "created",
+      "note": "Visual Communication Director \u2014 routes visual design questions to specialist skills"
+    }
+  ],
+  "design-orchestrator": [
+    {
+      "date": "2026-03-18",
+      "action": "created",
+      "note": "Art Design Orchestrator \u2014 creative director for visual design decisions"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Schema v2 migration \u2014 added parent, level, and subdomain fields"
+    },
+    {
+      "date": "2026-03-21",
+      "action": "updated",
+      "note": "Renamed from art-design-orchestrator, moved to design/ hierarchy"
+    },
+    {
+      "date": "2026-03-28",
+      "action": "updated",
+      "note": "Added Phase 2.5 (consult aesthetic identity), Phase 6 (observe and evolve), motion-design and illustration-direction references"
+    }
+  ],
+  "typography": [
+    {
+      "date": "2026-03-21",
+      "action": "created",
+      "note": "Typography Director \u2014 routes type questions to specialist skills"
+    }
+  ],
+  "type-fundamentals": [
+    {
+      "date": "2026-03-21",
+      "action": "created",
+      "note": "Typography knowledge skill \u2014 type-fundamentals"
+    }
+  ],
+  "type-pairing": [
+    {
+      "date": "2026-03-21",
+      "action": "created",
+      "note": "Typography knowledge skill \u2014 type-pairing"
+    }
+  ],
+  "responsive-type": [
+    {
+      "date": "2026-03-21",
+      "action": "created",
+      "note": "Typography knowledge skill \u2014 responsive-type"
+    }
+  ],
+  "brand-identity": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Brand Identity Director"
+    }
+  ],
+  "brand-foundations": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Brand knowledge skill \u2014 brand-foundations"
+    }
+  ],
+  "visual-identity": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Brand knowledge skill \u2014 visual-identity"
+    }
+  ],
+  "brand-voice": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Brand knowledge skill \u2014 brand-voice"
+    }
+  ],
+  "world-bible": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Worldbuilding domain \u2014 foundational world axioms and constraints"
+    },
+    {
+      "date": "2026-03-26",
+      "action": "updated",
+      "note": "Added 3 reference files: wrede-taxonomy, onlyworlds-ontology, generation-pipeline. Added 5 new skill references."
+    }
+  ],
+  "lore-writer": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Worldbuilding domain \u2014 produces in-universe artifacts in multiple voice registers"
+    }
+  ],
+  "naming-system": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Worldbuilding domain \u2014 phonetic naming systems for cultural distinctiveness"
+    }
+  ],
+  "magic-system-design": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research-driven addition \u2014 Sanderson's laws, hard/soft spectrum, cost structure patterns"
+    }
+  ],
+  "ecology-design": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research-driven addition \u2014 Getz 10-niche model, climate-biome cascade"
+    }
+  ],
+  "religion-design": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research-driven addition \u2014 Inkwell Ideas taxonomy, organizational patterns, deity portfolio framework"
+    }
+  ],
+  "character-belief-tracker": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research-driven addition \u2014 SymbolicToM belief graph, BDI models, epistemic state tracking"
+    }
+  ],
+  "history-builder": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research-driven addition \u2014 Microscope RPG fractal zoom, non-chronological history building"
+    }
+  ],
+  "game-theory-orchestrator": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Game theory domain \u2014 Phase 1 vertical slice"
+    }
+  ],
+  "strategic-foundations": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Game theory domain \u2014 Phase 1 vertical slice"
+    }
+  ],
+  "classical-games": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Game theory domain \u2014 Phase 1 vertical slice"
+    }
+  ],
+  "cooperative-games": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Game theory domain \u2014 Phase 1 vertical slice"
+    }
+  ],
+  "game-solver": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Game theory domain \u2014 Phase 1 vertical slice"
+    }
+  ],
+  "mechanism-design": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Stub director \u2014 scope definition for Phase 2"
+    },
+    {
+      "date": "2026-03-22",
+      "action": "updated",
+      "note": "Phase 2 \u2014 full director with routing, curriculum, conflict resolution"
+    }
+  ],
+  "auction-theory": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 2 \u2014 mechanism design subdomain"
+    }
+  ],
+  "matching-markets": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 2 \u2014 mechanism design subdomain"
+    }
+  ],
+  "social-choice": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 2 \u2014 mechanism design subdomain"
+    }
+  ],
+  "mechanism-designer": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 2 \u2014 mechanism design subdomain"
+    }
+  ],
+  "evolutionary-dynamics": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Stub director \u2014 scope definition for Phase 2"
+    },
+    {
+      "date": "2026-03-22",
+      "action": "updated",
+      "note": "Phase 2 \u2014 full director with routing, curriculum, conflict resolution"
+    }
+  ],
+  "evolutionary-games": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 2 \u2014 evolutionary dynamics subdomain"
+    }
+  ],
+  "population-dynamics": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 2 \u2014 evolutionary dynamics subdomain"
+    }
+  ],
+  "evo-simulator": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 2 \u2014 evolutionary dynamics subdomain"
+    }
+  ],
+  "information-economics": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Stub director \u2014 scope definition for Phase 3"
+    },
+    {
+      "date": "2026-03-22",
+      "action": "updated",
+      "note": "Phase 3 \u2014 full director with routing, curriculum, conflict resolution"
+    }
+  ],
+  "signaling-screening": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 3 \u2014 information economics subdomain"
+    }
+  ],
+  "bayesian-persuasion": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 3 \u2014 information economics subdomain"
+    }
+  ],
+  "info-designer": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 3 \u2014 information economics subdomain"
+    }
+  ],
+  "computational-strategy": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Stub director \u2014 scope definition for Phase 3"
+    },
+    {
+      "date": "2026-03-22",
+      "action": "updated",
+      "note": "Phase 3 \u2014 full director with routing, curriculum, conflict resolution"
+    }
+  ],
+  "algorithmic-game-theory": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 3 \u2014 computational strategy subdomain"
+    }
+  ],
+  "behavioral-game-theory": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 3 \u2014 computational strategy subdomain"
+    }
+  ],
+  "learning-in-games": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Phase 3 \u2014 computational strategy subdomain"
+    }
+  ],
+  "data-science-orchestrator": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "data-cleaning": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "feature-engineering": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "statistical-testing": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "causal-inference": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "model-evaluation": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "time-series": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "chart-selection": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "drift-detection": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "responsible-ai": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Data science skill suite MVP"
+    }
+  ],
+  "biostatistics": [
+    {
+      "date": "2026-03-22",
+      "action": "created",
+      "note": "Biostatistics skill added to data science suite"
+    }
+  ],
+  "statistical-analysis": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    }
+  ],
+  "modeling": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    }
+  ],
+  "data-wrangling": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    }
+  ],
+  "infrastructure-orchestrator": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    }
+  ],
+  "worldbuilding-orchestrator": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    }
+  ],
+  "geography-ecology": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    }
+  ],
+  "cultures-societies": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    }
+  ],
+  "magic-systems": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Diagnostic fix \u2014 added missing structural layer"
+    },
+    {
+      "date": "2026-03-26",
+      "action": "deprecated",
+      "note": "Content merged into magic-system-design. Use magic-system-design instead."
+    }
+  ],
+  "master-artificer": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Master Artificer \u2014 orchestrator for extraordinary artifact creation"
+    },
+    {
+      "date": "2026-03-28",
+      "action": "updated",
+      "note": "Added aesthetic identity consultation in Phase 1, observer activation in Phase 5"
+    }
+  ],
+  "visual-composer": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Visual composition knowledge for artifact layout"
+    }
+  ],
+  "creative-coding": [
+    {
+      "date": "2026-03-25",
+      "action": "created",
+      "note": "Creative coding algorithms and performance patterns"
+    }
+  ],
+  "spelunker": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research domain \u2014 Spelunker v1 deep research system"
+    }
+  ],
+  "claim-decomposer": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research domain \u2014 claim decomposition for Spelunker pipeline"
+    }
+  ],
+  "source-triangulator": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research domain \u2014 source verification engine for Spelunker pipeline"
+    }
+  ],
+  "evidence-synthesizer": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Research domain \u2014 evidence synthesis and output formatting for Spelunker pipeline"
+    }
+  ],
+  "prose-orchestrator": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Writing domain \u2014 top-level prose orchestrator"
+    }
+  ],
+  "sentence-craft": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Writing domain \u2014 sentence-level craft director"
+    }
+  ],
+  "prose-rhythm": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Writing domain \u2014 prose rhythm knowledge, grounded in Provost/Le Guin/Clark research"
+    }
+  ],
+  "diction": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Writing domain \u2014 diction knowledge, grounded in Orwell/Strunk/Hale research"
+    }
+  ],
+  "syntax-patterns": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Writing domain \u2014 syntax patterns knowledge, grounded in Tufte/Christensen research"
+    }
+  ],
+  "narrative-pacing": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Tier 2 \u2014 RimWorld storyteller archetypes, tension curves"
+    }
+  ],
+  "technology-progression": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Tier 2 \u2014 tech tree patterns from Civilization, game design research"
+    }
+  ],
+  "faction-design": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Tier 2 \u2014 pyramid technique, SUPREME method, fractal organizational modeling"
+    }
+  ],
+  "extrapolation-engine": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Tier 2 \u2014 systematic consequence tracing, domain cascade, interaction effects"
+    }
+  ],
+  "style-dna": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "14-dimension prose style model with 23 author profiles, unusual pairings reference"
+    }
+  ],
+  "style-mixer": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Voice Card creation via author DNA blending \u2014 recipe, mood, pairing, and contrast modes"
+    }
+  ],
+  "style-mutator": [
+    {
+      "date": "2026-03-26",
+      "action": "created",
+      "note": "Prose mutation engine \u2014 nudge/push/shove/collision intensity levels, wild mutation algorithm"
+    }
+  ],
+  "adaptive-monitoring": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "alt-data-monitoring": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "performance-attribution": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "rebalancing-logic": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "archon": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "asset-universe": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "alternatives": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "commodities": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "currencies": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "digital-assets": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "equities": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "fixed-income": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "geopolitical-overlay": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "energy-security": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "great-power-dynamics": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "secular-themes": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "market-microstructure": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "liquidity-topology": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "options-mechanics": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "passive-flow-dynamics": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "portfolio-construction": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "asset-allocation": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "factor-exposure": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "hedging-architecture": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "tax-optimization": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "reflexivity-sentiment": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "market-psychology": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "reflexivity-theory": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "sentiment-signals": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "regime-intelligence": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "fiscal-regime": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "macro-cycles": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "monetary-regime": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "risk-architecture": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "correlation-regimes": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "drawdown-psychology": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "position-sizing": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "tail-risk": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "special-situations": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "complexity-premium": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "event-driven": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "insider-signals": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "spinoffs-restructuring": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "value-quality": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "intrinsic-value": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "quality-compounders": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "second-level-thinking": [
+    {
+      "date": "2026-03-28",
+      "action": "registered",
+      "details": "Initial registration"
+    }
+  ],
+  "aesthetic-identity": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Living aesthetic identity model \u2014 dimensional fingerprint that evolves through use. Mutable-state skill: references/ are read-write, updated by style-evolution-observer."
+    }
+  ],
+  "style-evolution-observer": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Style evolution observer \u2014 infers aesthetic preferences from behavioral signals"
+    }
+  ],
+  "motion-design": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Motion design knowledge \u2014 timing, easing, choreography, scroll animation"
+    }
+  ],
+  "illustration-direction": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Illustration direction \u2014 style taxonomy, icon systems, texture and materiality"
+    }
+  ],
+  "physical-world": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Director added to provide routing layer for worldbuilding domain"
+    }
+  ],
+  "civilizations": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Director added to provide routing layer for worldbuilding domain"
+    }
+  ],
+  "systems-craft": [
+    {
+      "date": "2026-03-28",
+      "action": "created",
+      "note": "Director added to provide routing layer for worldbuilding domain"
+    }
+  ]
+}

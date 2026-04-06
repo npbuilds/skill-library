@@ -4,7 +4,11 @@ description: >
   Director skill that routes reflexivity theory, market psychology, and sentiment analysis questions
   to the appropriate specialist knowledge skill. Use when analyzing feedback loops between price and
   fundamentals, crowd behavior, contrarian positioning, or quantitative sentiment signals.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Reflexivity & Sentiment Director
@@ -76,6 +80,12 @@ Reflexivity & Sentiment questions sometimes overlap with other investing subdoma
 - **Regime + Sentiment**: Route macro regime questions to `regime-intelligence` director. This director handles market sentiment and reflexive dynamics within whatever macro context is established.
 - **Value + Sentiment**: Route valuation questions to `value-quality`. Sentiment tells you when to act on a valuation thesis, not whether the thesis is correct. Second-level thinking in `value-quality` overlaps with contrarian analysis here — route pure valuation there, pure sentiment here.
 - **Risk + Sentiment**: Route position sizing and tail risk to `risk-architecture`. Extreme sentiment readings should inform risk sizing, but the sizing methodology lives in risk architecture.
+
+## Cross-Domain Connections
+
+- **Game-theory/evolutionary-dynamics**: Herd behavior is an evolutionary dynamic — investment strategies compete for capital like species competing for resources. Momentum's success attracts capital until overcrowding destroys the edge (frequency-dependent selection). Replicator dynamics formalize what Soros describes intuitively.
+- **Game-theory/information-economics**: Corporate disclosure, analyst ratings, and earnings guidance are information design problems. Bayesian persuasion theory formalizes how companies strategically reveal information to shape market beliefs.
+- **Game-theory/computational-strategy/behavioral-game-theory**: Level-k thinking and QRE models explain why market participants systematically deviate from rational expectations — providing the formal foundation for the behavioral patterns catalogued in market-psychology.
 
 ## Scope Boundaries
 

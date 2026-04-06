@@ -5,6 +5,10 @@ description: >
   when designing quasi-experiments, selecting causal identification strategies, validating
   causal assumptions, or interpreting treatment effect estimates. Use when the question is
   "does X cause Y" rather than "does X predict Y."
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Causal Inference — The Why Engine
@@ -179,3 +183,8 @@ No observational study is assumption-free. Sensitivity analysis quantifies how r
 Use this skill when the question is causal: "Did this intervention work?", "What would happen if we changed this policy?", "Does this feature cause retention?" If the goal is prediction or description, standard ML and statistical methods suffice. If the goal is to *attribute* an effect to a cause, you need the tools here.
 
 See `references/method-comparison.md` for a decision tree that maps your data situation to the appropriate causal method, along with full assumption checklists for each approach.
+
+## Cross-Domain Connections
+
+- **Investing/adaptive-monitoring/performance-attribution**: Performance attribution IS causal decomposition of investment returns — Brinson-Fachler decomposes returns into allocation vs. selection effects, factor attribution uses regression to isolate factor contributions. The core question is identical: "What caused this outcome?"
+- **Investing/portfolio-construction/factor-exposure**: Determining whether factor exposures cause returns or are spurious correlations requires IV estimation and sensitivity analysis. The replication crisis in factor research mirrors the causal inference reproducibility challenge.

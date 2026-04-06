@@ -5,7 +5,11 @@ description: >
   to investigate a question, verify claims, research a topic in depth, fact-check information,
   or understand a complex subject with confidence-tagged findings and explicit gaps. Routes
   to domain-specific tools and applies adversarial self-checking.
-tools: Read, Write, Bash, Glob, Grep, Agent, WebSearch, WebFetch
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent WebSearch WebFetch
 ---
 
 # Spelunker — The Deep Researcher

@@ -4,6 +4,10 @@ description: >
   Expert knowledge on Howard Marks's contrarian investment framework — first-level vs second-level
   thinking, consensus analysis, cycle positioning, the relationship between price and risk, and
   the psychological requirements of contrarian investing.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Second-Level Thinking — Howard Marks's Contrarian Framework
@@ -301,6 +305,11 @@ How to express the view:
 - Wait (add to watchlist, define entry price) — lowest risk, may miss the opportunity
 
 The discipline is in the structure, not just the idea. A correct contrarian thesis with incorrect position structure can still lose money.
+
+## Cross-Domain Connections
+
+- **Game-theory/strategic-foundations/classical-games**: Market consensus is a Nash equilibrium — the price where all participants' expectations are mutually consistent. Second-level thinking asks: "Is this equilibrium stable, or are there profitable deviations?" Contrarian investing IS finding games where the Nash prediction is wrong because players are boundedly rational.
+- **Game-theory/information-economics**: Adverse selection explains why cheap stocks may be "lemons" — the seller knows more than the buyer. Second-level thinking must distinguish genuine mispricing from informed selling.
 
 ## Related Skills
 

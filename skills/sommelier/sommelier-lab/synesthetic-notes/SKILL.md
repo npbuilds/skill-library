@@ -6,6 +6,10 @@ description: >
   poetic or cross-sensory wine descriptions, needs language that communicates
   wine to non-wine-fluent guests, or wants to develop a more imaginative,
   memorable vocabulary for tasting and writing about wine.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Synesthetic Notes — The Other Senses

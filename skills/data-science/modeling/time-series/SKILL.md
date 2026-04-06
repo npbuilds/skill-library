@@ -5,6 +5,10 @@ description: >
   Reference when decomposing temporal patterns, selecting forecasting models, handling seasonality,
   evaluating forecast accuracy, or deciding between classical and modern approaches. Use when
   the data has a temporal dimension and the goal is understanding or predicting trends.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Time Series — The Temporal Lens
@@ -173,3 +177,8 @@ Time series evaluation must respect temporal ordering. Random cross-validation i
 - Any problem where "what will happen next?" depends on what happened before
 - Signal processing and sensor data analysis
 - Cold-start forecasting across many heterogeneous series (foundation models)
+
+## Cross-Domain Connections
+
+- **Investing/regime-intelligence/macro-cycles**: Macro cycle positioning is time-series analysis applied to economic indicators — leading indicator decomposition, structural break detection (regime shifts), and trend/cycle separation are the same methods used in different language.
+- **Investing/risk-architecture/correlation-regimes**: Regime-switching models (HMM, Markov-switching GARCH) are time-series models that detect when the correlation structure of assets has fundamentally changed. DCC-GARCH for dynamic correlation monitoring is advanced time-series methodology.

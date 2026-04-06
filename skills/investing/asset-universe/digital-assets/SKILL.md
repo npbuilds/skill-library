@@ -4,6 +4,10 @@ description: >
   Digital asset investing frameworks — Bitcoin, Ethereum, tokenization, on-chain analytics,
   and crypto market structure. Reference when analyzing cryptocurrency markets, sizing crypto
   in portfolios, evaluating DeFi opportunities, or understanding blockchain-based financial assets.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Digital Assets — The New Frontier

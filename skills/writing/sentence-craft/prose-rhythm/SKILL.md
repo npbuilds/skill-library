@@ -5,6 +5,10 @@ description: >
   sound of written language. Use when diagnosing why prose feels flat or monotonous, when
   teaching the craft of sentence rhythm, or when the user wants to understand how sentence
   length and sound create emotional effects.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Prose Rhythm — The Music of the Sentence

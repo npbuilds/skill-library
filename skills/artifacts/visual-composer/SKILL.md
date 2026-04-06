@@ -6,6 +6,10 @@ description: >
   density control, visual tension, and the compositional principles that
   make artifacts feel intentional rather than assembled. Consulted by
   the Master Artificer when visual arrangement decisions are needed.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Visual Composer — The Architecture of Seeing

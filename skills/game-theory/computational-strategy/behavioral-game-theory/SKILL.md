@@ -5,6 +5,10 @@ description: >
   Reference when analyzing level-k thinking, quantal response equilibrium, social preferences,
   experimental game theory results, or predicting actual human strategic behavior. Use when the
   question involves bounded rationality or empirical prediction, not normative analysis.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Behavioral Game Theory — The Empiricist
@@ -108,3 +112,8 @@ Read `references/sources.md` for the full bibliography — primary texts (Camere
 - Designing interfaces, contracts, or institutions that account for bounded rationality
 - Evaluating whether a game-theoretic prediction is likely to hold with real human players
 - Calibrating theoretical models with empirical behavior data
+
+## Cross-Domain Connections
+
+- **Investing/reflexivity-sentiment/market-psychology**: Level-k thinking explains market anomalies — most investors are level-1 thinkers (best-responding to naive expectations). Behavioral biases catalogued in market psychology (herding, anchoring, disposition effect) map directly to QRE and prospect theory in games. The beauty contest game IS the stock market.
+- **Investing/risk-architecture/drawdown-psychology**: Prospect theory's loss aversion and probability weighting explain why investors hold losers too long and sell winners too early, and why tail-risk hedging is psychologically valuable beyond its expected return.

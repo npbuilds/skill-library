@@ -4,7 +4,11 @@ description: >
   Route special-situations investing analysis to the appropriate specialist skill. Use when the user
   wants to analyze spinoffs, insider transactions, complexity-driven mispricings, or event-driven
   opportunities such as merger arbitrage, activist campaigns, or distressed investing.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Special Situations — The Opportunity Router
@@ -86,6 +90,11 @@ When child skills give contradictory guidance:
 - The question involves portfolio-level sizing or allocation of special-situations positions (route to portfolio-construction)
 - The question spans multiple investing subdomains and needs orchestrator-level coordination
 - The user needs risk management frameworks for special-situations positions (route to risk-architecture)
+
+## Cross-Domain Connections
+
+- **Game-theory/information-economics/signaling-screening**: Insider buying is a Spence signaling game — costly, verifiable transactions that credibly reveal private information about firm quality. The signaling-screening framework formalizes why insider purchases are more informative than sales (asymmetric signaling costs).
+- **Game-theory/mechanism-design/auction-theory**: M&A bidding wars are ascending auctions with common-value elements. Winner's curse directly predicts acquirer overpayment in contested deals. Auction theory explains why competitive bids extract more value for target shareholders.
 
 ## Sub-Skill Locations
 

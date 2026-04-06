@@ -5,6 +5,10 @@ description: >
   Covers fluid type scaling, viewport-based sizing, optical adjustments at different sizes,
   mobile-first type strategy, and line length management. Use when type needs to work
   across breakpoints or adapt to different reading contexts.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Responsive Type — Typography Across Screens

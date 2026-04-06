@@ -6,6 +6,10 @@ description: >
   philosophy, opening techniques for still and sparkling wine, and formal
   restaurant service protocol based on CMS Service Standards. Use for any
   question about how to properly serve or present a wine.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Service Protocol — The Ritual

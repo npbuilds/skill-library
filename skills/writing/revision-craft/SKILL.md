@@ -5,7 +5,11 @@ description: >
   questions to the right specialist skill. Use when the user has existing prose that needs
   improvement, wants a structured editing pass, or needs to analyze the style characteristics
   of a text sample.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Revision Craft Director — The Red Pen

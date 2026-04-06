@@ -6,6 +6,10 @@ description: >
   analyzing how agents adapt strategies over time, whether learning converges to equilibrium, or
   how AI systems learn to play games. Use when the question involves dynamic adaptation, not
   static analysis.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Learning in Games — The Adapters

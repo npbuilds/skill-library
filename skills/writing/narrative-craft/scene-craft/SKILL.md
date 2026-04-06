@@ -4,6 +4,10 @@ description: >
   Scene construction — the scene as a unit of change, entering late and leaving early, turning
   points, and the Five Commandments at scene level. Use when a scene feels flat, purposeless,
   or bloated, or when the user wants to understand how to build effective scenes.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Scene Craft — The Unit of Change

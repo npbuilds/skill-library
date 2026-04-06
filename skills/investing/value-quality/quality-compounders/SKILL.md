@@ -4,6 +4,10 @@ description: >
   Expert knowledge on Munger's quality-at-a-fair-price framework — the math of compounding,
   ROIC analysis, reinvestment runway, management assessment, franchise vs commodity businesses,
   and practical evaluation of quality compounders.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Quality Compounders — Munger's Framework for Wonderful Businesses

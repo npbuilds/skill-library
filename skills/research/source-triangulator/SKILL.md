@@ -5,7 +5,11 @@ description: >
   Use when an atomic claim needs evidence gathering, source quality evaluation, independence
   verification, and agreement/disagreement mapping. The core verification engine of the
   Spelunker research system.
-tools: Read, Write, WebSearch, WebFetch, PubMed, ClinicalTrials, GoogleDrive
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write WebSearch WebFetch PubMed ClinicalTrials GoogleDrive
 ---
 
 # Source Triangulator — The Verifier

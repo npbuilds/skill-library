@@ -4,6 +4,10 @@ description: >
   Narrative tempo — compression and expansion, tension and release, white space, and Hitchcock's
   bomb theory. Use when prose feels too slow, too fast, or rhythmically flat at the scene or
   chapter level, or when the user wants to understand how to control the reader's experience of time.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Pacing — The Clock in the Reader's Head
@@ -71,3 +75,7 @@ White space — paragraph breaks, section breaks, chapter breaks — is a pacing
 - The user asks about tension, suspense, or tempo
 - A piece has a saggy middle
 - The user wants to understand how to control the reader's experience of time
+
+## Cross-Domain Connections
+
+- **Worldbuilding/narrative-pacing**: Worldbuilding pacing operates at the revelation layer — when world-truths reach the reader. This skill operates at the prose layer — how fast scenes move. Both must align: a slow revelation spiral needs room in the prose pacing, and a high-tempo prose sequence shouldn't dump world lore.

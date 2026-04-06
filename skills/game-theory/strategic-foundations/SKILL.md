@@ -5,7 +5,11 @@ description: >
   specialist skill, define the learning curriculum, and resolve conflicts between analytical
   frameworks. Use when analyzing strategic interactions, finding equilibria, evaluating
   cooperation, bargaining, or classifying game structures.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Strategic Foundations Director

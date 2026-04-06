@@ -5,6 +5,10 @@ description: >
   across domains, identify cross-domain connections, detect structural issues, and recommend
   what to build next. Use when the user asks about overall library status, wants a bird's-eye
   view, or needs guidance on where to invest effort next.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Meta Observer — The Library's Self-Awareness

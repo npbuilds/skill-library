@@ -6,7 +6,11 @@ description: >
   or Voice Card. The mutator is experimental and discovery-oriented — less controlled than the
   mixer, more surprising. Works on any source prose: user drafts, prose-writer output, or passages
   for study.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Style Mutator — The Warp Engine

@@ -4,6 +4,10 @@ description: >
   Systematically trace cascading consequences from a single change or axiom. Reference when
   propagating the implications of a world rule, testing whether an axiom has been fully developed,
   or finding second and third-order effects that make a world feel deeply thought through.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Extrapolation Engine — And Then What?

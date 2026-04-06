@@ -5,6 +5,10 @@ description: >
   Reference when analyzing auction formats, computing optimal bidding strategies, evaluating
   revenue properties, or designing new auctions. Use when any analysis involves competitive
   bidding, price discovery, or allocation through auctions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Auction Theory — The Market Maker
@@ -114,3 +118,8 @@ Read `references/sources.md` for the full bibliography — primary texts (Krishn
 - Evaluating whether an auction format is revenue-optimal or efficient
 - Understanding real-world markets that use auction mechanisms (spectrum, advertising, procurement)
 - Choosing between auction formats for a specific application
+
+## Cross-Domain Connections
+
+- **Investing/market-microstructure**: Equity markets are continuous double auctions — bid-ask spreads, price discovery, and market maker rebates are auction theory applied. Consult `market-microstructure/liquidity-topology` for real-world auction dynamics in order books.
+- **Investing/special-situations/event-driven**: M&A bidding wars are ascending auctions with affiliated values. Winner's curse applies directly to takeover premiums — acquirers systematically overpay in contested deals.

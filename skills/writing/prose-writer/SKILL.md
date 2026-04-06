@@ -5,7 +5,11 @@ description: >
   the user needs new prose written, whether fiction, essay, or nonfiction. Takes an editorial
   brief (voice register, form, audience, constraints) and produces a draft that the user can
   then revise.
-tools: Read, Write, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Glob
 ---
 
 # Prose Writer — The Drafting Desk

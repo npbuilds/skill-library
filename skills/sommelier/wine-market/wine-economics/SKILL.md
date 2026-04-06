@@ -6,6 +6,10 @@ description: >
   négociant, DTC, auction), and the current landscape of wine critics and their
   market influence. Use when the user wants to understand wine pricing, critic
   scores, or how to buy wine intelligently across different channels.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Wine Economics — The Ledger
@@ -175,3 +179,8 @@ The influence is now distributed. Understanding which critic carries weight for 
 
 ### The Anti-Score Movement
 A meaningful segment of the wine world — particularly natural wine producers and European traditionalists — actively resists the critic score system. The argument: scores reduce complex sensory and cultural objects to a single number, incentivize a narrow range of "scoreable" styles, and create perverse winemaking incentives. The market has not abandoned scores, but the discourse exists and affects how younger consumers approach wine media.
+
+## Cross-Domain Connections
+
+- **Data-science/statistical-analysis**: Wine market economics is amenable to statistical analysis — price elasticity, critic score impact, vintage quality premiums, and regional valuation trends are all quantifiable. Regression analysis of auction results against critic scores, vintage, and provenance is applied econometrics.
+- **Investing/value-quality**: Fine wine as an alternative asset class shares the value investing framework — intrinsic value assessment, quality compounders (top estates that appreciate consistently), and mean-reversion in vintage pricing.

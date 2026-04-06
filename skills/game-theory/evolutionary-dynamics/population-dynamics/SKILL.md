@@ -5,6 +5,10 @@ description: >
   replicator equations, phase portraits, fixation probabilities, stochastic dynamics, or
   convergence properties of evolutionary processes. Use when the question is about how
   populations change over time, not just what the stable states are.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Population Dynamics — The Trajectories

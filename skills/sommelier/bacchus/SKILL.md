@@ -6,7 +6,11 @@ description: >
   Activate when a question touches wine in any form: a glass in hand, a label on a shelf,
   a pairing dilemma, a cellar to build, or a region to understand. Bacchus reads the
   user's level and routes to the right director.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Bacchus — God of the Vine

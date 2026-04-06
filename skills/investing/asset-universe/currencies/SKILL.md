@@ -4,6 +4,10 @@ description: >
   Currency analysis frameworks — FX valuation, dollar dynamics, carry trades, and how currencies
   affect multi-asset portfolios. Reference when analyzing foreign exchange, hedging currency
   exposure, evaluating the dollar's impact on global markets, or building FX-aware portfolios.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Currencies — The Hidden Variable

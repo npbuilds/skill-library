@@ -6,7 +6,11 @@ description: >
   expresses differently across terroir. Use when the user asks about any grape
   variety by name, wants to understand flavor signatures, or needs to identify
   a grape from tasting observations.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Grape Encyclopedia — The Ampelographer

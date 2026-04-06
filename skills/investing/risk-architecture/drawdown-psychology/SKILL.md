@@ -4,6 +4,10 @@ description: >
   Deep expertise in drawdown management — the psychology of losses, when to cut vs when to hold,
   stop-loss discipline, drawdown budgets, and the behavioral frameworks of Howard Marks, Tudor Jones,
   and Buffett. Use when navigating portfolio losses or planning pre-trade risk discipline.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Drawdown Psychology — The Human Element of Risk

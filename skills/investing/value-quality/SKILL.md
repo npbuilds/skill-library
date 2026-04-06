@@ -4,7 +4,11 @@ description: >
   Director skill that routes valuation, business quality, competitive advantage, and contrarian
   analysis questions to the appropriate specialist knowledge skill. Use when evaluating what a
   business is worth, assessing moats and quality, or applying second-level thinking to consensus views.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Value & Quality Director

@@ -5,7 +5,11 @@ description: >
   specialist skill, define cross-asset analysis frameworks, and resolve conflicts between
   asset class views. Use when analyzing a specific asset class or comparing opportunities
   across equities, fixed income, commodities, currencies, or alternatives.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Asset Universe — The Allocator's Map

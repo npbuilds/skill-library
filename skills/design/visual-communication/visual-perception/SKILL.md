@@ -4,6 +4,10 @@ description: >
   How human vision processes visual information. Reference when making decisions about
   attention flow, readability, visual weight, motion sensitivity, or why a design feels
   wrong despite following rules. Use when agents need perceptual science behind design choices.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Visual Perception — The Eye

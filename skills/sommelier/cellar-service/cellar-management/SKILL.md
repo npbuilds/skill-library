@@ -6,6 +6,10 @@ description: >
   portfolio ratios, buying channels (en primeur, auction, direct), and
   provenance authentication for investment-grade wine. Use for any question
   about how to store, age, organize, or build a wine collection.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Cellar Management — The Vault

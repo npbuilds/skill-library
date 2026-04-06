@@ -3,6 +3,10 @@ name: hedging-architecture
 description: >
   Downside protection and portfolio hedging frameworks — put protection strategies, tail risk hedging,
   the Taleb barbell, cross-asset hedging, currency hedging, and cost-benefit analysis of insurance approaches.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Hedging Architecture — The Portfolio's Insurance Policy

@@ -1,7 +1,11 @@
 ---
 name: civilizations
 description: Route questions about the people and structures of a world — cultures, factions, religions, and history. Use when designing a civilization's values or governance, building political entities, creating belief systems, writing a timeline, or understanding how groups of people organize themselves and conflict over time.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Civilizations — The People Who Live There

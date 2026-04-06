@@ -5,6 +5,10 @@ description: >
   moral hazard, and contract theory. Reference when analyzing how informed parties reveal or
   conceal private information through actions, and how uninformed parties extract information
   through menu design. Use when asymmetric information drives market failure or strategic behavior.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Signaling & Screening — The Classics
@@ -128,3 +132,9 @@ Read `references/sources.md` for the full bibliography — Nobel-prize papers, p
 - Contract design under hidden information or hidden action
 - Understanding why institutions like education, warranties, or insurance menus exist
 - Platform design (reputation systems, certification, quality assurance)
+
+## Cross-Domain Connections
+
+- **Investing/special-situations/insider-signals**: Insider buying is a signaling game — insiders use costly transactions (regulatory filing, capital at risk) to credibly signal private information about firm quality. The Spence signaling framework directly explains why insider purchases are more informative than insider sales.
+- **Investing/reflexivity-sentiment/sentiment-signals**: Corporate guidance, earnings surprises, and disclosure timing are information design problems. Companies strategically reveal information to manage market expectations — screening by institutional vs. retail audience.
+- **Investing/value-quality**: Adverse selection explains why cheap stocks are often cheap for a reason — the "market for lemons" dynamic in equity markets. Screening by quality metrics (ROIC, balance sheet strength) is the investor's response to asymmetric information.

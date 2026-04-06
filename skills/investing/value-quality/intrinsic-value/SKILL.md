@@ -5,6 +5,10 @@ description: >
   margin of safety, moat analysis, valuation multiples, and asset-based approaches. Covers the
   complete toolkit for determining what a business is actually worth. Use when evaluating whether
   a specific business or asset is trading above or below its fundamental worth.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Intrinsic Value — What Is This Business Actually Worth?

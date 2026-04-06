@@ -4,6 +4,10 @@ description: >
   Core visual design principles for evaluating and improving compositions. Use to assess
   layout quality, diagnose why a design feels wrong, establish visual hierarchy, or apply
   foundational rules like Gestalt, contrast, alignment, and proximity.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Design Principles — The Foundation
@@ -164,3 +168,7 @@ Asymmetric balance (unequal elements that balance through position and weight) i
 4. **Centering everything** — center alignment is the weakest form; it creates no strong visual edge
 5. **Ignoring whitespace** — treating empty space as wasted space rather than a design element
 6. **Style without structure** — making things "look nice" without solving the layout problem first
+
+## Cross-Domain Connections
+
+- **Writing/sentence-craft/prose-rhythm**: Contrast, repetition, and hierarchy apply identically to prose. Visual contrast (large/small, bold/light) parallels prose contrast (long sentence followed by short). Visual repetition (consistent spacing, repeated motifs) parallels prose rhythm (anaphora, parallel structure). Whitespace in design = silence in prose.

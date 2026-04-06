@@ -5,6 +5,10 @@ description: >
   Reference when analyzing evolutionarily stable strategies, interpreting classical games through
   an evolutionary lens, or understanding how cooperation, conflict, and conventions emerge
   without rational deliberation. Use when rationality is replaced by natural selection or imitation.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Evolutionary Games — The Survivors

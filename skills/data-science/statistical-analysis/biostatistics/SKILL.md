@@ -6,6 +6,10 @@ description: >
   computing epidemiological measures, conducting meta-analyses, handling multiplicity in clinical
   endpoints, or navigating FDA/EMA regulatory statistical requirements. Use when the data
   involves patient outcomes, censored time-to-event data, or regulatory submissions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Biostatistics — The Clinical Lens

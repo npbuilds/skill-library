@@ -4,6 +4,10 @@ description: >
   Knowledge skill covering central bank policy frameworks, rate cycle analysis, liquidity conditions,
   yield curve interpretation, and the transmission of monetary policy to markets. Use when assessing
   whether monetary policy is a headwind or tailwind for investment positioning.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Monetary Regime

@@ -7,6 +7,10 @@ description: >
   Provides the technical foundation that the Simulation Smith and other agents
   draw upon. Also covers rendering technology selection and performance
   optimization for computationally intensive artifacts.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Creative Coding — The Algorithm Palette

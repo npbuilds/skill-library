@@ -4,6 +4,10 @@ description: >
   Knowledge skill covering business cycle analysis, debt cycle frameworks, leading/coincident/lagging
   indicators, and practical cycle positioning. Use when determining where we are in the economic cycle
   and what historical patterns suggest comes next.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Macro Cycles
@@ -299,3 +303,8 @@ Policy response capacity determines whether the next downturn is mild (ample roo
 - **`monetary-regime`** (Regime Intelligence) — always consult alongside macro-cycles; monetary policy is the primary transmission mechanism for cycle dynamics
 - **`fiscal-regime`** (Regime Intelligence) — consult when assessing how government spending and debt trajectories amplify or dampen the cycle
 - **`asset-allocation`** (Portfolio Construction) — consult when translating cycle phase identification into concrete portfolio positioning and regime-based tilts
+
+## Cross-Domain Connections
+
+- **Data-science/modeling/time-series**: Cycle positioning uses time-series decomposition (trend, seasonal, cyclical components), structural break detection, and leading indicator analysis — all time-series methodology. Stationarity tests (ADF/KPSS) detect when a cycle regime has fundamentally shifted.
+- **Data-science/ml-engineering/drift-detection**: Regime changes ARE concept drift — models trained on expansion data degrade in contraction. The drift-detection framework (monitoring for distributional shifts in inputs and outputs) is the quantitative backbone of regime change detection.

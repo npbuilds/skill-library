@@ -6,6 +6,10 @@ description: >
   oak treatment options, pressing, fining, filtration, and sulfur management.
   Use when the user wants to understand how winemaking decisions shape the
   flavor, structure, and character of a finished wine.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Vinification — The Cellar

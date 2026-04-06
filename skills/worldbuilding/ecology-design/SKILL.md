@@ -5,6 +5,10 @@ description: >
   biomes, flora, fauna, food chains, or any biological element of a world. Uses the Getz
   10-niche model to ensure ecological completeness and the climate-biome cascade to derive
   ecosystems from geography.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Ecology Design — The Web of Life

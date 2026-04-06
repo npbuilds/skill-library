@@ -3,6 +3,10 @@ name: tax-optimization
 description: >
   Tax-efficient portfolio management frameworks — tax-loss harvesting, direct indexing, asset location,
   tax-aware rebalancing, capital gains management, and estate planning considerations for investors.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Tax Optimization — Keeping What You Earn

@@ -6,6 +6,10 @@ description: >
   elimination rules, and molecular flavor bridge methodology. Use when the user
   needs to understand why a pairing works, navigate difficult foods, or build
   pairing logic from first principles.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Pairing Science — The Bridge Builder

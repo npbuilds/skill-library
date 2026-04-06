@@ -25,44 +25,28 @@ SKILL_NAME=$(basename "$SKILL_DIR")
 # Step 1: Structural validation
 VALIDATION=$(bash "$PLUGIN_ROOT/scripts/validate-structure.sh" "$SKILL_DIR" 2>/dev/null) || true
 
-VALID=$(echo "$VALIDATION" | python3 -c "
+# Parse both fields from validation in one python3 call
+read -r VALID ISSUE_COUNT < <(echo "$VALIDATION" | python3 -c "
 import json, sys
 try:
-    data = json.loads(sys.stdin.read())
-    print('true' if data.get('valid', False) else 'false')
+    d = json.loads(sys.stdin.read())
+    print(str(d.get('valid', False)).lower(), d.get('issue_count', 0))
 except:
-    print('false')
-" 2>/dev/null || echo "false")
-
-ISSUE_COUNT=$(echo "$VALIDATION" | python3 -c "
-import json, sys
-try:
-    data = json.loads(sys.stdin.read())
-    print(data.get('issue_count', 0))
-except:
-    print(0)
-" 2>/dev/null || echo "0")
+    print('false', 0)
+" 2>/dev/null || echo "false 0")
 
 # Step 2: Compute metrics
 METRICS=$(bash "$PLUGIN_ROOT/scripts/analyze-skill.sh" "$SKILL_PATH" 2>/dev/null) || true
 
-BODY_WORDS=$(echo "$METRICS" | python3 -c "
+# Parse both fields from metrics in one python3 call
+read -r BODY_WORDS EST_TOKENS < <(echo "$METRICS" | python3 -c "
 import json, sys
 try:
-    data = json.loads(sys.stdin.read())
-    print(data.get('body_words', '?'))
+    d = json.loads(sys.stdin.read())
+    print(d.get('body_words', '?'), d.get('estimated_tokens_total', '?'))
 except:
-    print('?')
-" 2>/dev/null || echo "?")
-
-EST_TOKENS=$(echo "$METRICS" | python3 -c "
-import json, sys
-try:
-    data = json.loads(sys.stdin.read())
-    print(data.get('estimated_tokens_total', '?'))
-except:
-    print('?')
-" 2>/dev/null || echo "?")
+    print('?', '?')
+" 2>/dev/null || echo "? ?")
 
 # Step 3: Determine health status from metrics
 HEALTH="healthy"
@@ -112,4 +96,7 @@ print('true' if sys.argv[2] in reg.get('skills', {}) else 'false')
       echo "  Auto-registered $SKILL_NAME in registry" || \
       echo "  Auto-register failed — run: python3 scripts/sync-registry.py --apply"
   fi
+
+  # Append evolution snapshot for this skill (dashboard time-series)
+  python3 "$PLUGIN_ROOT/scripts/snapshot_evolution.py" --event=hook 2>/dev/null || true
 fi

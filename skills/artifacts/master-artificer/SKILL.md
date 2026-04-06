@@ -8,7 +8,11 @@ description: >
   that delights, surprises, or astonishes." Coordinates specialist agents, integrates with
   external skills (algorithmic-art, web-artifacts-builder, theme-factory), and applies a
   research-backed experimentation protocol to push creative boundaries.
-tools: Read, Write, Bash, Glob, Grep, Agent
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Write Bash Glob Grep Agent
 ---
 
 # The Master Artificer — Forgemaster of Digital Wonders

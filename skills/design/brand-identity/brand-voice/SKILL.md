@@ -4,6 +4,10 @@ description: >
   Brand voice and tone — how a brand communicates verbally. Covers voice definition,
   tone modulation across contexts, messaging frameworks, vocabulary systems, and
   content guidelines. The verbal execution layer that translates positioning into words.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Brand Voice — How the Brand Speaks
@@ -151,3 +155,7 @@ Define preferred and avoided vocabulary:
 - **No examples** — abstract guidelines ("be friendly") without concrete examples ("say X, not Y") are useless
 - **Voice by committee** — when 6 stakeholders edit copy, the voice becomes beige. One voice owner per brand.
 - **Ignoring internal communications** — brand voice that only applies to marketing but not support, docs, or internal comms is incomplete
+
+## Cross-Domain Connections
+
+- **Writing/sentence-craft/style-dna**: Brand voice IS style-dna applied to an organization instead of an author. Both define consistent identity through measurable traits — sentence length, vocabulary range, formality level. Style-dna provides the analytical toolkit; brand-voice provides the strategic framework.

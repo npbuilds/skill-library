@@ -4,6 +4,10 @@ description: >
   Great-power competition and its investment implications. Reference when assessing US-China
   decoupling, supply chain restructuring, Taiwan risk, alliance blocs, sanctions regimes, and
   multipolar currency shifts. Use when geopolitical risk needs to be translated into portfolio decisions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Great Power Dynamics — Investment Implications

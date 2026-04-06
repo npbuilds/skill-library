@@ -4,6 +4,10 @@ description: >
   Deep expertise in position sizing methodologies — Kelly criterion, risk budgeting,
   volatility-adjusted sizing, conviction-based concentration, and portfolio heat management.
   Use when determining how much capital to allocate to a specific trade or position.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Position Sizing — The Most Important Decision You Make

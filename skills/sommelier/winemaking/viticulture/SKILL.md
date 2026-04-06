@@ -6,6 +6,10 @@ description: >
   effects, and the history of phylloxera. Use when the user wants to understand
   what happens in the vineyard before harvest, how farming choices affect wine
   quality, or what old-vine and biodynamic actually mean.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Viticulture — The Vineyard

@@ -5,7 +5,11 @@ description: >
   skill, define the relationship between brand strategy and visual execution, and resolve
   conflicts between brand consistency and creative expression. Use when the user has a
   branding question and you need to determine which knowledge skill to consult.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Brand Identity Director

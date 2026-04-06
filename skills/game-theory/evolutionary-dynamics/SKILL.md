@@ -5,7 +5,11 @@ description: >
   population dynamics, ESS, replicator dynamics, fitness landscapes, and biological or cultural
   strategy to the right specialist skill. Use when analyzing large populations adapting over
   time without central design or full rationality.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Evolutionary Dynamics Director — The Naturalist
@@ -82,3 +86,8 @@ When child skills give contradictory guidance:
 - The question is about strategic information revelation → Information Economics
 - The question involves computational agents or AI → Computational Strategy
 - The biological context requires domain-specific knowledge beyond game theory (genetics, ecology) → flag for the user
+
+## Cross-Domain Connections
+
+- **Investing/reflexivity-sentiment**: Herd behavior in markets is an evolutionary dynamic — "follow the crowd" is an ESS until the bubble pops and contrarians invade. Replicator dynamics model how investment strategies (value, momentum, passive) compete for capital and how one strategy's success seeds its own destruction.
+- **Investing/reflexivity-sentiment/market-psychology**: Crowd psychology maps directly to population dynamics — sentiment extremes are unstable equilibria where a small perturbation (catalyst) can trigger a phase transition (crash/melt-up).

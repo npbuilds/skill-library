@@ -4,6 +4,10 @@ description: >
   Interpret insider buying and selling signals for investment decision-making. Use when the user
   wants to analyze Form 4 filings, evaluate insider transactions, build an insider buying watchlist,
   or understand what insider activity signals about a stock's prospects.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Insider Signals — Reading the Smart Money

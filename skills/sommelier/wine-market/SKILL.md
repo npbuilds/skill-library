@@ -6,7 +6,11 @@ description: >
   how wine is priced, evaluate whether a wine represents value, build an
   investment-grade cellar, or understand how climate change and cultural shifts
   are reshaping the wine world's geography and economics.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Wine Market — The Négociant

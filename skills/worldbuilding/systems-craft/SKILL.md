@@ -1,7 +1,11 @@
 ---
 name: systems-craft
 description: Route questions about the rules and systems that make a world distinct — magic, metaphysics, naming, and the foundational axioms in the world-bible. Use when designing a magic or technology system, creating a naming language for a culture, checking a world decision against its core rules, or establishing the fundamental constraints that everything else must respect.
-tools: Read
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read
 ---
 
 # Systems Craft — The Rules of the World

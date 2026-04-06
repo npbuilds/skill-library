@@ -5,6 +5,10 @@ description: >
   plus branching direction and structural diagnosis. Use when all sentences sound the same, when
   the user wants to understand sentence architecture, or when prose needs structural variety
   beyond rhythm and word choice.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Syntax Patterns — The Architecture of the Sentence

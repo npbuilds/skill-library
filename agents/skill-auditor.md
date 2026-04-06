@@ -49,8 +49,8 @@ For each skill, perform these checks:
 
 ### 5. Frontmatter Completeness
 - Required: `name`, `description`
-- Optional: `tools` (recommended for action skills that use tools)
-- Check if skill launches agents — if so, `tools` should include `Agent`
+- Optional: `allowed-tools` (recommended for action skills that use tools; space-delimited per agentskills.io spec)
+- Check if skill launches agents — if so, `allowed-tools` should include `Agent`
 
 ## Output Format
 

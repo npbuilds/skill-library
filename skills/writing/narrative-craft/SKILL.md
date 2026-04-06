@@ -5,7 +5,11 @@ description: >
   sensory detail questions to the right specialist skill. Use when the user has a question about
   how stories and scenes work, wants to improve narrative prose beyond the sentence level, or
   needs to understand why a passage lacks tension, clarity, or immersion.
-tools: Read, Glob
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
+allowed-tools: Read Glob
 ---
 
 # Narrative Craft Director — The Story Editor's Eye
@@ -73,4 +77,10 @@ This order goes micro to macro: ground the reader first, then check the scene's 
 - The problem is sentence-level (rhythm, diction, syntax) — that's sentence-craft territory
 - The problem is argumentative or persuasive — that's rhetoric territory
 - The user needs a full editing pass — that's revision-craft territory
+
+## Cross-Domain Connections
+
+- **Worldbuilding/narrative-pacing**: Worldbuilding has its own pacing system — revelation spirals and tension archetypes (Cassandra, Randy, Penelope) that control how world-information reaches the reader. When writing in a built world, narrative-craft pacing must harmonize with the worldbuilding revelation architecture.
+- **Worldbuilding/lore-writer**: Lore-writer produces in-universe artifacts (letters, myths, reports) using 7 voice registers. These artifacts ARE prose — scene-craft and dialogue principles apply within the artifact's voice constraints.
+- **Worldbuilding/character-belief-tracker**: What a character knows (their belief layer in the revelation architecture) determines their POV reliability and narrative distance. Character beliefs constrain point-of-view decisions.
 - The user needs prose *drafted*, not just diagnosed — the orchestrator routes to action skills

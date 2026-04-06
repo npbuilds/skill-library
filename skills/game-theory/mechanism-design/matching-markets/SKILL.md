@@ -5,6 +5,10 @@ description: >
   or analyzing matching systems, two-sided markets, assignment mechanisms, or allocation rules.
   Use when the problem involves matching agents to agents, agents to objects, or allocating
   indivisible resources where monetary transfers are limited or absent.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Matching Markets — The Matchmaker

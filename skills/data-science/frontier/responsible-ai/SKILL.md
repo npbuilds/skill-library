@@ -5,6 +5,10 @@ description: >
   when auditing models for fairness, selecting appropriate fairness criteria, implementing
   bias mitigation strategies, creating model cards, or ensuring compliance with AI governance
   frameworks like the EU AI Act or NIST AI RMF. Use when any model affects human decisions.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Responsible AI — The Conscience

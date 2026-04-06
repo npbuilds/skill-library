@@ -4,6 +4,10 @@ description: >
   Energy markets, transition dynamics, and resource security for investment analysis. Reference when
   evaluating oil and gas markets, renewable energy economics, nuclear renaissance, critical minerals,
   grid infrastructure, and ESG investing. Use when energy supply, demand, or policy shapes asset values.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Energy Security — Investment Implications

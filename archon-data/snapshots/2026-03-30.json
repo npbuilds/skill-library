@@ -1,0 +1,3276 @@
+{
+  "_snapshot_date": "2026-03-30",
+  "_saved_at": "2026-03-30T10:21:08.083169",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "description": "Growth falling with rising inflation \u2014 defensive assets, commodities, cash",
+      "confidence": 0.22,
+      "growth_score": -0.1,
+      "inflation_score": 0.333,
+      "growth_signals_count": 3,
+      "inflation_signals_count": 3,
+      "timestamp": "2026-03-30T10:21:08.082711"
+    },
+    "macro": {
+      "indicators": {
+        "GDPC1": {
+          "name": "Real GDP",
+          "value": 24065.956,
+          "date": "2025-10-01",
+          "prev_value": 24026.834,
+          "change": 39.122
+        },
+        "UNRATE": {
+          "name": "Unemployment Rate",
+          "value": 4.4,
+          "date": "2026-02-01",
+          "prev_value": 4.3,
+          "change": 0.1,
+          "yoy_change": 10.0
+        },
+        "PAYEMS": {
+          "name": "Nonfarm Payrolls",
+          "value": 158466.0,
+          "date": "2026-02-01",
+          "prev_value": 158558.0,
+          "change": -92.0,
+          "yoy_change": 0.1
+        },
+        "CPIAUCSL": {
+          "name": "CPI All Urban",
+          "value": 327.46,
+          "date": "2026-02-01",
+          "prev_value": 326.588,
+          "change": 0.872,
+          "yoy_change": 2.66
+        },
+        "PCEPILFE": {
+          "name": "Core PCE",
+          "value": 128.394,
+          "date": "2026-01-01",
+          "prev_value": 127.929,
+          "change": 0.465,
+          "yoy_change": 3.06
+        },
+        "T5YIE": {
+          "name": "5Y Breakeven Inflation",
+          "value": 2.56,
+          "date": "2026-03-27",
+          "prev_value": 2.56,
+          "change": 0.0,
+          "yoy_change": -0.78
+        },
+        "MICH": {
+          "name": "Michigan Inflation Expectations",
+          "value": 3.4,
+          "date": "2026-02-01",
+          "prev_value": 4.0,
+          "change": -0.6,
+          "yoy_change": -20.93
+        },
+        "FEDFUNDS": {
+          "name": "Fed Funds Rate",
+          "value": 3.64,
+          "date": "2026-02-01",
+          "prev_value": 3.64,
+          "change": 0.0,
+          "yoy_change": -15.94
+        },
+        "M2SL": {
+          "name": "M2 Money Supply",
+          "value": 22667.3,
+          "date": "2026-02-01",
+          "prev_value": 22469.1,
+          "change": 198.2,
+          "yoy_change": 4.88
+        },
+        "DGS10": {
+          "name": "10Y Treasury Yield",
+          "value": 4.42,
+          "date": "2026-03-26",
+          "prev_value": 4.33,
+          "change": 0.09,
+          "yoy_change": 6.51
+        },
+        "DGS2": {
+          "name": "2Y Treasury Yield",
+          "value": 3.96,
+          "date": "2026-03-26",
+          "prev_value": 3.84,
+          "change": 0.12,
+          "yoy_change": 10.92
+        },
+        "DGS3MO": {
+          "name": "3M Treasury Yield",
+          "value": 3.73,
+          "date": "2026-03-26",
+          "prev_value": 3.73,
+          "change": 0.0,
+          "yoy_change": 0.54
+        },
+        "T10Y2Y": {
+          "name": "10Y-2Y Spread",
+          "value": 0.56,
+          "date": "2026-03-27",
+          "prev_value": 0.46,
+          "change": 0.1,
+          "yoy_change": -1.75
+        },
+        "T10Y3M": {
+          "name": "10Y-3M Spread",
+          "value": 0.71,
+          "date": "2026-03-27",
+          "prev_value": 0.69,
+          "change": 0.02,
+          "yoy_change": 42.0
+        }
+      },
+      "timestamp": "2026-03-30T10:16:49.548263",
+      "yield_curve_signal": "normal",
+      "labor_signal": "moderate",
+      "inflation_signal": "hot",
+      "_cached_at": 1774880212.179529
+    },
+    "yield_curve": {
+      "yields": {
+        "3M": {
+          "value": 3.585,
+          "maturity_years": 0.25
+        },
+        "5Y": {
+          "value": 3.986,
+          "maturity_years": 5.0
+        },
+        "10Y": {
+          "value": 4.356,
+          "maturity_years": 10.0
+        },
+        "30Y": {
+          "value": 4.917,
+          "maturity_years": 30.0
+        },
+        "2Y": {
+          "value": 3.796,
+          "maturity_years": 2.0
+        }
+      },
+      "timestamp": "2026-03-30T10:16:52.182445",
+      "spread_10y2y": 0.56,
+      "spread_10y3m": 0.771,
+      "spread_30y10y": 0.561,
+      "curve_shape": "normal",
+      "rate_regime": "elevated",
+      "_cached_at": 1774880212.6265652
+    },
+    "contrarian": {
+      "pendulum": {
+        "position": 44.4,
+        "label": "cautious",
+        "components": {
+          "sentiment_composite": 44.9,
+          "vix_level": 49.0,
+          "cot_equity": 39.2,
+          "search_behavior": 50.0,
+          "vol_term_structure": 35
+        },
+        "interpretation": "The pendulum is near center \u2014 neither fear nor greed dominates. This is the hardest environment for contrarian positioning because there's no extreme to fade. Wait for the pendulum to swing."
+      },
+      "consensus_beliefs": [
+        {
+          "belief": "No strong directional consensus \u2014 market is uncertain",
+          "strength": "weak"
+        },
+        {
+          "belief": "Gold is a safe haven \u2014 buy and hold for protection",
+          "strength": "strong"
+        },
+        {
+          "belief": "Credit is fine \u2014 spreads are tight, no systemic risk",
+          "strength": "strong"
+        },
+        {
+          "belief": "Inflation is transitory / under control \u2014 the Fed will handle it",
+          "strength": "moderate"
+        },
+        {
+          "belief": "Current leadership (Energy, Materials) will continue",
+          "strength": "moderate"
+        },
+        {
+          "belief": "Private market valuations are reasonable \u2014 the denominator effect is manageable and marks will hold",
+          "strength": "moderate"
+        },
+        {
+          "belief": "VIX at 30 means panic \u2014 get out of the way",
+          "strength": "strong"
+        }
+      ],
+      "contrarian_views": [
+        {
+          "domain": "equities",
+          "consensus_belief": "No strong directional consensus \u2014 market is uncertain",
+          "consensus_strength": "weak",
+          "contrarian_read": "Uncertainty itself is the signal. When consensus is absent, the next catalyst (earnings, Fed, geopolitical) will have outsized impact.",
+          "evidence": [
+            "Composite sentiment at 45 (neutral zone)",
+            "VIX at 30.4 (panic)",
+            "Breadth divergence: +5.2% (equal_weight_leading)"
+          ],
+          "confidence": "L",
+          "error_type": "distribution",
+          "actionability": "Position for the catalyst, not the direction. Straddles or barbells outperform directional bets here."
+        },
+        {
+          "domain": "gold",
+          "consensus_belief": "Gold is a safe haven \u2014 buy and hold for protection",
+          "consensus_strength": "strong",
+          "contrarian_read": "Gold positioning is at extreme levels. The 'safe haven' trade is now the consensus trade, which paradoxically makes it less safe. A sharp reversal is possible on any USD strength catalyst.",
+          "evidence": [
+            "Gold specs net long at 41.7% OI \u2014 extreme crowding",
+            "Gold YTD: +4.9% \u2014 strong rally fueling the crowd"
+          ],
+          "confidence": "H",
+          "error_type": "timing",
+          "actionability": "Trim long gold positions or buy put protection. Don't initiate new longs at these positioning levels."
+        },
+        {
+          "domain": "credit",
+          "consensus_belief": "Credit is fine \u2014 spreads are tight, no systemic risk",
+          "consensus_strength": "strong",
+          "contrarian_read": "Credit spreads are lagging equity vol \u2014 the divergence between tight HY spreads and wide BDC NAV discounts suggests credit hasn't repriced to match equity fear. Spreads typically widen with a lag when VIX sustains above 25.",
+          "evidence": [
+            "HY spreads at 3.42% (342 bps, tight) while VIX at 30 \u2014 equity market pricing fear that credit isn't",
+            "BDCs at -17.0% NAV discount \u2014 public market pricing credit losses that private funds haven't marked",
+            "Credit cycle classified as late_cycle"
+          ],
+          "confidence": "H",
+          "error_type": "timing",
+          "actionability": "Underweight HY bonds. If BDC NAV discounts widen past -20%, that's the signal that credit stress is becoming real."
+        },
+        {
+          "domain": "inflation",
+          "consensus_belief": "Inflation is transitory / under control \u2014 the Fed will handle it",
+          "consensus_strength": "moderate",
+          "contrarian_read": "Multiple inflation signals are flashing while markets still price a 'soft landing' \u2014 the risk is that inflation proves stickier than consensus expects, forcing the Fed to hold rates higher for longer.",
+          "evidence": [
+            "Oil YTD +84% \u2014 supply-driven inflation pressure",
+            "Regime classified as stagflation \u2014 growth slowing + inflation sticky"
+          ],
+          "confidence": "M",
+          "error_type": "level",
+          "actionability": "Overweight commodities and TIPS. Underweight long-duration bonds. Energy sector leadership is a proxy for this thesis."
+        },
+        {
+          "domain": "rotation",
+          "consensus_belief": "Current leadership (Energy, Materials) will continue",
+          "consensus_strength": "moderate",
+          "contrarian_read": "Sector rotation tends to overshoot. When everyone chases the same factor (value/energy in stagflation), the premium gets crowded. Watch for exhaustion signals in the leaders.",
+          "evidence": [
+            "Energy leading (Energy) while Tech lagging \u2014 classic stagflation rotation",
+            "Equal-weight outperforming cap-weight by 5.2% \u2014 rotation away from mega-cap is real"
+          ],
+          "confidence": "L",
+          "error_type": "timing",
+          "actionability": "Don't chase momentum in leaders. Look for quality laggards \u2014 sectors being unfairly punished that have durable earnings."
+        },
+        {
+          "domain": "private_markets",
+          "consensus_belief": "Private market valuations are reasonable \u2014 the denominator effect is manageable and marks will hold",
+          "consensus_strength": "moderate",
+          "contrarian_read": "Public proxies are screaming that private marks are stale. GP stock weakness signals the market expects fee/carry impairment. The next wave of quarterly marks will likely show write-downs, creating forced selling by funds hitting allocation limits.",
+          "evidence": [
+            "PE/VC exit window is frozen \u2014 cannot realize investments",
+            "PE GP stocks down -29% YTD \u2014 market doubts fee/carry revenue",
+            "Private Credit: BDC index at -17.0% NAV discount \u2192 write_down_risk"
+          ],
+          "confidence": "H",
+          "error_type": "timing",
+          "actionability": "Avoid new commitments to private credit funds. Watch for GP-led secondary sales as forced liquidity events \u2014 these create opportunity for buyers."
+        },
+        {
+          "domain": "volatility",
+          "consensus_belief": "VIX at 30 means panic \u2014 get out of the way",
+          "consensus_strength": "strong",
+          "contrarian_read": "VIX backwardation during high spot VIX historically signals peak fear, not the start of a crisis. Backwardation means the market itself expects volatility to DECREASE \u2014 the term structure is contrarian to the spot level.",
+          "evidence": [
+            "VIX term structure in backwardation (spread: -1.7) \u2014 market pricing peak fear NOW, expecting vol to decrease",
+            "Specs net short VIX at -7.3% OI \u2014 betting on vol decline from here"
+          ],
+          "confidence": "M",
+          "error_type": "timing",
+          "actionability": "Sell VIX puts (if experienced) or wait for contango to return as confirmation that the panic is fading. Don't buy protection at peak fear \u2014 it's expensive."
+        }
+      ],
+      "crowding_alerts": [
+        {
+          "asset": "Gold",
+          "net_pct_oi": 41.7,
+          "direction": "long",
+          "risk": "Crowded long creates sharp reversal risk on any dollar strength or rate spike"
+        }
+      ],
+      "view_count": 7
+    },
+    "sentiment": {
+      "composite": {
+        "score": 44.9,
+        "label": "cautious",
+        "components": {
+          "vix": {
+            "raw": 30.41,
+            "normalized": 32.0
+          },
+          "breadth": {
+            "raw": 5.16,
+            "normalized": 75.8
+          },
+          "vix_term": {
+            "raw": "backwardation",
+            "spread": -1.7,
+            "normalized": 33.0
+          },
+          "momentum": {
+            "raw": -6.73,
+            "normalized": 33.2
+          }
+        },
+        "component_count": 4,
+        "timestamp": "2026-03-30T10:21:08.082739"
+      },
+      "raw": {
+        "vix": {
+          "timestamp": "2026-03-30T10:16:57.207798",
+          "spot": 30.41,
+          "3_month": 28.71,
+          "6_month": 29.26,
+          "term_structure": "backwardation",
+          "term_spread": -1.7,
+          "regime": "panic"
+        },
+        "fear_greed": {
+          "timestamp": "2026-03-30T10:16:57.333013",
+          "error": "HTTPSConnectionPool(host='production.dataviz.cnn.com', port=443): Max retries exceeded with url: /index/fearandgreed/graphdata (Caused by NameResolutionError(\"HTTPSConnection(host='production.dataviz.cnn.com', port=443): Failed to resolve 'production.dataviz.cnn.com' ([Errno 8] nodename nor servname provided, or not known)\"))"
+        },
+        "put_call": {
+          "timestamp": "2026-03-30T10:16:57.353670",
+          "note": "CBOE put/call data requires page parsing. Use VIX as proxy."
+        },
+        "timestamp": "2026-03-30T10:16:57.504120",
+        "signals": [
+          [
+            "vix",
+            "extreme_fear"
+          ]
+        ],
+        "overall": "cautious",
+        "_cached_at": 1774880217.504224
+      }
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "symbol": "^GSPC",
+          "price": 6384.74,
+          "ytd_pct": -6.73
+        },
+        "Nasdaq": {
+          "symbol": "^IXIC",
+          "price": 20970.25,
+          "ytd_pct": -9.77
+        },
+        "Russell 2000": {
+          "symbol": "^RUT",
+          "price": 2439.44,
+          "ytd_pct": -1.71
+        }
+      },
+      "breadth": {
+        "S&P 500 (Cap-Weight)": {
+          "symbol": "SPY",
+          "price": 636.16,
+          "ytd_pct": -6.46
+        },
+        "S&P 500 (Equal-Weight)": {
+          "symbol": "RSP",
+          "price": 189.07,
+          "ytd_pct": -1.3
+        }
+      },
+      "timestamp": "2026-03-30T10:16:52.627022",
+      "breadth_divergence": 5.16,
+      "breadth_signal": "equal_weight_leading",
+      "_cached_at": 1774880213.390474
+    },
+    "sectors": {
+      "sectors": {
+        "Energy": {
+          "symbol": "XLE",
+          "ytd_pct": 41.22,
+          "month_pct": 10.69
+        },
+        "Financials": {
+          "symbol": "XLF",
+          "ytd_pct": -11.94,
+          "month_pct": -5.98
+        },
+        "Technology": {
+          "symbol": "XLK",
+          "ytd_pct": -9.94,
+          "month_pct": -7.08
+        },
+        "Healthcare": {
+          "symbol": "XLV",
+          "ytd_pct": -7.21,
+          "month_pct": -9.39
+        },
+        "Industrials": {
+          "symbol": "XLI",
+          "ytd_pct": 2.0,
+          "month_pct": -11.55
+        },
+        "Consumer Staples": {
+          "symbol": "XLP",
+          "ytd_pct": 5.36,
+          "month_pct": -7.74
+        },
+        "Utilities": {
+          "symbol": "XLU",
+          "ytd_pct": 8.08,
+          "month_pct": -2.6
+        },
+        "Consumer Discretionary": {
+          "symbol": "XLY",
+          "ytd_pct": -10.97,
+          "month_pct": -7.89
+        },
+        "Materials": {
+          "symbol": "XLB",
+          "ytd_pct": 8.9,
+          "month_pct": -7.26
+        },
+        "Real Estate": {
+          "symbol": "XLRE",
+          "ytd_pct": 0.19,
+          "month_pct": -7.96
+        },
+        "Communications": {
+          "symbol": "XLC",
+          "ytd_pct": -8.5,
+          "month_pct": -8.62
+        }
+      },
+      "timestamp": "2026-03-30T10:16:53.391074",
+      "leaders": [
+        "Energy",
+        "Materials",
+        "Utilities"
+      ],
+      "laggards": [
+        "Financials",
+        "Consumer Discretionary",
+        "Technology"
+      ],
+      "_cached_at": 1774880215.314626
+    },
+    "assets": {
+      "assets": {
+        "VIX": {
+          "symbol": "^VIX",
+          "price": 30.41,
+          "ytd_pct": 103.41,
+          "month_pct": 41.84
+        },
+        "Gold (GLD)": {
+          "symbol": "GLD",
+          "price": 415.79,
+          "ytd_pct": 4.92,
+          "month_pct": -15.14
+        },
+        "Oil (USO)": {
+          "symbol": "USO",
+          "price": 127.2,
+          "ytd_pct": 83.92,
+          "month_pct": 45.89
+        },
+        "Bitcoin": {
+          "symbol": "BTC-USD",
+          "price": 67656.1,
+          "ytd_pct": -22.69,
+          "month_pct": 0.99
+        },
+        "Dollar (DXY)": {
+          "symbol": "DX-Y.NYB",
+          "price": 100.51,
+          "ytd_pct": 2.27,
+          "month_pct": 2.17
+        },
+        "20Y Treasury (TLT)": {
+          "symbol": "TLT",
+          "price": 86.6,
+          "ytd_pct": 0.06,
+          "month_pct": -3.36
+        },
+        "High Yield (HYG)": {
+          "symbol": "HYG",
+          "price": 78.94,
+          "ytd_pct": -1.12,
+          "month_pct": -1.66
+        },
+        "S&P 500": {
+          "symbol": "^GSPC",
+          "price": 6384.74,
+          "ytd_pct": -6.72,
+          "month_pct": -7.21
+        },
+        "Nasdaq": {
+          "symbol": "^IXIC",
+          "price": 20970.25,
+          "ytd_pct": -9.76,
+          "month_pct": -7.8
+        },
+        "Russell 2000": {
+          "symbol": "^RUT",
+          "price": 2439.44,
+          "ytd_pct": -1.71,
+          "month_pct": -8.15
+        }
+      },
+      "timestamp": "2026-03-30T10:16:55.315210",
+      "_cached_at": 1774880217.2070348
+    },
+    "risk": {
+      "vix": {
+        "level": 30.41,
+        "regime": "panic",
+        "term_structure": "backwardation",
+        "term_spread": -1.7
+      },
+      "yield_curve": {
+        "shape": "normal",
+        "spread_10y2y": 0.56,
+        "rate_regime": "elevated"
+      },
+      "correlations": {
+        "stock_bond": 0.49,
+        "stock_bond_regime": "positive_correlation",
+        "highlights": [
+          {
+            "pair": "S&P 500 / High Yield",
+            "correlation": 0.837,
+            "strength": "strong_positive"
+          },
+          {
+            "pair": "20Y Treasuries / High Yield",
+            "correlation": 0.714,
+            "strength": "strong_positive"
+          },
+          {
+            "pair": "Gold / Dollar",
+            "correlation": -0.09,
+            "strength": "uncorrelated"
+          }
+        ]
+      },
+      "breadth": {
+        "divergence": 5.16,
+        "signal": "equal_weight_leading"
+      },
+      "timestamp": "2026-03-30T10:21:08.082809",
+      "overall_risk": "extreme",
+      "risk_flags": 3
+    },
+    "factors": {
+      "factors": {
+        "Mkt-RF": {
+          "name": "Mkt-RF",
+          "latest_daily": -0.55,
+          "cumulative_5d": -0.17,
+          "cumulative_30d": 1.46,
+          "avg_daily_30d": 0.0487,
+          "positive_days_30d": 16,
+          "observations": 60,
+          "last_date": "20260130"
+        },
+        "SMB": {
+          "name": "SMB",
+          "latest_daily": -0.54,
+          "cumulative_5d": -2.53,
+          "cumulative_30d": -0.1,
+          "avg_daily_30d": -0.0033,
+          "positive_days_30d": 15,
+          "observations": 60,
+          "last_date": "20260130"
+        },
+        "HML": {
+          "name": "HML",
+          "latest_daily": 0.35,
+          "cumulative_5d": 2.12,
+          "cumulative_30d": 3.01,
+          "avg_daily_30d": 0.1003,
+          "positive_days_30d": 17,
+          "observations": 60,
+          "last_date": "20260130"
+        },
+        "RF": {
+          "name": "RF",
+          "latest_daily": 0.02,
+          "cumulative_5d": 0.1,
+          "cumulative_30d": 0.6,
+          "avg_daily_30d": 0.02,
+          "positive_days_30d": 30,
+          "observations": 60,
+          "last_date": "20260130"
+        },
+        "UMD": {
+          "name": "UMD (Momentum)",
+          "latest_daily": -1.17,
+          "cumulative_5d": 3.51,
+          "cumulative_30d": 6.86,
+          "avg_daily_30d": 0.2287,
+          "positive_days_30d": 17,
+          "observations": 60,
+          "last_date": "20260130"
+        }
+      },
+      "timestamp": "2026-03-30T10:16:58.036567",
+      "regime": {
+        "timestamp": "2026-03-30T10:16:58.509885",
+        "value_growth": "strong_value",
+        "size": "neutral",
+        "momentum": "strong_trend",
+        "market": "mild_risk_on",
+        "composite": "mixed",
+        "note": "No dominant factor regime \u2014 selective stock-picking environment"
+      },
+      "source": "Kenneth French Data Library",
+      "note": "Returns in percent. Daily frequency.",
+      "_cached_at": 1774880218.509985
+    },
+    "cot_positioning": {
+      "positions": {
+        "CRUDE OIL, LIGHT SWEET": {
+          "contract": "CRUDE OIL, LIGHT SWEET",
+          "asset_class": "oil",
+          "net_speculative": -36282,
+          "long": 78823,
+          "short": 115105,
+          "open_interest": 846034,
+          "report_date": "2026-03-24",
+          "net_pct_oi": -4.3,
+          "signal": "neutral"
+        },
+        "GOLD": {
+          "contract": "GOLD",
+          "asset_class": "gold",
+          "net_speculative": 168327,
+          "long": 220861,
+          "short": 52534,
+          "open_interest": 403925,
+          "report_date": "2026-03-24",
+          "net_pct_oi": 41.7,
+          "signal": "extreme_long"
+        },
+        "JAPANESE YEN": {
+          "contract": "JAPANESE YEN",
+          "asset_class": "yen",
+          "net_speculative": -62806,
+          "long": 98271,
+          "short": 161077,
+          "open_interest": 328210,
+          "report_date": "2026-03-24",
+          "net_pct_oi": -19.1,
+          "signal": "net_short"
+        },
+        "EURO FX": {
+          "contract": "EURO FX",
+          "asset_class": "euro",
+          "net_speculative": 9279,
+          "long": 200025,
+          "short": 190746,
+          "open_interest": 764691,
+          "report_date": "2026-03-24",
+          "net_pct_oi": 1.2,
+          "signal": "neutral"
+        },
+        "VIX FUTURES": {
+          "contract": "VIX FUTURES",
+          "asset_class": "vix",
+          "net_speculative": -24975,
+          "long": 89859,
+          "short": 114834,
+          "open_interest": 342684,
+          "report_date": "2026-03-24",
+          "net_pct_oi": -7.3,
+          "signal": "neutral"
+        },
+        "BITCOIN": {
+          "contract": "BITCOIN",
+          "asset_class": "bitcoin",
+          "net_speculative": 2106,
+          "long": 15861,
+          "short": 13755,
+          "open_interest": 23268,
+          "report_date": "2026-03-24",
+          "net_pct_oi": 9.1,
+          "signal": "neutral"
+        },
+        "E-MINI S&P 500": {
+          "contract": "E-MINI S&P 500",
+          "asset_class": "equities",
+          "net_speculative": -80891,
+          "long": 214137,
+          "short": 295028,
+          "open_interest": 1879423,
+          "report_date": "2026-03-24",
+          "net_pct_oi": -4.3,
+          "signal": "neutral"
+        }
+      },
+      "timestamp": "2026-03-30T10:16:57.708207",
+      "crowded_longs": [
+        "GOLD"
+      ],
+      "contracts_tracked": 7,
+      "_cached_at": 1774880218.035085
+    },
+    "insiders": {
+      "transactions": [],
+      "timestamp": "2026-03-30T10:16:57.504857",
+      "error": "HTTPSConnectionPool(host='openinsider.com', port=443): Max retries exceeded with url: /screener?s=&o=&pl=100&ph=&ll=&lh=&fd=30&fdr=&td=0&tdr=&feession=&cession=&sidTabbedPanels1=tab-insider-buy-702&cnt=25&page=1 (Caused by NewConnectionError(\"HTTPSConnection(host='openinsider.com', port=443): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "cluster_buys": [],
+      "total_transactions": 0,
+      "_cached_at": 1774880217.70703
+    },
+    "special_situations": {
+      "activist_stakes": [],
+      "spinoffs_ipos": [
+        {
+          "entity": "Signing Day Sports, Inc.  (SGN)  (CIK 0001898474)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Innventure, Inc.  (INV, INVLW)  (CIK 0002001557)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Signing Day Sports, Inc.  (SGN)  (CIK 0001898474)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Signing Day Sports, Inc.  (SGN)  (CIK 0001898474)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Signing Day Sports, Inc.  (SGN)  (CIK 0001898474)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Aptevo Therapeutics Inc.  (APVO)  (CIK 0001671584)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Signing Day Sports, Inc.  (SGN)  (CIK 0001898474)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Papa Medical Inc.  (PAPA)  (CIK 0002024283)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Yext, Inc.  (YEXT)  (CIK 0001614178)",
+          "filing_date": "2026-03-19",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Signing Day Sports, Inc.  (SGN)  (CIK 0001898474)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Yext, Inc.  (YEXT)  (CIK 0001614178)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Yesway, Inc.  (CIK 0001859836)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "LogicMark, Inc.  (LGMK)  (CIK 0001566826)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Eagle Nuclear Energy Corp.  (NUCL, NUCLW)  (CIK 0002089283)",
+          "filing_date": "2026-03-19",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "SERA PROGNOSTICS, INC.  (SERA)  (CIK 0001534969)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "CEA Industries Inc.  (BNC, BNCWW)  (CIK 0001482541)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Reliance Global Group, Inc.  (EZRA)  (CIK 0001812727)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "LogicMark, Inc.  (LGMK)  (CIK 0001566826)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "SolarWindow Technologies, Inc.  (WNDW)  (CIK 0001071840)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "VenHub Global, Inc.  (VHUB)  (CIK 0001972234)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "HMH Holding Inc  (HMH)  (CIK 0002021880)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "GIVBUX, INC.  (GBUX)  (CIK 0001169138)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "JACKSON NATIONAL LIFE INSURANCE CO OF NEW YORK  (CIK 0001128415)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "AI Era Corp.  (AERA)  (CIK 0001605331)",
+          "filing_date": "2026-03-23",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Option Therapeutics Inc.  (OPTN)  (CIK 0002070577)",
+          "filing_date": "2026-03-16",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Cryptex Digital Market Cap ETF  (CIK 0002115027)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "AEVEX Corp.  (CIK 0002096300)",
+          "filing_date": "2026-03-23",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "FibroBiologics, Inc.  (FBLG)  (CIK 0001958777)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Innovative Eyewear Inc  (LUCY, LUCYW)  (CIK 0001808377)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Swarmer, Inc  (SWMR)  (CIK 0002092574)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Jackson National Life Insurance Co (RILA)  (CIK 0002047976)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "BW Industrial Holdings Inc.  (BWGC)  (CIK 0002080841)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "MobbQuest Inc.  (CIK 0002109817)",
+          "filing_date": "2026-03-23",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "AMERICAN BATTERY MATERIALS, INC.  (BLTH)  (CIK 0001487718)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Elmet Group Co.  (CIK 0002101698)",
+          "filing_date": "2026-03-30",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Alamar Biosciences, Inc.  (CIK 0002104204)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "X-Energy, Inc.  (CIK 0002088896)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Arxis, Inc.  (CIK 0002093536)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Research Alliance Corp III  (CIK 0002118032)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Forgent Power Solutions, Inc.  (FPS)  (CIK 0002080126)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Ideal Power Inc.  (IPWR)  (CIK 0001507957)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "DentonX Inc  (CIK 0002093375)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "AmperCap Acquisition Co  (CIK 0002101393)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Laser Photonics Corp  (LASE)  (CIK 0001807887)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Collective Acquisition Corp. II  (CIK 0002115404)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "SolarWindow Technologies, Inc.  (WNDW)  (CIK 0001071840)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Kailera Therapeutics, Inc.  (CIK 0002096997)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Maywood Acquisition Corp. 2  (MYX)  (CIK 0002080087)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Option Therapeutics Inc.  (OPTN)  (CIK 0002070577)",
+          "filing_date": "2026-03-16",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "WEN Acquisition Corp  (WENN, WENNU, WENNW)  (CIK 0002057043)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "GoPro, Inc.  (GPRO)  (CIK 0001500435)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Oceanhawk Acquisition Corp.  (CIK 0002090787)",
+          "filing_date": "2026-03-23",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "WaterBridge Infrastructure LLC  (WBI)  (CIK 0002064947)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "AfterNext Acquisition I Corp.  (AFNX)  (CIK 0002087035)",
+          "filing_date": "2026-03-19",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "PRESIDIO PRODUCTION Co  (FTW, FTW-WT)  (CIK 0002083125)",
+          "filing_date": "2026-03-16",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Cannabist Co Holdings Inc.  (CBSTF)  (CIK 0001776738)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Exyn Technologies, Inc.  (CIK 0001960355)",
+          "filing_date": "2026-03-19",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Forgent Power Solutions, Inc.  (FPS)  (CIK 0002080126)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Stran & Company, Inc.  (SWAG, SWAGW)  (CIK 0001872525)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Apogee Acquisition Corp  (AACP)  (CIK 0002102123)",
+          "filing_date": "2026-03-23",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "UiPath, Inc.  (PATH)  (CIK 0001734722)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "VivoSim Labs, INC.  (VIVS)  (CIK 0001497253)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Invesco Commercial Real Estate Finance Trust, Inc.  (CIK 0001976927)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "ARTELO BIOSCIENCES, INC.  (ARTL)  (CIK 0001621221)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "GENELUX Corp  (GNLX)  (CIK 0001231457)",
+          "filing_date": "2026-03-19",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Cannabist Co Holdings Inc.  (CBSTF)  (CIK 0001776738)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "UNION SECURITY LIFE INSURANCE CO OF NEW YORK  (CIK 0000914804)",
+          "filing_date": "2026-03-30",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Sensei Harbor Corp.  (CIK 0002112634)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "UNION SECURITY INSURANCE CO  (CIK 0000823533)",
+          "filing_date": "2026-03-30",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "ARTELO BIOSCIENCES, INC.  (ARTL)  (CIK 0001621221)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "HeartSciences Inc.  (HSCS, HSCSW)  (CIK 0001468492)",
+          "filing_date": "2026-03-16",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "SKYX Platforms Corp.  (SKYX)  (CIK 0001598981)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "TALCOTT RESOLUTION LIFE INSURANCE CO  (CIK 0000045947)",
+          "filing_date": "2026-03-30",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Phoenix Energy One, LLC  (PHXE-P)  (CIK 0001818643)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Pono Capital Four, Inc.  (PONO)  (CIK 0002108164)",
+          "filing_date": "2026-03-17",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Athene Annuity & Life Co  (CIK 0000837332)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "LB PHARMACEUTICALS INC  (LBRX)  (CIK 0001691082)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "MEMBERS Life Insurance Co  (CIK 0001562577)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "4D Molecular Therapeutics, Inc.  (FDMT)  (CIK 0001650648)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "CIMG Inc.  (CIMG)  (CIK 0001527613)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Phoenix Energy One, LLC  (PHXE-P)  (CIK 0001818643)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Ideal Power Inc.  (IPWR)  (CIK 0001507957)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Choudary Kiran Kumar  (CIK 0002020220)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Plutonian Acquisition Corp. II  (CIK 0002065661)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Moleculin Biotech, Inc.  (MBRX)  (CIK 0001659617)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Rani Therapeutics Holdings, Inc.  (RANI)  (CIK 0001856725)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Morgan Stanley Bitcoin Trust  (CIK 0002103612)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "HMH Holding Inc  (HMH)  (CIK 0002021880)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Madison Air Solutions Corp  (MAIR)  (CIK 0002098430)",
+          "filing_date": "2026-03-16",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "URSB Bancorp, Inc.  (CIK 0002084261)",
+          "filing_date": "2026-03-26",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Papa Medical Inc.  (PAPA)  (CIK 0002024283)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "VenHub Global, Inc.  (VHUB)  (CIK 0001972234)",
+          "filing_date": "2026-03-24",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "Sensei Harbor Corp.  (CIK 0002112634)",
+          "filing_date": "2026-03-25",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "LUDWIG ENTERPRISES, INC.  (LUDG)  (CIK 0001960262)",
+          "filing_date": "2026-03-16",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "HEALTHY CHOICE WELLNESS CORP.  (HCWC)  (CIK 0001948864)",
+          "filing_date": "2026-03-16",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "SUMA Acquisition Corp  (SUMA, SUMAU)  (CIK 0002105838)",
+          "filing_date": "2026-03-18",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "GoPro, Inc.  (GPRO)  (CIK 0001500435)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "WaterBridge Infrastructure LLC  (WBI)  (CIK 0002064947)",
+          "filing_date": "2026-03-27",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "DentonX Inc  (CIK 0002093375)",
+          "filing_date": "2026-03-20",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        },
+        {
+          "entity": "AIAI Holdings Corp  (AIAI)  (CIK 0002096362)",
+          "filing_date": "2026-03-23",
+          "form_type": "S-1",
+          "description": "Registration statement \u2014 IPO or spinoff offering"
+        }
+      ],
+      "proxy_ma": [
+        {
+          "entity": "ADTRAN Holdings, Inc.  (ADTN)  (CIK 0000926282)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "National CineMedia, Inc.  (NCMI)  (CIK 0001377630)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "DOMINION ENERGY, INC  (D)  (CIK 0000715957)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "TERADYNE, INC  (TER)  (CIK 0000097210)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Vistance Networks, Inc.  (VISN)  (CIK 0001517228)",
+          "filing_date": "2026-03-23",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "HANOVER INSURANCE GROUP, INC.  (THG)  (CIK 0000944695)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Public Storage  (PSA, PSA-PF, PSA-PG, PSA-PH, PSA-PI, PSA-PJ, PSA-PK, PSA-PL, PSA-PM, PSA-PN, PSA-PO, PSA-PP, PSA-PQ)  (CIK 0001393311)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Innovex International, Inc.  (INVX)  (CIK 0001042893)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Adeia Inc.  (ADEA)  (CIK 0001803696)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Tradeweb Markets Inc.  (TW)  (CIK 0001758730)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Alcoa Corp  (AA)  (CIK 0001675149)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "ASPEN AEROGELS INC  (ASPN)  (CIK 0001145986)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Central Bancompany, Inc.  (CBC)  (CIK 0002065601)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "GRAFTECH INTERNATIONAL LTD  (EAF)  (CIK 0000931148)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "IDEX CORP /DE/  (IEX)  (CIK 0000832101)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "MSA Safety Inc  (MSA, MNESP)  (CIK 0000066570)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "CHURCH & DWIGHT CO INC /DE/  (CHD)  (CIK 0000313927)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Ovintiv Inc.  (OVV)  (CIK 0001792580)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Morningstar, Inc.  (MORN)  (CIK 0001289419)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "CRH PUBLIC LTD CO  (CRH)  (CIK 0000849395)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "ADVANCED MICRO DEVICES INC  (AMD)  (CIK 0000002488)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "GLADSTONE LAND Corp  (LAND, LANDO, LANDP)  (CIK 0001495240)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Pediatrix Medical Group, Inc.  (MD)  (CIK 0000893949)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Ally Financial Inc.  (ALLY)  (CIK 0000040729)",
+          "filing_date": "2026-03-18",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "UNITED RENTALS, INC.  (URI)  (CIK 0001067701)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "MID PENN BANCORP INC  (MPB)  (CIK 0000879635)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Corteva, Inc.  (CTVA)  (CIK 0001755672)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "BANK OF AMERICA CORP /DE/  (BAC, BAC-PB, BAC-PE, BAC-PK, BAC-PL, BAC-PM, BAC-PN, BAC-PO, BAC-PP, BML-PG, BML-PH, BML-PJ, BML-PL)  (CIK 0000070858)",
+          "filing_date": "2026-03-23",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "EQUIFAX INC  (EFX)  (CIK 0000033185)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Invesco Commercial Real Estate Finance Trust, Inc.  (CIK 0001976927)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "FNB CORP/PA/  (FNB)  (CIK 0000037808)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "BOYD GAMING CORP  (BYD)  (CIK 0000906553)",
+          "filing_date": "2026-03-20",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "KEMPER Corp  (KMPB, KMPR)  (CIK 0000860748)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Victory Capital Holdings, Inc.  (VCTR)  (CIK 0001570827)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "GRAN TIERRA ENERGY INC.  (GTE)  (CIK 0001273441)",
+          "filing_date": "2026-03-17",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "TRUSTMARK CORP  (TRMK)  (CIK 0000036146)",
+          "filing_date": "2026-03-16",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "TTM TECHNOLOGIES INC  (TTMI)  (CIK 0001116942)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Invitation Homes Inc.  (INVH)  (CIK 0001687229)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "REVVITY, INC.  (RVTY)  (CIK 0000031791)",
+          "filing_date": "2026-03-16",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "GLADSTONE COMMERCIAL CORP  (GOOD, GOODN, GOODO)  (CIK 0001234006)",
+          "filing_date": "2026-03-20",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "SEMPRA  (SRE, SREA)  (CIK 0001032208)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "NUCOR CORP  (NUE)  (CIK 0000073309)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Montrose Environmental Group, Inc.  (MEG)  (CIK 0001643615)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "TransUnion  (TRU)  (CIK 0001552033)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Aptiv PLC  (APTV)  (CIK 0001521332)",
+          "filing_date": "2026-03-16",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "California Resources Corp  (CRC)  (CIK 0001609253)",
+          "filing_date": "2026-03-18",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Prologis, Inc.  (PLD, PLDGP)  (CIK 0001045609)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Invesco Mortgage Capital Inc.  (IVR, IVR-PC)  (CIK 0001437071)",
+          "filing_date": "2026-03-20",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "IN8BIO, INC.  (INAB)  (CIK 0001740279)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Flowco Holdings Inc.  (FLOC)  (CIK 0002035149)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Baker Hughes Co  (BKR)  (CIK 0001701605)",
+          "filing_date": "2026-03-30",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Alcoa Corp  (AA)  (CIK 0001675149)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "WYNN RESORTS LTD  (WYNN)  (CIK 0001174922)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "American Water Works Company, Inc.  (AWK)  (CIK 0001410636)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "REPUBLIC SERVICES, INC.  (RSG)  (CIK 0001060391)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "WILLIS TOWERS WATSON PLC  (WTW)  (CIK 0001140536)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "DARLING INGREDIENTS INC.  (DAR)  (CIK 0000916540)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "NEWELL BRANDS INC.  (NWL)  (CIK 0000814453)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "MGM Resorts International  (MGM)  (CIK 0000789570)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "WILLIAMS COMPANIES, INC.  (WMB)  (CIK 0000107263)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "GOLDMAN SACHS GROUP INC  (GS, GSCE, GS-PA, GS-PC, GS-PD)  (CIK 0000886982)",
+          "filing_date": "2026-03-20",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "SOUTHWEST AIRLINES CO  (LUV)  (CIK 0000092380)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "CARLISLE COMPANIES INC  (CSL)  (CIK 0000790051)",
+          "filing_date": "2026-03-17",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "AMPCO PITTSBURGH CORP  (AP)  (CIK 0000006176)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "PureCycle Technologies, Inc.  (PCT, PCTBP, PCTTU, PCTTW)  (CIK 0001830033)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Alcoa Corp  (AA)  (CIK 0001675149)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "EXPEDITORS INTERNATIONAL OF WASHINGTON INC  (EXPD)  (CIK 0000746515)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "NORFOLK SOUTHERN CORP  (NSC)  (CIK 0000702165)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "GEO GROUP INC  (GEO)  (CIK 0000923796)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "MURPHY OIL CORP  (MUR)  (CIK 0000717423)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "ILLINOIS TOOL WORKS INC  (ITW)  (CIK 0000049826)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Sabre Corp  (SABR)  (CIK 0001597033)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "ATI INC  (ATI)  (CIK 0001018963)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "REGENCY CENTERS CORP  (REG, REGCO, REGCP)  (CIK 0000910606)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Ryerson Holding Corp  (RYI, RYZ)  (CIK 0001481582)",
+          "filing_date": "2026-03-18",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Cue Biopharma, Inc.  (CUE)  (CIK 0001645460)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "HACKETT GROUP, INC.  (HCKT)  (CIK 0001057379)",
+          "filing_date": "2026-03-20",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "PACKAGING CORP OF AMERICA  (PKG)  (CIK 0000075677)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "TRUIST FINANCIAL CORP  (TFC, TFC-PI, TFC-PO, TFC-PR)  (CIK 0000092230)",
+          "filing_date": "2026-03-16",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "AT&T INC.  (T, TBB, T-PA, T-PC)  (CIK 0000732717)",
+          "filing_date": "2026-03-23",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "BROWN & BROWN, INC.  (BRO)  (CIK 0000079282)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "PACCAR INC  (PCAR)  (CIK 0000075362)",
+          "filing_date": "2026-03-18",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "DOVER Corp  (DOV)  (CIK 0000029905)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "DOW INC.  (DOW)  (CIK 0001751788)",
+          "filing_date": "2026-03-17",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "LINCOLN EDUCATIONAL SERVICES CORP  (LINC)  (CIK 0001286613)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "HNI CORP  (HNI)  (CIK 0000048287)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Reynolds Consumer Products Inc.  (REYN)  (CIK 0001786431)",
+          "filing_date": "2026-03-18",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "BANK OF AMERICA CORP /DE/  (BAC, BAC-PB, BAC-PE, BAC-PK, BAC-PL, BAC-PM, BAC-PN, BAC-PO, BAC-PP, BML-PG, BML-PH, BML-PJ, BML-PL)  (CIK 0000070858)",
+          "filing_date": "2026-03-23",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Ferguson Enterprises Inc. /DE/  (FERG)  (CIK 0002011641)",
+          "filing_date": "2026-03-16",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "ARCH CAPITAL GROUP LTD.  (ACGL, ACGLN, ACGLO)  (CIK 0000947484)",
+          "filing_date": "2026-03-24",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "American Homes 4 Rent  (AMH, AMH-PG, AMH-PH)  (CIK 0001562401)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Chord Energy Corp  (CHRD)  (CIK 0001486159)",
+          "filing_date": "2026-03-19",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Archer-Daniels-Midland Co  (ADM)  (CIK 0000007084)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Guardian Pharmacy Services, Inc.  (GRDN)  (CIK 0001802255)",
+          "filing_date": "2026-03-26",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "STEEL DYNAMICS INC  (STLD)  (CIK 0001022671)",
+          "filing_date": "2026-03-27",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Broadstone Net Lease, Inc.  (BNL)  (CIK 0001424182)",
+          "filing_date": "2026-03-20",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Holley Inc.  (HLLY, HLLY-WT)  (CIK 0001822928)",
+          "filing_date": "2026-03-20",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "Hamilton Beach Brands Holding Co  (HBB)  (CIK 0001709164)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "NOVAGOLD RESOURCES INC  (NG)  (CIK 0001173420)",
+          "filing_date": "2026-03-25",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        },
+        {
+          "entity": "ASSOCIATED BANC-CORP  (ASB, ASBA, ASB-PE, ASB-PF)  (CIK 0000007789)",
+          "filing_date": "2026-03-16",
+          "form_type": "DEFA14A",
+          "description": "Proxy solicitation \u2014 often M&A or shareholder vote related"
+        }
+      ],
+      "timestamp": "2026-03-30T10:19:05.188219",
+      "total_filings": 200,
+      "_cached_at": 1774880347.935355
+    },
+    "filings_13f": {
+      "filings": [
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-24",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-27",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-19",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-24",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-19",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-26",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-17",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-30",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-23",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "BARCLAYS PLC  (BCS, BCLYF)  (CIK 0000312069)",
+          "filing_date": "2026-03-30",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-00826"
+          ]
+        },
+        {
+          "filer": "Leonteq Securities AG  (CIK 0001535950)",
+          "filing_date": "2026-03-26",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-26117"
+          ]
+        },
+        {
+          "filer": "EMC Capital Management  (CIK 0001847772)",
+          "filing_date": "2026-03-09",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-21069"
+          ]
+        },
+        {
+          "filer": "Corecam Pte. Ltd.  (CIK 0002106977)",
+          "filing_date": "2026-03-02",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-26718"
+          ]
+        },
+        {
+          "filer": "Leonteq Securities AG  (CIK 0001535950)",
+          "filing_date": "2026-03-26",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-26117"
+          ]
+        },
+        {
+          "filer": "CONSILIO WEALTH ADVISORS, LLC  (CIK 0001908944)",
+          "filing_date": "2026-03-20",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-21979"
+          ]
+        },
+        {
+          "filer": "rebel Financial LLC  (CIK 0002077940)",
+          "filing_date": "2026-03-27",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-25665"
+          ]
+        },
+        {
+          "filer": "Mission Financial Group, LLC  (CIK 0002113810)",
+          "filing_date": "2026-03-25",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-26781"
+          ]
+        },
+        {
+          "filer": "HughesLittle Investment Management Ltd.  (CIK 0002106035)",
+          "filing_date": "2026-03-20",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-26097"
+          ]
+        },
+        {
+          "filer": "HughesLittle Investment Management Ltd.  (CIK 0002106035)",
+          "filing_date": "2026-03-20",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-26097"
+          ]
+        },
+        {
+          "filer": "UNION SAVINGS BANK  (CIK 0001985855)",
+          "filing_date": "2026-03-06",
+          "form_type": "13F-HR",
+          "accession": [
+            "028-23351"
+          ]
+        }
+      ],
+      "timestamp": "2026-03-30T10:19:07.938401",
+      "count": 20,
+      "_cached_at": 1774880348.928972
+    },
+    "private_markets": {
+      "real_estate": {
+        "residential_cycle": "recovery",
+        "residential_score": 1,
+        "residential_signals": [
+          "Mortgage rates moderate (6.38%)",
+          "Home prices positive (1.27% YoY)"
+        ],
+        "structural_spread": 26.1,
+        "structural_signal": "new_economy_leading",
+        "vnq_ytd": -0.78,
+        "reit_market_regime": "correction"
+      },
+      "credit": {
+        "hy_spread": 3.42,
+        "quality_spread": 0.72,
+        "bdc_nav_discount": -16.97,
+        "lending_standards": 5.3,
+        "credit_cycle": "late_cycle",
+        "credit_score": -1,
+        "credit_signals": [
+          "HY spreads normal (3.42%, 342 bps)",
+          "BDCs at -17.0% NAV discount \u2014 market pricing credit losses"
+        ],
+        "real_yield": 2.08
+      },
+      "exit_window": {
+        "ipo_etf_ytd": -12.07,
+        "gp_avg_ytd": -28.96,
+        "arkk_ytd": -16.52,
+        "exit_window": "frozen",
+        "exit_score": -2,
+        "exit_signals": [
+          "IPO market weak (-12.1% YTD) \u2014 exit window narrowing",
+          "PE GP stocks weak (-29.0%) \u2014 market doubts exit/fundraising"
+        ],
+        "vc_proxy_avg_ytd": -14.28
+      },
+      "divergence": {
+        "divergences": [
+          {
+            "asset_class": "Private Credit",
+            "public_proxy": "BDC index at -17.0% NAV discount",
+            "private_lag": "Private credit funds haven't marked down yet",
+            "signal": "write_down_risk",
+            "severity": "high"
+          }
+        ],
+        "overall_divergence": "elevated",
+        "divergence_note": "One private asset class showing meaningful divergence from public proxies."
+      },
+      "raw_proxies": {
+        "reit_subsectors": {
+          "Prologis (Industrial)": {
+            "symbol": "PLD",
+            "price": 130.06,
+            "ytd_pct": 2.7,
+            "month_pct": -8.14,
+            "dividend_yield": 332.0,
+            "nav_proxy": 57.18,
+            "nav_discount_pct": 127.46
+          },
+          "American Tower (Cell Towers)": {
+            "symbol": "AMT",
+            "price": 171.18,
+            "ytd_pct": -2.5,
+            "month_pct": -10.0,
+            "dividend_yield": 406.0,
+            "nav_proxy": 7.83,
+            "nav_discount_pct": 2085.43
+          },
+          "Equinix (Data Centers)": {
+            "symbol": "EQIX",
+            "price": 967.83,
+            "ytd_pct": 27.01,
+            "month_pct": 0.18,
+            "dividend_yield": 200.0,
+            "nav_proxy": 144.12,
+            "nav_discount_pct": 571.56
+          },
+          "Realty Income (Retail/Net Lease)": {
+            "symbol": "O",
+            "price": 61.31,
+            "ytd_pct": 9.69,
+            "month_pct": -9.25,
+            "dividend_yield": 533.0,
+            "nav_proxy": 42.23,
+            "nav_discount_pct": 45.19
+          },
+          "Simon Property (Malls)": {
+            "symbol": "SPG",
+            "price": 182.62,
+            "ytd_pct": -0.21,
+            "month_pct": -9.08,
+            "dividend_yield": 480.0,
+            "nav_proxy": 15.89,
+            "nav_discount_pct": 1049.24
+          },
+          "AvalonBay (Apartments)": {
+            "symbol": "AVB",
+            "price": 162.07,
+            "ytd_pct": -10.61,
+            "month_pct": -9.47,
+            "dividend_yield": 443.0,
+            "nav_proxy": 82.99,
+            "nav_discount_pct": 95.28
+          },
+          "Ventas (Healthcare RE)": {
+            "symbol": "VTR",
+            "price": 82.39,
+            "ytd_pct": 6.47,
+            "month_pct": -4.93,
+            "dividend_yield": 254.0,
+            "nav_proxy": 26.38,
+            "nav_discount_pct": 212.36
+          },
+          "BXP Inc (Office)": {
+            "symbol": "BXP",
+            "price": 51.69,
+            "ytd_pct": -23.4,
+            "month_pct": -8.09,
+            "dividend_yield": 599.0,
+            "nav_proxy": 32.46,
+            "nav_discount_pct": 59.22
+          }
+        },
+        "pe_gps": {
+          "Blackstone": {
+            "symbol": "BX",
+            "price": 110.51,
+            "ytd_pct": -27.47,
+            "month_pct": -4.17,
+            "dividend_yield": 439.0,
+            "nav_proxy": 11.06,
+            "nav_discount_pct": 898.87
+          },
+          "KKR & Co": {
+            "symbol": "KKR",
+            "price": 89.79,
+            "ytd_pct": -29.44,
+            "month_pct": -0.91,
+            "dividend_yield": 84.0,
+            "nav_proxy": 31.81,
+            "nav_discount_pct": 182.24
+          },
+          "Apollo Global": {
+            "symbol": "APO",
+            "price": 109.38,
+            "ytd_pct": -24.13,
+            "month_pct": 2.75,
+            "dividend_yield": 188.0,
+            "nav_proxy": 37.9,
+            "nav_discount_pct": 188.61
+          },
+          "Ares Management": {
+            "symbol": "ARES",
+            "price": 106.82,
+            "ytd_pct": -33.01,
+            "month_pct": -4.49,
+            "dividend_yield": 508.0,
+            "nav_proxy": 12.69,
+            "nav_discount_pct": 742.06
+          },
+          "Carlyle Group": {
+            "symbol": "CG",
+            "price": 46.45,
+            "ytd_pct": -20.91,
+            "month_pct": -11.37,
+            "dividend_yield": 307.0,
+            "nav_proxy": 16.12,
+            "nav_discount_pct": 188.12
+          },
+          "Blue Owl Capital": {
+            "symbol": "OWL",
+            "price": 8.97,
+            "ytd_pct": -38.77,
+            "month_pct": -16.06,
+            "dividend_yield": 1018.0,
+            "nav_proxy": 3.31,
+            "nav_discount_pct": 171.41
+          }
+        },
+        "bdcs": {
+          "BDC Index ETF": {
+            "symbol": "BIZD",
+            "price": 12.41,
+            "ytd_pct": -12.48,
+            "month_pct": -3.8,
+            "dividend_yield": 1316.0
+          },
+          "Ares Capital (BDC)": {
+            "symbol": "ARCC",
+            "price": 17.5,
+            "ytd_pct": -11.11,
+            "month_pct": -5.25,
+            "dividend_yield": 1100.0,
+            "nav_proxy": 19.94,
+            "nav_discount_pct": -12.22
+          },
+          "Blue Owl Capital (BDC)": {
+            "symbol": "OBDC",
+            "price": 10.85,
+            "ytd_pct": -12.75,
+            "month_pct": -5.99,
+            "dividend_yield": 1394.0,
+            "nav_proxy": 14.81,
+            "nav_discount_pct": -26.78
+          },
+          "Blackstone Secured Lending": {
+            "symbol": "BXSL",
+            "price": 23.72,
+            "ytd_pct": -9.93,
+            "month_pct": -1.96,
+            "dividend_yield": 1310.0,
+            "nav_proxy": 26.92,
+            "nav_discount_pct": -11.91
+          }
+        },
+        "vc_proxies": {
+          "ARK Innovation (VC proxy)": {
+            "symbol": "ARKK",
+            "price": 64.21,
+            "ytd_pct": -16.52,
+            "month_pct": -13.49,
+            "dividend_yield": 0.0
+          },
+          "iShares Software (SaaS proxy)": {
+            "symbol": "IGV",
+            "price": 77.77,
+            "ytd_pct": -26.42,
+            "month_pct": -6.04,
+            "dividend_yield": 0.0,
+            "nav_proxy": 398.98,
+            "nav_discount_pct": -80.51
+          },
+          "Renaissance IPO ETF": {
+            "symbol": "IPO",
+            "price": 40.11,
+            "ytd_pct": -12.07,
+            "month_pct": -8.19,
+            "dividend_yield": 69.0
+          },
+          "Biotech (VC exit proxy)": {
+            "symbol": "XBI",
+            "price": 119.37,
+            "ytd_pct": -2.1,
+            "month_pct": -5.67,
+            "dividend_yield": 35.0
+          }
+        }
+      },
+      "timestamp": "2026-03-30T10:21:08.082844",
+      "summary": {
+        "real_estate_cycle": "recovery",
+        "credit_cycle": "late_cycle",
+        "exit_window": "frozen",
+        "public_private_divergence": "elevated",
+        "headline": "RE: recovery | Credit: late_cycle | Exits: frozen | Divergence: elevated"
+      }
+    },
+    "geopolitical": {
+      "hotspots": {
+        "iran_conflict": {
+          "name": "iran_conflict",
+          "query": "Iran conflict war Hormuz military",
+          "affected_markets": "oil, defense, risk-off",
+          "article_volume_7d": 127.9179,
+          "avg_daily_volume": 0.8,
+          "recent_volume": 0.8,
+          "peak_volume": 1.5479,
+          "latest_volume": 0.5777,
+          "data_points": 167,
+          "intensity_ratio": 1.01,
+          "intensity": "normal"
+        },
+        "china_taiwan": {
+          "name": "china_taiwan",
+          "query": "China Taiwan military strait invasion",
+          "affected_markets": "semiconductors, defense, risk-off",
+          "article_volume_7d": 1.3357,
+          "avg_daily_volume": 0.0,
+          "recent_volume": 0.0,
+          "peak_volume": 0.1233,
+          "latest_volume": 0,
+          "data_points": 167,
+          "intensity_ratio": 0.44,
+          "intensity": "declining"
+        },
+        "russia_ukraine": {
+          "name": "russia_ukraine",
+          "error": "HTTPSConnectionPool(host='api.gdeltproject.org', port=443): Read timed out. (read timeout=15)"
+        },
+        "us_china_trade": {
+          "name": "us_china_trade",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        },
+        "middle_east": {
+          "name": "middle_east",
+          "error": "HTTPSConnectionPool(host='api.gdeltproject.org', port=443): Read timed out. (read timeout=15)"
+        },
+        "ai_regulation": {
+          "name": "ai_regulation",
+          "error": "Expecting value: line 1 column 1 (char 0)"
+        }
+      },
+      "alerts": [],
+      "timestamp": "2026-03-30T10:16:58.510466",
+      "overall_risk": "low",
+      "hotspots_tracked": 6,
+      "source": "GDELT Project",
+      "_cached_at": 1774880340.050794
+    },
+    "crypto": {
+      "timestamp": "2026-03-30T10:19:00.051468",
+      "global": {
+        "total_market_cap_usd": "$2.41T",
+        "total_volume_24h_usd": "$83.2B",
+        "btc_dominance": 56.12,
+        "eth_dominance": 10.33,
+        "active_cryptocurrencies": 17937,
+        "market_cap_change_24h_pct": 1.65
+      },
+      "coins": {
+        "BTC": {
+          "name": "Bitcoin",
+          "price": 67541,
+          "market_cap": "$1350.9B",
+          "volume_24h": "$34.8B",
+          "change_24h_pct": 1.45,
+          "change_7d_pct": -4.41,
+          "change_30d_pct": 5.53,
+          "ath": 126080,
+          "ath_change_pct": -46.43,
+          "rank": 1
+        },
+        "ETH": {
+          "name": "Ethereum",
+          "price": 2063.21,
+          "market_cap": "$249.3B",
+          "volume_24h": "$15.9B",
+          "change_24h_pct": 3.55,
+          "change_7d_pct": -3.69,
+          "change_30d_pct": 8.46,
+          "ath": 4946.05,
+          "ath_change_pct": -58.29,
+          "rank": 2
+        },
+        "SOL": {
+          "name": "Solana",
+          "price": 84.41,
+          "market_cap": "$48.3B",
+          "volume_24h": "$3.2B",
+          "change_24h_pct": 2.87,
+          "change_7d_pct": -7.38,
+          "change_30d_pct": 7.05,
+          "ath": 293.31,
+          "ath_change_pct": -71.22,
+          "rank": 7
+        },
+        "ADA": {
+          "name": "Cardano",
+          "price": 0.249376,
+          "market_cap": "$9.2B",
+          "volume_24h": "$0.4B",
+          "change_24h_pct": 3.19,
+          "change_7d_pct": -4.19,
+          "change_30d_pct": -5.27,
+          "ath": 3.09,
+          "ath_change_pct": -91.92,
+          "rank": 13
+        },
+        "AVAX": {
+          "name": "Avalanche",
+          "price": 8.95,
+          "market_cap": "$3.9B",
+          "volume_24h": "$0.2B",
+          "change_24h_pct": 3.37,
+          "change_7d_pct": -5.28,
+          "change_30d_pct": 5.2,
+          "ath": 144.96,
+          "ath_change_pct": -93.83,
+          "rank": 29
+        }
+      },
+      "trending": [
+        {
+          "name": "Based",
+          "symbol": "BASED",
+          "rank": 658,
+          "score": 0
+        },
+        {
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "rank": 1,
+          "score": 1
+        },
+        {
+          "name": "Monad",
+          "symbol": "MON",
+          "rank": 147,
+          "score": 2
+        },
+        {
+          "name": "Hyperliquid",
+          "symbol": "HYPE",
+          "rank": 15,
+          "score": 3
+        },
+        {
+          "name": "River",
+          "symbol": "RIVER",
+          "rank": 135,
+          "score": 4
+        },
+        {
+          "name": "Bittensor",
+          "symbol": "TAO",
+          "rank": 35,
+          "score": 5
+        },
+        {
+          "name": "Solana",
+          "symbol": "SOL",
+          "rank": 7,
+          "score": 6
+        }
+      ],
+      "fear_greed": {
+        "value": 8,
+        "label": "Extreme Fear",
+        "timestamp": "1774828800",
+        "avg_7d": 11,
+        "trend": "deteriorating"
+      },
+      "defi": {
+        "defi_market_cap": "80282740997.9411561729573471365",
+        "defi_dominance": 3.33,
+        "defi_volume_24h": "2138557576.6283870934286103745415",
+        "top_defi_coin": "Lido Staked Ether"
+      },
+      "crypto_regime": "fear",
+      "crypto_note": "Fear elevated but prices holding \u2014 watch for washout or recovery",
+      "source": "CoinGecko + Alternative.me",
+      "_cached_at": 1774880341.7809868
+    },
+    "trends": {
+      "themes": {
+        "fear": {
+          "keywords": {
+            "stock market crash": {
+              "current": 20,
+              "avg_90d": 19.0,
+              "max_90d": 42,
+              "min_90d": 7,
+              "recent_vs_avg": 0.97,
+              "intensity": "normal"
+            },
+            "recession": {
+              "current": 82,
+              "avg_90d": 60.0,
+              "max_90d": 100,
+              "min_90d": 32,
+              "recent_vs_avg": 1.05,
+              "intensity": "normal"
+            },
+            "market crash": {
+              "current": 32,
+              "avg_90d": 36.5,
+              "max_90d": 75,
+              "min_90d": 19,
+              "recent_vs_avg": 0.82,
+              "intensity": "normal"
+            }
+          },
+          "theme_signal": "normal"
+        },
+        "greed": {
+          "keywords": {},
+          "theme_signal": "normal",
+          "error": "The request failed: Google returned a response with code 429"
+        },
+        "inflation": {
+          "keywords": {},
+          "theme_signal": "normal",
+          "error": "The request failed: Google returned a response with code 429"
+        },
+        "crypto": {
+          "keywords": {},
+          "theme_signal": "normal",
+          "error": "The request failed: Google returned a response with code 429"
+        },
+        "housing": {
+          "keywords": {},
+          "theme_signal": "normal",
+          "error": "The request failed: Google returned a response with code 429"
+        },
+        "geopolitical": {
+          "keywords": {
+            "war": {
+              "current": 49,
+              "avg_90d": 42.1,
+              "max_90d": 100,
+              "min_90d": 25,
+              "recent_vs_avg": 1.0,
+              "intensity": "normal"
+            },
+            "oil price": {
+              "current": 11,
+              "avg_90d": 4.9,
+              "max_90d": 24,
+              "min_90d": 1,
+              "recent_vs_avg": 1.51,
+              "intensity": "elevated"
+            }
+          },
+          "theme_signal": "normal"
+        }
+      },
+      "alerts": [],
+      "timestamp": "2026-03-30T10:19:01.783674",
+      "source": "Google Trends",
+      "_cached_at": 1774880345.187728
+    },
+    "earnings": {
+      "upcoming": [],
+      "by_week": {},
+      "timestamp": "2026-03-30T10:19:08.931570",
+      "catalyst_weeks": [],
+      "total_upcoming": 0,
+      "source": "yfinance",
+      "_cached_at": 1774880350.780094
+    },
+    "calendar": {
+      "releases": {
+        "releases": [
+          {
+            "date": "2026-04-02",
+            "name": "Jobless Claims (Weekly)",
+            "impact": "medium",
+            "category": "labor",
+            "days_until": 3,
+            "estimated": true
+          },
+          {
+            "date": "2026-04-03",
+            "name": "Employment Situation (NFP) [estimated]",
+            "impact": "high",
+            "category": "labor",
+            "days_until": 4,
+            "estimated": true
+          },
+          {
+            "date": "2026-04-09",
+            "name": "Jobless Claims (Weekly)",
+            "impact": "medium",
+            "category": "labor",
+            "days_until": 10,
+            "estimated": true
+          },
+          {
+            "date": "2026-04-14",
+            "name": "CPI (Consumer Price Index) [estimated]",
+            "impact": "high",
+            "category": "inflation",
+            "days_until": 15,
+            "estimated": true
+          },
+          {
+            "date": "2026-04-16",
+            "name": "Jobless Claims (Weekly)",
+            "impact": "medium",
+            "category": "labor",
+            "days_until": 17,
+            "estimated": true
+          }
+        ],
+        "catalyst_weeks": [],
+        "fomc_dates": [],
+        "lookahead_days": 21,
+        "timestamp": "2026-03-30T08:57:40.033806",
+        "_cached_at": 1774875460.0338209
+      },
+      "fed_context": {
+        "officials": {
+          "Jerome Powell": {
+            "role": "Chair",
+            "lean": "swing",
+            "votes": true
+          },
+          "John Williams": {
+            "role": "Vice Chair (NY Fed)",
+            "lean": "dove",
+            "votes": true
+          },
+          "Philip Jefferson": {
+            "role": "Vice Chair",
+            "lean": "dove",
+            "votes": true
+          },
+          "Michelle Bowman": {
+            "role": "Governor",
+            "lean": "hawk",
+            "votes": true
+          },
+          "Christopher Waller": {
+            "role": "Governor",
+            "lean": "hawk",
+            "votes": true
+          },
+          "Lisa Cook": {
+            "role": "Governor",
+            "lean": "dove",
+            "votes": true
+          },
+          "Adriana Kugler": {
+            "role": "Governor",
+            "lean": "dove",
+            "votes": true
+          },
+          "Michael Barr": {
+            "role": "Governor (Supervision)",
+            "lean": "dove",
+            "votes": true
+          },
+          "Austan Goolsbee": {
+            "role": "Chicago Fed",
+            "lean": "dove",
+            "votes": false
+          },
+          "Raphael Bostic": {
+            "role": "Atlanta Fed",
+            "lean": "swing",
+            "votes": false
+          },
+          "Susan Collins": {
+            "role": "Boston Fed",
+            "lean": "swing",
+            "votes": false
+          },
+          "Mary Daly": {
+            "role": "San Francisco Fed",
+            "lean": "dove",
+            "votes": false
+          },
+          "Thomas Barkin": {
+            "role": "Richmond Fed",
+            "lean": "swing",
+            "votes": false
+          },
+          "Patrick Harker": {
+            "role": "Philadelphia Fed",
+            "lean": "swing",
+            "votes": false
+          },
+          "Loretta Mester": {
+            "role": "Cleveland Fed",
+            "lean": "hawk",
+            "votes": false
+          },
+          "Neel Kashkari": {
+            "role": "Minneapolis Fed",
+            "lean": "hawk",
+            "votes": false
+          },
+          "James Bullard": {
+            "role": "St. Louis Fed",
+            "lean": "swing",
+            "votes": false
+          },
+          "Lorie Logan": {
+            "role": "Dallas Fed",
+            "lean": "hawk",
+            "votes": false
+          },
+          "Alberto Musalem": {
+            "role": "St. Louis Fed",
+            "lean": "swing",
+            "votes": false
+          },
+          "Jeffrey Schmid": {
+            "role": "Kansas City Fed",
+            "lean": "hawk",
+            "votes": false
+          }
+        },
+        "hawk_dove_balance": {
+          "hawks": 6,
+          "doves": 7,
+          "swings": 7,
+          "voting_hawks": 2,
+          "voting_doves": 5,
+          "voting_swings": 1,
+          "lean_summary": "dovish"
+        },
+        "key_voices": [
+          {
+            "name": "Jerome Powell",
+            "reason": "Chair sets the tone \u2014 all other voices are secondary"
+          },
+          {
+            "name": "Christopher Waller",
+            "reason": "Most influential hawk \u2014 his shifts signal policy turns"
+          },
+          {
+            "name": "John Williams",
+            "reason": "NY Fed runs market operations \u2014 closest to market plumbing"
+          },
+          {
+            "name": "Philip Jefferson",
+            "reason": "Vice Chair \u2014 Powell's likely successor, markets weight his views"
+          }
+        ],
+        "timestamp": "2026-03-30T08:57:40.034041",
+        "_cached_at": 1774875460.034048
+      },
+      "category_summary": {
+        "labor": 4,
+        "inflation": 1
+      },
+      "next_critical": null,
+      "next_high_impact": {
+        "date": "2026-04-03",
+        "name": "Employment Situation (NFP) [estimated]",
+        "impact": "high",
+        "category": "labor",
+        "days_until": 4,
+        "estimated": true
+      }
+    },
+    "fund_flows": {
+      "flows": {
+        "SPY": {
+          "name": "S&P 500",
+          "asset_class": "us_equity",
+          "style": "large_cap",
+          "price": 635.88,
+          "volume": 17069243,
+          "avg_volume_20d": 95724157,
+          "relative_volume": 0.18,
+          "dollar_volume_mm": 10853.9,
+          "avg_dollar_volume_mm": 63404.13,
+          "price_5d_pct": -2.98,
+          "price_20d_pct": -6.28,
+          "flow_signal": "stealth_distribution"
+        },
+        "QQQ": {
+          "name": "Nasdaq 100",
+          "asset_class": "us_equity",
+          "style": "growth",
+          "price": 563.35,
+          "volume": 15711727,
+          "avg_volume_20d": 70192276,
+          "relative_volume": 0.22,
+          "dollar_volume_mm": 8851.2,
+          "avg_dollar_volume_mm": 41713.0,
+          "price_5d_pct": -4.19,
+          "price_20d_pct": -6.35,
+          "flow_signal": "stealth_distribution"
+        },
+        "IWM": {
+          "name": "Russell 2000",
+          "asset_class": "us_equity",
+          "style": "small_cap",
+          "price": 242.29,
+          "volume": 11350427,
+          "avg_volume_20d": 52697921,
+          "relative_volume": 0.22,
+          "dollar_volume_mm": 2750.09,
+          "avg_dollar_volume_mm": 13162.67,
+          "price_5d_pct": -2.09,
+          "price_20d_pct": -6.37,
+          "flow_signal": "stealth_distribution"
+        },
+        "RSP": {
+          "name": "S&P Equal Weight",
+          "asset_class": "us_equity",
+          "style": "equal_weight",
+          "price": 188.99,
+          "volume": 2850895,
+          "avg_volume_20d": 17458304,
+          "relative_volume": 0.16,
+          "dollar_volume_mm": 538.8,
+          "avg_dollar_volume_mm": 3419.34,
+          "price_5d_pct": -1.41,
+          "price_20d_pct": -6.48,
+          "flow_signal": "stealth_distribution"
+        },
+        "EFA": {
+          "name": "Developed Intl",
+          "asset_class": "intl_equity",
+          "style": "developed",
+          "price": 94.26,
+          "volume": 3025889,
+          "avg_volume_20d": 29067514,
+          "relative_volume": 0.1,
+          "dollar_volume_mm": 285.22,
+          "avg_dollar_volume_mm": 2832.7,
+          "price_5d_pct": -1.65,
+          "price_20d_pct": -5.82,
+          "flow_signal": "stealth_distribution"
+        },
+        "EEM": {
+          "name": "Emerging Markets",
+          "asset_class": "intl_equity",
+          "style": "emerging",
+          "price": 55.01,
+          "volume": 4398602,
+          "avg_volume_20d": 50883680,
+          "relative_volume": 0.09,
+          "dollar_volume_mm": 241.97,
+          "avg_dollar_volume_mm": 2926.22,
+          "price_5d_pct": -4.01,
+          "price_20d_pct": -5.84,
+          "flow_signal": "stealth_distribution"
+        },
+        "TLT": {
+          "name": "20Y+ Treasuries",
+          "asset_class": "fixed_income",
+          "style": "long_duration",
+          "price": 86.6,
+          "volume": 7595202,
+          "avg_volume_20d": 46561860,
+          "relative_volume": 0.16,
+          "dollar_volume_mm": 657.71,
+          "avg_dollar_volume_mm": 4066.85,
+          "price_5d_pct": 0.24,
+          "price_20d_pct": -3.17,
+          "flow_signal": "stealth_distribution"
+        },
+        "SHY": {
+          "name": "1-3Y Treasuries",
+          "asset_class": "fixed_income",
+          "style": "short_duration",
+          "price": 82.5,
+          "volume": 1153972,
+          "avg_volume_20d": 6521828,
+          "relative_volume": 0.18,
+          "dollar_volume_mm": 95.21,
+          "avg_dollar_volume_mm": 538.17,
+          "price_5d_pct": 0.09,
+          "price_20d_pct": -0.36,
+          "flow_signal": "neutral"
+        },
+        "HYG": {
+          "name": "High Yield Corp",
+          "asset_class": "fixed_income",
+          "style": "high_yield",
+          "price": 78.99,
+          "volume": 11198557,
+          "avg_volume_20d": 70818427,
+          "relative_volume": 0.16,
+          "dollar_volume_mm": 884.52,
+          "avg_dollar_volume_mm": 5635.06,
+          "price_5d_pct": -0.57,
+          "price_20d_pct": -1.42,
+          "flow_signal": "neutral"
+        },
+        "LQD": {
+          "name": "IG Corporate",
+          "asset_class": "fixed_income",
+          "style": "investment_grade",
+          "price": 108.36,
+          "volume": 6362890,
+          "avg_volume_20d": 54516709,
+          "relative_volume": 0.12,
+          "dollar_volume_mm": 689.48,
+          "avg_dollar_volume_mm": 5952.81,
+          "price_5d_pct": -0.18,
+          "price_20d_pct": -2.26,
+          "flow_signal": "neutral"
+        },
+        "TIP": {
+          "name": "TIPS (Inflation)",
+          "asset_class": "fixed_income",
+          "style": "inflation_protected",
+          "price": 110.39,
+          "volume": 801844,
+          "avg_volume_20d": 3144007,
+          "relative_volume": 0.26,
+          "dollar_volume_mm": 88.51,
+          "avg_dollar_volume_mm": 348.16,
+          "price_5d_pct": 0.18,
+          "price_20d_pct": -1.0,
+          "flow_signal": "neutral"
+        },
+        "GLD": {
+          "name": "Gold",
+          "asset_class": "alternatives",
+          "style": "gold",
+          "price": 415.49,
+          "volume": 3686736,
+          "avg_volume_20d": 15135126,
+          "relative_volume": 0.24,
+          "dollar_volume_mm": 1531.8,
+          "avg_dollar_volume_mm": 6605.88,
+          "price_5d_pct": 2.83,
+          "price_20d_pct": -11.25,
+          "flow_signal": "stealth_distribution"
+        },
+        "USO": {
+          "name": "Oil",
+          "asset_class": "alternatives",
+          "style": "oil",
+          "price": 127.57,
+          "volume": 9321946,
+          "avg_volume_20d": 64899602,
+          "relative_volume": 0.14,
+          "dollar_volume_mm": 1189.15,
+          "avg_dollar_volume_mm": 7225.39,
+          "price_5d_pct": 15.38,
+          "price_20d_pct": 41.42,
+          "flow_signal": "stealth_accumulation"
+        },
+        "XLE": {
+          "name": "Energy",
+          "asset_class": "sector",
+          "style": "energy",
+          "price": 63.01,
+          "volume": 15457011,
+          "avg_volume_20d": 63875830,
+          "relative_volume": 0.24,
+          "dollar_volume_mm": 973.95,
+          "avg_dollar_volume_mm": 3709.53,
+          "price_5d_pct": 5.67,
+          "price_20d_pct": 11.48,
+          "flow_signal": "stealth_accumulation"
+        },
+        "XLK": {
+          "name": "Technology",
+          "asset_class": "sector",
+          "style": "technology",
+          "price": 129.48,
+          "volume": 3303508,
+          "avg_volume_20d": 18571465,
+          "relative_volume": 0.18,
+          "dollar_volume_mm": 427.72,
+          "avg_dollar_volume_mm": 2552.08,
+          "price_5d_pct": -5.46,
+          "price_20d_pct": -5.84,
+          "flow_signal": "stealth_distribution"
+        },
+        "XLF": {
+          "name": "Financials",
+          "asset_class": "sector",
+          "style": "financials",
+          "price": 48.24,
+          "volume": 13566197,
+          "avg_volume_20d": 58623389,
+          "relative_volume": 0.23,
+          "dollar_volume_mm": 654.43,
+          "avg_dollar_volume_mm": 2912.18,
+          "price_5d_pct": -2.09,
+          "price_20d_pct": -5.8,
+          "flow_signal": "stealth_distribution"
+        },
+        "XLU": {
+          "name": "Utilities",
+          "asset_class": "sector",
+          "style": "utilities",
+          "price": 46.17,
+          "volume": 5717550,
+          "avg_volume_20d": 27368447,
+          "relative_volume": 0.21,
+          "dollar_volume_mm": 263.98,
+          "avg_dollar_volume_mm": 1266.27,
+          "price_5d_pct": 3.1,
+          "price_20d_pct": -1.91,
+          "flow_signal": "neutral"
+        }
+      },
+      "asset_class_flows": {
+        "us_equity": {
+          "dominant_signal": "stealth_distribution",
+          "avg_relative_volume": 0.2,
+          "avg_price_5d_pct": -2.67,
+          "total_dollar_volume_mm": 22993.99,
+          "etf_count": 4
+        },
+        "intl_equity": {
+          "dominant_signal": "stealth_distribution",
+          "avg_relative_volume": 0.1,
+          "avg_price_5d_pct": -2.83,
+          "total_dollar_volume_mm": 527.19,
+          "etf_count": 2
+        },
+        "fixed_income": {
+          "dominant_signal": "neutral",
+          "avg_relative_volume": 0.18,
+          "avg_price_5d_pct": -0.05,
+          "total_dollar_volume_mm": 2415.43,
+          "etf_count": 5
+        },
+        "alternatives": {
+          "dominant_signal": "stealth_distribution",
+          "avg_relative_volume": 0.19,
+          "avg_price_5d_pct": 9.11,
+          "total_dollar_volume_mm": 2720.95,
+          "etf_count": 2
+        },
+        "sector": {
+          "dominant_signal": "stealth_distribution",
+          "avg_relative_volume": 0.21,
+          "avg_price_5d_pct": 0.31,
+          "total_dollar_volume_mm": 2320.08,
+          "etf_count": 4
+        }
+      },
+      "rotation_signals": [],
+      "risk_appetite": {
+        "score": 50,
+        "label": "neutral",
+        "signals": []
+      },
+      "etfs_tracked": 17,
+      "timestamp": "2026-03-30T10:19:12.430348",
+      "_cached_at": 1774880352.430471
+    },
+    "fed_game": {
+      "fed_position": {
+        "fed_funds_rate": 3.64,
+        "inflation_gap": 1.06,
+        "unemployment": 4.4,
+        "inflation_signal": "hot",
+        "labor_signal": "moderate",
+        "mandate_tension": "high",
+        "credibility_risk": "high",
+        "policy_space": {
+          "room_to_cut": 3.64,
+          "restrictive": true,
+          "neutral_estimate": 2.5
+        },
+        "strategic_options": [
+          {
+            "action": "hold",
+            "description": "Keep rates unchanged \u2014 wait for more data",
+            "payoff_if_correct": "Credibility maintained, optionality preserved",
+            "payoff_if_wrong": "Behind the curve on whichever mandate is deteriorating faster",
+            "game_theory_note": "Hold is the dominant strategy when mandate tension is high \u2014 moving in either direction risks policy error",
+            "probability_weight": 0.45
+          },
+          {
+            "action": "cut_25bp",
+            "description": "Cut 25bp \u2014 Support employment",
+            "payoff_if_correct": "Supports growth without reigniting inflation",
+            "payoff_if_wrong": "Inflation re-accelerates, credibility damaged",
+            "game_theory_note": "Cutting signals the Fed prioritizes employment over inflation \u2014 markets will test whether inflation is truly controlled",
+            "probability_weight": 0.27
+          },
+          {
+            "action": "hike_25bp",
+            "description": "Hike 25bp \u2014 reassert inflation-fighting credibility",
+            "payoff_if_correct": "Inflation expectations anchored, credibility restored",
+            "payoff_if_wrong": "Overtightening into weakness, recession risk increases",
+            "game_theory_note": "Hiking when inflation is above target but growth is slowing is the Volcker playbook \u2014 painful short-term but credibility-preserving",
+            "probability_weight": 0.14
+          },
+          {
+            "action": "guidance_shift",
+            "description": "Change forward guidance without rate action",
+            "payoff_if_correct": "Moves financial conditions without committing to action",
+            "payoff_if_wrong": "Market front-runs and over-prices the shift",
+            "game_theory_note": "The cheap option \u2014 Fed gets market to do the work via expectations. But this is a one-shot game: once guidance credibility is spent, only actual rate moves work.",
+            "probability_weight": 0.14
+          }
+        ]
+      },
+      "market_expectations": {
+        "fed_funds": 3.64,
+        "two_year": 3.796,
+        "ten_year": 4.356,
+        "spread_10y2y": 0.56,
+        "implied_cuts_2y": -0.62,
+        "term_premium": 0.56,
+        "pricing_narrative": "The market expects rates roughly unchanged (2Y at 3.80% \u2248 fed funds at 3.64%). Positive term premium suggests market sees growth/inflation ahead"
+      },
+      "fiscal_constraint": {
+        "fiscal_dominance_risk": "moderate",
+        "signals": [
+          "30Y-10Y spread at 0.56% \u2014 elevated term premium, possibly reflecting fiscal risk"
+        ],
+        "term_premium_proxy": 0.561,
+        "description": "Fiscal dominance occurs when government debt issuance becomes so large that it drives rates more than Fed policy. The Fed loses effective control of the long end."
+      },
+      "divergence": {
+        "divergences": [
+          {
+            "type": "hawkish_market_vs_employment",
+            "description": "Market barely pricing any cuts despite rising mandate tension. If employment deteriorates further, the Fed will be forced to cut faster than priced.",
+            "trade_implication": "Long 2Y Treasuries \u2014 if employment weakens, the front end rallies.",
+            "confidence": "L"
+          }
+        ],
+        "has_tradeable_divergence": true
+      },
+      "scenarios": [
+        {
+          "action": "hold",
+          "probability": 0.56,
+          "description": "Keep rates unchanged \u2014 wait for more data",
+          "market_impact": {
+            "equities": "neutral to slightly positive (uncertainty reduced)",
+            "bonds": "front end stable, long end driven by data",
+            "dollar": "supportive (rates stay high)",
+            "gold": "neutral"
+          },
+          "game_theory_note": "Hold is the dominant strategy when mandate tension is high \u2014 moving in either direction risks policy error"
+        },
+        {
+          "action": "cut_25bp",
+          "probability": 0.18,
+          "description": "Cut 25bp \u2014 Support employment",
+          "market_impact": {
+            "equities": "initially positive, but depends on 'why' \u2014 growth scare cut is bearish",
+            "bonds": "rally (front end leads)",
+            "dollar": "weaker",
+            "gold": "positive"
+          },
+          "game_theory_note": "Cutting signals the Fed prioritizes employment over inflation \u2014 markets will test whether inflation is truly controlled"
+        },
+        {
+          "action": "hike_25bp",
+          "probability": 0.13,
+          "description": "Hike 25bp \u2014 reassert inflation-fighting credibility",
+          "market_impact": {
+            "equities": "sharply negative (unexpected tightening)",
+            "bonds": "sell-off (front end leads)",
+            "dollar": "sharply stronger",
+            "gold": "negative"
+          },
+          "game_theory_note": "Hiking when inflation is above target but growth is slowing is the Volcker playbook \u2014 painful short-term but credibility-preserving"
+        },
+        {
+          "action": "guidance_shift",
+          "probability": 0.13,
+          "description": "Change forward guidance without rate action",
+          "market_impact": {
+            "equities": "depends on direction of shift",
+            "bonds": "front end reprices to new guidance",
+            "dollar": "modest move in direction of guidance",
+            "gold": "modest inverse to dollar"
+          },
+          "game_theory_note": "The cheap option \u2014 Fed gets market to do the work via expectations. But this is a one-shot game: once guidance credibility is spent, only actual rate moves work."
+        }
+      ],
+      "dominant_strategy": {
+        "strategy": "hold_and_signal",
+        "rationale": "High mandate tension + high credibility risk = paralysis. The Nash equilibrium is to hold rates and use forward guidance to signal data-dependence. Moving in either direction is a dominated strategy because the risk of being wrong is symmetric.",
+        "confidence": "H",
+        "historical_analog": "Similar to 2023 when the Fed held while debating whether inflation was sticky or transitory with a weakening labor market."
+      },
+      "timestamp": "2026-03-30T10:21:08.083023"
+    }
+  }
+}

@@ -5,6 +5,10 @@ description: >
   dealer hedging mechanics, volatility surface analysis, vanna and charm flows, options expiration
   effects, and retail options impact. Use when analyzing how options market mechanics create
   non-fundamental price movements in the underlying.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Options Mechanics

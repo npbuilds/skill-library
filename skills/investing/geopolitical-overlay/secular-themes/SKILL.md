@@ -4,6 +4,10 @@ description: >
   Multi-decade structural forces shaping investment landscapes. Reference when evaluating AI
   investment cycles, demographic shifts, deglobalization, sovereign debt sustainability, and
   climate risk. Use when distinguishing investable secular themes from transient narratives.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Secular Themes — Investment Implications

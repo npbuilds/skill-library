@@ -4,6 +4,10 @@ description: >
   Sensory specificity and the show/tell spectrum — the objective correlative, the telling detail,
   and knowing when showing is better than telling (and vice versa). Use when prose feels vague,
   abstract, or over-explained, or when the user asks about "show don't tell."
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Concrete Detail — The Telling Detail

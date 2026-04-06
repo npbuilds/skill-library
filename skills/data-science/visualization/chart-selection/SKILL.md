@@ -5,6 +5,10 @@ description: >
   for specific messages, designing accessible visualizations, avoiding misleading patterns,
   or applying direct labeling and annotation strategies. Use when communicating data insights
   visually to any audience.
+metadata:
+  author: nirav
+  version: "1.0"
+compatibility: Designed for Claude Code
 ---
 
 # Chart Selection — The Visual Translator
