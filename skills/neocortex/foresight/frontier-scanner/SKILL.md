@@ -57,22 +57,39 @@ What fundamental assumptions about AI are changing?
 | Unexpected emergence | Models suddenly good at something nobody predicted | New skill category opportunity |
 | Commoditization | Something that was cutting-edge becomes table stakes | Existing skills may need less sophistication, new skills become possible |
 
+## Source Intelligence
+
+All scans draw from the curated source registry: `references/source-registry.md`
+
+Sources are tiered by signal density:
+- **Tier 1** (every scan): Model lab blogs, tool ecosystem changelogs, MCP/SDK repos
+- **Tier 2** (weekly): Practitioner analysis blogs, arXiv/HuggingFace research feeds
+- **Tier 3** (when relevant): Domain-specific AI applications mapped to library domains
+
+Anti-sources (hype aggregators, listicles, LinkedIn thought leadership) are explicitly excluded.
+
 ## Scan Process
 
-### Quick Scan (5-minute pulse check)
-1. Check recent AI model announcements and releases
-2. Note capability changes relevant to the skill library
-3. Flag anything that changes what's possible
+### Quick Scan (weekly scheduled task)
+1. Hit Tier 1 primary sources for new announcements
+2. Skim Tier 2 practitioner blogs for pattern synthesis
+3. Cross-reference against library domains using Tier 3
+4. Flag anything that changes what's possible
 
-### Deep Scan (comprehensive analysis)
+### Deep Scan (on-demand, triggered by [ACTION NEEDED] or user request)
+Uses `research/spelunker` methodology for epistemic rigor:
+
 1. **Survey** — Map the current state of AI capabilities across all dimensions
 2. **Delta** — What changed since last scan? What's trending?
-3. **Implication analysis** — For each significant change:
+3. **Decompose** — Break each development into atomic claims (spelunker Phase 2)
+4. **Triangulate** — Verify claims across multiple independent sources (spelunker Phase 3)
+5. **Adversarial pass** — For every significant claim, actively search for counterevidence, limitations, and what the announcement does NOT say (spelunker Phase 5). Tag confidence: Confirmed / Likely / Speculative / Contested
+6. **Implication analysis** — For each verified change:
    - What skill categories does this enable?
    - What existing skills does this make more/less valuable?
    - What architectural assumptions does this challenge?
-4. **Opportunity ranking** — Prioritize implications by impact × urgency
-5. **Briefing** — Present findings using clarity-engine framing (headline → picture → evidence → recommendation)
+7. **Opportunity ranking** — Prioritize implications by impact × urgency
+8. **Briefing** — Present findings using clarity-engine framing (headline → picture → evidence → recommendation)
 
 ## Output Format
 
@@ -109,7 +126,7 @@ Confidence: [High / Medium / Low — how certain are these assessments?]
 
 ## Cross-Domain Connections
 
-- **Research/spelunker**: For deep dives into specific developments frontier-scanner surfaces
+- **Research/spelunker**: Deep scan mode borrows spelunker's full methodology — claim decomposition, source triangulation, adversarial pass, confidence tagging. For deep dives into specific developments frontier-scanner surfaces
 - **Neocortex/clarity-engine**: To explain findings in plain language with visual framing
 - **Neocortex/growth-architect**: Frontier findings feed directly into build prioritization
 - **Infrastructure/skill-registry**: To check current library state when assessing implications
