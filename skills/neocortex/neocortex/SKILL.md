@@ -120,4 +120,4 @@ Every Neocortex output follows this structure:
 - **Research**: frontier-scanner complements `research/spelunker` for deep dives. clarity-engine complements `research/evidence-synthesizer` for making findings accessible. research-curator builds on the research domain's investigative tools.
 - **Philosophy**: scenario-planner shares mental models with `philosophy/decision-theory`. skill-evolutionist's maturity model connects to epistemological concepts of knowledge currency.
 - **Investing**: scenario-planner parallels `investing/regime-intelligence` (paradigm shifts). frontier-scanner's capability tracking mirrors market regime detection.
-- **All domains**: skill-cartographer, growth-architect, and domain-translator need a birds-eye view of the entire library.
+- **All domains**: skill-cartographer, growth-architect, and domain-translator read across every domain. These connections are intentionally NOT wired as registry edges — neocortex operates *on* the library graph, not *within* it. Formal edges to all 240 skills would add noise to connectivity metrics and make the domain graph unreadable.
