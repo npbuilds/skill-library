@@ -2094,6 +2094,10 @@ if __name__ == "__main__":
                 mcp.remove_tool(_name)
             except Exception:
                 pass
+        # Disable DNS rebinding protection (missed at import time)
+        mcp.settings.transport_security = TransportSecuritySettings(
+            enable_dns_rebinding_protection=False,
+        )
 
     # Resolve transport: explicit flag wins, otherwise infer from mode
     transport = args.transport or ("streamable-http" if (args.remote or REMOTE_MODE) else "stdio")

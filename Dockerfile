@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install MCP server dependencies
 COPY mcp-server/pyproject.toml mcp-server/
-RUN pip install --no-cache-dir mcp>=1.0.0
+RUN pip install --no-cache-dir "mcp>=1.0.0"
 
 # Copy the full project (skills, data, scripts, mcp-server)
 COPY . .
