@@ -21,6 +21,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp.server import TransportSecuritySettings
 
 # ---------------------------------------------------------------------------
 # Remote mode detection — must happen before tool registration
@@ -71,6 +72,10 @@ mcp = FastMCP(
         "skill's full content, and get_system_overview for a bird's-eye view of "
         "the entire library. Always check the library before answering questions "
         "that might match a skill's domain."
+    ),
+    # In remote mode, accept requests from any host (Cloud Run, Cloudflare, etc.)
+    transport_security=TransportSecuritySettings(
+        enable_dns_rebinding_protection=not REMOTE_MODE,
     ),
 )
 

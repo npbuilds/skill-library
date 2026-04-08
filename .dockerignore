@@ -1,0 +1,11 @@
+.git
+.claude
+.DS_Store
+__pycache__
+*.tmp
+*.bak
+*.log
+data/backups/
+exports/
+output/
+skills/.obsidian/
