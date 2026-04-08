@@ -115,6 +115,7 @@ Confidence tags mean the same thing at every depth — the criteria don't change
 | Upgrading confidence because the claim "feels right" | Confirmation bias | Stick to the criteria — evidence counts, not intuition |
 | Marking as Confirmed without checking for contradictions | Ignores the "no credible contradicting sources" criterion | Always do an adversarial search |
 | Conflating "widely repeated" with "well-evidenced" | Popularity is not evidence | Trace to primary sources regardless of repetition |
+| Tagging Speculative before attempting primary source verification | Speculative means insufficient evidence after looking; it is not a substitute for looking | Follow Guiding Principle #4 — trace to the primary source first. Speculative is the output of a failed verification attempt, not a reason to skip one. |
 
 ## Edge Cases
 

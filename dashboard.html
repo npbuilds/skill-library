@@ -211,10 +211,9 @@ body::after {
 .no-grid {
   display: grid;
   grid-template-columns: 1fr 320px;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto minmax(400px, 60vh) auto;
   gap: 1px;
   background: var(--border-dim);
-  min-height: calc(100vh - 56px);
 }
 
 .no-panel {
@@ -303,15 +302,16 @@ body::after {
 /* ═══════════════════════════════════════════════
    CORTEX MAP
    ═══════════════════════════════════════════════ */
-#cortex-panel { min-height: 500px; }
+#cortex-panel { position: relative; overflow: hidden; }
 
-#cortex-svg {
+.view-svg {
   width: 100%;
   height: 100%;
   cursor: grab;
 }
-#cortex-svg:active { cursor: grabbing; }
+.view-svg:active { cursor: grabbing; }
 
+/* Cortex map */
 .cortex-link { stroke: var(--border-dim); stroke-opacity: 0.3; fill: none; }
 .cortex-link.cross-domain {
   stroke-dasharray: 4 3;
@@ -332,6 +332,18 @@ body::after {
   dominant-baseline: central;
 }
 
+.domain-label {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: central;
+  opacity: 0.5;
+}
+
 .learning-trail {
   fill: none;
   stroke: var(--amber-bright);
@@ -340,6 +352,87 @@ body::after {
   stroke-dasharray: 6 4;
   animation: flow 3s linear infinite;
 }
+
+@keyframes pulse-ring {
+  0% { r: 0; opacity: 0.6; }
+  100% { r: 18; opacity: 0; }
+}
+.pulse-ring {
+  fill: none;
+  stroke-width: 1.5;
+  pointer-events: none;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Org chart */
+.org-link {
+  fill: none;
+  stroke: var(--border-dim);
+  stroke-width: 1.2;
+  stroke-opacity: 0.5;
+}
+.org-node { cursor: pointer; }
+.org-node-bg {
+  rx: 4;
+  ry: 4;
+  stroke-width: 1.5;
+  transition: all 0.2s var(--ease);
+}
+.org-node:hover .org-node-bg { filter: brightness(1.2); }
+.org-node-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--text-bright);
+  pointer-events: none;
+  dominant-baseline: central;
+}
+.org-node-type {
+  font-family: var(--font-display);
+  font-size: 7px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  pointer-events: none;
+  dominant-baseline: central;
+}
+.org-node-count {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--text-dim);
+  pointer-events: none;
+  dominant-baseline: central;
+}
+.org-collapse-icon {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--text-dim);
+  pointer-events: none;
+  dominant-baseline: central;
+  text-anchor: middle;
+}
+
+/* View toggle tabs in panel */
+.view-tabs {
+  display: flex;
+  gap: 2px;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  z-index: 5;
+}
+.view-tab {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 10px;
+  border: 1px solid var(--border-dim);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.15s var(--ease);
+}
+.view-tab:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.view-tab:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+.view-tab:hover { border-color: var(--cyan-faded); color: var(--text-primary); }
+.view-tab.active { background: var(--cyan-glow); border-color: var(--cyan-bright); color: var(--cyan-bright); }
 
 /* ═══════════════════════════════════════════════
    SIDEBAR PANELS
@@ -649,6 +742,180 @@ body::after {
 .no-tooltip .tt-dim { color: var(--text-dim); }
 
 /* ═══════════════════════════════════════════════
+   COMMAND PALETTE
+   ═══════════════════════════════════════════════ */
+.palette-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 400;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s var(--ease);
+}
+.palette-overlay.open { opacity: 1; pointer-events: all; }
+
+.palette {
+  width: 680px;
+  max-height: 70vh;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(-10px);
+  transition: transform 0.2s var(--ease);
+}
+.palette-overlay.open .palette { transform: translateY(0); }
+
+.palette-search {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-dim);
+}
+.palette-search input {
+  width: 100%;
+  background: var(--bg-deep);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  outline: none;
+}
+.palette-search input:focus { border-color: var(--cyan-faded); }
+.palette-search input::placeholder { color: var(--text-dim); }
+
+.palette-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  padding: 0 16px 4px;
+}
+
+.palette-results {
+  overflow-y: auto;
+  flex: 1;
+  padding: 8px;
+}
+
+.palette-group {
+  margin-bottom: 4px;
+}
+.palette-group-header {
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 8px 12px 4px;
+}
+
+.palette-item {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.1s;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.palette-item:hover { background: var(--bg-panel-hover); }
+
+.palette-icon {
+  font-size: 20px;
+  width: 28px;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+.palette-body { flex: 1; min-width: 0; }
+.palette-name {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+.palette-when {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.palette-routes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+.palette-route {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  border: 1px solid;
+  opacity: 0.7;
+}
+.palette-kbd {
+  position: absolute;
+  bottom: 10px;
+  right: 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+/* ═══════════════════════════════════════════════
+   CHORD DIAGRAM
+   ═══════════════════════════════════════════════ */
+#chord-svg {
+  width: 100%;
+  height: 280px;
+}
+.chord-arc {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.chord-ribbon {
+  transition: opacity 0.2s;
+}
+.chord-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════
+   COVERAGE TOGGLE
+   ═══════════════════════════════════════════════ */
+.coverage-legend {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  display: none;
+  gap: 12px;
+  z-index: 5;
+}
+.coverage-legend.show { display: flex; }
+.coverage-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+/* ═══════════════════════════════════════════════
    RESPONSIVE & REDUCED MOTION
    ═══════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
@@ -662,6 +929,17 @@ body::after {
 </style>
 </head>
 <body>
+
+<!-- Command Palette -->
+<div class="palette-overlay" id="palette-overlay">
+  <div class="palette">
+    <div class="palette-search">
+      <input type="text" id="palette-input" placeholder="What do you want to do?" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="palette-hint">Search by task, domain, or capability. Press Esc to close.</div>
+    <div class="palette-results" id="palette-results"></div>
+  </div>
+</div>
 
 <!-- Tooltip -->
 <div class="no-tooltip" id="tooltip"></div>
@@ -684,7 +962,9 @@ body::after {
   </div>
   <div class="no-controls">
     <span class="refresh-status" id="refresh-status"></span>
+    <button class="no-btn" id="btn-palette" title="What can I do? (Ctrl+K)" style="border-color:var(--amber-faded);color:var(--amber-bright)">? what can I do</button>
     <button class="no-btn" id="btn-refresh" title="Reload all data">&#x21bb; refresh</button>
+    <button class="no-btn" id="btn-coverage" title="Toggle used/unused overlay">coverage</button>
     <button class="no-btn" id="btn-trail" title="Toggle learning trail">trail</button>
     <button class="no-btn" id="btn-labels" title="Toggle labels">labels</button>
     <button class="no-btn" id="btn-theme" title="Toggle theme">light</button>
@@ -696,10 +976,19 @@ body::after {
   <!-- Domain Vitals Strip -->
   <div class="vitals-strip" id="vitals-strip"></div>
 
-  <!-- Cortex Map -->
+  <!-- Cortex Map / Org Chart -->
   <div class="no-panel" id="cortex-panel">
-    <div class="no-panel-title">Cortex Map</div>
-    <svg id="cortex-svg"></svg>
+    <div class="no-panel-title" id="view-title">Cortex Map</div>
+    <div class="view-tabs">
+      <button class="view-tab active" data-view="cortex">cortex</button>
+      <button class="view-tab" data-view="org">org chart</button>
+    </div>
+    <svg id="cortex-svg" class="view-svg"></svg>
+    <svg id="org-svg" class="view-svg" style="display:none"></svg>
+    <div class="coverage-legend" id="coverage-legend">
+      <span><span class="coverage-dot" style="background:var(--cyan-bright)"></span> used</span>
+      <span><span class="coverage-dot" style="background:var(--red-faded);opacity:0.4"></span> never used (79%)</span>
+    </div>
   </div>
 
   <!-- Sidebar Stack -->
@@ -719,10 +1008,14 @@ body::after {
   </div>
 
   <!-- Bottom Panels -->
-  <div class="bottom-panels">
+  <div class="bottom-panels" style="grid-template-columns: 1fr 1fr 1fr">
     <div class="no-panel" id="timeline-panel">
       <div class="no-panel-title">Growth Timeline</div>
       <svg id="timeline-svg"></svg>
+    </div>
+    <div class="no-panel" id="chord-panel">
+      <div class="no-panel-title">Cross-Domain Bridges</div>
+      <svg id="chord-svg"></svg>
     </div>
     <div class="no-panel" id="table-panel">
       <div class="no-panel-title">Skill Registry</div>
@@ -1058,7 +1351,7 @@ NO.vitals = {
 NO.cortex = {
   svg: null, sim: null, nodes: [], links: [],
   showLabels: false, showTrail: false, filteredDomain: null,
-  g: null, linkG: null, nodeG: null, labelG: null, trailG: null,
+  g: null, linkG: null, nodeG: null, labelG: null, trailG: null, domainLabelG: null, pulseG: null,
 
   init() {
     const container = document.getElementById('cortex-panel');
@@ -1068,23 +1361,34 @@ NO.cortex = {
     const width = container.clientWidth;
     const height = container.clientHeight - 32;
     svg.attr('viewBox', `0 0 ${width} ${height}`);
+    this.w = width;
+    this.h = height;
 
     // Build nodes and links
     this.buildGraph(width, height);
 
-    // Glow filter
+    // Defs: glow filter + per-domain radial gradients
     const defs = svg.append('defs');
-    const glow = defs.append('filter').attr('id', 'glow');
+    const glow = defs.append('filter').attr('id', 'glow').attr('x', '-50%').attr('y', '-50%').attr('width', '200%').attr('height', '200%');
     glow.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'blur');
     const merge = glow.append('feMerge');
     merge.append('feMergeNode').attr('in', 'blur');
     merge.append('feMergeNode').attr('in', 'SourceGraphic');
 
-    // Groups
+    // Stronger glow for orchestrators
+    const glowStrong = defs.append('filter').attr('id', 'glow-strong').attr('x', '-80%').attr('y', '-80%').attr('width', '260%').attr('height', '260%');
+    glowStrong.append('feGaussianBlur').attr('stdDeviation', '5').attr('result', 'blur');
+    const merge2 = glowStrong.append('feMerge');
+    merge2.append('feMergeNode').attr('in', 'blur');
+    merge2.append('feMergeNode').attr('in', 'SourceGraphic');
+
+    // Groups (order matters for layering)
     const g = svg.append('g');
     this.g = g;
     this.trailG = g.append('g').attr('class', 'trail-group');
     this.linkG = g.append('g').attr('class', 'link-group');
+    this.domainLabelG = g.append('g').attr('class', 'domain-label-group');
+    this.pulseG = g.append('g').attr('class', 'pulse-group');
     this.nodeG = g.append('g').attr('class', 'node-group');
     this.labelG = g.append('g').attr('class', 'label-group').style('display', 'none');
 
@@ -1096,14 +1400,22 @@ NO.cortex = {
 
     // Render
     this.renderLinks();
+    this.renderDomainLabels();
     this.renderNodes(width, height);
     this.renderLabels();
+    this.renderPulseRings();
     this.startSimulation(width, height);
+  },
+
+  // Score-scaled radius: base type size + score bonus
+  nodeRadius(d) {
+    const base = NO.config.typeRadius[d.type] || 5;
+    const scoreBonus = (d.score / 100) * 4; // up to +4px for score=100
+    return base + scoreBonus;
   },
 
   buildGraph(w, h) {
     const data = NO.data;
-    // Domain centers in a circle
     const domainCenters = {};
     const domainList = data.domainOrder;
     domainList.forEach((d, i) => {
@@ -1113,7 +1425,9 @@ NO.cortex = {
     });
     this.domainCenters = domainCenters;
 
-    // Nodes
+    // Identify recently used skills (last 15 usage events)
+    const recentlyUsed = new Set(NO.data.usage.slice(-15).map(e => e.skill));
+
     this.nodes = data.skillList.map(s => ({
       id: s.name,
       domain: data.skillDomain[s.name] || 'unknown',
@@ -1121,14 +1435,15 @@ NO.cortex = {
       score: s.composite_score || 0,
       health: s.health_status,
       used: (data.usageCounts[s.name] || 0) > 0,
+      recent: recentlyUsed.has(s.name),
       words: s.metrics?.body_words || 0,
+      refs: s.metrics?.reference_files || 0,
       x: (domainCenters[data.skillDomain[s.name]]?.x || w/2) + (Math.random() - 0.5) * 40,
       y: (domainCenters[data.skillDomain[s.name]]?.y || h/2) + (Math.random() - 0.5) * 40,
     }));
 
     const nodeMap = new Map(this.nodes.map(n => [n.id, n]));
 
-    // Links (depends_on only to avoid double-counting)
     this.links = [];
     for (const s of data.skillList) {
       for (const dep of (s.depends_on || [])) {
@@ -1143,6 +1458,18 @@ NO.cortex = {
     }
   },
 
+  renderDomainLabels() {
+    const labels = Object.entries(this.domainCenters).map(([d, pos]) => ({
+      domain: d, ...pos, color: NO.config.domainColors[d] || '#888'
+    }));
+    this.domainLabelG.selectAll('text')
+      .data(labels, d => d.domain)
+      .join('text')
+      .attr('class', 'domain-label')
+      .attr('fill', d => d.color)
+      .text(d => d.domain);
+  },
+
   renderLinks() {
     this.linkG.selectAll('path')
       .data(this.links)
@@ -1150,6 +1477,15 @@ NO.cortex = {
       .attr('class', d => 'cortex-link' + (d.crossDomain ? ' cross-domain' : ''))
       .attr('stroke', d => d.crossDomain ? 'var(--magenta-faded)' : 'var(--border-dim)')
       .attr('stroke-width', d => d.crossDomain ? 1.5 : 0.5);
+  },
+
+  renderPulseRings() {
+    const recentNodes = this.nodes.filter(d => d.recent);
+    this.pulseG.selectAll('circle')
+      .data(recentNodes, d => d.id)
+      .join('circle')
+      .attr('class', 'pulse-ring')
+      .attr('stroke', d => NO.config.domainColors[d.domain] || '#888');
   },
 
   renderNodes(w, h) {
@@ -1167,44 +1503,93 @@ NO.cortex = {
     nodeEls.each(function(d) {
       const g = d3.select(this);
       g.selectAll('*').remove();
-      const r = NO.config.typeRadius[d.type] || 5;
+      const r = self.nodeRadius(d);
       const color = NO.config.domainColors[d.domain] || '#888';
+      const opacity = d.used ? 0.9 : 0.35;
 
       if (d.type === 'orchestrator') {
-        // Diamond
         const s = r * 1.2;
         g.append('rect')
           .attr('width', s * 2).attr('height', s * 2)
           .attr('x', -s).attr('y', -s)
           .attr('transform', 'rotate(45)')
           .attr('fill', color)
-          .attr('opacity', d.used ? 0.9 : 0.4)
-          .attr('filter', 'url(#glow)');
+          .attr('opacity', opacity)
+          .attr('filter', 'url(#glow-strong)');
       } else if (d.type === 'director') {
-        // Square
         const s = r;
         g.append('rect')
           .attr('width', s * 2).attr('height', s * 2)
           .attr('x', -s).attr('y', -s)
           .attr('rx', 2)
           .attr('fill', color)
-          .attr('opacity', d.used ? 0.9 : 0.4);
+          .attr('opacity', opacity)
+          .attr('filter', 'url(#glow)');
+      } else if (d.type === 'action') {
+        // Hexagon-ish (6-sided)
+        const hex = d3.range(6).map(i => {
+          const a = (Math.PI / 3) * i - Math.PI / 6;
+          return [r * Math.cos(a), r * Math.sin(a)];
+        });
+        g.append('polygon')
+          .attr('points', hex.map(p => p.join(',')).join(' '))
+          .attr('fill', color)
+          .attr('opacity', opacity);
       } else {
-        // Circle for knowledge/action/observer
         g.append('circle')
           .attr('r', r)
           .attr('fill', color)
-          .attr('opacity', d.used ? 0.85 : 0.35);
+          .attr('opacity', opacity);
+      }
+
+      // Score ring for high-scoring skills
+      if (d.score >= 60) {
+        g.append('circle')
+          .attr('r', r + 3)
+          .attr('fill', 'none')
+          .attr('stroke', color)
+          .attr('stroke-width', 0.8)
+          .attr('stroke-opacity', 0.4)
+          .attr('stroke-dasharray', `${(d.score / 100) * (2 * Math.PI * (r + 3))} 999`);
       }
     });
 
-    // Hover and click
+    // Hover: highlight connected nodes
     nodeEls
       .on('mouseover', (e, d) => {
         const color = NO.config.domainColors[d.domain] || '#888';
-        NO.tooltip.show(e, `<div class="tt-name" style="color:${color}">${d.id}</div><div class="tt-dim">${d.domain} / ${d.type}</div><div>Score: ${d.score} | Words: ${d.words.toLocaleString()}</div>`);
+        const usages = NO.data.usageCounts[d.id] || 0;
+        NO.tooltip.show(e,
+          `<div class="tt-name" style="color:${color}">${d.id}</div>` +
+          `<div class="tt-dim">${d.domain} / ${d.type}${d.recent ? ' &bull; recent' : ''}</div>` +
+          `<div>Score: ${d.score} | Words: ${d.words.toLocaleString()} | Used: ${usages}x</div>`
+        );
+        // Dim unconnected nodes
+        const connected = new Set();
+        connected.add(d.id);
+        for (const link of self.links) {
+          const sid = typeof link.source === 'object' ? link.source.id : link.source;
+          const tid = typeof link.target === 'object' ? link.target.id : link.target;
+          if (sid === d.id) connected.add(tid);
+          if (tid === d.id) connected.add(sid);
+        }
+        self.nodeG.selectAll('.cortex-node-g').style('opacity', n => connected.has(n.id) ? 1 : 0.15);
+        self.linkG.selectAll('path').style('opacity', l => {
+          const sid = typeof l.source === 'object' ? l.source.id : l.source;
+          const tid = typeof l.target === 'object' ? l.target.id : l.target;
+          return (sid === d.id || tid === d.id) ? 0.8 : 0.03;
+        });
       })
-      .on('mouseout', () => NO.tooltip.hide())
+      .on('mouseout', () => {
+        NO.tooltip.hide();
+        const domain = self.filteredDomain;
+        self.nodeG.selectAll('.cortex-node-g').style('opacity', d => !domain || d.domain === domain ? 1 : 0.1);
+        self.linkG.selectAll('path').style('opacity', d => {
+          if (!domain) return d.crossDomain ? 0.5 : 0.3;
+          const sd = d.source.domain || d.source, td = d.target.domain || d.target;
+          return (sd === domain || td === domain) ? 0.5 : 0.05;
+        });
+      })
       .on('click', (e, d) => { e.stopPropagation(); NO.detail.open(d.id); });
   },
 
@@ -1235,13 +1620,12 @@ NO.cortex = {
       .force('x', d3.forceX(w / 2).strength(0.07))
       .force('y', d3.forceY(h / 2).strength(0.07))
       .force('cluster', forceCluster)
-      .force('collide', d3.forceCollide(d => (NO.config.typeRadius[d.type] || 5) + 2))
+      .force('collide', d3.forceCollide(d => self.nodeRadius(d) + 2))
       .alphaDecay(0.02)
       .on('tick', () => this.tick());
   },
 
   tick() {
-    // Update links
     this.linkG.selectAll('path')
       .attr('d', d => {
         const sx = d.source.x, sy = d.source.y, tx = d.target.x, ty = d.target.y;
@@ -1252,14 +1636,29 @@ NO.cortex = {
         return `M${sx},${sy} L${tx},${ty}`;
       });
 
-    // Update nodes
     this.nodeG.selectAll('.cortex-node-g')
       .attr('transform', d => `translate(${d.x},${d.y})`);
 
-    // Update labels
     this.labelG.selectAll('text')
       .attr('x', d => d.x)
-      .attr('y', d => d.y + (NO.config.typeRadius[d.type] || 5) + 10);
+      .attr('y', d => d.y + this.nodeRadius(d) + 10);
+
+    // Domain labels follow cluster centers (weighted average of node positions)
+    const domainPositions = {};
+    for (const n of this.nodes) {
+      if (!domainPositions[n.domain]) domainPositions[n.domain] = { sx: 0, sy: 0, c: 0 };
+      domainPositions[n.domain].sx += n.x;
+      domainPositions[n.domain].sy += n.y;
+      domainPositions[n.domain].c++;
+    }
+    this.domainLabelG.selectAll('text')
+      .attr('x', d => { const p = domainPositions[d.domain]; return p ? p.sx / p.c : d.x; })
+      .attr('y', d => { const p = domainPositions[d.domain]; return p ? p.sy / p.c - (Math.min(this.w, this.h) * 0.08) : d.y; });
+
+    // Pulse rings follow their nodes
+    this.pulseG.selectAll('circle')
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y);
   },
 
   filterDomain(domain) {
@@ -1270,10 +1669,16 @@ NO.cortex = {
     this.linkG.selectAll('path')
       .transition().duration(200)
       .style('opacity', d => {
-        if (!domain) return 1;
+        if (!domain) return d.crossDomain ? 0.5 : 0.3;
         const sd = d.source.domain || d.source, td = d.target.domain || d.target;
-        return (sd === domain || td === domain) ? 1 : 0.05;
+        return (sd === domain || td === domain) ? 0.5 : 0.05;
       });
+    this.domainLabelG.selectAll('text')
+      .transition().duration(200)
+      .style('opacity', d => !domain || d.domain === domain ? 0.5 : 0.08);
+    this.pulseG.selectAll('circle')
+      .transition().duration(200)
+      .style('opacity', d => !domain || d.domain === domain ? 1 : 0.05);
   },
 
   toggleLabels() {
@@ -1286,7 +1691,6 @@ NO.cortex = {
     this.trailG.selectAll('*').remove();
     if (!this.showTrail) return;
 
-    // Build learning trail from usage log
     const usageNodes = [];
     const nodeMap = new Map(this.nodes.map(n => [n.id, n]));
     for (const e of NO.data.usage) {
@@ -1300,6 +1704,296 @@ NO.cortex = {
       .datum(usageNodes)
       .attr('class', 'learning-trail')
       .attr('d', line);
+  }
+};
+
+/* ─── Org Chart (Collapsible Tree) ─── */
+NO.org = {
+  svg: null, g: null, root: null, treeLayout: null,
+  nodeW: 160, nodeH: 28, duration: 400,
+
+  init() {
+    const container = document.getElementById('cortex-panel');
+    const svg = d3.select('#org-svg');
+    this.svg = svg;
+
+    const width = container.clientWidth;
+    const height = container.clientHeight - 32;
+    svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+    const g = svg.append('g').attr('transform', 'translate(40, 20)');
+    this.g = g;
+    this.width = width;
+    this.height = height;
+
+    // Zoom
+    svg.call(d3.zoom().scaleExtent([0.2, 3])
+      .on('zoom', (e) => g.attr('transform', e.transform)));
+
+    // Build hierarchy from registry parent data
+    this.buildTree();
+    this.render(this.root);
+  },
+
+  buildTree() {
+    const data = NO.data;
+    const skills = data.skills;
+
+    // Root node
+    const treeData = { name: 'Skill Library', type: 'root', children: [] };
+
+    // Group by domain
+    for (const domain of data.domainOrder) {
+      const domainNode = {
+        name: domain, type: 'domain', domain: domain,
+        color: NO.config.domainColors[domain] || '#888',
+        children: []
+      };
+
+      const domainSkills = data.domains[domain] || [];
+      const childrenOf = {}; // parent → [children]
+
+      for (const sName of domainSkills) {
+        const s = skills[sName];
+        if (!s) continue;
+        const parent = s.parent;
+        if (parent && domainSkills.includes(parent)) {
+          if (!childrenOf[parent]) childrenOf[parent] = [];
+          childrenOf[parent].push(sName);
+        }
+      }
+
+      // Find root skills in this domain (no parent, or parent not in domain)
+      const roots = domainSkills.filter(sName => {
+        const s = skills[sName];
+        return !s?.parent || !domainSkills.includes(s.parent);
+      });
+
+      // Recursive tree builder
+      const buildNode = (sName) => {
+        const s = skills[sName];
+        if (!s) return null;
+        const node = {
+          name: sName,
+          type: s.type,
+          domain: domain,
+          color: NO.config.domainColors[domain] || '#888',
+          score: s.composite_score || 0,
+          description: s.description || '',
+        };
+        const kids = childrenOf[sName];
+        if (kids && kids.length) {
+          node.children = kids.sort((a, b) => {
+            const ta = skills[a]?.type || '', tb = skills[b]?.type || '';
+            const order = { orchestrator: 0, director: 1, action: 2, knowledge: 3, observer: 4 };
+            return (order[ta] ?? 5) - (order[tb] ?? 5) || a.localeCompare(b);
+          }).map(buildNode).filter(Boolean);
+        }
+        return node;
+      };
+
+      // Sort roots: orchestrators first
+      roots.sort((a, b) => {
+        const ta = skills[a]?.type || '', tb = skills[b]?.type || '';
+        const order = { orchestrator: 0, director: 1, action: 2, knowledge: 3, observer: 4 };
+        return (order[ta] ?? 5) - (order[tb] ?? 5) || a.localeCompare(b);
+      });
+
+      domainNode.children = roots.map(buildNode).filter(Boolean);
+      treeData.children.push(domainNode);
+    }
+
+    this.root = d3.hierarchy(treeData);
+
+    // Start with domains expanded, children collapsed
+    this.root.children?.forEach(domainNode => {
+      domainNode.children?.forEach(child => {
+        if (child.children) this.collapse(child);
+      });
+    });
+
+    this.root.x0 = this.height / 2;
+    this.root.y0 = 0;
+  },
+
+  collapse(d) {
+    if (d.children) {
+      d._children = d.children;
+      d._children.forEach(c => this.collapse(c));
+      d.children = null;
+    }
+  },
+
+  toggle(d) {
+    if (d.children) {
+      d._children = d.children;
+      d.children = null;
+    } else if (d._children) {
+      d.children = d._children;
+      d._children = null;
+    }
+  },
+
+  render(source) {
+    const self = this;
+    const tree = d3.tree().nodeSize([this.nodeH + 4, this.nodeW + 20]);
+    tree(this.root);
+
+    const nodes = this.root.descendants();
+    const links = this.root.links();
+
+    // Normalize depth for horizontal layout
+    nodes.forEach(d => { d.y = d.depth * (this.nodeW + 30); });
+
+    // ── Links ──
+    const link = this.g.selectAll('.org-link-g')
+      .data(links, d => d.target.data.name + d.target.depth);
+
+    const linkEnter = link.enter().append('path')
+      .attr('class', 'org-link')
+      .attr('d', () => {
+        const o = { x: source.x0, y: source.y0 };
+        return this.diagonal(o, o);
+      });
+
+    link.merge(linkEnter)
+      .transition().duration(this.duration)
+      .attr('d', d => this.diagonal(d.source, d.target))
+      .attr('stroke', d => d.target.data.color || 'var(--border-dim)');
+
+    link.exit().transition().duration(this.duration)
+      .attr('d', () => {
+        const o = { x: source.x, y: source.y };
+        return this.diagonal(o, o);
+      }).remove();
+
+    // ── Nodes ──
+    const node = this.g.selectAll('.org-node')
+      .data(nodes, d => d.data.name + d.depth);
+
+    const nodeEnter = node.enter().append('g')
+      .attr('class', 'org-node')
+      .attr('transform', `translate(${source.y0},${source.x0})`)
+      .style('opacity', 0);
+
+    // Background rect
+    nodeEnter.append('rect')
+      .attr('class', 'org-node-bg')
+      .attr('width', d => d.data.type === 'root' ? 100 : d.data.type === 'domain' ? 90 : this.nodeW)
+      .attr('height', this.nodeH)
+      .attr('y', -this.nodeH / 2)
+      .attr('x', -4);
+
+    // Collapse indicator
+    nodeEnter.append('text')
+      .attr('class', 'org-collapse-icon')
+      .attr('x', -14)
+      .attr('y', 1);
+
+    // Label
+    nodeEnter.append('text')
+      .attr('class', 'org-node-label')
+      .attr('x', 6)
+      .attr('y', -2);
+
+    // Type badge
+    nodeEnter.append('text')
+      .attr('class', 'org-node-type')
+      .attr('x', 6)
+      .attr('y', 10);
+
+    // Child count
+    nodeEnter.append('text')
+      .attr('class', 'org-node-count');
+
+    // ── Update all ──
+    const nodeUpdate = node.merge(nodeEnter);
+
+    nodeUpdate.transition().duration(this.duration)
+      .attr('transform', d => `translate(${d.y},${d.x})`)
+      .style('opacity', 1);
+
+    nodeUpdate.select('.org-node-bg')
+      .attr('fill', d => {
+        if (d.data.type === 'root') return 'var(--bg-deep)';
+        if (d.data.type === 'domain') return d.data.color + '18';
+        return 'var(--bg-deep)';
+      })
+      .attr('stroke', d => d.data.color || 'var(--border-dim)')
+      .attr('stroke-opacity', d => d.data.type === 'root' ? 0.3 : 0.5);
+
+    nodeUpdate.select('.org-collapse-icon')
+      .text(d => d.children ? '\u25BC' : d._children ? '\u25B6' : '')
+      .attr('fill', d => d.data.color || 'var(--text-dim)');
+
+    nodeUpdate.select('.org-node-label')
+      .text(d => {
+        const n = d.data.name;
+        const maxLen = d.data.type === 'domain' ? 12 : 18;
+        return n.length > maxLen ? n.substring(0, maxLen - 1) + '\u2026' : n;
+      })
+      .attr('fill', d => d.data.type === 'domain' ? d.data.color : 'var(--text-bright)')
+      .attr('font-weight', d => (d.data.type === 'domain' || d.data.type === 'orchestrator') ? '700' : '400');
+
+    nodeUpdate.select('.org-node-type')
+      .text(d => (d.data.type !== 'root' && d.data.type !== 'domain') ? d.data.type : '')
+      .attr('fill', d => d.data.color || 'var(--text-dim)');
+
+    nodeUpdate.select('.org-node-count')
+      .text(d => {
+        const kids = d._children || d.children;
+        return kids ? `(${this.countDescendants(d)})` : '';
+      })
+      .attr('x', d => {
+        const w = d.data.type === 'root' ? 100 : d.data.type === 'domain' ? 90 : this.nodeW;
+        return w + 4;
+      })
+      .attr('y', 1);
+
+    // Click handler
+    nodeUpdate.on('click', (e, d) => {
+      if (d.data.type !== 'root' && d.data.type !== 'domain' && !d.children && !d._children) {
+        // Leaf node — open detail
+        NO.detail.open(d.data.name);
+        return;
+      }
+      this.toggle(d);
+      this.render(d);
+    }).on('mouseover', (e, d) => {
+      if (d.data.description) {
+        NO.tooltip.show(e, `<div class="tt-name" style="color:${d.data.color || 'var(--text-bright)'}">${d.data.name}</div><div>${d.data.description}</div>${d.data.score ? '<div class="tt-dim">Score: ' + d.data.score + '</div>' : ''}`);
+      }
+    }).on('mouseout', () => NO.tooltip.hide());
+
+    // ── Exit ──
+    node.exit().transition().duration(this.duration)
+      .attr('transform', `translate(${source.y},${source.x})`)
+      .style('opacity', 0)
+      .remove();
+
+    // Stash positions for next transition
+    nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+  },
+
+  countDescendants(d) {
+    let count = 0;
+    const kids = d._children || d.children;
+    if (!kids) return 0;
+    for (const c of kids) {
+      count++;
+      count += this.countDescendants(c);
+    }
+    return count;
+  },
+
+  diagonal(s, t) {
+    return `M${s.y},${s.x} C${(s.y + t.y) / 2},${s.x} ${(s.y + t.y) / 2},${t.x} ${t.y},${t.x}`;
+  },
+
+  filterDomain(domain) {
+    // For org chart, rebuild the tree with only matching domain
+    // (or all if null). Simple approach: re-init
+    // Not needed per user request — org chart shows all, no cross-domain filtering
   }
 };
 
@@ -1608,6 +2302,299 @@ NO.theme = {
   }
 };
 
+/* ─── Command Palette ─── */
+NO.palette = {
+  overlay: document.getElementById('palette-overlay'),
+  input: document.getElementById('palette-input'),
+  results: document.getElementById('palette-results'),
+  entries: [],
+
+  init() {
+    this.buildEntries();
+
+    // Open/close
+    document.getElementById('btn-palette').onclick = () => this.open();
+    this.overlay.onclick = (e) => { if (e.target === this.overlay) this.close(); };
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); this.open(); }
+      if (e.key === 'Escape' && this.overlay.classList.contains('open')) this.close();
+    });
+
+    this.input.oninput = () => this.filter();
+  },
+
+  buildEntries() {
+    const skills = NO.data.skills;
+    const domainMap = NO.data.skillDomain;
+    const domains = NO.data.domains;
+    const domainOrder = NO.data.domainOrder;
+
+    // Domain icons
+    const icons = {
+      investing: '\u{1F4C8}', sommelier: '\u{1F377}', writing: '\u{270F}\uFE0F',
+      worldbuilding: '\u{1F30D}', 'game-theory': '\u{265F}\uFE0F', design: '\u{1F3A8}',
+      'data-science': '\u{1F4CA}', infrastructure: '\u{2699}\uFE0F', research: '\u{1F50D}',
+      artifacts: '\u{2728}', meta: '\u{1F9E0}', philosophy: '\u{1F4AD}', neocortex: '\u{1F52C}'
+    };
+
+    this.entries = [];
+
+    for (const d of domainOrder) {
+      const domainSkills = domains[d] || [];
+      const orch = domainSkills.find(s => skills[s]?.type === 'orchestrator');
+      if (!orch) continue;
+
+      const s = skills[orch];
+      const desc = s.description || '';
+
+      // Extract "Use when..." phrase
+      let useWhen = '';
+      const patterns = ['Use when ', 'Activate when ', 'use when '];
+      for (const p of patterns) {
+        const idx = desc.indexOf(p);
+        if (idx !== -1) {
+          useWhen = desc.substring(idx).split(/\.\s/)[0] + '.';
+          break;
+        }
+      }
+      if (!useWhen) useWhen = desc.split('.').slice(0, 2).join('.') + '.';
+
+      // Get directors as routes
+      const directors = domainSkills
+        .filter(sn => skills[sn]?.type === 'director')
+        .map(sn => ({ name: sn, desc: (skills[sn]?.description || '').split('.')[0] }));
+
+      // Get action skills
+      const actions = domainSkills
+        .filter(sn => skills[sn]?.type === 'action')
+        .map(sn => sn);
+
+      this.entries.push({
+        domain: d,
+        name: orch,
+        icon: icons[d] || '\u{1F4E6}',
+        color: NO.config.domainColors[d] || '#888',
+        useWhen: useWhen,
+        directors: directors,
+        actions: actions,
+        searchText: `${d} ${orch} ${useWhen} ${directors.map(dr => dr.name + ' ' + dr.desc).join(' ')} ${actions.join(' ')}`.toLowerCase()
+      });
+    }
+  },
+
+  open() {
+    this.overlay.classList.add('open');
+    this.input.value = '';
+    this.filter();
+    setTimeout(() => this.input.focus(), 50);
+  },
+
+  close() {
+    this.overlay.classList.remove('open');
+  },
+
+  filter() {
+    const q = (this.input.value || '').toLowerCase().trim();
+    const matches = q ? this.entries.filter(e => e.searchText.includes(q)) : this.entries;
+    this.renderResults(matches);
+  },
+
+  renderResults(entries) {
+    if (!entries.length) {
+      this.results.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-dim);font-family:var(--font-mono);font-size:12px">No matching capabilities</div>';
+      return;
+    }
+
+    let html = '';
+    for (const e of entries) {
+      html += '<div class="palette-item" data-skill="' + NO.detail.esc(e.name) + '">';
+      html += '<div class="palette-icon">' + e.icon + '</div>';
+      html += '<div class="palette-body">';
+      html += '<div class="palette-name" style="color:' + e.color + '">' + NO.detail.esc(e.name) + ' <span style="font-weight:400;font-size:11px;color:var(--text-dim)">(' + NO.detail.esc(e.domain) + ')</span></div>';
+      html += '<div class="palette-when">' + NO.detail.esc(e.useWhen) + '</div>';
+
+      if (e.directors.length) {
+        html += '<div class="palette-routes">';
+        for (const dr of e.directors) {
+          html += '<span class="palette-route" style="color:' + e.color + ';border-color:' + e.color + '40" title="' + NO.detail.esc(dr.desc) + '">' + NO.detail.esc(dr.name) + '</span>';
+        }
+        html += '</div>';
+      }
+
+      html += '</div></div>';
+    }
+
+    this.results.innerHTML = html;
+
+    this.results.querySelectorAll('.palette-item').forEach(el => {
+      el.onclick = () => {
+        this.close();
+        NO.detail.open(el.dataset.skill);
+      };
+    });
+  }
+};
+
+/* ─── Chord Diagram (Cross-Domain Bridges) ─── */
+NO.chord = {
+  render() {
+    const svg = d3.select('#chord-svg');
+    const container = document.getElementById('chord-panel');
+    if (!container) return;
+    const size = Math.min(container.clientWidth - 32, 280);
+    const outerRadius = size / 2 - 10;
+    const innerRadius = outerRadius - 16;
+    svg.attr('viewBox', `0 0 ${size} ${size}`);
+    svg.selectAll('*').remove();
+
+    const data = NO.data;
+    const domainOrder = data.domainOrder.filter(d => {
+      // Only include domains that have cross-domain edges
+      return data.skillList.some(s => {
+        const sd = data.skillDomain[s.name];
+        if (sd !== d) return false;
+        for (const dep of (s.depends_on || [])) {
+          if (data.skillDomain[dep] && data.skillDomain[dep] !== d) return true;
+        }
+        return false;
+      }) || data.skillList.some(s => {
+        const sd = data.skillDomain[s.name];
+        if (sd === d) return false;
+        for (const dep of (s.depends_on || [])) {
+          if (data.skillDomain[dep] === d) return true;
+        }
+        return false;
+      });
+    });
+
+    if (domainOrder.length < 2) {
+      svg.append('text').attr('x', size/2).attr('y', size/2)
+        .attr('text-anchor', 'middle').attr('fill', 'var(--text-dim)')
+        .attr('font-family', 'var(--font-mono)').attr('font-size', '11')
+        .text('No cross-domain edges');
+      return;
+    }
+
+    // Build adjacency matrix
+    const n = domainOrder.length;
+    const matrix = Array.from({ length: n }, () => Array(n).fill(0));
+    const domainIdx = new Map(domainOrder.map((d, i) => [d, i]));
+
+    for (const s of data.skillList) {
+      const sd = data.skillDomain[s.name];
+      const si = domainIdx.get(sd);
+      if (si === undefined) continue;
+      for (const dep of (s.depends_on || [])) {
+        const td = data.skillDomain[dep];
+        const ti = domainIdx.get(td);
+        if (ti !== undefined && si !== ti) {
+          matrix[si][ti]++;
+          matrix[ti][si]++;
+        }
+      }
+    }
+
+    const g = svg.append('g').attr('transform', `translate(${size/2},${size/2})`);
+
+    const chord = d3.chord().padAngle(0.06).sortSubgroups(d3.descending);
+    const chords = chord(matrix);
+
+    const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
+    const ribbon = d3.ribbon().radius(innerRadius);
+
+    // Arcs
+    g.selectAll('.chord-arc')
+      .data(chords.groups)
+      .join('path')
+      .attr('class', 'chord-arc')
+      .attr('d', arc)
+      .attr('fill', d => NO.config.domainColors[domainOrder[d.index]] || '#888')
+      .attr('stroke', 'var(--bg-deep)')
+      .attr('stroke-width', 1)
+      .on('mouseover', (e, d) => {
+        const domain = domainOrder[d.index];
+        g.selectAll('.chord-ribbon').style('opacity', r =>
+          r.source.index === d.index || r.target.index === d.index ? 0.7 : 0.05);
+        NO.tooltip.show(e, `<div class="tt-name" style="color:${NO.config.domainColors[domain]}">${domain}</div>`);
+      })
+      .on('mouseout', () => {
+        g.selectAll('.chord-ribbon').style('opacity', 0.5);
+        NO.tooltip.hide();
+      });
+
+    // Labels
+    g.selectAll('.chord-label')
+      .data(chords.groups)
+      .join('text')
+      .attr('class', 'chord-label')
+      .each(function(d) {
+        const angle = (d.startAngle + d.endAngle) / 2;
+        const flip = angle > Math.PI;
+        d3.select(this)
+          .attr('transform', `rotate(${angle * 180 / Math.PI - 90}) translate(${outerRadius + 6}) ${flip ? 'rotate(180)' : ''}`)
+          .attr('text-anchor', flip ? 'end' : 'start')
+          .attr('fill', NO.config.domainColors[domainOrder[d.index]] || '#888');
+      })
+      .text(d => {
+        const name = domainOrder[d.index];
+        return name.length > 10 ? name.substring(0, 8) + '..' : name;
+      });
+
+    // Ribbons
+    g.selectAll('.chord-ribbon')
+      .data(chords)
+      .join('path')
+      .attr('class', 'chord-ribbon')
+      .attr('d', ribbon)
+      .attr('fill', d => NO.config.domainColors[domainOrder[d.source.index]] || '#888')
+      .attr('opacity', 0.5)
+      .on('mouseover', (e, d) => {
+        const src = domainOrder[d.source.index], tgt = domainOrder[d.target.index];
+        const count = matrix[d.source.index][d.target.index];
+        NO.tooltip.show(e, `<div class="tt-name">${src} \u2194 ${tgt}</div><div class="tt-dim">${count} shared edges</div>`);
+      })
+      .on('mouseout', () => NO.tooltip.hide());
+  }
+};
+
+/* ─── Coverage Overlay ─── */
+NO.coverage = {
+  active: false,
+
+  toggle() {
+    this.active = !this.active;
+    document.getElementById('btn-coverage').classList.toggle('active', this.active);
+    document.getElementById('coverage-legend').classList.toggle('show', this.active);
+
+    if (this.active) {
+      // Dim unused, brighten used
+      NO.cortex.nodeG.selectAll('.cortex-node-g')
+        .transition().duration(300)
+        .style('opacity', d => d.used ? 1 : 0.12);
+      NO.cortex.linkG.selectAll('path')
+        .transition().duration(300)
+        .style('opacity', 0.05);
+    } else {
+      // Restore
+      const domain = NO.cortex.filteredDomain;
+      NO.cortex.nodeG.selectAll('.cortex-node-g')
+        .transition().duration(300)
+        .style('opacity', d => !domain || d.domain === domain ? 1 : 0.1);
+      NO.cortex.linkG.selectAll('path')
+        .transition().duration(300)
+        .style('opacity', d => d.crossDomain ? 0.5 : 0.3);
+    }
+
+    // Update legend with current stats
+    const used = NO.data.skillList.filter(s => (NO.data.usageCounts[s.name] || 0) > 0).length;
+    const total = NO.data.skillList.length;
+    const pct = Math.round(100 * (total - used) / total);
+    document.getElementById('coverage-legend').innerHTML =
+      `<span><span class="coverage-dot" style="background:var(--cyan-bright)"></span> used (${used})</span>` +
+      `<span><span class="coverage-dot" style="background:var(--red-faded);opacity:0.4"></span> unused (${total - used}, ${pct}%)</span>`;
+  }
+};
+
 /* ─── Bootstrap ─── */
 (async function() {
   try {
@@ -1635,11 +2622,56 @@ NO.theme = {
   NO.detail.init();
   NO.vitals.render();
   NO.cortex.init();
+  // Org chart is lazy-initialized on first view switch
   NO.timeline.render();
   NO.signals.render();
   NO.heatmap.render();
   NO.depth.render();
   NO.table.init();
+  NO.palette.init();
+  NO.chord.render();
+
+  // Coverage toggle
+  document.getElementById('btn-coverage').onclick = () => NO.coverage.toggle();
+
+  // View toggle (cortex ↔ org chart)
+  let currentView = 'cortex';
+  let orgInitialized = false;
+  const cortexSvg = document.getElementById('cortex-svg');
+  const orgSvg = document.getElementById('org-svg');
+  const viewTitle = document.getElementById('view-title');
+
+  document.querySelectorAll('.view-tab').forEach(tab => {
+    tab.onclick = () => {
+      const view = tab.dataset.view;
+      if (view === currentView) return;
+      currentView = view;
+
+      document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      if (view === 'cortex') {
+        cortexSvg.style.display = 'block';
+        orgSvg.style.display = 'none';
+        viewTitle.textContent = 'Cortex Map';
+        // Show cortex-specific buttons
+        document.getElementById('btn-trail').style.display = '';
+        document.getElementById('btn-labels').style.display = '';
+      } else {
+        cortexSvg.style.display = 'none';
+        orgSvg.style.display = 'block';
+        viewTitle.textContent = 'Org Chart';
+        // Hide cortex-specific buttons
+        document.getElementById('btn-trail').style.display = 'none';
+        document.getElementById('btn-labels').style.display = 'none';
+        // Lazy init
+        if (!orgInitialized) {
+          NO.org.init();
+          orgInitialized = true;
+        }
+      }
+    };
+  });
 
   // Wire buttons
   document.getElementById('btn-trail').onclick = () => {

@@ -12,6 +12,20 @@ dependencies = [
     "click>=8.0",
 ]
 
+[project.optional-dependencies]
+search = [
+    "rank-bm25>=0.2.2",
+    "sentence-transformers>=2.2.0",
+    "numpy>=1.24.0",
+]
+graph = [
+    "python-igraph>=0.11.0",
+    "leidenalg>=0.10.0",
+]
+all = [
+    "skill-library[search,graph]",
+]
+
 [project.scripts]
 skills = "cli:main"
 
@@ -19,4 +33,4 @@ skills = "cli:main"
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
-only-include = ["cli.py", "server.py", "shared.py"]
+only-include = ["cli.py", "server.py", "shared.py", "search_index.py"]

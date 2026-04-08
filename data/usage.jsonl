@@ -86,3 +86,10 @@
 {"skill": "responsive-type", "type": "knowledge", "timestamp": "2026-04-02T19:43:29.260562+00:00"}
 {"skill": "time-series", "type": "knowledge", "timestamp": "2026-04-02T19:43:29.529196+00:00"}
 {"skill": "religion-design", "type": "knowledge", "timestamp": "2026-04-02T20:04:51.166141+00:00"}
+{"skill": "frontier-scanner", "type": "action", "timestamp": "2026-04-06T22:16:37.250162+00:00"}
+{"skill": "spelunker", "type": "orchestrator", "timestamp": "2026-04-06T22:17:23.162914+00:00"}
+{"skill": "claim-decomposer", "type": "action", "timestamp": "2026-04-06T22:17:23.553296+00:00"}
+{"skill": "source-triangulator", "type": "action", "timestamp": "2026-04-06T22:17:24.475173+00:00"}
+{"skill": "evidence-synthesizer", "type": "action", "timestamp": "2026-04-06T22:17:24.486647+00:00"}
+{"skill": "archon", "type": "orchestrator", "timestamp": "2026-04-06T22:26:30.042316+00:00"}
+{"skill": "archon", "type": "orchestrator", "timestamp": "2026-04-06T22:28:01.750500+00:00"}

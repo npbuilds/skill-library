@@ -220,3 +220,91 @@ def compute_auto_score(
         + score_usage(name, usage_counts, max_usage) * 0.10
         + score_feedback(name, feedback_ratings) * 0.10
     )
+
+
+# ---------------------------------------------------------------------------
+# Impact analysis
+# ---------------------------------------------------------------------------
+
+
+def _get_domain(entry: dict) -> str:
+    """Extract the domain tag from a skill entry, or '?' if missing."""
+    for tag in entry.get("tags", []):
+        if tag.startswith("domain:"):
+            return tag.split(":", 1)[1]
+    return "?"
+
+
+def blast_radius(
+    skills: dict,
+    skill_name: str,
+    direction: str = "upstream",
+    max_depth: int = 3,
+) -> dict:
+    """Trace the blast radius of changing a skill in the dependency graph.
+
+    Args:
+        skills:     The ``registry["skills"]`` dict.
+        skill_name: Starting skill.
+        direction:  ``"upstream"`` follows *referenced_by* (who depends on me),
+                    ``"downstream"`` follows *depends_on* (what do I depend on).
+        max_depth:  Maximum BFS depth (1-5, clamped).
+
+    Returns a dict::
+
+        {
+            "risk": "LOW" | "MEDIUM" | "HIGH" | "CRITICAL",
+            "total_affected": int,
+            "domains_hit": int,
+            "tiers": {
+                1: [{"skill": str, "via": str, "domain": str}, ...],
+                2: [...],
+                ...
+            },
+        }
+    """
+    max_depth = max(1, min(5, max_depth))
+    edge_key = "referenced_by" if direction == "upstream" else "depends_on"
+
+    tiers: dict[int, list[dict]] = {}
+    visited: set[str] = {skill_name}
+    frontier: set[str] = {skill_name}
+
+    for depth in range(1, max_depth + 1):
+        next_frontier: set[str] = set()
+        for s in frontier:
+            s_entry = skills.get(s)
+            if not s_entry:
+                continue
+            for neighbor in s_entry.get(edge_key, []):
+                if neighbor not in visited and neighbor in skills:
+                    visited.add(neighbor)
+                    next_frontier.add(neighbor)
+                    tiers.setdefault(depth, []).append({
+                        "skill": neighbor,
+                        "via": s,
+                        "domain": _get_domain(skills[neighbor]),
+                    })
+        frontier = next_frontier
+        if not frontier:
+            break
+
+    total = sum(len(v) for v in tiers.values())
+    all_domains = {e["domain"] for tier in tiers.values() for e in tier}
+    domains_hit = len(all_domains - {"?"})
+
+    if total >= 10 and domains_hit >= 3:
+        risk = "CRITICAL"
+    elif total >= 10:
+        risk = "HIGH"
+    elif total >= 4:
+        risk = "MEDIUM"
+    else:
+        risk = "LOW"
+
+    return {
+        "risk": risk,
+        "total_affected": total,
+        "domains_hit": domains_hit,
+        "tiers": tiers,
+    }

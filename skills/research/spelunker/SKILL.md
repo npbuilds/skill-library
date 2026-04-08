@@ -3,8 +3,11 @@ name: spelunker
 description: >
   Orchestrate deep research across any topic with epistemic rigor. Use when the user needs
   to investigate a question, verify claims, research a topic in depth, fact-check information,
-  or understand a complex subject with confidence-tagged findings and explicit gaps. Routes
-  to domain-specific tools and applies adversarial self-checking.
+  understand a complex subject, or find the best approach to an open-ended problem. Routes
+  investigative questions to claim decomposition and source triangulation, and generative
+  questions ("what's the best X?", "how should we design X?") to the agentic-researcher
+  for evolutionary candidate evaluation. Applies adversarial self-checking and confidence-tagged
+  findings with explicit gaps.
 metadata:
   author: nirav
   version: "1.0"
@@ -43,6 +46,17 @@ Parse the research question and establish parameters:
 4. **Identify available tools** for the detected domain (see `references/domain-routing.md`).
 
 If the user doesn't specify depth, default to `standard`. Upgrade to `deep` if early results reveal significant disagreement or complexity.
+
+5. **Classify the question mode** — investigative or generative:
+
+| Signal | Mode | Route |
+|--------|------|-------|
+| "Is X true?", "What caused X?", "Verify X", fact-check | **Investigative** | Continue to Phase 2 (decompose → triangulate → synthesize) |
+| "What's the best X?", "How should we X?", "What are the options for X?", "Design X", "Optimize X" | **Generative** | Route to `agentic-researcher` |
+
+**Generative questions** require constructing and comparing candidate solutions rather than verifying existing claims. When a generative question is detected, pass the restated question, detected domain, depth mode, and user constraints to `agentic-researcher` and present its output in Phase 6 format.
+
+If unsure, default to investigative. If early decomposition reveals the question is actually generative (most "claims" are design choices rather than verifiable assertions), pivot to `agentic-researcher` at that point.
 
 ### Phase 2 — Decompose
 
@@ -164,6 +178,12 @@ Deliver the final research brief to the user. The output format is defined in `e
 | Topic is politically or commercially charged | Upgrade to `deep` | Higher risk of biased sources |
 
 ## Cross-Domain Integration
+
+### Agentic Researcher (Generative Mode)
+
+When a question is generative rather than investigative (see Phase 1, step 5), the spelunker routes to `agentic-researcher` which uses an evolutionary generate → evaluate → select → mutate loop to construct and refine candidate solutions. The agentic-researcher shares the spelunker's confidence framework and calls source-triangulator for evidence gathering. Its output (an Agentic Research Brief with ranked recommendations and trade-off maps) is presented using Phase 6 formatting.
+
+### External Integration
 
 Spelunker is available as a research tool for other skill domains:
 

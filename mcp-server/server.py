@@ -1,14 +1,32 @@
 """
 Skill Library MCP Server
 Exposes your skill library to Claude Desktop via the Model Context Protocol.
+
+Supports two modes:
+  - Local (default): stdio transport, all tools (read + write). Used by Claude Desktop.
+  - Remote: HTTP transport, read-only tools. Used by claude.ai (web + mobile).
+
+Usage:
+  python server.py                              # local stdio (default)
+  python server.py --remote                     # remote HTTP on port 8742
+  python server.py --remote --port 9000         # remote HTTP on custom port
+  MCP_REMOTE=true python server.py              # remote via env var
 """
 
 import fcntl
 import json
+import logging
 import os
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from mcp.server.fastmcp import FastMCP
+
+# ---------------------------------------------------------------------------
+# Remote mode detection — must happen before tool registration
+# ---------------------------------------------------------------------------
+
+REMOTE_MODE = os.environ.get("MCP_REMOTE", "false").lower() == "true"
 
 # ---------------------------------------------------------------------------
 # Setup
@@ -22,6 +40,7 @@ from shared import (
     compute_auto_score,
     score_structure, score_depth, score_connectivity,
     score_freshness, score_usage, score_feedback,
+    blast_radius, _get_domain,
 )
 
 
@@ -58,6 +77,10 @@ mcp = FastMCP(
 
 _registry_cache_snapshot: tuple[tuple[str, float], dict] | None = None
 
+# Hybrid search index (lazy-loaded, invalidated by registry mtime)
+_search_index = None  # type: ignore[assignment]
+_search_index_mtime: float = 0.0
+
 
 def load_registry() -> dict:
     """Load registry, cached by (path, mtime) — picks up changes instantly after writes."""
@@ -82,6 +105,34 @@ def load_registry() -> dict:
     # Atomic snapshot update — both key and data in one tuple assignment
     _registry_cache_snapshot = (key, data)
     return data
+
+
+def _get_search_index():
+    """Return the hybrid search index, rebuilding if registry changed."""
+    global _search_index, _search_index_mtime
+    try:
+        from search_index import HybridSearchIndex
+    except ImportError:
+        return None
+
+    try:
+        mtime = REGISTRY_PATH.stat().st_mtime
+    except OSError:
+        return None
+
+    if _search_index is not None and mtime == _search_index_mtime:
+        return _search_index
+
+    try:
+        registry = load_registry()
+        idx = HybridSearchIndex(SKILLS_DIR, registry, DATA_DIR)
+        idx.build()
+        _search_index = idx
+        _search_index_mtime = mtime
+        return idx
+    except Exception as e:
+        logging.getLogger(__name__).warning("Failed to build search index: %s", e)
+        return None
 
 
 def resolve_skill_path(entry: dict, skill_name: str) -> str | None:
@@ -251,6 +302,9 @@ def _match_score(name: str, entry: dict, query: str) -> int:
 def search_skills(query: str) -> str:
     """Search the skill library by keyword. Matches against skill names, descriptions, and tags.
 
+    Uses hybrid search (BM25 + semantic vectors + graph proximity) when
+    available, falling back to keyword matching otherwise.
+
     Args:
         query: The search term (e.g. "color", "testing", "design", "accessibility").
     """
@@ -262,6 +316,55 @@ def search_skills(query: str) -> str:
     if not skills:
         return "The registry is empty or missing the 'skills' key."
 
+    # --- Try hybrid search first ---
+    idx = _get_search_index()
+    if idx is not None and idx.is_ready:
+        # Get recent skills for graph proximity signal
+        recent_skills: list[str] = []
+        try:
+            usage_events = load_log(USAGE_LOG)
+            seen: set[str] = set()
+            for e in reversed(usage_events):
+                s = e.get("skill", "")
+                if s and s not in seen:
+                    seen.add(s)
+                    recent_skills.append(s)
+                if len(recent_skills) >= 10:
+                    break
+        except Exception:
+            pass
+
+        hybrid_results = idx.search(query, recent_skills=recent_skills, limit=20)
+
+        if hybrid_results:
+            lines = [f"Found {len(hybrid_results)} skill(s) matching '{query}' "
+                     f"(hybrid: {idx.signal_count} signals):\n"]
+            for r in hybrid_results:
+                entry = skills.get(r["name"], {})
+                stype = entry.get("type", "unknown")
+                desc = entry.get("description", "").strip()
+                tags = entry.get("tags", [])
+                cscore = entry.get("composite_score")
+                sig_flags = []
+                if r["signals"].get("bm25"):
+                    sig_flags.append("bm25")
+                if r["signals"].get("vector"):
+                    sig_flags.append("vec")
+                if r["signals"].get("graph"):
+                    sig_flags.append("graph")
+                sig_str = "+".join(sig_flags) if sig_flags else "?"
+                lines.append(f"  [{stype}] {r['name']}  "
+                             f"(score: {cscore}, rrf: {r['rrf_score']:.4f}, signals: {sig_str})")
+                lines.append(f"    {desc}")
+                lines.append(f"    tags: {', '.join(tags)}")
+                lines.append("")
+
+            if len(hybrid_results) <= 2:
+                _log_event(GAPS_LOG, {"query": query, "result_count": len(hybrid_results)})
+
+            return "\n".join(lines)
+
+    # --- Fallback: keyword matching ---
     matches = []
     for name, entry in skills.items():
         rel = _match_score(name, entry, query)
@@ -285,13 +388,58 @@ def search_skills(query: str) -> str:
     if len(matches) <= 2:
         _log_event(GAPS_LOG, {"query": query, "result_count": len(matches)})
 
-    lines = [f"Found {len(matches)} skill(s) matching '{query}':\n"]
+    lines = [f"Found {len(matches)} skill(s) matching '{query}' (keyword):\n"]
     for m in matches:
         lines.append(f"  [{m['type']}] {m['name']}  (score: {m['score']}, relevance: {m['_rel']})")
         lines.append(f"    {m['description']}")
         lines.append(f"    tags: {', '.join(m['tags'])}")
         lines.append("")
 
+    return "\n".join(lines)
+
+
+@mcp.tool()
+def rebuild_search_index() -> str:
+    """Force rebuild of the hybrid search index (BM25 + vector embeddings + graph proximity).
+
+    Run this after bulk skill changes or if search results seem stale.
+    The index auto-rebuilds when the registry changes, but this forces an
+    immediate rebuild and reports status.
+    """
+    global _search_index, _search_index_mtime
+
+    try:
+        from search_index import HybridSearchIndex
+    except ImportError:
+        return (
+            "Hybrid search requires optional dependencies.\n"
+            "Install with:  pip install rank-bm25 sentence-transformers numpy\n"
+            "Or:  pip install 'skill-library[search]'\n\n"
+            "Search will continue to use keyword matching as fallback."
+        )
+
+    try:
+        registry = load_registry()
+    except RuntimeError as e:
+        return str(e)
+
+    idx = HybridSearchIndex(SKILLS_DIR, registry, DATA_DIR)
+    status = idx.build()
+
+    try:
+        _search_index = idx
+        _search_index_mtime = REGISTRY_PATH.stat().st_mtime
+    except OSError:
+        pass
+
+    lines = [
+        "=== Search Index Rebuilt ===",
+        f"Skills indexed: {status['skills_indexed']}",
+        f"BM25: {'ready' if status['bm25'] else 'unavailable (pip install rank-bm25)'}",
+        f"Vectors: {'ready' if status['vectors'] else 'unavailable (pip install sentence-transformers numpy)'}",
+        f"Graph proximity: ready",
+        f"Build time: {status['build_time_ms']}ms",
+    ]
     return "\n".join(lines)
 
 
@@ -813,6 +961,213 @@ def get_skill_stats(skill_name: str | None = None) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Impact analysis
+# ---------------------------------------------------------------------------
+
+_TIER_LABELS = {1: "WILL BREAK", 2: "LIKELY AFFECTED", 3: "MAY NEED REVIEW"}
+
+
+@mcp.tool()
+def analyze_impact(
+    skill_name: str,
+    direction: str = "upstream",
+    max_depth: int = 3,
+) -> str:
+    """Analyze the blast radius of changing or deprecating a skill.
+
+    Traces the dependency graph to find all skills that would be affected.
+    Use before making significant changes to highly-connected skills.
+
+    Args:
+        skill_name: The skill to analyze.
+        direction:  "upstream" (default) — who depends on me?
+                    "downstream" — what do I depend on?
+        max_depth:  How many hops to trace (1-5, default 3).
+    """
+    if direction not in ("upstream", "downstream"):
+        return "direction must be 'upstream' or 'downstream'."
+
+    try:
+        registry = load_registry()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+
+    if skill_name not in skills:
+        return f"Skill '{skill_name}' not found in registry."
+
+    result = blast_radius(skills, skill_name, direction, max_depth)
+
+    lines = [
+        f"=== Impact Analysis: {skill_name} ({direction}) ===",
+        f"Risk level: {result['risk']}",
+        f"Total affected: {result['total_affected']} skill(s) across {result['domains_hit']} domain(s)",
+        "",
+    ]
+
+    if not result["tiers"]:
+        lines.append("No skills affected — this skill has no " +
+                      ("dependents." if direction == "upstream" else "dependencies."))
+        return "\n".join(lines)
+
+    for depth in sorted(result["tiers"]):
+        label = _TIER_LABELS.get(depth, f"DEPTH {depth}")
+        tier_entries = result["tiers"][depth]
+        lines.append(f"--- Tier {depth}: {label} ({len(tier_entries)} skill(s)) ---")
+        for e in sorted(tier_entries, key=lambda x: x["domain"]):
+            lines.append(f"  [{e['domain']}] {e['skill']}  (via {e['via']})")
+        lines.append("")
+
+    if result["risk"] in ("HIGH", "CRITICAL"):
+        lines.append(
+            "Recommendation: Review all Tier 1 skills before proceeding. "
+            "Consider updating dependents or providing a replacement skill."
+        )
+
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Community detection
+# ---------------------------------------------------------------------------
+
+@mcp.tool()
+def detect_communities() -> str:
+    """Detect algorithmic communities in the skill dependency graph using Leiden.
+
+    Compares emergent communities against manual domain assignments to surface
+    fragmented domains, natural cross-domain bridges, and cohesion issues.
+    Requires python-igraph and leidenalg (pip install python-igraph leidenalg).
+    """
+    try:
+        import igraph as ig
+        import leidenalg
+    except ImportError:
+        return (
+            "Community detection requires optional dependencies.\n"
+            "Install with:  pip install python-igraph leidenalg\n"
+            "Or:  pip install 'skill-library[graph]'"
+        )
+
+    try:
+        registry = load_registry()
+    except RuntimeError as e:
+        return str(e)
+    skills = registry.get("skills", {})
+
+    # Build node list (active skills only)
+    names = [n for n, e in skills.items() if e.get("status") == "active"]
+    if len(names) < 3:
+        return "Too few active skills to detect communities."
+
+    name_to_idx = {n: i for i, n in enumerate(names)}
+    name_set = set(names)
+
+    # Build undirected edges
+    edges = set()
+    for name in names:
+        entry = skills[name]
+        for dep in entry.get("depends_on", []):
+            if dep in name_set:
+                a, b = name_to_idx[name], name_to_idx[dep]
+                edges.add((min(a, b), max(a, b)))
+        for ref in entry.get("referenced_by", []):
+            if ref in name_set:
+                a, b = name_to_idx[name], name_to_idx[ref]
+                edges.add((min(a, b), max(a, b)))
+
+    G = ig.Graph(n=len(names), edges=list(edges), directed=False)
+    partition = leidenalg.find_partition(
+        G, leidenalg.RBConfigurationVertexPartition, resolution_parameter=1.0
+    )
+
+    # Analyze communities
+    communities = []
+    community_members_all: set[str] = set()
+    for comm_id, members in enumerate(partition):
+        if len(members) < 2:
+            continue
+        member_names = [names[i] for i in members]
+        community_members_all.update(member_names)
+        domains = Counter(_get_domain(skills[n]) for n in member_names)
+
+        subgraph = G.subgraph(members)
+        internal_edges = subgraph.ecount()
+        total_incident = sum(G.degree(m) for m in members)
+        external_edges = total_incident - 2 * internal_edges
+        total = internal_edges + external_edges
+        cohesion = internal_edges / total if total > 0 else 0.0
+
+        communities.append({
+            "id": comm_id,
+            "size": len(members),
+            "members": sorted(member_names),
+            "cohesion": round(cohesion, 3),
+            "dominant_domain": domains.most_common(1)[0][0],
+            "domain_mix": dict(domains.most_common()),
+            "is_cross_domain": len(domains) > 1,
+        })
+
+    communities.sort(key=lambda c: -c["size"])
+    singletons = [n for n in names if n not in community_members_all]
+
+    # Domain alignment
+    domain_skills: dict[str, list[str]] = {}
+    for n in names:
+        d = _get_domain(skills[n])
+        domain_skills.setdefault(d, []).append(n)
+
+    # Format output
+    lines = [
+        f"=== Community Detection Report ===",
+        f"Skills: {len(names)}, Edges: {len(edges)}, "
+        f"Communities: {len(communities)}, Singletons: {len(singletons)}, "
+        f"Modularity: {partition.modularity:.4f}",
+        "",
+    ]
+
+    for c in communities:
+        cross = " [CROSS-DOMAIN]" if c["is_cross_domain"] else ""
+        lines.append(
+            f"Community {c['id']}: {c['size']} skills, "
+            f"cohesion {c['cohesion']:.2f}{cross}"
+        )
+        lines.append(f"  Domains: {c['domain_mix']}")
+        shown = c["members"][:8]
+        lines.append(
+            f"  Members: {', '.join(shown)}"
+            + (f" (+{c['size'] - 8} more)" if c["size"] > 8 else "")
+        )
+        lines.append("")
+
+    lines.append("--- Domain Alignment ---")
+    for domain, d_skills in sorted(domain_skills.items()):
+        comm_assignments: Counter = Counter()
+        for s in d_skills:
+            for c in communities:
+                if s in c["members"]:
+                    comm_assignments[c["id"]] += 1
+                    break
+        if comm_assignments:
+            dominant = comm_assignments.most_common(1)[0][1]
+            alignment = dominant / len(d_skills)
+        else:
+            alignment = 0.0
+        frag = " FRAGMENTED" if len(comm_assignments) >= 3 else ""
+        lines.append(
+            f"  {domain}: {len(d_skills)} skills, "
+            f"alignment {alignment:.0%}, "
+            f"{len(comm_assignments)} communities{frag}"
+        )
+
+    if singletons:
+        lines.append(f"\nIsolates ({len(singletons)}): {', '.join(singletons[:10])}"
+                      + ("..." if len(singletons) > 10 else ""))
+
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
 # Write tools
 # ---------------------------------------------------------------------------
 
@@ -821,7 +1176,6 @@ import re
 import shutil
 import subprocess
 import tempfile
-from collections import Counter
 from datetime import date
 
 
@@ -1477,6 +1831,15 @@ def update_skill_content(
         for n in info_notes:
             result_lines.append(f"    [INFO] {n}")
 
+    # Impact warning for highly-connected skills
+    refs = entry.get("referenced_by", [])
+    if len(refs) >= 4:
+        impact = blast_radius(skills, skill_name, "upstream", max_depth=2)
+        result_lines.append(
+            f"\n  Heads up: {impact['total_affected']} skill(s) depend on this "
+            f"({impact['risk']} risk). Run analyze_impact for full details."
+        )
+
     return "\n".join(result_lines)
 
 
@@ -1531,6 +1894,9 @@ def deprecate_skill(
         if skill_name in e.get("depends_on", []) and n != skill_name
     ]
 
+    # Compute blast radius before writing (so exceptions don't lose the report)
+    impact = blast_radius(skills, skill_name, "upstream", max_depth=3)
+
     today = date.today().isoformat()
     entry["status"] = "deprecated"
     entry["health_status"] = "warning"
@@ -1548,6 +1914,16 @@ def deprecate_skill(
     lines.append(f"  Reason: {reason}")
     if replacement_skill:
         lines.append(f"  Replacement: {replacement_skill}")
+
+    # Blast radius report
+    if impact["total_affected"] > 0:
+        lines.append(f"\n  Blast radius: {impact['risk']} — "
+                      f"{impact['total_affected']} skill(s) across "
+                      f"{impact['domains_hit']} domain(s)")
+        for depth in sorted(impact["tiers"]):
+            label = _TIER_LABELS.get(depth, f"Depth {depth}")
+            names = [e["skill"] for e in impact["tiers"][depth]]
+            lines.append(f"    Tier {depth} ({label}): {', '.join(names)}")
 
     if parent_orphans:
         lines.append(f"\n  Warning — {len(parent_orphans)} skill(s) have this as their parent:")
@@ -1665,8 +2041,61 @@ def add_skill_dependency(
 
 
 # ---------------------------------------------------------------------------
+# Remote mode: remove write tools (keeps read-only surface for claude.ai)
+# ---------------------------------------------------------------------------
+
+_WRITE_TOOLS = {
+    "update_skill_metadata",
+    "scaffold_skill",
+    "add_reference_doc",
+    "recalibrate_scores",
+    "update_skill_content",
+    "deprecate_skill",
+    "add_skill_dependency",
+}
+
+if REMOTE_MODE:
+    for _name in _WRITE_TOOLS:
+        mcp.remove_tool(_name)
+
+
+# ---------------------------------------------------------------------------
 # Run
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    mcp.run()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Skill Library MCP Server")
+    parser.add_argument(
+        "--remote", action="store_true",
+        help="Enable remote mode (HTTP transport, read-only tools)",
+    )
+    parser.add_argument(
+        "--transport",
+        choices=["stdio", "sse", "streamable-http"],
+        default=None,
+        help="Transport protocol (default: stdio local, streamable-http remote)",
+    )
+    parser.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
+    parser.add_argument("--port", type=int, default=8742, help="Bind port (default: 8742)")
+    args = parser.parse_args()
+
+    # --remote flag also sets REMOTE_MODE for tool gating
+    if args.remote and not REMOTE_MODE:
+        REMOTE_MODE = True
+        for _name in _WRITE_TOOLS:
+            try:
+                mcp.remove_tool(_name)
+            except Exception:
+                pass
+
+    # Resolve transport: explicit flag wins, otherwise infer from mode
+    transport = args.transport or ("streamable-http" if (args.remote or REMOTE_MODE) else "stdio")
+
+    if transport == "stdio":
+        mcp.run()
+    else:
+        mcp.settings.host = args.host
+        mcp.settings.port = args.port
+        mcp.run(transport=transport)

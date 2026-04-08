@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-04-02T00:00:00Z",
+  "last_scan": "2026-04-06T22:03:35Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -1756,10 +1756,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 76,
       "depends_on": [
         "infrastructure-orchestrator",
         "skill-analyze",
@@ -1855,10 +1855,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 79,
       "depends_on": [
         "infrastructure-orchestrator",
         "skill-registry",
@@ -2348,10 +2348,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 73,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 76,
       "depends_on": [
         "design-orchestrator",
         "rhetoric",
@@ -2472,10 +2472,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 73,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 76,
       "depends_on": [
         "design-orchestrator",
         "sentence-craft",
@@ -3151,10 +3151,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 81,
       "depends_on": [
         "cultures-societies",
         "worldbuilding-orchestrator",
@@ -3205,10 +3205,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 73,
       "depends_on": [
         "cultures-societies",
         "world-bible",
@@ -3254,10 +3254,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 73,
       "depends_on": [
         "lore-writer",
         "world-bible",
@@ -3569,10 +3569,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 78,
       "depends_on": [
         "game-theory-orchestrator",
         "market-microstructure",
@@ -3610,26 +3610,27 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1075,
-        "body_words": 1075,
+        "name": "auction-theory",
+        "path": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/game-theory/mechanism-design/auction-theory/SKILL.md",
+        "word_count": 1188,
+        "body_words": 1133,
         "description_words": 39,
-        "section_count": 12,
+        "section_count": 10,
         "reference_files": 3,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_metadata": 37,
-        "estimated_tokens_body": 2500,
-        "estimated_tokens_total": 2537,
-        "precise_tokens": null
+        "estimated_tokens_metadata": 51,
+        "estimated_tokens_body": 1996,
+        "estimated_tokens_total": 2047
       },
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 82,
       "depends_on": [
         "mechanism-design",
         "market-microstructure",
@@ -3649,7 +3650,7 @@
       ],
       "parent": "mechanism-design",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-06"
     },
     "matching-markets": {
       "name": "matching-markets",
@@ -3781,10 +3782,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 81,
       "depends_on": [
         "auction-theory",
         "matching-markets",
@@ -4032,8 +4033,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 78,
+      "composite_score": 78,
       "depends_on": [
         "game-theory-orchestrator",
         "reflexivity-sentiment",
@@ -4226,8 +4227,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 75,
+      "composite_score": 75,
       "depends_on": [
         "game-theory-orchestrator",
         "algorithmic-game-theory",
@@ -4321,8 +4322,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
-      "composite_score": 81,
+      "auto_score": 84,
+      "composite_score": 84,
       "depends_on": [
         "strategic-foundations",
         "market-psychology",
@@ -4525,10 +4526,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 81,
       "depends_on": [
         "data-wrangling",
         "modeling",
@@ -4751,10 +4752,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 83,
+      "auto_score": 86,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 83,
+      "composite_score": 86,
       "depends_on": [
         "modeling",
         "statistical-analysis",
@@ -4961,10 +4962,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 79,
       "depends_on": [
         "statistical-analysis",
         "statistical-testing"
@@ -5556,7 +5557,7 @@
     },
     "spelunker": {
       "name": "spelunker",
-      "description": "Orchestrate deep research across any topic with epistemic rigor. Use when the user needs to investigate a question, verify claims, research a topic in depth, fact-check information, or understand a complex subject with confidence-tagged findings and explicit gaps. Routes to domain-specific tools and applies adversarial self-checking.",
+      "description": "Orchestrate deep research across any topic with epistemic rigor. Use when the user needs to investigate a question, verify claims, research a topic in depth, fact-check information, understand a complex subject, or find the best approach to an open-ended problem.",
       "location": "skills/research/spelunker/SKILL.md",
       "plugin": "research",
       "type": "orchestrator",
@@ -5567,7 +5568,7 @@
       "metrics": {
         "word_count": 1977,
         "body_words": 1977,
-        "description_words": 46,
+        "description_words": 40,
         "section_count": 14,
         "reference_files": 3,
         "example_files": 0,
@@ -5581,10 +5582,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 86,
+      "auto_score": 90,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 86,
+      "composite_score": 90,
       "depends_on": [
         "claim-decomposer",
         "source-triangulator",
@@ -5602,7 +5603,7 @@
       ],
       "parent": null,
       "created": "2026-03-26",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-06"
     },
     "claim-decomposer": {
       "name": "claim-decomposer",
@@ -5631,10 +5632,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 79,
       "depends_on": [
         "spelunker"
       ],
@@ -5679,10 +5680,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 84,
       "depends_on": [
         "claim-decomposer",
         "spelunker"
@@ -5690,7 +5691,8 @@
       "referenced_by": [
         "evidence-synthesizer",
         "spelunker",
-        "evidence-evaluator"
+        "evidence-evaluator",
+        "agentic-researcher"
       ],
       "tags": [
         "domain:research",
@@ -5698,7 +5700,7 @@
       ],
       "parent": "spelunker",
       "created": "2026-03-26",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-07"
     },
     "evidence-synthesizer": {
       "name": "evidence-synthesizer",
@@ -5728,10 +5730,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 77,
       "depends_on": [
         "claim-decomposer",
         "source-triangulator",
@@ -6430,8 +6432,8 @@
         "estimated_tokens_body": 863,
         "estimated_tokens_total": 928
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 78,
+      "composite_score": 78,
       "referenced_by": [
         "argument-structure",
         "essay-forms",
@@ -11210,10 +11212,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 69,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 78,
       "depends_on": [
         "foresight",
         "architecture",
@@ -11246,7 +11248,7 @@
         "word_count": 793,
         "body_words": 793,
         "section_count": 12,
-        "reference_files": 1,
+        "reference_files": 3,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -11256,10 +11258,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 67,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 84,
       "depends_on": [
         "clarity-engine"
       ],
@@ -11275,7 +11277,7 @@
         "level:action"
       ],
       "created": "2026-04-02",
-      "last_modified": "2026-04-06",
+      "last_modified": "2026-04-07",
       "parent": "foresight"
     },
     "skill-cartographer": {
@@ -11346,10 +11348,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 67,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 72,
       "depends_on": [
         "skill-cartographer"
       ],
@@ -11391,10 +11393,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 79,
       "depends_on": [
         "frontier-scanner",
         "skill-cartographer",
@@ -11577,10 +11579,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 67,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "architecture",
@@ -11768,6 +11770,53 @@
       "created": "2026-04-02",
       "last_modified": "2026-04-06",
       "parent": "architecture"
+    },
+    "agentic-researcher": {
+      "name": "agentic-researcher",
+      "description": "Generate, test, and iteratively refine candidate solutions to open-ended research questions using an evolutionary loop with automated evaluation. Use when the question is generative rather than investigative \u2014 \"what's the best approach to X?\" rather than \"is X true?\" \u2014 and when candidates can be evaluated against definable criteria. Produces ranked recommendations with confidence-tagged reasoning and explicit trade-off maps.",
+      "location": "skills/research/agentic-researcher/SKILL.md",
+      "plugin": "skill-research",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1002,
+        "body_words": 910,
+        "section_count": 5,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1746,
+        "description_words": 59
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-06T22:17:47Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 72,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 72,
+      "depends_on": [
+        "source-triangulator"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:research",
+        "level:action",
+        "subdomain:evolutionary-dynamics"
+      ],
+      "created": "2026-04-07",
+      "last_modified": "2026-04-06",
+      "parent": "spelunker"
     }
   },
   "network": {
@@ -11915,7 +11964,8 @@
         "claim-decomposer",
         "evidence-synthesizer",
         "source-triangulator",
-        "spelunker"
+        "spelunker",
+        "agentic-researcher"
       ],
       "writing": [
         "argument-structure",

@@ -66,7 +66,7 @@ These generate noise, not signal. Skip them even if they appear in search result
 ## Scan Protocol
 
 ### Quick Scan (weekly scheduled task)
-1. Check all Tier 1 primary sources for new announcements
+1. Check all Tier 1 primary sources for new announcements — **for any post from the past 7 days, fetch the full destination page, not just the blog index.** Titles and summaries on index pages are navigation aids. The capability claim, linked system cards, and technical details live on the post itself.
 2. Skim Tier 2 practitioner blogs for pattern synthesis
 3. Cross-reference any development against library domains using Tier 3
 
@@ -81,4 +81,6 @@ For every significant development:
 - Search for "[development] problems", "[development] limitations", "[development] criticism"
 - Check if benchmarks are cherry-picked or self-reported vs. independently verified
 - Look for what the announcement does NOT say (capability gaps, missing comparisons)
-- If a capability claim has no independent verification, tag it Speculative regardless of source prestige
+- If a claim from a secondary source lacks primary verification — **fetch the primary source before assigning confidence.** Unverified ≠ Speculative; it means verification is pending. Do the verification.
+- Only tag Speculative after genuinely failing to find primary confirmation
+- Confidence tags are the *output* of verification, not a substitute for it
