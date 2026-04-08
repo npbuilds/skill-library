@@ -19,4 +19,4 @@ skills = "cli:main"
 testpaths = ["tests"]
 
 [tool.hatch.build.targets.wheel]
-only-include = ["cli.py", "server.py"]
+only-include = ["cli.py", "server.py", "shared.py"]

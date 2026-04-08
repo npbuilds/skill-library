@@ -82,8 +82,30 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
 }
 
 
+def _detect_cycles(dep_map: dict[str, list[str]]) -> list[tuple[str, str]]:
+    """Detect mutual dependency cycles (A→B and B→A). Returns list of (a, b) pairs."""
+    cycles = []
+    seen = set()
+    for skill, deps in dep_map.items():
+        for dep in deps:
+            if dep in dep_map and skill in dep_map[dep]:
+                pair = tuple(sorted([skill, dep]))
+                if pair not in seen:
+                    seen.add(pair)
+                    cycles.append(pair)
+    return cycles
+
+
 def main() -> None:
     dry_run = "--apply" not in sys.argv
+
+    # Check for mutual dependency cycles before wiring
+    cycles = _detect_cycles(DEPENDENCY_MAP)
+    if cycles:
+        print(f"WARNING: {len(cycles)} mutual dependency cycle(s) detected:")
+        for a, b in cycles:
+            print(f"  {a} ↔ {b}")
+        print()
 
     with open(REGISTRY_PATH) as f:
         registry = json.load(f)

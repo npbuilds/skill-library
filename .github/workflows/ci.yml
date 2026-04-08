@@ -128,12 +128,12 @@ print('Registry JSON: valid')
           import json, sys
           with open('data/registry.json') as f:
               reg = json.load(f)
-          scores = [s.get('composite_score', 0) for s in reg['skills'].values()]
+          scores = [s.get('composite_score', 0) for s in reg['skills'].values() if s.get('status') != 'deprecated']
           if not scores:
               print('ERROR: No skills found in registry')
               sys.exit(1)
           avg = sum(scores) / len(scores)
-          low = [n for n, s in reg['skills'].items() if s.get('composite_score', 0) < 30]
+          low = [n for n, s in reg['skills'].items() if s.get('composite_score', 0) < 30 and s.get('status') != 'deprecated']
           print(f'Score distribution: min={min(scores)}, max={max(scores)}, avg={avg:.1f}')
           print(f'Skills below 30 (critical): {len(low)}')
           if low:

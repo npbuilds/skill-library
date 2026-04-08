@@ -48,6 +48,10 @@ except:
     print('?', '?')
 " 2>/dev/null || echo "? ?")
 
+# Guard against empty values from failed python3 parse
+[ -z "$BODY_WORDS" ] && BODY_WORDS="?"
+[ -z "$EST_TOKENS" ] && EST_TOKENS="?"
+
 # Step 3: Determine health status from metrics
 HEALTH="healthy"
 if [ "$BODY_WORDS" != "?" ]; then

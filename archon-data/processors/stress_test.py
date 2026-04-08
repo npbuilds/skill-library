@@ -761,8 +761,9 @@ def run_all_stress_tests(briefing: dict) -> dict:
     results = {}
     for scenario_id in SCENARIO_LIBRARY:
         result = run_stress_test(scenario_id=scenario_id, briefing=briefing)
-        # Parse worst-case SPX impact for ranking
-        _, worst_case = _parse_impact_range(result["scenario"]["net_spx_impact"] or "0%")
+        # Parse worst-case SPX impact for ranking — use the most negative number
+        low, high = _parse_impact_range(result["scenario"]["net_spx_impact"] or "0%")
+        worst_case = min(low, high)  # most negative = worst case
         results[scenario_id] = {
             "label": result["scenario"]["label"],
             "net_spx_impact": result["scenario"]["net_spx_impact"],

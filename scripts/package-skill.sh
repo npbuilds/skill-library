@@ -26,7 +26,7 @@ if [ -f "$PLUGIN_DIR/.claude-plugin/plugin.json" ]; then
 fi
 
 # Get metrics
-METRICS_JSON=$("$SCRIPT_DIR/analyze-skill.sh" "$SKILL_DIR/SKILL.md" 2>/dev/null)
+METRICS_JSON=$(bash "$SCRIPT_DIR/analyze-skill.sh" "$SKILL_DIR/SKILL.md" 2>/dev/null)
 if [ -z "$METRICS_JSON" ]; then
   echo "ERROR: Failed to analyze $SKILL_DIR/SKILL.md" >&2
   exit 1

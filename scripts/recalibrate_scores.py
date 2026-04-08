@@ -25,8 +25,10 @@ import importlib.util
 
 _shared_path = _here.parent / "mcp-server" / "shared.py"
 _spec = importlib.util.spec_from_file_location("shared", _shared_path)
-_shared = importlib.util.module_from_spec(_spec)  # type: ignore[arg-type]
-_spec.loader.exec_module(_shared)  # type: ignore[union-attr]
+if _spec is None or _spec.loader is None:
+    raise ImportError(f"Cannot locate shared module at {_shared_path}")
+_shared = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_shared)
 
 # Re-export what we need
 REGISTRY_PATH = _shared.REGISTRY_PATH

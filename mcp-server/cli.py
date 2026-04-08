@@ -221,9 +221,9 @@ def gaps():
 @click.option("--note", "-n", default="", help="Optional note about the skill")
 def record_feedback(skill_name, rating, note):
     """Record feedback for a skill (rating 1-5)."""
-    from server import record_skill_feedback
+    from shared import record_feedback_entry
 
-    result = record_skill_feedback(skill_name, rating, note)
+    result = record_feedback_entry(skill_name, rating, note)
     click.echo(result)
 
 

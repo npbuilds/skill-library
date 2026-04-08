@@ -426,9 +426,15 @@ def _load_predictions() -> list[dict]:
 
 
 def _save_predictions(predictions: list[dict]) -> None:
-    """Save predictions to the predictions file."""
+    """Save predictions to the predictions file with file locking."""
+    import fcntl
     PREDICTIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    PREDICTIONS_FILE.write_text(json.dumps(predictions, indent=2))
+    with open(PREDICTIONS_FILE, "w") as f:
+        fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+        try:
+            f.write(json.dumps(predictions, indent=2))
+        finally:
+            fcntl.flock(f.fileno(), fcntl.LOCK_UN)
 
 
 # ── Helpers ──────────────────────────────────────────────────

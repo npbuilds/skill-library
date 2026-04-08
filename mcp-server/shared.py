@@ -18,6 +18,27 @@ FEEDBACK_LOG = DATA_DIR / "feedback.jsonl"
 SKILLS_DIR = PROJECT_ROOT / "skills"
 
 
+def record_feedback_entry(skill_name: str, rating: int, note: str = "") -> str:
+    """Record feedback for a skill (standalone, no MCP server dependency)."""
+    if not REGISTRY_PATH.exists():
+        return f"Registry not found at {REGISTRY_PATH}"
+    registry = json.loads(REGISTRY_PATH.read_text())
+    if skill_name not in registry.get("skills", {}):
+        return f"Skill '{skill_name}' not found in registry."
+    if not 1 <= rating <= 5:
+        return "Rating must be between 1 and 5."
+    entry = {
+        "skill": skill_name,
+        "rating": rating,
+        "note": note,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+    FEEDBACK_LOG.parent.mkdir(parents=True, exist_ok=True)
+    with open(FEEDBACK_LOG, "a") as f:
+        f.write(json.dumps(entry) + "\n")
+    return f"Recorded: {skill_name} rated {rating}/5{f' — {note}' if note else ''}."
+
+
 def load_log(path: Path) -> list[dict]:
     """Load all events from a JSONL log file."""
     if not path.exists():
@@ -135,7 +156,9 @@ def score_freshness(entry: dict, now: datetime) -> int:
     """Days since last_modified, with decay."""
     last_mod = entry.get("last_modified", "2020-01-01")
     try:
-        mod_date = datetime.fromisoformat(last_mod).replace(tzinfo=timezone.utc)
+        mod_date = datetime.fromisoformat(last_mod)
+        if mod_date.tzinfo is None:
+            mod_date = mod_date.replace(tzinfo=timezone.utc)
         days_old = (now - mod_date).days
     except (ValueError, TypeError):
         days_old = 90

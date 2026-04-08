@@ -228,11 +228,12 @@ def main() -> None:
         entry = skills[skill_name]
         # Filter deps to only those that exist in registry
         valid_deps = sorted(d for d in deps if d in skills)
-        old_deps = sorted(entry.get("depends_on", []))
-        if old_deps != valid_deps:
-            changes.append(f"  {skill_name}: deps {old_deps} → {valid_deps}")
+        old_deps = set(entry.get("depends_on", []))
+        merged_deps = sorted(old_deps | set(valid_deps))
+        if sorted(old_deps) != merged_deps:
+            changes.append(f"  {skill_name}: deps {sorted(old_deps)} → {merged_deps}")
         if not dry_run:
-            entry["depends_on"] = valid_deps
+            entry["depends_on"] = merged_deps
 
     # Update referenced_by (additive)
     for target, referrers in referenced_by_index.items():

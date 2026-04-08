@@ -281,6 +281,7 @@ def apply_bridges(target_name, candidates, registry, max_bridges=3):
     if applied or healed:
         with open(REGISTRY_PATH, "w") as f:
             json.dump(registry, f, indent=2)
+            f.write("\n")
 
     if healed:
         print(f"  (also healed {healed} missing referenced_by back-links)")

@@ -280,13 +280,16 @@ def run_experiment(
     if delta < 0:
         revert_fn()
         status = "reverted"
-    else:
-        # Persist composite score
+    elif delta > 0:
+        # Persist composite score only when there's an actual improvement
         reg["skills"][skill_name]["composite_score"] = after_score
         reg["skills"][skill_name]["auto_score"]      = after_score
         reg["skills"][skill_name]["last_modified"]   = now.strftime("%Y-%m-%d")
         _save_registry(reg)
-        status = "kept" if delta > 0 else "neutral"
+        status = "kept"
+    else:
+        # Neutral — no score change, don't write registry (avoids inflating freshness)
+        status = "neutral"
 
     return dict(skill=skill_name, lever=lever, status=status,
                 before=before_score, after=after_score, delta=delta,
@@ -321,13 +324,16 @@ def experiment_add_ref_file(
         _save_registry(reg)
         return True
 
+    # Capture pre-existing reference file count for safe revert
+    pre_ref_count = entry.get("metrics", {}).get("reference_files", 0)
+
     def revert():
         if ref_file.exists():
             ref_file.unlink()
         if refs_dir.exists() and not any(refs_dir.iterdir()):
             refs_dir.rmdir()
         reg = _reload_registry()
-        reg["skills"][skill_name]["metrics"]["reference_files"] = 0
+        reg["skills"][skill_name]["metrics"]["reference_files"] = pre_ref_count
         _save_registry(reg)
 
     return run_experiment(
@@ -439,7 +445,7 @@ def main() -> None:
             domain = args[i + 1]
 
     # Load registry and analytics
-    reg   = _load_registry()
+    reg   = _reload_registry()
     skills = reg["skills"]
     all_names = set(skills)
 
@@ -475,7 +481,7 @@ def main() -> None:
 
     for _, skill_name, entry in candidates:
         # Refresh entry each iteration (previous experiments may have changed it)
-        entry = _load_registry()["skills"][skill_name]
+        entry = _reload_registry()["skills"][skill_name]
 
         for lever_fn in [
             lambda sn=skill_name, e=entry: experiment_add_ref_file(
@@ -508,11 +514,6 @@ def main() -> None:
         print(f"  Total score gain: +{total_gain} pts across kept experiments")
     if dry_run:
         print("\nRun with --apply to commit changes.")
-
-
-def _load_registry() -> dict:
-    with open(REGISTRY_PATH) as f:
-        return json.load(f)
 
 
 if __name__ == "__main__":

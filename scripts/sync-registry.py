@@ -196,8 +196,7 @@ def discover_skills() -> dict[str, dict]:
 
         # Skip meta/hidden directories
         if any(part in SKIP_DIRS for part in skill_md.relative_to(SKILLS_DIR).parts[:-1]):
-            if skill_name in SKIP_DIRS:
-                continue
+            continue
 
         rel_path = str(skill_md.relative_to(PROJECT_ROOT))
         text = skill_md.read_text(errors="replace")

@@ -159,6 +159,8 @@ def _fetch_fred_releases(start: date, end: date) -> list[dict]:
         return releases
 
     except Exception as e:
+        import sys
+        print(f"FRED releases fetch failed: {e}", file=sys.stderr)
         return []
 
 

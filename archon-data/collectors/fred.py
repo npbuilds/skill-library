@@ -3,6 +3,8 @@
 import os
 from datetime import datetime, timedelta
 
+import pandas as pd
+
 from .cache import get_cached, set_cached
 
 # FRED series IDs for the Archon's regime intelligence
@@ -82,14 +84,19 @@ def _get_series_latest(fred, series_id: str, periods: int = 18) -> dict | None:
             result["prev_value"] = round(float(prev), 4)
             result["change"] = round(float(latest - prev), 4)
 
-        # YoY change for monthly/quarterly series
-        if len(data.dropna()) >= 12:
-            year_ago_idx = max(0, len(data.dropna()) - 13)
-            year_ago = data.dropna().iloc[year_ago_idx]
-            if year_ago != 0:
-                result["yoy_change"] = round(
-                    ((float(latest) / float(year_ago)) - 1) * 100, 2
-                )
+        # YoY change — use actual date offset instead of positional indexing
+        # (positional indexing gives wrong results for quarterly series)
+        clean = data.dropna()
+        if len(clean) >= 4:
+            one_year_ago = clean.index[-1] - pd.DateOffset(years=1)
+            # Find the closest observation to one year ago
+            candidates = clean[clean.index <= one_year_ago]
+            if not candidates.empty:
+                year_ago = candidates.iloc[-1]
+                if year_ago != 0:
+                    result["yoy_change"] = round(
+                        ((float(latest) / float(year_ago)) - 1) * 100, 2
+                    )
 
         return result
     except Exception as e:

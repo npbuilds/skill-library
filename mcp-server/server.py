@@ -56,32 +56,31 @@ mcp = FastMCP(
 )
 
 
-_registry_cache: dict | None = None
-_registry_cache_key: tuple[str, float] = ("", 0.0)
+_registry_cache_snapshot: tuple[tuple[str, float], dict] | None = None
 
 
 def load_registry() -> dict:
     """Load registry, cached by (path, mtime) — picks up changes instantly after writes."""
-    global _registry_cache, _registry_cache_key
+    global _registry_cache_snapshot
     try:
-        stat = REGISTRY_PATH.stat()
-        key = (str(REGISTRY_PATH), stat.st_mtime)
+        with open(REGISTRY_PATH) as f:
+            # Use fstat on the open fd to avoid TOCTOU race
+            stat = os.fstat(f.fileno())
+            key = (str(REGISTRY_PATH), stat.st_mtime)
+            if _registry_cache_snapshot is not None and key == _registry_cache_snapshot[0]:
+                return _registry_cache_snapshot[1]
+            data = json.load(f)
     except FileNotFoundError:
         raise RuntimeError(
             f"Registry not found at {REGISTRY_PATH}. "
             "Make sure data/registry.json exists."
         )
-    if _registry_cache is not None and key == _registry_cache_key:
-        return _registry_cache
-    try:
-        with open(REGISTRY_PATH) as f:
-            data = json.load(f)
     except json.JSONDecodeError as e:
         raise RuntimeError(
             f"Registry has invalid JSON: {e}. Check data/registry.json for syntax errors."
         )
-    _registry_cache = data
-    _registry_cache_key = key
+    # Atomic snapshot update — both key and data in one tuple assignment
+    _registry_cache_snapshot = (key, data)
     return data
 
 
@@ -870,6 +869,8 @@ def _run_script(
         )
         if errors is not None and result.stderr.strip():
             errors.append(result.stderr.strip())
+        if result.returncode != 0 and errors is not None:
+            errors.append(f"{script_name} exited with code {result.returncode}")
         return json.loads(result.stdout)
     except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError) as e:
         if errors is not None:
@@ -1184,7 +1185,9 @@ def add_reference_doc(
         return f"Skill file not found for '{skill_name}'."
 
     # ── Write file ─────────────────────────────────────────────────────────
-    refs_dir = Path(skill_path).parent / "references"
+    refs_dir = (Path(skill_path).parent / "references").resolve()
+    if not refs_dir.is_relative_to(PROJECT_ROOT):
+        return f"Refusing to write outside project root: {refs_dir}"
     refs_dir_was_new = not refs_dir.exists()
     refs_dir.mkdir(exist_ok=True)
     target = refs_dir / filename

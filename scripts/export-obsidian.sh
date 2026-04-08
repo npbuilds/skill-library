@@ -60,8 +60,11 @@ for skill_name, meta in skills.items():
     # Inject domain and type tags into YAML frontmatter for Obsidian graph coloring
     domain_tag = next((t.split(":")[1] for t in meta.get("tags", []) if t.startswith("domain:")), "unknown")
     if content.startswith("---"):
-        # Find end of frontmatter
-        end_fm = content.index("---", 3)
+        # Find end of frontmatter (use find to avoid ValueError on malformed files)
+        end_fm = content.find("---", 3)
+        if end_fm == -1:
+            print(f"  WARN (malformed frontmatter): {skill_name}", file=sys.stderr)
+            end_fm = 3  # treat as no frontmatter
         fm_block = content[3:end_fm]
         after_fm = content[end_fm:]
         # Add tags if not already present
@@ -166,9 +169,9 @@ total_critical = sum(1 for s in exported_skills.values() if s.get("health_status
 index_lines.append(f"\n## Health Summary\n")
 index_lines.append(f"| Status | Count | % |")
 index_lines.append(f"|--------|------:|--:|")
-index_lines.append(f"| Healthy | {total_healthy} | {round(total_healthy/total*100)}% |")
-index_lines.append(f"| Degraded | {total_degraded} | {round(total_degraded/total*100)}% |")
-index_lines.append(f"| Critical | {total_critical} | {round(total_critical/total*100)}% |")
+index_lines.append(f"| Healthy | {total_healthy} | {round(total_healthy/total*100) if total else 0}% |")
+index_lines.append(f"| Degraded | {total_degraded} | {round(total_degraded/total*100) if total else 0}% |")
+index_lines.append(f"| Critical | {total_critical} | {round(total_critical/total*100) if total else 0}% |")
 
 # Type breakdown
 types = {}
@@ -193,12 +196,14 @@ PYEOF
 if [ -d "$SKILLS_DIR/.obsidian" ]; then
   # Copy config but skip workspace (volatile)
   mkdir -p "$OUTPUT_DIR/.obsidian"
+  shopt -s nullglob
   for f in "$SKILLS_DIR/.obsidian"/*.json; do
     fname=$(basename "$f")
     if [[ "$fname" != "workspace.json" && "$fname" != "workspaces.json" ]]; then
       cp "$f" "$OUTPUT_DIR/.obsidian/$fname"
     fi
   done
+  shopt -u nullglob
   # Copy templates
   if [ -d "$SKILLS_DIR/.obsidian/templates" ]; then
     cp -r "$SKILLS_DIR/.obsidian/templates" "$OUTPUT_DIR/.obsidian/templates"

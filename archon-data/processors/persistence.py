@@ -86,6 +86,16 @@ def save_daily_snapshot(briefing_data: dict, for_date: str | None = None) -> str
     snapshot_date = for_date or date.today().isoformat()
     path = SNAPSHOT_DIR / f"{snapshot_date}.json"
 
+    # Avoid overwriting existing same-day snapshots — append counter suffix
+    if path.exists():
+        counter = 1
+        while True:
+            alt_path = SNAPSHOT_DIR / f"{snapshot_date}_{counter}.json"
+            if not alt_path.exists():
+                path = alt_path
+                break
+            counter += 1
+
     snapshot = {
         "_snapshot_date": snapshot_date,
         "_saved_at": datetime.now().isoformat(),
@@ -119,8 +129,10 @@ def get_prior_snapshot(before_date: str | None = None, max_lookback: int = 30) -
     if not SNAPSHOT_DIR.exists():
         return None
     # Scan recent snapshots, find the most recent one before ref date
+    # Use <= to include same-day snapshots saved earlier (they won't match
+    # exactly since save_snapshot appends a counter suffix for same-day saves)
     candidates = sorted(
-        (p for p in SNAPSHOT_DIR.glob("*.json") if p.stem < ref),
+        (p for p in SNAPSHOT_DIR.glob("*.json") if p.stem.split("_")[0] < ref),
         reverse=True,
     )
     for path in candidates[:max_lookback]:

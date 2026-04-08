@@ -3,6 +3,7 @@
 import math
 from datetime import datetime, timedelta
 
+import pandas as pd
 import yfinance as yf
 
 from .cache import get_cached, set_cached
@@ -100,8 +101,9 @@ def _ytd_return(ticker_obj: yf.Ticker) -> float | None:
         hist = ticker_obj.history(start=fetch_start, end=datetime.now())
         if len(hist) < 2:
             return None
-        # Find the last close before the current year
-        prior_year = hist[hist.index < f"{current_year}-01-01"]
+        # Find the last close before the current year (tz-aware comparison)
+        cutoff = pd.Timestamp(f"{current_year}-01-01", tz=hist.index.tz) if hist.index.tz else pd.Timestamp(f"{current_year}-01-01")
+        prior_year = hist[hist.index < cutoff]
         if prior_year.empty:
             # Fallback: use first available close
             return ((hist["Close"].iloc[-1] / hist["Close"].iloc[0]) - 1) * 100
