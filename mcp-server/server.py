@@ -71,7 +71,20 @@ mcp = FastMCP(
         "search_skills to find relevant skills by keyword, get_skill to read a "
         "skill's full content, and get_system_overview for a bird's-eye view of "
         "the entire library. Always check the library before answering questions "
-        "that might match a skill's domain."
+        "that might match a skill's domain.\n\n"
+        "IMPORTANT — Adapting skills to your environment:\n"
+        "Skills were written for Claude Code and may reference tools like WebSearch, "
+        "Agent, Bash, Grep, Read, or Write. When running outside Claude Code "
+        "(e.g. on claude.ai web or mobile), adapt the methodology to tools you "
+        "DO have available:\n"
+        "- WebSearch/WebFetch → use your built-in web search\n"
+        "- Agent → do the work inline instead of delegating\n"
+        "- Bash/Grep/Read/Write → skip or ask the user for that info\n"
+        "- Multi-phase skills → follow the phases conceptually, substituting "
+        "available capabilities\n"
+        "The skill content is methodology and thinking frameworks — the value is "
+        "in the approach, not the specific tool calls. Follow the spirit of the "
+        "skill even when you can't use the exact tools it names."
     ),
     # In remote mode, accept requests from any host (Cloud Run, Cloudflare, etc.)
     transport_security=TransportSecuritySettings(
