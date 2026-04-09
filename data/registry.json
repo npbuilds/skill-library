@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-04-06T22:03:35Z",
+  "last_scan": "2026-04-09T00:45:09Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -7398,18 +7398,18 @@
       "version": "1.0.0",
       "metrics": {
         "name": "archon",
-        "path": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/investing/archon/SKILL.md",
-        "word_count": 2173,
-        "body_words": 2088,
-        "description_words": 50,
-        "section_count": 12,
-        "reference_files": 4,
+        "path": "/Users/nirav/Desktop/Claude Playground/Skill Building/.claude/worktrees/interesting-austin/skills/investing/archon/SKILL.md",
+        "word_count": 997,
+        "body_words": 913,
+        "description_words": 59,
+        "section_count": 9,
+        "reference_files": 6,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_metadata": 125,
-        "estimated_tokens_body": 3236,
-        "estimated_tokens_total": 3361
+        "estimated_tokens_metadata": 77,
+        "estimated_tokens_body": 1625,
+        "estimated_tokens_total": 1702
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
@@ -7448,7 +7448,7 @@
         "domain:investing",
         "level:orchestrator"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-09"
     },
     "asset-universe": {
       "name": "asset-universe",

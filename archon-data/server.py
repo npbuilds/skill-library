@@ -1,332 +1,136 @@
-"""Archon Data — MCP server for live investment intelligence.
+"""Archon Data v2 — MCP server for live investment intelligence.
 
-Exposes market data, macro indicators, sentiment analysis, and risk metrics
-as MCP tools that the Archon skill and React dashboard can consume.
+Consolidated from 27 tools to 15: 6 core data tools, 4 utility tools,
+and 5 portfolio tools. Every tool response includes _meta health tracking.
 """
 
 import sys
+import traceback
+from datetime import datetime
 from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 
-# Add project root to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 
 mcp = FastMCP(
     "Archon Data",
     instructions=(
-        "Live investment data pipeline for the Archon investment intelligence system. "
-        "Provides regime classification, sentiment analysis, market snapshots, "
-        "cross-asset performance, insider signals, risk dashboards, and "
-        "private markets monitoring (RE, credit, PE/VC exit window). "
-        "Data is cached with TTLs to avoid excessive API calls. "
-        "FRED data requires FRED_API_KEY environment variable."
+        "Archon v2 investment intelligence pipeline. Provides consolidated "
+        "market data, regime classification, sentiment/positioning, risk "
+        "dashboards, external signals, private markets monitoring, and paper "
+        "trading portfolio management. All responses include _meta health info."
     ),
 )
 
 
-@mcp.tool()
-def get_regime() -> dict:
-    """Get the current macroeconomic regime classification (Dalio's 2x2 quadrant).
+# ── Helpers ──────────────────────────────────────────────────
 
-    Returns the current regime (goldilocks/reflation/stagflation/deflation),
-    confidence score, underlying macro indicators from FRED (GDP, unemployment,
-    CPI, PCE, Fed funds, M2), and yield curve analysis. Requires FRED_API_KEY
-    env var for full macro data; falls back to yield curve only without it.
+
+def _safe_collect(name: str, source: str, fn, *args, **kwargs) -> dict:
+    """Call a collector function, wrapping result with health _meta.
+
+    Returns the result dict with _meta on success, or an error dict on failure.
     """
-    from collectors.fred import get_macro_data
-    from collectors.treasury import get_yield_curve
-    from processors.regime import classify_regime
+    from processors.health import wrap_with_meta
 
-    macro = get_macro_data()
-    yields = get_yield_curve()
-    regime = classify_regime(macro, yields)
+    try:
+        result = fn(*args, **kwargs)
+        if isinstance(result, dict) and "error" in result:
+            return wrap_with_meta(result, source, status="degraded", degraded_reason=str(result["error"]))
+        return wrap_with_meta(result if isinstance(result, dict) else {"data": result}, source)
+    except Exception as e:
+        return wrap_with_meta(
+            {"error": str(e)},
+            source,
+            status="failed",
+            degraded_reason=str(e)[:100],
+        )
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CORE DATA TOOLS (6)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+@mcp.tool()
+def get_market_data() -> dict:
+    """Get consolidated market data: indices, sectors, cross-asset, factors, fund flows.
+
+    Merges market snapshot, asset performance, sector rotation, factor returns,
+    and fund flow signals into a single response. All from yfinance (no API key).
+    """
+    from collectors.market import (
+        get_asset_performance,
+        get_market_snapshot,
+        get_sector_performance,
+    )
+    from collectors.factors import get_factor_returns
+    from collectors.fund_flows import get_fund_flow_proxies
+
+    market = _safe_collect("market", "yfinance", get_market_snapshot)
+    sectors = _safe_collect("sectors", "yfinance", get_sector_performance)
+    assets = _safe_collect("assets", "yfinance", get_asset_performance)
+    factors = _safe_collect("factors", "french_data", get_factor_returns)
+    flows = _safe_collect("flows", "yfinance", get_fund_flow_proxies)
 
     return {
-        "regime": regime,
-        "macro_indicators": macro,
-        "yield_curve": yields,
+        "market": market,
+        "sectors": sectors,
+        "assets": assets,
+        "factors": factors,
+        "fund_flows": flows,
     }
 
 
 @mcp.tool()
-def get_sentiment() -> dict:
-    """Get the current market sentiment dashboard.
+def get_regime_and_macro() -> dict:
+    """Get regime classification, macro indicators, yield curve, and Fed game theory.
 
-    Returns a composite sentiment score (0-100, fear→greed), VIX level and
-    term structure, CNN Fear/Greed Index, put/call context, and market breadth
-    analysis. All data from free sources (yfinance, CNN).
-    """
-    from collectors.market import get_market_snapshot
-    from collectors.sentiment import get_sentiment_dashboard
-    from processors.sentiment_score import compute_sentiment_score
-
-    sentiment = get_sentiment_dashboard()
-    market = get_market_snapshot()
-    composite = compute_sentiment_score(sentiment, market)
-
-    return {
-        "composite": composite,
-        "raw_indicators": sentiment,
-        "breadth": {
-            "divergence": market.get("breadth_divergence"),
-            "signal": market.get("breadth_signal"),
-        },
-    }
-
-
-@mcp.tool()
-def market_snapshot() -> dict:
-    """Get current market levels, YTD performance, breadth, and sector rotation.
-
-    Returns S&P 500, Nasdaq, Russell 2000 levels and YTD returns, SPY vs RSP
-    breadth analysis, and sector ETF performance with leaders/laggards.
-    """
-    from collectors.market import get_market_snapshot, get_sector_performance
-
-    return {
-        "market": get_market_snapshot(),
-        "sectors": get_sector_performance(),
-    }
-
-
-@mcp.tool()
-def get_asset_performance() -> dict:
-    """Get cross-asset performance table (equities, bonds, gold, oil, BTC, USD).
-
-    Returns current prices, YTD and 1-month returns for major indices,
-    treasuries (TLT), high yield (HYG), gold (GLD), oil (USO), Bitcoin,
-    and the Dollar Index.
-    """
-    from collectors.market import get_asset_performance as _perf
-
-    return _perf()
-
-
-@mcp.tool()
-def get_insider_signals() -> dict:
-    """Get recent insider buying signals from OpenInsider.
-
-    Returns notable insider purchases (>$100K) from the last 30 days,
-    with cluster buy detection (multiple insiders buying the same ticker).
-    Cluster buys are among the highest-signal free datasets available.
-    """
-    from collectors.insider import get_insider_buys
-
-    return get_insider_buys()
-
-
-@mcp.tool()
-def get_risk_dashboard() -> dict:
-    """Get the risk dashboard — correlations, VIX regime, yield curve, breadth.
-
-    Returns 30-day rolling correlation matrix for key assets (stocks, bonds,
-    gold, oil, dollar, bitcoin), stock-bond correlation regime, VIX term
-    structure analysis, yield curve shape, and an overall risk level.
-    """
-    from collectors.market import get_market_snapshot as _snapshot
-    from collectors.sentiment import get_sentiment_dashboard
-    from collectors.treasury import get_yield_curve
-    from processors.risk import get_risk_dashboard as _risk
-
-    sentiment = get_sentiment_dashboard()
-    yields = get_yield_curve()
-    market = _snapshot()
-
-    return _risk(sentiment, yields, market)
-
-
-@mcp.tool()
-def get_cot_positioning() -> dict:
-    """Get CFTC Commitments of Traders data — institutional futures positioning.
-
-    Returns net speculative positioning for key contracts (S&P 500, Treasuries,
-    gold, oil, euro, yen, bitcoin, VIX), with extreme readings flagged.
-    Updated weekly. Crowded longs/shorts are among the highest-signal
-    contrarian indicators available for free.
-    """
-    from collectors.cot import get_cot_positioning as _cot
-
-    return _cot()
-
-
-@mcp.tool()
-def get_factor_returns() -> dict:
-    """Get academic factor returns from Kenneth French Data Library.
-
-    Returns daily Mkt-RF, SMB (size), HML (value), and UMD (momentum)
-    factor returns with 5-day and 30-day cumulative performance,
-    plus a factor regime assessment (value rotation, momentum crash, etc.).
-    """
-    from collectors.factors import get_factor_returns as _factors
-
-    return _factors()
-
-
-@mcp.tool()
-def get_geopolitical_monitor() -> dict:
-    """Get real-time geopolitical event monitoring from GDELT Project.
-
-    Tracks article volume and sentiment tone across key hotspots:
-    Iran conflict, China-Taiwan, Russia-Ukraine, US-China trade,
-    Middle East, and AI regulation. Flags surging coverage as alerts
-    with affected market mapping.
-    """
-    from collectors.gdelt import get_geopolitical_monitor as _geo
-
-    return _geo()
-
-
-@mcp.tool()
-def get_special_situations() -> dict:
-    """Get special situation filings from SEC EDGAR.
-
-    Returns recent SC 13D filings (activist stakes >5%), S-1 filings
-    (IPOs/spinoffs), and DEFA14A filings (proxy/M&A). Identifies
-    potential special situation opportunities per Greenblatt's framework.
-    """
-    from collectors.sec_edgar import get_special_situation_filings
-
-    return get_special_situation_filings()
-
-
-@mcp.tool()
-def get_13f_filings() -> dict:
-    """Get recent 13F-HR institutional holdings filings from SEC EDGAR.
-
-    Returns the most recent institutional holdings disclosures, showing
-    which major institutions have filed updated portfolio positions.
-    """
-    from collectors.sec_edgar import get_recent_13f_filings
-
-    return get_recent_13f_filings()
-
-
-@mcp.tool()
-def get_google_trends() -> dict:
-    """Get Google Trends data for investment-relevant search terms.
-
-    Tracks search interest for fear-related terms (recession, crash),
-    greed-related terms (buy stocks, best stocks), inflation, crypto,
-    housing, and geopolitical themes. Spikes in fear terms are
-    historically contrarian bullish at extremes.
-    """
-    from collectors.google_trends import get_trend_signals
-
-    return get_trend_signals()
-
-
-@mcp.tool()
-def get_crypto_dashboard() -> dict:
-    """Get comprehensive crypto market data from CoinGecko.
-
-    Returns total market cap, BTC/ETH dominance, top coin prices and
-    changes (24h/7d/30d), trending coins, crypto Fear & Greed Index,
-    DeFi stats, and a crypto regime classification.
-    """
-    from collectors.coingecko import get_crypto_dashboard as _crypto
-
-    return _crypto()
-
-
-@mcp.tool()
-def get_earnings_calendar() -> dict:
-    """Get upcoming earnings dates for major companies (6-week lookahead).
-
-    Tracks Magnificent 7, major financials, healthcare, energy, consumer,
-    and semiconductor companies. Groups by week and identifies
-    catalyst-dense periods where multiple large-caps report.
-    """
-    from collectors.earnings import get_earnings_calendar as _earnings
-
-    return _earnings()
-
-
-@mcp.tool()
-def get_fed_game() -> dict:
-    """Get the Fed game theory analysis — strategic interaction modeling.
-
-    Models the Fed-Market-Fiscal interaction as a multi-player game.
-    Returns the Fed's strategic position and constraints, what the bond
-    market is pricing, where market expectations diverge from game equilibrium,
-    probability-weighted Fed action scenarios, the dominant strategy, and
-    fiscal dominance assessment. Powers the Fed-focused commentary in §7
-    and the predictions section §15.
+    Combines FRED macro data, Treasury yield curve, Dalio regime classification,
+    and Fed strategic analysis. Requires FRED_API_KEY for full macro data;
+    falls back to market-implied signals without it.
     """
     from collectors.fred import get_macro_data
     from collectors.treasury import get_yield_curve
     from processors.regime import classify_regime
     from processors.fed_game import analyze_fed_game
 
-    macro = get_macro_data()
-    yields = get_yield_curve()
-    regime = classify_regime(macro, yields)
+    macro = _safe_collect("macro", "FRED", get_macro_data)
+    yields = _safe_collect("yields", "treasury", get_yield_curve)
 
-    return analyze_fed_game(regime=regime, macro=macro, yields=yields)
+    # Extract raw data for processors (strip _meta)
+    macro_raw = {k: v for k, v in macro.items() if k != "_meta"}
+    yields_raw = {k: v for k, v in yields.items() if k != "_meta"}
 
+    regime = _safe_collect("regime", "computed", classify_regime, macro_raw, yields_raw)
+    regime_raw = {k: v for k, v in regime.items() if k != "_meta"}
 
-@mcp.tool()
-def get_fund_flows() -> dict:
-    """Get ETF-based fund flow proxy signals.
+    fed_game = _safe_collect(
+        "fed_game", "computed",
+        analyze_fed_game, regime=regime_raw, macro=macro_raw, yields=yields_raw,
+    )
 
-    Analyzes volume patterns across 17 key ETFs (equities, fixed income,
-    alternatives, sectors) to detect institutional capital rotation.
-    Returns per-ETF flow signals (accumulation/distribution/capitulation/
-    squeeze), asset class aggregates, rotation patterns, and an overall
-    risk appetite score (0=extreme risk-off, 100=extreme risk-on).
-    """
-    from collectors.fund_flows import get_fund_flow_proxies
-
-    return get_fund_flow_proxies()
-
-
-@mcp.tool()
-def get_alerts() -> dict:
-    """Get the alert feed — threshold-based signals across all data sources.
-
-    Scans the full briefing data for conditions that warrant attention:
-    regime shifts, VIX extremes, credit stress, crowded positioning,
-    breadth divergences, private market signals, upcoming catalysts,
-    and correlation regime changes. Each alert has a severity level
-    (critical/warning/watch), investor framework mapping, and an
-    actionability note.
-    """
-    from processors.alerts import generate_alerts
-
-    briefing = generate_briefing()
-    return generate_alerts(briefing)
+    return {
+        "regime": regime,
+        "macro": macro,
+        "yield_curve": yields,
+        "fed_game": fed_game,
+    }
 
 
 @mcp.tool()
-def get_economic_calendar() -> dict:
-    """Get upcoming economic data releases and Fed speaker context.
+def get_sentiment_and_positioning() -> dict:
+    """Get sentiment, CFTC positioning, Google Trends, and contrarian scorecard.
 
-    Returns a 3-week lookahead of high-impact economic releases (CPI, NFP,
-    GDP, FOMC, retail sales, ISM) with impact levels and days until release,
-    catalyst-dense week identification, and Fed official roster with hawk/dove
-    classifications. Uses FRED release calendar API if FRED_API_KEY is set,
-    otherwise falls back to a static estimated calendar.
+    Combines sentiment dashboard, COT institutional positioning, behavioral
+    signals from Google Trends, and the computed contrarian scorecard.
     """
-    from collectors.econ_calendar import get_economic_calendar as _cal
-
-    return _cal()
-
-
-@mcp.tool()
-def get_contrarian_scorecard() -> dict:
-    """Get the contrarian scorecard — consensus beliefs vs. second-level thinking.
-
-    Synthesizes COT positioning, sentiment, Google trends, market breadth,
-    and private markets data into a structured matrix of where consensus is
-    likely wrong. Returns Marks's pendulum position (fear↔greed), specific
-    contrarian views with evidence chains, crowding alerts, and confidence
-    tags. Powers §2 Consensus vs. Contrarian in the briefing protocol.
-    """
-    from collectors.cot import get_cot_positioning as _cot
+    from collectors.cot import get_cot_positioning
     from collectors.google_trends import get_trend_signals
     from collectors.market import (
-        get_asset_performance as _assets,
-        get_market_snapshot as _snapshot,
+        get_asset_performance,
+        get_market_snapshot,
         get_private_market_proxies,
         get_sector_performance,
     )
@@ -338,197 +142,213 @@ def get_contrarian_scorecard() -> dict:
     from processors.regime import classify_regime
     from processors.sentiment_score import compute_sentiment_score
 
-    # Collect
-    sentiment_raw = get_sentiment_dashboard()
-    market = _snapshot()
-    composite = compute_sentiment_score(sentiment_raw, market)
-    sentiment = {"composite": composite, "raw": sentiment_raw}
-    cot = _cot()
-    trends = get_trend_signals()
-    assets = _assets()
-    sectors = get_sector_performance()
+    sentiment_raw = _safe_collect("sentiment", "CNN/yfinance", get_sentiment_dashboard)
+    cot = _safe_collect("cot", "CFTC", get_cot_positioning)
+    trends = _safe_collect("trends", "google_trends", get_trend_signals)
 
-    macro = get_macro_data()
-    yields = get_yield_curve()
-    regime = classify_regime(macro, yields)
+    # Compute composite sentiment
+    try:
+        market = get_market_snapshot()
+    except Exception:
+        market = {}
+    sent_data = {k: v for k, v in sentiment_raw.items() if k != "_meta"}
+    composite = compute_sentiment_score(sent_data, market)
 
-    fred_pm = get_private_market_macro()
-    proxies = get_private_market_proxies()
-    pm = get_private_markets_dashboard(fred_pm, proxies)
+    # Compute contrarian scorecard
+    try:
+        macro = get_macro_data()
+        yields = get_yield_curve()
+        regime = classify_regime(macro, yields)
+        assets = get_asset_performance()
+        sectors = get_sector_performance()
+        fred_pm = get_private_market_macro()
+        proxies = get_private_market_proxies()
+        pm = get_private_markets_dashboard(fred_pm, proxies)
 
-    return compute_contrarian_scorecard(
-        sentiment=sentiment,
-        cot=cot,
-        trends=trends,
-        market=market,
-        regime=regime,
-        risk={},  # Risk dashboard not needed for contrarian scoring
-        private_markets=pm,
-        assets=assets,
-        sectors=sectors,
-    )
+        sentiment_bundle = {"composite": composite, "raw": sent_data}
+        cot_raw = {k: v for k, v in cot.items() if k != "_meta"}
+        trends_raw = {k: v for k, v in trends.items() if k != "_meta"}
+
+        contrarian = compute_contrarian_scorecard(
+            sentiment=sentiment_bundle, cot=cot_raw, trends=trends_raw,
+            market=market, regime=regime, risk={},
+            private_markets=pm, assets=assets, sectors=sectors,
+        )
+    except Exception as e:
+        contrarian = {"error": str(e), "_meta": {"status": "failed", "source": "computed"}}
+
+    return {
+        "sentiment": {**sentiment_raw, "composite": composite},
+        "cot_positioning": cot,
+        "trends": trends,
+        "contrarian": contrarian,
+    }
+
+
+@mcp.tool()
+def get_risk_dashboard() -> dict:
+    """Get risk dashboard: correlations, VIX regime, yield curve, overall risk level.
+
+    Returns 30-day rolling correlations, stock-bond correlation regime,
+    VIX term structure, and an overall risk assessment.
+    """
+    from collectors.market import get_market_snapshot
+    from collectors.sentiment import get_sentiment_dashboard
+    from collectors.treasury import get_yield_curve
+    from processors.risk import get_risk_dashboard as _risk
+
+    sentiment = _safe_collect("sentiment", "CNN/yfinance", get_sentiment_dashboard)
+    yields = _safe_collect("yields", "treasury", get_yield_curve)
+    market = _safe_collect("market", "yfinance", get_market_snapshot)
+
+    sent_raw = {k: v for k, v in sentiment.items() if k != "_meta"}
+    yields_raw = {k: v for k, v in yields.items() if k != "_meta"}
+    market_raw = {k: v for k, v in market.items() if k != "_meta"}
+
+    risk = _safe_collect("risk", "computed", _risk, sent_raw, yields_raw, market_raw)
+
+    return risk
+
+
+@mcp.tool()
+def get_external_signals() -> dict:
+    """Get external signals: insider buys, SEC filings, geopolitical, crypto, calendars.
+
+    Consolidates fragile/scraping-dependent data sources. Tolerates partial
+    failures — each source is independently collected and health-tracked.
+    """
+    from collectors.coingecko import get_crypto_dashboard
+    from collectors.earnings import get_earnings_calendar
+    from collectors.econ_calendar import get_economic_calendar
+    from collectors.gdelt import get_geopolitical_monitor
+    from collectors.insider import get_insider_buys
+    from collectors.sec_edgar import get_special_situation_filings, get_recent_13f_filings
+
+    return {
+        "insider": _safe_collect("insider", "OpenInsider", get_insider_buys),
+        "special_situations": _safe_collect("special_sit", "SEC_EDGAR", get_special_situation_filings),
+        "filings_13f": _safe_collect("13f", "SEC_EDGAR", get_recent_13f_filings),
+        "geopolitical": _safe_collect("geopolitical", "GDELT", get_geopolitical_monitor),
+        "crypto": _safe_collect("crypto", "CoinGecko", get_crypto_dashboard),
+        "earnings": _safe_collect("earnings", "yfinance", get_earnings_calendar),
+        "economic_calendar": _safe_collect("econ_cal", "FRED", get_economic_calendar),
+    }
 
 
 @mcp.tool()
 def get_private_markets() -> dict:
-    """Get the private markets monitor — real estate cycle, credit cycle, PE/VC exit window.
+    """Get private markets monitor: RE cycle, credit cycle, PE/VC exit window.
 
-    Synthesizes FRED macro data (mortgage rates, housing starts, credit spreads,
-    lending standards) with public market proxy data (REITs, BDCs, PE GP stocks,
-    VC proxy ETFs) to classify private market cycles and detect public-private
-    valuation divergence. Divergence signals future write-downs in private marks.
+    Synthesizes FRED macro + public market proxies (REITs, BDCs, PE GP stocks)
+    to classify private market cycles and detect public-private divergence.
     """
     from collectors.fred import get_private_market_macro
     from collectors.market import get_private_market_proxies
     from processors.private_markets import get_private_markets_dashboard
 
-    fred_data = get_private_market_macro()
-    proxy_data = get_private_market_proxies()
+    fred_data = _safe_collect("fred_pm", "FRED", get_private_market_macro)
+    proxy_data = _safe_collect("proxies", "yfinance", get_private_market_proxies)
 
-    return get_private_markets_dashboard(fred_data, proxy_data)
+    fred_raw = {k: v for k, v in fred_data.items() if k != "_meta"}
+    proxy_raw = {k: v for k, v in proxy_data.items() if k != "_meta"}
+
+    dashboard = _safe_collect("private_markets", "computed", get_private_markets_dashboard, fred_raw, proxy_raw)
+
+    return dashboard
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# UTILITY TOOLS (4)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 @mcp.tool()
 def generate_briefing() -> dict:
-    """Generate a complete Archon investment intelligence briefing.
+    """Generate a complete Archon v2 briefing data package.
 
-    Assembles the full data package for the briefing protocol by calling
-    all data collectors and processors: regime, sentiment, market snapshot,
-    sectors, cross-asset, COT, factors, geopolitical, crypto, trends,
-    special situations, insider signals, earnings, private markets,
-    economic calendar, fund flows, contrarian scorecard, and Fed game
-    theory analysis.
+    Calls all 6 core data tools and assembles the full data package with
+    health tracking. Returns a _health dict summarizing data source status.
     """
-    from collectors.coingecko import get_crypto_dashboard as _crypto
-    from collectors.cot import get_cot_positioning as _cot
-    from collectors.earnings import get_earnings_calendar as _earnings
-    from collectors.econ_calendar import get_economic_calendar as _calendar
-    from collectors.factors import get_factor_returns as _factors
-    from collectors.fred import get_macro_data, get_private_market_macro
-    from collectors.fund_flows import get_fund_flow_proxies as _flows
-    from collectors.gdelt import get_geopolitical_monitor as _geo
-    from collectors.google_trends import get_trend_signals
-    from collectors.insider import get_insider_buys
-    from collectors.market import (
-        get_asset_performance as _assets,
-        get_market_snapshot as _snapshot,
-        get_private_market_proxies,
-        get_sector_performance,
-    )
-    from collectors.sec_edgar import (
-        get_recent_13f_filings,
-        get_special_situation_filings,
-    )
-    from collectors.sentiment import get_sentiment_dashboard
-    from collectors.treasury import get_yield_curve
-    from processors.private_markets import get_private_markets_dashboard
-    from processors.regime import classify_regime
-    from processors.risk import get_risk_dashboard as _risk
-    from processors.sentiment_score import compute_sentiment_score
+    from processors.health import collect_health
 
-    # ── Core market data ──────────────────────────────────────
-    macro = get_macro_data()
-    yields = get_yield_curve()
-    market = _snapshot()
-    sectors = get_sector_performance()
-    assets = _assets()
-    sentiment = get_sentiment_dashboard()
-    insiders = get_insider_buys()
+    results = {}
+    tool_health = {}
 
-    # ── Extended data sources ─────────────────────────────────
-    cot = _cot()
-    factors = _factors()
-    geo = _geo()
-    crypto = _crypto()
-    trends = get_trend_signals()
-    special_situations = get_special_situation_filings()
-    filings_13f = get_recent_13f_filings()
-    earnings = _earnings()
-    fund_flows = _flows()
+    # Call all core tools
+    for name, fn in [
+        ("market_data", get_market_data),
+        ("regime_macro", get_regime_and_macro),
+        ("sentiment_positioning", get_sentiment_and_positioning),
+        ("risk", get_risk_dashboard),
+        ("external", get_external_signals),
+        ("private_markets", get_private_markets),
+    ]:
+        try:
+            result = fn()
+            results[name] = result
+            # Extract health from _meta (top-level or nested)
+            if isinstance(result, dict):
+                if "_meta" in result:
+                    tool_health[name] = result
+                for k, v in result.items():
+                    if isinstance(v, dict) and "_meta" in v:
+                        tool_health[f"{name}.{k}"] = v
+        except Exception as e:
+            results[name] = {"error": str(e)}
+            tool_health[name] = {"_meta": {"status": "failed", "source": name}}
 
-    # ── Private markets ───────────────────────────────────────
-    fred_private = get_private_market_macro()
-    proxies = get_private_market_proxies()
-
-    # ── Process ───────────────────────────────────────────────
-    regime = classify_regime(macro, yields)
-    composite_sentiment = compute_sentiment_score(sentiment, market)
-    sentiment_bundle = {"composite": composite_sentiment, "raw": sentiment}
-    risk = _risk(sentiment, yields, market)
-    private_markets = get_private_markets_dashboard(fred_private, proxies)
-
-    # ── Economic calendar ──────────────────────────────────────
-    calendar = _calendar()
-
-    # ── Fed game theory (§7, §15) ────────────────────────────
-    from processors.fed_game import analyze_fed_game
-
-    fed_game = analyze_fed_game(regime=regime, macro=macro, yields=yields)
-
-    # ── Contrarian scorecard (§2) ────────────────────────────
-    from processors.contrarian import compute_contrarian_scorecard
-
-    contrarian = compute_contrarian_scorecard(
-        sentiment=sentiment_bundle,
-        cot=cot,
-        trends=trends,
-        market=market,
-        regime=regime,
-        risk=risk,
-        private_markets=private_markets,
-        assets=assets,
-        sectors=sectors,
-    )
+    # Aggregate health
+    health = collect_health(tool_health)
 
     return {
-        # §1 Regime + §7 Macro
-        "regime": regime,
-        "macro": macro,
-        "yield_curve": yields,
-        # §2 Consensus vs. Contrarian
-        "contrarian": contrarian,
-        # §3 Vitals
-        "sentiment": sentiment_bundle,
-        # §4 Equities + §5 Sectors + §6 Cross-Asset
-        "market": market,
-        "sectors": sectors,
-        "assets": assets,
-        # §8 Risk
-        "risk": risk,
-        # §9 Factors
-        "factors": factors,
-        # §10 CFTC Positioning
-        "cot_positioning": cot,
-        # §11 Special Situations + Insider Signals
-        "insiders": insiders,
-        "special_situations": special_situations,
-        "filings_13f": filings_13f,
-        # §11.5 Private Markets
-        "private_markets": private_markets,
-        # §12 Geopolitical
-        "geopolitical": geo,
-        # §13 Crypto
-        "crypto": crypto,
-        # §14 Behavioral / Google Trends
-        "trends": trends,
-        # §17 Earnings Calendar
-        "earnings": earnings,
-        # Catalyst calendar
-        "calendar": calendar,
-        # Fund flows
-        "fund_flows": fund_flows,
-        # Fed game theory
-        "fed_game": fed_game,
+        **results,
+        "_health": health,
     }
+
+
+@mcp.tool()
+def get_pipeline_health() -> dict:
+    """Quick health check — returns data source status without full briefing.
+
+    Useful for diagnostics. Tests connectivity to each major data source
+    and reports status, freshness, and any errors.
+    """
+    from processors.health import collect_health
+
+    checks = {}
+
+    # Test each source independently
+    test_sources = [
+        ("yfinance", "collectors.market", "get_market_snapshot"),
+        ("FRED", "collectors.fred", "get_macro_data"),
+        ("treasury", "collectors.treasury", "get_yield_curve"),
+        ("sentiment", "collectors.sentiment", "get_sentiment_dashboard"),
+        ("CFTC", "collectors.cot", "get_cot_positioning"),
+        ("CoinGecko", "collectors.coingecko", "get_crypto_dashboard"),
+        ("GDELT", "collectors.gdelt", "get_geopolitical_monitor"),
+        ("OpenInsider", "collectors.insider", "get_insider_buys"),
+    ]
+
+    for name, module_path, fn_name in test_sources:
+        try:
+            module = __import__(module_path, fromlist=[fn_name])
+            fn = getattr(module, fn_name)
+            result = fn()
+            if isinstance(result, dict) and "error" in result:
+                checks[name] = {"_meta": {"status": "degraded", "source": name, "degraded_reason": str(result["error"])[:80]}}
+            else:
+                checks[name] = {"_meta": {"status": "ok", "source": name, "cache_age_seconds": 0}}
+        except Exception as e:
+            checks[name] = {"_meta": {"status": "failed", "source": name, "degraded_reason": str(e)[:80]}}
+
+    return collect_health(checks)
 
 
 @mcp.tool()
 def save_snapshot(for_date: str = "") -> dict:
     """Save today's briefing data as a permanent daily snapshot.
 
-    Generates a full briefing and persists it to archon-data/snapshots/YYYY-MM-DD.json.
-    This enables the Delta Block (§0) which diffs today vs prior day.
-    Call this after reviewing a briefing to persist it for future comparison.
+    Persists to archon-data/snapshots/YYYY-MM-DD.json for delta computation.
 
     Args:
         for_date: Optional date (YYYY-MM-DD). Defaults to today.
@@ -542,112 +362,151 @@ def save_snapshot(for_date: str = "") -> dict:
         "status": "saved",
         "path": path,
         "date": for_date or __import__("datetime").date.today().isoformat(),
-        "sections": list(briefing.keys()),
     }
 
 
 @mcp.tool()
 def get_delta() -> dict:
-    """Get the Delta Block — what changed since the last saved briefing.
+    """Get the Delta Block — what changed since the last saved snapshot.
 
-    Generates a fresh briefing, compares it to the most recent saved snapshot,
+    Generates a fresh briefing, diffs it against the most recent snapshot,
     and returns structured deltas: market moves, regime changes, threshold
-    crossings, leadership changes, private market shifts, and a 3-5 bullet
-    summary for §0 of the briefing protocol.
+    crossings, leadership changes, and summary bullets.
     """
     from processors.persistence import compute_delta, get_prior_snapshot
 
-    current_briefing = generate_briefing()
+    current = generate_briefing()
     prior = get_prior_snapshot()
 
     if prior is None:
         return {
             "status": "no_prior_snapshot",
-            "message": "No prior snapshot found. Run save_snapshot first to establish a baseline.",
-            "current_briefing": current_briefing,
+            "message": "No prior snapshot. Run save_snapshot to establish a baseline.",
+            "current_briefing": current,
         }
 
-    delta = compute_delta({"data": current_briefing}, prior)
+    delta = compute_delta({"data": current}, prior)
     return {
         "status": "ok",
         "delta": delta,
-        "current_briefing": current_briefing,
+        "current_briefing": current,
     }
 
 
 @mcp.tool()
-def get_statistical_context(category: str = "", tags: str = "") -> dict:
-    """Get statistical base rates and live z-scores for current market conditions.
+def get_alerts() -> dict:
+    """Get the alert feed — threshold-based signals across all data.
 
-    Provides empirical grounding for briefing claims. When the Archon says
-    "VIX >30 historically reverts within 20 days," this endpoint verifies it
-    with actual base rates, confidence intervals, sample sizes, and caveats.
-
-    Returns current readings with z-scores and percentiles, applicable base
-    rates for today's conditions, and statistical warnings for extreme readings.
-
-    Args:
-        category: Filter base rates by category (volatility, macro, credit, etc.)
-        tags: Comma-separated tags to filter by (e.g., "contrarian,vix")
+    Scans for regime shifts, VIX extremes, credit stress, crowded positioning,
+    breadth divergences, and correlation regime changes. Each alert has severity
+    (critical/warning/watch) and actionability note.
     """
-    from processors.statistics import compute_live_statistics, get_base_rates
+    from processors.alerts import generate_alerts
 
     briefing = generate_briefing()
-    live = compute_live_statistics(briefing)
+    return generate_alerts(briefing)
 
-    # Also include filtered base rate library if requested
-    tag_list = [t.strip() for t in tags.split(",") if t.strip()] if tags else None
-    library = get_base_rates(
-        category=category or None,
-        tags=tag_list,
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# PORTFOLIO TOOLS (5)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+@mcp.tool()
+def open_position(
+    symbol: str,
+    direction: str,
+    size_pct: float,
+    entry_price: float,
+    thesis_source: str,
+    thesis_text: str,
+    confidence: str,
+    regime_context: str = "",
+    stop_loss_pct: float = 0.0,
+    target_pct: float = 0.0,
+) -> dict:
+    """Open a paper trade in Archon's portfolio.
+
+    Args:
+        symbol: Ticker (e.g., "XLE", "GLD", "QQQ")
+        direction: "long" or "short"
+        size_pct: Position size as % of capital (e.g., 10.0)
+        entry_price: Entry price per share
+        thesis_source: What analysis drove this (contrarian_scorecard, regime_shift, alert, etc.)
+        thesis_text: The specific thesis statement
+        confidence: "H", "M", or "L"
+        regime_context: Active regime when opened
+        stop_loss_pct: Stop-loss % from entry (negative, e.g., -5.0). 0 = use default.
+        target_pct: Profit target % from entry (positive). 0 = no target.
+    """
+    from processors.portfolio import open_position as _open
+
+    return _open(
+        symbol=symbol, direction=direction, size_pct=size_pct,
+        entry_price=entry_price, thesis_source=thesis_source,
+        thesis_text=thesis_text, confidence=confidence,
+        regime_context=regime_context,
+        stop_loss_pct=stop_loss_pct or None,
+        target_pct=target_pct or None,
     )
 
-    return {
-        "live_statistics": live,
-        "base_rate_library": library if (category or tags) else {"note": "Pass category or tags to browse the full base rate library"},
-    }
-
 
 @mcp.tool()
-def run_stress_test(scenario: str = "") -> dict:
-    """Run a scenario stress test — "if X happens, what breaks?"
-
-    Takes a trigger shock and traces the transmission cascade through asset
-    classes, sectors, and risk factors. Returns impact estimates adjusted
-    for current market vulnerability, portfolio impact across allocation
-    types, and framework-specific hedging suggestions.
-
-    Available scenarios: oil_spike, vix_spike, credit_blowout, rate_shock,
-    dollar_crash, china_shock, ai_bubble_pop. Call with no scenario to list all.
+def close_position(
+    trade_id: str,
+    exit_price: float,
+    exit_reason: str,
+    resolution_notes: str = "",
+    thesis_outcome: str = "correct",
+) -> dict:
+    """Close an open paper trade.
 
     Args:
-        scenario: Scenario ID from the library (e.g., "oil_spike"). Empty to list all.
+        trade_id: Position's unique ID (8-char hex)
+        exit_price: Exit price per share
+        exit_reason: target_hit, stop_hit, thesis_broken, regime_change, rebalance
+        resolution_notes: Explanation
+        thesis_outcome: correct, wrong, stopped_out, invalidated
     """
-    from processors.stress_test import run_stress_test as _stress, list_scenarios
+    from processors.portfolio import close_position as _close
 
-    if not scenario:
-        return list_scenarios()
-
-    briefing = generate_briefing()
-    return _stress(scenario_id=scenario, briefing=briefing)
+    result = _close(trade_id, exit_price, exit_reason, resolution_notes, thesis_outcome)
+    if result is None:
+        return {"error": f"Position {trade_id} not found"}
+    return result
 
 
 @mcp.tool()
-def get_historical_analogs() -> dict:
-    """Find historical periods most similar to current market conditions.
+def update_positions() -> dict:
+    """Mark-to-market all open positions using live prices.
 
-    Compares the current macro/sentiment/vol/positioning fingerprint against
-    a curated library of 12 historical reference periods (COVID crash, GFC,
-    2022 stagflation, Volcker, 2017 low-vol, etc.) and any saved Archon
-    snapshots older than 30 days. Returns ranked matches with similarity
-    scores, forward outcomes from each analog, divergences from today,
-    and a composite outlook weighted by similarity. Powers the "what
-    rhymes with today?" analysis in §16 of the briefing protocol.
+    Fetches current prices from yfinance and updates unrealized P&L,
+    high water marks, and daily equity snapshot.
     """
-    from processors.analogs import find_analogs
+    from processors.portfolio import update_positions as _update
 
-    briefing = generate_briefing()
-    return find_analogs(briefing)
+    return _update()
+
+
+@mcp.tool()
+def get_portfolio() -> dict:
+    """Get the full portfolio state: positions, trades, metrics, rules."""
+    from processors.portfolio import get_portfolio as _get
+
+    return _get()
+
+
+@mcp.tool()
+def get_portfolio_performance() -> dict:
+    """Get detailed performance breakdown by regime, thesis source, and timeframe."""
+    from processors.portfolio import get_portfolio_performance as _perf
+
+    return _perf()
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# PREDICTION TRACKING (3 — kept from v1)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 @mcp.tool()
@@ -661,70 +520,52 @@ def log_prediction(
     evidence: list[str] | None = None,
     tags: list[str] | None = None,
 ) -> dict:
-    """Log a falsifiable prediction for future calibration scoring.
-
-    Records a specific, time-bounded prediction with its assigned probability,
-    the investor framework that generated it, and supporting evidence.
-    Predictions are stored in snapshots/predictions.json and scored against
-    outcomes using Brier scores once resolved.
+    """Log a falsifiable prediction for calibration scoring.
 
     Args:
-        claim: Specific, falsifiable prediction (e.g., "VIX below 25 by April 15")
+        claim: Specific prediction (e.g., "VIX below 25 by April 15")
         probability: Assigned probability (0.0 to 1.0)
-        framework: Investor framework source (e.g., "Marks", "Soros", "Tudor Jones")
-        category: Domain (regime, credit, equity, vol, rotation, fed, etc.)
-        resolve_by: Resolution deadline (YYYY-MM-DD)
-        regime_context: What regime was active when prediction was made
+        framework: Source framework (Marks, Soros, Tudor Jones, etc.)
+        category: Domain (regime, credit, equity, vol, rotation, fed)
+        resolve_by: Deadline (YYYY-MM-DD)
+        regime_context: Active regime when prediction was made
         evidence: Supporting evidence points
-        tags: Optional tags for filtering
+        tags: Optional tags
     """
     from processors.calibration import log_prediction as _log
 
     return _log(
-        claim=claim,
-        probability=probability,
-        framework=framework,
-        category=category,
-        resolve_by=resolve_by,
+        claim=claim, probability=probability, framework=framework,
+        category=category, resolve_by=resolve_by,
         regime_context=regime_context or None,
-        evidence=evidence,
-        tags=tags,
+        evidence=evidence, tags=tags,
     )
 
 
 @mcp.tool()
 def resolve_prediction(prediction_id: str, outcome: bool, notes: str = "") -> dict:
-    """Resolve a prediction with its actual outcome (True = happened, False = didn't).
-
-    Marks a prediction as resolved and records whether the predicted event occurred.
-    Once enough predictions are resolved, calibration metrics become meaningful.
+    """Resolve a prediction (True = happened, False = didn't).
 
     Args:
-        prediction_id: The prediction's unique ID (8-char hex string)
-        outcome: True if the predicted event occurred, False if not
-        notes: Optional resolution notes explaining the outcome
+        prediction_id: The prediction's 8-char ID
+        outcome: Whether the predicted event occurred
+        notes: Resolution notes
     """
     from processors.calibration import resolve_prediction as _resolve
 
     result = _resolve(prediction_id, outcome, notes=notes or None)
     if result is None:
-        return {"status": "not_found", "prediction_id": prediction_id}
+        return {"error": f"Prediction {prediction_id} not found"}
     return {"status": "resolved", "prediction": result}
 
 
 @mcp.tool()
 def get_calibration_report(framework: str = "", category: str = "") -> dict:
-    """Get the calibration report — Brier scores, calibration curve, accuracy.
-
-    Computes calibration metrics for all resolved predictions (or filtered
-    by framework/category). Returns Brier score (0=perfect, 1=worst),
-    calibration curve (predicted vs actual frequency in 5 buckets),
-    sharpness (decisiveness), accuracy, and breakdowns by framework,
-    category, and regime. Requires at least 5 resolved predictions.
+    """Get calibration report: Brier scores, accuracy, breakdowns.
 
     Args:
-        framework: Filter to a specific investor framework (optional)
-        category: Filter to a specific category (optional)
+        framework: Filter by investor framework (optional)
+        category: Filter by category (optional)
     """
     from processors.calibration import (
         compute_calibration_report,
@@ -736,52 +577,13 @@ def get_calibration_report(framework: str = "", category: str = "") -> dict:
         framework=framework or None,
         category=category or None,
     )
-
-    # Always include open/overdue for visibility
-    if report.get("status") == "ok" or report.get("status") == "insufficient_data":
-        report["open_predictions"] = get_open_predictions()
-        report["overdue_predictions"] = get_overdue_predictions()
+    report["open_predictions"] = get_open_predictions()
+    report["overdue_predictions"] = get_overdue_predictions()
 
     return report
 
 
-@mcp.tool()
-def extract_predictions() -> dict:
-    """Auto-extract falsifiable predictions from the current briefing data.
-
-    Scans regime classification, VIX levels, contrarian views, credit cycle,
-    and Fed game scenarios for claims that can be logged as predictions.
-    Returns candidates — call log_prediction to persist the ones you want.
-    Does NOT auto-log; the Archon reviews and selects which to persist.
-    """
-    from processors.calibration import extract_predictions_from_briefing
-
-    briefing = generate_briefing()
-    candidates = extract_predictions_from_briefing(briefing)
-
-    return {
-        "candidate_count": len(candidates),
-        "candidates": candidates,
-        "note": "These are candidates. Call log_prediction for each one you want to track.",
-    }
-
-
-@mcp.tool()
-def list_snapshots() -> dict:
-    """List all saved daily briefing snapshots.
-
-    Returns dates, file paths, and sizes for all persisted snapshots.
-    Use this to see what historical data is available for delta computation
-    and trend analysis.
-    """
-    from processors.persistence import list_snapshots as _list
-
-    snapshots = _list()
-    return {
-        "count": len(snapshots),
-        "snapshots": snapshots,
-    }
-
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 if __name__ == "__main__":
     mcp.run()
