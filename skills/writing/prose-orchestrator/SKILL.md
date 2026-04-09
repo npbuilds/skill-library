@@ -51,8 +51,8 @@ Determine which subdomain(s) apply and route through the appropriate director.
 
 | Subdomain | Director | Activates When |
 |-----------|----------|---------------|
-| Sentence Craft | `skills/writing/sentence-craft/SKILL.md` | Rhythm, word choice, sentence structure, line-level polish |
-| Narrative Craft | `skills/writing/narrative-craft/SKILL.md` | Scene construction, story arc, pacing, dialogue, POV, concrete detail |
+| Sentence Craft | `skills/writing/sentence-craft/SKILL.md` | Rhythm, word choice, sentence structure, line-level polish, figurative language (metaphor, simile, image systems) |
+| Narrative Craft | `skills/writing/narrative-craft/SKILL.md` | Scene construction, story arc, pacing, dialogue, POV, concrete detail, character interiority, micro-tension, narrative geometry, world-to-story translation, hybrid/experimental forms |
 | Rhetoric | `skills/writing/rhetoric/SKILL.md` | Argument structure, persuasion, rhetorical devices, essay forms |
 | Revision Craft | `skills/writing/revision-craft/SKILL.md` | Editing passes, style analysis, tightening |
 

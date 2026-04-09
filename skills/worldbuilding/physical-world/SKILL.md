@@ -18,6 +18,8 @@ Before societies can exist, the world must have a physical foundation that makes
 |---|---|
 | Terrain, mountain ranges, rivers, coastlines, resource distribution, how geography shapes civilization | `geography-ecology` |
 | Biomes, flora, fauna, food chains, ecological completeness (which species exist and why) | `ecology-design` |
+| What the world feels, smells, sounds like — the experiential layer of place | `sensory-worldbuilding` |
+| Physical spaces that narrate history through traces, ruins, wear, architecture | `environmental-storytelling` |
 | Technology trees, innovation pathways, how tech level shapes society and military | `technology-progression` |
 
 ## When to Layer These Skills
