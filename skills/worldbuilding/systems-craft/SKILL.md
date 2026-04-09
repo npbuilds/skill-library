@@ -18,7 +18,9 @@ Every world has rules. Some are physical (gravity, thermodynamics). Some are mag
 |---|---|
 | Magic systems, metaphysical substrates, speculative technology rules | `magic-system-design` |
 | Hard/soft spectrum for your magic, Sanderson's laws, cost structures | `magic-system-design` (preferred) or `magic-systems` |
+| Worlds that resist systematization — New Weird, numinous, alien, anti-Sanderson | `weird-worldbuilding` |
 | Names for people, places, institutions within a specific culture | `naming-system` |
+| Constructed languages beyond naming — morphology, syntax, language-as-worldview | `conlang-craft` |
 | Checking a world decision against established axioms; adding new axioms | `world-bible` |
 
 > **Note on duplicates:** `magic-system-design` and `magic-systems` cover overlapping ground — both address hard/soft magic spectra, Sanderson's laws, and cost structures. Prefer `magic-system-design` for new work; `magic-systems` may have supplementary material worth checking for comprehensive design.

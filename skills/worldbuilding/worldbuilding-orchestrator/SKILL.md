@@ -43,9 +43,14 @@ Determine which worldbuilding skill(s) apply. Most requests touch multiple skill
 | Design magic/fantasy system | `magic-system-design` | `world-bible` | Design methodology; results go in world-bible |
 | Design geography, physical world | `geography-ecology` | `world-bible` | Terrain, climate, resource distribution |
 | Design ecosystems, flora, fauna | `ecology-design` | `geography-ecology`, `world-bible` | Getz 10-niche model, food webs |
+| Design what the world feels/smells/sounds like | `sensory-worldbuilding` | `geography-ecology`, `cultures-societies` | Five sensory channels, sensory signatures |
+| Design spaces that narrate history through physical traces | `environmental-storytelling` | `history-builder`, `geography-ecology` | Jenkins' four types, archaeology method |
 | Create a civilization, culture | `cultures-societies` | `naming-system`, `world-bible` | Seven pillars of culture design |
+| Design fictional economies, trade, currency, scarcity | `economic-systems` | `cultures-societies`, `geography-ecology` | Five questions, currency systems, trade routes |
+| Design characters as products of their world | `character-design` | `cultures-societies`, `faction-design` | Character Diamond, world-shapes-character pipeline |
 | Design religions, belief systems | `religion-design` | `cultures-societies`, `world-bible` | Organizational patterns, deity design |
 | Name characters, places, institutions | `naming-system` | `world-bible`, `cultures-societies` | Phonetic palettes per culture |
+| Build constructed languages beyond naming | `conlang-craft` | `naming-system`, `cultures-societies` | Morphology, Sapir-Whorf, conlang-to-culture pipeline |
 | Write in-universe documents, lore | `lore-writer` | `world-bible`, `naming-system` | 7 voices, artifact format |
 | Build history, timelines | `history-builder` | `world-bible`, `lore-writer` | Fractal zoom, non-chronological |
 | Track who knows what | `character-belief-tracker` | `world-bible`, `lore-writer` | Belief graph against revelation layers |
@@ -54,6 +59,7 @@ Determine which worldbuilding skill(s) apply. Most requests touch multiple skill
 | Design technology levels, innovation | `technology-progression` | `magic-system-design`, `world-bible` | Tech trees, fantasy system disruption |
 | Control pacing, tension curves | `narrative-pacing` | `lore-writer`, `world-bible` | Storyteller archetypes, revelation spiral pacing |
 | Trace consequences of an axiom | `extrapolation-engine` | `world-bible` | "And Then What?" drill, domain cascade |
+| Build weird/numinous/alien worlds that resist systematization | `weird-worldbuilding` | `magic-system-design`, `world-bible` | The Glimpse, unreliable world, numinous objects |
 | Consistency check across artifacts | `world-bible` | All others | The bible is the authority |
 | "Build me a world from scratch" | All, in sequence | — | Full pipeline (see Phase 3) |
 
@@ -161,6 +167,12 @@ Route to the appropriate skill, passing accumulated context.
 | `technology-progression` | knowledge | Tech trees, innovation pathways, fantasy system disruption |
 | `faction-design` | knowledge | Pyramid technique, SUPREME method, power vacuums |
 | `extrapolation-engine` | knowledge | "And Then What?" drill, cascading consequences across domains |
+| `economic-systems` | knowledge | Fictional economies — trade, currency, scarcity, Five Questions framework |
+| `conlang-craft` | knowledge | Constructed languages — morphology, Sapir-Whorf, conlang-to-culture pipeline |
+| `character-design` | knowledge | Characters as products of world — Character Diamond, arc patterns |
+| `sensory-worldbuilding` | knowledge | What the world feels/smells/sounds like — five sensory channels |
+| `environmental-storytelling` | knowledge | Physical spaces narrating history — Jenkins' four types, archaeology method |
+| `weird-worldbuilding` | knowledge | Anti-systematic worldbuilding — the Glimpse, numinous objects, estrangement |
 
 When delegating, always pass:
 - Current world-bible state (relevant axioms)

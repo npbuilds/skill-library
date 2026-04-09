@@ -17,6 +17,8 @@ The physical world is the stage. Civilizations are the story. Every culture, fac
 | What you're building | Skill to load |
 |---|---|
 | A culture's values, governance, customs, economy, or social structure | `cultures-societies` |
+| Trade, currency, scarcity, economic structure, fictional economies in depth | `economic-systems` |
+| Characters as products of their world — psychology, motivation, contradiction, arc | `character-design` |
 | Political entities, organizations, secret societies, factions with competing interests | `faction-design` |
 | Pantheons, cults, philosophies, any organized belief system | `religion-design` |
 | Timelines, historical eras, events at any scale, how history accumulates | `history-builder` |

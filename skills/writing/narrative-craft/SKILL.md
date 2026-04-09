@@ -22,12 +22,16 @@ Narrative craft governs everything above the sentence and below the whole piece:
 
 | Question Pattern | Route To | Why |
 |-----------------|----------|-----|
-| Story structure, plot, arc, three-act, beginnings/endings | `narrative-arc` | Whole-piece architecture |
+| Story structure, plot, arc, three-act, beginnings/endings | `narrative-arc` | Whole-piece architecture (linear) |
+| Non-linear structure, experimental forms, "what shape should this story be," meander, spiral, fractal | `narrative-geometry` | Alternative shapes beyond the arc |
 | Scene construction, turning points, "enter late/leave early" | `scene-craft` | Scene-level architecture |
 | Tension, tempo, "too slow," "too fast," compression/expansion | `pacing` | Narrative time management |
 | Character speech, subtext, "dialogue feels wooden" | `dialogue` | Dialogue craft |
 | POV, narrative distance, "head-hopping," omniscient vs close | `point-of-view` | Perspective mechanics |
 | "Show don't tell," sensory detail, vague description | `concrete-detail` | Specificity and implication |
+| Interiority, "getting inside the character's head," free indirect discourse, rendering consciousness, "telling not showing emotions" | `character-interiority` | Consciousness rendering |
+| "Flat prose," "no energy," "why is this boring," page-turning quality without action, engagement in static scenes | `micro-tension` | Line-by-line emotional charge |
+| Autofiction, metafiction, fragmented narrative, genre-bending, experimental forms | `hybrid-forms` | When categories break |
 | "This scene doesn't work" (vague) | Diagnose first | Read the scene, identify the primary weakness, then route |
 
 ### Multi-Skill Questions
@@ -35,25 +39,27 @@ Narrative craft governs everything above the sentence and below the whole piece:
 Some questions need more than one skill. Load them in this order:
 
 1. `concrete-detail` — is the reader grounded in sensory reality?
-2. `scene-craft` — does the scene turn? Does it have a reason to exist?
-3. `dialogue` — if dialogue is present, is it carrying weight?
-4. `pacing` — is the narrative time management working?
-5. `point-of-view` — is the perspective consistent and serving the story?
-6. `narrative-arc` — does this scene serve the whole-piece structure?
+2. `character-interiority` — is the reader inside the character's consciousness, not just observing it?
+3. `scene-craft` — does the scene turn? Does it have a reason to exist?
+4. `dialogue` — if dialogue is present, is it carrying weight?
+5. `pacing` — is the narrative time management working?
+6. `point-of-view` — is the perspective consistent and serving the story?
+7. `narrative-arc` — does this scene serve the whole-piece structure?
 
-This order goes micro to macro: ground the reader first, then check the scene's internal logic, then check its role in the larger structure.
+This order goes micro to macro: ground the reader first, then inhabit the character, then check the scene's internal logic, then check its role in the larger structure.
 
 ## Curriculum Order
 
 1. **Concrete Detail** (foundation) — Before anything else, the reader must be able to see, hear, and feel. Sensory specificity is the bedrock skill.
-2. **Scene Craft** (construction) — Once you can create vivid moments, learn to structure them into scenes that turn.
-3. **Dialogue** (voice) — Scenes often hinge on what characters say — and don't say.
-4. **Pacing** (time) — Learn to control narrative tempo: when to expand a moment, when to compress a month.
-5. **Point of View** (perspective) — The lens through which everything is filtered. Changes everything about what the reader knows and feels.
-6. **Narrative Arc** (architecture) — The whole-piece structure. Most useful after you understand scenes, because arcs are made of scenes.
+2. **Character Interiority** (consciousness) — Once you can create vivid sensory reality, learn to filter it through a character's mind. The perception filter, somatic emotion, and free indirect discourse.
+3. **Scene Craft** (construction) — Once you can ground the reader in a character's experience, structure those experiences into scenes that turn.
+4. **Dialogue** (voice) — Scenes often hinge on what characters say — and don't say. The tension between dialogue and interiority is one of fiction's most powerful tools.
+5. **Pacing** (time) — Learn to control narrative tempo: when to expand a moment, when to compress a month. Interiority provides the subjective clock; pacing provides the narrative one.
+6. **Point of View** (perspective) — The lens through which everything is filtered. Changes everything about what the reader knows and feels.
+7. **Narrative Arc** (architecture) — The whole-piece structure. Most useful after you understand scenes, because arcs are made of scenes.
 
 ### Level Progression
-- **Foundational**: All six current skills
+- **Foundational**: All seven current skills (concrete-detail, character-interiority, scene-craft, dialogue, pacing, point-of-view, narrative-arc)
 - **Intermediate**: (future) subplot management, flashback technique, ensemble POV
 - **Advanced**: (future) non-linear structure, unreliable narration, experimental narrative forms
 
