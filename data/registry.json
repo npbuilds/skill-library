@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-04-06T22:03:35Z",
+  "last_scan": "2026-04-09T00:07:21Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2898,7 +2898,9 @@
         "naming-system",
         "narrative-pacing",
         "religion-design",
-        "technology-progression"
+        "technology-progression",
+        "world-to-story",
+        "weird-worldbuilding"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -3007,7 +3009,8 @@
       ],
       "referenced_by": [
         "lore-writer",
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "conlang-craft"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -3059,7 +3062,8 @@
         "lore-writer",
         "magic-systems",
         "technology-progression",
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "weird-worldbuilding"
       ],
       "shares_references_with": [
         "ecology-design",
@@ -3267,7 +3271,8 @@
       ],
       "referenced_by": [
         "extrapolation-engine",
-        "faction-design"
+        "faction-design",
+        "environmental-storytelling"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5301,7 +5306,10 @@
         "cultures-societies",
         "ecology-design",
         "technology-progression",
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "economic-systems",
+        "sensory-worldbuilding",
+        "environmental-storytelling"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5362,7 +5370,12 @@
         "dialogue",
         "rhetoric",
         "dilemma-analyzer",
-        "rights-reasoner"
+        "rights-reasoner",
+        "economic-systems",
+        "conlang-craft",
+        "character-design",
+        "sensory-worldbuilding",
+        "environmental-storytelling"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5856,7 +5869,8 @@
         "prose-writer",
         "style-dna",
         "syntax-patterns",
-        "typography"
+        "typography",
+        "figurative-language"
       ],
       "tags": [
         "domain:writing",
@@ -5957,7 +5971,8 @@
         "syntax-patterns",
         "worldbuilding-orchestrator",
         "lore-writer",
-        "naming-system"
+        "naming-system",
+        "figurative-language"
       ],
       "tags": [
         "domain:writing",
@@ -6075,7 +6090,12 @@
         "prose-orchestrator",
         "prose-writer",
         "scene-craft",
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "character-interiority",
+        "micro-tension",
+        "narrative-geometry",
+        "world-to-story",
+        "hybrid-forms"
       ],
       "invocation": "director"
     },
@@ -6125,7 +6145,9 @@
       "composite_score": 69,
       "referenced_by": [
         "narrative-craft",
-        "narrative-pacing"
+        "narrative-pacing",
+        "narrative-geometry",
+        "hybrid-forms"
       ],
       "invocation": "knowledge"
     },
@@ -6177,7 +6199,8 @@
         "narrative-arc",
         "narrative-craft",
         "pacing",
-        "point-of-view"
+        "point-of-view",
+        "world-to-story"
       ],
       "invocation": "knowledge"
     },
@@ -6230,7 +6253,8 @@
         "narrative-arc",
         "narrative-craft",
         "point-of-view",
-        "narrative-pacing"
+        "narrative-pacing",
+        "narrative-geometry"
       ],
       "invocation": "knowledge"
     },
@@ -6283,7 +6307,8 @@
       "referenced_by": [
         "narrative-craft",
         "faction-design",
-        "cultures-societies"
+        "cultures-societies",
+        "micro-tension"
       ],
       "invocation": "knowledge"
     },
@@ -6334,7 +6359,8 @@
       "referenced_by": [
         "narrative-craft",
         "lore-writer",
-        "character-belief-tracker"
+        "character-belief-tracker",
+        "character-interiority"
       ],
       "invocation": "knowledge"
     },
@@ -6383,7 +6409,12 @@
       "auto_score": 74,
       "composite_score": 74,
       "referenced_by": [
-        "narrative-craft"
+        "narrative-craft",
+        "character-interiority",
+        "figurative-language",
+        "world-to-story",
+        "sensory-worldbuilding",
+        "environmental-storytelling"
       ],
       "invocation": "knowledge"
     },
@@ -6633,7 +6664,8 @@
       "auto_score": 69,
       "composite_score": 69,
       "referenced_by": [
-        "rhetoric"
+        "rhetoric",
+        "hybrid-forms"
       ],
       "invocation": "knowledge"
     },
@@ -6977,7 +7009,8 @@
       ],
       "referenced_by": [
         "dialogue",
-        "justice-analyst"
+        "justice-analyst",
+        "character-design"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -7023,7 +7056,9 @@
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "weird-worldbuilding"
+      ],
       "tags": [
         "domain:worldbuilding",
         "level:knowledge",
@@ -9784,7 +9819,9 @@
       "referenced_by": [
         "geography-ecology",
         "ecology-design",
-        "technology-progression"
+        "technology-progression",
+        "sensory-worldbuilding",
+        "environmental-storytelling"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9831,7 +9868,9 @@
         "cultures-societies",
         "faction-design",
         "religion-design",
-        "history-builder"
+        "history-builder",
+        "economic-systems",
+        "character-design"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9878,7 +9917,9 @@
         "magic-system-design",
         "magic-systems",
         "naming-system",
-        "world-bible"
+        "world-bible",
+        "conlang-craft",
+        "weird-worldbuilding"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -11817,6 +11858,685 @@
       "created": "2026-04-07",
       "last_modified": "2026-04-06",
       "parent": "spelunker"
+    },
+    "character-interiority": {
+      "name": "character-interiority",
+      "description": "Rendering consciousness on the page \u2014 the full spectrum from direct thought through free indirect discourse through stream of consciousness, and the craft of making readers live inside a character'...",
+      "location": "skills/writing/narrative-craft/character-interiority/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 2854,
+        "body_words": 2854,
+        "section_count": 21,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 4281
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 72,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 72,
+      "depends_on": [
+        "point-of-view",
+        "concrete-detail"
+      ],
+      "referenced_by": [
+        "micro-tension",
+        "character-design",
+        "world-to-story"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:narrative-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "narrative-craft"
+    },
+    "micro-tension": {
+      "name": "micro-tension",
+      "description": "The line-by-line tension that keeps readers turning pages regardless of whether anything is \"happening\" \u2014 emotional contradiction, the unsaid, conflicting desires within a single consciousness. Use...",
+      "location": "skills/writing/narrative-craft/micro-tension/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1818,
+        "body_words": 1818,
+        "section_count": 14,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2727
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 69,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 69,
+      "depends_on": [
+        "character-interiority",
+        "dialogue"
+      ],
+      "referenced_by": [
+        "character-design",
+        "hybrid-forms"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:narrative-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "narrative-craft"
+    },
+    "figurative-language": {
+      "name": "figurative-language",
+      "description": "Metaphor, simile, image systems, and the objective correlative \u2014 the machinery of implication in prose. Use when prose is literal and flat, when metaphors feel clich\u00e9d or decorative, when the user ...",
+      "location": "skills/writing/sentence-craft/figurative-language/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1837,
+        "body_words": 1837,
+        "section_count": 19,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2755
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 67,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 67,
+      "depends_on": [
+        "diction",
+        "concrete-detail"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:sentence-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "sentence-craft"
+    },
+    "narrative-geometry": {
+      "name": "narrative-geometry",
+      "description": "Alternative narrative shapes beyond the dramatic arc \u2014 meander, spiral, fractal, wavelet, radial, braid, and cycle. Use when a story resists three-act structure, when the user wants non-linear or n...",
+      "location": "skills/writing/narrative-craft/narrative-geometry/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1846,
+        "body_words": 1846,
+        "section_count": 16,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2769
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 69,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 69,
+      "depends_on": [
+        "narrative-arc",
+        "pacing"
+      ],
+      "referenced_by": [
+        "hybrid-forms"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:narrative-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "narrative-craft"
+    },
+    "economic-systems": {
+      "name": "economic-systems",
+      "description": "Design fictional economies \u2014 trade routes, currency systems, resource scarcity, and the relationship between economic structure and power. Use when building a world's economy, designing currency or...",
+      "location": "skills/worldbuilding/civilizations/economic-systems/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1242,
+        "body_words": 1242,
+        "section_count": 11,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1863
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 69,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 69,
+      "depends_on": [
+        "cultures-societies",
+        "geography-ecology"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "subdomain:civilizations",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "civilizations"
+    },
+    "conlang-craft": {
+      "name": "conlang-craft",
+      "description": "Constructed language design beyond phonetic palettes \u2014 morphology, syntax, the Sapir-Whorf hypothesis as worldbuilding tool, and the conlang-to-culture pipeline. Use when a culture needs linguistic...",
+      "location": "skills/worldbuilding/systems-craft/conlang-craft/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1303,
+        "body_words": 1303,
+        "section_count": 16,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1954
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 67,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 67,
+      "depends_on": [
+        "naming-system",
+        "cultures-societies"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "subdomain:systems-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "systems-craft"
+    },
+    "character-design": {
+      "name": "character-design",
+      "description": "Design characters as the intersection of world and story \u2014 psychology, motivation, contradiction, arc potential, and the relationship between who a character is and the world that shaped them. Use ...",
+      "location": "skills/worldbuilding/civilizations/character-design/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1397,
+        "body_words": 1397,
+        "section_count": 16,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2095
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [
+        "cultures-societies",
+        "faction-design",
+        "character-interiority",
+        "micro-tension"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "subdomain:civilizations",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "civilizations"
+    },
+    "world-to-story": {
+      "name": "world-to-story",
+      "description": "Convert worldbuilding artifacts into narrative \u2014 which axioms become subtext vs. exposition, how to dramatize systems through character experience, and the iceberg methodology for controlling infor...",
+      "location": "skills/writing/narrative-craft/world-to-story/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1401,
+        "body_words": 1401,
+        "section_count": 18,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2101
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 61,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 61,
+      "depends_on": [
+        "world-bible",
+        "scene-craft",
+        "character-interiority",
+        "concrete-detail"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:narrative-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "narrative-craft"
+    },
+    "sensory-worldbuilding": {
+      "name": "sensory-worldbuilding",
+      "description": "Design what a world feels like to inhabit \u2014 soundscapes, smells, textures, temperatures, and the embodied experience of living in a specific place. Use when a world is structurally complete but fee...",
+      "location": "skills/worldbuilding/physical-world/sensory-worldbuilding/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1070,
+        "body_words": 1070,
+        "section_count": 13,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1605
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-08T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [
+        "geography-ecology",
+        "cultures-societies",
+        "concrete-detail"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "subdomain:physical-world",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-08",
+      "last_modified": "2026-04-08",
+      "changelog": [
+        {
+          "date": "2026-04-08",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "physical-world"
+    },
+    "environmental-storytelling": {
+      "name": "environmental-storytelling",
+      "description": "Design physical spaces that narrate history, culture, and conflict through traces, ruins, wear patterns, and architecture. Use when the world needs to show its past through its present, when settin...",
+      "location": "skills/worldbuilding/physical-world/environmental-storytelling/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 998,
+        "body_words": 998,
+        "section_count": 11,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1497
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-09T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 65,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 65,
+      "depends_on": [
+        "geography-ecology",
+        "history-builder",
+        "cultures-societies",
+        "concrete-detail"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "subdomain:physical-world",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-09",
+      "changelog": [
+        {
+          "date": "2026-04-09",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "physical-world"
+    },
+    "weird-worldbuilding": {
+      "name": "weird-worldbuilding",
+      "description": "Build worlds that resist systematization \u2014 the New Weird approach where the uncanny is a feature not a bug, where glimpses of vastness replace complete explanation, and where the world exceeds the ...",
+      "location": "skills/worldbuilding/systems-craft/weird-worldbuilding/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1092,
+        "body_words": 1092,
+        "section_count": 11,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1638
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-09T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 65,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 65,
+      "depends_on": [
+        "magic-system-design",
+        "world-bible",
+        "extrapolation-engine"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "subdomain:systems-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-09",
+      "changelog": [
+        {
+          "date": "2026-04-09",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "systems-craft"
+    },
+    "hybrid-forms": {
+      "name": "hybrid-forms",
+      "description": "Experimental and genre-crossing narrative forms \u2014 autofiction, fragmented narrative, metafiction, genre-bending, epistolary, and collage. Use when a story resists conventional categories, when the ...",
+      "location": "skills/writing/narrative-craft/hybrid-forms/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1175,
+        "body_words": 1175,
+        "section_count": 23,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1762
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-09T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [
+        "narrative-geometry",
+        "narrative-arc",
+        "essay-forms",
+        "micro-tension"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:narrative-craft",
+        "layer:knowledge"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-09",
+      "changelog": [
+        {
+          "date": "2026-04-09",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "narrative-craft"
     }
   },
   "network": {
