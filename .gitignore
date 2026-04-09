@@ -23,5 +23,6 @@ exports/
 firebase-debug.log
 *.log
 
-# Generated output artifacts
+# Generated output artifacts (except visualizations which are version-controlled)
 output/
+!output/visualizations/
