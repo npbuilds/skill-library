@@ -27,7 +27,8 @@ When a question arrives in this subdomain, classify it and route accordingly:
 | Sentence length, cadence, "it doesn't flow," reading aloud | `prose-rhythm` | Rhythm and music of the sentence |
 | Word choice, "the right word," precision, register, connotation | `diction` | Word selection and its effects |
 | Sentence structure, variety, "all my sentences sound the same" | `syntax-patterns` | Structural arrangement |
-| "This paragraph feels flat/monotonous" | All three, in curriculum order | Monotony can be rhythm, diction, or syntax — diagnose before treating |
+| Metaphor, simile, imagery, symbolism, "clichéd metaphors," image systems, allegory | `figurative-language` | The machinery of implication |
+| "This paragraph feels flat/monotonous" | All three (or four), in curriculum order | Monotony can be rhythm, diction, syntax, or figurative flatness — diagnose before treating |
 | "How do I make this more vivid/punchy/elegant?" | Depends on diagnosis | Read the passage first, then route to the skill that addresses the actual weakness |
 | "How does this author write?" "What makes this prose distinctive?" "Design a voice for me" | `style-dna` | Author voice decomposition via the 14-dimension model |
 | "Write like McCarthy but more intimate" "Blend Hobb with Camus" | `style-dna` → `style-mixer` | Author profiles feed the mixer to produce a Voice Card |
