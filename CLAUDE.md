@@ -50,3 +50,16 @@ commands/         # Claude Code slash command definitions
 - Registry is the source of truth for skill metadata: `data/registry.json`
 - Scripts that modify registry should go through `scripts/sync-registry.py`
 - The MCP server (`mcp-server/server.py`) exposes skill library tools to Claude
+
+## Auto-Trigger Skills
+
+### Spelunker (Deep Research)
+
+When the user's request matches any of these signals, automatically invoke `/spelunker` with their question:
+
+- Explicit: "research", "investigate", "verify", "fact-check", "look into", "dig into"
+- Inquiry: "what does the evidence say", "help me understand", "is X true", "what caused X"
+- Generative: "what's the best X", "how should we design X", "what are the options for X"
+- Depth cues: "I need to be sure", "this is for a decision", "comprehensive analysis"
+
+Do NOT trigger for simple factual lookups that a single web search would answer. Spelunker is for multi-source, confidence-tagged research — not quick answers.
