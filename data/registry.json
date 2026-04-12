@@ -12537,6 +12537,57 @@
         }
       ],
       "parent": "narrative-craft"
+    },
+    "the-loom": {
+      "name": "the-loom",
+      "description": "Master product orchestrator \u2014 the head of product for the entire skill library suite. Weaves together capabilities from every domain (design, data science, investing, writing, game theory, worldbuilding, research, infrastructure) into coherent product strategy. Use when planning product direction, prioritizing features across product lines, making cross-domain trade-offs, building roadmaps, evaluating product-market fit, or coordinating multi-domain work into shippable outcomes.",
+      "location": "skills/product/the-loom/SKILL.md",
+      "plugin": "skill-product",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1650,
+        "body_words": 1650,
+        "section_count": 12,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2600,
+        "description_words": 55
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-12T00:00:00Z",
+      "status": "active",
+      "auto_score": 75,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 75,
+      "depends_on": [
+        "design-orchestrator",
+        "data-science-orchestrator",
+        "archon",
+        "prose-orchestrator",
+        "game-theory-orchestrator",
+        "worldbuilding-orchestrator",
+        "spelunker",
+        "neocortex",
+        "infrastructure-orchestrator",
+        "bacchus",
+        "philosophy-orchestrator",
+        "master-artificer"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "level:orchestrator"
+      ],
+      "created": "2026-04-12",
+      "last_modified": "2026-04-12",
+      "parent": null
     }
   },
   "network": {
@@ -12761,6 +12812,9 @@
         "tail-risk",
         "tax-optimization",
         "value-quality"
+      ],
+      "product": [
+        "the-loom"
       ]
     },
     "shared_references": {}
