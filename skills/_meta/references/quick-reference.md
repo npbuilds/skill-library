@@ -1,4 +1,4 @@
-# Meta Observer — Quick Reference
+# Sentinel Prime — Quick Reference
 
 
 ## Formula / Pseudocode

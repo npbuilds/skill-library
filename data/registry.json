@@ -1711,7 +1711,7 @@
       "referenced_by": [
         "design-orchestrator",
         "infrastructure-orchestrator",
-        "meta-observer",
+        "sentinel-prime",
         "skill-analyze",
         "skill-dashboard",
         "skill-export",
@@ -2278,16 +2278,16 @@
       "last_modified": "2026-03-28",
       "parent": "visual-communication"
     },
-    "meta-observer": {
-      "name": "meta-observer",
-      "description": "Observe the skill library as a whole \u2014 surface gaps in domain coverage, track maturity across domains, identify cross-domain connections, detect structural issues, and recommend what to build next. Use when the user asks about overall library status, wants a bird's-eye view, or needs guidance on where to invest effort next.",
+    "sentinel-prime": {
+      "name": "sentinel-prime",
+      "description": "The library's eternal watchguard \u2014 observe the skill library as a whole, surface gaps in domain coverage, track maturity across domains, identify cross-domain connections, detect structural issues, and recommend what to build next. Use when the user asks about overall library status, wants a bird's-eye view, or needs guidance on where to invest effort next.",
       "location": "skills/_meta/SKILL.md",
       "plugin": "skill-infra",
       "type": "observer",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "metrics": {
         "word_count": 449,
         "body_words": 392,
@@ -2319,7 +2319,7 @@
       ],
       "parent": null,
       "created": "2026-03-21",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-12"
     },
     "visual-communication": {
       "name": "visual-communication",
@@ -12611,7 +12611,7 @@
         "visual-perception"
       ],
       "meta": [
-        "meta-observer"
+        "sentinel-prime"
       ],
       "worldbuilding": [
         "character-belief-tracker",
