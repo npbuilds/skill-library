@@ -48,8 +48,8 @@ THE LOOM (orchestrator) — AI-Native Product Orchestrator
 |---|---|
 | Orchestrator | 1 |
 | Director | 6 |
-| Action skill | 20 |
-| Knowledge skill | 4 |
+| Action skill | 19 |
+| Knowledge skill | 5 |
 | **Total** | **31** |
 
 ## Cross-Domain Dependencies
