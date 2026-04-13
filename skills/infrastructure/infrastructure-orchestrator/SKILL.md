@@ -143,6 +143,6 @@ The infrastructure tools are all action skills — they do things rather than ex
 
 This orchestrator handles **skill library lifecycle operations**. It does NOT:
 - Write the actual content of skills (it creates the structure; the user or another orchestrator fills in domain knowledge)
-- Make decisions about what domains or skills to build (it asks the user or takes direction from the meta-observer)
+- Make decisions about what domains or skills to build (it asks the user or takes direction from Sentinel Prime)
 - Manage the MCP server or plugin configuration (those are separate infrastructure)
 - Interact with external systems (no git, no deployment — those are user operations)
