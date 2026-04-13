@@ -12552,7 +12552,7 @@
         "word_count": 2800,
         "body_words": 1650,
         "section_count": 12,
-        "reference_files": 7,
+        "reference_files": 9,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -12622,7 +12622,9 @@
       ],
       "referenced_by": [
         "initiative-tracker",
-        "narrative-keeper"
+        "narrative-keeper",
+        "pattern-weaver",
+        "product-briefing-engine"
       ],
       "tags": [
         "domain:product",
@@ -13134,6 +13136,718 @@
       "created": "2026-04-13",
       "last_modified": "2026-04-13",
       "parent": "envision"
+    },
+    "seed": {
+      "name": "seed",
+      "description": "Route product seeding work \u2014 designing initial conditions for emergence, sculpting constraints, growing prototypes, and architecting feedback loops.",
+      "location": "skills/product/seed/SKILL.md",
+      "plugin": "skill-product",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 350,
+        "body_words": 350,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 560,
+        "description_words": 18
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "the-loom"
+      ],
+      "referenced_by": [
+        "condition-designer",
+        "constraint-sculptor",
+        "prototype-grower",
+        "feedback-architect"
+      ],
+      "tags": [
+        "domain:product",
+        "subdomain:seed",
+        "level:director"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "the-loom"
+    },
+    "condition-designer": {
+      "name": "condition-designer",
+      "description": "Design initial conditions for a product to emerge \u2014 capabilities to combine, constraints to impose, feedback signals, and intentional open space.",
+      "location": "skills/product/seed/condition-designer/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 600,
+        "body_words": 600,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 960,
+        "description_words": 21
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "seed"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:seed",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "seed"
+    },
+    "constraint-sculptor": {
+      "name": "constraint-sculptor",
+      "description": "Frameworks for using constraints as creative tools. The right constraints channel emergence; too many kill it; too few produce chaos.",
+      "location": "skills/product/seed/constraint-sculptor/SKILL.md",
+      "plugin": "skill-product",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 650,
+        "body_words": 650,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1040,
+        "description_words": 20
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "seed"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:seed",
+        "level:knowledge"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "seed"
+    },
+    "prototype-grower": {
+      "name": "prototype-grower",
+      "description": "Grow rapid capability prototypes \u2014 living demonstrations of capability combinations, not wireframes or mockups.",
+      "location": "skills/product/seed/prototype-grower/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 500,
+        "body_words": 500,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 800,
+        "description_words": 14
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "seed"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:seed",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "seed"
+    },
+    "feedback-architect": {
+      "name": "feedback-architect",
+      "description": "Design the feedback loops that shape a product's evolution. The feedback architecture IS the growth plan.",
+      "location": "skills/product/seed/feedback-architect/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 600,
+        "body_words": 600,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 960,
+        "description_words": 16
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "seed"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:seed",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "seed"
+    },
+    "surface": {
+      "name": "surface",
+      "description": "Route product surfacing work \u2014 interface philosophy, exposure sequencing, experience design, and value architecture. Where intelligence meets the world.",
+      "location": "skills/product/surface/SKILL.md",
+      "plugin": "skill-product",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 350,
+        "body_words": 350,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 560,
+        "description_words": 19
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "the-loom"
+      ],
+      "referenced_by": [
+        "interface-philosopher",
+        "exposure-strategist",
+        "experience-weaver",
+        "value-architect"
+      ],
+      "tags": [
+        "domain:product",
+        "subdomain:surface",
+        "level:director"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "the-loom"
+    },
+    "interface-philosopher": {
+      "name": "interface-philosopher",
+      "description": "Deep thinking about how intelligence should meet humans. When is language the right interface? When visual? When ambient? The epistemology of AI interfaces.",
+      "location": "skills/product/surface/interface-philosopher/SKILL.md",
+      "plugin": "skill-product",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 750,
+        "body_words": 750,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1200,
+        "description_words": 23
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "surface"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:surface",
+        "level:knowledge"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "surface"
+    },
+    "exposure-strategist": {
+      "name": "exposure-strategist",
+      "description": "Decide which capabilities to surface, when, to whom, and in what sequence. Not everything should be visible. The art of revelation.",
+      "location": "skills/product/surface/exposure-strategist/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 600,
+        "body_words": 600,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 960,
+        "description_words": 21
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "surface"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:surface",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "surface"
+    },
+    "experience-weaver": {
+      "name": "experience-weaver",
+      "description": "Design the experience layer \u2014 emotional tone, pacing, depth calibration, voice character. How surfaced capabilities feel in use.",
+      "location": "skills/product/surface/experience-weaver/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 600,
+        "body_words": 600,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 960,
+        "description_words": 18
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "surface"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:surface",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "surface"
+    },
+    "value-architect": {
+      "name": "value-architect",
+      "description": "Design value exchange for intelligence products \u2014 pricing, business model, value flow. How do you price something that gets better the more you use it?",
+      "location": "skills/product/surface/value-architect/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 700,
+        "body_words": 700,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1120,
+        "description_words": 25
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "surface"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:surface",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "surface"
+    },
+    "evolve": {
+      "name": "evolve",
+      "description": "Route product evolution work \u2014 observing adaptation, amplifying successful patterns, pruning what doesn't work, designing self-improving systems.",
+      "location": "skills/product/evolve/SKILL.md",
+      "plugin": "skill-product",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 350,
+        "body_words": 350,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 560,
+        "description_words": 17
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "the-loom"
+      ],
+      "referenced_by": [
+        "adaptation-observer",
+        "amplifier",
+        "pruning-engine",
+        "learning-loops"
+      ],
+      "tags": [
+        "domain:product",
+        "subdomain:evolve",
+        "level:director"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "the-loom"
+    },
+    "adaptation-observer": {
+      "name": "adaptation-observer",
+      "description": "Watch how the product-in-use differs from the product-as-designed. Where are users doing unexpected things? Where is the system developing beyond its seed?",
+      "location": "skills/product/evolve/adaptation-observer/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 550,
+        "body_words": 550,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 880,
+        "description_words": 22
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "evolve"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:evolve",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "evolve"
+    },
+    "amplifier": {
+      "name": "amplifier",
+      "description": "Strengthen emergent successful patterns. Not 'add a feature' but 'create conditions for more of this behavior.'",
+      "location": "skills/product/evolve/amplifier/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 500,
+        "body_words": 500,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 800,
+        "description_words": 16
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "evolve"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:evolve",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "evolve"
+    },
+    "pruning-engine": {
+      "name": "pruning-engine",
+      "description": "Decide what to compost, simplify, or let atrophy. Extract learnings, preserve reusable capabilities, let the rest go.",
+      "location": "skills/product/evolve/pruning-engine/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 550,
+        "body_words": 550,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 880,
+        "description_words": 17
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "evolve"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:evolve",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "evolve"
+    },
+    "learning-loops": {
+      "name": "learning-loops",
+      "description": "Frameworks for self-improving systems \u2014 behavioral refinement, capability compounding, knowledge accumulation, pattern recognition deepening.",
+      "location": "skills/product/evolve/learning-loops/SKILL.md",
+      "plugin": "skill-product",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 700,
+        "body_words": 700,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1120,
+        "description_words": 14
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "evolve"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:evolve",
+        "level:knowledge"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "evolve"
+    },
+    "pattern-weaver": {
+      "name": "pattern-weaver",
+      "description": "Cross-product, cross-domain pattern recognition. What's working across multiple surfaces? What meta-capability is the system developing?",
+      "location": "skills/product/synthesize/pattern-weaver/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 500,
+        "body_words": 500,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 800,
+        "description_words": 15
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "synthesize"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:synthesize",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "synthesize"
+    },
+    "product-briefing-engine": {
+      "name": "product-briefing-engine",
+      "description": "Generate the Weekly Product Synthesis \u2014 strategic narrative about what the system is becoming, what it learned, what's surprising, what to do next.",
+      "location": "skills/product/synthesize/product-briefing-engine/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 700,
+        "body_words": 700,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1120,
+        "description_words": 23
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "synthesize"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:synthesize",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "synthesize"
     }
   },
   "network": {
@@ -13371,9 +14085,26 @@
         "paradigm-designer",
         "possibility-mapper",
         "thesis-forge",
+        "seed",
+        "condition-designer",
+        "constraint-sculptor",
+        "prototype-grower",
+        "feedback-architect",
+        "surface",
+        "interface-philosopher",
+        "exposure-strategist",
+        "experience-weaver",
+        "value-architect",
+        "evolve",
+        "adaptation-observer",
+        "amplifier",
+        "pruning-engine",
+        "learning-loops",
         "synthesize",
         "initiative-tracker",
-        "narrative-keeper"
+        "narrative-keeper",
+        "pattern-weaver",
+        "product-briefing-engine"
       ]
     },
     "shared_references": {}
