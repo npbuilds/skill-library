@@ -12540,23 +12540,23 @@
     },
     "the-loom": {
       "name": "the-loom",
-      "description": "Master product orchestrator \u2014 the head of product for the entire skill library suite. Weaves together capabilities from every domain (design, data science, investing, writing, game theory, worldbuilding, research, infrastructure) into coherent product strategy. Use when planning product direction, prioritizing features across product lines, making cross-domain trade-offs, building roadmaps, evaluating product-market fit, or coordinating multi-domain work into shippable outcomes.",
+      "description": "Master AI-native product orchestrator. Cultivates living intelligence products by weaving capabilities from every domain into coherent capability surfaces. Use when envisioning what an intelligence system should become, designing conditions for product emergence, deciding which capabilities to surface, evolving products through use, or synthesizing the meta-pattern across the full product portfolio.",
       "location": "skills/product/the-loom/SKILL.md",
       "plugin": "skill-product",
       "type": "orchestrator",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "metrics": {
-        "word_count": 1650,
+        "word_count": 2800,
         "body_words": 1650,
         "section_count": 12,
-        "reference_files": 0,
+        "reference_files": 5,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 2600,
+        "estimated_tokens_total": 4400,
         "description_words": 55
       },
       "health_status": "healthy",
@@ -12586,8 +12586,134 @@
         "level:orchestrator"
       ],
       "created": "2026-04-12",
-      "last_modified": "2026-04-12",
+      "last_modified": "2026-04-13",
       "parent": null
+    },
+    "synthesize": {
+      "name": "synthesize",
+      "description": "Route product synthesis work \u2014 cross-product pattern recognition, initiative lifecycle tracking, weekly product briefing generation, and product narrative maintenance. The Loom's reflective intelligence.",
+      "location": "skills/product/synthesize/SKILL.md",
+      "plugin": "skill-product",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 450,
+        "body_words": 450,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 700,
+        "description_words": 30
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "the-loom"
+      ],
+      "referenced_by": [
+        "initiative-tracker",
+        "narrative-keeper"
+      ],
+      "tags": [
+        "domain:product",
+        "subdomain:synthesize",
+        "level:director"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "the-loom"
+    },
+    "initiative-tracker": {
+      "name": "initiative-tracker",
+      "description": "Track product initiatives through their organic lifecycle \u2014 from seed to compost. Maintains the initiative log with state transitions, learnings, and portfolio-level views.",
+      "location": "skills/product/synthesize/initiative-tracker/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 700,
+        "body_words": 700,
+        "section_count": 6,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1100,
+        "description_words": 25
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "synthesize"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:synthesize",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "synthesize"
+    },
+    "narrative-keeper": {
+      "name": "narrative-keeper",
+      "description": "Maintain the living product narrative \u2014 the evolving story of what this intelligence system is, where it came from, where it's going, and what it believes.",
+      "location": "skills/product/synthesize/narrative-keeper/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 650,
+        "body_words": 650,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1000,
+        "description_words": 28
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "synthesize"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:synthesize",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "synthesize"
     }
   },
   "network": {
@@ -12814,7 +12940,10 @@
         "value-quality"
       ],
       "product": [
-        "the-loom"
+        "the-loom",
+        "synthesize",
+        "initiative-tracker",
+        "narrative-keeper"
       ]
     },
     "shared_references": {}
