@@ -12552,7 +12552,7 @@
         "word_count": 2800,
         "body_words": 1650,
         "section_count": 12,
-        "reference_files": 5,
+        "reference_files": 7,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -12714,6 +12714,426 @@
       "created": "2026-04-13",
       "last_modified": "2026-04-13",
       "parent": "synthesize"
+    },
+    "sense": {
+      "name": "sense",
+      "description": "Route product sensing work \u2014 reading frontier signals through a product lens, detecting emergent capability combinations, interpreting external signals, and mapping the gap between possible and surfaced capabilities.",
+      "location": "skills/product/sense/SKILL.md",
+      "plugin": "skill-product",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 400,
+        "body_words": 400,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 640,
+        "description_words": 28
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "the-loom"
+      ],
+      "referenced_by": [
+        "frontier-antenna",
+        "emergence-detector",
+        "signal-reader",
+        "capability-radar"
+      ],
+      "tags": [
+        "domain:product",
+        "subdomain:sense",
+        "level:director"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "the-loom"
+    },
+    "frontier-antenna": {
+      "name": "frontier-antenna",
+      "description": "Translate AI frontier developments into product opportunities. Consumes neocortex/frontier-scanner output and reframes through a product lens.",
+      "location": "skills/product/sense/frontier-antenna/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 550,
+        "body_words": 550,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 880,
+        "description_words": 16
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "sense"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:sense",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "sense"
+    },
+    "emergence-detector": {
+      "name": "emergence-detector",
+      "description": "Monitor the skill library for unexpected capability combinations \u2014 behaviors that emerge from cross-domain interaction that nobody explicitly designed.",
+      "location": "skills/product/sense/emergence-detector/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 600,
+        "body_words": 600,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 960,
+        "description_words": 19
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "sense"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:sense",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "sense"
+    },
+    "signal-reader": {
+      "name": "signal-reader",
+      "description": "Frameworks for reading external signals through a product lens \u2014 market timing, technology adoption curves, readiness levels, competitive shifts, and demand indicators.",
+      "location": "skills/product/sense/signal-reader/SKILL.md",
+      "plugin": "skill-product",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 700,
+        "body_words": 700,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1120,
+        "description_words": 22
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "sense"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:sense",
+        "level:knowledge"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "sense"
+    },
+    "capability-radar": {
+      "name": "capability-radar",
+      "description": "Produce a living map of what the intelligence system can do vs. what's been surfaced. The gap between possible and exposed is the product opportunity space.",
+      "location": "skills/product/sense/capability-radar/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 550,
+        "body_words": 550,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 880,
+        "description_words": 26
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "sense"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:sense",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "sense"
+    },
+    "envision": {
+      "name": "envision",
+      "description": "Route product vision work \u2014 designing what the intelligence system should become, exploring interaction paradigms, mapping possibility space, and crystallizing falsifiable product theses.",
+      "location": "skills/product/envision/SKILL.md",
+      "plugin": "skill-product",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 400,
+        "body_words": 400,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 640,
+        "description_words": 23
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "the-loom"
+      ],
+      "referenced_by": [
+        "vision-architect",
+        "paradigm-designer",
+        "possibility-mapper",
+        "thesis-forge"
+      ],
+      "tags": [
+        "domain:product",
+        "subdomain:envision",
+        "level:director"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "the-loom"
+    },
+    "vision-architect": {
+      "name": "vision-architect",
+      "description": "Design the intelligence system's future state in experiential terms \u2014 not feature lists but what it's like to interact with this intelligence.",
+      "location": "skills/product/envision/vision-architect/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 600,
+        "body_words": 600,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 960,
+        "description_words": 22
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "envision"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:envision",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "envision"
+    },
+    "paradigm-designer": {
+      "name": "paradigm-designer",
+      "description": "Catalog, analyze, and create new interaction paradigms for AI products. Generative UI, ambient intelligence, agent-to-agent, conversational surfaces, and paradigms not yet named.",
+      "location": "skills/product/envision/paradigm-designer/SKILL.md",
+      "plugin": "skill-product",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 800,
+        "body_words": 800,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1280,
+        "description_words": 22
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "envision"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:envision",
+        "level:knowledge"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "envision"
+    },
+    "possibility-mapper": {
+      "name": "possibility-mapper",
+      "description": "Map the full space of possible products from current and emerging capabilities \u2014 before filtering to what should be built.",
+      "location": "skills/product/envision/possibility-mapper/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 650,
+        "body_words": 650,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1040,
+        "description_words": 20
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "envision"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:envision",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "envision"
+    },
+    "thesis-forge": {
+      "name": "thesis-forge",
+      "description": "Crystallize a product thesis \u2014 a specific, falsifiable bet with kill criteria. Every thesis answers: what do we believe, why now, and what would prove us wrong?",
+      "location": "skills/product/envision/thesis-forge/SKILL.md",
+      "plugin": "skill-product",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 700,
+        "body_words": 700,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1120,
+        "description_words": 27
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "envision"
+      ],
+      "referenced_by": [],
+      "tags": [
+        "domain:product",
+        "subdomain:envision",
+        "level:action"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "envision"
     }
   },
   "network": {
@@ -12941,6 +13361,16 @@
       ],
       "product": [
         "the-loom",
+        "sense",
+        "frontier-antenna",
+        "emergence-detector",
+        "signal-reader",
+        "capability-radar",
+        "envision",
+        "vision-architect",
+        "paradigm-designer",
+        "possibility-mapper",
+        "thesis-forge",
         "synthesize",
         "initiative-tracker",
         "narrative-keeper"

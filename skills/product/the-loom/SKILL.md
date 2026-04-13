@@ -10,7 +10,7 @@ description: >
   the question is "what should this intelligence become, and how do we let it grow?"
 metadata:
   author: nirav
-  version: "2.0"
+  version: "2.0.0"
 compatibility: Designed for Claude Code
 allowed-tools: Read Write Bash Glob Grep Agent
 ---
