@@ -12,7 +12,7 @@ metadata:
   author: nirav
   version: "1.0"
 compatibility: Designed for Claude Code
-allowed-tools: Read Write Bash Glob Grep Agent WebSearch WebFetch
+allowed-tools: Read Write bash Glob Grep Agent WebSearch WebFetch
 ---
 
 # Spelunker — The Deep Researcher

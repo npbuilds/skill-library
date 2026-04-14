@@ -10,7 +10,7 @@ metadata:
   version: "1.0"
   innovation: "End-to-end rNPV with platform optionality and Monte Carlo — no open-source equivalent"
 compatibility: Designed for Claude Code
-allowed-tools: Read, Bash, WebSearch, WebFetch
+allowed-tools: Read, bash, WebSearch, WebFetch
 ---
 
 # rNPV Modeler — The Valuation Engine

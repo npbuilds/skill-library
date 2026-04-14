@@ -9,7 +9,7 @@ metadata:
   author: nirav
   version: "1.0"
 compatibility: Designed for Claude Code
-allowed-tools: Read Write Bash Glob Grep
+allowed-tools: Read Write bash Glob Grep
 ---
 
 # Initiative Tracker — The Living Ledger

@@ -11,7 +11,7 @@ metadata:
   version: "1.0"
   inspired_by: "AlphaEvolve (DeepMind, 2025) — evolutionary coding agent with automated evaluators"
 compatibility: Designed for Claude Code
-allowed-tools: Read Write Bash WebSearch WebFetch
+allowed-tools: Read Write bash WebSearch WebFetch
 ---
 
 # Agentic Researcher — The Evolver

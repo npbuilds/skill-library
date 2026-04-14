@@ -8,7 +8,7 @@ metadata:
   author: nirav
   version: "1.0"
 compatibility: Designed for Claude Code
-allowed-tools: Read Glob Grep Bash
+allowed-tools: Read Glob Grep bash
 ---
 
 # Skill Cartographer — The Mapmaker
