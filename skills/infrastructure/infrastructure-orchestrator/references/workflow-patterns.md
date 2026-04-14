@@ -12,7 +12,7 @@ Common multi-skill orchestration patterns for infrastructure operations.
 ### 2. Domain Bootstrap
 **Trigger**: "Build a new domain for X"
 **Sequence**:
-1. Design hierarchy (user input + meta-observer guidance)
+1. Design hierarchy (user input + Sentinel Prime guidance)
 2. scaffold orchestrator
 3. scaffold directors (can parallelize)
 4. scaffold knowledge skills (can parallelize per director)
