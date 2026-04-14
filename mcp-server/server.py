@@ -17,7 +17,7 @@ import fcntl
 import json
 import logging
 import os
-from collections import Counter
+from collections import Counter, deque
 from datetime import datetime, timezone
 from pathlib import Path
 from mcp.server.fastmcp import FastMCP
@@ -189,7 +189,7 @@ def read_file_safe(path: str) -> str:
 # ---------------------------------------------------------------------------
 
 
-@mcp.tool()
+@mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})
 def list_skills(
     domain: str | None = None,
     skill_type: str | None = None,
@@ -316,7 +316,7 @@ def _match_score(name: str, entry: dict, query: str) -> int:
     return score
 
 
-@mcp.tool()
+@mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})
 def search_skills(query: str) -> str:
     """Search the skill library by keyword. Matches against skill names, descriptions, and tags.
 
@@ -461,7 +461,7 @@ def rebuild_search_index() -> str:
     return "\n".join(lines)
 
 
-@mcp.tool()
+@mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})
 def get_skill(skill_name: str, include_references: bool = True) -> str:
     """Read a skill's full content, including its reference documents.
 
@@ -519,7 +519,7 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
     return "".join(parts)
 
 
-@mcp.tool()
+@mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})
 def get_skill_details(skill_name: str) -> str:
     """Get metadata and metrics for a specific skill (without reading the full content).
 
@@ -558,7 +558,7 @@ def get_skill_details(skill_name: str) -> str:
     return json.dumps(details, indent=2)
 
 
-@mcp.tool()
+@mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})
 def get_system_overview() -> str:
     """Get a bird's-eye view of the entire skill library.
 
@@ -857,7 +857,7 @@ def record_skill_feedback(skill_name: str, rating: int, note: str = "") -> str:
     return f"Recorded: {skill_name} rated {rating}/5{f' — {note}' if note else ''}."
 
 
-@mcp.tool()
+@mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})
 def get_skill_stats(skill_name: str | None = None) -> str:
     """Get usage and quality stats for your skills.
 
@@ -1241,8 +1241,10 @@ def _run_script(
         )
         if errors is not None and result.stderr.strip():
             errors.append(result.stderr.strip())
-        if result.returncode != 0 and errors is not None:
-            errors.append(f"{script_name} exited with code {result.returncode}")
+        if result.returncode != 0:
+            if errors is not None:
+                errors.append(f"{script_name} exited with code {result.returncode}")
+            return None
         return json.loads(result.stdout)
     except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError) as e:
         if errors is not None:
@@ -1562,7 +1564,9 @@ def add_reference_doc(
         return f"Refusing to write outside project root: {refs_dir}"
     refs_dir_was_new = not refs_dir.exists()
     refs_dir.mkdir(exist_ok=True)
-    target = refs_dir / filename
+    target = (refs_dir / filename).resolve()
+    if not target.is_relative_to(refs_dir):
+        return f"Refusing to write outside references directory: {target}"
     overwrite_note = " (overwrote existing file)" if target.exists() else ""
 
     try:
@@ -2001,13 +2005,13 @@ def add_skill_dependency(
         # Mark nodes as visited on enqueue (not dequeue) to prevent a node
         # from being added to the queue multiple times on dense graphs.
         visited = {depends_on}
-        queue = []
+        queue = deque()
         for n in skills.get(depends_on, {}).get("depends_on", []):
             if n not in visited:
                 visited.add(n)
                 queue.append(n)
         while queue:
-            node = queue.pop(0)
+            node = queue.popleft()
             if node == skill_name:
                 return (
                     f"Adding this dependency would create a cycle: "

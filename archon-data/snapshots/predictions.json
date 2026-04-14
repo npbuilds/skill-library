@@ -1,0 +1,283 @@
+[
+  {
+    "id": "april_cpi_compounds",
+    "claim": "April CPI YoY (released ~May 12) prints above 3.5% as energy compounds from full-month Hormuz closure plus tariff pass-through",
+    "probability": 0.70,
+    "framework": "Energy lag + mine-extended Hormuz closure + tariff pass-through accumulation",
+    "category": "inflation",
+    "created": "2026-04-11",
+    "resolve_by": "2026-05-15",
+    "regime_context": "stagflation_supply_shock",
+    "evidence": [
+      "March energy CPI +10.9% MoM from ~6 weeks of disruption",
+      "April has full month of Hormuz closure (sea mines confirmed)",
+      "Pharma 100% tariffs from April 2 entering supply chains",
+      "Transportation inflation lags energy by 4-8 weeks",
+      "Dollar weakening adds commodity price tailwind"
+    ],
+    "tags": ["cpi", "energy", "hormuz", "inflation", "tariffs"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-11", "probability": 0.70, "note": "Initial log. Sea mines structurally extend Hormuz closure; tariff compounding underway."}
+    ]
+  },
+  {
+    "id": "vix_above25_prefomc",
+    "claim": "VIX closes above 25 at least once before April 28-29 FOMC meeting",
+    "probability": 0.58,
+    "framework": "Earnings-week stress + ceasefire expiry binary + hawkish Fed signaling",
+    "category": "volatility",
+    "created": "2026-04-11",
+    "resolve_by": "2026-04-27",
+    "regime_context": "stagflation_supply_shock",
+    "evidence": [
+      "VIX at 19.23-19.49 with 5 major bank earnings starting April 13",
+      "Ceasefire expiry April 21 — binary geopolitical event",
+      "FOMC April 28-29 with rate hike discussion active",
+      "Historical: VIX at 19 with known catalyst density typically sees further expansion"
+    ],
+    "tags": ["vix", "earnings", "fomc", "volatility", "geopolitical"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-11", "probability": 0.58, "note": "Initial log. VIX at 19; sea mines + earnings + ceasefire expiry = multiple known catalysts."}
+    ]
+  },
+  {
+    "id": "gold_target_5000",
+    "claim": "Gold spot reaches $5,000/oz within 45 days as stagflation regime deepens",
+    "probability": 0.60,
+    "framework": "Stagflation regime trade + real-money accumulation + reflexivity feedback loop",
+    "category": "commodities",
+    "created": "2026-04-11",
+    "resolve_by": "2026-05-25",
+    "regime_context": "stagflation_supply_shock",
+    "evidence": [
+      "Gold +10% on CPI day to $4,750 — real-money accumulation confirmed",
+      "Dollar soft despite hot CPI — demand destruction read adds commodity tailwind",
+      "CFTC crowding being absorbed by fundamental demand (not a ceiling)",
+      "Stagflation regime = gold bull; 1970s analog had gold 5x over the inflation cycle",
+      "Sea mines extend supply shock duration"
+    ],
+    "tags": ["gold", "stagflation", "inflation", "real-assets", "reflexivity"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-11", "probability": 0.60, "note": "Initial log. Gold at $4,750 after +10% move; upgrading to conviction long."}
+    ]
+  },
+  {
+    "id": "f1173bd0",
+    "claim": "Crude oil (USO) net speculative position covers short (moves from -5.3% to +5%+ OI) within 30 days as Hormuz closure extends",
+    "probability": 0.72,
+    "framework": "Soros",
+    "category": "commodities",
+    "created": "2026-04-09",
+    "resolve_by": "2026-05-09",
+    "regime_context": "stagflation",
+    "evidence": [
+      "Crude specs net short -5.3% OI while price +100% YTD",
+      "Hormuz closure extending per IEA",
+      "Classic short-squeeze setup"
+    ],
+    "tags": ["oil", "cftc", "squeeze"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-09", "probability": 0.65, "note": "Initial log"},
+      {"date": "2026-04-10", "probability": 0.65, "note": "Ceasefire complicates timing but physical blockade persists; maintaining probability"},
+      {"date": "2026-04-11", "probability": 0.72, "note": "Sea mines officially confirmed; Hormuz structurally blocked; short-squeeze thesis strengthens"}
+    ]
+  },
+  {
+    "id": "57443812",
+    "claim": "Gold (GLD) falls an additional 8%+ from April 9 levels within 45 days as crowded longs unwind (45.2% OI extreme)",
+    "probability": 0.18,
+    "framework": "Marks",
+    "category": "commodities",
+    "created": "2026-04-09",
+    "resolve_by": "2026-05-24",
+    "regime_context": "stagflation",
+    "evidence": [
+      "CFTC gold at 45.2% OI extreme long",
+      "GLD already -9.5% past month",
+      "DXY strengthening",
+      "Soros Phase 6 topping pattern"
+    ],
+    "tags": ["gold", "cftc", "contrarian"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-09", "probability": 0.60, "note": "Initial log"},
+      {"date": "2026-04-10", "probability": 0.60, "note": "GLD up +1% despite ceasefire — sticky. Real money holding. Maintaining probability but timing uncertain."},
+      {"date": "2026-04-11", "probability": 0.18, "note": "FAILING. Gold +10% on CPI day. Real-money safe-haven accumulation in stagflation regime overwhelms speculative positioning signal. Direction wrong. Contrarian view closed."}
+    ]
+  },
+  {
+    "id": "35d668b3",
+    "claim": "S&P 500 tests 6,200 support level within 60 days as Q1 earnings disappoint under tariff + oil cost inflation",
+    "probability": 0.38,
+    "framework": "Druckenmiller",
+    "category": "equity",
+    "created": "2026-04-09",
+    "resolve_by": "2026-06-09",
+    "regime_context": "stagflation",
+    "evidence": [
+      "Scenario B (Stagflation Deepens) 40% probability",
+      "Tariff shock just took effect April 9",
+      "Tudor Jones stop at 6,400 vulnerable"
+    ],
+    "tags": ["sp500", "earnings", "tariffs"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-09", "probability": 0.45, "note": "Initial log"},
+      {"date": "2026-04-10", "probability": 0.30, "note": "S&P at 6,824 moved away from 6,200 target on ceasefire relief rally. Still 60 days remaining. Thesis intact but probability decayed."},
+      {"date": "2026-04-11", "probability": 0.38, "note": "Probability recovering. Earnings week (GS Apr 13, JPM Apr 14) + FOMC Apr 28-29 compressing catalyst timeline. VIX repricing from 10 to 19 validates underlying fragility."}
+    ]
+  },
+  {
+    "id": "f1b9eb8d",
+    "claim": "Private credit BDC NAV discounts widen further from -16% to -22%+ by end of Q2 2026 as quarterly marks reset",
+    "probability": 0.68,
+    "framework": "Marks",
+    "category": "credit",
+    "created": "2026-04-09",
+    "resolve_by": "2026-06-30",
+    "regime_context": "stagflation",
+    "evidence": [
+      "BDC NAV discount already -16%",
+      "PE exit window frozen",
+      "HY OAS widening +9% YoY",
+      "GP stocks -30% YTD"
+    ],
+    "tags": ["private_credit", "bdc", "marks"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-09", "probability": 0.65, "note": "Initial log"},
+      {"date": "2026-04-10", "probability": 0.65, "note": "BDC liquidity stress signals emerging (redemption pressure). On track."},
+      {"date": "2026-04-11", "probability": 0.68, "note": "Bank Q1 earnings this week (GS Apr 13, JPM Apr 14) will provide first public window into loan books and credit quality. Initating short BIZD ahead of this catalyst."}
+    ]
+  },
+  {
+    "id": "20751b47",
+    "claim": "Fed holds rates unchanged through July 2026 FOMC (no cut AND no hike) as dual-shock creates policy paralysis",
+    "probability": 0.55,
+    "framework": "Fed Game Theory",
+    "category": "fed",
+    "created": "2026-04-09",
+    "resolve_by": "2026-07-31",
+    "regime_context": "stagflation",
+    "evidence": [
+      "Fed Funds unchanged at 3.64%",
+      "Core PCE 3.06% above target",
+      "GDPNow negative Q1",
+      "Powell acknowledged hike discussion",
+      "Rate cuts pushed to 2027"
+    ],
+    "tags": ["fed", "rates", "policy_trap"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-09", "probability": 0.60, "note": "Initial log"},
+      {"date": "2026-04-10", "probability": 0.45, "note": "FOMC March minutes explicitly raised rate hike possibility. This materially reduces probability of unchanged hold scenario. A hike at Apr 28-29 FOMC is now a live risk."},
+      {"date": "2026-04-11", "probability": 0.55, "note": "Core CPI +2.6% (below +2.7% forecast) gives Fed cover for patience. The core containment reduces immediate hike pressure. Patient trap — holding becomes more likely through April 28-29 and possibly June. July remains unclear."}
+    ]
+  },
+  {
+    "id": "vix_reversion_apr10",
+    "claim": "VIX re-tests 20+ within 30 days (by May 10) as CPI confirms stagflation and FOMC meeting approaches",
+    "probability": 0.65,
+    "framework": "Marks + Taleb",
+    "category": "volatility",
+    "created": "2026-04-10",
+    "resolve_by": "2026-05-10",
+    "regime_context": "stagflation",
+    "evidence": [
+      "VIX at multi-year low (~10) on ceasefire headline",
+      "Hormuz still 80% blocked — narrative vs. physical reality gap",
+      "March CPI printing today — forecasted at +3.7% YoY",
+      "FOMC April 28-29 — rate hike now on table",
+      "Q1 earnings season starting next week with tariff/oil cost pressures",
+      "Historical: VIX below 12 during active geopolitical crisis reliably reverts in 2-4 weeks"
+    ],
+    "tags": ["vix", "volatility", "complacency", "stagflation"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-10", "probability": 0.65, "note": "Initial log"},
+      {"date": "2026-04-11", "probability": 0.92, "note": "VIX reached 19.23-19.49 in a single session — essentially triggered within 24h of logging. Resolve-by May 10. Sea mines + FOMC + earnings week = multiple remaining catalysts."}
+    ]
+  },
+  {
+    "id": "sp500_reversal_apr10",
+    "claim": "S&P 500 re-tests 6,600 (April 9 levels) within 21 days as CPI and earnings season disappoint",
+    "probability": 0.72,
+    "framework": "Druckenmiller + Tudor Jones",
+    "category": "equity",
+    "created": "2026-04-10",
+    "resolve_by": "2026-05-01",
+    "regime_context": "stagflation",
+    "evidence": [
+      "Relief rally to 6,824 driven by ceasefire narrative not fundamentals",
+      "CPI today forecast to confirm stagflation (+3.7% YoY)",
+      "FOMC rate hike on table removes Fed put",
+      "Q1 earnings starting next week — first look at tariff/oil cost impact on margins",
+      "VIX complacency at 10 creates fragile positioning"
+    ],
+    "tags": ["sp500", "earnings", "cpi", "reversal"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-10", "probability": 0.60, "note": "Initial log"},
+      {"date": "2026-04-11", "probability": 0.72, "note": "S&P at 6,816.89 on April 10 close. Direction correct but target 6,600 still ~3% away. Earnings week (GS Apr 13, JPM Apr 14) and FOMC compressing the timeline. VIX at 19 confirms fragility."}
+    ]
+  },
+  {
+    "id": "fed_hawk_escalation_apr10",
+    "claim": "At least one additional FOMC voter publicly advocates rate hike before April 28-29 meeting",
+    "probability": 0.40,
+    "framework": "Fed Game Theory",
+    "category": "fed",
+    "created": "2026-04-10",
+    "resolve_by": "2026-04-27",
+    "regime_context": "stagflation",
+    "evidence": [
+      "March FOMC minutes explicitly raised rate hike option",
+      "March CPI forecasted at +3.7% YoY — well above target",
+      "Powell: inflation 'not coming down as hoped'",
+      "Wide distribution in dot plot: 7 members see 0 cuts in 2026"
+    ],
+    "tags": ["fed", "rates", "hike", "fomc"],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null,
+    "probability_history": [
+      {"date": "2026-04-10", "probability": 0.55, "note": "Initial log"},
+      {"date": "2026-04-11", "probability": 0.40, "note": "Core CPI +2.6% below +2.7% forecast weakens hawks' case. Fed likely to remain 'patient' through April 28-29. Hike advocacy before FOMC now less likely. Watch for any comments this week citing core containment as validation."}
+    ]
+  }
+]

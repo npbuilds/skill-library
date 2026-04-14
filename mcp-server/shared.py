@@ -1,5 +1,6 @@
 """Shared utilities for the Skill Library MCP server and CLI."""
 
+import fcntl
 import json
 import os
 import tempfile
@@ -35,7 +36,12 @@ def record_feedback_entry(skill_name: str, rating: int, note: str = "") -> str:
     }
     FEEDBACK_LOG.parent.mkdir(parents=True, exist_ok=True)
     with open(FEEDBACK_LOG, "a") as f:
-        f.write(json.dumps(entry) + "\n")
+        fcntl.flock(f, fcntl.LOCK_EX)
+        try:
+            f.write(json.dumps(entry) + "\n")
+            f.flush()
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)
     return f"Recorded: {skill_name} rated {rating}/5{f' — {note}' if note else ''}."
 
 
