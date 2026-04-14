@@ -1,0 +1,217 @@
+{
+  "_snapshot_date": "2026-04-10",
+  "_saved_at": "2026-04-10T08:00:00.000000",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "confidence": 0.80,
+      "growth_score": 0.15,
+      "inflation_score": 0.85,
+      "description": "Stagflationary dual-shock regime: Hormuz ceasefire fragile (80% blocked), CPI printing +3.7% YoY forecast, Fed hawkish pivot",
+      "note": "Ceasefire reduced confidence from 0.85 to 0.80 — narrative reset without physical reset"
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 6824,
+          "ytd_pct": -4.0,
+          "note": "est from Apr 8 close; ceasefire relief rally +3.2% from Apr 9"
+        },
+        "Nasdaq": {
+          "price": 22822,
+          "ytd_pct": -5.0,
+          "note": "est from Apr 8 close"
+        },
+        "Russell 2000": {
+          "price": 2644,
+          "ytd_pct": 4.0,
+          "note": "est from Apr 8 close"
+        }
+      },
+      "breadth_divergence": 4.78,
+      "breadth_signal": "equal_weight_leading"
+    },
+    "sentiment": {
+      "composite": {
+        "score": 30,
+        "label": "complacency",
+        "note": "Estimated from VIX collapse; was 52 (neutral_slight_fear) on Apr 9"
+      },
+      "raw": {
+        "vix": {
+          "spot": 10.5,
+          "regime": "extreme_complacency",
+          "note": "Multi-year low; was 24.17 on Apr 9 — collapsed on ceasefire"
+        }
+      }
+    },
+    "yield_curve": {
+      "yields": {
+        "2Y": {
+          "value": 3.79
+        },
+        "10Y": {
+          "value": 4.31
+        }
+      },
+      "spread_10y2y": 0.52,
+      "curve_shape": "normal",
+      "rate_regime": "elevated_hawkish",
+      "fed_funds": "3.50-3.75",
+      "fomc_note": "March minutes raised rate hike option for first time this cycle"
+    },
+    "sectors": {
+      "leaders": [
+        "Energy",
+        "Materials",
+        "Utilities",
+        "Consumer Staples"
+      ],
+      "laggards": [
+        "Technology",
+        "Financials",
+        "Consumer Discretionary",
+        "Healthcare (pharma drag)"
+      ]
+    },
+    "assets": {
+      "Oil (WTI)": {
+        "price": 91,
+        "ytd_pct": 65,
+        "note": "est; down ~15% from peak on ceasefire; was ~$107 pre-ceasefire"
+      },
+      "Gold (GLD)": {
+        "price": 431.81,
+        "ytd_pct": 8.2,
+        "note": "Apr 8 close confirmed"
+      },
+      "Bitcoin": {
+        "price": 71931,
+        "ytd_pct": -20.0,
+        "note": "BingX Apr 10; moderate confidence"
+      },
+      "Dollar (DXY)": {
+        "price": 98.85,
+        "ytd_pct": 1.7,
+        "note": "Apr 9 close"
+      },
+      "20Y Treasury (TLT)": {
+        "price": 87,
+        "ytd_pct": 0.6,
+        "note": "est from yield levels"
+      }
+    },
+    "cot": {
+      "gold_net_pct_oi": 45.2,
+      "crude_net_pct_oi": -5.3,
+      "crowded_longs": ["GOLD"],
+      "note": "Apr 4 release (Apr 1 positions); Apr 10 release expected 3:30pm ET — not yet confirmed",
+      "data_lag": true
+    },
+    "geopolitical": {
+      "overall_risk": "elevated",
+      "alerts": [
+        {
+          "hotspot": "middle_east",
+          "level": "high",
+          "detail": "US-Iran ceasefire April 7; fragile — Hormuz ~80% blocked, Iran demanding $2M/vessel toll"
+        }
+      ],
+      "ceasefire_status": "fragile",
+      "hormuz_transit_pct": 20
+    },
+    "macro_catalysts": {
+      "cpi_march_2026": {
+        "status": "releasing_today",
+        "forecast_yoy": "3.1-3.7%",
+        "prior_yoy": "2.4%",
+        "severity": "critical"
+      },
+      "fomc_april_28_29": {
+        "status": "upcoming",
+        "rate_hike_discussed": true,
+        "current_rate": "3.50-3.75%"
+      },
+      "pharma_tariffs": {
+        "status": "enacted",
+        "level": "100%",
+        "type": "Section 232",
+        "date": "2026-04-02"
+      }
+    },
+    "private_markets": {
+      "credit": {
+        "credit_cycle": "late_cycle",
+        "hy_spread": 328,
+        "hy_yield": 7.44
+      },
+      "divergence": {
+        "overall_divergence": "severe"
+      },
+      "bdc": {
+        "nav_discount": -16,
+        "liquidity_stress": "emerging",
+        "note": "Redemption pressure signals emerging; Q2 marks will be revealing"
+      },
+      "pe_exit_window": "frozen"
+    },
+    "contrarian": {
+      "contrarian_views": [
+        {
+          "domain": "volatility",
+          "confidence": "H",
+          "contrarian_read": "VIX at 10-year low while Hormuz 80% blocked and CPI printing today. Buying VIX is the highest-conviction trade."
+        },
+        {
+          "domain": "gold",
+          "confidence": "H",
+          "contrarian_read": "Gold positioning at extreme (45.2% OI) but GLD sticky despite ceasefire — real money (not just specs) holding. Timing uncertain."
+        },
+        {
+          "domain": "equities",
+          "confidence": "M",
+          "contrarian_read": "Non-pharma healthcare unfairly punished alongside pharma on Section 232 tariff news. Hospitals, devices unaffected."
+        }
+      ]
+    },
+    "predictions": {
+      "active": [
+        "f1173bd0",
+        "57443812",
+        "35d668b3",
+        "f1b9eb8d",
+        "20751b47"
+      ],
+      "probability_updates": {
+        "35d668b3": {"from": 0.45, "to": 0.30, "reason": "S&P at 6,824 moved away from 6,200 target on ceasefire rally"},
+        "20751b47": {"from": 0.60, "to": 0.45, "reason": "FOMC minutes raised rate hike option explicitly"}
+      },
+      "new_today": [
+        {
+          "id": "vix_reversion_apr10",
+          "claim": "VIX re-tests 20+ within 30 days (by May 10) as CPI confirms stagflation and FOMC approaches",
+          "probability": 0.65,
+          "framework": "Marks + Taleb",
+          "created": "2026-04-10",
+          "resolve_by": "2026-05-10"
+        },
+        {
+          "id": "sp500_reversal_apr10",
+          "claim": "S&P 500 re-tests 6,600 within 21 days as CPI and earnings disappoint",
+          "probability": 0.60,
+          "framework": "Druckenmiller + Tudor Jones",
+          "created": "2026-04-10",
+          "resolve_by": "2026-05-01"
+        },
+        {
+          "id": "fed_hawk_escalation_apr10",
+          "claim": "At least one additional FOMC voter publicly advocates rate hike before April 28-29 meeting",
+          "probability": 0.55,
+          "framework": "Fed Game Theory",
+          "created": "2026-04-10",
+          "resolve_by": "2026-04-27"
+        }
+      ]
+    }
+  }
+}

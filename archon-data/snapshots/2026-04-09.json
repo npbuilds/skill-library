@@ -1,0 +1,134 @@
+{
+  "_snapshot_date": "2026-04-09",
+  "_saved_at": "2026-04-09T08:20:58.112292",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "confidence": 0.85,
+      "growth_score": 0.2,
+      "inflation_score": 0.8,
+      "description": "Stagflationary supply-shock regime: Hormuz crisis + Trump tariffs"
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 6611.83,
+          "ytd_pct": -3.41
+        },
+        "Nasdaq": {
+          "price": 21996.34,
+          "ytd_pct": -5.36
+        },
+        "Russell 2000": {
+          "price": 2540.64,
+          "ytd_pct": 2.37
+        }
+      },
+      "breadth_divergence": 4.78,
+      "breadth_signal": "equal_weight_leading"
+    },
+    "sentiment": {
+      "composite": {
+        "score": 52,
+        "label": "neutral_slight_fear"
+      },
+      "raw": {
+        "vix": {
+          "spot": 24.17,
+          "regime": "elevated"
+        }
+      }
+    },
+    "yield_curve": {
+      "yields": {
+        "2Y": {
+          "value": 3.806
+        },
+        "10Y": {
+          "value": 4.335
+        }
+      },
+      "spread_10y2y": 0.529,
+      "curve_shape": "normal",
+      "rate_regime": "elevated"
+    },
+    "sectors": {
+      "leaders": [
+        "Energy",
+        "Materials",
+        "Utilities"
+      ],
+      "laggards": [
+        "Consumer Discretionary",
+        "Financials",
+        "Healthcare"
+      ]
+    },
+    "assets": {
+      "Oil (USO)": {
+        "price": 138.94,
+        "ytd_pct": 100.9
+      },
+      "Gold (GLD)": {
+        "price": 427.65,
+        "ytd_pct": 7.91
+      },
+      "Bitcoin": {
+        "price": 69343.09,
+        "ytd_pct": -20.76
+      },
+      "Dollar (DXY)": {
+        "price": 99.99,
+        "ytd_pct": 1.74
+      },
+      "20Y Treasury (TLT)": {
+        "price": 86.65,
+        "ytd_pct": 0.53
+      }
+    },
+    "cot": {
+      "gold_net_pct_oi": 45.2,
+      "crude_net_pct_oi": -5.3,
+      "crowded_longs": [
+        "GOLD"
+      ]
+    },
+    "geopolitical": {
+      "overall_risk": "elevated",
+      "alerts": [
+        {
+          "hotspot": "middle_east",
+          "level": "high"
+        }
+      ]
+    },
+    "private_markets": {
+      "credit": {
+        "credit_cycle": "late_cycle",
+        "hy_spread": 3.46
+      },
+      "divergence": {
+        "overall_divergence": "severe"
+      }
+    },
+    "contrarian": {
+      "contrarian_views": [
+        {
+          "domain": "gold",
+          "confidence": "H",
+          "contrarian_read": "Gold positioning at extreme levels (45.2% OI). The safe-haven trade IS the consensus trade."
+        },
+        {
+          "domain": "private_markets",
+          "confidence": "H",
+          "contrarian_read": "Private market marks are stale. BDC NAV discount -16%. Write-down cycle imminent."
+        },
+        {
+          "domain": "equities",
+          "confidence": "M",
+          "contrarian_read": "Healthcare being unfairly punished despite defensive earnings and no tariff exposure."
+        }
+      ]
+    }
+  }
+}

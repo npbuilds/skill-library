@@ -1,0 +1,173 @@
+{
+  "_snapshot_date": "2026-04-11",
+  "_saved_at": "2026-04-11T10:00:00.000000",
+  "_version": "v2",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "subtype": "supply_shock",
+      "confidence": 0.85,
+      "growth_score": 0.15,
+      "inflation_score": 0.87,
+      "description": "Supply-shock stagflation confirmed: CPI +3.3% YoY (2-year high); Core +2.6% (below forecast); Hormuz sea mines officially confirmed; VIX doubled in one session",
+      "note": "Bifurcated paths: Path A (supply-shock resolves if Hormuz opens, 60%) vs Path B (embeds if stays closed, 40%). Core containment is the critical variable.",
+      "path_a_probability": 0.60,
+      "path_b_probability": 0.40
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 6816.89,
+          "ytd_pct": -4.1,
+          "note": "April 10 close; -0.1% on CPI day — absorbed but not resolved"
+        }
+      },
+      "breadth_signal": "defensive_rotation_continuing"
+    },
+    "sentiment": {
+      "composite": {
+        "score": 45,
+        "label": "fear",
+        "note": "VIX doubled in single session; swung from extreme complacency (30) to fear (45)"
+      },
+      "raw": {
+        "vix": {
+          "spot": 19.23,
+          "prior_close": 19.49,
+          "regime": "fear",
+          "note": "Was ~10.5 pre-CPI morning; doubled on March CPI confirmation (+3.3%); sea mines confirmed same session"
+        }
+      }
+    },
+    "yield_curve": {
+      "yields": {
+        "2Y": { "value": 3.82 },
+        "10Y": { "value": 4.35 }
+      },
+      "spread_10y2y": 0.53,
+      "curve_shape": "normal",
+      "rate_regime": "patient_trap",
+      "fed_funds": "3.50-3.75",
+      "fomc_note": "Core CPI containment (+2.6% vs +2.7% forecast) allows patient stance; April 28-29 hike probability reduced but not zero"
+    },
+    "cpi_march_2026": {
+      "headline_yoy": 3.3,
+      "headline_mom": 0.9,
+      "core_yoy": 2.6,
+      "core_mom_est": 0.2,
+      "energy_mom": 10.9,
+      "gasoline_mom": 21.2,
+      "shelter_mom": 0.3,
+      "shelter_yoy": 3.0,
+      "services_ex_energy_yoy": 3.0,
+      "note": "Key distinction: core +2.6% BELOW +2.7% forecast. Supply shock confirmed; wage-price spiral NOT yet embedded. Path A vs Path B distinction operative."
+    },
+    "sectors": {
+      "leaders": ["Energy", "Gold/Precious Metals", "Materials", "Utilities", "Consumer Staples"],
+      "laggards": ["Technology", "Financials", "Consumer Discretionary", "Healthcare (pharma drag)"]
+    },
+    "assets": {
+      "Oil (WTI)": {
+        "price": 99.16,
+        "ytd_pct_est": 77,
+        "note": "Recovering from ceasefire dump; sea mines in Hormuz structurally extend supply disruption"
+      },
+      "Gold (spot)": {
+        "price": 4750,
+        "conviction": "long",
+        "note": "+10% on CPI day; real-money accumulation confirmed; upgraded from contrarian-fade to conviction long"
+      },
+      "GLD (ETF est.)": {
+        "price": 475,
+        "note": "Estimated from gold spot; was $431.81 on April 9 (+11% in 2 days)"
+      },
+      "Bitcoin": {
+        "price": 72880,
+        "ytd_pct": -18.0,
+        "note": "Mild risk-off resilience"
+      },
+      "Dollar (DXY)": {
+        "price": 98.64,
+        "note": "Soft despite hot CPI — demand destruction signal; anomaly with commodity tailwind implication"
+      }
+    },
+    "geopolitical": {
+      "overall_risk": "critical",
+      "hormuz": {
+        "status": "structurally_blocked_by_mines",
+        "transit_pct": 10,
+        "mine_confirmed": true,
+        "mine_map_published": "2026-04-11",
+        "mine_clearance_timeline": "weeks_minimum_with_political_will",
+        "vessels_stranded_est": 230,
+        "note": "IRGC officially published mine map. Ships must coordinate with IRGC Navy. Mine clearance requires US Navy minesweepers + diplomacy + physical clearance — not a headline event."
+      },
+      "ceasefire": {
+        "status": "fragile",
+        "expiry": "2026-04-21",
+        "jd_vance_talks": "2026-04-12 (Pakistan)"
+      }
+    },
+    "catalyst_schedule": {
+      "april_12": "JD Vance Pakistan peace talks",
+      "april_13": "Goldman Sachs Q1 earnings",
+      "april_14": "JPMorgan, Wells Fargo, Citigroup Q1 earnings",
+      "april_15": "Bank of America Q1",
+      "april_21": "Iran 2-week ceasefire expiry",
+      "april_28_29": "FOMC meeting"
+    },
+    "portfolio": {
+      "trades_today": [
+        "TAKE 50% PROFIT on Long VIX (entry ~10.5, now 19.23; up ~78%)",
+        "CLOSE gold contrarian short view (57443812 failing)",
+        "INITIATE short BIZD (BDC ETF, small) ahead of bank earnings",
+        "ADD Gold (GLD) to conviction long"
+      ],
+      "open_themes": [
+        "Long VIX (half position remaining, targeting 25)",
+        "Energy overweight (trimmed; re-entry setup $90-92 WTI)",
+        "Non-pharma healthcare long",
+        "Gold conviction long (new)",
+        "Short BIZD/BDC ETF (new, small)"
+      ]
+    },
+    "predictions": {
+      "active_ids": [
+        "f1173bd0", "57443812", "35d668b3", "f1b9eb8d", "20751b47",
+        "vix_reversion_apr10", "sp500_reversal_apr10", "fed_hawk_escalation_apr10",
+        "sea_mines_apr11", "vix_regime_apr11",
+        "april_cpi_compounds", "vix_above25_prefomc", "gold_target_5000"
+      ],
+      "probability_updates_from_apr10": {
+        "vix_reversion_apr10": {"from": 0.65, "to": 0.92, "reason": "VIX 19.23-19.49; essentially triggered in 24h"},
+        "sp500_reversal_apr10": {"from": 0.60, "to": 0.72, "reason": "Earnings + FOMC converging"},
+        "57443812": {"from": 0.60, "to": 0.18, "reason": "Gold +10%; direction wrong; real money buying"},
+        "35d668b3": {"from": 0.30, "to": 0.38, "reason": "Catalyst density compressing timeline"},
+        "f1173bd0": {"from": 0.65, "to": 0.72, "reason": "Sea mines extend closure; short-squeeze building"},
+        "f1b9eb8d": {"from": 0.65, "to": 0.68, "reason": "Bank earnings will accelerate signal"},
+        "20751b47": {"from": 0.45, "to": 0.55, "reason": "Core +2.6% gives Fed patience cover"},
+        "fed_hawk_escalation_apr10": {"from": 0.55, "to": 0.40, "reason": "Core containment weakens hawks' case"}
+      },
+      "new_today": [
+        {
+          "id": "april_cpi_compounds",
+          "claim": "April CPI YoY (released ~May 12) prints above 3.5%",
+          "probability": 0.70,
+          "resolve_by": "2026-05-15"
+        },
+        {
+          "id": "vix_above25_prefomc",
+          "claim": "VIX closes above 25 before April 28-29 FOMC",
+          "probability": 0.58,
+          "resolve_by": "2026-04-27"
+        },
+        {
+          "id": "gold_target_5000",
+          "claim": "Gold spot reaches $5,000/oz within 45 days",
+          "probability": 0.60,
+          "resolve_by": "2026-05-25"
+        }
+      ]
+    }
+  }
+}

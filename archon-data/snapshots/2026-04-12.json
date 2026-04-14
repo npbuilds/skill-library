@@ -1,0 +1,188 @@
+{
+  "_snapshot_date": "2026-04-12",
+  "_saved_at": "2026-04-12T12:00:00.000000",
+  "_version": "v2",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "subtype": "supply_shock_compound",
+      "confidence": 0.88,
+      "growth_score": 0.14,
+      "inflation_score": 0.90,
+      "description": "Compound stagflation: oil shock (Hormuz mines, MCM gap) + China tariff escalation (84%→125%). Vance talks collapsed. Path B probability rising.",
+      "note": "Dual inflation vectors now active. Path A (supply-shock resolves, 20%) vs Path B (embeds, 48%) vs Path C (stagflation scenarios, 20%) vs Scenario D (tanker incident, 10%+).",
+      "path_a_probability": 0.20,
+      "path_b_probability": 0.48,
+      "path_c_probability": 0.22,
+      "scenario_d_probability": 0.10
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 6816.89,
+          "ytd_pct": -4.1,
+          "note": "April 10 close (weekend); opens Monday with GS earnings; key support ~6,585"
+        }
+      },
+      "breadth_signal": "defensive_rotation_stagflation_confirmed",
+      "q1_earnings_expectations": {
+        "consensus_growth_yoy": "+13%",
+        "key_reporters": "GS (Mon), JPM/WFC/C (Tue), BAC (Wed)",
+        "real_signal": "Q2 guidance — first with full Hormuz + China 125% in cost base"
+      }
+    },
+    "sentiment": {
+      "composite": {
+        "score": 42,
+        "label": "fear",
+        "note": "Drifting lower from 45 on Friday; Vance failure adds geopolitical anxiety heading into week"
+      },
+      "raw": {
+        "vix": {
+          "spot": 19.0,
+          "prior_close": 19.23,
+          "regime": "fear",
+          "note": "Weekend; no new session. Opens Monday with GS earnings + Vance failure priced."
+        }
+      }
+    },
+    "yield_curve": {
+      "yields": {
+        "2Y": { "value": 3.82 },
+        "10Y": { "value": 4.35 }
+      },
+      "spread_10y2y": 0.53,
+      "curve_shape": "normal",
+      "rate_regime": "patient_trap_tightening",
+      "fed_funds": "3.50-3.75",
+      "fomc_note": "China 125% tariffs change patient-stance calculus. April CPI will have dual drivers. Patient trap snaps if core >2.8% in April."
+    },
+    "geopolitical": {
+      "overall_risk": "critical_escalating",
+      "hormuz": {
+        "status": "structurally_blocked_compound",
+        "transit_pct": 5,
+        "mine_confirmed": true,
+        "mines_still_being_laid": true,
+        "mcm_capacity_gap": "US decommissioned MCM ships in 2025; two destroyers transited but insufficient",
+        "mine_clearance_timeline": "weeks_to_months_minimum",
+        "vessels_stranded_est": 230,
+        "ceasefire_expiry": "2026-04-22",
+        "note": "US MCM capacity gap critical revelation. Even with full political will, NATO/UK minesweepers required. Iran still laying mines during ceasefire."
+      },
+      "vance_talks": {
+        "date": "2026-04-12",
+        "location": "Islamabad, Pakistan",
+        "duration_hours": 21,
+        "outcome": "COLLAPSED — no deal",
+        "sticking_point": "Iran refused to commit to forgoing nuclear weapons development",
+        "mine_clearance_commitment": false
+      },
+      "china_tariffs": {
+        "us_tariffs_on_china": "145%",
+        "china_tariffs_on_us": "125%",
+        "china_prior_rate": "84%",
+        "change_date": "2026-04-12",
+        "note": "Second inflation vector: not supply-shock (doesn't resolve when Hormuz opens); policy-driven; requires bilateral talks or Trump reversal"
+      },
+      "iran_signals": {
+        "tehran_billboard": "The Strait of Hormuz remains closed",
+        "ceasefire_violations_claimed": "Lebanon exclusion by US/Israel cited",
+        "mine_clearance_status": "no_agreement"
+      }
+    },
+    "assets": {
+      "Oil (WTI)": {
+        "price": 96.57,
+        "ytd_pct_est": 71,
+        "note": "Down from $99.16; ceasefire narrative fading; structural floor from mines + Saudi facility attacks (-600K bbl/day)"
+      },
+      "Oil (Brent)": {
+        "price": 96.69,
+        "note": "Corroborating WTI"
+      },
+      "Gold (spot)": {
+        "price": 4749,
+        "conviction": "long",
+        "target": 5000,
+        "note": "Flat from April 11; real-money bid sustained; dual inflation vectors structural"
+      },
+      "Bitcoin": {
+        "price": 72200,
+        "ytd_pct": -17.5,
+        "note": "Mild risk-off weekend drift; -0.9% from April 11"
+      },
+      "Dollar (DXY)": {
+        "price": 98.64,
+        "note": "Soft despite inflation — demand destruction signal; structural short bias from stagflation"
+      }
+    },
+    "sectors": {
+      "leaders": ["Energy", "Gold/Precious Metals", "Materials", "Utilities"],
+      "laggards": ["Technology", "Consumer Discretionary", "Financials", "Pharma"],
+      "new_risk": "Consumer Discretionary now has China tariff COGS headwind + demand destruction double jeopardy"
+    },
+    "catalyst_schedule": {
+      "april_13": "Goldman Sachs Q1 pre-market; beat expected, Q2 guidance key",
+      "april_14": "JPMorgan, Wells Fargo, Citigroup Q1 earnings",
+      "april_14": "CPI import prices (tariff pass-through first read)",
+      "april_15": "Bank of America Q1",
+      "april_22": "Iran 2-week ceasefire expiry — CRITICAL DEADLINE",
+      "april_28_29": "FOMC meeting",
+      "may_12_est": "April CPI release — april_cpi_compounds prediction resolves"
+    },
+    "portfolio": {
+      "open_themes": [
+        "Long VIX (half position, entry ~10.5, current ~19; targeting 25-27)",
+        "Energy overweight (trimmed; re-entry setup $90-92 WTI)",
+        "Non-pharma healthcare long",
+        "Gold conviction long ($4,749; target $5,000)",
+        "Short BIZD/BDC ETF (small; bank earnings catalyst)",
+        "NEW: Short XLY (consumer discretionary, small; China tariff + demand destruction)"
+      ],
+      "trades_today": [
+        "INITIATE Short XLY (consumer discretionary, small) — China 125% tariff + consumer sentiment 53.3 = double jeopardy"
+      ]
+    },
+    "predictions": {
+      "active_ids": [
+        "f1173bd0", "35d668b3", "f1b9eb8d", "20751b47",
+        "vix_reversion_apr10", "sp500_reversal_apr10", "fed_hawk_escalation_apr10",
+        "sea_mines_apr11", "vix_regime_apr11",
+        "april_cpi_compounds", "vix_above25_prefomc", "gold_target_5000",
+        "ceasefire_expiry_no_renewal", "gs_q1_beats_consensus"
+      ],
+      "resolved_today": [
+        {
+          "id": "sea_mines_vance",
+          "claim": "JD Vance Pakistan talks fail to secure mine-clearance commitment",
+          "outcome": "CORRECT — talks collapsed after 21 hours; no deal; no mine-clearance commitment",
+          "resolved_date": "2026-04-12"
+        }
+      ],
+      "probability_updates_from_apr11": {
+        "sea_mines_apr11": {"from": 0.72, "to": 0.88, "reason": "MCM gap confirmed; Iran still laying mines; Vance failure removes diplomatic clearing"},
+        "vix_above25_prefomc": {"from": 0.58, "to": 0.65, "reason": "Vance failure + MCM gap + ceasefire expiry April 22 = three converging catalysts"},
+        "fed_hawk_escalation_apr10": {"from": 0.40, "to": 0.45, "reason": "China 125% tariffs add goods inflation; modest increase in hawkish case"},
+        "april_cpi_compounds": {"from": 0.70, "to": 0.75, "reason": "Dual inflation vector: oil persistence + China 125% tariff pass-through"},
+        "57443812": {"status": "closed_failing", "note": "Gold contrarian short view already closed April 11"}
+      },
+      "new_today": [
+        {
+          "id": "ceasefire_expiry_no_renewal",
+          "claim": "Iran 2-week ceasefire expires April 22 without formal renewal",
+          "probability": 0.68,
+          "resolve_by": "2026-04-23",
+          "rationale": "Vance failure removes US diplomatic pathway; Iran still laying mines; ceasefire terms disputed"
+        },
+        {
+          "id": "gs_q1_beats_consensus",
+          "claim": "Goldman Sachs Q1 EPS beats $16.41 consensus estimate",
+          "probability": 0.72,
+          "resolve_by": "2026-04-13",
+          "rationale": "4 consecutive beats with avg +14% surprise; equities trading +19% est.; volatility desk benefits"
+        }
+      ]
+    }
+  }
+}
