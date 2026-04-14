@@ -39,12 +39,13 @@ jobs:
           python-version: "3.12"
 
       - name: Validate registry JSON
-        run: python3 -c "
-import json
-with open('data/registry.json') as f:
-    json.load(f)
-print('Registry JSON: valid')
-"
+        run: |
+          python3 << 'EOF'
+          import json
+          with open('data/registry.json') as f:
+              json.load(f)
+          print('Registry JSON: valid')
+          EOF
 
       - name: Check all registered skills exist
         run: |
