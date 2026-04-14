@@ -1,0 +1,33 @@
+{
+  "rules": {
+    "initial_capital": 1000000,
+    "current_capital": 1000000,
+    "max_position_pct": 15,
+    "max_positions": 8,
+    "stop_loss_default_pct": -5.0,
+    "conviction_sizing": true,
+    "rules_history": [
+      {
+        "date": "2026-04-09",
+        "change": "initial rules set",
+        "rationale": "$1M notional, max 15% per position, max 8 positions, default 5% stop-loss, conviction-based sizing enabled. Archon may evolve these rules over time."
+      }
+    ]
+  },
+  "positions": [],
+  "closed_trades": [],
+  "daily_equity": [],
+  "metrics": {
+    "total_return_pct": 0.0,
+    "sharpe_ratio": null,
+    "sortino_ratio": null,
+    "max_drawdown_pct": 0.0,
+    "win_rate": null,
+    "profit_factor": null,
+    "avg_holding_days": null,
+    "avg_winner_pct": null,
+    "avg_loser_pct": null,
+    "by_regime": {},
+    "by_thesis_source": {}
+  }
+}

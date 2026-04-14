@@ -103,6 +103,85 @@ def _get_series_latest(fred, series_id: str, periods: int = 18) -> dict | None:
         return {"error": str(e)}
 
 
+def _market_implied_fallback() -> dict:
+    """Fallback when FRED_API_KEY is not set — derive macro signals from market prices.
+
+    Uses yfinance to get:
+    - TIP vs SHY spread → implied inflation
+    - Yield curve (IEF/SHY) → growth expectations
+    - XLE/SPY ratio → energy inflation signal
+    """
+    try:
+        import yfinance as yf
+
+        tickers = yf.download(
+            "TIP SHY IEF ^TNX ^FVX ^IRX",
+            period="6mo",
+            progress=False,
+            auto_adjust=True,
+        )
+
+        result = {
+            "indicators": {},
+            "timestamp": datetime.now().isoformat(),
+            "_fallback": True,
+            "_fallback_reason": "FRED_API_KEY not set — using market-implied signals",
+        }
+
+        closes = tickers["Close"] if "Close" in tickers.columns.get_level_values(0) else tickers
+
+        # Implied inflation from TIP/SHY ratio change
+        if "TIP" in closes.columns and "SHY" in closes.columns:
+            tip = closes["TIP"].dropna()
+            shy = closes["SHY"].dropna()
+            if len(tip) >= 20 and len(shy) >= 20:
+                # TIP outperforming SHY = rising inflation expectations
+                tip_ret_1m = (tip.iloc[-1] / tip.iloc[-21] - 1) * 100
+                shy_ret_1m = (shy.iloc[-1] / shy.iloc[-21] - 1) * 100
+                inflation_spread = tip_ret_1m - shy_ret_1m
+
+                if inflation_spread > 1.0:
+                    result["inflation_signal"] = "hot"
+                elif inflation_spread > 0.3:
+                    result["inflation_signal"] = "elevated"
+                elif inflation_spread > -0.3:
+                    result["inflation_signal"] = "target"
+                else:
+                    result["inflation_signal"] = "low"
+
+                result["indicators"]["implied_inflation"] = {
+                    "name": "Market-Implied Inflation (TIP-SHY spread)",
+                    "value": round(float(inflation_spread), 2),
+                    "signal": result["inflation_signal"],
+                }
+
+        # Growth signal from yield curve slope (10Y - 3M from tickers)
+        if "^TNX" in closes.columns and "^IRX" in closes.columns:
+            tnx = closes["^TNX"].dropna()
+            irx = closes["^IRX"].dropna()
+            if len(tnx) > 0 and len(irx) > 0:
+                spread = float(tnx.iloc[-1]) - float(irx.iloc[-1])
+                result["indicators"]["T10Y3M"] = {
+                    "name": "10Y-3M Spread (market-implied)",
+                    "value": round(spread, 3),
+                }
+                if spread < 0:
+                    result["yield_curve_signal"] = "inverted"
+                elif spread < 0.5:
+                    result["yield_curve_signal"] = "flat"
+                else:
+                    result["yield_curve_signal"] = "normal"
+
+        set_cached("fred_macro", result)
+        return result
+
+    except Exception as e:
+        return {
+            "error": f"FRED fallback failed: {e}. Set FRED_API_KEY for full macro data.",
+            "timestamp": datetime.now().isoformat(),
+        }
+
+
 def get_macro_data() -> dict:
     """Pull all macro indicators from FRED."""
     cached = get_cached("fred_macro", ttl_seconds=14400)  # 4 hours
@@ -111,10 +190,7 @@ def get_macro_data() -> dict:
 
     fred = _get_fred_client()
     if not fred:
-        return {
-            "error": "FRED_API_KEY not set. Get a free key at api.stlouisfed.org/api_key",
-            "timestamp": datetime.now().isoformat(),
-        }
+        return _market_implied_fallback()
 
     result = {"indicators": {}, "timestamp": datetime.now().isoformat()}
 
