@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-04-09T00:07:21Z",
+  "last_scan": "2026-04-13T09:12:25Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -13848,6 +13848,1804 @@
       "created": "2026-04-13",
       "last_modified": "2026-04-13",
       "parent": "synthesize"
+    },
+    "asclepius": {
+      "name": "asclepius",
+      "description": "Orchestrate biotech venture diligence and investment analysis across clinical development, regulatory strategy, asset valuation, competitive intelligence, manufacturing risk, IP analysis, and deal ...",
+      "location": "skills/biotech-venture/asclepius/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1116,
+        "body_words": 1116,
+        "section_count": 9,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1674
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [],
+      "referenced_by": [
+        "clinical-development",
+        "probability-of-success",
+        "asset-valuation",
+        "regulatory-strategy",
+        "competitive-intelligence",
+        "manufacturing-ip",
+        "deal-synthesis"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": null
+    },
+    "asset-valuation": {
+      "name": "asset-valuation",
+      "description": "Direct rNPV modeling, peak sales forecasting, development cost estimation, and deal economics questions to the appropriate specialist skill. Activate when building a risk-adjusted valuation for a c...",
+      "location": "skills/biotech-venture/asset-valuation/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1145,
+        "body_words": 1145,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1717
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asclepius"
+      ],
+      "referenced_by": [
+        "deal-economics",
+        "peak-sales-forecaster",
+        "cost-estimator",
+        "rnpv-modeler"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:asset-valuation"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asclepius"
+    },
+    "biomarker-enrichment": {
+      "name": "biomarker-enrichment",
+      "description": "Design biomarker-driven enrichment strategies for clinical trials, predicting responder populations and quantifying the impact of enrichment on statistical power, probability of success, and develo...",
+      "location": "skills/biotech-venture/clinical-development/biomarker-enrichment/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1637,
+        "body_words": 1637,
+        "section_count": 17,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2455
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "clinical-development",
+        "endpoint-selection",
+        "patient-population-sizer"
+      ],
+      "referenced_by": [
+        "trial-design-optimizer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:clinical-development"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "clinical-development"
+    },
+    "clinical-development": {
+      "name": "clinical-development",
+      "description": "Direct clinical trial design, endpoint selection, biomarker enrichment, and patient population sizing questions to the appropriate specialist skill. Activate when evaluating a clinical program's de...",
+      "location": "skills/biotech-venture/clinical-development/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1081,
+        "body_words": 1081,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1621
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asclepius"
+      ],
+      "referenced_by": [
+        "endpoint-selection",
+        "patient-population-sizer",
+        "trial-design-optimizer",
+        "biomarker-enrichment"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:clinical-development"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asclepius"
+    },
+    "clinical-differentiator": {
+      "name": "clinical-differentiator",
+      "description": "Assess clinical differentiation of a therapeutic asset versus competitors using structured cross-trial analysis, competitive positioning matrices, and second-level thinking frameworks. Identifies w...",
+      "location": "skills/biotech-venture/competitive-intelligence/clinical-differentiator/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1763,
+        "body_words": 1763,
+        "section_count": 18,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2644
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "competitive-intelligence",
+        "endpoint-selection"
+      ],
+      "referenced_by": [
+        "diligence-scorecard"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:competitive-intelligence"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "competitive-intelligence"
+    },
+    "cmc-risk-assessor": {
+      "name": "cmc-risk-assessor",
+      "description": "Assess chemistry, manufacturing, and controls risk using FMEA methodology with modality-specific failure modes, severity/occurrence/detection scoring, scalability assessment, COGS trajectory modeli...",
+      "location": "skills/biotech-venture/manufacturing-ip/cmc-risk-assessor/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1530,
+        "body_words": 1530,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2295
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "manufacturing-ip",
+        "modality-manufacturing"
+      ],
+      "referenced_by": [
+        "diligence-scorecard"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:manufacturing-ip"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "manufacturing-ip"
+    },
+    "competitive-intelligence": {
+      "name": "competitive-intelligence",
+      "description": "Direct pipeline mapping, clinical differentiation analysis, and market dynamics questions to the appropriate specialist skill. Activate when evaluating an asset's competitive position, mapping the ...",
+      "location": "skills/biotech-venture/competitive-intelligence/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1087,
+        "body_words": 1087,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1630
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asclepius"
+      ],
+      "referenced_by": [
+        "market-dynamics",
+        "clinical-differentiator",
+        "pipeline-mapper"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:competitive-intelligence"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asclepius"
+    },
+    "cost-estimator": {
+      "name": "cost-estimator",
+      "description": "Estimate clinical development costs, regulatory costs, and launch costs for a therapeutic program by phase, therapeutic area, and trial complexity using industry benchmarks, cost driver analysis, a...",
+      "location": "skills/biotech-venture/asset-valuation/cost-estimator/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1684,
+        "body_words": 1684,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2526
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asset-valuation"
+      ],
+      "referenced_by": [
+        "rnpv-modeler"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:asset-valuation"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asset-valuation"
+    },
+    "deal-economics": {
+      "name": "deal-economics",
+      "description": "Apply biotech deal structure frameworks including licensing economics, M&A valuation premiums, royalty rate benchmarks, milestone design principles, and option-based deal architectures for biotech ...",
+      "location": "skills/biotech-venture/asset-valuation/deal-economics/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1702,
+        "body_words": 1702,
+        "section_count": 13,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2553
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asset-valuation"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:asset-valuation"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asset-valuation"
+    },
+    "deal-synthesis": {
+      "name": "deal-synthesis",
+      "description": "Direct diligence scorecard generation, investment memo writing, and portfolio analysis to the appropriate specialist skill. Activate when synthesizing a complete investment view on a biotech asset,...",
+      "location": "skills/biotech-venture/deal-synthesis/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1098,
+        "body_words": 1098,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1647
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asclepius"
+      ],
+      "referenced_by": [
+        "diligence-scorecard",
+        "investment-memo-writer",
+        "portfolio-analyzer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:deal-synthesis"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asclepius"
+    },
+    "diligence-scorecard": {
+      "name": "diligence-scorecard",
+      "description": "Generate a comprehensive 8-pillar investment diligence scorecard for a therapeutic asset or biotech company by synthesizing clinical, regulatory, competitive, manufacturing, IP, financial, team, an...",
+      "location": "skills/biotech-venture/deal-synthesis/diligence-scorecard/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1206,
+        "body_words": 1206,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1809
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "deal-synthesis",
+        "pos-calculator",
+        "rnpv-modeler",
+        "pathway-analyzer",
+        "clinical-differentiator",
+        "cmc-risk-assessor",
+        "patent-analyzer"
+      ],
+      "referenced_by": [
+        "investment-memo-writer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:deal-synthesis"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "deal-synthesis"
+    },
+    "endpoint-selection": {
+      "name": "endpoint-selection",
+      "description": "Apply endpoint selection frameworks for clinical trials across therapeutic areas, distinguishing validated surrogate endpoints from clinical endpoints and mapping FDA/EMA acceptance precedent. Refe...",
+      "location": "skills/biotech-venture/clinical-development/endpoint-selection/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1237,
+        "body_words": 1237,
+        "section_count": 12,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1855
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "clinical-development"
+      ],
+      "referenced_by": [
+        "trial-design-optimizer",
+        "biomarker-enrichment",
+        "regulatory-risk-scorer",
+        "clinical-differentiator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:clinical-development"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "clinical-development"
+    },
+    "investment-memo-writer": {
+      "name": "investment-memo-writer",
+      "description": "Generate structured investment committee memos from diligence scorecard outputs. Template covers Executive Summary through Recommendation with assertion-led writing, quantified claims, and explicit...",
+      "location": "skills/biotech-venture/deal-synthesis/investment-memo-writer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1485,
+        "body_words": 1485,
+        "section_count": 8,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2227
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "deal-synthesis",
+        "diligence-scorecard"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:deal-synthesis"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "deal-synthesis"
+    },
+    "ip-valuation": {
+      "name": "ip-valuation",
+      "description": "IP valuation frameworks for biotech assets including cost approach, market approach (comparable royalty rates), and income approach (relief-from-royalty). Covers royalty rate benchmarks by patent t...",
+      "location": "skills/biotech-venture/manufacturing-ip/ip-valuation/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1596,
+        "body_words": 1596,
+        "section_count": 15,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2394
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "manufacturing-ip"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:manufacturing-ip"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "manufacturing-ip"
+    },
+    "manufacturing-ip": {
+      "name": "manufacturing-ip",
+      "description": "Direct CMC risk assessment, modality-specific manufacturing analysis, patent landscape mapping, and IP valuation questions to the appropriate specialist skill. Activate when evaluating manufacturin...",
+      "location": "skills/biotech-venture/manufacturing-ip/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1239,
+        "body_words": 1239,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1858
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asclepius"
+      ],
+      "referenced_by": [
+        "modality-manufacturing",
+        "ip-valuation",
+        "cmc-risk-assessor",
+        "patent-analyzer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:manufacturing-ip"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asclepius"
+    },
+    "market-dynamics": {
+      "name": "market-dynamics",
+      "description": "Therapeutic market dynamics frameworks including game-theoretic competitive modeling, market archetypes, launch sequence impact, class saturation signals, payer adoption curves, and biosimilar eros...",
+      "location": "skills/biotech-venture/competitive-intelligence/market-dynamics/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1650,
+        "body_words": 1650,
+        "section_count": 16,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2475
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "competitive-intelligence"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:competitive-intelligence"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "competitive-intelligence"
+    },
+    "mechanism-risk-adjuster": {
+      "name": "mechanism-risk-adjuster",
+      "description": "Assess mechanism-of-action-specific risk factors that modify base-rate PoS, evaluating target validation depth using Mendelian randomization evidence, preclinical translatability, competitive mecha...",
+      "location": "skills/biotech-venture/probability-of-success/mechanism-risk-adjuster/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1519,
+        "body_words": 1519,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2278
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "probability-of-success",
+        "pos-base-rates"
+      ],
+      "referenced_by": [
+        "pos-calculator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:probability-of-success"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "probability-of-success"
+    },
+    "modality-manufacturing": {
+      "name": "modality-manufacturing",
+      "description": "Catalog manufacturing considerations, COGS benchmarks, scalability profiles, and process development timelines for each major therapeutic modality. Reference when assessing whether a company's manu...",
+      "location": "skills/biotech-venture/manufacturing-ip/modality-manufacturing/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1894,
+        "body_words": 1894,
+        "section_count": 15,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2841
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "manufacturing-ip"
+      ],
+      "referenced_by": [
+        "cmc-risk-assessor"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:manufacturing-ip"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "manufacturing-ip"
+    },
+    "patent-analyzer": {
+      "name": "patent-analyzer",
+      "description": "Analyze patent landscape and IP risk for biotech assets including patent type taxonomy, patent life calculation with extensions, Orange/Purple Book analysis, Paragraph IV dynamics, biosimilar BPCIA...",
+      "location": "skills/biotech-venture/manufacturing-ip/patent-analyzer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1723,
+        "body_words": 1723,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2584
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "manufacturing-ip"
+      ],
+      "referenced_by": [
+        "diligence-scorecard"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:manufacturing-ip"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "manufacturing-ip"
+    },
+    "pathway-analyzer": {
+      "name": "pathway-analyzer",
+      "description": "Analyze and recommend optimal FDA and EMA regulatory pathways for a given therapeutic program, quantifying timeline impact, eligibility criteria, and historical conversion rates. Produces actionabl...",
+      "location": "skills/biotech-venture/regulatory-strategy/pathway-analyzer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1533,
+        "body_words": 1533,
+        "section_count": 13,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2299
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "regulatory-strategy",
+        "regulatory-precedent"
+      ],
+      "referenced_by": [
+        "diligence-scorecard"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:regulatory-strategy"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "regulatory-strategy"
+    },
+    "patient-population-sizer": {
+      "name": "patient-population-sizer",
+      "description": "Estimate addressable patient populations from epidemiological data, applying diagnostic rates, treatment-eligible filters, biomarker prevalence, and geographic adjustments to produce treatable popu...",
+      "location": "skills/biotech-venture/clinical-development/patient-population-sizer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1462,
+        "body_words": 1462,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2193
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "clinical-development"
+      ],
+      "referenced_by": [
+        "peak-sales-forecaster",
+        "biomarker-enrichment"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:clinical-development"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "clinical-development"
+    },
+    "peak-sales-forecaster": {
+      "name": "peak-sales-forecaster",
+      "description": "Forecast peak revenue for a therapeutic asset by modeling patient population, market penetration curves, pricing, and competitive dynamics over a 10-year commercial horizon to produce probability-w...",
+      "location": "skills/biotech-venture/asset-valuation/peak-sales-forecaster/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1397,
+        "body_words": 1397,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2095
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asset-valuation",
+        "patient-population-sizer"
+      ],
+      "referenced_by": [
+        "rnpv-modeler"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:asset-valuation"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asset-valuation"
+    },
+    "pipeline-mapper": {
+      "name": "pipeline-mapper",
+      "description": "Map the competitive pipeline for a therapeutic area, target, or mechanism of action using ClinicalTrials.gov, SEC filings, and conference abstracts. Produces a structured competitive landscape matr...",
+      "location": "skills/biotech-venture/competitive-intelligence/pipeline-mapper/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1314,
+        "body_words": 1314,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1971
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "competitive-intelligence"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:competitive-intelligence"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "competitive-intelligence"
+    },
+    "portfolio-analyzer": {
+      "name": "portfolio-analyzer",
+      "description": "Portfolio-level analysis for biotech venture funds including PoS-weighted expected portfolio value, portfolio probability of at least one success, therapeutic area concentration (Herfindahl index),...",
+      "location": "skills/biotech-venture/deal-synthesis/portfolio-analyzer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1733,
+        "body_words": 1733,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2599
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "deal-synthesis",
+        "rnpv-modeler",
+        "pos-calculator"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:deal-synthesis"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "deal-synthesis"
+    },
+    "pos-base-rates": {
+      "name": "pos-base-rates",
+      "description": "Provide historical clinical trial success rates by phase, therapeutic area, modality, and endpoint type, sourced from BIO/Informa/QLS databases with vintage-year adjustments. Reference when calcula...",
+      "location": "skills/biotech-venture/probability-of-success/pos-base-rates/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1050,
+        "body_words": 1050,
+        "section_count": 11,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1575
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "probability-of-success"
+      ],
+      "referenced_by": [
+        "pos-calculator",
+        "mechanism-risk-adjuster"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:probability-of-success"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "probability-of-success"
+    },
+    "pos-calculator": {
+      "name": "pos-calculator",
+      "description": "Calculate risk-adjusted probability of success for any therapeutic program using historical base rates, mechanism-based adjustments, and program-specific modifiers. Produce phase-by-phase transitio...",
+      "location": "skills/biotech-venture/probability-of-success/pos-calculator/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1177,
+        "body_words": 1177,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1765
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "probability-of-success",
+        "pos-base-rates",
+        "mechanism-risk-adjuster"
+      ],
+      "referenced_by": [
+        "rnpv-modeler",
+        "diligence-scorecard",
+        "portfolio-analyzer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:probability-of-success"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "probability-of-success"
+    },
+    "probability-of-success": {
+      "name": "probability-of-success",
+      "description": "Direct probability of success estimation, phase transition analysis, and mechanism-based risk adjustment to the appropriate specialist skill. Activate when calculating PoS for a clinical asset, adj...",
+      "location": "skills/biotech-venture/probability-of-success/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1122,
+        "body_words": 1122,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1683
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asclepius"
+      ],
+      "referenced_by": [
+        "pos-base-rates",
+        "pos-calculator",
+        "mechanism-risk-adjuster"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:probability-of-success"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asclepius"
+    },
+    "regulatory-precedent": {
+      "name": "regulatory-precedent",
+      "description": "Catalog FDA and EMA regulatory precedents by therapeutic area, including expedited pathway statistics, approval basis, endpoint acceptance, advisory committee outcomes, and Complete Response Letter...",
+      "location": "skills/biotech-venture/regulatory-strategy/regulatory-precedent/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1050,
+        "body_words": 1050,
+        "section_count": 13,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1575
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "regulatory-strategy"
+      ],
+      "referenced_by": [
+        "pathway-analyzer",
+        "regulatory-risk-scorer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:regulatory-strategy"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "regulatory-strategy"
+    },
+    "regulatory-risk-scorer": {
+      "name": "regulatory-risk-scorer",
+      "description": "Score regulatory risk across six clinical-regulatory dimensions using a structured framework, producing a quantitative risk profile with radar chart scores, aggregate risk rating, and prioritized m...",
+      "location": "skills/biotech-venture/regulatory-strategy/regulatory-risk-scorer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1733,
+        "body_words": 1733,
+        "section_count": 14,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2599
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "regulatory-strategy",
+        "regulatory-precedent",
+        "endpoint-selection"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:regulatory-strategy"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "regulatory-strategy"
+    },
+    "regulatory-strategy": {
+      "name": "regulatory-strategy",
+      "description": "Direct FDA/EMA pathway analysis, designation eligibility assessment, regulatory precedent research, and regulatory risk scoring to the appropriate specialist skill. Activate when evaluating a regul...",
+      "location": "skills/biotech-venture/regulatory-strategy/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1119,
+        "body_words": 1119,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1678
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asclepius"
+      ],
+      "referenced_by": [
+        "regulatory-precedent",
+        "pathway-analyzer",
+        "regulatory-risk-scorer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:regulatory-strategy"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asclepius"
+    },
+    "rnpv-modeler": {
+      "name": "rnpv-modeler",
+      "description": "Build risk-adjusted net present value models for therapeutic assets incorporating phase-gated probability, peak sales forecasts, development cost estimates, and time-value discounting with optional...",
+      "location": "skills/biotech-venture/asset-valuation/rnpv-modeler/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1357,
+        "body_words": 1357,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2035
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "asset-valuation",
+        "pos-calculator",
+        "peak-sales-forecaster",
+        "cost-estimator"
+      ],
+      "referenced_by": [
+        "diligence-scorecard",
+        "portfolio-analyzer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:asset-valuation"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "asset-valuation"
+    },
+    "trial-design-optimizer": {
+      "name": "trial-design-optimizer",
+      "description": "Generate optimized clinical trial designs given a therapeutic hypothesis, target population, and development stage. Incorporates adaptive designs, modern estimand frameworks, and synthetic control ...",
+      "location": "skills/biotech-venture/clinical-development/trial-design-optimizer/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1447,
+        "body_words": 1447,
+        "section_count": 15,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2170
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-04-13T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [
+        "clinical-development",
+        "endpoint-selection",
+        "biomarker-enrichment"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:biotech-venture",
+        "subdomain:clinical-development"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "changelog": [
+        {
+          "date": "2026-04-13",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "clinical-development"
     }
   },
   "network": {
@@ -14105,6 +15903,40 @@
         "narrative-keeper",
         "pattern-weaver",
         "product-briefing-engine"
+      ],
+      "biotech-venture": [
+        "asclepius",
+        "asset-valuation",
+        "biomarker-enrichment",
+        "clinical-development",
+        "clinical-differentiator",
+        "cmc-risk-assessor",
+        "competitive-intelligence",
+        "cost-estimator",
+        "deal-economics",
+        "deal-synthesis",
+        "diligence-scorecard",
+        "endpoint-selection",
+        "investment-memo-writer",
+        "ip-valuation",
+        "manufacturing-ip",
+        "market-dynamics",
+        "mechanism-risk-adjuster",
+        "modality-manufacturing",
+        "patent-analyzer",
+        "pathway-analyzer",
+        "patient-population-sizer",
+        "peak-sales-forecaster",
+        "pipeline-mapper",
+        "portfolio-analyzer",
+        "pos-base-rates",
+        "pos-calculator",
+        "probability-of-success",
+        "regulatory-precedent",
+        "regulatory-risk-scorer",
+        "regulatory-strategy",
+        "rnpv-modeler",
+        "trial-design-optimizer"
       ]
     },
     "shared_references": {}
