@@ -8,7 +8,7 @@ metadata:
   author: nirav
   version: "1.0"
 compatibility: Designed for Claude Code
-allowed-tools: Read Bash Grep Glob
+allowed-tools: Read bash Grep Glob
 ---
 
 # Skill Analyze — The Oracle

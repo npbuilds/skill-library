@@ -9,7 +9,7 @@ metadata:
   author: nirav
   version: "1.0"
 compatibility: Designed for Claude Code
-allowed-tools: Read Bash Glob Grep Write Agent
+allowed-tools: Read bash Glob Grep Write Agent
 ---
 
 # Skill Health — The Doctor

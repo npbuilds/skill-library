@@ -12,7 +12,7 @@ metadata:
   author: nirav
   version: "2.0.0"
 compatibility: Designed for Claude Code
-allowed-tools: Read Write Bash Glob Grep Agent
+allowed-tools: Read Write bash Glob Grep Agent
 ---
 
 # The Loom — AI-Native Product Orchestrator
