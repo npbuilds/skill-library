@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-04-09T00:07:21Z",
+  "last_scan": "2026-04-06T22:03:35Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -74,10 +74,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 81,
       "depends_on": [
         "bacchus",
         "grape-encyclopedia",
@@ -309,10 +309,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 79,
       "depends_on": [
         "bacchus",
         "winemaking"
@@ -1090,10 +1090,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 74,
       "depends_on": [
         "food-pairing",
         "pairing-science",
@@ -1806,10 +1806,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 80,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 80,
       "depends_on": [
         "infrastructure-orchestrator",
         "skill-analyze",
@@ -2145,10 +2145,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-19T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 77,
       "depends_on": [
         "visual-communication"
       ],
@@ -2198,10 +2198,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-19T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [
         "visual-communication",
         "prose-rhythm"
@@ -2405,10 +2405,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-18T00:00:00Z",
       "status": "active",
-      "auto_score": 87,
+      "auto_score": 86,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 87,
+      "composite_score": 86,
       "depends_on": [
         "skill-registry",
         "color-theory",
@@ -2627,10 +2627,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 73,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 72,
       "depends_on": [
         "type-fundamentals",
         "typography"
@@ -2877,10 +2877,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 85,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 84,
       "depends_on": [
         "worldbuilding-orchestrator",
         "systems-craft"
@@ -2898,9 +2898,7 @@
         "naming-system",
         "narrative-pacing",
         "religion-design",
-        "technology-progression",
-        "world-to-story",
-        "weird-worldbuilding"
+        "technology-progression"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -2996,10 +2994,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 83,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 83,
       "depends_on": [
         "cultures-societies",
         "world-bible",
@@ -3019,7 +3017,7 @@
       ],
       "parent": "systems-craft",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-09"
     },
     "magic-system-design": {
       "name": "magic-system-design",
@@ -3047,10 +3045,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 85,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 82,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator",
@@ -3062,8 +3060,7 @@
         "lore-writer",
         "magic-systems",
         "technology-progression",
-        "worldbuilding-orchestrator",
-        "weird-worldbuilding"
+        "worldbuilding-orchestrator"
       ],
       "shares_references_with": [
         "ecology-design",
@@ -3168,7 +3165,8 @@
       "referenced_by": [
         "lore-writer",
         "history-builder",
-        "dilemma-analyzer"
+        "dilemma-analyzer",
+        "religions-and-worldviews"
       ],
       "shares_references_with": [
         "magic-system-design",
@@ -3181,7 +3179,7 @@
       ],
       "parent": "civilizations",
       "created": "2026-03-26",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-14"
     },
     "character-belief-tracker": {
       "name": "character-belief-tracker",
@@ -3258,10 +3256,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 73,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 76,
       "depends_on": [
         "lore-writer",
         "world-bible",
@@ -3271,8 +3269,7 @@
       ],
       "referenced_by": [
         "extrapolation-engine",
-        "faction-design",
-        "environmental-storytelling"
+        "faction-design"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -3310,10 +3307,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 89,
+      "auto_score": 85,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 89,
+      "composite_score": 85,
       "depends_on": [
         "strategic-foundations",
         "mechanism-design",
@@ -3378,7 +3375,8 @@
         "classical-games",
         "cooperative-games",
         "game-solver",
-        "game-theory-orchestrator"
+        "game-theory-orchestrator",
+        "strategy-and-grand-strategy"
       ],
       "tags": [
         "domain:game-theory",
@@ -3387,7 +3385,7 @@
       ],
       "parent": "game-theory-orchestrator",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-14"
     },
     "classical-games": {
       "name": "classical-games",
@@ -3416,10 +3414,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 83,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 83,
       "depends_on": [
         "strategic-foundations",
         "second-level-thinking",
@@ -3434,7 +3432,8 @@
         "strategic-foundations",
         "second-level-thinking",
         "faction-design",
-        "dilemma-analyzer"
+        "dilemma-analyzer",
+        "strategy-and-grand-strategy"
       ],
       "tags": [
         "domain:game-theory",
@@ -3444,7 +3443,7 @@
       ],
       "parent": "strategic-foundations",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-14"
     },
     "cooperative-games": {
       "name": "cooperative-games",
@@ -3473,10 +3472,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 80,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 80,
       "depends_on": [
         "classical-games",
         "strategic-foundations",
@@ -3486,7 +3485,8 @@
       "referenced_by": [
         "strategic-foundations",
         "game-solver",
-        "rights-reasoner"
+        "rights-reasoner",
+        "diplomacy-and-international-order"
       ],
       "tags": [
         "domain:game-theory",
@@ -3496,7 +3496,7 @@
       ],
       "parent": "strategic-foundations",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-13"
     },
     "game-solver": {
       "name": "game-solver",
@@ -3525,10 +3525,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 79,
       "depends_on": [
         "algorithmic-game-theory",
         "classical-games",
@@ -3787,10 +3787,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 79,
       "depends_on": [
         "auction-theory",
         "matching-markets",
@@ -4055,7 +4055,8 @@
         "info-designer",
         "signaling-screening",
         "second-level-thinking",
-        "reflexivity-sentiment"
+        "reflexivity-sentiment",
+        "intelligence-and-information-war"
       ],
       "tags": [
         "domain:game-theory",
@@ -4064,7 +4065,7 @@
       ],
       "parent": "game-theory-orchestrator",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-14"
     },
     "signaling-screening": {
       "name": "signaling-screening",
@@ -4103,7 +4104,8 @@
         "bayesian-persuasion",
         "info-designer",
         "information-economics",
-        "special-situations"
+        "special-situations",
+        "intelligence-and-information-war"
       ],
       "tags": [
         "domain:game-theory",
@@ -4113,7 +4115,7 @@
       ],
       "parent": "information-economics",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-14"
     },
     "bayesian-persuasion": {
       "name": "bayesian-persuasion",
@@ -4141,8 +4143,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 73,
-      "composite_score": 73,
+      "auto_score": 72,
+      "composite_score": 72,
       "depends_on": [
         "information-economics",
         "signaling-screening"
@@ -4327,8 +4329,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 84,
-      "composite_score": 84,
+      "auto_score": 82,
+      "composite_score": 82,
       "depends_on": [
         "strategic-foundations",
         "market-psychology",
@@ -4426,10 +4428,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 86,
+      "auto_score": 85,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 86,
+      "composite_score": 85,
       "depends_on": [
         "data-cleaning",
         "feature-engineering",
@@ -4757,10 +4759,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 86,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 86,
+      "composite_score": 84,
       "depends_on": [
         "modeling",
         "statistical-analysis",
@@ -4774,7 +4776,8 @@
         "data-science-orchestrator",
         "macro-cycles",
         "correlation-regimes",
-        "climate-projections"
+        "climate-projections",
+        "comparative-civilizations"
       ],
       "tags": [
         "domain:data-science",
@@ -4783,7 +4786,7 @@
         "level:knowledge"
       ],
       "created": "2026-03-22",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-04-14",
       "parent": "modeling"
     },
     "chart-selection": {
@@ -4813,10 +4816,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 77,
       "depends_on": [
         "data-science-orchestrator",
         "statistical-analysis",
@@ -4967,10 +4970,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 78,
       "depends_on": [
         "statistical-analysis",
         "statistical-testing"
@@ -5031,7 +5034,8 @@
         "responsible-ai",
         "statistical-testing",
         "time-series",
-        "wine-economics"
+        "wine-economics",
+        "demographic-and-structural-forces"
       ],
       "tags": [
         "domain:data-science",
@@ -5039,7 +5043,7 @@
         "level:director"
       ],
       "created": "2026-03-25",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-14"
     },
     "modeling": {
       "name": "modeling",
@@ -5224,10 +5228,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 88,
+      "auto_score": 87,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 88,
+      "composite_score": 87,
       "depends_on": [
         "lore-writer",
         "naming-system",
@@ -5292,10 +5296,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 79,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator",
@@ -5307,9 +5311,7 @@
         "ecology-design",
         "technology-progression",
         "worldbuilding-orchestrator",
-        "economic-systems",
-        "sensory-worldbuilding",
-        "environmental-storytelling"
+        "economic-systems"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5317,7 +5319,7 @@
         "level:knowledge"
       ],
       "created": "2026-03-25",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-04-09",
       "parent": "physical-world"
     },
     "cultures-societies": {
@@ -5347,10 +5349,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 84,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator",
@@ -5372,10 +5374,7 @@
         "dilemma-analyzer",
         "rights-reasoner",
         "economic-systems",
-        "conlang-craft",
-        "character-design",
-        "sensory-worldbuilding",
-        "environmental-storytelling"
+        "conlang-craft"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5383,7 +5382,7 @@
         "level:knowledge"
       ],
       "created": "2026-03-25",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-04-09",
       "parent": "civilizations"
     },
     "magic-systems": {
@@ -5463,10 +5462,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 87,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 87,
+      "composite_score": 84,
       "depends_on": [
         "visual-composer",
         "creative-coding",
@@ -5511,10 +5510,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "master-artificer"
@@ -5553,10 +5552,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [],
       "referenced_by": [
         "master-artificer"
@@ -5616,7 +5615,7 @@
       ],
       "parent": null,
       "created": "2026-03-26",
-      "last_modified": "2026-04-06"
+      "last_modified": "2026-04-13"
     },
     "claim-decomposer": {
       "name": "claim-decomposer",
@@ -5645,10 +5644,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 77,
       "depends_on": [
         "spelunker"
       ],
@@ -5705,7 +5704,8 @@
         "evidence-synthesizer",
         "spelunker",
         "evidence-evaluator",
-        "agentic-researcher"
+        "agentic-researcher",
+        "source-criticism"
       ],
       "tags": [
         "domain:research",
@@ -5713,7 +5713,7 @@
       ],
       "parent": "spelunker",
       "created": "2026-03-26",
-      "last_modified": "2026-04-07"
+      "last_modified": "2026-04-13"
     },
     "evidence-synthesizer": {
       "name": "evidence-synthesizer",
@@ -5803,8 +5803,8 @@
         "estimated_tokens_total": 2230,
         "precise_tokens": null
       },
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 81,
+      "composite_score": 81,
       "referenced_by": [
         "narrative-craft",
         "prose-writer",
@@ -5869,8 +5869,7 @@
         "prose-writer",
         "style-dna",
         "syntax-patterns",
-        "typography",
-        "figurative-language"
+        "typography"
       ],
       "tags": [
         "domain:writing",
@@ -5913,8 +5912,8 @@
         "estimated_tokens_total": 1500,
         "precise_tokens": null
       },
-      "auto_score": 76,
-      "composite_score": 76,
+      "auto_score": 75,
+      "composite_score": 75,
       "referenced_by": [
         "sentence-craft",
         "syntax-patterns",
@@ -5943,7 +5942,7 @@
         "sentence-craft"
       ],
       "created": "2026-03-26",
-      "last_modified": "2026-03-26",
+      "last_modified": "2026-04-09",
       "name": "diction",
       "description": "Word choice in prose \u2014 precision, connotation, register, and the difference between the right word and the almost-right word. Use when diagnosing vague or imprecise language, when the user wants to understand word choice at the craft level, or when register and tone feel inconsistent across a piece of writing.",
       "location": "skills/writing/sentence-craft/diction/SKILL.md",
@@ -5963,8 +5962,8 @@
         "estimated_tokens_total": 1780,
         "precise_tokens": null
       },
-      "auto_score": 80,
-      "composite_score": 80,
+      "auto_score": 82,
+      "composite_score": 82,
       "referenced_by": [
         "concrete-detail",
         "sentence-craft",
@@ -6079,8 +6078,8 @@
         "estimated_tokens_body": 989,
         "estimated_tokens_total": 1071
       },
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 81,
+      "composite_score": 81,
       "referenced_by": [
         "concrete-detail",
         "dialogue",
@@ -6090,12 +6089,7 @@
         "prose-orchestrator",
         "prose-writer",
         "scene-craft",
-        "worldbuilding-orchestrator",
-        "character-interiority",
-        "micro-tension",
-        "narrative-geometry",
-        "world-to-story",
-        "hybrid-forms"
+        "worldbuilding-orchestrator"
       ],
       "invocation": "director"
     },
@@ -6127,7 +6121,7 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-26T10:01:10",
+      "last_modified": "2026-04-09",
       "metrics": {
         "word_count": 890,
         "body_words": 845,
@@ -6141,13 +6135,12 @@
         "estimated_tokens_body": 1098,
         "estimated_tokens_total": 1157
       },
-      "auto_score": 69,
-      "composite_score": 69,
+      "auto_score": 79,
+      "composite_score": 79,
       "referenced_by": [
         "narrative-craft",
         "narrative-pacing",
-        "narrative-geometry",
-        "hybrid-forms"
+        "narrative-geometry"
       ],
       "invocation": "knowledge"
     },
@@ -6199,8 +6192,7 @@
         "narrative-arc",
         "narrative-craft",
         "pacing",
-        "point-of-view",
-        "world-to-story"
+        "point-of-view"
       ],
       "invocation": "knowledge"
     },
@@ -6232,7 +6224,7 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-04-09",
       "metrics": {
         "word_count": 696,
         "body_words": 643,
@@ -6246,8 +6238,8 @@
         "estimated_tokens_body": 835,
         "estimated_tokens_total": 904
       },
-      "auto_score": 77,
-      "composite_score": 77,
+      "auto_score": 79,
+      "composite_score": 79,
       "referenced_by": [
         "dialogue",
         "narrative-arc",
@@ -6288,7 +6280,7 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-26T10:01:10",
+      "last_modified": "2026-04-09",
       "metrics": {
         "word_count": 646,
         "body_words": 598,
@@ -6302,8 +6294,8 @@
         "estimated_tokens_body": 777,
         "estimated_tokens_total": 839
       },
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 77,
+      "composite_score": 77,
       "referenced_by": [
         "narrative-craft",
         "faction-design",
@@ -6340,7 +6332,7 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-26T10:01:10",
+      "last_modified": "2026-04-09",
       "metrics": {
         "word_count": 705,
         "body_words": 665,
@@ -6354,8 +6346,8 @@
         "estimated_tokens_body": 864,
         "estimated_tokens_total": 916
       },
-      "auto_score": 74,
-      "composite_score": 74,
+      "auto_score": 77,
+      "composite_score": 77,
       "referenced_by": [
         "narrative-craft",
         "lore-writer",
@@ -6392,7 +6384,7 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-26T10:01:10",
+      "last_modified": "2026-04-09",
       "metrics": {
         "word_count": 758,
         "body_words": 711,
@@ -6406,15 +6398,12 @@
         "estimated_tokens_body": 924,
         "estimated_tokens_total": 985
       },
-      "auto_score": 74,
-      "composite_score": 74,
+      "auto_score": 80,
+      "composite_score": 80,
       "referenced_by": [
         "narrative-craft",
         "character-interiority",
-        "figurative-language",
-        "world-to-story",
-        "sensory-worldbuilding",
-        "environmental-storytelling"
+        "figurative-language"
       ],
       "invocation": "knowledge"
     },
@@ -6449,7 +6438,7 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-04-13",
       "metrics": {
         "word_count": 714,
         "body_words": 664,
@@ -6472,7 +6461,8 @@
         "rhetorical-appeals",
         "rhetorical-devices",
         "cultures-societies",
-        "visual-communication"
+        "visual-communication",
+        "historical-argument"
       ],
       "invocation": "director"
     },
@@ -6664,8 +6654,7 @@
       "auto_score": 69,
       "composite_score": 69,
       "referenced_by": [
-        "rhetoric",
-        "hybrid-forms"
+        "rhetoric"
       ],
       "invocation": "knowledge"
     },
@@ -6862,8 +6851,8 @@
         "estimated_tokens_body": 1040,
         "estimated_tokens_total": 1111
       },
-      "auto_score": 79,
-      "composite_score": 79,
+      "auto_score": 78,
+      "composite_score": 78,
       "referenced_by": [
         "prose-orchestrator",
         "worldbuilding-orchestrator",
@@ -6947,10 +6936,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 73,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 72,
       "depends_on": [
         "geography-ecology",
         "world-bible",
@@ -6994,10 +6983,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 78,
       "depends_on": [
         "cultures-societies",
         "history-builder",
@@ -7009,8 +6998,7 @@
       ],
       "referenced_by": [
         "dialogue",
-        "justice-analyst",
-        "character-design"
+        "justice-analyst"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -7047,18 +7035,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 70,
       "depends_on": [
         "history-builder",
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [
-        "weird-worldbuilding"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:worldbuilding",
         "level:knowledge",
@@ -7102,8 +7088,8 @@
         "estimated_tokens_total": 8900,
         "precise_tokens": null
       },
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 81,
+      "composite_score": 81,
       "referenced_by": [
         "prose-writer",
         "sentence-craft",
@@ -7858,7 +7844,8 @@
         "energy-security",
         "great-power-dynamics",
         "secular-themes",
-        "justice-analyst"
+        "justice-analyst",
+        "trade-and-globalization"
       ],
       "parent": "archon",
       "tags": [
@@ -7866,7 +7853,7 @@
         "level:director",
         "subdomain:geopolitical-overlay"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-13"
     },
     "energy-security": {
       "name": "energy-security",
@@ -8487,7 +8474,7 @@
         "body_words": 1187,
         "description_words": 35,
         "section_count": 6,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -8498,10 +8485,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 81,
       "depends_on": [
         "archon",
         "evolutionary-dynamics",
@@ -8522,7 +8509,7 @@
         "level:director",
         "subdomain:reflexivity-sentiment"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-09"
     },
     "market-psychology": {
       "name": "market-psychology",
@@ -8568,7 +8555,8 @@
         "sentiment-signals",
         "behavioral-game-theory",
         "bias-detector",
-        "belief-auditor"
+        "belief-auditor",
+        "historical-pattern-recognition"
       ],
       "parent": "reflexivity-sentiment",
       "tags": [
@@ -8576,7 +8564,7 @@
         "level:knowledge",
         "subdomain:reflexivity-sentiment"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-13"
     },
     "reflexivity-theory": {
       "name": "reflexivity-theory",
@@ -8698,7 +8686,7 @@
         "body_words": 896,
         "description_words": 35,
         "section_count": 5,
-        "reference_files": 3,
+        "reference_files": 4,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -8709,10 +8697,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 85,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 85,
       "depends_on": [
         "archon"
       ],
@@ -8733,7 +8721,7 @@
         "level:director",
         "subdomain:regime-intelligence"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-09"
     },
     "fiscal-regime": {
       "name": "fiscal-regime",
@@ -8812,10 +8800,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 84,
       "depends_on": [
         "fiscal-regime",
         "monetary-regime",
@@ -8831,7 +8819,8 @@
         "monetary-regime",
         "reflexivity-theory",
         "time-series",
-        "drift-detection"
+        "drift-detection",
+        "money-and-financial-systems"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8839,7 +8828,7 @@
         "level:knowledge",
         "subdomain:regime-intelligence"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-13"
     },
     "monetary-regime": {
       "name": "monetary-regime",
@@ -8881,7 +8870,8 @@
         "currencies",
         "fiscal-regime",
         "fixed-income",
-        "macro-cycles"
+        "macro-cycles",
+        "money-and-financial-systems"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8889,7 +8879,7 @@
         "level:knowledge",
         "subdomain:regime-intelligence"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-13"
     },
     "risk-architecture": {
       "name": "risk-architecture",
@@ -9716,10 +9706,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [
         "design-orchestrator",
         "visual-communication"
@@ -9819,9 +9809,7 @@
       "referenced_by": [
         "geography-ecology",
         "ecology-design",
-        "technology-progression",
-        "sensory-worldbuilding",
-        "environmental-storytelling"
+        "technology-progression"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9869,8 +9857,7 @@
         "faction-design",
         "religion-design",
         "history-builder",
-        "economic-systems",
-        "character-design"
+        "comparative-civilizations"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9878,7 +9865,7 @@
       ],
       "parent": "worldbuilding-orchestrator",
       "created": "2026-03-28",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-04-14"
     },
     "systems-craft": {
       "name": "systems-craft",
@@ -9917,9 +9904,7 @@
         "magic-system-design",
         "magic-systems",
         "naming-system",
-        "world-bible",
-        "conlang-craft",
-        "weird-worldbuilding"
+        "world-bible"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9956,10 +9941,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 65,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -10009,14 +9994,15 @@
         "ethics",
         "decision-theory",
         "philosophy-of-science",
-        "political-philosophy"
+        "political-philosophy",
+        "intellectual-history"
       ],
       "tags": [
         "domain:philosophy",
         "level:orchestrator"
       ],
       "created": "2026-04-02",
-      "last_modified": "2026-04-06",
+      "last_modified": "2026-04-14",
       "parent": null
     },
     "logic": {
@@ -10475,10 +10461,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "ethics",
         "second-level-thinking",
@@ -10881,7 +10867,8 @@
       "referenced_by": [
         "justice-analyst",
         "rights-reasoner",
-        "social-choice"
+        "social-choice",
+        "political-thought"
       ],
       "tags": [
         "domain:philosophy",
@@ -10889,7 +10876,7 @@
         "level:director"
       ],
       "created": "2026-04-02",
-      "last_modified": "2026-04-06",
+      "last_modified": "2026-04-14",
       "parent": "philosophy-orchestrator"
     },
     "justice-analyst": {
@@ -11253,10 +11240,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 81,
       "depends_on": [
         "foresight",
         "architecture",
@@ -11345,10 +11332,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 75,
       "depends_on": [],
       "referenced_by": [
         "neocortex",
@@ -11389,10 +11376,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 76,
       "depends_on": [
         "skill-cartographer"
       ],
@@ -11434,10 +11421,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 83,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 83,
       "depends_on": [
         "frontier-scanner",
         "skill-cartographer",
@@ -11662,10 +11649,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 75,
       "depends_on": [
         "frontier-scanner"
       ],
@@ -11752,10 +11739,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 78,
       "depends_on": [
         "pattern-synthesizer"
       ],
@@ -11795,10 +11782,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
-      "auto_score": 67,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [
         "architecture",
@@ -11861,27 +11848,77 @@
     },
     "character-interiority": {
       "name": "character-interiority",
-      "description": "Rendering consciousness on the page \u2014 the full spectrum from direct thought through free indirect discourse through stream of consciousness, and the craft of making readers live inside a character'...",
-      "location": "skills/writing/narrative-craft/character-interiority/SKILL.md",
-      "plugin": "skill-infra",
+      "description": "Rendering consciousness on the page \u2014 the full spectrum from direct thought through free indirect discourse through stream of consciousness, and the craft of making readers live inside a character's mind.",
+      "location": "skills/writing/character-interiority/SKILL.md",
+      "plugin": "skill-writing",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2854,
-        "body_words": 2854,
-        "section_count": 21,
-        "reference_files": 0,
+        "word_count": 2484,
+        "body_words": 2398,
+        "section_count": 6,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 4281
+        "estimated_tokens_total": 4003,
+        "description_words": 31
+      },
+      "health_status": "warning",
+      "last_checked": "2026-04-08T23:33:05Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 77,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 77,
+      "depends_on": [
+        "point-of-view",
+        "concrete-detail"
+      ],
+      "referenced_by": [
+        "micro-tension"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "level:knowledge",
+        "subdomain:narrative-craft"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
+      "parent": "narrative-craft"
+    },
+    "micro-tension": {
+      "name": "micro-tension",
+      "description": "The line-by-line tension that keeps readers turning pages regardless of whether anything is \"happening\" \u2014 emotional contradiction, the unsaid, conflicting desires within a single consciousness. Use when prose feels flat despite good plot structure, when description or exposition kills momentum, when dialogue lacks charge, or when the user asks why literary fiction can be page-turning without action.",
+      "location": "skills/writing/micro-tension/SKILL.md",
+      "plugin": "skill-writing",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 906,
+        "body_words": 833,
+        "section_count": 7,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1525,
+        "description_words": 57
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-08T23:38:08Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -11891,122 +11928,53 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "point-of-view",
-        "concrete-detail"
-      ],
-      "referenced_by": [
-        "micro-tension",
-        "character-design",
-        "world-to-story"
-      ],
-      "shares_references_with": [],
-      "forked_from": null,
-      "forked_into": [],
-      "tags": [
-        "domain:writing",
-        "subdomain:narrative-craft",
-        "layer:knowledge"
-      ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": "narrative-craft"
-    },
-    "micro-tension": {
-      "name": "micro-tension",
-      "description": "The line-by-line tension that keeps readers turning pages regardless of whether anything is \"happening\" \u2014 emotional contradiction, the unsaid, conflicting desires within a single consciousness. Use...",
-      "location": "skills/writing/narrative-craft/micro-tension/SKILL.md",
-      "plugin": "skill-infra",
-      "type": "knowledge",
-      "source": "self",
-      "context_mode": "inline",
-      "invocation": "both",
-      "version": "1.0.0",
-      "metrics": {
-        "word_count": 1818,
-        "body_words": 1818,
-        "section_count": 14,
-        "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_total": 2727
-      },
-      "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
-      "status": "active",
-      "deprecated_date": null,
-      "replacement_skill": null,
-      "deprecation_reason": null,
-      "auto_score": 69,
-      "manual_rating": null,
-      "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [
         "character-interiority",
         "dialogue"
       ],
-      "referenced_by": [
-        "character-design",
-        "hybrid-forms"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
         "domain:writing",
-        "subdomain:narrative-craft",
-        "layer:knowledge"
+        "level:knowledge",
+        "subdomain:narrative-craft"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
       "parent": "narrative-craft"
     },
     "figurative-language": {
       "name": "figurative-language",
-      "description": "Metaphor, simile, image systems, and the objective correlative \u2014 the machinery of implication in prose. Use when prose is literal and flat, when metaphors feel clich\u00e9d or decorative, when the user ...",
-      "location": "skills/writing/sentence-craft/figurative-language/SKILL.md",
-      "plugin": "skill-infra",
+      "description": "Metaphor, simile, image systems, and the objective correlative \u2014 the machinery of implication in prose. Use when prose is literal and flat, when metaphors feel clich\u00e9d or decorative, when the user asks about \"show don't tell\" at the figurative level, or when a work needs thematic coherence through sustained imagery.",
+      "location": "skills/writing/figurative-language/SKILL.md",
+      "plugin": "skill-writing",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1837,
-        "body_words": 1837,
-        "section_count": 19,
-        "reference_files": 0,
+        "word_count": 654,
+        "body_words": 588,
+        "section_count": 9,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 2755
+        "estimated_tokens_total": 1137,
+        "description_words": 50
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-08T23:41:02Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 70,
       "depends_on": [
         "diction",
         "concrete-detail"
@@ -12017,108 +11985,92 @@
       "forked_into": [],
       "tags": [
         "domain:writing",
-        "subdomain:sentence-craft",
-        "layer:knowledge"
+        "level:knowledge",
+        "subdomain:sentence-craft"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
       "parent": "sentence-craft"
     },
     "narrative-geometry": {
       "name": "narrative-geometry",
-      "description": "Alternative narrative shapes beyond the dramatic arc \u2014 meander, spiral, fractal, wavelet, radial, braid, and cycle. Use when a story resists three-act structure, when the user wants non-linear or n...",
-      "location": "skills/writing/narrative-craft/narrative-geometry/SKILL.md",
-      "plugin": "skill-infra",
+      "description": "Alternative narrative shapes beyond the dramatic arc \u2014 meander, spiral, fractal, wavelet, radial, braid, and cycle. Use when a story resists three-act structure, when the user wants non-linear or non-Western narrative forms, when a draft feels forced into a shape that doesn't serve its material, or when the user asks about experimental structure.",
+      "location": "skills/writing/narrative-geometry/SKILL.md",
+      "plugin": "skill-writing",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1846,
-        "body_words": 1846,
-        "section_count": 16,
-        "reference_files": 0,
+        "word_count": 629,
+        "body_words": 560,
+        "section_count": 4,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 2769
+        "estimated_tokens_total": 1061,
+        "description_words": 53
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-08T23:47:19Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 72,
       "depends_on": [
         "narrative-arc",
         "pacing"
       ],
-      "referenced_by": [
-        "hybrid-forms"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
         "domain:writing",
-        "subdomain:narrative-craft",
-        "layer:knowledge"
+        "level:knowledge",
+        "subdomain:narrative-craft"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
       "parent": "narrative-craft"
     },
     "economic-systems": {
       "name": "economic-systems",
-      "description": "Design fictional economies \u2014 trade routes, currency systems, resource scarcity, and the relationship between economic structure and power. Use when building a world's economy, designing currency or...",
-      "location": "skills/worldbuilding/civilizations/economic-systems/SKILL.md",
-      "plugin": "skill-infra",
+      "description": "Design fictional economies \u2014 trade routes, currency systems, resource scarcity, and the relationship between economic structure and power. Use when building a world's economy, designing currency or trade, creating scarcity-driven conflict, or when cultures-societies Pillar 2 (Economy) needs depth beyond the basics.",
+      "location": "skills/worldbuilding/economic-systems/SKILL.md",
+      "plugin": "skill-worldbuilding",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1242,
-        "body_words": 1242,
-        "section_count": 11,
-        "reference_files": 0,
+        "word_count": 449,
+        "body_words": 391,
+        "section_count": 4,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 1863
+        "estimated_tokens_total": 762,
+        "description_words": 42
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-08T23:50:31Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 72,
       "depends_on": [
         "cultures-societies",
         "geography-ecology"
@@ -12129,51 +12081,43 @@
       "forked_into": [],
       "tags": [
         "domain:worldbuilding",
-        "subdomain:civilizations",
-        "layer:knowledge"
+        "level:knowledge"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
       "parent": "civilizations"
     },
     "conlang-craft": {
       "name": "conlang-craft",
-      "description": "Constructed language design beyond phonetic palettes \u2014 morphology, syntax, the Sapir-Whorf hypothesis as worldbuilding tool, and the conlang-to-culture pipeline. Use when a culture needs linguistic...",
-      "location": "skills/worldbuilding/systems-craft/conlang-craft/SKILL.md",
-      "plugin": "skill-infra",
+      "description": "Constructed language design beyond phonetic palettes \u2014 morphology, syntax, the Sapir-Whorf hypothesis as worldbuilding tool, and the conlang-to-culture pipeline. Use when a culture needs linguistic depth beyond naming conventions, when language should encode worldview, or when the user asks about creating fictional languages.",
+      "location": "skills/worldbuilding/conlang-craft/SKILL.md",
+      "plugin": "skill-worldbuilding",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1303,
-        "body_words": 1303,
-        "section_count": 16,
-        "reference_files": 0,
+        "word_count": 594,
+        "body_words": 535,
+        "section_count": 6,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 1954
+        "estimated_tokens_total": 984,
+        "description_words": 43
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-08T23:50:33Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 70,
       "depends_on": [
         "naming-system",
         "cultures-societies"
@@ -12184,43 +12128,79 @@
       "forked_into": [],
       "tags": [
         "domain:worldbuilding",
-        "subdomain:systems-craft",
-        "layer:knowledge"
+        "level:knowledge"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
       "parent": "systems-craft"
     },
     "character-design": {
       "name": "character-design",
-      "description": "Design characters as the intersection of world and story \u2014 psychology, motivation, contradiction, arc potential, and the relationship between who a character is and the world that shaped them. Use ...",
-      "location": "skills/worldbuilding/civilizations/character-design/SKILL.md",
-      "plugin": "skill-infra",
+      "description": "Design characters as the intersection of world and story \u2014 psychology, motivation, contradiction, arc potential, and how the world shapes who they are. Use when creating characters, when characters feel generic or disconnected from their setting, or when the step from world-bible to person-in-world hasn't been taken.",
+      "location": "skills/worldbuilding/character-design/SKILL.md",
+      "plugin": "skill-worldbuilding",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1397,
-        "body_words": 1397,
-        "section_count": 16,
-        "reference_files": 0,
+        "word_count": 463,
+        "body_words": 400,
+        "section_count": 5,
+        "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 2095
+        "estimated_tokens_total": 767,
+        "description_words": 47
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-08T23:57:30Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 65,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 65,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:knowledge"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
+      "parent": "civilizations"
+    },
+    "world-to-story": {
+      "name": "world-to-story",
+      "description": "Convert worldbuilding artifacts into narrative \u2014 determine which axioms become subtext vs. exposition, dramatize systems through character experience, and apply the iceberg methodology to control information flow. Use when worldbuilding is done but the story hasn't started, when prose reads as travelogue, or when the user asks how to show a world without info-dumping.",
+      "location": "skills/writing/world-to-story/SKILL.md",
+      "plugin": "skill-writing",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 502,
+        "body_words": 429,
+        "section_count": 6,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 833,
+        "description_words": 54
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-08T23:57:33Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -12229,55 +12209,175 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 63,
-      "depends_on": [
-        "cultures-societies",
-        "faction-design",
-        "character-interiority",
-        "micro-tension"
-      ],
+      "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:worldbuilding",
-        "subdomain:civilizations",
-        "layer:knowledge"
+        "domain:writing",
+        "level:action",
+        "subdomain:narrative-craft"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": "civilizations"
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
+      "parent": "narrative-craft"
     },
-    "world-to-story": {
-      "name": "world-to-story",
-      "description": "Convert worldbuilding artifacts into narrative \u2014 which axioms become subtext vs. exposition, how to dramatize systems through character experience, and the iceberg methodology for controlling infor...",
-      "location": "skills/writing/narrative-craft/world-to-story/SKILL.md",
-      "plugin": "skill-infra",
+    "sensory-worldbuilding": {
+      "name": "sensory-worldbuilding",
+      "description": "Design what a world feels like to inhabit \u2014 soundscapes, smells, textures, temperatures, and embodied experience of place. Use when a world is structurally complete but feels abstract, when settings lack sensory identity, or when the user asks how to make a world feel real rather than described.",
+      "location": "skills/worldbuilding/sensory-worldbuilding/SKILL.md",
+      "plugin": "skill-worldbuilding",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1401,
-        "body_words": 1401,
-        "section_count": 18,
+        "word_count": 439,
+        "body_words": 375,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 755,
+        "description_words": 48
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-08T23:57:35Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 65,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 65,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:knowledge"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
+      "parent": "physical-world"
+    },
+    "environmental-storytelling": {
+      "name": "environmental-storytelling",
+      "description": "Design physical spaces that narrate history, culture, and conflict through traces, ruins, wear patterns, and architecture. Use when the world needs to show its past through its present, when settings feel like backdrops rather than storytellers, or when the user asks how to convey world-history without exposition.",
+      "location": "skills/worldbuilding/environmental-storytelling/SKILL.md",
+      "plugin": "skill-worldbuilding",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 425,
+        "body_words": 362,
+        "section_count": 5,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_total": 2101
+        "estimated_tokens_total": 715,
+        "description_words": 47
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-09T00:07:31Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:knowledge"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-09",
+      "parent": "physical-world"
+    },
+    "weird-worldbuilding": {
+      "name": "weird-worldbuilding",
+      "description": "Build worlds that resist systematization \u2014 the New Weird approach where mystery is structural, glimpses imply vastness, and the world exceeds comprehension. Use as the anti-systematic pole to complement magic-system-design, or when a world should feel alien, numinous, or unsettling.",
+      "location": "skills/worldbuilding/weird-worldbuilding/SKILL.md",
+      "plugin": "skill-worldbuilding",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 420,
+        "body_words": 364,
+        "section_count": 5,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 712,
+        "description_words": 40
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-09T00:07:34Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 65,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 65,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:knowledge"
+      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-13",
+      "parent": "systems-craft"
+    },
+    "hybrid-forms": {
+      "name": "hybrid-forms",
+      "description": "Navigate experimental and genre-crossing narrative forms \u2014 autofiction, fragmented narrative, metafiction, genre-bending, epistolary, and collage. Use when a story resists conventional categories, when the user asks about experimental fiction, or when boundaries between fiction and nonfiction, between genres, or between prose and other media are the subject.",
+      "location": "skills/writing/hybrid-forms/SKILL.md",
+      "plugin": "skill-writing",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 419,
+        "body_words": 356,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 757,
+        "description_words": 47
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-09T00:07:36Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -12286,257 +12386,2377 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 61,
-      "depends_on": [
-        "world-bible",
-        "scene-craft",
-        "character-interiority",
-        "concrete-detail"
-      ],
+      "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
         "domain:writing",
-        "subdomain:narrative-craft",
-        "layer:knowledge"
+        "level:knowledge",
+        "subdomain:narrative-craft"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
+      "created": "2026-04-09",
+      "last_modified": "2026-04-09",
       "parent": "narrative-craft"
     },
-    "sensory-worldbuilding": {
-      "name": "sensory-worldbuilding",
-      "description": "Design what a world feels like to inhabit \u2014 soundscapes, smells, textures, temperatures, and the embodied experience of living in a specific place. Use when a world is structurally complete but fee...",
-      "location": "skills/worldbuilding/physical-world/sensory-worldbuilding/SKILL.md",
-      "plugin": "skill-infra",
+    "wan-shi-tong": {
+      "name": "wan-shi-tong",
+      "description": "Orchestrate world history learning across nine wings: political, economic, cultural, military, intellectual, world-systems, historiography, applied-history, and regional-atlas. Activate when any question touches human history \u2014 events, periods, civilizations, causes, patterns, sources, or analogies. Routes by theme and temporal register, teaches historical thinking at every step.",
+      "location": "skills/world-history/wan-shi-tong/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 999,
+        "body_words": 936,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1653,
+        "description_words": 45
+      },
+      "health_status": "warning",
+      "last_checked": "2026-04-13T06:59:32Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [],
+      "referenced_by": [
+        "historiography",
+        "applied-history",
+        "political-history",
+        "economic-history",
+        "military-history",
+        "intellectual-history",
+        "world-systems",
+        "cultural-history",
+        "regional-atlas"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:orchestrator"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": null
+    },
+    "historiography": {
+      "name": "historiography",
+      "description": "Route questions about historical methods, source evaluation, schools of interpretation, historical thinking skills, and how history is written and contested. Activate when users ask how we know what we know about the past, how to evaluate evidence, or how different historians interpret the same events.",
+      "location": "skills/world-history/historiography/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 736,
+        "body_words": 673,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1265,
+        "description_words": 45
+      },
+      "health_status": "warning",
+      "last_checked": "2026-04-13T06:59:35Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "historical-thinking",
+        "source-criticism",
+        "historical-argument",
+        "schools-of-thought",
+        "source-evaluator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:historiography"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "wan-shi-tong"
+    },
+    "applied-history": {
+      "name": "applied-history",
+      "description": "Route questions about using history as a practical tool for understanding the present and making decisions. Activate when users seek historical analogies, recurring patterns, lessons for current situations, or want to build timelines and argue both sides of historical debates.",
+      "location": "skills/world-history/applied-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 682,
+        "body_words": 624,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1191,
+        "description_words": 40
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T06:59:37Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "historical-pattern-recognition",
+        "history-and-decision-making",
+        "timeline-builder",
+        "debate-simulator",
+        "nexus-event-analyzer"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:applied-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "wan-shi-tong"
+    },
+    "historical-thinking": {
+      "name": "historical-thinking",
+      "description": "Teach the cognitive toolkit for engaging with historical content: sourcing, contextualization, corroboration, and argumentation per Wineburg; the six concepts of significance, evidence, continuity and change, cause and consequence, perspective, and ethical judgment per Seixas; and the C3 Framework dimensions. Use when the user needs to learn HOW to think historically rather than just absorb WHAT happened.",
+      "location": "skills/world-history/historical-thinking/SKILL.md",
+      "plugin": "skill-world-history",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1070,
-        "body_words": 1070,
+        "word_count": 1303,
+        "body_words": 1231,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2252,
+        "description_words": 56
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T06:59:57Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "historiography"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:historiography"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "historiography"
+    },
+    "source-criticism": {
+      "name": "source-criticism",
+      "description": "Evaluate historical sources through primary and secondary source classification, internal and external criticism, bias detection, provenance analysis, the hermeneutic circle, and digital source authentication. Use when encountering a historical document, artifact, or claim that needs assessment of what it can and cannot tell us about the past.",
+      "location": "skills/world-history/source-criticism/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1104,
+        "body_words": 1041,
+        "section_count": 7,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1860,
+        "description_words": 47
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T06:59:59Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "historiography",
+        "source-triangulator"
+      ],
+      "referenced_by": [
+        "source-evaluator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:historiography"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "historiography"
+    },
+    "historical-argument": {
+      "name": "historical-argument",
+      "description": "Construct and evaluate historical arguments: thesis formation, evidence marshaling, interpretive frameworks, counterfactual reasoning, causal analysis, and periodization. Use when building or critiquing a historical claim, analyzing how historians establish causation, or evaluating whether a historical interpretation is well-supported by evidence.",
+      "location": "skills/world-history/historical-argument/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1152,
+        "body_words": 1096,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 1962,
+        "description_words": 40
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:00:01Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "historiography",
+        "rhetoric"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:historiography"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "historiography"
+    },
+    "historical-pattern-recognition": {
+      "name": "historical-pattern-recognition",
+      "description": "Identify and evaluate recurring patterns across history: imperial overstretch, Thucydides traps, financial manias, revolutionary dynamics, secular cycles, and technological displacement. Use when analyzing whether a historical pattern is genuinely recurring versus when an analogy is misleading, or when applying historical lessons to current geopolitical or economic situations.",
+      "location": "skills/world-history/historical-pattern-recognition/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1471,
+        "body_words": 1408,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_total": 2559,
+        "description_words": 47
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:00:04Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "applied-history",
+        "market-psychology"
+      ],
+      "referenced_by": [
+        "historical-analogy-engine",
+        "empires-and-states",
+        "history-and-decision-making"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:applied-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "applied-history"
+    },
+    "political-history": {
+      "name": "political-history",
+      "description": "Route questions about states, empires, governance, revolution, diplomacy, sovereignty, and international order. Activate when users ask about how political power has been organized, contested, transferred, or dissolved across history, from ancient city-states through modern nation-states and international systems.",
+      "location": "skills/world-history/political-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 734,
+        "body_words": 680,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1174,
+        "description_words": 38
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:13Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 55,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 55,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "empires-and-states",
+        "revolutions-and-regime-change",
+        "diplomacy-and-international-order",
+        "decolonization-and-sovereignty",
+        "historical-analogy-engine"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:political-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "wan-shi-tong"
+    },
+    "empires-and-states": {
+      "name": "empires-and-states",
+      "description": "Analyze the rise, expansion, administration, and fall of empires and state systems from Akkad through modern nation-states. Use when examining patterns of imperial governance, legitimacy, collapse dynamics, overstretch, and the recurring structural contradictions that drive state formation and dissolution across all temporal registers.",
+      "location": "skills/world-history/empires-and-states/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 993,
+        "body_words": 936,
+        "section_count": 14,
+        "reference_files": 0,
+        "estimated_tokens_total": 1588,
+        "description_words": 43
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:15Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "political-history",
+        "historical-pattern-recognition"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:political-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "political-history"
+    },
+    "revolutions-and-regime-change": {
+      "name": "revolutions-and-regime-change",
+      "description": "Analyze revolutionary dynamics from the English Civil War through the Arab Spring using Brinton's anatomy, Skocpol's structural theory, and modern frameworks. Use when examining why revolutions erupt, why some consolidate and others devour their children, and how to distinguish revolutionary situations from mere unrest.",
+      "location": "skills/world-history/revolutions-and-regime-change/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 974,
+        "body_words": 916,
+        "section_count": 10,
+        "reference_files": 0,
+        "estimated_tokens_total": 1558,
+        "description_words": 44
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:17Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "political-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:political-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "political-history"
+    },
+    "diplomacy-and-international-order": {
+      "name": "diplomacy-and-international-order",
+      "description": "Analyze how states relate to each other across history: the Westphalian system, balance of power, concert systems, alliance structures, international law, and the evolution from the Congress of Vienna through the UN. Use when examining how international orders are built, maintained, and collapse, drawing on realist, liberal, and constructivist frameworks.",
+      "location": "skills/world-history/diplomacy-and-international-order/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 904,
+        "body_words": 840,
         "section_count": 13,
         "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_total": 1605
+        "estimated_tokens_total": 1446,
+        "description_words": 50
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-08T00:00:00Z",
+      "last_checked": "2026-04-13T07:36:20Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 48,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 48,
       "depends_on": [
-        "geography-ecology",
-        "cultures-societies",
-        "concrete-detail"
+        "political-history",
+        "cooperative-games"
       ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:worldbuilding",
-        "subdomain:physical-world",
-        "layer:knowledge"
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:political-history"
       ],
-      "created": "2026-04-08",
-      "last_modified": "2026-04-08",
-      "changelog": [
-        {
-          "date": "2026-04-08",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": "physical-world"
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "political-history"
     },
-    "environmental-storytelling": {
-      "name": "environmental-storytelling",
-      "description": "Design physical spaces that narrate history, culture, and conflict through traces, ruins, wear patterns, and architecture. Use when the world needs to show its past through its present, when settin...",
-      "location": "skills/worldbuilding/physical-world/environmental-storytelling/SKILL.md",
-      "plugin": "skill-infra",
+    "decolonization-and-sovereignty": {
+      "name": "decolonization-and-sovereignty",
+      "description": "Analyze the dissolution of colonial empires, national liberation movements, neo-colonialism, Cold War proxy dynamics, and the creation of the modern state system in Asia, Africa, and the Middle East. Use when examining tensions between self-determination and state viability, or the legacies of colonial rule in contemporary politics.",
+      "location": "skills/world-history/decolonization-and-sovereignty/SKILL.md",
+      "plugin": "skill-world-history",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 998,
-        "body_words": 998,
+        "word_count": 932,
+        "body_words": 871,
+        "section_count": 12,
+        "reference_files": 0,
+        "estimated_tokens_total": 1491,
+        "description_words": 47
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:23Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "political-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:political-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "political-history"
+    },
+    "historical-analogy-engine": {
+      "name": "historical-analogy-engine",
+      "description": "Build structured historical analogy analyses for current geopolitical situations. Use when the user presents a current event and wants the 3-5 most instructive historical parallels, with explicit evaluation of where each analogy holds, where it breaks, and what the comparison reveals that studying either case alone would miss.",
+      "location": "skills/world-history/historical-analogy-engine/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 789,
+        "body_words": 725,
         "section_count": 11,
         "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_total": 1497
+        "estimated_tokens_total": 1262,
+        "description_words": 48
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-09T00:00:00Z",
+      "last_checked": "2026-04-13T07:36:26Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 49,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 49,
       "depends_on": [
-        "geography-ecology",
-        "history-builder",
-        "cultures-societies",
-        "concrete-detail"
+        "political-history",
+        "historical-pattern-recognition"
       ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:worldbuilding",
-        "subdomain:physical-world",
-        "layer:knowledge"
+        "domain:world-history",
+        "level:action",
+        "subdomain:political-history"
       ],
-      "created": "2026-04-09",
-      "last_modified": "2026-04-09",
-      "changelog": [
-        {
-          "date": "2026-04-09",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": "physical-world"
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "political-history"
     },
-    "weird-worldbuilding": {
-      "name": "weird-worldbuilding",
-      "description": "Build worlds that resist systematization \u2014 the New Weird approach where the uncanny is a feature not a bug, where glimpses of vastness replace complete explanation, and where the world exceeds the ...",
-      "location": "skills/worldbuilding/systems-craft/weird-worldbuilding/SKILL.md",
-      "plugin": "skill-infra",
+    "economic-history": {
+      "name": "economic-history",
+      "description": "Route questions about trade, finance, industrialization, economic systems, labor, inequality, and material life across history. Activate when users ask about how economies have been organized, how wealth has been created and distributed, why some societies industrialized and others did not, or how financial systems have evolved and crashed.",
+      "location": "skills/world-history/economic-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 658,
+        "body_words": 594,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1052,
+        "description_words": 48
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:29Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 55,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 55,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "trade-and-globalization",
+        "money-and-financial-systems",
+        "industrialization-and-development",
+        "labor-and-inequality"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:economic-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "wan-shi-tong"
+    },
+    "trade-and-globalization": {
+      "name": "trade-and-globalization",
+      "description": "Analyze trade networks and globalization cycles from the Silk Roads and Indian Ocean trade through the Columbian Exchange, mercantilism, free trade imperialism, Bretton Woods, and post-1990 hyperglobalization. Use when examining how trade reshapes civilizations, what drives integration and fragmentation cycles, and why trade networks collapse.",
+      "location": "skills/world-history/trade-and-globalization/SKILL.md",
+      "plugin": "skill-world-history",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1092,
-        "body_words": 1092,
+        "word_count": 924,
+        "body_words": 865,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 1478,
+        "description_words": 45
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:32Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "economic-history",
+        "geopolitical-overlay"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:economic-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "economic-history"
+    },
+    "money-and-financial-systems": {
+      "name": "money-and-financial-systems",
+      "description": "Analyze the evolution of money and finance from Mesopotamian grain accounting through coinage, bills of exchange, central banking, the gold standard, fiat currency, and modern financial architecture. Use when examining financial crises as recurring phenomena, the institutional infrastructure of credit, and how monetary systems shape political power.",
+      "location": "skills/world-history/money-and-financial-systems/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 944,
+        "body_words": 883,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1510,
+        "description_words": 47
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:34Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "economic-history",
+        "macro-cycles",
+        "monetary-regime"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:economic-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "economic-history"
+    },
+    "industrialization-and-development": {
+      "name": "industrialization-and-development",
+      "description": "Analyze the British Industrial Revolution, the Great Divergence debate, subsequent industrializations in the US, Germany, Japan, the Asian Tigers, and China, and the persistence of underdevelopment. Use when examining why industrialization happened where it did, drawing on Pomeranz, Acemoglu, dependency theory, and institutional economics.",
+      "location": "skills/world-history/industrialization-and-development/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 908,
+        "body_words": 850,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1452,
+        "description_words": 44
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T07:36:37Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "economic-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:economic-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "economic-history"
+    },
+    "labor-and-inequality": {
+      "name": "labor-and-inequality",
+      "description": "Analyze how societies organize work and distribute its rewards across history: slavery, serfdom, wage labor, the labor movement, welfare states, and the long arc of inequality. Use when examining Piketty's r greater than g thesis, the Great Compression, the Great Divergence, and recurring patterns in how economic growth interacts with social stratification.",
+      "location": "skills/world-history/labor-and-inequality/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1097,
+        "body_words": 1031,
         "section_count": 11,
         "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_total": 1638
+        "estimated_tokens_total": 1755,
+        "description_words": 52
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-09T00:00:00Z",
+      "last_checked": "2026-04-13T07:36:41Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 48,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 48,
       "depends_on": [
-        "magic-system-design",
-        "world-bible",
-        "extrapolation-engine"
+        "economic-history"
       ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:worldbuilding",
-        "subdomain:systems-craft",
-        "layer:knowledge"
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:economic-history"
       ],
-      "created": "2026-04-09",
-      "last_modified": "2026-04-09",
-      "changelog": [
-        {
-          "date": "2026-04-09",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": "systems-craft"
+      "created": "2026-04-13",
+      "last_modified": "2026-04-13",
+      "parent": "economic-history"
     },
-    "hybrid-forms": {
-      "name": "hybrid-forms",
-      "description": "Experimental and genre-crossing narrative forms \u2014 autofiction, fragmented narrative, metafiction, genre-bending, epistolary, and collage. Use when a story resists conventional categories, when the ...",
-      "location": "skills/writing/narrative-craft/hybrid-forms/SKILL.md",
-      "plugin": "skill-infra",
+    "military-history": {
+      "name": "military-history",
+      "description": "Route questions about warfare, strategy, military technology, intelligence, and peacemaking across history. Activate when users ask about battles, campaigns, grand strategy, revolutions in military affairs, espionage, or the evolution of how humans organize violence and its consequences for political and social order.",
+      "location": "skills/world-history/military-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 702,
+        "body_words": 644,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1123,
+        "description_words": 42
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:10Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 55,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 55,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "strategy-and-grand-strategy",
+        "warfare-through-the-ages",
+        "intelligence-and-information-war",
+        "battle-analysis"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:military-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "wan-shi-tong"
+    },
+    "strategy-and-grand-strategy": {
+      "name": "strategy-and-grand-strategy",
+      "description": "Analyze strategic thought from Sun Tzu and Thucydides through Clausewitz, Jomini, Liddell Hart, and modern theorists. Use when examining enduring principles of strategy, the relationship between military means and political ends, grand strategy as the alignment of all instruments of national power, and how strategic thinking evolves across eras.",
+      "location": "skills/world-history/strategy-and-grand-strategy/SKILL.md",
+      "plugin": "skill-world-history",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1175,
-        "body_words": 1175,
-        "section_count": 23,
+        "word_count": 1062,
+        "body_words": 999,
+        "section_count": 10,
         "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_total": 1762
+        "estimated_tokens_total": 1699,
+        "description_words": 49
       },
       "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-04-09T00:00:00Z",
+      "last_checked": "2026-04-13T09:05:13Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 48,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 48,
       "depends_on": [
-        "narrative-geometry",
-        "narrative-arc",
-        "essay-forms",
-        "micro-tension"
+        "military-history",
+        "strategic-foundations",
+        "classical-games"
+      ],
+      "referenced_by": [
+        "battle-analysis"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:military-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "military-history"
+    },
+    "warfare-through-the-ages": {
+      "name": "warfare-through-the-ages",
+      "description": "Analyze the evolution of warfare from phalanx formations through cavalry empires, gunpowder revolution, Napoleonic mass armies, industrial total war, nuclear deterrence, and hybrid warfare. Use when examining revolutions in military affairs, how technology transforms the character of war, and why some military transitions reshape entire civilizations.",
+      "location": "skills/world-history/warfare-through-the-ages/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1080,
+        "body_words": 1020,
+        "section_count": 13,
+        "reference_files": 0,
+        "estimated_tokens_total": 1728,
+        "description_words": 46
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:16Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "military-history"
+      ],
+      "referenced_by": [
+        "battle-analysis"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:military-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "military-history"
+    },
+    "intelligence-and-information-war": {
+      "name": "intelligence-and-information-war",
+      "description": "Analyze espionage, codebreaking, deception operations, propaganda, and information warfare from ancient spies through Bletchley Park, Cold War tradecraft, and modern cyber operations. Use when examining how information asymmetry shapes conflict outcomes and how intelligence successes and failures have altered the course of history.",
+      "location": "skills/world-history/intelligence-and-information-war/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 956,
+        "body_words": 899,
+        "section_count": 11,
+        "reference_files": 0,
+        "estimated_tokens_total": 1529,
+        "description_words": 43
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:17Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "military-history",
+        "information-economics",
+        "signaling-screening"
       ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
       "tags": [
-        "domain:writing",
-        "subdomain:narrative-craft",
-        "layer:knowledge"
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:military-history"
       ],
-      "created": "2026-04-09",
-      "last_modified": "2026-04-09",
-      "changelog": [
-        {
-          "date": "2026-04-09",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "military-history"
+    },
+    "battle-analysis": {
+      "name": "battle-analysis",
+      "description": "Produce structured analyses of historical battles and campaigns using the US Army Staff Ride methodology adapted for analytical learning. Use when the user wants to understand a specific battle's strategic context, force composition, terrain, plan versus execution, the decisive moment, and what it teaches about warfare and leadership.",
+      "location": "skills/world-history/battle-analysis/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 743,
+        "body_words": 679,
+        "section_count": 12,
+        "reference_files": 0,
+        "estimated_tokens_total": 1188,
+        "description_words": 48
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:18Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 49,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 49,
+      "depends_on": [
+        "military-history",
+        "strategy-and-grand-strategy",
+        "warfare-through-the-ages"
       ],
-      "parent": "narrative-craft"
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:action",
+        "subdomain:military-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "military-history"
+    },
+    "intellectual-history": {
+      "name": "intellectual-history",
+      "description": "Route questions about the history of ideas, scientific revolutions, political thought, and knowledge systems. Activate when users ask how ideas emerged, spread, and transformed societies, from the Axial Age through the Scientific Revolution, the Enlightenment, and the digital age, or when examining how knowledge is produced and contested.",
+      "location": "skills/world-history/intellectual-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 671,
+        "body_words": 607,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1073,
+        "description_words": 48
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:21Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 55,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 55,
+      "depends_on": [
+        "wan-shi-tong",
+        "philosophy-orchestrator"
+      ],
+      "referenced_by": [
+        "scientific-revolutions",
+        "political-thought",
+        "knowledge-systems"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:intellectual-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "wan-shi-tong"
+    },
+    "scientific-revolutions": {
+      "name": "scientific-revolutions",
+      "description": "Analyze Kuhn's paradigm shifts as historical narrative: the Copernican revolution, Newton, Darwin, Einstein, quantum mechanics, plate tectonics, and the genomic revolution. Use when examining how scientific knowledge actually changes through punctuated upheavals rather than smooth accumulation, and how scientific revolutions reshape worldviews and societies.",
+      "location": "skills/world-history/scientific-revolutions/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 984,
+        "body_words": 926,
+        "section_count": 14,
+        "reference_files": 0,
+        "estimated_tokens_total": 1574,
+        "description_words": 44
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:25Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "intellectual-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:intellectual-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "intellectual-history"
+    },
+    "political-thought": {
+      "name": "political-thought",
+      "description": "Analyze the great conversation of political thought from Plato and Aristotle through Machiavelli, Hobbes, Locke, Rousseau, Marx, Mill, Arendt, and Rawls. Use when examining how political ideas shape societies, tracing the genealogy of concepts like liberty, equality, sovereignty, and rights, and understanding how thinkers responded to the crises of their time.",
+      "location": "skills/world-history/political-thought/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1128,
+        "body_words": 1063,
+        "section_count": 12,
+        "reference_files": 0,
+        "estimated_tokens_total": 1804,
+        "description_words": 51
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:26Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "intellectual-history",
+        "political-philosophy"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:intellectual-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "intellectual-history"
+    },
+    "knowledge-systems": {
+      "name": "knowledge-systems",
+      "description": "Analyze how civilizations organize, preserve, and transmit knowledge: oral traditions, the invention of writing, libraries including Alexandria, universities, the printing press, the Enlightenment encyclopedia project, indigenous knowledge systems, and the digital age. Use when examining the infrastructure of knowing and how knowledge institutions shape what societies can think and do.",
+      "location": "skills/world-history/knowledge-systems/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1141,
+        "body_words": 1077,
+        "section_count": 11,
+        "reference_files": 0,
+        "estimated_tokens_total": 1825,
+        "description_words": 50
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-13T09:05:41Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "intellectual-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:intellectual-history"
+      ],
+      "created": "2026-04-13",
+      "last_modified": "2026-04-14",
+      "parent": "intellectual-history"
+    },
+    "world-systems": {
+      "name": "world-systems",
+      "description": "Route questions about comparative civilizations, environmental history, demographic forces, deep history, and technology as a civilizational force. Activate when users ask big-picture questions about why civilizations rise and fall, how climate and disease shape history, what happened before agriculture, or how structural forces operate beneath the surface of events.",
+      "location": "skills/world-history/world-systems/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 704,
+        "body_words": 641,
+        "section_count": 7,
+        "reference_files": 0,
+        "estimated_tokens_total": 1126,
+        "description_words": 49
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:16:48Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 55,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 55,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "comparative-civilizations",
+        "environmental-history",
+        "deep-history",
+        "demographic-and-structural-forces",
+        "technology-and-civilizational-change",
+        "comparative-analysis-engine"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:world-systems"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "wan-shi-tong"
+    },
+    "comparative-civilizations": {
+      "name": "comparative-civilizations",
+      "description": "Analyze grand civilizational theories from Spengler and Toynbee through Diamond, Morris, and Turchin. Use when examining why civilizations flourish and collapse, evaluating geographic versus institutional versus cultural explanations of divergence, and assessing the strengths and limits of comparative frameworks that treat civilizations as units of analysis.",
+      "location": "skills/world-history/comparative-civilizations/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 816,
+        "body_words": 756,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 1305,
+        "description_words": 46
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:16:52Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "world-systems",
+        "civilizations",
+        "time-series"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:world-systems"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "world-systems"
+    },
+    "environmental-history": {
+      "name": "environmental-history",
+      "description": "Analyze climate as a historical actor, ecological imperialism, disease as a force in history, and the Anthropocene. Use when examining how environmental forces shape human history through the Medieval Warm Period, the Little Ice Age, epidemic disease, deforestation, and the ongoing debate between environmental determinism and human agency.",
+      "location": "skills/world-history/environmental-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 856,
+        "body_words": 794,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1369,
+        "description_words": 48
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:16:54Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "world-systems"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:world-systems"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "world-systems"
+    },
+    "deep-history": {
+      "name": "deep-history",
+      "description": "Analyze the 200,000-plus years of human history before agriculture, drawing on Smail's neurohistory, David Christian's Big History thresholds, and current research on human migration, the cognitive revolution, and the Neolithic transition. Use when examining what came before civilization, why the starting point of history matters, and how deep time perspectives reshape historical understanding.",
+      "location": "skills/world-history/deep-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 990,
+        "body_words": 923,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 1584,
+        "description_words": 53
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:16:58Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "world-systems"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:world-systems"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "world-systems"
+    },
+    "demographic-and-structural-forces": {
+      "name": "demographic-and-structural-forces",
+      "description": "Analyze population dynamics, urbanization, migration, epidemics, and Malthusian constraints as historical forces. Use when examining Turchin's cliodynamics, secular cycles, elite overproduction, structural-demographic theory of political instability, and the deep forces that operate beneath the surface of political events across all temporal registers.",
+      "location": "skills/world-history/demographic-and-structural-forces/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 887,
+        "body_words": 831,
+        "section_count": 10,
+        "reference_files": 0,
+        "estimated_tokens_total": 1419,
+        "description_words": 42
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:01Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "world-systems",
+        "statistical-analysis"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:world-systems"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "world-systems"
+    },
+    "technology-and-civilizational-change": {
+      "name": "technology-and-civilizational-change",
+      "description": "Analyze general-purpose technologies as civilizational inflection points: stirrups, printing, gunpowder, steam, electricity, nuclear energy, computing, and AI. Use when examining how technologies reshape societies through the recurring pattern of invention, institutional resistance, creative destruction, and transformation, drawing on Mokyr's knowledge economics framework.",
+      "location": "skills/world-history/technology-and-civilizational-change/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 976,
+        "body_words": 921,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 1561,
+        "description_words": 42
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:04Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "world-systems"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:world-systems"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "world-systems"
+    },
+    "comparative-analysis-engine": {
+      "name": "comparative-analysis-engine",
+      "description": "Build structured comparisons of historical phenomena across time and space. Use when the user wants to compare two or more empires, revolutions, economic crises, or technological transitions, producing an analysis of what they share, where they diverge, what explains the difference, and what the comparison reveals that studying either case alone would miss.",
+      "location": "skills/world-history/comparative-analysis-engine/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 667,
+        "body_words": 598,
+        "section_count": 10,
+        "reference_files": 0,
+        "estimated_tokens_total": 1067,
+        "description_words": 53
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:08Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 49,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 49,
+      "depends_on": [
+        "world-systems"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:action",
+        "subdomain:world-systems"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "world-systems"
+    },
+    "cultural-history": {
+      "name": "cultural-history",
+      "description": "Route questions about art, religion, gender, identity, social movements, and everyday life across history. Activate when users ask about how ordinary people lived, how belief systems shaped civilizations, how marginalized groups changed history, how cultural production reflects and reshapes power, or how the texture of human experience varies across time and place.",
+      "location": "skills/world-history/cultural-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 685,
+        "body_words": 619,
+        "section_count": 7,
+        "reference_files": 0,
+        "estimated_tokens_total": 1096,
+        "description_words": 52
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:11Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 55,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 55,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "religions-and-worldviews",
+        "gender-and-sexuality-history",
+        "social-movements-and-identity",
+        "art-and-cultural-production",
+        "everyday-life-and-material-culture"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:cultural-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "wan-shi-tong"
+    },
+    "religions-and-worldviews": {
+      "name": "religions-and-worldviews",
+      "description": "Analyze the Axial Age, the spread of Buddhism, Christianity, and Islam, the Reformation, secularization, and religious revivalism as historical forces. Use when examining how belief systems shape civilizations and how civilizations shape belief systems, covering not just doctrine but lived religion, syncretism, and the political consequences of religious change.",
+      "location": "skills/world-history/religions-and-worldviews/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 848,
+        "body_words": 785,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 1356,
+        "description_words": 49
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:14Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "cultural-history",
+        "religion-design"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:cultural-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "cultural-history"
+    },
+    "gender-and-sexuality-history": {
+      "name": "gender-and-sexuality-history",
+      "description": "Analyze gender as a historical category following Joan Scott, the history of sexuality, family, and reproduction across cultures, feminist historiography, and masculinity studies. Use when examining how gender roles have been constructed and contested across time, how women's history transforms our understanding of political and economic history, and how sexuality has been regulated and experienced.",
+      "location": "skills/world-history/gender-and-sexuality-history/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 853,
+        "body_words": 784,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 1364,
+        "description_words": 55
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:16Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "cultural-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:cultural-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "cultural-history"
+    },
+    "social-movements-and-identity": {
+      "name": "social-movements-and-identity",
+      "description": "Analyze abolitionism, suffrage, civil rights, feminism, labor movements, anti-colonial nationalism, and environmentalism as historical forces. Use when examining how marginalized groups have changed history, the recurring patterns of movement building, backlash, and institutionalization, and how history from below transforms our understanding of political change.",
+      "location": "skills/world-history/social-movements-and-identity/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 792,
+        "body_words": 734,
+        "section_count": 11,
+        "reference_files": 0,
+        "estimated_tokens_total": 1267,
+        "description_words": 44
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:19Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "cultural-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:cultural-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "cultural-history"
+    },
+    "art-and-cultural-production": {
+      "name": "art-and-cultural-production",
+      "description": "Analyze art, architecture, literature, music, and performance as historical evidence and historical force. Use when examining how cultural production reflects and reshapes power, from cave paintings through the Renaissance, modernism, and the digital age, including patronage systems, censorship, cultural transmission, and the politics of aesthetic production across civilizations.",
+      "location": "skills/world-history/art-and-cultural-production/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 793,
+        "body_words": 731,
+        "section_count": 7,
+        "reference_files": 0,
+        "estimated_tokens_total": 1268,
+        "description_words": 48
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:27Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "cultural-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:cultural-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "cultural-history"
+    },
+    "everyday-life-and-material-culture": {
+      "name": "everyday-life-and-material-culture",
+      "description": "Analyze what ordinary people ate, wore, believed, feared, celebrated, and died of across history using the Annales school approach and Braudel's three temporal registers. Use when examining history from below, microhistory, mentalites, and the longue duree \u2014 the slow-moving structures of everyday experience that persist beneath the fast-moving surface of political events.",
+      "location": "skills/world-history/everyday-life-and-material-culture/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 956,
+        "body_words": 890,
+        "section_count": 10,
+        "reference_files": 0,
+        "estimated_tokens_total": 1529,
+        "description_words": 52
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:17:30Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "cultural-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:cultural-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "cultural-history"
+    },
+    "regional-atlas": {
+      "name": "regional-atlas",
+      "description": "Route questions about specific world regions using a connected histories lens that emphasizes cross-regional entanglements over isolated area studies. Activate when users ask about the Mediterranean, East Asia, Sub-Saharan Africa, the Americas, or any region-specific question that requires geographic context, regional periodization, and area-studies depth.",
+      "location": "skills/world-history/regional-atlas/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 614,
+        "body_words": 553,
+        "section_count": 7,
+        "reference_files": 0,
+        "estimated_tokens_total": 982,
+        "description_words": 45
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:07Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 55,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 55,
+      "depends_on": [
+        "wan-shi-tong"
+      ],
+      "referenced_by": [
+        "mediterranean-and-near-east",
+        "east-asia",
+        "sub-saharan-africa",
+        "americas-and-oceania"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:director",
+        "subdomain:regional-atlas"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "wan-shi-tong"
+    },
+    "mediterranean-and-near-east": {
+      "name": "mediterranean-and-near-east",
+      "description": "Analyze the Mediterranean and Near East as a connected historical zone from the Fertile Crescent through classical antiquity, Byzantium, the Islamic golden age, the Ottoman Empire, and the modern Middle East. Use when examining region-specific dynamics, cross-cultural exchange across the inland sea, and connections to Indian Ocean and Central Asian networks.",
+      "location": "skills/world-history/mediterranean-and-near-east/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 594,
+        "body_words": 529,
+        "section_count": 6,
+        "reference_files": 0,
+        "estimated_tokens_total": 950,
+        "description_words": 51
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:10Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "regional-atlas"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:regional-atlas"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "regional-atlas"
+    },
+    "east-asia": {
+      "name": "east-asia",
+      "description": "Analyze East Asia as a connected historical zone covering China's dynastic cycles, Japan, Korea, steppe empires, and the Sinocentric order. Use when examining region-specific dynamics including the examination system, tributary relations, Confucian civilization, maritime networks, and connections to Southeast Asia and the broader Indo-Pacific world.",
+      "location": "skills/world-history/east-asia/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 680,
+        "body_words": 621,
+        "section_count": 7,
+        "reference_files": 0,
+        "estimated_tokens_total": 1088,
+        "description_words": 45
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:13Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "regional-atlas"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:regional-atlas"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "regional-atlas"
+    },
+    "sub-saharan-africa": {
+      "name": "sub-saharan-africa",
+      "description": "Analyze Sub-Saharan Africa's history from Great Zimbabwe, Mali, and Songhai through the Swahili coast, the Atlantic slave trade, colonial partition, and post-colonial state-building. Use when examining African historical agency before and beyond European contact, trans-Saharan and Indian Ocean connections, and the legacies of colonialism in contemporary Africa.",
+      "location": "skills/world-history/sub-saharan-africa/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 709,
+        "body_words": 648,
+        "section_count": 8,
+        "reference_files": 0,
+        "estimated_tokens_total": 1134,
+        "description_words": 47
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:16Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "regional-atlas"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:regional-atlas"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "regional-atlas"
+    },
+    "americas-and-oceania": {
+      "name": "americas-and-oceania",
+      "description": "Analyze the Americas and Oceania from pre-Columbian civilizations through European colonization, nation-building, and the Atlantic and Pacific worlds. Use when examining Inca, Aztec, Maya, and Mississippian civilizations, the Columbian Exchange, settler colonialism, independence movements, and Polynesian navigation and Pacific Island societies.",
+      "location": "skills/world-history/americas-and-oceania/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 745,
+        "body_words": 690,
+        "section_count": 7,
+        "reference_files": 0,
+        "estimated_tokens_total": 1192,
+        "description_words": 41
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:18Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "regional-atlas"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:regional-atlas"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "regional-atlas"
+    },
+    "schools-of-thought": {
+      "name": "schools-of-thought",
+      "description": "Analyze historiographical schools from Ranke's scientific history through Marxist, Annales, postcolonial, gender, microhistory, and the linguistic turn to digital humanities. Use when examining how different methodological traditions produce different histories from the same past, including non-Western historiographical traditions like Islamic, Chinese dynastic, and indigenous oral frameworks.",
+      "location": "skills/world-history/schools-of-thought/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 860,
+        "body_words": 800,
+        "section_count": 6,
+        "reference_files": 0,
+        "estimated_tokens_total": 1376,
+        "description_words": 46
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:22Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "historiography"
+      ],
+      "referenced_by": [
+        "debate-simulator"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:historiography"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "historiography"
+    },
+    "history-and-decision-making": {
+      "name": "history-and-decision-making",
+      "description": "Analyze how policymakers, strategists, and investors use and misuse history for decisions, drawing on Neustadt and May's Thinking in Time framework, intelligence analysis methods, and scenario planning with historical precedents. Use when the user wants to apply historical reasoning to a current decision or evaluate how decision-makers have used historical analogies.",
+      "location": "skills/world-history/history-and-decision-making/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 889,
+        "body_words": 824,
+        "section_count": 11,
+        "reference_files": 0,
+        "estimated_tokens_total": 1422,
+        "description_words": 51
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:25Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 48,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 48,
+      "depends_on": [
+        "applied-history",
+        "historical-pattern-recognition"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:knowledge",
+        "subdomain:applied-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "applied-history"
+    },
+    "source-evaluator": {
+      "name": "source-evaluator",
+      "description": "Produce structured evaluations of historical sources using provenance, bias, reliability assessment, and the PACT protocol from source-criticism. Use when the user presents a specific historical document, artifact, or claim and wants a systematic evaluation of what it can and cannot tell us, formatted as a reusable analytical template.",
+      "location": "skills/world-history/source-evaluator/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 543,
+        "body_words": 479,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 868,
+        "description_words": 48
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:28Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 49,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 49,
+      "depends_on": [
+        "historiography",
+        "source-criticism"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:action",
+        "subdomain:historiography"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "historiography"
+    },
+    "timeline-builder": {
+      "name": "timeline-builder",
+      "description": "Build annotated timelines with events, causal connections, and turning points, designed for visual learners. Use when the user wants a structured chronological overview of a topic, period, or question, with events linked by causal arrows and annotated with significance assessments and cross-references to other wings.",
+      "location": "skills/world-history/timeline-builder/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 539,
+        "body_words": 478,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 862,
+        "description_words": 45
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:31Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 49,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 49,
+      "depends_on": [
+        "applied-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:action",
+        "subdomain:applied-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "applied-history"
+    },
+    "debate-simulator": {
+      "name": "debate-simulator",
+      "description": "Argue both sides of contested historical questions with sourced evidence and named historians. Use when the user wants to understand a historical debate by hearing the strongest version of each position, with explicit identification of the evidence each side marshals, the assumptions each side makes, and where the debate currently stands in the scholarly community.",
+      "location": "skills/world-history/debate-simulator/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 644,
+        "body_words": 573,
+        "section_count": 9,
+        "reference_files": 0,
+        "estimated_tokens_total": 1030,
+        "description_words": 55
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:33Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 49,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 49,
+      "depends_on": [
+        "applied-history",
+        "schools-of-thought"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:action",
+        "subdomain:applied-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "applied-history"
+    },
+    "nexus-event-analyzer": {
+      "name": "nexus-event-analyzer",
+      "description": "Analyze events that span all wings simultaneously, such as the Industrial Revolution, the French Revolution, decolonization, and World War II. Use when the user asks about a major historical event that cannot be understood through a single thematic lens, producing a multi-wing synthesis showing how political, economic, cultural, military, and intellectual threads interweave.",
+      "location": "skills/world-history/nexus-event-analyzer/SKILL.md",
+      "plugin": "skill-world-history",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 724,
+        "body_words": 655,
+        "section_count": 10,
+        "reference_files": 0,
+        "estimated_tokens_total": 1158,
+        "description_words": 53
+      },
+      "health_status": "healthy",
+      "last_checked": "2026-04-14T08:29:36Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 49,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 49,
+      "depends_on": [
+        "applied-history"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:world-history",
+        "level:action",
+        "subdomain:applied-history"
+      ],
+      "created": "2026-04-14",
+      "last_modified": "2026-04-14",
+      "parent": "applied-history"
     }
   },
   "network": {
@@ -12633,7 +14853,13 @@
         "technology-progression",
         "world-bible",
         "worldbuilding-orchestrator",
-        "game-mechanics"
+        "game-mechanics",
+        "economic-systems",
+        "conlang-craft",
+        "character-design",
+        "sensory-worldbuilding",
+        "environmental-storytelling",
+        "weird-worldbuilding"
       ],
       "game-theory": [
         "algorithmic-game-theory",
@@ -12711,7 +14937,13 @@
         "style-dna",
         "style-mixer",
         "style-mutator",
-        "syntax-patterns"
+        "syntax-patterns",
+        "character-interiority",
+        "micro-tension",
+        "figurative-language",
+        "narrative-geometry",
+        "world-to-story",
+        "hybrid-forms"
       ],
       "investing": [
         "adaptive-monitoring",
@@ -12761,6 +14993,59 @@
         "tail-risk",
         "tax-optimization",
         "value-quality"
+      ],
+      "world-history": [
+        "wan-shi-tong",
+        "historiography",
+        "applied-history",
+        "historical-thinking",
+        "source-criticism",
+        "historical-argument",
+        "historical-pattern-recognition",
+        "political-history",
+        "empires-and-states",
+        "revolutions-and-regime-change",
+        "diplomacy-and-international-order",
+        "decolonization-and-sovereignty",
+        "historical-analogy-engine",
+        "economic-history",
+        "trade-and-globalization",
+        "money-and-financial-systems",
+        "industrialization-and-development",
+        "labor-and-inequality",
+        "military-history",
+        "strategy-and-grand-strategy",
+        "warfare-through-the-ages",
+        "intelligence-and-information-war",
+        "battle-analysis",
+        "intellectual-history",
+        "scientific-revolutions",
+        "political-thought",
+        "knowledge-systems",
+        "world-systems",
+        "comparative-civilizations",
+        "environmental-history",
+        "deep-history",
+        "demographic-and-structural-forces",
+        "technology-and-civilizational-change",
+        "comparative-analysis-engine",
+        "cultural-history",
+        "religions-and-worldviews",
+        "gender-and-sexuality-history",
+        "social-movements-and-identity",
+        "art-and-cultural-production",
+        "everyday-life-and-material-culture",
+        "regional-atlas",
+        "mediterranean-and-near-east",
+        "east-asia",
+        "sub-saharan-africa",
+        "americas-and-oceania",
+        "schools-of-thought",
+        "history-and-decision-making",
+        "source-evaluator",
+        "timeline-builder",
+        "debate-simulator",
+        "nexus-event-analyzer"
       ]
     },
     "shared_references": {}
