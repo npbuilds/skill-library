@@ -2,10 +2,9 @@
 name: character-design
 description: >
   Design characters as the intersection of world and story — psychology, motivation,
-  contradiction, arc potential, and the relationship between who a character is and
-  the world that shaped them. Use when creating characters for fiction, games, or any
-  narrative medium. The bridge between worldbuilding (which builds the systems characters
-  inhabit) and writing (which renders their consciousness and voice).
+  contradiction, arc potential, and how the world shapes who they are. Use when creating
+  characters, when characters feel generic or disconnected from their setting, or when the
+  step from world-bible to person-in-world hasn't been taken.
 metadata:
   author: nirav
   version: "1.0"
@@ -14,82 +13,46 @@ compatibility: Designed for Claude Code
 
 # Character Design — Where World Becomes Person
 
-Characters are not invented in a vacuum. They are *produced* by worlds — shaped by the culture they were raised in, the economic system they navigate, the religion they believe or reject, the magic system they can or cannot access. Simultaneously, characters are the primary vehicle through which readers experience worlds — their perceptions, desires, and blind spots determine what the reader sees and what remains hidden.
-
-This skill sits at the intersection of worldbuilding and writing. It takes inputs from both domains and produces characters that are simultaneously products of their world and engines of their story.
+Characters are produced by worlds — shaped by culture, economics, religion, and magic system access. Simultaneously, characters are how readers experience worlds. This skill bridges worldbuilding (systems) and writing (consciousness).
 
 ## The Character Diamond
 
-Four facets, all required. A character missing any facet feels incomplete.
-
 ### 1. Want (External Goal)
-What the character is actively pursuing. Visible, concrete, often achievable.
-- Must create forward motion — the reader should know what the character is trying to do
-- Connects to plot: want drives action, action creates scenes
-- Should be specific enough to succeed or fail: "find the artifact" not "be happy"
+What the character pursues. Visible, concrete, able to succeed or fail. Drives plot.
 
 ### 2. Need (Internal Requirement)
-What the character actually requires to become whole — which they usually don't recognize. The gap between want and need is the engine of character arc.
-- Want is what they pursue; need is what would actually help them
-- Truby: the need is always moral or psychological — a correctable flaw in how the character treats others or themselves
-- Cron: the need stems from a misbelief formed by a formative wound
+What they actually require to become whole — usually unrecognized. The gap between want and need is the engine of arc. Stems from a misbelief (Cron) or moral flaw (Truby).
 
 ### 3. Wound (Formative Experience)
-The past event that created the misbelief and the defensive behaviors the character now exhibits. The wound explains *why* the character has this specific need and not some other.
-- Not always traumatic — can be a quiet realization, an absence, a pattern of small failures
-- The wound should connect to the world: it happened because of the specific conditions of THIS world
-- The character's wound should make them the worst possible person for their situation — or the only person who could survive it
+The past event that created the misbelief. Should connect to THIS world's specific conditions. Makes them the worst person for their situation — or the only one who could survive it.
 
 ### 4. Contradiction (Internal Tension)
-The internal split that makes the character feel real. Every compelling character holds at least one unresolved contradiction.
-- A gentle person capable of violence. A liar who values truth. A leader who craves solitude.
-- The contradiction is NOT a flaw to be resolved — it's a permanent feature of the character's psychology
-- Connects to micro-tension: the contradiction produces line-by-line emotional conflict
+The unresolved split that makes them real. Not a flaw to resolve — a permanent feature. A gentle person capable of violence. A liar who values truth. Produces micro-tension on every page.
 
 ## Character From World
 
-Characters should feel *inevitable* given their world — the product of specific conditions, not generic protagonists dropped into a setting.
-
 ### The World-Shapes-Character Pipeline
-
-1. **Culture** → Values, taboos, communication norms, sense of identity
-   - What does this culture teach its children about the world? That's the character's default worldview.
-   - What does this culture suppress? That's where the character's shadow lives.
-
-2. **Social position** → Access, constraints, perspective, blind spots
-   - Where in the hierarchy was the character born? What can they see from that position? What's invisible to them?
-   - Jemisin's micro-worldbuilding question: "How would a powerful person act? How would a powerless person act?"
-
-3. **Economic system** → Material reality, class consciousness, aspiration
-   - What does this character have to do to survive? That shapes their daily reality.
-   - What economic mobility exists? That shapes their sense of possibility.
-
-4. **Fantasy/tech system** → Ability, limitation, relationship to power
-   - Can this character access the fantasy system? How does that access (or lack of it) define their social position?
-   - A character who CAN use magic in a world where magic is feared is fundamentally different from one who can use magic in a world where magic is celebrated.
-
-5. **History** → Inherited memory, generational trauma, identity narrative
-   - What historical events shaped the character's family or community?
-   - What do they believe about the past? What's actually true? (Reference the revelation architecture.)
+1. **Culture** → values, taboos, worldview, shadow
+2. **Social position** → access, constraints, blind spots
+3. **Economic system** → daily reality, class consciousness, aspiration
+4. **Fantasy/tech system** → ability, limitation, relationship to power
+5. **History** → inherited memory, generational trauma, identity narrative
 
 ### The Character-Reveals-World Pipeline
+- What they **notice** → what the world normalizes
+- What they **ignore** → blind spots and assumptions
+- What they **misunderstand** → dramatic irony
+- What they **desire** → what the world makes scarce
 
-Equally important: characters are the lens through which readers discover the world.
-
-- What a character **notices** reveals what the world normalizes (they don't notice what's normal to them)
-- What a character **ignores** reveals their blind spots AND the world's assumptions
-- What a character **misunderstands** creates dramatic irony when the reader sees further
-- What a character **desires** reveals what the world makes scarce
-
-## Character Arc Patterns
+## Arc Patterns
 
 | Pattern | Structure | Best For |
 |---------|-----------|----------|
-| **Positive change** | Character recognizes need, overcomes misbelief, grows | Redemptive stories, coming-of-age |
-| **Negative change** | Character fails to recognize need, doubles down on misbelief | Tragedy, cautionary tales, antiheroes |
-| **Flat/testing** | Character already knows the truth; the world tests whether they'll hold to it | Heroes, moral exemplars, mysteries |
-| **Disillusionment** | Character's positive belief is revealed as naivety; they gain wisdom at the cost of innocence | Literary fiction, war stories |
-| **Fall and rise** | Character descends into darkness, then finds a path back — changed, not restored | Addiction, recovery, atonement |
+| Positive change | Recognizes need, overcomes misbelief | Redemption, coming-of-age |
+| Negative change | Fails to recognize need, doubles down | Tragedy, antiheroes |
+| Flat/testing | Already knows truth; world tests them | Heroes, moral exemplars |
+| Disillusionment | Positive belief revealed as naivety | Literary fiction, war stories |
+| Fall and rise | Descends then finds way back — changed, not restored | Recovery, atonement |
 
 ## Character Relationships as System
 
@@ -102,33 +65,7 @@ Characters don't exist alone. The web of relationships between characters create
 **Factions as character clusters**: In worldbuilding, factions have internal structure (pyramid, SUPREME method). Characters within a faction embody different positions in that structure — the true believer, the pragmatist, the secret dissenter.
 
 ## Anti-Patterns
-
-1. **The generic protagonist**: A character with no specific world-shaped traits. Could live anywhere, anywhen. They exist to be relatable rather than particular.
-2. **Motivation by plot**: The character does things because the plot needs them to, not because their psychology compels them. "Why would they go into the haunted house?" If the answer is "because Chapter 12 needs them to," the character isn't designed.
-3. **Wound without world**: A backstory trauma that could happen anywhere — abusive parent, dead mentor — without connecting to the specific conditions of THIS world.
-4. **Contradiction as quirk**: "She's tough but she likes kittens." That's not contradiction; it's decoration. Real contradiction creates genuine internal tension that affects decisions.
-5. **Static character mistaken for consistent character**: Consistency is holding to core values under pressure. Stasis is never changing in response to events. Characters should be consistent AND dynamic.
+1. Generic protagonist — could live anywhere. 2. Motivation by plot, not psychology. 3. Wound without world connection. 4. Contradiction as quirk, not tension. 5. Static mistaken for consistent.
 
 ## Relationship to Other Skills
-
-### From Worldbuilding
-- **Cultures-Societies**: The seven pillars shape character values, taboos, and worldview
-- **Faction Design**: Characters exist within faction structures — their position in the faction shapes their goals and constraints
-- **Economic Systems**: Material reality shapes daily life, aspiration, and class consciousness
-- **Character-Belief-Tracker**: Tracks what characters know vs. what's true — maintains dramatic irony
-- **Conlang-Craft**: A character's language shapes their thought (Sapir-Whorf principle in action)
-
-### From Writing
-- **Character Interiority**: Once designed, characters need to be *rendered* on the page — this skill provides consciousness-rendering techniques
-- **Micro-Tension**: The character's internal contradictions are the raw material for line-by-line tension
-- **Dialogue**: Character voice in speech — the external expression of internal design
-- **Style DNA**: Dimension 2 (Psychic Distance) determines how close the reader gets to this character's consciousness
-- **Point of View**: The character chosen as POV determines everything about information flow and reader experience
-
-## When This Applies
-
-- Creating a new character for any narrative project
-- A character feels generic, unmotivated, or disconnected from their world
-- The user asks about character motivation, backstory, arc, or "why doesn't this character feel real?"
-- Worldbuilding is complete but the step from "world" to "person in world" hasn't been taken
-- Characters from different factions or cultures need to feel shaped by those differences
+**From worldbuilding**: cultures-societies, faction-design, economic-systems, character-belief-tracker, conlang-craft. **From writing**: character-interiority (rendering), micro-tension (contradictions as engine), dialogue (voice), style-dna (psychic distance), point-of-view (information flow).
