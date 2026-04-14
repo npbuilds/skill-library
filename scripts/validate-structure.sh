@@ -126,7 +126,7 @@ if echo "$DIR_NAME" | grep -qE "orchestrator|archon|bacchus|prose-orchestrator|s
   SKILL_TYPE="orchestrator"
 elif echo "$CONTENT_LOWER" | grep -qE "routing table|child skills"; then
   SKILL_TYPE="director"
-elif echo "$CONTENT_LOWER" | grep -qE "observer|monitor.*trigger"; then
+elif echo "$DIR_NAME" | grep -qE "-observer$|^sentinel-prime$"; then
   SKILL_TYPE="observer"
 elif echo "$FRONTMATTER" | grep -qiE "^allowed-tools:|^tools:"; then
   # Has tools declared (allowed-tools: or legacy tools:) — likely action unless it routes
