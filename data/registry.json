@@ -5,7 +5,7 @@
   "skills": {
     "bacchus": {
       "name": "bacchus",
-      "description": "Orchestrate all things wine \u2014 tasting and blind evaluation, food pairing, regional terroir, grape varieties, winemaking process, cellar and service, market and investment. Activate when a question touches wine in any form: a glass in hand, a label on a shelf, a pairing dilemma, a cellar to build, or a region to understand.",
+      "description": "Orchestrate all things wine — tasting and blind evaluation, food pairing, regional terroir, grape varieties, winemaking process, cellar and service, market and investment. Activate when a question touches wine in any form: a glass in hand, a label on a shelf, a pairing dilemma, a cellar to build, or a region to understand.",
       "location": "skills/sommelier/bacchus/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "orchestrator",
@@ -241,7 +241,7 @@
     },
     "aroma-lexicon": {
       "name": "aroma-lexicon",
-      "description": "Build and apply wine tasting vocabulary using Ann Noble's Wine Aroma Wheel \u2014 a three-tier hierarchy of 119 terms. Use when identifying specific aromas, understanding what aromatic observations reveal about grape variety, origin, and winemaking, or when improving blind tasting precision and tasting note quality.",
+      "description": "Build and apply wine tasting vocabulary using Ann Noble's Wine Aroma Wheel — a three-tier hierarchy of 119 terms. Use when identifying specific aromas, understanding what aromatic observations reveal about grape variety, origin, and winemaking, or when improving blind tasting precision and tasting note quality.",
       "location": "skills/sommelier/tasting-evaluation/aroma-lexicon/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -339,7 +339,7 @@
     },
     "old-world-atlas": {
       "name": "old-world-atlas",
-      "description": "Deep reference for European wine regions \u2014 France, Italy, Spain, Germany, Portugal, Austria, Greece, and Georgia. Use when the user asks about any Old World wine region, appellation, classification system, or regional style. Covers key terroir, grape varieties, classification hierarchies, and benchmark producers for each country.",
+      "description": "Deep reference for European wine regions — France, Italy, Spain, Germany, Portugal, Austria, Greece, and Georgia. Use when the user asks about any Old World wine region, appellation, classification system, or regional style. Covers key terroir, grape varieties, classification hierarchies, and benchmark producers for each country.",
       "location": "skills/sommelier/regions-terroir/old-world-atlas/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -388,7 +388,7 @@
     },
     "new-world-atlas": {
       "name": "new-world-atlas",
-      "description": "Deep reference for New World wine regions \u2014 USA, Australia, New Zealand, South Africa, Argentina, and Chile. Use when the user asks about any New World wine region, appellation, terroir characteristic, or regional style. Covers climate drivers, key sub-regions, benchmark producers, and how New World regions compare to Old World counterparts.",
+      "description": "Deep reference for New World wine regions — USA, Australia, New Zealand, South Africa, Argentina, and Chile. Use when the user asks about any New World wine region, appellation, terroir characteristic, or regional style. Covers climate drivers, key sub-regions, benchmark producers, and how New World regions compare to Old World counterparts.",
       "location": "skills/sommelier/regions-terroir/new-world-atlas/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -434,7 +434,7 @@
     },
     "terroir-science": {
       "name": "terroir-science",
-      "description": "Explain the science behind terroir \u2014 how soil type, climate, altitude, aspect, and microclimate shape wine flavor. Use when the user wants to understand why a region tastes distinctive, how to compare wine climates using Winkler and Huglin indices, or engage with the ongoing scientific debate about soil mineral expression in wine.",
+      "description": "Explain the science behind terroir — how soil type, climate, altitude, aspect, and microclimate shape wine flavor. Use when the user wants to understand why a region tastes distinctive, how to compare wine climates using Winkler and Huglin indices, or engage with the ongoing scientific debate about soil mineral expression in wine.",
       "location": "skills/sommelier/regions-terroir/terroir-science/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -481,7 +481,7 @@
     },
     "appellation-law": {
       "name": "appellation-law",
-      "description": "Navigate the legal classification systems governing wine production worldwide \u2014 EU PDO/PGI, French AOC, Italian DOC/DOCG, Spanish DO/DOCa, German Pr\u00e4dikat, US AVA, and Australian GI. Use when the user needs to understand what a label means, what a classification system regulates, or why legal boundaries matter for wine identity.",
+      "description": "Navigate the legal classification systems governing wine production worldwide — EU PDO/PGI, French AOC, Italian DOC/DOCG, Spanish DO/DOCa, German Prädikat, US AVA, and Australian GI. Use when the user needs to understand what a label means, what a classification system regulates, or why legal boundaries matter for wine identity.",
       "location": "skills/sommelier/regions-terroir/appellation-law/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -524,7 +524,7 @@
     },
     "grape-encyclopedia": {
       "name": "grape-encyclopedia",
-      "description": "Route grape variety questions to the correct specialist knowledge \u2014 major noble grapes, indigenous and regional varieties, or how the same grape expresses differently across terroir. Use when the user asks about any grape variety by name, wants to understand flavor signatures, or needs to identify a grape from tasting observations.",
+      "description": "Route grape variety questions to the correct specialist knowledge — major noble grapes, indigenous and regional varieties, or how the same grape expresses differently across terroir. Use when the user asks about any grape variety by name, wants to understand flavor signatures, or needs to identify a grape from tasting observations.",
       "location": "skills/sommelier/grape-encyclopedia/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "director",
@@ -571,7 +571,7 @@
     },
     "noble-grapes": {
       "name": "noble-grapes",
-      "description": "Navigate the 15 internationally recognized noble grape varieties \u2014 9 reds and 6 whites \u2014 with aromatic profiles, structural signatures, classic regions, and common winemaking treatments. Use when identifying a grape from tasting notes, understanding a variety's range across regions, or explaining why a grape behaves the way it does.",
+      "description": "Navigate the 15 internationally recognized noble grape varieties — 9 reds and 6 whites — with aromatic profiles, structural signatures, classic regions, and common winemaking treatments. Use when identifying a grape from tasting notes, understanding a variety's range across regions, or explaining why a grape behaves the way it does.",
       "location": "skills/sommelier/grape-encyclopedia/noble-grapes/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -702,7 +702,7 @@
     },
     "winemaking": {
       "name": "winemaking",
-      "description": "Route winemaking questions \u2014 viticulture, vinification, special production methods, and alternative techniques \u2014 to the correct specialist knowledge. Use when the user wants to understand how wine is grown or made, how sparkling or fortified wines are produced, or what distinguishes natural, orange, or biodynamic wine from conventional production.",
+      "description": "Route winemaking questions — viticulture, vinification, special production methods, and alternative techniques — to the correct specialist knowledge. Use when the user wants to understand how wine is grown or made, how sparkling or fortified wines are produced, or what distinguishes natural, orange, or biodynamic wine from conventional production.",
       "location": "skills/sommelier/winemaking/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "director",
@@ -751,7 +751,7 @@
     },
     "viticulture": {
       "name": "viticulture",
-      "description": "Explain how grapes are grown \u2014 the vine's annual cycle, canopy and yield management, farming philosophies from conventional to biodynamic, vine age effects, and the history of phylloxera. Use when the user wants to understand what happens in the vineyard before harvest, how farming choices affect wine quality, or what old-vine and biodynamic actually mean.",
+      "description": "Explain how grapes are grown — the vine's annual cycle, canopy and yield management, farming philosophies from conventional to biodynamic, vine age effects, and the history of phylloxera. Use when the user wants to understand what happens in the vineyard before harvest, how farming choices affect wine quality, or what old-vine and biodynamic actually mean.",
       "location": "skills/sommelier/winemaking/viticulture/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -798,7 +798,7 @@
     },
     "vinification": {
       "name": "vinification",
-      "description": "Explain how wine is made in the cellar \u2014 fermentation choices (wild vs cultured yeast, temperature), maceration techniques, malolactic conversion, oak treatment options, pressing, fining, filtration, and sulfur management. Use when the user wants to understand how winemaking decisions shape the flavor, structure, and character of a finished wine.",
+      "description": "Explain how wine is made in the cellar — fermentation choices (wild vs cultured yeast, temperature), maceration techniques, malolactic conversion, oak treatment options, pressing, fining, filtration, and sulfur management. Use when the user wants to understand how winemaking decisions shape the flavor, structure, and character of a finished wine.",
       "location": "skills/sommelier/winemaking/vinification/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -844,7 +844,7 @@
     },
     "special-methods": {
       "name": "special-methods",
-      "description": "Explain the production of sparkling, fortified, and sweet wines \u2014 m\u00e9thode traditionnelle, Charmat, p\u00e9t-nat, Port, Sherry, Madeira, botrytis, and ice wine. Use when the user asks how Champagne, Prosecco, Port, or Sauternes is made, or needs to understand what distinguishes one sparkling or fortified style from another.",
+      "description": "Explain the production of sparkling, fortified, and sweet wines — méthode traditionnelle, Charmat, pét-nat, Port, Sherry, Madeira, botrytis, and ice wine. Use when the user asks how Champagne, Prosecco, Port, or Sauternes is made, or needs to understand what distinguishes one sparkling or fortified style from another.",
       "location": "skills/sommelier/winemaking/special-methods/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -888,7 +888,7 @@
     },
     "alternative-winemaking": {
       "name": "alternative-winemaking",
-      "description": "Explain natural wine, orange/amber wine, p\u00e9t-nat, amphora and concrete fermentation, carbonic maceration, whole-cluster, and biodynamic winemaking. Use when the user asks about low-intervention wine, wants to understand the natural wine movement, or needs to distinguish intentional stylistic choice from conventional winemaking fault.",
+      "description": "Explain natural wine, orange/amber wine, pét-nat, amphora and concrete fermentation, carbonic maceration, whole-cluster, and biodynamic winemaking. Use when the user asks about low-intervention wine, wants to understand the natural wine movement, or needs to distinguish intentional stylistic choice from conventional winemaking fault.",
       "location": "skills/sommelier/winemaking/alternative-winemaking/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -933,7 +933,7 @@
     },
     "food-pairing": {
       "name": "food-pairing",
-      "description": "Route food and wine pairing questions to the correct approach \u2014 structural pairing principles, specific cuisine traditions, or active wine recommendation for a dish. Use when the user wants to match wine to food, understand why a pairing works or fails, plan a wine list for a meal, or learn the science behind flavor bridges and structural compatibility.",
+      "description": "Route food and wine pairing questions to the correct approach — structural pairing principles, specific cuisine traditions, or active wine recommendation for a dish. Use when the user wants to match wine to food, understand why a pairing works or fails, plan a wine list for a meal, or learn the science behind flavor bridges and structural compatibility.",
       "location": "skills/sommelier/food-pairing/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "director",
@@ -980,7 +980,7 @@
     },
     "pairing-science": {
       "name": "pairing-science",
-      "description": "Apply the structural science of food and wine pairing \u2014 the five component axes (acidity, tannin, sweetness, body, oak), decision framework, WineGraph elimination rules, and molecular flavor bridge methodology. Use when the user needs to understand why a pairing works, navigate difficult foods, or build pairing logic from first principles.",
+      "description": "Apply the structural science of food and wine pairing — the five component axes (acidity, tannin, sweetness, body, oak), decision framework, WineGraph elimination rules, and molecular flavor bridge methodology. Use when the user needs to understand why a pairing works, navigate difficult foods, or build pairing logic from first principles.",
       "location": "skills/sommelier/food-pairing/pairing-science/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1025,7 +1025,7 @@
     },
     "cuisine-pairing": {
       "name": "cuisine-pairing",
-      "description": "Match wine to nine world cuisine traditions \u2014 French, Italian, Japanese, Indian, Thai, Middle Eastern, Mexican, Korean, and cheese. Use when the user is pairing wine with a specific national or regional cuisine, needs cuisine-specific guidance beyond structural principles, or wants to understand how cultural food traditions align with particular wine styles.",
+      "description": "Match wine to nine world cuisine traditions — French, Italian, Japanese, Indian, Thai, Middle Eastern, Mexican, Korean, and cheese. Use when the user is pairing wine with a specific national or regional cuisine, needs cuisine-specific guidance beyond structural principles, or wants to understand how cultural food traditions align with particular wine styles.",
       "location": "skills/sommelier/food-pairing/cuisine-pairing/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1154,7 +1154,7 @@
     },
     "service-protocol": {
       "name": "service-protocol",
-      "description": "Apply correct wine service technique \u2014 serving temperatures by style, decanting decisions (aeration vs sediment separation), glassware selection philosophy, opening techniques for still and sparkling wine, and formal restaurant service protocol based on CMS Service Standards. Use for any question about how to properly serve or present a wine.",
+      "description": "Apply correct wine service technique — serving temperatures by style, decanting decisions (aeration vs sediment separation), glassware selection philosophy, opening techniques for still and sparkling wine, and formal restaurant service protocol based on CMS Service Standards. Use for any question about how to properly serve or present a wine.",
       "location": "skills/sommelier/cellar-service/service-protocol/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1197,7 +1197,7 @@
     },
     "cellar-management": {
       "name": "cellar-management",
-      "description": "Manage wine storage and aging \u2014 optimal cellar conditions, drinking windows by wine type, how to assess readiness, practical cellar building strategy with portfolio ratios, buying channels (en primeur, auction, direct), and provenance authentication for investment-grade wine. Use for any question about how to store, age, organize, or build a wine collection.",
+      "description": "Manage wine storage and aging — optimal cellar conditions, drinking windows by wine type, how to assess readiness, practical cellar building strategy with portfolio ratios, buying channels (en primeur, auction, direct), and provenance authentication for investment-grade wine. Use for any question about how to store, age, organize, or build a wine collection.",
       "location": "skills/sommelier/cellar-service/cellar-management/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1243,7 +1243,7 @@
     },
     "wine-market": {
       "name": "wine-market",
-      "description": "Route wine market and economics questions \u2014 pricing mechanics, collecting and investment, and emerging market trends. Use when the user wants to understand how wine is priced, evaluate whether a wine represents value, build an investment-grade cellar, or understand how climate change and cultural shifts are reshaping the wine world's geography and economics.",
+      "description": "Route wine market and economics questions — pricing mechanics, collecting and investment, and emerging market trends. Use when the user wants to understand how wine is priced, evaluate whether a wine represents value, build an investment-grade cellar, or understand how climate change and cultural shifts are reshaping the wine world's geography and economics.",
       "location": "skills/sommelier/wine-market/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "director",
@@ -1289,7 +1289,7 @@
     },
     "wine-economics": {
       "name": "wine-economics",
-      "description": "Understand how wine is priced and traded \u2014 production cost anatomy, the Parker Effect, the Bordeaux en primeur system, distribution channels (three-tier, n\u00e9gociant, DTC, auction), and the current landscape of wine critics and their market influence. Use when the user wants to understand wine pricing, critic scores, or how to buy wine intelligently across different channels.",
+      "description": "Understand how wine is priced and traded — production cost anatomy, the Parker Effect, the Bordeaux en primeur system, distribution channels (three-tier, négociant, DTC, auction), and the current landscape of wine critics and their market influence. Use when the user wants to understand wine pricing, critic scores, or how to buy wine intelligently across different channels.",
       "location": "skills/sommelier/wine-market/wine-economics/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1337,7 +1337,7 @@
     },
     "collecting-investment": {
       "name": "collecting-investment",
-      "description": "Evaluate wine as a collectible and investment asset \u2014 blue-chip producers, the Liv-ex Fine Wine Index, provenance and counterfeiting risk, and the honest case for collecting what you love to drink. Use when the user wants to build an investment-grade cellar, understand which wines hold value, or assess the risks and realities of wine as an alternative asset class.",
+      "description": "Evaluate wine as a collectible and investment asset — blue-chip producers, the Liv-ex Fine Wine Index, provenance and counterfeiting risk, and the honest case for collecting what you love to drink. Use when the user wants to build an investment-grade cellar, understand which wines hold value, or assess the risks and realities of wine as an alternative asset class.",
       "location": "skills/sommelier/wine-market/collecting-investment/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1383,7 +1383,7 @@
     },
     "wine-futures": {
       "name": "wine-futures",
-      "description": "Explore the future of wine \u2014 climate change impacts on classic regions, rising regions to watch, natural wine market dynamics, and global consumption trend shifts. Use when the user wants to understand how warming is reshaping wine geography, which emerging regions represent the best value opportunity, or how generational and cultural shifts are transforming the wine market.",
+      "description": "Explore the future of wine — climate change impacts on classic regions, rising regions to watch, natural wine market dynamics, and global consumption trend shifts. Use when the user wants to understand how warming is reshaping wine geography, which emerging regions represent the best value opportunity, or how generational and cultural shifts are transforming the wine market.",
       "location": "skills/sommelier/wine-market/wine-futures/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1431,7 +1431,7 @@
     },
     "sommelier-lab": {
       "name": "sommelier-lab",
-      "description": "Route questions at the experimental frontier of wine knowledge \u2014 synesthetic tasting notes, coached blind tasting practice, climate change projections for wine regions, and molecular flavor pairing science. Use when the user wants to explore wine creatively, practice for a sommelier exam, understand the science behind non-obvious pairings, or speculate on the future of wine geography.",
+      "description": "Route questions at the experimental frontier of wine knowledge — synesthetic tasting notes, coached blind tasting practice, climate change projections for wine regions, and molecular flavor pairing science. Use when the user wants to explore wine creatively, practice for a sommelier exam, understand the science behind non-obvious pairings, or speculate on the future of wine geography.",
       "location": "skills/sommelier/sommelier-lab/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "director",
@@ -1481,7 +1481,7 @@
     },
     "synesthetic-notes": {
       "name": "synesthetic-notes",
-      "description": "Translate wine profiles into parallel sensory domains \u2014 color palettes, music, textures, seasons, landscapes, and emotional moments. Use when the user wants poetic or cross-sensory wine descriptions, needs language that communicates wine to non-wine-fluent guests, or wants to develop a more imaginative, memorable vocabulary for tasting and writing about wine.",
+      "description": "Translate wine profiles into parallel sensory domains — color palettes, music, textures, seasons, landscapes, and emotional moments. Use when the user wants poetic or cross-sensory wine descriptions, needs language that communicates wine to non-wine-fluent guests, or wants to develop a more imaginative, memorable vocabulary for tasting and writing about wine.",
       "location": "skills/sommelier/sommelier-lab/synesthetic-notes/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1572,7 +1572,7 @@
     },
     "climate-projections": {
       "name": "climate-projections",
-      "description": "Explore how climate change is reshaping wine regions \u2014 confirmed warming data, region-by-region 2050 projections, adaptation strategies, and the new high-altitude frontiers emerging as classic regions face heat stress. Use when the user wants to understand which regions are winning or losing from climate change and what this means for collecting, tasting, and the future of wine.",
+      "description": "Explore how climate change is reshaping wine regions — confirmed warming data, region-by-region 2050 projections, adaptation strategies, and the new high-altitude frontiers emerging as classic regions face heat stress. Use when the user wants to understand which regions are winning or losing from climate change and what this means for collecting, tasting, and the future of wine.",
       "location": "skills/sommelier/sommelier-lab/climate-projections/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1624,7 +1624,7 @@
     },
     "molecular-pairing": {
       "name": "molecular-pairing",
-      "description": "Explore wine and food pairing through shared volatile aroma compounds \u2014 the Ahn et al. flavor network research, Foodpairing methodology, 14-compound reference table, and five non-obvious pairings with molecular explanations. Use when the user wants to understand the chemistry behind classic pairings, discover unexpected combinations, or go beyond structural pairing into flavor compound science.",
+      "description": "Explore wine and food pairing through shared volatile aroma compounds — the Ahn et al. flavor network research, Foodpairing methodology, 14-compound reference table, and five non-obvious pairings with molecular explanations. Use when the user wants to understand the chemistry behind classic pairings, discover unexpected combinations, or go beyond structural pairing into flavor compound science.",
       "location": "skills/sommelier/sommelier-lab/molecular-pairing/SKILL.md",
       "plugin": "skill-sommelier",
       "type": "knowledge",
@@ -1675,7 +1675,7 @@
     },
     "skill-registry": {
       "name": "skill-registry",
-      "description": "Manage the skill registry \u2014 the central catalog of all skills in the mycelial network. Use when the user wants to browse skills, search the catalog, add or update a skill entry, remove a skill, sync the registry with the filesystem, or when any other infrastructure skill needs to look up skill metadata, locations, or relationships.",
+      "description": "Manage the skill registry — the central catalog of all skills in the mycelial network. Use when the user wants to browse skills, search the catalog, add or update a skill entry, remove a skill, sync the registry with the filesystem, or when any other infrastructure skill needs to look up skill metadata, locations, or relationships.",
       "location": "skills/infrastructure/skill-registry/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -2280,7 +2280,7 @@
     },
     "visual-communication": {
       "name": "visual-communication",
-      "description": "Direct the visual communication subdomain \u2014 route design questions to the right specialist skill, define the learning curriculum, and resolve conflicts between visual design principles. Use when the user has a visual design question and you need to determine which knowledge skill (color theory, design principles, or visual perception) to consult.",
+      "description": "Direct the visual communication subdomain — route design questions to the right specialist skill, define the learning curriculum, and resolve conflicts between visual design principles. Use when the user has a visual design question and you need to determine which knowledge skill (color theory, design principles, or visual perception) to consult.",
       "location": "skills/design/visual-communication/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -2337,7 +2337,7 @@
     },
     "design-orchestrator": {
       "name": "design-orchestrator",
-      "description": "Orchestrate artistic design decisions across visual projects. Use when the user needs design direction, style choices, color palettes, typography decisions, composition guidance, or visual identity work. Activates when artistic or aesthetic judgment is needed for any visual output \u2014 UI mockups, illustrations, branding, data visualizations, presentations, or generative art.",
+      "description": "Orchestrate artistic design decisions across visual projects. Use when the user needs design direction, style choices, color palettes, typography decisions, composition guidance, or visual identity work. Activates when artistic or aesthetic judgment is needed for any visual output — UI mockups, illustrations, branding, data visualizations, presentations, or generative art.",
       "location": "skills/design/design-orchestrator/SKILL.md",
       "plugin": "skill-infra",
       "type": "orchestrator",
@@ -2404,7 +2404,7 @@
     },
     "typography": {
       "name": "typography",
-      "description": "Direct the typography subdomain \u2014 route type-related questions to the right specialist skill, define the curriculum from anatomy to pairing to responsive scaling, and resolve conflicts between readability and aesthetic goals. Use when the user has a typography question and you need to determine which knowledge skill to consult.",
+      "description": "Direct the typography subdomain — route type-related questions to the right specialist skill, define the curriculum from anatomy to pairing to responsive scaling, and resolve conflicts between readability and aesthetic goals. Use when the user has a typography question and you need to determine which knowledge skill to consult.",
       "location": "skills/design/typography/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -2460,7 +2460,7 @@
     },
     "type-fundamentals": {
       "name": "type-fundamentals",
-      "description": "Typography foundations \u2014 typeface anatomy, classification systems, and legibility principles. Covers x-height, stroke contrast, serifs vs sans-serifs, monospaced vs proportional, optical sizing, and the core properties that determine how a typeface feels and performs.",
+      "description": "Typography foundations — typeface anatomy, classification systems, and legibility principles. Covers x-height, stroke contrast, serifs vs sans-serifs, monospaced vs proportional, optical sizing, and the core properties that determine how a typeface feels and performs.",
       "location": "skills/design/typography/type-fundamentals/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -2510,7 +2510,7 @@
     },
     "type-pairing": {
       "name": "type-pairing",
-      "description": "Typeface pairing methodology \u2014 how to combine fonts for harmony, contrast, and hierarchy. Covers the contrast principle, superfamily strategy, mood matching, and common pairing patterns. Use when selecting fonts for a project that needs more than one typeface.",
+      "description": "Typeface pairing methodology — how to combine fonts for harmony, contrast, and hierarchy. Covers the contrast principle, superfamily strategy, mood matching, and common pairing patterns. Use when selecting fonts for a project that needs more than one typeface.",
       "location": "skills/design/typography/type-pairing/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -2559,7 +2559,7 @@
     },
     "responsive-type": {
       "name": "responsive-type",
-      "description": "Responsive typography \u2014 how type behaves across screen sizes, devices, and contexts. Covers fluid type scaling, viewport-based sizing, optical adjustments at different sizes, mobile-first type strategy, and line length management. Use when type needs to work across breakpoints or adapt to different reading contexts.",
+      "description": "Responsive typography — how type behaves across screen sizes, devices, and contexts. Covers fluid type scaling, viewport-based sizing, optical adjustments at different sizes, mobile-first type strategy, and line length management. Use when type needs to work across breakpoints or adapt to different reading contexts.",
       "location": "skills/design/typography/responsive-type/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -2608,7 +2608,7 @@
     },
     "brand-identity": {
       "name": "brand-identity",
-      "description": "Direct the brand-identity subdomain \u2014 route brand questions to the right specialist skill, define the relationship between brand strategy and visual execution, and resolve conflicts between brand consistency and creative expression. Use when the user has a branding question and you need to determine which knowledge skill to consult.",
+      "description": "Direct the brand-identity subdomain — route brand questions to the right specialist skill, define the relationship between brand strategy and visual execution, and resolve conflicts between brand consistency and creative expression. Use when the user has a branding question and you need to determine which knowledge skill to consult.",
       "location": "skills/design/brand-identity/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -2661,7 +2661,7 @@
     },
     "brand-foundations": {
       "name": "brand-foundations",
-      "description": "Brand strategy fundamentals \u2014 positioning, values, audience definition, personality frameworks, and competitive differentiation. The strategic layer that informs all visual and verbal brand decisions. Use before any brand execution work.",
+      "description": "Brand strategy fundamentals — positioning, values, audience definition, personality frameworks, and competitive differentiation. The strategic layer that informs all visual and verbal brand decisions. Use before any brand execution work.",
       "location": "skills/design/brand-identity/brand-foundations/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -2711,7 +2711,7 @@
     },
     "visual-identity": {
       "name": "visual-identity",
-      "description": "Visual identity systems \u2014 logo design principles, brand color systems, imagery direction, iconography, and how to build a cohesive visual language from brand strategy. The visual execution layer that translates positioning into what people see.",
+      "description": "Visual identity systems — logo design principles, brand color systems, imagery direction, iconography, and how to build a cohesive visual language from brand strategy. The visual execution layer that translates positioning into what people see.",
       "location": "skills/design/brand-identity/visual-identity/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -2760,7 +2760,7 @@
     },
     "brand-voice": {
       "name": "brand-voice",
-      "description": "Brand voice and tone \u2014 how a brand communicates verbally. Covers voice definition, tone modulation across contexts, messaging frameworks, vocabulary systems, and content guidelines. The verbal execution layer that translates positioning into words.",
+      "description": "Brand voice and tone — how a brand communicates verbally. Covers voice definition, tone modulation across contexts, messaging frameworks, vocabulary systems, and content guidelines. The verbal execution layer that translates positioning into words.",
       "location": "skills/design/brand-identity/brand-voice/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -2868,7 +2868,7 @@
     },
     "lore-writer": {
       "name": "lore-writer",
-      "description": "Produce in-universe artifacts \u2014 documents that exist inside the world, written in a specific voice and format. Use when the user wants to create lore documents, intercepted communications, historical accounts, field reports, myths, or any text artifact that belongs to the world itself rather than describing it from outside.",
+      "description": "Produce in-universe artifacts — documents that exist inside the world, written in a specific voice and format. Use when the user wants to create lore documents, intercepted communications, historical accounts, field reports, myths, or any text artifact that belongs to the world itself rather than describing it from outside.",
       "location": "skills/worldbuilding/lore-writer/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -2978,7 +2978,7 @@
     },
     "magic-system-design": {
       "name": "magic-system-design",
-      "description": "Framework for designing systematic magic, metaphysical, or speculative technology systems. Reference when creating the fantasy element of a world \u2014 defining its source, cost, limits, access, and interaction with physics. Covers the hard/soft spectrum, Sanderson's laws as design constraints, and cost structure patterns.",
+      "description": "Framework for designing systematic magic, metaphysical, or speculative technology systems. Reference when creating the fantasy element of a world — defining its source, cost, limits, access, and interaction with physics. Covers the hard/soft spectrum, Sanderson's laws as design constraints, and cost structure patterns.",
       "location": "skills/worldbuilding/magic-system-design/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -3140,7 +3140,7 @@
     },
     "character-belief-tracker": {
       "name": "character-belief-tracker",
-      "description": "Track what characters and factions know, believe, and hide \u2014 mapped against the world-bible's revelation layers. Use when you need to verify what a character would know at a given point in the narrative, check for accidental information leaks between revelation layers, or map the epistemic state of the world at any moment.",
+      "description": "Track what characters and factions know, believe, and hide — mapped against the world-bible's revelation layers. Use when you need to verify what a character would know at a given point in the narrative, check for accidental information leaks between revelation layers, or map the epistemic state of the world at any moment.",
       "location": "skills/worldbuilding/character-belief-tracker/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -3189,7 +3189,7 @@
     },
     "history-builder": {
       "name": "history-builder",
-      "description": "Build fictional history non-chronologically using fractal zoom \u2014 jump to any era, define events at any scale, and let the narrative emerge from the gaps. Based on the Microscope RPG methodology. Use when creating timelines, defining eras, or building historical depth for civilizations.",
+      "description": "Build fictional history non-chronologically using fractal zoom — jump to any era, define events at any scale, and let the narrative emerge from the gaps. Based on the Microscope RPG methodology. Use when creating timelines, defining eras, or building historical depth for civilizations.",
       "location": "skills/worldbuilding/history-builder/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -3292,7 +3292,7 @@
     },
     "strategic-foundations": {
       "name": "strategic-foundations",
-      "description": "Direct the strategic foundations subdomain \u2014 route game theory questions to the right specialist skill, define the learning curriculum, and resolve conflicts between analytical frameworks. Use when analyzing strategic interactions, finding equilibria, evaluating cooperation, bargaining, or classifying game structures.",
+      "description": "Direct the strategic foundations subdomain — route game theory questions to the right specialist skill, define the learning curriculum, and resolve conflicts between analytical frameworks. Use when analyzing strategic interactions, finding equilibria, evaluating cooperation, bargaining, or classifying game structures.",
       "location": "skills/game-theory/strategic-foundations/SKILL.md",
       "plugin": "game-theory",
       "type": "director",
@@ -3506,7 +3506,7 @@
     },
     "mechanism-design": {
       "name": "mechanism-design",
-      "description": "Direct the mechanism design subdomain \u2014 route questions about auction design, market rules, matching systems, voting mechanisms, incentive structures, and contract design to the right specialist skill. Use when the user needs to design rules or institutions, not just analyze an existing strategic interaction.",
+      "description": "Direct the mechanism design subdomain — route questions about auction design, market rules, matching systems, voting mechanisms, incentive structures, and contract design to the right specialist skill. Use when the user needs to design rules or institutions, not just analyze an existing strategic interaction.",
       "location": "skills/game-theory/mechanism-design/SKILL.md",
       "plugin": "game-theory",
       "type": "director",
@@ -3719,7 +3719,7 @@
     },
     "mechanism-designer": {
       "name": "mechanism-designer",
-      "description": "Design incentive-compatible mechanisms for specific allocation, auction, voting, or governance problems. Use when the user needs to create rules for a strategic situation \u2014 choosing an auction format, designing a matching system, structuring incentives for a team or platform, or building governance rules for an organization or DAO.",
+      "description": "Design incentive-compatible mechanisms for specific allocation, auction, voting, or governance problems. Use when the user needs to create rules for a strategic situation — choosing an auction format, designing a matching system, structuring incentives for a team or platform, or building governance rules for an organization or DAO.",
       "location": "skills/game-theory/mechanism-design/mechanism-designer/SKILL.md",
       "plugin": "game-theory",
       "type": "action",
@@ -3769,7 +3769,7 @@
     },
     "evolutionary-dynamics": {
       "name": "evolutionary-dynamics",
-      "description": "Direct the evolutionary dynamics subdomain \u2014 route questions about evolutionary game theory, population dynamics, ESS, replicator dynamics, fitness landscapes, and biological or cultural strategy to the right specialist skill. Use when analyzing large populations adapting over time without central design or full rationality.",
+      "description": "Direct the evolutionary dynamics subdomain — route questions about evolutionary game theory, population dynamics, ESS, replicator dynamics, fitness landscapes, and biological or cultural strategy to the right specialist skill. Use when analyzing large populations adapting over time without central design or full rationality.",
       "location": "skills/game-theory/evolutionary-dynamics/SKILL.md",
       "plugin": "game-theory",
       "type": "director",
@@ -3922,7 +3922,7 @@
     },
     "evo-simulator": {
       "name": "evo-simulator",
-      "description": "Simulate evolutionary game dynamics \u2014 run replicator equations, compute fixation probabilities, visualize phase portraits and population trajectories, and analyze evolutionary stability computationally. Use when the user wants to see dynamics in action, validate analytical predictions, or explore games too complex for closed-form analysis.",
+      "description": "Simulate evolutionary game dynamics — run replicator equations, compute fixation probabilities, visualize phase portraits and population trajectories, and analyze evolutionary stability computationally. Use when the user wants to see dynamics in action, validate analytical predictions, or explore games too complex for closed-form analysis.",
       "location": "skills/game-theory/evolutionary-dynamics/evo-simulator/SKILL.md",
       "plugin": "game-theory",
       "type": "action",
@@ -3970,7 +3970,7 @@
     },
     "information-economics": {
       "name": "information-economics",
-      "description": "Direct the information economics subdomain \u2014 route questions about signaling, screening, adverse selection, moral hazard, Bayesian persuasion, information design, cheap talk, and strategic communication to the right specialist skill. Use when asymmetric information drives the strategic interaction.",
+      "description": "Direct the information economics subdomain — route questions about signaling, screening, adverse selection, moral hazard, Bayesian persuasion, information design, cheap talk, and strategic communication to the right specialist skill. Use when asymmetric information drives the strategic interaction.",
       "location": "skills/game-theory/information-economics/SKILL.md",
       "plugin": "game-theory",
       "type": "director",
@@ -4122,7 +4122,7 @@
     },
     "info-designer": {
       "name": "info-designer",
-      "description": "Design optimal information disclosure policies for strategic settings. Use when the user needs to determine what information to reveal, to whom, and when \u2014 for platforms, regulators, organizations, or any sender who controls information flow. Produces concrete signal structures with commitment and incentive analysis.",
+      "description": "Design optimal information disclosure policies for strategic settings. Use when the user needs to determine what information to reveal, to whom, and when — for platforms, regulators, organizations, or any sender who controls information flow. Produces concrete signal structures with commitment and incentive analysis.",
       "location": "skills/game-theory/information-economics/info-designer/SKILL.md",
       "plugin": "game-theory",
       "type": "action",
@@ -4167,7 +4167,7 @@
     },
     "computational-strategy": {
       "name": "computational-strategy",
-      "description": "Direct the computational strategy subdomain \u2014 route questions about algorithmic game theory, computational complexity of equilibria, behavioral game theory, bounded rationality, learning in games, multi-agent reinforcement learning, and AI-era game theory to the right specialist skill. Use when computational limits, bounded rationality, or AI agents are central.",
+      "description": "Direct the computational strategy subdomain — route questions about algorithmic game theory, computational complexity of equilibria, behavioral game theory, bounded rationality, learning in games, multi-agent reinforcement learning, and AI-era game theory to the right specialist skill. Use when computational limits, bounded rationality, or AI agents are central.",
       "location": "skills/game-theory/computational-strategy/SKILL.md",
       "plugin": "game-theory",
       "type": "director",
@@ -4950,7 +4950,7 @@
     },
     "statistical-analysis": {
       "name": "statistical-analysis",
-      "description": "Direct the statistical analysis subdomain \u2014 route inference questions to the right specialist skill, define the learning curriculum, and resolve conflicts between analytical frameworks. Use when the user needs hypothesis testing, causal inference, survival analysis, clinical trial design, or any question requiring rigorous statistical reasoning.",
+      "description": "Direct the statistical analysis subdomain — route inference questions to the right specialist skill, define the learning curriculum, and resolve conflicts between analytical frameworks. Use when the user needs hypothesis testing, causal inference, survival analysis, clinical trial design, or any question requiring rigorous statistical reasoning.",
       "location": "skills/data-science/statistical-analysis/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -5004,7 +5004,7 @@
     },
     "modeling": {
       "name": "modeling",
-      "description": "Direct the modeling subdomain \u2014 route prediction and forecasting questions to the right specialist skill, define the learning curriculum, and resolve conflicts between model complexity and interpretability. Use when the user needs to build, evaluate, select, or forecast with predictive models.",
+      "description": "Direct the modeling subdomain — route prediction and forecasting questions to the right specialist skill, define the learning curriculum, and resolve conflicts between model complexity and interpretability. Use when the user needs to build, evaluate, select, or forecast with predictive models.",
       "location": "skills/data-science/modeling/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -5054,7 +5054,7 @@
     },
     "data-wrangling": {
       "name": "data-wrangling",
-      "description": "Direct the data wrangling subdomain \u2014 route data preparation questions to the right specialist skill, define the learning curriculum, and resolve conflicts between cleaning aggressiveness and information preservation. Use when the user needs to clean, transform, encode, or engineer features from raw data.",
+      "description": "Direct the data wrangling subdomain — route data preparation questions to the right specialist skill, define the learning curriculum, and resolve conflicts between cleaning aggressiveness and information preservation. Use when the user needs to clean, transform, encode, or engineer features from raw data.",
       "location": "skills/data-science/data-wrangling/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -5100,7 +5100,7 @@
     },
     "infrastructure-orchestrator": {
       "name": "infrastructure-orchestrator",
-      "description": "Orchestrate skill library management across the full lifecycle. Use when the user wants to create a new skill, audit the library, build a domain from scratch, run diagnostics, export skills, or perform any multi-step operation that involves coordinating multiple infrastructure tools \u2014 scaffold, registry, health, test, analyze, network, dashboard, export, or fork.",
+      "description": "Orchestrate skill library management across the full lifecycle. Use when the user wants to create a new skill, audit the library, build a domain from scratch, run diagnostics, export skills, or perform any multi-step operation that involves coordinating multiple infrastructure tools — scaffold, registry, health, test, analyze, network, dashboard, export, or fork.",
       "location": "skills/infrastructure/infrastructure-orchestrator/SKILL.md",
       "plugin": "skill-infra",
       "type": "orchestrator",
@@ -5228,7 +5228,7 @@
     },
     "geography-ecology": {
       "name": "geography-ecology",
-      "description": "Physical world design \u2014 terrain, climate, biomes, resource distribution, and how geography shapes civilization. Reference when placing civilizations, designing trade routes, determining natural barriers, or building any aspect of the world that derives from the physical landscape. The land shapes the people before the people shape the land.",
+      "description": "Physical world design — terrain, climate, biomes, resource distribution, and how geography shapes civilization. Reference when placing civilizations, designing trade routes, determining natural barriers, or building any aspect of the world that derives from the physical landscape. The land shapes the people before the people shape the land.",
       "location": "skills/worldbuilding/geography-ecology/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -5394,7 +5394,7 @@
     },
     "master-artificer": {
       "name": "master-artificer",
-      "description": "Orchestrate the creation of mind-blowing artifacts \u2014 interactive experiences, generative art, data visualizations, immersive narratives, simulations, and creative web applications. Use when the user wants to build something visually extraordinary, experientially surprising, or technically ambitious. Activates when the goal is not just \"make a thing\" but \"make a thing that delights, surprises, or astonishes.",
+      "description": "Orchestrate the creation of mind-blowing artifacts — interactive experiences, generative art, data visualizations, immersive narratives, simulations, and creative web applications. Use when the user wants to build something visually extraordinary, experientially surprising, or technically ambitious. Activates when the goal is not just \"make a thing\" but \"make a thing that delights, surprises, or astonishes.",
       "location": "skills/artifacts/master-artificer/SKILL.md",
       "plugin": "skill-infra",
       "type": "orchestrator",
@@ -5742,7 +5742,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
       "name": "prose-orchestrator",
-      "description": "Orchestrate prose writing, revision, and craft learning across fiction, nonfiction, and essays. Use when the user needs help drafting prose, revising existing text, analyzing writing style, or learning prose craft. Activates when the task involves sentence-level polish, narrative structure, rhetorical strategy, editing passes, or voice development \u2014 for any genre or form.",
+      "description": "Orchestrate prose writing, revision, and craft learning across fiction, nonfiction, and essays. Use when the user needs help drafting prose, revising existing text, analyzing writing style, or learning prose craft. Activates when the task involves sentence-level polish, narrative structure, rhetorical strategy, editing passes, or voice development — for any genre or form.",
       "location": "skills/writing/prose-orchestrator/SKILL.md",
       "plugin": "skill-infra",
       "type": "orchestrator",
@@ -5798,7 +5798,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
       "name": "sentence-craft",
-      "description": "Direct the sentence-craft subdomain \u2014 route line-level prose questions to the right specialist skill, define the learning curriculum, and resolve conflicts between rhythm, diction, and syntax guidance. Use when the user has a question about how sentences work, wants to improve their prose at the line level, or needs to understand why a sentence does or doesn't land.",
+      "description": "Direct the sentence-craft subdomain — route line-level prose questions to the right specialist skill, define the learning curriculum, and resolve conflicts between rhythm, diction, and syntax guidance. Use when the user has a question about how sentences work, wants to improve their prose at the line level, or needs to understand why a sentence does or doesn't land.",
       "location": "skills/writing/sentence-craft/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -5851,7 +5851,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "name": "prose-rhythm",
-      "description": "The music of prose \u2014 sentence length variation, cadence, stress patterns, and the physical sound of written language. Use when diagnosing why prose feels flat or monotonous, when teaching the craft of sentence rhythm, or when the user wants to understand how sentence length and sound create emotional effects.",
+      "description": "The music of prose — sentence length variation, cadence, stress patterns, and the physical sound of written language. Use when diagnosing why prose feels flat or monotonous, when teaching the craft of sentence rhythm, or when the user wants to understand how sentence length and sound create emotional effects.",
       "location": "skills/writing/sentence-craft/prose-rhythm/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -5901,7 +5901,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-04-09",
       "name": "diction",
-      "description": "Word choice in prose \u2014 precision, connotation, register, and the difference between the right word and the almost-right word. Use when diagnosing vague or imprecise language, when the user wants to understand word choice at the craft level, or when register and tone feel inconsistent across a piece of writing.",
+      "description": "Word choice in prose — precision, connotation, register, and the difference between the right word and the almost-right word. Use when diagnosing vague or imprecise language, when the user wants to understand word choice at the craft level, or when register and tone feel inconsistent across a piece of writing.",
       "location": "skills/writing/sentence-craft/diction/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -5956,7 +5956,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "name": "syntax-patterns",
-      "description": "Sentence structure variety in prose \u2014 cumulative, periodic, balanced, and fragmentary patterns, plus branching direction and structural diagnosis. Use when all sentences sound the same, when the user wants to understand sentence architecture, or when prose needs structural variety beyond rhythm and word choice.",
+      "description": "Sentence structure variety in prose — cumulative, periodic, balanced, and fragmentary patterns, plus branching direction and structural diagnosis. Use when all sentences sound the same, when the user wants to understand sentence architecture, or when prose needs structural variety beyond rhythm and word choice.",
       "location": "skills/writing/sentence-craft/syntax-patterns/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -5989,7 +5989,7 @@
     },
     "narrative-craft": {
       "name": "narrative-craft",
-      "description": "Direct the narrative-craft subdomain \u2014 route scene, structure, pacing, dialogue, POV, and sensory detail questions to the right specialist skill. Use when the user has a question about how stories and scenes work, wants to improve narrative prose beyond the sentence level, or needs to understand why a passage lacks tension, clarity, or immersion.",
+      "description": "Direct the narrative-craft subdomain — route scene, structure, pacing, dialogue, POV, and sensory detail questions to the right specialist skill. Use when the user has a question about how stories and scenes work, wants to improve narrative prose beyond the sentence level, or needs to understand why a passage lacks tension, clarity, or immersion.",
       "type": "director",
       "location": "skills/writing/narrative-craft/SKILL.md",
       "plugin": "skill-infra",
@@ -6052,7 +6052,7 @@
     },
     "narrative-arc": {
       "name": "narrative-arc",
-      "description": "Story structure frameworks \u2014 three-act, kishotenketsu, Truby's organic steps, and non-linear techniques. Use when the user asks about plot structure, story architecture, how to organize a narrative, or why a story feels shapeless. Presents frameworks as lenses, not rules.",
+      "description": "Story structure frameworks — three-act, kishotenketsu, Truby's organic steps, and non-linear techniques. Use when the user asks about plot structure, story architecture, how to organize a narrative, or why a story feels shapeless. Presents frameworks as lenses, not rules.",
       "type": "knowledge",
       "location": "skills/writing/narrative-craft/narrative-arc/SKILL.md",
       "plugin": "skill-infra",
@@ -6103,7 +6103,7 @@
     },
     "scene-craft": {
       "name": "scene-craft",
-      "description": "Scene construction \u2014 the scene as a unit of change, entering late and leaving early, turning points, and the Five Commandments at scene level. Use when a scene feels flat, purposeless, or bloated, or when the user wants to understand how to build effective scenes.",
+      "description": "Scene construction — the scene as a unit of change, entering late and leaving early, turning points, and the Five Commandments at scene level. Use when a scene feels flat, purposeless, or bloated, or when the user wants to understand how to build effective scenes.",
       "type": "knowledge",
       "location": "skills/writing/narrative-craft/scene-craft/SKILL.md",
       "plugin": "skill-infra",
@@ -6155,7 +6155,7 @@
     },
     "pacing": {
       "name": "pacing",
-      "description": "Narrative tempo \u2014 compression and expansion, tension and release, white space, and Hitchcock's bomb theory. Use when prose feels too slow, too fast, or rhythmically flat at the scene or chapter level, or when the user wants to understand how to control the reader's experience of time.",
+      "description": "Narrative tempo — compression and expansion, tension and release, white space, and Hitchcock's bomb theory. Use when prose feels too slow, too fast, or rhythmically flat at the scene or chapter level, or when the user wants to understand how to control the reader's experience of time.",
       "type": "knowledge",
       "location": "skills/writing/narrative-craft/pacing/SKILL.md",
       "plugin": "skill-infra",
@@ -6209,7 +6209,7 @@
     },
     "dialogue": {
       "name": "dialogue",
-      "description": "Dialogue craft \u2014 subtext, attribution, distinct character voices, and the art of characters saying one thing while meaning another. Use when dialogue feels wooden, generic, or on-the-nose, or when the user wants to understand how skilled writers make characters sound like themselves.",
+      "description": "Dialogue craft — subtext, attribution, distinct character voices, and the art of characters saying one thing while meaning another. Use when dialogue feels wooden, generic, or on-the-nose, or when the user wants to understand how skilled writers make characters sound like themselves.",
       "type": "knowledge",
       "location": "skills/writing/narrative-craft/dialogue/SKILL.md",
       "plugin": "skill-infra",
@@ -6263,7 +6263,7 @@
     },
     "point-of-view": {
       "name": "point-of-view",
-      "description": "Narrative perspective \u2014 psychic distance, free indirect discourse, unreliable narration, and POV mechanics. Use when the user asks about first/third person, narrative distance, head-hopping, or how to filter a story through a character's consciousness.",
+      "description": "Narrative perspective — psychic distance, free indirect discourse, unreliable narration, and POV mechanics. Use when the user asks about first/third person, narrative distance, head-hopping, or how to filter a story through a character's consciousness.",
       "type": "knowledge",
       "location": "skills/writing/narrative-craft/point-of-view/SKILL.md",
       "plugin": "skill-infra",
@@ -6315,7 +6315,7 @@
     },
     "concrete-detail": {
       "name": "concrete-detail",
-      "description": "Sensory specificity and the show/tell spectrum \u2014 the objective correlative, the telling detail, and knowing when showing is better than telling (and vice versa). Use when prose feels vague, abstract, or over-explained, or when the user asks about \"show don't tell.\"",
+      "description": "Sensory specificity and the show/tell spectrum — the objective correlative, the telling detail, and knowing when showing is better than telling (and vice versa). Use when prose feels vague, abstract, or over-explained, or when the user asks about \"show don't tell.\"",
       "type": "knowledge",
       "location": "skills/writing/narrative-craft/concrete-detail/SKILL.md",
       "plugin": "skill-infra",
@@ -6366,7 +6366,7 @@
     },
     "rhetoric": {
       "name": "rhetoric",
-      "description": "Direct the rhetoric subdomain \u2014 route persuasion, argument, essay form, and rhetorical device questions to the right specialist skill. Use when the user is writing to persuade, constructing an argument, choosing an essay form, or wants to deploy rhetorical devices effectively.",
+      "description": "Direct the rhetoric subdomain — route persuasion, argument, essay form, and rhetorical device questions to the right specialist skill. Use when the user is writing to persuade, constructing an argument, choosing an essay form, or wants to deploy rhetorical devices effectively.",
       "type": "director",
       "location": "skills/writing/rhetoric/SKILL.md",
       "plugin": "skill-infra",
@@ -6425,7 +6425,7 @@
     },
     "rhetorical-appeals": {
       "name": "rhetorical-appeals",
-      "description": "The classical modes of persuasion \u2014 ethos, pathos, logos, and kairos. Use when the user is writing to persuade and needs to understand which appeal to deploy, when credibility matters more than emotion, or how to create genuine urgency without manipulation.",
+      "description": "The classical modes of persuasion — ethos, pathos, logos, and kairos. Use when the user is writing to persuade and needs to understand which appeal to deploy, when credibility matters more than emotion, or how to create genuine urgency without manipulation.",
       "type": "knowledge",
       "location": "skills/writing/rhetoric/rhetorical-appeals/SKILL.md",
       "plugin": "skill-infra",
@@ -6473,7 +6473,7 @@
     },
     "argument-structure": {
       "name": "argument-structure",
-      "description": "How to build and arrange arguments \u2014 Toulmin's warrant, Rogerian empathy, classical structure, and the volta/turn in essays. Use when the user needs to organize a persuasive piece, handle counterarguments, or understand why an argument isn't landing structurally.",
+      "description": "How to build and arrange arguments — Toulmin's warrant, Rogerian empathy, classical structure, and the volta/turn in essays. Use when the user needs to organize a persuasive piece, handle counterarguments, or understand why an argument isn't landing structurally.",
       "type": "knowledge",
       "location": "skills/writing/rhetoric/argument-structure/SKILL.md",
       "plugin": "skill-infra",
@@ -6521,7 +6521,7 @@
     },
     "rhetorical-devices": {
       "name": "rhetorical-devices",
-      "description": "The workhorse rhetorical devices for prose \u2014 anaphora, tricolon, antithesis, chiasmus, and the rhythm-and-pace devices that make prose memorable. Use when the user wants to deploy specific devices for emphasis, rhythm, or persuasion. Not an encyclopedia \u2014 only the devices working prose writers actually use.",
+      "description": "The workhorse rhetorical devices for prose — anaphora, tricolon, antithesis, chiasmus, and the rhythm-and-pace devices that make prose memorable. Use when the user wants to deploy specific devices for emphasis, rhythm, or persuasion. Not an encyclopedia — only the devices working prose writers actually use.",
       "type": "knowledge",
       "location": "skills/writing/rhetoric/rhetorical-devices/SKILL.md",
       "plugin": "skill-infra",
@@ -6569,7 +6569,7 @@
     },
     "essay-forms": {
       "name": "essay-forms",
-      "description": "A form registry for essays \u2014 personal, argumentative, lyric, braided, hermit crab, and collage/fragment. Use when the user is choosing an essay form, wants to understand how form shapes content, or asks about specific essay types. Each form carries its own logic, strengths, and constraints.",
+      "description": "A form registry for essays — personal, argumentative, lyric, braided, hermit crab, and collage/fragment. Use when the user is choosing an essay form, wants to understand how form shapes content, or asks about specific essay types. Each form carries its own logic, strengths, and constraints.",
       "type": "knowledge",
       "location": "skills/writing/rhetoric/essay-forms/SKILL.md",
       "plugin": "skill-infra",
@@ -6617,7 +6617,7 @@
     },
     "revision-craft": {
       "name": "revision-craft",
-      "description": "Direct the revision-craft subdomain \u2014 route editing, style analysis, and prose-tightening questions to the right specialist skill. Use when the user has existing prose that needs improvement, wants a structured editing pass, or needs to analyze the style characteristics of a text sample.",
+      "description": "Direct the revision-craft subdomain — route editing, style analysis, and prose-tightening questions to the right specialist skill. Use when the user has existing prose that needs improvement, wants a structured editing pass, or needs to analyze the style characteristics of a text sample.",
       "type": "director",
       "location": "skills/writing/revision-craft/SKILL.md",
       "plugin": "skill-infra",
@@ -6670,7 +6670,7 @@
     },
     "prose-editor": {
       "name": "prose-editor",
-      "description": "Revise existing prose using the professional editing-pass hierarchy \u2014 structural, then line, then copy. Use when the user has a draft that needs improvement, wants a specific editing pass, or asks to \"make this better.\" Diagnoses before treating.",
+      "description": "Revise existing prose using the professional editing-pass hierarchy — structural, then line, then copy. Use when the user has a draft that needs improvement, wants a specific editing pass, or asks to \"make this better.\" Diagnoses before treating.",
       "type": "action",
       "location": "skills/writing/revision-craft/prose-editor/SKILL.md",
       "plugin": "skill-infra",
@@ -6718,7 +6718,7 @@
     },
     "style-analyzer": {
       "name": "style-analyzer",
-      "description": "Analyze and characterize the style of a prose text \u2014 sentence length distribution, diction register, vocabulary richness, syntactic patterns, and voice signature. Use when the user wants to understand what makes a text's prose distinctive, compare styles, or diagnose style inconsistencies.",
+      "description": "Analyze and characterize the style of a prose text — sentence length distribution, diction register, vocabulary richness, syntactic patterns, and voice signature. Use when the user wants to understand what makes a text's prose distinctive, compare styles, or diagnose style inconsistencies.",
       "type": "action",
       "location": "skills/writing/revision-craft/style-analyzer/SKILL.md",
       "plugin": "skill-infra",
@@ -6767,7 +6767,7 @@
     },
     "prose-writer": {
       "name": "prose-writer",
-      "description": "Draft prose from a brief \u2014 voice-aware, form-aware, and grounded in craft principles. Use when the user needs new prose written, whether fiction, essay, or nonfiction. Takes an editorial brief (voice register, form, audience, constraints) and produces a draft that the user can then revise.",
+      "description": "Draft prose from a brief — voice-aware, form-aware, and grounded in craft principles. Use when the user needs new prose written, whether fiction, essay, or nonfiction. Takes an editorial brief (voice register, form, audience, constraints) and produces a draft that the user can then revise.",
       "type": "action",
       "location": "skills/writing/prose-writer/SKILL.md",
       "plugin": "skill-infra",
@@ -7027,7 +7027,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-03-26",
       "name": "style-dna",
-      "description": "The 14-dimension model of prose style \u2014 decompose any author's voice into measurable axes, compare authors, and identify the specific craft levers that make one writer sound different from another. Reference when designing blended voices, analyzing prose style, or understanding why a passage sounds the way it does. Feeds into style-mixer and style-mutator.",
+      "description": "The 14-dimension model of prose style — decompose any author's voice into measurable axes, compare authors, and identify the specific craft levers that make one writer sound different from another. Reference when designing blended voices, analyzing prose style, or understanding why a passage sounds the way it does. Feeds into style-mixer and style-mutator.",
       "location": "skills/writing/sentence-craft/style-dna/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -7081,7 +7081,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
       "name": "style-mixer",
-      "description": "Blend 2-4 author DNA profiles into a novel Voice Card \u2014 a reusable style specification that the prose-writer can consume. Use when the user wants to design a specific voice for a project, character, or piece by combining elements from different authors. The mixer doesn't average \u2014 it selects which dimensions to pull from each author.",
+      "description": "Blend 2-4 author DNA profiles into a novel Voice Card — a reusable style specification that the prose-writer can consume. Use when the user wants to design a specific voice for a project, character, or piece by combining elements from different authors. The mixer doesn't average — it selects which dimensions to pull from each author.",
       "location": "skills/writing/prose-orchestrator/style-mixer/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -7131,7 +7131,7 @@
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
       "name": "style-mutator",
-      "description": "Transform existing prose by pushing it along specific style-DNA axes. Use when the user has a passage and wants to see what happens when it's warped toward a different author, dimension, or Voice Card. The mutator is experimental and discovery-oriented \u2014 less controlled than the mixer, more surprising.",
+      "description": "Transform existing prose by pushing it along specific style-DNA axes. Use when the user has a passage and wants to see what happens when it's warped toward a different author, dimension, or Voice Card. The mutator is experimental and discovery-oriented — less controlled than the mixer, more surprising.",
       "location": "skills/writing/revision-craft/style-mutator/SKILL.md",
       "plugin": "skill-infra",
       "type": "action",
@@ -7165,7 +7165,7 @@
     },
     "adaptive-monitoring": {
       "name": "adaptive-monitoring",
-      "description": "Direct the adaptive monitoring subdomain \u2014 route portfolio oversight questions to the right specialist skill, define the analysis workflow, and resolve conflicts between monitoring approaches. Use when the user needs to evaluate portfolio performance, decide on rebalancing, or integrate alternative data into their investment process.",
+      "description": "Direct the adaptive monitoring subdomain — route portfolio oversight questions to the right specialist skill, define the analysis workflow, and resolve conflicts between monitoring approaches. Use when the user needs to evaluate portfolio performance, decide on rebalancing, or integrate alternative data into their investment process.",
       "location": "skills/investing/adaptive-monitoring/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -7430,7 +7430,7 @@
     },
     "asset-universe": {
       "name": "asset-universe",
-      "description": "Direct the asset universe subdomain \u2014 route asset-class-specific questions to the right specialist skill, define cross-asset analysis frameworks, and resolve conflicts between asset class views. Use when analyzing a specific asset class or comparing opportunities across equities, fixed income, commodities, currencies, or alternatives.",
+      "description": "Direct the asset universe subdomain — route asset-class-specific questions to the right specialist skill, define cross-asset analysis frameworks, and resolve conflicts between asset class views. Use when analyzing a specific asset class or comparing opportunities across equities, fixed income, commodities, currencies, or alternatives.",
       "location": "skills/investing/asset-universe/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -7482,7 +7482,7 @@
     },
     "alternatives": {
       "name": "alternatives",
-      "description": "Alternative investment frameworks \u2014 private equity, private credit, real estate, infrastructure, hedge funds, and managed futures. Reference when evaluating illiquid investments, sizing alternative allocations, understanding the illiquidity premium, or accessing non-traditional return streams.",
+      "description": "Alternative investment frameworks — private equity, private credit, real estate, infrastructure, hedge funds, and managed futures. Reference when evaluating illiquid investments, sizing alternative allocations, understanding the illiquidity premium, or accessing non-traditional return streams.",
       "location": "skills/investing/asset-universe/alternatives/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -7528,7 +7528,7 @@
     },
     "commodities": {
       "name": "commodities",
-      "description": "Commodity investing frameworks \u2014 supply/demand analysis, energy markets, metals, agriculture, and futures market structure. Reference when analyzing commodity markets, evaluating inflation hedges, understanding roll yield, or positioning within the commodity complex.",
+      "description": "Commodity investing frameworks — supply/demand analysis, energy markets, metals, agriculture, and futures market structure. Reference when analyzing commodity markets, evaluating inflation hedges, understanding roll yield, or positioning within the commodity complex.",
       "location": "skills/investing/asset-universe/commodities/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -7576,7 +7576,7 @@
     },
     "currencies": {
       "name": "currencies",
-      "description": "Currency analysis frameworks \u2014 FX valuation, dollar dynamics, carry trades, and how currencies affect multi-asset portfolios. Reference when analyzing foreign exchange, hedging currency exposure, evaluating the dollar's impact on global markets, or building FX-aware portfolios.",
+      "description": "Currency analysis frameworks — FX valuation, dollar dynamics, carry trades, and how currencies affect multi-asset portfolios. Reference when analyzing foreign exchange, hedging currency exposure, evaluating the dollar's impact on global markets, or building FX-aware portfolios.",
       "location": "skills/investing/asset-universe/currencies/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -7622,7 +7622,7 @@
     },
     "digital-assets": {
       "name": "digital-assets",
-      "description": "Digital asset investing frameworks \u2014 Bitcoin, Ethereum, tokenization, on-chain analytics, and crypto market structure. Reference when analyzing cryptocurrency markets, sizing crypto in portfolios, evaluating DeFi opportunities, or understanding blockchain-based financial assets.",
+      "description": "Digital asset investing frameworks — Bitcoin, Ethereum, tokenization, on-chain analytics, and crypto market structure. Reference when analyzing cryptocurrency markets, sizing crypto in portfolios, evaluating DeFi opportunities, or understanding blockchain-based financial assets.",
       "location": "skills/investing/asset-universe/digital-assets/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -7668,7 +7668,7 @@
     },
     "equities": {
       "name": "equities",
-      "description": "Equity investing frameworks \u2014 factor investing, sector rotation, geographic allocation, earnings analysis, and market structure. Reference when analyzing stocks, building equity portfolios, evaluating market conditions, or understanding what drives equity returns.",
+      "description": "Equity investing frameworks — factor investing, sector rotation, geographic allocation, earnings analysis, and market structure. Reference when analyzing stocks, building equity portfolios, evaluating market conditions, or understanding what drives equity returns.",
       "location": "skills/investing/asset-universe/equities/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -7716,7 +7716,7 @@
     },
     "fixed-income": {
       "name": "fixed-income",
-      "description": "Fixed income investing frameworks \u2014 yield curve analysis, credit evaluation, duration management, and bond market structure. Reference when analyzing bonds, managing interest rate risk, evaluating credit, or understanding what the bond market signals about the economy.",
+      "description": "Fixed income investing frameworks — yield curve analysis, credit evaluation, duration management, and bond market structure. Reference when analyzing bonds, managing interest rate risk, evaluating credit, or understanding what the bond market signals about the economy.",
       "location": "skills/investing/asset-universe/fixed-income/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -7763,7 +7763,7 @@
     },
     "geopolitical-overlay": {
       "name": "geopolitical-overlay",
-      "description": "Direct the geopolitical overlay subdomain \u2014 route macro-geopolitical investment questions to the right specialist skill covering great-power dynamics, energy security, or secular themes. Use when the user needs to assess how geopolitical forces shape portfolio positioning.",
+      "description": "Direct the geopolitical overlay subdomain — route macro-geopolitical investment questions to the right specialist skill covering great-power dynamics, energy security, or secular themes. Use when the user needs to assess how geopolitical forces shape portfolio positioning.",
       "location": "skills/investing/geopolitical-overlay/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -7959,7 +7959,7 @@
     },
     "market-microstructure": {
       "name": "market-microstructure",
-      "description": "Director skill that routes questions about passive fund flows, options market mechanics, and liquidity dynamics to the appropriate specialist knowledge skill. Use when analyzing how market plumbing \u2014 index flows, dealer hedging, dark pools, and structural liquidity \u2014 affects prices independent of fundamentals.",
+      "description": "Director skill that routes questions about passive fund flows, options market mechanics, and liquidity dynamics to the appropriate specialist knowledge skill. Use when analyzing how market plumbing — index flows, dealer hedging, dark pools, and structural liquidity — affects prices independent of fundamentals.",
       "location": "skills/investing/market-microstructure/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -8014,7 +8014,7 @@
     },
     "liquidity-topology": {
       "name": "liquidity-topology",
-      "description": "Knowledge skill covering market liquidity assessment \u2014 bid-ask spreads, market depth, dark pool mechanics, order flow toxicity (VPIN), flash crash anatomy, ETF liquidity illusion, HFT market quality, and payment for order flow. Use when evaluating whether a market is genuinely liquid or structurally fragile beneath the surface.",
+      "description": "Knowledge skill covering market liquidity assessment — bid-ask spreads, market depth, dark pool mechanics, order flow toxicity (VPIN), flash crash anatomy, ETF liquidity illusion, HFT market quality, and payment for order flow. Use when evaluating whether a market is genuinely liquid or structurally fragile beneath the surface.",
       "location": "skills/investing/market-microstructure/liquidity-topology/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8061,7 +8061,7 @@
     },
     "options-mechanics": {
       "name": "options-mechanics",
-      "description": "Knowledge skill covering options market microstructure \u2014 0DTE dynamics, gamma exposure (GEX), dealer hedging mechanics, volatility surface analysis, vanna and charm flows, options expiration effects, and retail options impact. Use when analyzing how options market mechanics create non-fundamental price movements in the underlying.",
+      "description": "Knowledge skill covering options market microstructure — 0DTE dynamics, gamma exposure (GEX), dealer hedging mechanics, volatility surface analysis, vanna and charm flows, options expiration effects, and retail options impact. Use when analyzing how options market mechanics create non-fundamental price movements in the underlying.",
       "location": "skills/investing/market-microstructure/options-mechanics/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8109,7 +8109,7 @@
     },
     "passive-flow-dynamics": {
       "name": "passive-flow-dynamics",
-      "description": "Knowledge skill covering the mechanics, market impact, and investment implications of passive fund flows \u2014 index inclusion effects, ETF creation/redemption, rebalancing calendars, market-cap weighting feedback loops, and the degradation of price discovery as passive dominance grows.",
+      "description": "Knowledge skill covering the mechanics, market impact, and investment implications of passive fund flows — index inclusion effects, ETF creation/redemption, rebalancing calendars, market-cap weighting feedback loops, and the degradation of price discovery as passive dominance grows.",
       "location": "skills/investing/market-microstructure/passive-flow-dynamics/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8209,7 +8209,7 @@
     },
     "asset-allocation": {
       "name": "asset-allocation",
-      "description": "Strategic and tactical asset allocation frameworks \u2014 from classic models (60/40, risk parity, endowment) to regime-based positioning, glide path design, liability-driven investing, and rebalancing methodology.",
+      "description": "Strategic and tactical asset allocation frameworks — from classic models (60/40, risk parity, endowment) to regime-based positioning, glide path design, liability-driven investing, and rebalancing methodology.",
       "location": "skills/investing/portfolio-construction/asset-allocation/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8264,7 +8264,7 @@
     },
     "factor-exposure": {
       "name": "factor-exposure",
-      "description": "Systematic factor investing frameworks \u2014 the robust factors (value, momentum, quality, low vol, size, carry), factor timing across regimes, multi-factor construction, smart beta implementation, and factor attribution.",
+      "description": "Systematic factor investing frameworks — the robust factors (value, momentum, quality, low vol, size, carry), factor timing across regimes, multi-factor construction, smart beta implementation, and factor attribution.",
       "location": "skills/investing/portfolio-construction/factor-exposure/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8319,7 +8319,7 @@
     },
     "hedging-architecture": {
       "name": "hedging-architecture",
-      "description": "Downside protection and portfolio hedging frameworks \u2014 put protection strategies, tail risk hedging, the Taleb barbell, cross-asset hedging, currency hedging, and cost-benefit analysis of insurance approaches.",
+      "description": "Downside protection and portfolio hedging frameworks — put protection strategies, tail risk hedging, the Taleb barbell, cross-asset hedging, currency hedging, and cost-benefit analysis of insurance approaches.",
       "location": "skills/investing/portfolio-construction/hedging-architecture/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8368,7 +8368,7 @@
     },
     "tax-optimization": {
       "name": "tax-optimization",
-      "description": "Tax-efficient portfolio management frameworks \u2014 tax-loss harvesting, direct indexing, asset location, tax-aware rebalancing, capital gains management, and estate planning considerations for investors.",
+      "description": "Tax-efficient portfolio management frameworks — tax-loss harvesting, direct indexing, asset location, tax-aware rebalancing, capital gains management, and estate planning considerations for investors.",
       "location": "skills/investing/portfolio-construction/tax-optimization/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8840,7 +8840,7 @@
     },
     "risk-architecture": {
       "name": "risk-architecture",
-      "description": "Direct the risk architecture subdomain \u2014 route questions about position sizing, tail risk, correlation regimes, and drawdown psychology to the right specialist skill. Use when managing portfolio risk, sizing positions, hedging tail events, or navigating drawdowns.",
+      "description": "Direct the risk architecture subdomain — route questions about position sizing, tail risk, correlation regimes, and drawdown psychology to the right specialist skill. Use when managing portfolio risk, sizing positions, hedging tail events, or navigating drawdowns.",
       "location": "skills/investing/risk-architecture/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -8891,7 +8891,7 @@
     },
     "correlation-regimes": {
       "name": "correlation-regimes",
-      "description": "Deep expertise in cross-asset correlation regimes \u2014 how correlations shift across market environments, why diversification fails in crises, and how to identify true diversifiers. Use when stress-testing portfolio diversification or analyzing regime-dependent behavior.",
+      "description": "Deep expertise in cross-asset correlation regimes — how correlations shift across market environments, why diversification fails in crises, and how to identify true diversifiers. Use when stress-testing portfolio diversification or analyzing regime-dependent behavior.",
       "location": "skills/investing/risk-architecture/correlation-regimes/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8945,7 +8945,7 @@
     },
     "drawdown-psychology": {
       "name": "drawdown-psychology",
-      "description": "Deep expertise in drawdown management \u2014 the psychology of losses, when to cut vs when to hold, stop-loss discipline, drawdown budgets, and the behavioral frameworks of Howard Marks, Tudor Jones, and Buffett. Use when navigating portfolio losses or planning pre-trade risk discipline.",
+      "description": "Deep expertise in drawdown management — the psychology of losses, when to cut vs when to hold, stop-loss discipline, drawdown budgets, and the behavioral frameworks of Howard Marks, Tudor Jones, and Buffett. Use when navigating portfolio losses or planning pre-trade risk discipline.",
       "location": "skills/investing/risk-architecture/drawdown-psychology/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -8994,7 +8994,7 @@
     },
     "position-sizing": {
       "name": "position-sizing",
-      "description": "Deep expertise in position sizing methodologies \u2014 Kelly criterion, risk budgeting, volatility-adjusted sizing, conviction-based concentration, and portfolio heat management. Use when determining how much capital to allocate to a specific trade or position.",
+      "description": "Deep expertise in position sizing methodologies — Kelly criterion, risk budgeting, volatility-adjusted sizing, conviction-based concentration, and portfolio heat management. Use when determining how much capital to allocate to a specific trade or position.",
       "location": "skills/investing/risk-architecture/position-sizing/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -9043,7 +9043,7 @@
     },
     "tail-risk": {
       "name": "tail-risk",
-      "description": "Deep expertise in tail risk management using Nassim Taleb's framework \u2014 fat tails, antifragility, barbell strategy, convexity, and via negativa. Use when evaluating portfolio fragility, structuring tail hedges, or building antifragile positions.",
+      "description": "Deep expertise in tail risk management using Nassim Taleb's framework — fat tails, antifragility, barbell strategy, convexity, and via negativa. Use when evaluating portfolio fragility, structuring tail hedges, or building antifragile positions.",
       "location": "skills/investing/risk-architecture/tail-risk/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -9394,7 +9394,7 @@
     },
     "intrinsic-value": {
       "name": "intrinsic-value",
-      "description": "Expert knowledge on business valuation from first principles \u2014 DCF methodology, owner earnings, margin of safety, moat analysis, valuation multiples, and asset-based approaches. Covers the complete toolkit for determining what a business is actually worth. Use when evaluating whether a specific business or asset is trading above or below its fundamental worth.",
+      "description": "Expert knowledge on business valuation from first principles — DCF methodology, owner earnings, margin of safety, moat analysis, valuation multiples, and asset-based approaches. Covers the complete toolkit for determining what a business is actually worth. Use when evaluating whether a specific business or asset is trading above or below its fundamental worth.",
       "location": "skills/investing/value-quality/intrinsic-value/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -9443,7 +9443,7 @@
     },
     "quality-compounders": {
       "name": "quality-compounders",
-      "description": "Expert knowledge on Munger's quality-at-a-fair-price framework \u2014 the math of compounding, ROIC analysis, reinvestment runway, management assessment, franchise vs commodity businesses, and practical evaluation of quality compounders.",
+      "description": "Expert knowledge on Munger's quality-at-a-fair-price framework — the math of compounding, ROIC analysis, reinvestment runway, management assessment, franchise vs commodity businesses, and practical evaluation of quality compounders.",
       "location": "skills/investing/value-quality/quality-compounders/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -9491,7 +9491,7 @@
     },
     "second-level-thinking": {
       "name": "second-level-thinking",
-      "description": "Expert knowledge on Howard Marks's contrarian investment framework \u2014 first-level vs second-level thinking, consensus analysis, cycle positioning, the relationship between price and risk, and the psychological requirements of contrarian investing.",
+      "description": "Expert knowledge on Howard Marks's contrarian investment framework — first-level vs second-level thinking, consensus analysis, cycle positioning, the relationship between price and risk, and the psychological requirements of contrarian investing.",
       "location": "skills/investing/value-quality/second-level-thinking/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -9545,7 +9545,7 @@
     },
     "aesthetic-identity": {
       "name": "aesthetic-identity",
-      "description": "A living model of the user's evolving visual aesthetic \u2014 dimensional fingerprint, palette tendencies, compositional preferences, and motion feel. Consult before any creative output to ground design decisions in the user's established (and evolving) identity.",
+      "description": "A living model of the user's evolving visual aesthetic — dimensional fingerprint, palette tendencies, compositional preferences, and motion feel. Consult before any creative output to ground design decisions in the user's established (and evolving) identity.",
       "location": "skills/design/aesthetic-identity/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -9593,7 +9593,7 @@
     },
     "style-evolution-observer": {
       "name": "style-evolution-observer",
-      "description": "Observe creative outputs and infer aesthetic preferences from user behavior \u2014 acceptance, revision patterns, explicit praise, and abandonment. Update the aesthetic-identity profile with dimensional shifts, confidence changes, and discovered dimensions. Activates after any creative output (artifact, design, visualization) to capture what was built and how the user responded.",
+      "description": "Observe creative outputs and infer aesthetic preferences from user behavior — acceptance, revision patterns, explicit praise, and abandonment. Update the aesthetic-identity profile with dimensional shifts, confidence changes, and discovered dimensions. Activates after any creative output (artifact, design, visualization) to capture what was built and how the user responded.",
       "location": "skills/design/style-evolution-observer/SKILL.md",
       "plugin": "skill-infra",
       "type": "observer",
@@ -9639,7 +9639,7 @@
     },
     "motion-design": {
       "name": "motion-design",
-      "description": "Knowledge skill for animation principles, timing, easing, choreography, and motion language in digital artifacts. Covers micro-interactions, page transitions, loading states, scroll-driven animation, and performance-aware motion patterns. Consult when any artifact or design needs movement \u2014 from a single hover effect to a fully choreographed experience.",
+      "description": "Knowledge skill for animation principles, timing, easing, choreography, and motion language in digital artifacts. Covers micro-interactions, page transitions, loading states, scroll-driven animation, and performance-aware motion patterns. Consult when any artifact or design needs movement — from a single hover effect to a fully choreographed experience.",
       "location": "skills/design/motion-design/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -9732,7 +9732,7 @@
     },
     "physical-world": {
       "name": "physical-world",
-      "description": "Route questions about the physical environment of a world \u2014 terrain, climate, biomes, ecosystems, and technology. Use when the user is designing geography, building an ecosystem, placing civilizations on a map, defining a tech level, or asking how the physical landscape shapes the people who live in it.",
+      "description": "Route questions about the physical environment of a world — terrain, climate, biomes, ecosystems, and technology. Use when the user is designing geography, building an ecosystem, placing civilizations on a map, defining a tech level, or asking how the physical landscape shapes the people who live in it.",
       "location": "skills/worldbuilding/physical-world/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "director",
@@ -9778,7 +9778,7 @@
     },
     "civilizations": {
       "name": "civilizations",
-      "description": "Route questions about the people and structures of a world \u2014 cultures, factions, religions, and history. Use when designing a civilization's values or governance, building political entities, creating belief systems, writing a timeline, or understanding how groups of people organize themselves and conflict over time.",
+      "description": "Route questions about the people and structures of a world — cultures, factions, religions, and history. Use when designing a civilization's values or governance, building political entities, creating belief systems, writing a timeline, or understanding how groups of people organize themselves and conflict over time.",
       "location": "skills/worldbuilding/civilizations/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "director",
@@ -9826,7 +9826,7 @@
     },
     "systems-craft": {
       "name": "systems-craft",
-      "description": "Route questions about the rules and systems that make a world distinct \u2014 magic, metaphysics, naming, and the foundational axioms in the world-bible. Use when designing a magic or technology system, creating a naming language for a culture, checking a world decision against its core rules, or establishing the fundamental constraints that everything else must respect.",
+      "description": "Route questions about the rules and systems that make a world distinct — magic, metaphysics, naming, and the foundational axioms in the world-bible. Use when designing a magic or technology system, creating a naming language for a culture, checking a world decision against its core rules, or establishing the fundamental constraints that everything else must respect.",
       "location": "skills/worldbuilding/systems-craft/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "director",
@@ -9964,7 +9964,7 @@
     },
     "logic": {
       "name": "logic",
-      "description": "Direct the logic subdomain \u2014 route reasoning evaluation tasks to argument analysis, formal logic, or assumption excavation. Use when evaluating argument validity, detecting fallacies, checking logical structure, formalizing natural-language reasoning, or surfacing hidden premises.",
+      "description": "Direct the logic subdomain — route reasoning evaluation tasks to argument analysis, formal logic, or assumption excavation. Use when evaluating argument validity, detecting fallacies, checking logical structure, formalizing natural-language reasoning, or surfacing hidden premises.",
       "location": "skills/philosophy/logic/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "director",
@@ -10009,7 +10009,7 @@
     },
     "argument-analyst": {
       "name": "argument-analyst",
-      "description": "Evaluate an argument for validity, soundness, and fallacies. Use when the user presents an argument and needs a structured diagnosis of its logical quality \u2014 whether the conclusion follows from the premises, whether the premises are plausible, and what reasoning errors are present.",
+      "description": "Evaluate an argument for validity, soundness, and fallacies. Use when the user presents an argument and needs a structured diagnosis of its logical quality — whether the conclusion follows from the premises, whether the premises are plausible, and what reasoning errors are present.",
       "location": "skills/philosophy/logic/argument-analyst/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "action",
@@ -10091,7 +10091,7 @@
     },
     "dialectical-tools": {
       "name": "dialectical-tools",
-      "description": "Direct the dialectical methods subdomain \u2014 route meta-methodological requests to Socratic questioning, steel-manning, thought experiments, or structured dialectic. Use when the user wants to challenge reasoning, stress-test a position, play devil's advocate, think through a problem more carefully, or run a structured debate.",
+      "description": "Direct the dialectical methods subdomain — route meta-methodological requests to Socratic questioning, steel-manning, thought experiments, or structured dialectic. Use when the user wants to challenge reasoning, stress-test a position, play devil's advocate, think through a problem more carefully, or run a structured debate.",
       "location": "skills/philosophy/dialectical-tools/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "director",
@@ -10219,7 +10219,7 @@
     },
     "epistemology": {
       "name": "epistemology",
-      "description": "Direct the epistemology subdomain \u2014 route knowledge, justification, and evidence questions to evidence evaluation, belief auditing, or Bayesian reasoning. Use when assessing what we know and how well we know it, evaluating evidence quality, checking belief coherence, detecting epistemic overconfidence, or calibrating credences.",
+      "description": "Direct the epistemology subdomain — route knowledge, justification, and evidence questions to evidence evaluation, belief auditing, or Bayesian reasoning. Use when assessing what we know and how well we know it, evaluating evidence quality, checking belief coherence, detecting epistemic overconfidence, or calibrating credences.",
       "location": "skills/philosophy/epistemology/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "director",
@@ -10350,7 +10350,7 @@
     },
     "ethics": {
       "name": "ethics",
-      "description": "Direct the ethics subdomain \u2014 route moral reasoning questions to dilemma analysis, stakeholder mapping, or values excavation. Use when evaluating whether an action is right or wrong, analyzing ethical trade-offs, surfacing hidden value judgments, identifying affected parties, or applying moral frameworks to real-world decisions.",
+      "description": "Direct the ethics subdomain — route moral reasoning questions to dilemma analysis, stakeholder mapping, or values excavation. Use when evaluating whether an action is right or wrong, analyzing ethical trade-offs, surfacing hidden value judgments, identifying affected parties, or applying moral frameworks to real-world decisions.",
       "location": "skills/philosophy/ethics/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "director",
@@ -10486,7 +10486,7 @@
     },
     "decision-theory": {
       "name": "decision-theory",
-      "description": "Direct the decision theory subdomain \u2014 route choice-under-uncertainty problems to decision structuring, bias detection, or counterfactual analysis. Use when the user needs to make a decision with incomplete information, structure a complex choice, identify cognitive biases, or reason about what would have happened under different choices.",
+      "description": "Direct the decision theory subdomain — route choice-under-uncertainty problems to decision structuring, bias detection, or counterfactual analysis. Use when the user needs to make a decision with incomplete information, structure a complex choice, identify cognitive biases, or reason about what would have happened under different choices.",
       "location": "skills/philosophy/decision-theory/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "director",
@@ -10665,7 +10665,7 @@
     },
     "philosophy-of-science": {
       "name": "philosophy-of-science",
-      "description": "Direct the philosophy of science subdomain \u2014 route methodology and demarcation questions to the right specialist. Use when evaluating study design, assessing scientific methodology, distinguishing science from pseudoscience, identifying paradigmatic assumptions, or critiquing research methods.",
+      "description": "Direct the philosophy of science subdomain — route methodology and demarcation questions to the right specialist. Use when evaluating study design, assessing scientific methodology, distinguishing science from pseudoscience, identifying paradigmatic assumptions, or critiquing research methods.",
       "location": "skills/philosophy/philosophy-of-science/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "director",
@@ -10792,7 +10792,7 @@
     },
     "political-philosophy": {
       "name": "political-philosophy",
-      "description": "Direct the political philosophy subdomain \u2014 route justice, rights, and governance questions to the right specialist. Use when evaluating policy through justice frameworks, analyzing competing rights claims, assessing governance structures, or understanding why reasonable people disagree about political arrangements.",
+      "description": "Direct the political philosophy subdomain — route justice, rights, and governance questions to the right specialist. Use when evaluating policy through justice frameworks, analyzing competing rights claims, assessing governance structures, or understanding why reasonable people disagree about political arrangements.",
       "location": "skills/philosophy/political-philosophy/SKILL.md",
       "plugin": "skill-philosophy",
       "type": "director",
@@ -11175,7 +11175,7 @@
     },
     "neocortex": {
       "name": "neocortex",
-      "description": "Orchestrate the skill library's research and foresight division \u2014 scan the AI frontier, model future scenarios, map skill gaps, synthesize cross-domain patterns, track skill evolution, plan growth, translate knowledge between domains, and explain complex concepts simply. Use when deciding what to build next, understanding AI developments, finding missing connections in the library, or needing technical concepts made intuitive.",
+      "description": "Orchestrate the skill library's research and foresight division — scan the AI frontier, model future scenarios, map skill gaps, synthesize cross-domain patterns, track skill evolution, plan growth, translate knowledge between domains, and explain complex concepts simply. Use when deciding what to build next, understanding AI developments, finding missing connections in the library, or needing technical concepts made intuitive.",
       "location": "skills/neocortex/neocortex/SKILL.md",
       "plugin": "skill-neocortex",
       "type": "orchestrator",
@@ -11311,7 +11311,7 @@
     },
     "pattern-synthesizer": {
       "name": "pattern-synthesizer",
-      "description": "Detect recurring patterns across domains in the skill library \u2014 shared structures, parallel architectures, common abstractions, and missing connections. Use when noticing similarities between domains, looking for deeper organizing principles, or identifying structural opportunities the library isn't exploiting.",
+      "description": "Detect recurring patterns across domains in the skill library — shared structures, parallel architectures, common abstractions, and missing connections. Use when noticing similarities between domains, looking for deeper organizing principles, or identifying structural opportunities the library isn't exploiting.",
       "location": "skills/neocortex/architecture/pattern-synthesizer/SKILL.md",
       "plugin": "skill-neocortex",
       "type": "action",
@@ -11356,7 +11356,7 @@
     },
     "growth-architect": {
       "name": "growth-architect",
-      "description": "Design and prioritize the skill library's growth \u2014 turn gap analyses, frontier scans, and pattern insights into concrete, sequenced build plans. Use when deciding what domain to build next, how to sequence skill construction, where to invest effort, or how to evolve existing domains.",
+      "description": "Design and prioritize the skill library's growth — turn gap analyses, frontier scans, and pattern insights into concrete, sequenced build plans. Use when deciding what domain to build next, how to sequence skill construction, where to invest effort, or how to evolve existing domains.",
       "location": "skills/neocortex/architecture/growth-architect/SKILL.md",
       "plugin": "skill-neocortex",
       "type": "action",
@@ -11450,7 +11450,7 @@
     },
     "foresight": {
       "name": "foresight",
-      "description": "Direct the foresight subdomain \u2014 route AI landscape tracking, future scenario modeling, and strategic briefing requests to the right specialist. Use when the user asks what's new in AI, wants to explore possible futures for the library, or needs a strategic summary of where things stand and where they're headed.",
+      "description": "Direct the foresight subdomain — route AI landscape tracking, future scenario modeling, and strategic briefing requests to the right specialist. Use when the user asks what's new in AI, wants to explore possible futures for the library, or needs a strategic summary of where things stand and where they're headed.",
       "location": "skills/neocortex/foresight/SKILL.md",
       "plugin": "skill-neocortex",
       "type": "director",
@@ -11494,7 +11494,7 @@
     },
     "architecture": {
       "name": "architecture",
-      "description": "Direct the architecture subdomain \u2014 route library structure analysis, gap mapping, pattern detection, skill evolution tracking, cross-domain translation, research curation, and concept explanation to the right specialist. Use when examining the library itself \u2014 its coverage, health, patterns, growth opportunities, or when concepts need clear explanation.",
+      "description": "Direct the architecture subdomain — route library structure analysis, gap mapping, pattern detection, skill evolution tracking, cross-domain translation, research curation, and concept explanation to the right specialist. Use when examining the library itself — its coverage, health, patterns, growth opportunities, or when concepts need clear explanation.",
       "location": "skills/neocortex/architecture/SKILL.md",
       "plugin": "skill-neocortex",
       "type": "director",
@@ -11758,7 +11758,7 @@
     },
     "agentic-researcher": {
       "name": "agentic-researcher",
-      "description": "Generate, test, and iteratively refine candidate solutions to open-ended research questions using an evolutionary loop with automated evaluation. Use when the question is generative rather than investigative \u2014 \"what's the best approach to X?\" rather than \"is X true?\" \u2014 and when candidates can be evaluated against definable criteria. Produces ranked recommendations with confidence-tagged reasoning and explicit trade-off maps.",
+      "description": "Generate, test, and iteratively refine candidate solutions to open-ended research questions using an evolutionary loop with automated evaluation. Use when the question is generative rather than investigative — \"what's the best approach to X?\" rather than \"is X true?\" — and when candidates can be evaluated against definable criteria. Produces ranked recommendations with confidence-tagged reasoning and explicit trade-off maps.",
       "location": "skills/research/agentic-researcher/SKILL.md",
       "plugin": "skill-research",
       "type": "action",
@@ -11805,7 +11805,7 @@
     },
     "character-interiority": {
       "name": "character-interiority",
-      "description": "Rendering consciousness on the page \u2014 the full spectrum from direct thought through free indirect discourse through stream of consciousness, and the craft of making readers live inside a character's mind.",
+      "description": "Rendering consciousness on the page — the full spectrum from direct thought through free indirect discourse through stream of consciousness, and the craft of making readers live inside a character's mind.",
       "location": "skills/writing/narrative-craft/character-interiority/SKILL.md",
       "plugin": "skill-writing",
       "type": "knowledge",
@@ -11855,7 +11855,7 @@
     },
     "micro-tension": {
       "name": "micro-tension",
-      "description": "The line-by-line tension that keeps readers turning pages regardless of whether anything is \"happening\" \u2014 emotional contradiction, the unsaid, conflicting desires within a single consciousness. Use when prose feels flat despite good plot structure, when description or exposition kills momentum, when dialogue lacks charge, or when the user asks why literary fiction can be page-turning without action.",
+      "description": "The line-by-line tension that keeps readers turning pages regardless of whether anything is \"happening\" — emotional contradiction, the unsaid, conflicting desires within a single consciousness. Use when prose feels flat despite good plot structure, when description or exposition kills momentum, when dialogue lacks charge, or when the user asks why literary fiction can be page-turning without action.",
       "location": "skills/writing/narrative-craft/micro-tension/SKILL.md",
       "plugin": "skill-writing",
       "type": "knowledge",
@@ -11903,7 +11903,7 @@
     },
     "figurative-language": {
       "name": "figurative-language",
-      "description": "Metaphor, simile, image systems, and the objective correlative \u2014 the machinery of implication in prose. Use when prose is literal and flat, when metaphors feel clich\u00e9d or decorative, when the user asks about \"show don't tell\" at the figurative level, or when a work needs thematic coherence through sustained imagery.",
+      "description": "Metaphor, simile, image systems, and the objective correlative — the machinery of implication in prose. Use when prose is literal and flat, when metaphors feel clichéd or decorative, when the user asks about \"show don't tell\" at the figurative level, or when a work needs thematic coherence through sustained imagery.",
       "location": "skills/writing/sentence-craft/figurative-language/SKILL.md",
       "plugin": "skill-writing",
       "type": "knowledge",
@@ -11951,7 +11951,7 @@
     },
     "narrative-geometry": {
       "name": "narrative-geometry",
-      "description": "Alternative narrative shapes beyond the dramatic arc \u2014 meander, spiral, fractal, wavelet, radial, braid, and cycle. Use when a story resists three-act structure, when the user wants non-linear or non-Western narrative forms, when a draft feels forced into a shape that doesn't serve its material, or when the user asks about experimental structure.",
+      "description": "Alternative narrative shapes beyond the dramatic arc — meander, spiral, fractal, wavelet, radial, braid, and cycle. Use when a story resists three-act structure, when the user wants non-linear or non-Western narrative forms, when a draft feels forced into a shape that doesn't serve its material, or when the user asks about experimental structure.",
       "location": "skills/writing/narrative-craft/narrative-geometry/SKILL.md",
       "plugin": "skill-writing",
       "type": "knowledge",
@@ -11999,7 +11999,7 @@
     },
     "economic-systems": {
       "name": "economic-systems",
-      "description": "Design fictional economies \u2014 trade routes, currency systems, resource scarcity, and the relationship between economic structure and power. Use when building a world's economy, designing currency or trade, creating scarcity-driven conflict, or when cultures-societies Pillar 2 (Economy) needs depth beyond the basics.",
+      "description": "Design fictional economies — trade routes, currency systems, resource scarcity, and the relationship between economic structure and power. Use when building a world's economy, designing currency or trade, creating scarcity-driven conflict, or when cultures-societies Pillar 2 (Economy) needs depth beyond the basics.",
       "location": "skills/worldbuilding/civilizations/economic-systems/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "knowledge",
@@ -12046,7 +12046,7 @@
     },
     "conlang-craft": {
       "name": "conlang-craft",
-      "description": "Constructed language design beyond phonetic palettes \u2014 morphology, syntax, the Sapir-Whorf hypothesis as worldbuilding tool, and the conlang-to-culture pipeline. Use when a culture needs linguistic depth beyond naming conventions, when language should encode worldview, or when the user asks about creating fictional languages.",
+      "description": "Constructed language design beyond phonetic palettes — morphology, syntax, the Sapir-Whorf hypothesis as worldbuilding tool, and the conlang-to-culture pipeline. Use when a culture needs linguistic depth beyond naming conventions, when language should encode worldview, or when the user asks about creating fictional languages.",
       "location": "skills/worldbuilding/systems-craft/conlang-craft/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "knowledge",
@@ -12093,7 +12093,7 @@
     },
     "character-design": {
       "name": "character-design",
-      "description": "Design characters as the intersection of world and story \u2014 psychology, motivation, contradiction, arc potential, and how the world shapes who they are. Use when creating characters, when characters feel generic or disconnected from their setting, or when the step from world-bible to person-in-world hasn't been taken.",
+      "description": "Design characters as the intersection of world and story — psychology, motivation, contradiction, arc potential, and how the world shapes who they are. Use when creating characters, when characters feel generic or disconnected from their setting, or when the step from world-bible to person-in-world hasn't been taken.",
       "location": "skills/worldbuilding/civilizations/character-design/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "knowledge",
@@ -12137,7 +12137,7 @@
     },
     "world-to-story": {
       "name": "world-to-story",
-      "description": "Convert worldbuilding artifacts into narrative \u2014 determine which axioms become subtext vs. exposition, dramatize systems through character experience, and apply the iceberg methodology to control information flow. Use when worldbuilding is done but the story hasn't started, when prose reads as travelogue, or when the user asks how to show a world without info-dumping.",
+      "description": "Convert worldbuilding artifacts into narrative — determine which axioms become subtext vs. exposition, dramatize systems through character experience, and apply the iceberg methodology to control information flow. Use when worldbuilding is done but the story hasn't started, when prose reads as travelogue, or when the user asks how to show a world without info-dumping.",
       "location": "skills/writing/narrative-craft/world-to-story/SKILL.md",
       "plugin": "skill-writing",
       "type": "action",
@@ -12182,7 +12182,7 @@
     },
     "sensory-worldbuilding": {
       "name": "sensory-worldbuilding",
-      "description": "Design what a world feels like to inhabit \u2014 soundscapes, smells, textures, temperatures, and embodied experience of place. Use when a world is structurally complete but feels abstract, when settings lack sensory identity, or when the user asks how to make a world feel real rather than described.",
+      "description": "Design what a world feels like to inhabit — soundscapes, smells, textures, temperatures, and embodied experience of place. Use when a world is structurally complete but feels abstract, when settings lack sensory identity, or when the user asks how to make a world feel real rather than described.",
       "location": "skills/worldbuilding/physical-world/sensory-worldbuilding/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "knowledge",
@@ -12270,7 +12270,7 @@
     },
     "weird-worldbuilding": {
       "name": "weird-worldbuilding",
-      "description": "Build worlds that resist systematization \u2014 the New Weird approach where mystery is structural, glimpses imply vastness, and the world exceeds comprehension. Use as the anti-systematic pole to complement magic-system-design, or when a world should feel alien, numinous, or unsettling.",
+      "description": "Build worlds that resist systematization — the New Weird approach where mystery is structural, glimpses imply vastness, and the world exceeds comprehension. Use as the anti-systematic pole to complement magic-system-design, or when a world should feel alien, numinous, or unsettling.",
       "location": "skills/worldbuilding/systems-craft/weird-worldbuilding/SKILL.md",
       "plugin": "skill-worldbuilding",
       "type": "knowledge",
@@ -12314,7 +12314,7 @@
     },
     "hybrid-forms": {
       "name": "hybrid-forms",
-      "description": "Navigate experimental and genre-crossing narrative forms \u2014 autofiction, fragmented narrative, metafiction, genre-bending, epistolary, and collage. Use when a story resists conventional categories, when the user asks about experimental fiction, or when boundaries between fiction and nonfiction, between genres, or between prose and other media are the subject.",
+      "description": "Navigate experimental and genre-crossing narrative forms — autofiction, fragmented narrative, metafiction, genre-bending, epistolary, and collage. Use when a story resists conventional categories, when the user asks about experimental fiction, or when boundaries between fiction and nonfiction, between genres, or between prose and other media are the subject.",
       "location": "skills/writing/narrative-craft/hybrid-forms/SKILL.md",
       "plugin": "skill-writing",
       "type": "knowledge",
@@ -12359,7 +12359,7 @@
     },
     "wan-shi-tong": {
       "name": "wan-shi-tong",
-      "description": "Orchestrate world history learning across nine wings: political, economic, cultural, military, intellectual, world-systems, historiography, applied-history, and regional-atlas. Activate when any question touches human history \u2014 events, periods, civilizations, causes, patterns, sources, or analogies. Routes by theme and temporal register, teaches historical thinking at every step.",
+      "description": "Orchestrate world history learning across nine wings: political, economic, cultural, military, intellectual, world-systems, historiography, applied-history, and regional-atlas. Activate when any question touches human history — events, periods, civilizations, causes, patterns, sources, or analogies. Routes by theme and temporal register, teaches historical thinking at every step.",
       "location": "skills/world-history/wan-shi-tong/SKILL.md",
       "plugin": "skill-world-history",
       "type": "orchestrator",
@@ -14179,7 +14179,7 @@
     },
     "everyday-life-and-material-culture": {
       "name": "everyday-life-and-material-culture",
-      "description": "Analyze what ordinary people ate, wore, believed, feared, celebrated, and died of across history using the Annales school approach and Braudel's three temporal registers. Use when examining history from below, microhistory, mentalites, and the longue duree \u2014 the slow-moving structures of everyday experience that persist beneath the fast-moving surface of political events.",
+      "description": "Analyze what ordinary people ate, wore, believed, feared, celebrated, and died of across history using the Annales school approach and Braudel's three temporal registers. Use when examining history from below, microhistory, mentalites, and the longue duree — the slow-moving structures of everyday experience that persist beneath the fast-moving surface of political events.",
       "location": "skills/world-history/everyday-life-and-material-culture/SKILL.md",
       "plugin": "skill-world-history",
       "type": "knowledge",
@@ -14868,7 +14868,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": null
     },
     "asset-valuation": {
       "name": "asset-valuation",
@@ -14919,7 +14919,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": "asclepius"
     },
     "biomarker-enrichment": {
       "name": "biomarker-enrichment",
@@ -15074,7 +15074,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": "asclepius"
     },
     "clinical-differentiator": {
       "name": "clinical-differentiator",
@@ -15229,11 +15229,11 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": "asclepius"
     },
     "condition-designer": {
       "name": "condition-designer",
-      "description": "Design the initial conditions for a product to emerge \u2014 what capabilities to combine, what constraints to impose, what feedback signals to listen to, and what to intentionally leave open for emerge...",
+      "description": "Design the initial conditions for a product to emerge — what capabilities to combine, what constraints to impose, what feedback signals to listen to, and what to intentionally leave open for emerge...",
       "location": "skills/product/seed/condition-designer/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -15488,7 +15488,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": "asclepius"
     },
     "diligence-scorecard": {
       "name": "diligence-scorecard",
@@ -15544,7 +15544,7 @@
     },
     "emergence-detector": {
       "name": "emergence-detector",
-      "description": "Monitor the skill library for unexpected capability combinations \u2014 behaviors that emerge from cross-domain interaction that nobody explicitly designed. Use when you notice the system doing somethin...",
+      "description": "Monitor the skill library for unexpected capability combinations — behaviors that emerge from cross-domain interaction that nobody explicitly designed. Use when you notice the system doing somethin...",
       "location": "skills/product/sense/emergence-detector/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -15648,7 +15648,7 @@
     },
     "envision": {
       "name": "envision",
-      "description": "Route product vision work \u2014 designing what the intelligence system should become, exploring new interaction paradigms for AI products, mapping the full possibility space, and crystallizing falsifia...",
+      "description": "Route product vision work — designing what the intelligence system should become, exploring new interaction paradigms for AI products, mapping the full possibility space, and crystallizing falsifia...",
       "location": "skills/product/envision/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -15695,11 +15695,11 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "product"
+      "parent": "the-loom"
     },
     "evolve": {
       "name": "evolve",
-      "description": "Route product evolution work \u2014 observing how surfaced products change through use, amplifying emergent successful patterns, pruning what isn't working, and designing self-improving feedback systems...",
+      "description": "Route product evolution work — observing how surfaced products change through use, amplifying emergent successful patterns, pruning what isn't working, and designing self-improving feedback systems...",
       "location": "skills/product/evolve/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -15746,11 +15746,11 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "product"
+      "parent": "the-loom"
     },
     "experience-weaver": {
       "name": "experience-weaver",
-      "description": "Design the experience layer \u2014 how surfaced capabilities feel in use. The emotional and aesthetic quality of interacting with intelligence. Creates experience briefs that get handed to design and wr...",
+      "description": "Design the experience layer — how surfaced capabilities feel in use. The emotional and aesthetic quality of interacting with intelligence. Creates experience briefs that get handed to design and wr...",
       "location": "skills/product/surface/experience-weaver/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -15854,7 +15854,7 @@
     },
     "feedback-architect": {
       "name": "feedback-architect",
-      "description": "Design the feedback loops that will shape a product's evolution. The feedback architecture IS the growth plan \u2014 what signals the system listens to, how it adapts, what reinforces good behavior, wha...",
+      "description": "Design the feedback loops that will shape a product's evolution. The feedback architecture IS the growth plan — what signals the system listens to, how it adapts, what reinforces good behavior, wha...",
       "location": "skills/product/seed/feedback-architect/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -15906,7 +15906,7 @@
     },
     "frontier-antenna": {
       "name": "frontier-antenna",
-      "description": "Translate AI frontier developments into product opportunities. Consumes neocortex/frontier-scanner output and reframes it through a product lens \u2014 not \"what's new in AI\" but \"what does this make bu...",
+      "description": "Translate AI frontier developments into product opportunities. Consumes neocortex/frontier-scanner output and reframes it through a product lens — not \"what's new in AI\" but \"what does this make bu...",
       "location": "skills/product/sense/frontier-antenna/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -15958,7 +15958,7 @@
     },
     "initiative-tracker": {
       "name": "initiative-tracker",
-      "description": "Track product initiatives through their organic lifecycle \u2014 from seed to compost. Maintains the initiative log with state transitions, learnings, and portfolio-level views. Use when checking initia...",
+      "description": "Track product initiatives through their organic lifecycle — from seed to compost. Maintains the initiative log with state transitions, learnings, and portfolio-level views. Use when checking initia...",
       "location": "skills/product/synthesize/initiative-tracker/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -16265,7 +16265,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": "asclepius"
     },
     "market-dynamics": {
       "name": "market-dynamics",
@@ -16425,7 +16425,7 @@
     },
     "narrative-keeper": {
       "name": "narrative-keeper",
-      "description": "Maintain the living product narrative \u2014 the evolving story of what this intelligence system is, where it came from, where it's going, and what it believes. Use when updating the product story after...",
+      "description": "Maintain the living product narrative — the evolving story of what this intelligence system is, where it came from, where it's going, and what it believes. Use when updating the product story after...",
       "location": "skills/product/synthesize/narrative-keeper/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -16997,7 +16997,7 @@
     },
     "possibility-mapper": {
       "name": "possibility-mapper",
-      "description": "Map the full space of possible products from current and emerging capabilities \u2014 before filtering to what should be built. Combines capability radar output with frontier signals to explore what COU...",
+      "description": "Map the full space of possible products from current and emerging capabilities — before filtering to what should be built. Combines capability radar output with frontier signals to explore what COU...",
       "location": "skills/product/envision/possibility-mapper/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -17096,11 +17096,11 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": "asclepius"
     },
     "product-briefing-engine": {
       "name": "product-briefing-engine",
-      "description": "Generate the Weekly Product Synthesis \u2014 not a status report but a strategic narrative about what the intelligence system is becoming, what it learned this week, what's surprising, what needs attent...",
+      "description": "Generate the Weekly Product Synthesis — not a status report but a strategic narrative about what the intelligence system is becoming, what it learned this week, what's surprising, what needs attent...",
       "location": "skills/product/synthesize/product-briefing-engine/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -17152,7 +17152,7 @@
     },
     "prototype-grower": {
       "name": "prototype-grower",
-      "description": "Grow rapid capability prototypes \u2014 not wireframes or mockups but living demonstrations of capability combinations. Shows what happens when you combine specific domains for a product use case. Use w...",
+      "description": "Grow rapid capability prototypes — not wireframes or mockups but living demonstrations of capability combinations. Shows what happens when you combine specific domains for a product use case. Use w...",
       "location": "skills/product/seed/prototype-grower/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -17204,7 +17204,7 @@
     },
     "pruning-engine": {
       "name": "pruning-engine",
-      "description": "Decide what to stop, simplify, or let atrophy. Not \"kill features\" \u2014 compost them. Extract the learnings, preserve what's reusable, let the rest go. Every pruning decision feeds the Sense director ...",
+      "description": "Decide what to stop, simplify, or let atrophy. Not \"kill features\" — compost them. Extract the learnings, preserve what's reusable, let the rest go. Every pruning decision feeds the Sense director ...",
       "location": "skills/product/evolve/pruning-engine/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -17407,7 +17407,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "biotech-venture"
+      "parent": "asclepius"
     },
     "rnpv-modeler": {
       "name": "rnpv-modeler",
@@ -17463,7 +17463,7 @@
     },
     "seed": {
       "name": "seed",
-      "description": "Route product seeding work \u2014 designing initial conditions for product emergence, sculpting constraints that channel behavior productively, growing rapid capability prototypes, and architecting the ...",
+      "description": "Route product seeding work — designing initial conditions for product emergence, sculpting constraints that channel behavior productively, growing rapid capability prototypes, and architecting the ...",
       "location": "skills/product/seed/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -17510,11 +17510,11 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "product"
+      "parent": "the-loom"
     },
     "sense": {
       "name": "sense",
-      "description": "Route product sensing work \u2014 reading frontier signals through a product lens, detecting emergent capability combinations, interpreting external market and technology signals, and mapping the gap be...",
+      "description": "Route product sensing work — reading frontier signals through a product lens, detecting emergent capability combinations, interpreting external market and technology signals, and mapping the gap be...",
       "location": "skills/product/sense/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -17561,11 +17561,11 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "product"
+      "parent": "the-loom"
     },
     "signal-reader": {
       "name": "signal-reader",
-      "description": "Frameworks for reading external signals through a product lens \u2014 market timing, technology adoption curves, readiness levels, competitive shifts, and demand indicators. Use when evaluating whether ...",
+      "description": "Frameworks for reading external signals through a product lens — market timing, technology adoption curves, readiness levels, competitive shifts, and demand indicators. Use when evaluating whether ...",
       "location": "skills/product/sense/signal-reader/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -17617,7 +17617,7 @@
     },
     "surface": {
       "name": "surface",
-      "description": "Route product surfacing work \u2014 deciding how intelligence meets the world. Interface philosophy, exposure sequencing, experience design, and value architecture. Activates when a capability is ready ...",
+      "description": "Route product surfacing work — deciding how intelligence meets the world. Interface philosophy, exposure sequencing, experience design, and value architecture. Activates when a capability is ready ...",
       "location": "skills/product/surface/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -17664,11 +17664,11 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "product"
+      "parent": "the-loom"
     },
     "synthesize": {
       "name": "synthesize",
-      "description": "Route product synthesis work \u2014 cross-product pattern recognition, initiative lifecycle tracking, weekly product briefing generation, and product narrative maintenance. Activates when the question s...",
+      "description": "Route product synthesis work — cross-product pattern recognition, initiative lifecycle tracking, weekly product briefing generation, and product narrative maintenance. Activates when the question s...",
       "location": "skills/product/synthesize/SKILL.md",
       "plugin": "skill-infra",
       "type": "director",
@@ -17715,7 +17715,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "product"
+      "parent": "the-loom"
     },
     "the-loom": {
       "name": "the-loom",
@@ -17766,7 +17766,7 @@
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
-      "parent": "product"
+      "parent": null
     },
     "thesis-forge": {
       "name": "thesis-forge",
@@ -17874,7 +17874,7 @@
     },
     "value-architect": {
       "name": "value-architect",
-      "description": "Design the value exchange for intelligence products \u2014 not just pricing but the full model of how value flows between the system and its users. Handles free vs. paid, usage-based, capability-tiered,...",
+      "description": "Design the value exchange for intelligence products — not just pricing but the full model of how value flows between the system and its users. Handles free vs. paid, usage-based, capability-tiered,...",
       "location": "skills/product/surface/value-architect/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -17926,7 +17926,7 @@
     },
     "vision-architect": {
       "name": "vision-architect",
-      "description": "Design the intelligence system's future state in experiential terms \u2014 not feature lists but what it's like to interact with this intelligence. Produces vision documents that describe capabilities a...",
+      "description": "Design the intelligence system's future state in experiential terms — not feature lists but what it's like to interact with this intelligence. Produces vision documents that describe capabilities a...",
       "location": "skills/product/envision/vision-architect/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -17978,7 +17978,7 @@
     },
     "sentinel-prime": {
       "name": "sentinel-prime",
-      "description": "Observe the skill library as a whole \u2014 surface gaps in domain coverage, track maturity across domains, identify cross-domain connections, detect structural issues, and recommend what to build next. Use when the user asks about overall library status, wants a bird's-eye view, or needs guidance on where to invest effort next.",
+      "description": "Observe the skill library as a whole — surface gaps in domain coverage, track maturity across domains, identify cross-domain connections, detect structural issues, and recommend what to build next. Use when the user asks about overall library status, wants a bird's-eye view, or needs guidance on where to invest effort next.",
       "location": "skills/_meta/SKILL.md",
       "plugin": "skill-infra",
       "type": "observer",
