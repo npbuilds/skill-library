@@ -370,8 +370,10 @@ SERVICE_URL=$(gcloud run services describe skill-library-mcp \
 
 # Your identity must have roles/run.invoker or be the scheduler SA.
 # Your user account (Project Owner) works.
+# NOTE: --audiences flag only works for service-account identities;
+# user-account identity tokens are issued without audience claim.
 curl -X POST \
-  -H "Authorization: Bearer $(gcloud auth print-identity-token --audiences=${SERVICE_URL})" \
+  -H "Authorization: Bearer $(gcloud auth print-identity-token)" \
   "${SERVICE_URL}/maint/recalibrate"
 ```
 

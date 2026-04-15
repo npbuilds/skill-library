@@ -22,7 +22,6 @@ import shutil
 import subprocess
 import tempfile
 from datetime import datetime, timezone
-from pathlib import Path
 
 try:
     import httpx
@@ -110,9 +109,12 @@ async def _recalibrate(request: Request) -> JSONResponse:
 
     tmpdir = tempfile.mkdtemp(prefix="maint-recal-")
     try:
-        # 1. Clone (shallow)
+        # 1. Clone (shallow). capture=True keeps the PAT-embedded URL
+        # out of process stderr (which would land in Cloud Run logs).
+        # On failure, _run redacts `pat` before re-raising.
         _run(
             ["git", "clone", "--depth", "1", "--branch", BASE_BRANCH, clone_url, tmpdir],
+            capture=True,
             redact=pat,
         )
 
@@ -123,7 +125,9 @@ async def _recalibrate(request: Request) -> JSONResponse:
         # 3. New branch
         _run(["git", "checkout", "-b", branch], cwd=tmpdir)
 
-        # 4. Run the recalibrate script
+        # 4. Run the recalibrate script. Note: recalibrate_scores.py
+        # ALSO appends to data/evolution.jsonl via snapshot_evolution.py —
+        # we stage everything (git add -A), not just registry.json.
         result = _run(
             ["python3", "scripts/recalibrate_scores.py"],
             cwd=tmpdir,
@@ -131,9 +135,10 @@ async def _recalibrate(request: Request) -> JSONResponse:
         )
         stdout = (result.stdout or "").strip()
 
-        # 5. No drift? return cleanly without a PR
+        # 5. Stage everything recalibrate touched; check if anything changed.
+        _run(["git", "add", "-A"], cwd=tmpdir)
         diff_check = subprocess.run(
-            ["git", "diff", "--quiet", "--", "data/registry.json"],
+            ["git", "diff", "--cached", "--quiet"],
             cwd=tmpdir,
         )
         if diff_check.returncode == 0:
@@ -146,15 +151,19 @@ async def _recalibrate(request: Request) -> JSONResponse:
                 }
             )
 
-        # 6. Commit + push
+        # 6. Commit + push (PAT also redacted from push errors).
         commit_msg = (
             f"chore(maint): recalibrate scores {ts}\n\n"
             f"Automated recalibration via /maint/recalibrate.\n\n"
             f"{stdout}"
         )
-        _run(["git", "add", "data/registry.json"], cwd=tmpdir)
         _run(["git", "commit", "-m", commit_msg], cwd=tmpdir)
-        _run(["git", "push", "origin", branch], cwd=tmpdir, redact=pat)
+        _run(
+            ["git", "push", "origin", branch],
+            cwd=tmpdir,
+            capture=True,
+            redact=pat,
+        )
 
         # 7. Open PR + label via GitHub API
         headers = {
