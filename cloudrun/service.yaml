@@ -43,10 +43,10 @@ spec:
               value: "true"
             - name: MAINTENANCE_AUTONOMY
               value: conservative
-            # Secrets from Secret Manager are added in Layer 2 when maintenance.py
-            # lands. Example shape, commented out until needed:
-            # - name: GITHUB_BOT_PAT
-            #   valueFrom:
-            #     secretKeyRef:
-            #       key: latest
-            #       name: github-bot-pat
+            # Bot PAT for maintenance router bot PR operations.
+            # Layer 2 live since commit 7d0081d.
+            - name: GITHUB_BOT_PAT
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: github-bot-pat
