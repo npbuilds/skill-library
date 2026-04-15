@@ -256,3 +256,157 @@ After completing steps 1–7:
 
 If any of these fail, the deploy workflow won't succeed — each is a
 precondition, not optional.
+
+---
+
+# Layer 2 — Maintenance bot setup
+
+Once Layer 1 is live, these steps wire up the scheduled maintenance
+loop. Complete them before the next deploy that references the
+`github-bot-pat` secret (otherwise Cloud Run will refuse to start).
+
+## L2.1 Create a fine-grained GitHub bot PAT
+
+A fine-grained PAT, scoped to **only this repo**, with only the
+permissions the bot actually needs. Do this via the GitHub UI
+(there's no CLI for fine-grained PAT creation).
+
+1. Go to https://github.com/settings/personal-access-tokens/new
+2. **Token name**: `skill-library-bot`
+3. **Expiration**: 1 year (or max you're comfortable with)
+4. **Resource owner**: `npbuilds`
+5. **Repository access** → **Only select repositories** → choose `skill-library`
+6. **Repository permissions**:
+   - **Contents**: Read and write  (push branches)
+   - **Pull requests**: Read and write  (open PRs, add labels)
+   - **Metadata**: Read-only  (auto-added; required for the others)
+   - Everything else: no access
+7. Click **Generate token**. Copy the token string (`github_pat_…`) — it's shown once.
+
+## L2.2 Store PAT in Secret Manager
+
+```bash
+echo -n "<paste-the-github_pat_here>" | gcloud secrets create github-bot-pat \
+  --project=skill-library-prod \
+  --data-file=- \
+  --replication-policy=automatic
+```
+
+Verify:
+
+```bash
+gcloud secrets versions access latest --secret=github-bot-pat --project=skill-library-prod | head -c 20
+# should print the first 20 chars of your token
+```
+
+## L2.3 Grant Cloud Run runtime SA access to the secret
+
+Cloud Run runs as the **Compute Engine default service account** unless
+a custom one is specified. Grant it permission to read this one secret.
+
+```bash
+PROJECT_NUMBER=$(gcloud projects describe skill-library-prod --format='value(projectNumber)')
+RUNTIME_SA="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
+
+gcloud secrets add-iam-policy-binding github-bot-pat \
+  --project=skill-library-prod \
+  --member="serviceAccount:${RUNTIME_SA}" \
+  --role=roles/secretmanager.secretAccessor
+```
+
+## L2.4 Create a scheduler SA + grant Cloud Run invoker
+
+Cloud Scheduler needs an identity to call Cloud Run. Use a dedicated
+SA (not the deploy SA — principle of least privilege):
+
+```bash
+gcloud iam service-accounts create scheduler-invoker \
+  --display-name="Cloud Scheduler — Cloud Run invoker" \
+  --project=skill-library-prod
+
+SCHED_SA=scheduler-invoker@skill-library-prod.iam.gserviceaccount.com
+
+# Grant invoker role on the service (not project-wide)
+gcloud run services add-iam-policy-binding skill-library-mcp \
+  --region=us-central1 \
+  --project=skill-library-prod \
+  --member="serviceAccount:${SCHED_SA}" \
+  --role=roles/run.invoker
+```
+
+## L2.5 Create the daily recalibrate scheduler job
+
+```bash
+SERVICE_URL=$(gcloud run services describe skill-library-mcp \
+  --region=us-central1 --project=skill-library-prod \
+  --format='value(status.url)')
+
+SCHED_SA=scheduler-invoker@skill-library-prod.iam.gserviceaccount.com
+
+gcloud scheduler jobs create http maint-recalibrate \
+  --project=skill-library-prod \
+  --location=us-central1 \
+  --schedule="0 3 * * *" \
+  --time-zone="America/New_York" \
+  --uri="${SERVICE_URL}/maint/recalibrate" \
+  --http-method=POST \
+  --oidc-service-account-email="${SCHED_SA}" \
+  --oidc-token-audience="${SERVICE_URL}" \
+  --attempt-deadline=5m \
+  --description="Daily skill score recalibration"
+```
+
+(Time zone picked arbitrarily; change `--time-zone` to your own.)
+
+## L2.6 Manual test
+
+Once the next deploy lands (after committing the code that references
+the secret), you can trigger the recalibrate manually from your shell:
+
+```bash
+SERVICE_URL=$(gcloud run services describe skill-library-mcp \
+  --region=us-central1 --project=skill-library-prod \
+  --format='value(status.url)')
+
+# Your identity must have roles/run.invoker or be the scheduler SA.
+# Your user account (Project Owner) works.
+curl -X POST \
+  -H "Authorization: Bearer $(gcloud auth print-identity-token --audiences=${SERVICE_URL})" \
+  "${SERVICE_URL}/maint/recalibrate"
+```
+
+Expected responses:
+
+- **`{"status": "no_changes", ...}`** — scores already in sync, no PR opened (normal when nothing has drifted).
+- **`{"status": "pr_opened", "pr_number": N, "pr_url": "...", "branch": "maintenance/recalibrate-..."}`** — a bot PR was opened.
+
+You can also run the scheduler job manually without waiting for cron:
+
+```bash
+gcloud scheduler jobs run maint-recalibrate \
+  --project=skill-library-prod --location=us-central1
+```
+
+Logs for the run:
+
+```bash
+gcloud run services logs read skill-library-mcp \
+  --region=us-central1 --project=skill-library-prod --limit=50
+```
+
+## L2.7 Kill switches
+
+- **Pause the bot**: disable the scheduler job
+  ```bash
+  gcloud scheduler jobs pause maint-recalibrate \
+    --project=skill-library-prod --location=us-central1
+  ```
+- **Nuke the bot's credential**: rotate the PAT in GitHub (revoke + regenerate),
+  then update the secret:
+  ```bash
+  echo -n "<new-pat>" | gcloud secrets versions add github-bot-pat \
+    --project=skill-library-prod --data-file=-
+  ```
+  Revisions of Cloud Run need to restart to pick up new secret versions;
+  trigger a redeploy or: `gcloud run services update skill-library-mcp
+  --region=us-central1 --project=skill-library-prod`.

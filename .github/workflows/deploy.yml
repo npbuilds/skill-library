@@ -82,6 +82,7 @@ jobs:
             --timeout=300 \
             --port=8080 \
             --set-env-vars="MCP_REMOTE=true,MAINTENANCE_AUTONOMY=conservative" \
+            --set-secrets="GITHUB_BOT_PAT=github-bot-pat:latest" \
             --quiet
 
       - name: Report deploy
