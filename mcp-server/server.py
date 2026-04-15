@@ -2119,6 +2119,16 @@ if __name__ == "__main__":
     # Resolve transport: explicit flag wins, otherwise infer from mode
     transport = args.transport or ("streamable-http" if (args.remote or REMOTE_MODE) else "stdio")
 
+    # In remote mode, mount the maintenance HTTP router (health + /maint/*).
+    # Stdio mode skips this: no HTTP server exists for extra routes.
+    if transport != "stdio":
+        try:
+            import maintenance
+            maintenance.register(mcp)
+        except Exception as _e:
+            # Surface but don't prevent startup — MCP protocol still works.
+            logging.warning("maintenance router failed to mount: %s", _e)
+
     if transport == "stdio":
         mcp.run()
     else:
