@@ -46,10 +46,10 @@ jobs:
 
           for i in $(seq 1 $ATTEMPTS); do
             # Get check states (exclude our own workflow to avoid self-reference)
-            CHECKS=$(gh pr checks "${PR}" --repo "${REPO}" --json name,state 2>/dev/null || echo "[]")
-            # Filter out the auto-merge job itself
-            CHECKS=$(echo "$CHECKS" | jq '[.[] | select(.name != "Auto-merge if green")]')
-            COUNT=$(echo "$CHECKS" | jq 'length')
+            RAW=$(gh pr checks "${PR}" --repo "${REPO}" --json name,state 2>&1) || true
+            # If gh returned an error string instead of JSON, treat as no checks
+            CHECKS=$(echo "$RAW" | jq '[.[] | select(.name != "Auto-merge if green")]' 2>/dev/null) || CHECKS="[]"
+            COUNT=$(echo "$CHECKS" | jq 'length' 2>/dev/null) || COUNT=0
 
             if [ "$COUNT" -eq 0 ]; then
               echo "  [${i}/${ATTEMPTS}] No CI checks yet, waiting ${INTERVAL}s..."
