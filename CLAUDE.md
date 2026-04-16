@@ -7,18 +7,21 @@
 | Content type | Target directory | Examples |
 |---|---|---|
 | Skill definitions | `skills/<domain>/<skill-name>/SKILL.md` | Sommelier tasting grid |
-| Archon briefings | `archon-briefings/` | Daily HTML briefings |
-| Visualizations & dashboards | `output/visualizations/` | dashboard.html, skill-map.html |
-| Creative output (art, writing) | `output/art/` or `output/writing/` | Algorithmic art, fiction |
-| Architecture diagrams | `output/visualizations/` | architecture-diagram.html |
-| Research reports | `research/` | Landscape reports, skill research |
-| Data files (JSON, JSONL) | `data/` | Registry, evolution logs, usage |
-| Shell scripts | `scripts/` | Automation, analysis, migration |
-| Python scripts | `scripts/` | Graph wiring, scoring, detection |
-| Agent definitions | `agents/` | Subagent prompts |
+| Neural Observatory app | `app/` | index.html, firebase.json, firestore.rules |
 | MCP server code | `mcp-server/` | Server, CLI, search index |
-| Archon data pipeline | `archon-data/` | Collectors, processors, snapshots |
+| Cloud Run config | `cloudrun/` | service.yaml |
+| Data files (JSON, JSONL) | `data/` | Registry, evolution logs, usage |
+| Shell/Python scripts | `scripts/` | Automation, migration, analysis |
+| Agent definitions | `agents/` | Subagent prompts |
+| Slash commands | `commands/` | Claude Code command definitions |
 | Git hooks | `hooks/` | File watchers, validators |
+| Cloud/infra docs | `docs/` | Setup guides |
+| Archon data pipeline | `archon-data/` | Collectors, processors, snapshots |
+| Archon briefings | `archon-briefings/` | Daily HTML briefings |
+| Loom briefings | `loom-briefings/` | Decision journal, emergence log |
+| Research reports | `research/` | Landscape reports, skill research |
+| Legacy visualizations | `output/visualizations/` | Old dashboard, skill-map, diagrams |
+| Creative output | `output/art/` or `output/writing/` | Algorithmic art, fiction |
 | Exports (Obsidian, etc.) | `exports/` | Vault exports |
 | Deployment config | project root (Dockerfile only) | Dockerfile, .dockerignore |
 
@@ -27,21 +30,45 @@ If you're unsure where a file goes, place it in `output/` with an appropriate su
 ## Project Structure
 
 ```
-skills/           # Skill SKILL.md files organized by domain
-data/             # Registry, logs, evolution data
-scripts/          # All automation scripts (sh + py)
-mcp-server/       # MCP server for skill library
-archon-data/      # Investment briefing data pipeline
-archon-briefings/ # Generated archon briefing outputs
-output/           # All generated artifacts (gitignored)
-  visualizations/ # Dashboards, diagrams, maps
-  art/            # Algorithmic art
-  writing/        # Creative writing output
-research/         # Research reports and analysis
-agents/           # Subagent prompt definitions
-hooks/            # Git and Claude Code hooks
-exports/          # Obsidian vault and other exports
-commands/         # Claude Code slash command definitions
+app/                # Neural Observatory — Firebase Hosting (live app)
+  index.html        #   Dashboard with Firestore data layer
+  js/               #   Firebase config, data adapter modules
+  firebase.json     #   Hosting + Firestore emulator config
+  firestore.rules   #   Security rules (public read, auth write)
+skills/             # Skill SKILL.md files organized by domain
+data/               # Local data (registry.json, JSONL logs)
+mcp-server/         # MCP server for skill library (Cloud Run)
+cloudrun/           # Cloud Run service config
+scripts/            # All automation scripts (sh + py)
+  migrate_to_firestore.py  # Push local data → Firestore
+  serve.py          # Legacy local HTTP server
+agents/             # Subagent prompt definitions
+commands/           # Claude Code slash command definitions
+hooks/              # Git and Claude Code hooks
+docs/               # Infrastructure setup guides
+archon-data/        # Investment briefing data pipeline
+archon-briefings/   # Generated archon briefing outputs
+loom-briefings/     # Decision journal, emergence log
+research/           # Research reports and analysis
+output/             # Generated artifacts (mostly gitignored)
+  visualizations/   # Legacy dashboards, diagrams, maps
+exports/            # Obsidian vault exports
+```
+
+## Live Deployments
+
+| Service | URL | Platform |
+|---|---|---|
+| Neural Observatory | https://skill-library-prod.web.app | Firebase Hosting |
+| MCP Server | Cloud Run (skill-library-mcp) | GCP Cloud Run |
+| Firestore | skill-library-prod (us-central1) | GCP Firestore |
+
+## Data Flow
+
+```
+Local:   data/registry.json ──→ scripts/migrate_to_firestore.py ──→ Firestore
+Live:    MCP server tools ──→ Firestore collections ──→ app/index.html (real-time)
+Desktop: Neural Observatory.webloc ──→ https://skill-library-prod.web.app
 ```
 
 ## Conventions
@@ -50,6 +77,8 @@ commands/         # Claude Code slash command definitions
 - Registry is the source of truth for skill metadata: `data/registry.json`
 - Scripts that modify registry should go through `scripts/sync-registry.py`
 - The MCP server (`mcp-server/server.py`) exposes skill library tools to Claude
+- After adding skills locally, run `python3 scripts/migrate_to_firestore.py` to sync to Firestore
+- Deploy app changes: `cd app && npx firebase-tools deploy --only hosting`
 
 ## Auto-Trigger Skills
 

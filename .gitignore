@@ -8,21 +8,27 @@ Thumbs.db
 # Temporary/backup files
 *.tmp
 *.bak
-data/backups/
 __pycache__/
 
-# Obsidian volatile state (workspace changes on every session)
+# Debug and build logs
+*.log
+firebase-debug.log
+
+# ── Data ──
+data/backups/
+
+# ── Firebase / App ──
+app/.firebase/
+app/node_modules/
+
+# ── Obsidian ──
 skills/.obsidian/workspace.json
 skills/.obsidian/workspaces.json
 skills/.obsidian/workspace-mobile.json
-
-# Obsidian export output
 exports/
 
-# Debug logs
-firebase-debug.log
-*.log
-
-# Generated output artifacts (except visualizations which are version-controlled)
+# ── Generated output ──
+# Version-controlled: output/visualizations/ (legacy dashboards)
+# Everything else in output/ is gitignored
 output/
 !output/visualizations/

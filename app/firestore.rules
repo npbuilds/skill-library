@@ -1,0 +1,46 @@
+rules_version = '2';
+
+// Neural Observatory — Firestore Security Rules
+// Read-only public access for the dashboard.
+// Write access restricted to authenticated service accounts (MCP server, migration scripts).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Skills collection — one doc per skill
+    match /skills/{skillId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Registry metadata (schema_version, last_scan, network domains)
+    match /meta/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Usage events
+    match /usage/{eventId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Evolution snapshots
+    match /evolution/{snapshotId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Gap analysis entries
+    match /gaps/{gapId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Changelogs
+    match /changelogs/{logId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
