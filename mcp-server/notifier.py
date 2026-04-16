@@ -232,8 +232,20 @@ class Notifier:
 
     @staticmethod
     def _error_signature(job: str, error: Exception) -> str:
-        """Stable hash for deduplicating recurring failures."""
-        key = f"{job}:{type(error).__name__}:{str(error)[:100]}"
+        """Stable hash for deduplicating recurring failures.
+
+        For CalledProcessError: uses job + type + returncode (not the
+        full command string, which contains ephemeral tmpdir paths that
+        would break dedup across runs).
+        For other errors: uses the first line of the message.
+        """
+        if hasattr(error, "returncode"):
+            # Subprocess errors: dedup by job + error type + exit code
+            key = f"{job}:{type(error).__name__}:rc{error.returncode}"
+        else:
+            # Other errors: dedup by job + error type + first line of message
+            first_line = str(error).splitlines()[0][:80] if str(error) else ""
+            key = f"{job}:{type(error).__name__}:{first_line}"
         return hashlib.sha256(key.encode()).hexdigest()[:16]
 
 
