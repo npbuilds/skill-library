@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-04-16T14:01:05.039017+00:00",
+  "timestamp": "2026-04-16T14:10:06.077200+00:00",
   "total_active": 366,
   "total_deprecated": 1,
   "health_breakdown": {
@@ -10,9 +10,8 @@
   "low_score_skills": [],
   "stale_count": 0,
   "stale_skills": [],
-  "orphan_count": 54,
+  "orphan_count": 53,
   "orphans": [
-    "adaptation-observer",
     "amplifier",
     "biomarker-enrichment",
     "capability-radar",
@@ -31,7 +30,8 @@
     "exposure-strategist",
     "feedback-architect",
     "frontier-antenna",
-    "game-mechanics"
+    "game-mechanics",
+    "hybrid-forms"
   ],
   "domain_summary": {
     "_meta": {
