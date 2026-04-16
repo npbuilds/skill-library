@@ -27,7 +27,6 @@ Usage:
 import argparse
 import json
 import os
-import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -190,8 +189,8 @@ Do NOT repeat the description verbatim — synthesize and explain.
 
 Skill description: {desc}
 
-Full skill content:
-{skill_content[:8000]}"""
+Skill content{' (truncated — full version is longer)' if len(skill_content) > 12000 else ''}:
+{skill_content[:12000]}"""
 
     response = client.messages.create(
         model=model,
@@ -296,6 +295,10 @@ def run_pipeline(vault_dir: Path, limit: int = 5, budget_cap: float = 50.0,
         print(f"  [{processed+1}/{limit}] {name}...", end=" ", flush=True)
         try:
             result = fill_t1(name, entry, note_path, client)
+            if result["status"] == "skipped":
+                print(f"⏭️  skipped ({result.get('reason', '?')})")
+                results.append({"skill": name, **result})
+                continue  # don't count as processed or record spend
             budget.record("T1", name, result["cost"])
             total_cost += result["cost"]
             processed += 1
