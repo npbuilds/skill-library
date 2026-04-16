@@ -142,7 +142,9 @@ Last synced: {NOW}
 
 ## Content
 
+<!-- auto:begin:content -->
 {preview if preview else "_No content preview available._"}
+<!-- auto:end:content -->
 
 <!-- auto:begin:cross-refs -->
 **Depends on**: {dep_links}
