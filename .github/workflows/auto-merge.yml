@@ -1,85 +1,76 @@
 name: Auto-merge maintenance PRs
 
-# Merges maint:green PRs after CI passes. Polls check status and
-# merges directly once all checks succeed (works on any GitHub plan
-# including free-tier private repos, which lack native auto-merge
-# and branch protection).
+# Merges maint:green PRs after CI passes. Triggers on CI workflow
+# completion (not polling) — avoids check-visibility issues between
+# concurrent workflows.
+#
+# Flow: CI completes → this fires → finds the PR by SHA → checks
+# for maint:green label → merges if labeled.
 #
 # Autonomy tiers (from plan):
 #   conservative (v1): only maint:green auto-merges
-#   standard:          also maint:yellow (add || condition below)
-#   aggressive:        also maint:red (add || condition below)
+#   standard:          also maint:yellow (add to label grep)
+#   aggressive:        also maint:red (add to label grep)
 
 on:
-  pull_request:
-    types: [opened, labeled, synchronize]
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
 
 permissions:
   contents: write
   pull-requests: write
-  checks: read
 
 jobs:
   auto-merge:
     name: Auto-merge if green
     runs-on: ubuntu-latest
-    timeout-minutes: 15
 
-    # Conservative autonomy: only maint:green PRs.
-    # To escalate to standard, add:
-    #   || contains(github.event.pull_request.labels.*.name, 'maint:yellow')
-    if: contains(github.event.pull_request.labels.*.name, 'maint:green')
+    # Only act when CI passed (not on failure, cancellation, etc.)
+    if: github.event.workflow_run.conclusion == 'success'
 
     steps:
-      - name: Wait for CI checks then merge
+      - name: Find PR and check label
+        id: pr
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
-          echo "PR #${PR} has maint:green label — waiting for CI then merging"
+          echo "CI passed for SHA: ${SHA}"
 
-          # Poll until all checks pass (or any fails).
-          # CI typically takes ~25s. We poll every 15s for up to 10 minutes.
-          ATTEMPTS=40
-          INTERVAL=15
+          # Find open PR with this head SHA
+          PR=$(gh pr list --repo "${REPO}" --state open \
+            --json number,headRefOid \
+            --jq ".[] | select(.headRefOid == \"${SHA}\") | .number")
 
-          for i in $(seq 1 $ATTEMPTS); do
-            # Get check states (exclude our own workflow to avoid self-reference)
-            RAW=$(gh pr checks "${PR}" --repo "${REPO}" --json name,state 2>&1) || true
-            # If gh returned an error string instead of JSON, treat as no checks
-            CHECKS=$(echo "$RAW" | jq '[.[] | select(.name != "Auto-merge if green")]' 2>/dev/null) || CHECKS="[]"
-            COUNT=$(echo "$CHECKS" | jq 'length' 2>/dev/null) || COUNT=0
+          if [ -z "$PR" ]; then
+            echo "No open PR for this SHA (push to main, or PR already merged)"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Found PR #${PR}"
 
-            if [ "$COUNT" -eq 0 ]; then
-              echo "  [${i}/${ATTEMPTS}] No CI checks yet, waiting ${INTERVAL}s..."
-              sleep $INTERVAL
-              continue
-            fi
+          # Check for maint:green label
+          LABELS=$(gh pr view "${PR}" --repo "${REPO}" --json labels --jq '.labels[].name')
+          echo "Labels: ${LABELS}"
 
-            # Any failures? Abort.
-            FAILED=$(echo "$CHECKS" | jq '[.[] | select(.state == "FAILURE")] | length')
-            if [ "$FAILED" -gt 0 ]; then
-              echo "❌ CI check(s) failed — not merging PR #${PR}"
-              echo "$CHECKS" | jq -r '.[] | select(.state == "FAILURE") | "  FAILED: \(.name)"'
-              exit 1
-            fi
+          if echo "$LABELS" | grep -q "^maint:green$"; then
+            echo "PR #${PR} has maint:green label — will merge"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "number=${PR}" >> "$GITHUB_OUTPUT"
+          else
+            echo "PR #${PR} does not have maint:green label — skipping"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
 
-            # All succeeded?
-            SUCCEEDED=$(echo "$CHECKS" | jq '[.[] | select(.state == "SUCCESS")] | length')
-            if [ "$SUCCEEDED" -eq "$COUNT" ]; then
-              echo "✅ All ${COUNT} CI checks passed — merging PR #${PR}"
-              gh pr merge "${PR}" --repo "${REPO}" --squash --delete-branch
-              echo "🎉 PR #${PR} merged and branch deleted"
-              exit 0
-            fi
-
-            # Some still pending
-            PENDING=$((COUNT - SUCCEEDED))
-            echo "  [${i}/${ATTEMPTS}] ${SUCCEEDED}/${COUNT} passed, ${PENDING} pending, waiting ${INTERVAL}s..."
-            sleep $INTERVAL
-          done
-
-          echo "⏰ Timed out after $((ATTEMPTS * INTERVAL))s — CI checks did not complete"
-          echo "PR #${PR} left open for manual review"
-          exit 1
+      - name: Merge PR
+        if: steps.pr.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.pr.outputs.number }}
+        run: |
+          echo "Merging PR #${PR} (squash + delete branch)"
+          gh pr merge "${PR}" --repo "${REPO}" --squash --delete-branch
+          echo "✅ PR #${PR} auto-merged"
