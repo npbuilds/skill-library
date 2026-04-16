@@ -24,7 +24,6 @@ Replaces the old one-shot export-obsidian.sh with idempotent diff-merge.
 import argparse
 import json
 import re
-import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -338,11 +337,12 @@ def sync(vault_dir: Path, dry_run: bool = False) -> dict:
                 moc_path.write_text(content)
             stats["mocs_written"] += 1
 
-    # --- Index ---
+    # --- Index (with idempotency check to avoid spurious generated_at diffs) ---
     index_path = maps_dir / "_Index.md"
     content = generate_index(domains, len(active), deprecated_count)
     if not dry_run:
-        index_path.write_text(content)
+        if not index_path.exists() or index_path.read_text() != content:
+            index_path.write_text(content)
 
     # --- Create empty structure dirs ---
     if not dry_run:
