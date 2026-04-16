@@ -1,9 +1,9 @@
 name: Auto-merge maintenance PRs
 
-# Merges maint:green PRs after CI passes. Works on any GitHub plan
-# (free, Pro, Team). Tries native auto-merge first (available on
-# public repos / paid plans); falls back to watch-and-merge for
-# private free-tier repos.
+# Merges maint:green PRs after CI passes. Polls check status and
+# merges directly once all checks succeed (works on any GitHub plan
+# including free-tier private repos, which lack native auto-merge
+# and branch protection).
 #
 # Autonomy tiers (from plan):
 #   conservative (v1): only maint:green auto-merges
@@ -31,35 +31,28 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'maint:green')
 
     steps:
-      - name: Wait for CI and merge
+      - name: Wait for CI checks then merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
         run: |
-          echo "PR #${PR} has maint:green label — attempting auto-merge"
+          echo "PR #${PR} has maint:green label — waiting for CI then merging"
 
-          # Path 1: Try native auto-merge (works on public repos / paid plans).
-          # If repo doesn't support it, falls through silently.
-          if gh pr merge "${PR}" --repo "${REPO}" --auto --squash --delete-branch 2>/dev/null; then
-            echo "✅ Native auto-merge enabled — GitHub will merge when checks pass"
-            exit 0
-          fi
+          # Poll until all checks pass (or any fails).
+          # CI typically takes ~25s. We poll every 15s for up to 10 minutes.
+          ATTEMPTS=40
+          INTERVAL=15
 
-          # Path 2: Watch checks and merge directly (free-tier fallback).
-          echo "Native auto-merge not available, watching CI checks..."
-
-          # Wait up to 10 minutes for checks to appear and complete.
-          # CI typically takes ~25s; the generous timeout covers cold starts.
-          ATTEMPTS=60
-          INTERVAL=10
           for i in $(seq 1 $ATTEMPTS); do
-            # Get check states as JSON array
+            # Get check states (exclude our own workflow to avoid self-reference)
             CHECKS=$(gh pr checks "${PR}" --repo "${REPO}" --json name,state 2>/dev/null || echo "[]")
+            # Filter out the auto-merge job itself
+            CHECKS=$(echo "$CHECKS" | jq '[.[] | select(.name != "Auto-merge if green")]')
             COUNT=$(echo "$CHECKS" | jq 'length')
 
             if [ "$COUNT" -eq 0 ]; then
-              echo "  [${i}/${ATTEMPTS}] No checks yet, waiting ${INTERVAL}s..."
+              echo "  [${i}/${ATTEMPTS}] No CI checks yet, waiting ${INTERVAL}s..."
               sleep $INTERVAL
               continue
             fi
@@ -67,16 +60,17 @@ jobs:
             # Any failures? Abort.
             FAILED=$(echo "$CHECKS" | jq '[.[] | select(.state == "FAILURE")] | length')
             if [ "$FAILED" -gt 0 ]; then
-              echo "❌ CI check(s) failed — not merging"
-              echo "$CHECKS" | jq '.[] | select(.state == "FAILURE")'
+              echo "❌ CI check(s) failed — not merging PR #${PR}"
+              echo "$CHECKS" | jq -r '.[] | select(.state == "FAILURE") | "  FAILED: \(.name)"'
               exit 1
             fi
 
             # All succeeded?
             SUCCEEDED=$(echo "$CHECKS" | jq '[.[] | select(.state == "SUCCESS")] | length')
             if [ "$SUCCEEDED" -eq "$COUNT" ]; then
-              echo "✅ All ${COUNT} checks passed — merging"
+              echo "✅ All ${COUNT} CI checks passed — merging PR #${PR}"
               gh pr merge "${PR}" --repo "${REPO}" --squash --delete-branch
+              echo "🎉 PR #${PR} merged and branch deleted"
               exit 0
             fi
 
@@ -86,5 +80,6 @@ jobs:
             sleep $INTERVAL
           done
 
-          echo "⏰ Timed out waiting for checks after $((ATTEMPTS * INTERVAL))s"
+          echo "⏰ Timed out after $((ATTEMPTS * INTERVAL))s — CI checks did not complete"
+          echo "PR #${PR} left open for manual review"
           exit 1
