@@ -37,6 +37,8 @@ except ImportError:  # pragma: no cover - surfaced at deploy time if missing
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
+from notifier import get_notifier
+
 logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -242,6 +244,7 @@ async def _recalibrate(request: Request) -> JSONResponse:
     if isinstance(pat, JSONResponse):
         return pat
 
+    notify = get_notifier()
     bot = _BotPR(pat, "recalibrate")
     try:
         bot.clone()
@@ -252,7 +255,7 @@ async def _recalibrate(request: Request) -> JSONResponse:
         stdout = (result.stdout or "").strip()
 
         if not bot.has_changes():
-            logger.info("recalibrate: no drift, skipping PR")
+            notify.p2_log("recalibrate", {"status": "no_changes"})
             return JSONResponse({
                 "status": "no_changes",
                 "message": "Scores already in sync.",
@@ -270,14 +273,17 @@ async def _recalibrate(request: Request) -> JSONResponse:
             ),
             labels=["maint:green"],
         )
+        notify.p2_log("recalibrate", {"status": "pr_opened", **pr})
         return JSONResponse({"status": "pr_opened", **pr})
 
     except subprocess.CalledProcessError as e:
+        await notify.p1("recalibrate", e)
         return _subprocess_error(e)
     except httpx.HTTPStatusError as e:
+        await notify.p1("recalibrate", e)
         return _github_api_error(e)
     except Exception as e:
-        logger.exception("unexpected error in /maint/recalibrate")
+        await notify.p0(f"Unexpected failure in recalibrate: {e}", {"job": "recalibrate"})
         return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
     finally:
         bot.cleanup()
@@ -290,6 +296,7 @@ async def _validate(request: Request) -> JSONResponse:
     if isinstance(pat, JSONResponse):
         return pat
 
+    notify = get_notifier()
     bot = _BotPR(pat, "validate")
     try:
         bot.clone()
@@ -317,17 +324,20 @@ async def _validate(request: Request) -> JSONResponse:
                 results.append({"skill": name, "valid": False, "error": "non-JSON output"})
 
         critical = [r for r in results if not r.get("valid", True)]
+        status = "issues_found" if critical else "ok"
+        notify.p2_log("validate", {"status": status, "checked": len(results), "critical_count": len(critical)})
         return JSONResponse({
-            "status": "issues_found" if critical else "ok",
+            "status": status,
             "checked": len(results),
             "critical_count": len(critical),
             "results": results,
         })
 
     except subprocess.CalledProcessError as e:
+        await notify.p1("validate", e)
         return _subprocess_error(e)
     except Exception as e:
-        logger.exception("unexpected error in /maint/validate")
+        await notify.p0(f"Unexpected failure in validate: {e}", {"job": "validate"})
         return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
     finally:
         bot.cleanup()
@@ -340,6 +350,7 @@ async def _snapshot(request: Request) -> JSONResponse:
     if isinstance(pat, JSONResponse):
         return pat
 
+    notify = get_notifier()
     bot = _BotPR(pat, "snapshot")
     try:
         bot.clone()
@@ -350,7 +361,7 @@ async def _snapshot(request: Request) -> JSONResponse:
         stdout = (result.stdout or "").strip()
 
         if not bot.has_changes():
-            logger.info("snapshot: no new entries, skipping PR")
+            notify.p2_log("snapshot", {"status": "no_changes"})
             return JSONResponse({"status": "no_changes", "stdout": stdout})
 
         pr = await bot.open_pr(
@@ -363,14 +374,17 @@ async def _snapshot(request: Request) -> JSONResponse:
             ),
             labels=["maint:green"],
         )
+        notify.p2_log("snapshot", {"status": "pr_opened", **pr})
         return JSONResponse({"status": "pr_opened", **pr})
 
     except subprocess.CalledProcessError as e:
+        await notify.p1("snapshot", e)
         return _subprocess_error(e)
     except httpx.HTTPStatusError as e:
+        await notify.p1("snapshot", e)
         return _github_api_error(e)
     except Exception as e:
-        logger.exception("unexpected error in /maint/snapshot")
+        await notify.p0(f"Unexpected failure in snapshot: {e}", {"job": "snapshot"})
         return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
     finally:
         bot.cleanup()
@@ -386,6 +400,7 @@ async def _sentinel(request: Request) -> JSONResponse:
     if isinstance(pat, JSONResponse):
         return pat
 
+    notify = get_notifier()
     bot = _BotPR(pat, "sentinel")
     try:
         bot.clone()
@@ -396,7 +411,7 @@ async def _sentinel(request: Request) -> JSONResponse:
         stdout = (result.stdout or "").strip()
 
         if not bot.has_changes():
-            logger.info("sentinel: no report generated, skipping PR")
+            notify.p2_log("sentinel", {"status": "no_changes"})
             return JSONResponse({"status": "no_changes", "stdout": stdout})
 
         pr = await bot.open_pr(
@@ -410,14 +425,17 @@ async def _sentinel(request: Request) -> JSONResponse:
             ),
             labels=["maint:green"],
         )
+        notify.p2_log("sentinel", {"status": "pr_opened", **pr})
         return JSONResponse({"status": "pr_opened", **pr})
 
     except subprocess.CalledProcessError as e:
+        await notify.p1("sentinel", e)
         return _subprocess_error(e)
     except httpx.HTTPStatusError as e:
+        await notify.p1("sentinel", e)
         return _github_api_error(e)
     except Exception as e:
-        logger.exception("unexpected error in /maint/sentinel")
+        await notify.p0(f"Unexpected failure in sentinel: {e}", {"job": "sentinel"})
         return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
     finally:
         bot.cleanup()
@@ -427,13 +445,22 @@ async def _sentinel(request: Request) -> JSONResponse:
 # Registration
 # ---------------------------------------------------------------------------
 
+async def _status(_request: Request) -> JSONResponse:
+    """System status — last-run-per-job, config, health signals.
+    Reads from in-memory notifier state (resets on container restart;
+    Cloud Logging is the durable substrate)."""
+    notify = get_notifier()
+    return JSONResponse(notify.status())
+
+
 def register(mcp) -> None:
     """Attach maintenance HTTP routes to the FastMCP instance."""
     mcp.custom_route("/health", methods=["GET"])(_health)
+    mcp.custom_route("/status", methods=["GET"])(_status)
     mcp.custom_route("/maint/recalibrate", methods=["POST"])(_recalibrate)
     mcp.custom_route("/maint/validate", methods=["POST"])(_validate)
     mcp.custom_route("/maint/snapshot", methods=["POST"])(_snapshot)
     mcp.custom_route("/maint/sentinel", methods=["POST"])(_sentinel)
     logger.info(
-        "maintenance router mounted: /health, /maint/{recalibrate,validate,snapshot,sentinel}"
+        "maintenance router mounted: /health, /status, /maint/{recalibrate,validate,snapshot,sentinel}"
     )
