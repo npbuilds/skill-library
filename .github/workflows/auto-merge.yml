@@ -1,0 +1,90 @@
+name: Auto-merge maintenance PRs
+
+# Merges maint:green PRs after CI passes. Works on any GitHub plan
+# (free, Pro, Team). Tries native auto-merge first (available on
+# public repos / paid plans); falls back to watch-and-merge for
+# private free-tier repos.
+#
+# Autonomy tiers (from plan):
+#   conservative (v1): only maint:green auto-merges
+#   standard:          also maint:yellow (add || condition below)
+#   aggressive:        also maint:red (add || condition below)
+
+on:
+  pull_request:
+    types: [opened, labeled, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  auto-merge:
+    name: Auto-merge if green
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    # Conservative autonomy: only maint:green PRs.
+    # To escalate to standard, add:
+    #   || contains(github.event.pull_request.labels.*.name, 'maint:yellow')
+    if: contains(github.event.pull_request.labels.*.name, 'maint:green')
+
+    steps:
+      - name: Wait for CI and merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          echo "PR #${PR} has maint:green label — attempting auto-merge"
+
+          # Path 1: Try native auto-merge (works on public repos / paid plans).
+          # If repo doesn't support it, falls through silently.
+          if gh pr merge "${PR}" --repo "${REPO}" --auto --squash --delete-branch 2>/dev/null; then
+            echo "✅ Native auto-merge enabled — GitHub will merge when checks pass"
+            exit 0
+          fi
+
+          # Path 2: Watch checks and merge directly (free-tier fallback).
+          echo "Native auto-merge not available, watching CI checks..."
+
+          # Wait up to 10 minutes for checks to appear and complete.
+          # CI typically takes ~25s; the generous timeout covers cold starts.
+          ATTEMPTS=60
+          INTERVAL=10
+          for i in $(seq 1 $ATTEMPTS); do
+            # Get check states as JSON array
+            CHECKS=$(gh pr checks "${PR}" --repo "${REPO}" --json name,state 2>/dev/null || echo "[]")
+            COUNT=$(echo "$CHECKS" | jq 'length')
+
+            if [ "$COUNT" -eq 0 ]; then
+              echo "  [${i}/${ATTEMPTS}] No checks yet, waiting ${INTERVAL}s..."
+              sleep $INTERVAL
+              continue
+            fi
+
+            # Any failures? Abort.
+            FAILED=$(echo "$CHECKS" | jq '[.[] | select(.state == "FAILURE")] | length')
+            if [ "$FAILED" -gt 0 ]; then
+              echo "❌ CI check(s) failed — not merging"
+              echo "$CHECKS" | jq '.[] | select(.state == "FAILURE")'
+              exit 1
+            fi
+
+            # All succeeded?
+            SUCCEEDED=$(echo "$CHECKS" | jq '[.[] | select(.state == "SUCCESS")] | length')
+            if [ "$SUCCEEDED" -eq "$COUNT" ]; then
+              echo "✅ All ${COUNT} checks passed — merging"
+              gh pr merge "${PR}" --repo "${REPO}" --squash --delete-branch
+              exit 0
+            fi
+
+            # Some still pending
+            PENDING=$((COUNT - SUCCEEDED))
+            echo "  [${i}/${ATTEMPTS}] ${SUCCEEDED}/${COUNT} passed, ${PENDING} pending, waiting ${INTERVAL}s..."
+            sleep $INTERVAL
+          done
+
+          echo "⏰ Timed out waiting for checks after $((ATTEMPTS * INTERVAL))s"
+          exit 1
