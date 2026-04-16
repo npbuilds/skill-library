@@ -80,7 +80,8 @@ def main() -> None:
     stale.sort(key=lambda x: -x["days_ago"])
 
     # --- Orphaned skills (no deps, no referenced_by, not a hub type) ---
-    hub_types = {"orchestrator", "director"}
+    # Observers (like Sentinel Prime) are standalone by design — not orphans.
+    hub_types = {"orchestrator", "director", "observer"}
     orphans = sorted(
         n for n, s in active.items()
         if not s.get("depends_on") and not s.get("referenced_by")
