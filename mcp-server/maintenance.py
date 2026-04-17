@@ -46,10 +46,12 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 GITHUB_REPO = os.environ.get("GITHUB_BOT_REPO", "npbuilds/skill-library")
+VAULT_REPO = os.environ.get("GITHUB_VAULT_REPO", "npbuilds/skill-library-vault")
 BASE_BRANCH = os.environ.get("GITHUB_BASE_BRANCH", "main")
 BOT_PAT_ENV = "GITHUB_BOT_PAT"
 BOT_EMAIL = os.environ.get("BOT_EMAIL", "skill-library-bot@users.noreply.github.com")
 BOT_NAME = os.environ.get("BOT_NAME", "skill-library-bot")
+KB_REFRESH_LIMIT = int(os.environ.get("KB_REFRESH_LIMIT", "5"))
 
 
 # ---------------------------------------------------------------------------
@@ -441,6 +443,110 @@ async def _sentinel(request: Request) -> JSONResponse:
         bot.cleanup()
 
 
+async def _kb_refresh(request: Request) -> JSONResponse:
+    """Run the KB pipeline: vault-sync (T0) → gap detection → T1 enrichment.
+
+    Manages TWO clones:
+      1. skill-library (source: registry, skills, scripts)
+      2. skill-library-vault (target: vault notes)
+
+    Enriched vault notes are pushed to skill-library-vault directly
+    (not via PR — the vault repo doesn't have CI gating).
+    """
+    pat = _require_pat()
+    if isinstance(pat, JSONResponse):
+        return pat
+
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        return JSONResponse(
+            {"error": "ANTHROPIC_API_KEY not set — T1 enrichment unavailable"},
+            status_code=503,
+        )
+
+    notify = get_notifier()
+    ts = _ts()
+    source_dir = tempfile.mkdtemp(prefix="maint-kb-source-")
+    vault_dir = tempfile.mkdtemp(prefix="maint-kb-vault-")
+
+    try:
+        # 1. Clone source repo (skill-library)
+        _run(
+            ["git", "clone", "--depth", "1", "--branch", BASE_BRANCH,
+             f"https://x-access-token:{pat}@github.com/{GITHUB_REPO}.git", source_dir],
+            capture=True, redact=pat,
+        )
+
+        # 2. Clone vault repo (skill-library-vault)
+        _run(
+            ["git", "clone", "--depth", "1", "--branch", BASE_BRANCH,
+             f"https://x-access-token:{pat}@github.com/{VAULT_REPO}.git", vault_dir],
+            capture=True, redact=pat,
+        )
+        _run(["git", "config", "user.email", BOT_EMAIL], cwd=vault_dir)
+        _run(["git", "config", "user.name", BOT_NAME], cwd=vault_dir)
+
+        # 3. Run kb-pipeline from the SOURCE clone (latest code on main)
+        #    The pipeline reads registry + skills from source_dir,
+        #    writes enriched notes to vault_dir.
+        result = _run(
+            [
+                "python3", "scripts/kb-pipeline.py",
+                "--vault-dir", vault_dir,
+                "--limit", str(KB_REFRESH_LIMIT),
+            ],
+            cwd=source_dir,
+            capture=True,
+            env={
+                **os.environ,
+                "ANTHROPIC_API_KEY": api_key,
+            },
+        )
+        stdout = (result.stdout or "").strip()
+
+        # 4. Check if vault has changes
+        _run(["git", "add", "-A"], cwd=vault_dir)
+        diff = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=vault_dir)
+
+        if diff.returncode == 0:
+            notify.p2_log("kb-refresh", {"status": "no_changes"})
+            return JSONResponse({
+                "status": "no_changes",
+                "message": "No vault updates this cycle.",
+                "pipeline_stdout": stdout,
+            })
+
+        # 5. Commit and push to vault repo (direct push, no PR)
+        #    The vault repo doesn't have CI — it's a content repo.
+        commit_msg = (
+            f"chore(kb): enrich vault notes {ts}\n\n"
+            f"Automated KB pipeline run via /maint/kb-refresh.\n\n"
+            f"{stdout[-500:]}"
+        )
+        _run(["git", "commit", "-m", commit_msg], cwd=vault_dir)
+        _run(
+            ["git", "push", "origin", BASE_BRANCH],
+            cwd=vault_dir, capture=True, redact=pat,
+        )
+
+        notify.p2_log("kb-refresh", {"status": "pushed", "stdout_tail": stdout[-200:]})
+        return JSONResponse({
+            "status": "pushed",
+            "message": "Vault updated and pushed.",
+            "pipeline_stdout": stdout,
+        })
+
+    except subprocess.CalledProcessError as e:
+        await notify.p1("kb-refresh", e)
+        return _subprocess_error(e)
+    except Exception as e:
+        await notify.p0(f"Unexpected failure in kb-refresh: {e}", {"job": "kb-refresh"})
+        return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
+    finally:
+        shutil.rmtree(source_dir, ignore_errors=True)
+        shutil.rmtree(vault_dir, ignore_errors=True)
+
+
 # ---------------------------------------------------------------------------
 # Registration
 # ---------------------------------------------------------------------------
@@ -461,6 +567,8 @@ def register(mcp) -> None:
     mcp.custom_route("/maint/validate", methods=["POST"])(_validate)
     mcp.custom_route("/maint/snapshot", methods=["POST"])(_snapshot)
     mcp.custom_route("/maint/sentinel", methods=["POST"])(_sentinel)
+    mcp.custom_route("/maint/kb-refresh", methods=["POST"])(_kb_refresh)
     logger.info(
-        "maintenance router mounted: /health, /status, /maint/{recalibrate,validate,snapshot,sentinel}"
+        "maintenance router mounted: /health, /status, "
+        "/maint/{recalibrate,validate,snapshot,sentinel,kb-refresh}"
     )

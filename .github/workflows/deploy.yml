@@ -81,8 +81,8 @@ jobs:
             --cpu=1 \
             --timeout=300 \
             --port=8080 \
-            --set-env-vars="MCP_REMOTE=true,MAINTENANCE_AUTONOMY=conservative" \
-            --set-secrets="GITHUB_BOT_PAT=github-bot-pat:latest" \
+            --set-env-vars="MCP_REMOTE=true,MAINTENANCE_AUTONOMY=conservative,GITHUB_VAULT_REPO=npbuilds/skill-library-vault" \
+            --set-secrets="GITHUB_BOT_PAT=github-bot-pat:latest,ANTHROPIC_API_KEY=anthropic-api-key:latest" \
             --quiet
 
       - name: Report deploy
