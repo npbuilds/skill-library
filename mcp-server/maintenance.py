@@ -58,11 +58,12 @@ KB_REFRESH_LIMIT = int(os.environ.get("KB_REFRESH_LIMIT", "5"))
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _run(cmd, cwd=None, capture=False, redact=None):
+def _run(cmd, cwd=None, capture=False, redact=None, env=None):
     """Run a subprocess. Raises CalledProcessError on non-zero exit.
 
     `redact`, if provided, is a string replaced with <REDACTED> in any
     error message we surface (to avoid leaking the bot PAT).
+    `env`, if provided, replaces the subprocess environment.
     """
     try:
         return subprocess.run(
@@ -71,6 +72,7 @@ def _run(cmd, cwd=None, capture=False, redact=None):
             check=True,
             capture_output=capture,
             text=capture,
+            env=env,
         )
     except subprocess.CalledProcessError as e:
         cmd_str = " ".join(str(x) for x in e.cmd) if isinstance(e.cmd, (list, tuple)) else str(e.cmd)
