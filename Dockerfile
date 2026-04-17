@@ -14,7 +14,10 @@ RUN apt-get update \
 #   mcp  -> MCP protocol + FastMCP + transitive Starlette/Uvicorn
 #   httpx -> GitHub API calls from the maintenance router
 COPY mcp-server/pyproject.toml mcp-server/
-RUN pip install --no-cache-dir "mcp>=1.0.0" "httpx>=0.25"
+# mcp      → MCP protocol + FastMCP + transitive Starlette/Uvicorn
+# httpx    → GitHub API calls from the maintenance router
+# anthropic → Claude API calls from kb-pipeline (T1 enrichment)
+RUN pip install --no-cache-dir "mcp>=1.0.0" "httpx>=0.25" "anthropic>=0.30"
 
 # Copy the full project (skills, data, scripts, mcp-server)
 COPY . .
