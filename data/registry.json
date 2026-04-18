@@ -2921,7 +2921,7 @@
         "level:action",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "civilizations",
       "created": "2026-03-22",
       "last_modified": "2026-03-28"
     },
@@ -3183,7 +3183,7 @@
         "level:action",
         "level:foundational"
       ],
-      "parent": null,
+      "parent": "civilizations",
       "created": "2026-03-26",
       "last_modified": "2026-03-28"
     },
@@ -4406,7 +4406,8 @@
         "data-wrangling",
         "modeling",
         "responsible-ai",
-        "statistical-analysis"
+        "statistical-analysis",
+        "drift-detection"
       ],
       "tags": [
         "domain:data-science",
@@ -5564,7 +5565,8 @@
         "claim-decomposer",
         "evidence-synthesizer",
         "skill-scaffold",
-        "source-triangulator"
+        "source-triangulator",
+        "agentic-researcher"
       ],
       "tags": [
         "domain:research",
@@ -5826,7 +5828,8 @@
         "prose-writer",
         "style-dna",
         "syntax-patterns",
-        "typography"
+        "typography",
+        "figurative-language"
       ],
       "tags": [
         "domain:writing",
@@ -6046,7 +6049,12 @@
         "prose-orchestrator",
         "prose-writer",
         "scene-craft",
-        "worldbuilding-orchestrator"
+        "worldbuilding-orchestrator",
+        "character-interiority",
+        "hybrid-forms",
+        "micro-tension",
+        "narrative-geometry",
+        "world-to-story"
       ],
       "invocation": "director"
     },
@@ -6863,7 +6871,7 @@
         "level:knowledge",
         "level:intermediate"
       ],
-      "parent": null,
+      "parent": "systems-craft",
       "created": "2026-03-26",
       "last_modified": "2026-03-28"
     },
@@ -7007,7 +7015,7 @@
         "level:knowledge",
         "level:intermediate"
       ],
-      "parent": null,
+      "parent": "systems-craft",
       "created": "2026-03-26",
       "last_modified": "2026-03-26"
     },
@@ -9766,7 +9774,9 @@
       "referenced_by": [
         "geography-ecology",
         "ecology-design",
-        "technology-progression"
+        "technology-progression",
+        "environmental-storytelling",
+        "sensory-worldbuilding"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9814,7 +9824,11 @@
         "faction-design",
         "religion-design",
         "history-builder",
-        "comparative-civilizations"
+        "comparative-civilizations",
+        "character-belief-tracker",
+        "character-design",
+        "economic-systems",
+        "lore-writer"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9861,7 +9875,12 @@
         "magic-system-design",
         "magic-systems",
         "naming-system",
-        "world-bible"
+        "world-bible",
+        "conlang-craft",
+        "extrapolation-engine",
+        "game-mechanics",
+        "narrative-pacing",
+        "weird-worldbuilding"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9913,7 +9932,7 @@
       ],
       "created": "2026-03-28",
       "last_modified": "2026-03-30",
-      "parent": null
+      "parent": "systems-craft"
     },
     "philosophy-orchestrator": {
       "name": "philosophy-orchestrator",
@@ -11210,7 +11229,10 @@
         "growth-architect",
         "clarity-engine"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "architecture",
+        "foresight"
+      ],
       "tags": [
         "domain:neocortex",
         "level:orchestrator"
@@ -11482,7 +11504,10 @@
         "briefing-engine"
       ],
       "referenced_by": [
-        "neocortex"
+        "neocortex",
+        "briefing-engine",
+        "frontier-scanner",
+        "scenario-planner"
       ],
       "tags": [
         "domain:neocortex",
@@ -11530,7 +11555,14 @@
         "clarity-engine"
       ],
       "referenced_by": [
-        "neocortex"
+        "neocortex",
+        "clarity-engine",
+        "domain-translator",
+        "growth-architect",
+        "pattern-synthesizer",
+        "research-curator",
+        "skill-cartographer",
+        "skill-evolutionist"
       ],
       "tags": [
         "domain:neocortex",
@@ -11824,7 +11856,7 @@
         "estimated_tokens_total": 4003,
         "description_words": 31
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:33:05Z",
       "status": "active",
       "deprecated_date": null,
@@ -12408,7 +12440,7 @@
         "level:orchestrator"
       ],
       "created": "2026-04-13",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-04-18",
       "parent": null
     },
     "historiography": {
@@ -12461,7 +12493,7 @@
         "subdomain:historiography"
       ],
       "created": "2026-04-13",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-04-18",
       "parent": "wan-shi-tong"
     },
     "applied-history": {
@@ -14851,7 +14883,15 @@
       "manual_notes": null,
       "composite_score": 64,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "asset-valuation",
+        "clinical-development",
+        "competitive-intelligence",
+        "deal-synthesis",
+        "manufacturing-ip",
+        "probability-of-success",
+        "regulatory-strategy"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -14902,7 +14942,12 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "cost-estimator",
+        "deal-economics",
+        "peak-sales-forecaster",
+        "rnpv-modeler"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -15057,7 +15102,12 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "biomarker-enrichment",
+        "endpoint-selection",
+        "patient-population-sizer",
+        "trial-design-optimizer"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -15212,7 +15262,11 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "clinical-differentiator",
+        "market-dynamics",
+        "pipeline-mapper"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -15471,7 +15525,11 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "diligence-scorecard",
+        "investment-memo-writer",
+        "portfolio-analyzer"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -15678,7 +15736,12 @@
       "manual_notes": null,
       "composite_score": 57,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "paradigm-designer",
+        "possibility-mapper",
+        "thesis-forge",
+        "vision-architect"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -15729,7 +15792,12 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "adaptation-observer",
+        "amplifier",
+        "learning-loops",
+        "pruning-engine"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -16248,7 +16316,12 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "cmc-risk-assessor",
+        "ip-valuation",
+        "modality-manufacturing",
+        "patent-analyzer"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17079,7 +17152,11 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "mechanism-risk-adjuster",
+        "pos-base-rates",
+        "pos-calculator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17390,7 +17467,11 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "pathway-analyzer",
+        "regulatory-precedent",
+        "regulatory-risk-scorer"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17493,7 +17574,12 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "condition-designer",
+        "constraint-sculptor",
+        "feedback-architect",
+        "prototype-grower"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17544,7 +17630,12 @@
       "manual_notes": null,
       "composite_score": 57,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "capability-radar",
+        "emergence-detector",
+        "frontier-antenna",
+        "signal-reader"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17647,7 +17738,12 @@
       "manual_notes": null,
       "composite_score": 59,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "experience-weaver",
+        "exposure-strategist",
+        "interface-philosopher",
+        "value-architect"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17698,7 +17794,12 @@
       "manual_notes": null,
       "composite_score": 57,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "initiative-tracker",
+        "narrative-keeper",
+        "pattern-weaver",
+        "product-briefing-engine"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17749,7 +17850,14 @@
       "manual_notes": null,
       "composite_score": 65,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "envision",
+        "evolve",
+        "seed",
+        "sense",
+        "surface",
+        "synthesize"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
