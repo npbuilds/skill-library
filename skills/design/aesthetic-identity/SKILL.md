@@ -1,14 +1,18 @@
 ---
 name: aesthetic-identity
 description: >
-  A living model of the user's evolving visual aesthetic — dimensional fingerprint, palette
-  tendencies, compositional preferences, and motion feel. Consult before any creative output
-  to ground design decisions in the user's established (and evolving) identity. Activates
-  when setting creative direction, choosing palettes, establishing mood, or when any design
-  skill needs a starting point that reflects the user rather than generic defaults.
+  A living model of the user's evolving visual aesthetic — dimensional fingerprint across 17
+  axes (spatial, chromatic, form, temporal, emotional, photographic, discovered), palette
+  tendencies, compositional preferences, motion feel, and photographic sensibility. Consult
+  before any creative output to ground design decisions in the user's established (and evolving)
+  identity. Also hosts Tengan (天眼) — the aesthetic intelligence system that analyzes
+  inspiration images across all dimensions when the user signals "absorb", "reference", or
+  "avoid". Activates when setting creative direction, choosing palettes, establishing mood,
+  analyzing inspiration, or when any design skill needs a starting point that reflects the
+  user rather than generic defaults.
 metadata:
   author: nirav
-  version: "1.0"
+  version: "2.0"
 compatibility: Designed for Claude Code
 ---
 
@@ -62,13 +66,25 @@ The profile translates to concrete creative decisions:
 
 **Mood anchors:** Emotional Register plus the narrative summary in current-profile.md → generate the 3–5 adjective anchors that orchestrators pass to sub-agents.
 
+**Photography / Visual Analysis:** Light Character, Substrate/Grain, and Atmosphere/Mood dimensions plus the photography vocabulary reference (`references/photography-vocabulary.md`) guide photographic creative direction — light quality, grain treatment, atmospheric conditions. Cross-reference with Temperature and Contrast for color grading decisions. Genre context (street, architectural, cinematic/editorial) shapes which vocabulary entries are most relevant.
+
+## Tengan (天眼) — The Heavenly Eye
+
+Tengan is the aesthetic intelligence system — the "divine sight" that perceives the dimensional truth of an image across all 17 axes. Named after the Buddhist concept of perceiving reality beyond surface appearance.
+
+**Invocation:** "Tengan, absorb this" / "Tengan, analyze this" / "Tengan, what do you see?"
+
+Tengan operates through the style-evolution-observer's inspiration analysis mode. When the user shares an image with an intent signal, Tengan maps it across all 17 dimensions, shows the delta from the current profile, and proposes updates weighted by signal strength (absorb: 0.7x, reference: 0.4x, avoid: -0.5x).
+
+See `skills/design/style-evolution-observer/SKILL.md` → "Tengan Inspiration Analysis Mode" for the full protocol.
+
 ## Integration Points
 
-**Design Orchestrator** — Phase 2.5 (after classify, before set direction): read profile, pre-populate creative brief fields, flag any dimension with high confidence as a default.
+**Design Orchestrator** — Phase 2.5 (after classify, before set direction): read profile, pre-populate creative brief fields, flag any dimension with high confidence as a default. For photographic work, also read `references/photography-vocabulary.md`.
 
 **Master Artificer** — Phase 1 (Divine the Intent): read profile to inform the Artifact Blueprint's Visual Direction. If the user doesn't specify mood/palette/motion, the profile fills the gaps.
 
-**Style Evolution Observer** — after every creative output, observer reads what was built, maps it to dimensional positions, and updates confidence scores.
+**Style Evolution Observer** — two modes: (1) after every creative output, observer reads what was built, maps it to dimensional positions, and updates confidence scores. (2) Tengan inspiration analysis mode — when user shares inspiration images with explicit intent signals, analyzes across all 17 dimensions and proposes profile updates with weighted signals.
 
 ## What This Skill Does NOT Do
 

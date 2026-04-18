@@ -1,14 +1,36 @@
 {
   "hosting": {
     "public": ".",
-    "ignore": ["firebase.json", "firestore.rules", "firestore.indexes.json", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "firestore.rules",
+      "firestore.indexes.json",
+      "storage.rules",
+      "**/node_modules/**"
+    ],
     "rewrites": [
-      { "source": "**", "destination": "/index.html" }
+      {
+        "source": "/observatory",
+        "destination": "/observatory.html"
+      },
+      {
+        "source": "/observatory.html",
+        "destination": "/observatory.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ],
     "headers": [
       {
         "source": "**/*.js",
-        "headers": [{ "key": "Cache-Control", "value": "max-age=3600" }]
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=3600"
+          }
+        ]
       }
     ]
   },
@@ -16,9 +38,34 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "storage": {
+    "rules": "storage.rules"
+  },
   "emulators": {
-    "hosting": { "port": 5000 },
-    "firestore": { "port": 8080 },
-    "ui": { "enabled": true, "port": 4000 }
+    "hosting": {
+      "port": 5000
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "storage": {
+      "port": 9199
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    }
+  },
+  "auth": {
+    "providers": {
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "Skill Library",
+        "supportEmail": "np.lore.05@gmail.com",
+        "authorizedRedirectUris": [
+          "https://skill-library-prod.web.app",
+          "https://skill-library-prod.firebaseapp.com"
+        ]
+      }
+    }
   }
 }
