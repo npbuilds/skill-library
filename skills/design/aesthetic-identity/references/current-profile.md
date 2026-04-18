@@ -47,3 +47,29 @@ The user's aesthetic is not converging toward a single point — it's establishi
 | "faded neon" | 1 | Muted accent colors at 40-60% intensity. | 2026-03-28 |
 | "vintage feel" | 1 | Retro textures, classic typography weight. | 2026-03-28 |
 | "absorb" | 1 | Deliberate aesthetic expansion. Not replacing, adding to range. | 2026-04-15 |
+
+## Photographic Tendencies
+
+*Added 2026-04-18 via Tengan (天眼) expansion. Three new Photographic dimensions at neutral positions with zero confidence — awaiting first inspiration analysis.*
+
+**New dimensions:**
+- **Light Character** (0.50, conf 0.00) — Soft/Diffuse ↔ Hard/Directional
+- **Substrate/Grain** (0.50, conf 0.00) — Clean Digital ↔ Film/Analog
+- **Atmosphere/Mood** (0.50, conf 0.00) — Clear/Bright ↔ Moody/Dramatic
+
+**Genre interests** (stated, not yet evidence-backed):
+- Street / documentary — urban grit, candid observation, environmental storytelling
+- Architectural / design — built environments, geometric precision, light as material
+- Cinematic / editorial — dramatic light, color grading, narrative framing
+
+**Anti-interests** (explicit exclusions — do NOT weight toward profile):
+- Nature / landscape
+- Fashion
+- Portraits
+
+**Predicted tendencies** (from existing profile signals, awaiting photographic confirmation):
+- Substrate/Grain likely bimodal: clean digital (operational) ↔ analog/grain (contemplative) — mirrors existing Precision bimodality
+- Atmosphere/Mood likely bimodal: clear (operational) ↔ moody (contemplative) — mirrors existing Contrast bimodality
+- Light Character uncertain — street/architectural/cinematic all use directional light differently
+
+**Tengan analysis mode:** Share a photograph and say "Tengan, absorb this" to trigger full 17-dimension analysis and profile update via the style-evolution-observer's inspiration analysis protocol.

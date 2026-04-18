@@ -98,6 +98,28 @@ Dimensions are grouped by category. New dimensions discovered by the observer ar
 
 ---
 
+## Photographic
+
+### Light Character
+**Soft/Diffuse** ◄────────────────► **Hard/Directional**
+- Position: 0.50 | Confidence: 0.00 | Data points: 0
+- What it measures: Quality and direction of light in an image. Soft ambient diffusion (overcast, shade, fill light, blue hour glow) vs. harsh directional light with strong shadows (noon sun, rim/backlight, spotlight, hard flash). Dimensional landmarks: golden hour (0.65 — moderately directional, warm), blue hour (0.30 — soft, cool), harsh noon (0.90 — hard overhead), rim/backlight (0.80 — dramatic directional), studio key light (0.70), available light (variable, 0.40-0.60).
+- Evidence: No data points yet. Awaiting first inspiration analysis via Tengan.
+
+### Substrate/Grain
+**Clean Digital** ◄────────────────► **Film/Analog**
+- Position: 0.50 | Confidence: 0.00 | Data points: 0
+- What it measures: Surface texture quality of the image. Pristine pixel-perfect digital rendering vs. visible grain, noise, analog artifacts, and film stock character. Dimensional landmarks: clean digital sensor (0.10), medium format film (0.45 — fine grain, rich tonality), Portra 400 (0.55 — warm shift, moderate grain), Tri-X 400 (0.75 — bold contrast, strong grain), high ISO noise (0.70 — gritty digital), CRT/analog display texture (0.80), cross-processed (0.85 — shifted colors + heavy grain).
+- Evidence: No data points yet. However, existing profile shows affinity for CRT textures, "vintage feel", and "faded neon" — suggesting potential lean toward analog in contemplative contexts, with clean digital for operational. Awaiting first Tengan analysis.
+
+### Atmosphere/Mood
+**Clear/Bright** ◄────────────────► **Moody/Dramatic**
+- Position: 0.50 | Confidence: 0.00 | Data points: 0
+- What it measures: Environmental atmospheric conditions and their contribution to image mood. Clean, well-lit, clear environments vs. suffused with haze, shadow, weather, and dramatic atmospheric phenomena. Dimensional landmarks: bright clear day (0.15), golden hour warmth (0.40), overcast diffusion (0.45), urban haze (0.55), fog/mist (0.75), rain with neon reflections (0.85), heavy shadow + smoke (0.90).
+- Evidence: No data points yet. Existing profile signals: "weathered", "lived in", cyberpunk theming suggest lean toward moody. But operational register prefers clarity. Bimodal potential. Awaiting first Tengan analysis.
+
+---
+
 ## Discovered
 
 ### Light/Dark Preference

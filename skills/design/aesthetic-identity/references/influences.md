@@ -31,3 +31,32 @@ Reference artists, designers, styles, eras, and works that shape the user's aest
 - Frequency: 1
 - What it signals: Sublime Scale → cosmic, Emotional Register → awe-serious, Temporal Register → mythic/timeless
 - Key qualities: The specific visual moment where a character confronts the infinite — the gate in Bebop, the Spiritual Realm in Stormlight, the space between worlds. Not action, but *encounter*. User independently mapped the cosmic flame artwork to these narrative moments, suggesting a deep aesthetic resonance with the lone-figure-facing-the-sublime archetype.
+
+---
+
+## Photography Influences
+
+*This section populates as the user shares photographic inspirations via Tengan (天眼) inspiration analysis. Tengan analyzes images across all 17 aesthetic dimensions and logs influences here when the user signals "absorb" or "reference."*
+
+*No photography-specific influences captured yet.*
+
+### Genre Interests (stated, not yet evidence-backed)
+- **Street / documentary** — Urban environments, candid observation, environmental storytelling, grit and texture
+- **Architectural / design** — Built environments as aesthetic objects, geometric forms, light revealing structure
+- **Cinematic / editorial** — Styled compositions, dramatic lighting, color-graded, narrative framing
+
+### Anti-Interests (explicit exclusions)
+- Nature / landscape — NOT a signal source
+- Fashion — NOT a signal source
+- Portraits — NOT a signal source
+
+<!--
+TEMPLATE FOR PHOTOGRAPHY INFLUENCES:
+### [Influence Name]
+- Type: photographer / movement / technique / film-stock / color-grade
+- First referenced: [date]
+- Frequency: [N]
+- What it signals: [dimension mappings]
+- Key qualities: [description]
+- Genre: street / architectural / cinematic / editorial
+-->

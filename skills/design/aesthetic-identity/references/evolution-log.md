@@ -78,3 +78,39 @@ Timestamped record of profile changes. Each entry captures what changed, why (ev
 2. **Contemplative mode** — warm, organic, gestural, atmosphere-forward, dark backgrounds (worldbuilding/creative/sublime)
 
 Both share: serious emotional register, high information density (even the sparse composition is information-dense in its color language), and a preference for intentional, authored aesthetics over generic defaults. The observer should track whether future outputs cluster into these two modes or blend into a synthesis.
+
+---
+
+## 2026-04-18 — discovery (Tengan expansion + photographic dimensions)
+
+**Trigger:** User expressed interest in expanding the aesthetic identity system to capture photography, art style, and richer visual analysis beyond color palettes. Stated photography interests: street/documentary, architectural/design, cinematic/editorial. Explicitly excluded: nature/landscape, fashion, portraits.
+
+**Type:** `discovery` — three new dimensions added, new analysis mode created
+
+**Dimensions discovered:**
+
+- Light Character: 0.50 (confidence: 0.00) — Soft/Diffuse ↔ Hard/Directional
+  - What it measures: Quality and direction of light. Golden hour, blue hour, noon, rim/backlight, studio, available light.
+  - Discovery evidence: User's stated interest in cinematic/editorial and architectural photography — both genres where light character is a defining aesthetic choice.
+
+- Substrate/Grain: 0.50 (confidence: 0.00) — Clean Digital ↔ Film/Analog
+  - What it measures: Surface texture quality. Clean pixels vs. film grain, noise, analog artifacts.
+  - Discovery evidence: Existing profile signals ("vintage feel", "lived in", CRT textures, "faded neon") suggest analog affinity in contemplative mode.
+
+- Atmosphere/Mood: 0.50 (confidence: 0.00) — Clear/Bright ↔ Moody/Dramatic
+  - What it measures: Environmental atmospheric conditions. Clear vs. fog, rain, harsh shadows, dramatic weather.
+  - Discovery evidence: Existing profile signals ("weathered", cyberpunk theming) suggest moody lean. Bimodal potential with operational preference for clarity.
+
+**System changes:**
+- New Photographic dimension category added to dimension-registry.md (total: 17 dimensions)
+- Photography vocabulary reference created (`references/photography-vocabulary.md`) — maps lighting, grain, atmosphere, genres, and composition to dimensional positions
+- Style-evolution-observer extended with **Tengan (天眼) inspiration analysis mode** — analyzes inspiration images across all 17 dimensions when user signals "absorb", "reference", or "avoid"
+- Inspiration signals weighted at 0.4x–0.7x vs output-based 1.0x (liking ≠ wanting to create)
+- Design-orchestrator updated with photographic direction in creative brief (Phase 3)
+
+**Evidence:**
+- User explicitly requested expansion: "i dont want just the color aesthetic to be absorbed. but also the art style. im also into photography."
+- Named Tengan (天眼 — "heavenly eye") as the aesthetic intelligence system
+- Signal strength: **Strong positive** — deliberate system expansion with named concept
+
+**Notes:** This is the first expansion of the dimensional model beyond the prior 14 dimensions (12 seeded + 2 discovered). The three new Photographic dimensions are initialized at neutral (0.50) with zero confidence — they await first data from Tengan inspiration analysis. The photography vocabulary reference provides structured mappings so photographic concepts can be consistently translated to dimensional positions. The observer's new Tengan mode creates a second input channel alongside output observation: now the profile can learn from what the user is *inspired by*, not just what they *create*.

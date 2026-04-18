@@ -152,12 +152,162 @@ When the observer detects a consistent pattern that doesn't map to any existing 
 - Scale relationships (uniform vs. extreme size contrast)
 - Narrative quality (does the design tell a story or present a state?)
 
+## Tengan (天眼) Inspiration Analysis Mode
+
+A second activation mode. While the primary mode observes *outputs* and infers from *behavior*, Tengan analyzes *inputs* — inspiration images the user explicitly shares — and proposes dimension updates directly.
+
+**Name meaning:** 天眼 (tengan) — "heavenly eye" / "divine sight." A Buddhist concept of perceiving reality beyond surface appearance. Tengan sees the dimensional truth of an image across all 17 aesthetic axes.
+
+### When to Activate
+
+When the user shares an image with an explicit intent signal:
+
+| Intent Signal | Examples | Action |
+|--------------|---------|--------|
+| **Absorb** | "absorb this", "add to my aesthetic", "Tengan, absorb this" | Full analysis → profile update at 0.7x weight |
+| **Reference** | "I like this", "inspired by", "reference for next project" | Full analysis → profile update at 0.4x weight |
+| **Analyze** | "what does Tengan see?", "analyze this", "map this to my dimensions" | Full analysis → report only, no profile update |
+| **Avoid** | "not this", "anti-reference", "the opposite of what I want" | Full analysis → negative profile update at -0.5x weight |
+
+### Signal Strength Multipliers
+
+Inspiration signals carry less weight than output-based signals because liking something is not the same as wanting to create it. A user can admire a Vermeer without wanting their dashboards to look like Dutch Golden Age paintings.
+
+| Signal Source | Multiplier | Data Point Weight | Rationale |
+|---|:-:|:-:|---|
+| Creative output (primary mode) | 1.0x | 1.0 | The user made this and accepted it — strongest signal |
+| Inspiration "absorb" | 0.7x | 0.7 | Deliberate aesthetic expansion — strong but not output-equivalent |
+| Inspiration "reference" | 0.4x | 0.4 | Appreciation — may not want to replicate fully |
+| Inspiration "avoid" | -0.5x | 0.5 | Negative signal — push dimensions away |
+
+**Why not 1.0x for inspiration?** 20 Pinterest saves shouldn't outweigh 5 actual creative outputs. The multiplier prevents passive consumption from overwriting active creation. This matches how Pinterest (PinnerSage) and Pento weight implicit vs. explicit signals in their taste models.
+
+### Inspiration Analysis Protocol
+
+When Tengan activates, analyze the image across **all 17 dimensions**:
+
+#### Phase 1 — Dimensional Map
+
+For each dimension, estimate the image's position (0.0–1.0):
+
+```
+TENGAN ANALYSIS — [Image description]
+Date: [date]
+Signal: [absorb / reference / analyze / avoid]
+
+── SPATIAL ──
+  Density:     [0.XX] — [brief justification]
+  Symmetry:    [0.XX] — [brief justification]
+  Depth:       [0.XX] — [brief justification]
+
+── CHROMATIC ──
+  Temperature:      [0.XX] — [brief justification]
+  Chromatic Range:   [0.XX] — [brief justification]
+  Contrast:          [0.XX] — [brief justification]
+
+── FORM ──
+  Geometry:    [0.XX] — [brief justification]
+  Precision:   [0.XX] — [brief justification]
+
+── TEMPORAL ──
+  Motion Feel:       [0.XX] — [brief justification]
+  Temporal Register: [0.XX] — [brief justification]
+
+── EMOTIONAL ──
+  Emotional Register:  [0.XX] — [brief justification]
+  Information Stance:  [0.XX] — [brief justification]
+
+── PHOTOGRAPHIC ──
+  Light Character:   [0.XX] — [brief justification]
+  Substrate/Grain:   [0.XX] — [brief justification]
+  Atmosphere/Mood:   [0.XX] — [brief justification]
+
+── DISCOVERED ──
+  Light/Dark Pref:   [0.XX] — [brief justification]
+  Sublime Scale:     [0.XX] — [brief justification]
+```
+
+#### Phase 2 — Confidence Modifiers
+
+Not every dimension is equally expressed in every image. Rate how clearly the image expresses each dimension:
+
+- **Strong expression** (1.0 modifier) — the image clearly demonstrates this dimension's position
+- **Moderate expression** (0.6 modifier) — the dimension is present but not the image's defining quality
+- **Weak expression** (0.3 modifier) — the dimension is barely relevant to this image
+- **Not applicable** (0.0 modifier) — skip this dimension for this image
+
+Apply: `effective_weight = signal_multiplier × confidence_modifier`
+
+#### Phase 3 — Delta from Current Profile
+
+Show the largest divergences between the image and the user's current profile:
+
+```
+LARGEST DIVERGENCES (Δ > 0.15):
+  [Dimension]: current [X.XX] → image [Y.YY] (Δ [Z.ZZ])
+  [Dimension]: current [X.XX] → image [Y.YY] (Δ [Z.ZZ])
+  ...
+
+REINFORCEMENTS (Δ < 0.10, same direction as profile):
+  [Dimension]: current [X.XX] ≈ image [Y.YY] — confirms existing position
+  ...
+```
+
+#### Phase 4 — Proposed Updates
+
+If the signal is "absorb", "reference", or "avoid" (not "analyze"), propose profile updates:
+
+```
+PROPOSED UPDATES (signal: [type], multiplier: [X.Xx]):
+  [Dimension]: [current] → [proposed] (conf: [current] → [proposed])
+  ...
+```
+
+Apply the confidence scoring formula from the Update Protocol section, treating inspiration data points as fractional: an "absorb" = 0.7 data points, a "reference" = 0.4 data points.
+
+### Photography-Specific Checklist
+
+When the inspiration image is a photograph or photographic in nature, additionally analyze:
+
+1. **Light** — Direction, quality, source. Natural vs. artificial. Time of day. Reference `photography-vocabulary.md` lighting table for dimensional mapping.
+2. **Grain/Texture** — Film stock character, digital noise, processing artifacts. Reference `photography-vocabulary.md` substrate table.
+3. **Atmosphere** — Weather, environmental conditions, haze, fog, smoke. Reference `photography-vocabulary.md` atmospheric conditions table.
+4. **Color grading** — Natural vs. stylized. If graded: teal/orange, cool desaturation, warm amber, split-toned, cross-processed. Maps to Temperature + Contrast + Chromatic Range.
+5. **Composition/Framing** — Focal length (wide/normal/tele), depth of field (deep/selective/shallow), framing pattern (negative space, centered, rule of thirds, fill). Reference `photography-vocabulary.md` composition tables.
+6. **Genre** — Street, architectural, cinematic, editorial, other. Cross-reference with user's stated interests in the profile. Images in the user's interest genres carry full weight; images in anti-interest genres should be flagged but weighted at 0.0 unless the user explicitly signals otherwise.
+
+### Evolution Log Entry Format
+
+Inspiration analyses use a distinct change type in `evolution-log.md`:
+
+```
+## [Date] — inspiration ([absorb/reference/avoid])
+
+**Trigger:** User shared [image description] with "[exact signal phrase]"
+**Type:** `inspiration`
+**Signal multiplier:** [0.7x / 0.4x / -0.5x]
+
+**Dimensions shifted:**
+- [Dimension]: [old] → [new] (confidence: [old] → [new])
+- ...
+
+**Dimension discovered:** [if applicable]
+
+**Evidence:**
+- [Brief description of the image and what it signals]
+- Signal strength: [Strong/Moderate] — [rationale]
+
+**Notes:** [Any observations about how this fits or expands the existing profile]
+```
+
 ## What This Observer Does NOT Do
 
 - Ask the user questions (all inference is behavioral)
 - Override the user's explicit creative direction
 - Delete or downgrade dimensions (only decay confidence)
 - Make creative decisions (only updates the profile that other skills read)
+- Analyze images the user hasn't explicitly asked to analyze — Tengan inspiration analysis mode only activates on explicit user intent signals
+- Weight anti-interest genre images toward the profile (nature, fashion, portraits) unless the user explicitly overrides
 
 ## Scope Boundaries
 

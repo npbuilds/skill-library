@@ -60,7 +60,8 @@ Read `references/style-taxonomy.md` for the full domain catalog.
 Before setting creative direction, read the user's evolving aesthetic profile:
 
 1. Read `skills/design/aesthetic-identity/references/current-profile.md` for the narrative summary
-2. Check `skills/design/aesthetic-identity/references/dimension-registry.md` for specific dimensional positions
+2. Check `skills/design/aesthetic-identity/references/dimension-registry.md` for specific dimensional positions (17 dimensions across Spatial, Chromatic, Form, Temporal, Emotional, Photographic, Discovered)
+3. For photography/visual composition work, also read `skills/design/aesthetic-identity/references/photography-vocabulary.md` for photographic concept → dimension mappings
 
 **How the profile shapes Phase 3:**
 - **High-confidence dimensions (>0.7):** pre-populate the Creative Brief with these as defaults. Note them as "from your established aesthetic" so the user knows they can override.
@@ -101,7 +102,16 @@ Before delegating, establish the design guardrails. Start from the aesthetic ide
    - Check profile: mood vocabulary in `current-profile.md`
    - Example: "precise, warm, approachable, modern, grounded"
 
-6. **Anti-patterns** — what to explicitly avoid
+6. **Photographic direction** — if the output involves photography, visual art, or photographic aesthetic
+   - Check profile: Light Character, Substrate/Grain, Atmosphere/Mood dimensions
+   - Consult `skills/design/aesthetic-identity/references/photography-vocabulary.md` for vocabulary
+   - Light quality and direction (soft/hard, golden/blue hour, rim/backlight)
+   - Grain/texture treatment (clean digital, film stock emulation, analog artifacts)
+   - Atmospheric conditions (clear, moody, fog, rain, dramatic shadows)
+   - Color grading intent (natural, teal/orange, desaturated, warm amber)
+   - Genre context (street/documentary, architectural, cinematic/editorial)
+
+7. **Anti-patterns** — what to explicitly avoid
    - Example: "no gradients, no stock photo aesthetic, no rounded corners"
 
 Document these as a **Creative Brief** that gets passed to every sub-agent.
