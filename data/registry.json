@@ -2951,10 +2951,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 83,
+      "auto_score": 80,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 83,
+      "composite_score": 80,
       "depends_on": [
         "cultures-societies",
         "world-bible",
@@ -5253,10 +5253,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 76,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator",
@@ -5306,10 +5306,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 81,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator",
@@ -5919,8 +5919,8 @@
         "estimated_tokens_total": 1780,
         "precise_tokens": null
       },
-      "auto_score": 82,
-      "composite_score": 82,
+      "auto_score": 79,
+      "composite_score": 79,
       "referenced_by": [
         "concrete-detail",
         "sentence-craft",
@@ -6092,8 +6092,8 @@
         "estimated_tokens_body": 1098,
         "estimated_tokens_total": 1157
       },
-      "auto_score": 79,
-      "composite_score": 79,
+      "auto_score": 76,
+      "composite_score": 76,
       "referenced_by": [
         "narrative-craft",
         "narrative-pacing",
@@ -6195,8 +6195,8 @@
         "estimated_tokens_body": 835,
         "estimated_tokens_total": 904
       },
-      "auto_score": 79,
-      "composite_score": 79,
+      "auto_score": 76,
+      "composite_score": 76,
       "referenced_by": [
         "dialogue",
         "narrative-arc",
@@ -6251,8 +6251,8 @@
         "estimated_tokens_body": 777,
         "estimated_tokens_total": 839
       },
-      "auto_score": 77,
-      "composite_score": 77,
+      "auto_score": 74,
+      "composite_score": 74,
       "referenced_by": [
         "narrative-craft",
         "faction-design",
@@ -6303,8 +6303,8 @@
         "estimated_tokens_body": 864,
         "estimated_tokens_total": 916
       },
-      "auto_score": 77,
-      "composite_score": 77,
+      "auto_score": 74,
+      "composite_score": 74,
       "referenced_by": [
         "narrative-craft",
         "lore-writer",
@@ -6355,8 +6355,8 @@
         "estimated_tokens_body": 924,
         "estimated_tokens_total": 985
       },
-      "auto_score": 80,
-      "composite_score": 80,
+      "auto_score": 77,
+      "composite_score": 77,
       "referenced_by": [
         "narrative-craft",
         "character-interiority",
@@ -8442,10 +8442,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 78,
       "depends_on": [
         "archon",
         "evolutionary-dynamics",
@@ -8654,10 +8654,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 85,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 82,
       "depends_on": [
         "archon"
       ],
@@ -12251,10 +12251,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 60,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 60,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -12339,10 +12339,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 61,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 61,
+      "composite_score": 58,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
