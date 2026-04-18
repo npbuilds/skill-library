@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "skill-library-prod"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

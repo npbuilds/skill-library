@@ -17,3 +17,17 @@ Reference artists, designers, styles, eras, and works that shape the user's aest
 - Frequency: 1
 - What it signals: Temporal Register → retro, Precision → mechanical, Depth → moderate (scan lines create layering)
 - Key qualities: Scanline overlays, vignette effects, monospace typography, terminal-style data presentation. The warmth of old hardware applied to modern data.
+
+### Cosmic Sublime / Flame Nebula Expressionism
+- Type: style
+- First referenced: 2026-04-15
+- Frequency: 1
+- What it signals: Sublime Scale → cosmic, Geometry → organic, Precision → expressive, Temperature → warm, Contrast → high, Light/Dark → dark
+- Key qualities: Lone figure dwarfed by overwhelming cosmic force. Deep black void as canvas. Gestural, painterly energy forms with full-spectrum color (red through violet). White silhouette as human anchor against the infinite. The sublime as aesthetic experience — awe, not beauty. Connected by user to Cosmere (Dalinar/Spiritual Realm), Cowboy Bebop (gate sequences), and Stormlight Archive. This is the contemplative pole of the bimodal identity.
+
+### Bebop Gate / Cosmere Splash (narrative sublime)
+- Type: narrative-visual
+- First referenced: 2026-04-15
+- Frequency: 1
+- What it signals: Sublime Scale → cosmic, Emotional Register → awe-serious, Temporal Register → mythic/timeless
+- Key qualities: The specific visual moment where a character confronts the infinite — the gate in Bebop, the Spiritual Realm in Stormlight, the space between worlds. Not action, but *encounter*. User independently mapped the cosmic flame artwork to these narrative moments, suggesting a deep aesthetic resonance with the lone-figure-facing-the-sublime archetype.
