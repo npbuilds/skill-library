@@ -12371,14 +12371,14 @@
         "word_count": 999,
         "body_words": 936,
         "section_count": 5,
-        "reference_files": 0,
+        "reference_files": 8,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_total": 1653,
         "description_words": 45
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T06:59:32Z",
       "status": "active",
       "deprecated_date": null,
@@ -12408,7 +12408,7 @@
         "level:orchestrator"
       ],
       "created": "2026-04-13",
-      "last_modified": "2026-04-14",
+      "last_modified": "2026-04-19",
       "parent": null
     },
     "historiography": {
@@ -12425,14 +12425,14 @@
         "word_count": 736,
         "body_words": 673,
         "section_count": 5,
-        "reference_files": 0,
+        "reference_files": 4,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_total": 1265,
         "description_words": 45
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T06:59:35Z",
       "status": "active",
       "deprecated_date": null,
@@ -12461,7 +12461,7 @@
         "subdomain:historiography"
       ],
       "created": "2026-04-13",
-      "last_modified": "2026-04-14",
+      "last_modified": "2026-04-19",
       "parent": "wan-shi-tong"
     },
     "applied-history": {
