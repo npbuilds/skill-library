@@ -109,7 +109,7 @@ fi
 # Check 5: description has action verbs
 if [ "$DESC_WORDS" -gt 0 ]; then
   HAS_VERB=$(echo "$DESC_TEXT" | tr '[:upper:]' '[:lower:]' | awk '
-    /(^|[^a-z])(use|create|build|add|update|fix|analyze|check|run|generate|scaffold|fork|test|export|browse|search|manage|audit|review|optimize)([^a-z]|$)/ { found=1 }
+    /(^|[^a-z])(use|create|build|add|update|fix|analyze|check|run|generate|scaffold|fork|test|export|browse|search|manage|audit|review|optimize|orchestrate|route|coordinate|teach|design|evaluate|assess)([^a-z]|$)/ { found=1 }
     END { print found+0 }
   ')
   if [ "$HAS_VERB" -eq 0 ]; then

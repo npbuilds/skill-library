@@ -91,7 +91,11 @@ def tmp_project(tmp_path):
     refs_dir.mkdir()
     (refs_dir / "color-wheel.md").write_text("# Color Wheel\n\nReference content.\n")
 
-    # Patch module-level paths to use tmp_path
+    # Patch module-level paths to use tmp_path.
+    # Note: `shared` module globals must also be patched because functions like
+    # `atomic_write_registry` live in shared.py and read shared.REGISTRY_PATH
+    # (not server.REGISTRY_PATH). Without this, writes escape the test sandbox.
+    import shared
     with (
         patch.object(server, "PROJECT_ROOT", tmp_path),
         patch.object(server, "REGISTRY_PATH", data_dir / "registry.json"),
@@ -100,6 +104,9 @@ def tmp_project(tmp_path):
         patch.object(server, "USAGE_LOG", data_dir / "usage.jsonl"),
         patch.object(server, "GAPS_LOG", data_dir / "gaps.jsonl"),
         patch.object(server, "FEEDBACK_LOG", data_dir / "feedback.jsonl"),
+        patch.object(shared, "PROJECT_ROOT", tmp_path),
+        patch.object(shared, "REGISTRY_PATH", data_dir / "registry.json"),
+        patch.object(shared, "DATA_DIR", data_dir),
     ):
         yield tmp_path
 
@@ -489,3 +496,91 @@ class TestConcurrentLogging:
         raw_lines = [l for l in log_path.read_text().splitlines() if l.strip()]
         for line in raw_lines:
             json.loads(line)  # raises if malformed
+
+
+# ---------------------------------------------------------------------------
+# update_skill_metadata — referenced_by maintenance
+# ---------------------------------------------------------------------------
+# Regression tests for the drift bug: changing `parent` via
+# update_skill_metadata must keep the denormalized referenced_by index in sync
+# on both the old and new parents.
+
+
+class TestUpdateMetadataReferencedBy:
+    def test_reparent_moves_entry_between_referenced_by_lists(self, tmp_project):
+        """parent: A → B must remove child from A.referenced_by and append to B.referenced_by."""
+        # Seed: add a second director so we have two possible parents
+        reg = json.loads((server.REGISTRY_PATH).read_text())
+        reg["skills"]["other-director"] = {
+            "name": "other-director", "type": "director", "status": "active",
+            "description": "Another director for reparenting tests.",
+            "location": "skills/design/other-director/SKILL.md",
+            "tags": ["domain:design"], "parent": None, "depends_on": [],
+            "referenced_by": [], "metrics": {}, "last_modified": "2026-03-01",
+            "health_status": "healthy",
+        }
+        server.REGISTRY_PATH.write_text(json.dumps(reg))
+
+        # color-theory starts with parent=design-director
+        result = server.update_skill_metadata("color-theory", parent="other-director")
+        assert "parent=other-director" in result
+
+        reg2 = json.loads((server.REGISTRY_PATH).read_text())
+        assert reg2["skills"]["color-theory"]["parent"] == "other-director"
+        # Old parent loses the back-reference
+        assert "color-theory" not in reg2["skills"]["design-director"]["referenced_by"]
+        # New parent gains it
+        assert "color-theory" in reg2["skills"]["other-director"]["referenced_by"]
+
+    def test_clearing_parent_removes_from_old_referenced_by(self, tmp_project):
+        """parent: X → "" must remove child from X.referenced_by."""
+        result = server.update_skill_metadata("color-theory", parent="")
+        assert "cleared" in result
+
+        reg = json.loads((server.REGISTRY_PATH).read_text())
+        assert reg["skills"]["color-theory"]["parent"] is None
+        assert "color-theory" not in reg["skills"]["design-director"]["referenced_by"]
+
+    def test_setting_parent_on_orphan_appends_to_new_referenced_by(self, tmp_project):
+        """parent: None → X must add child to X.referenced_by."""
+        # data-wrangling starts with parent=None
+        # Seed a director in data-science to adopt it
+        reg = json.loads((server.REGISTRY_PATH).read_text())
+        reg["skills"]["ds-director"] = {
+            "name": "ds-director", "type": "director", "status": "active",
+            "description": "Data science director.",
+            "location": "skills/data-science/ds-director/SKILL.md",
+            "tags": ["domain:data-science"], "parent": None, "depends_on": [],
+            "referenced_by": [], "metrics": {}, "last_modified": "2026-03-01",
+            "health_status": "healthy",
+        }
+        server.REGISTRY_PATH.write_text(json.dumps(reg))
+
+        server.update_skill_metadata("data-wrangling", parent="ds-director")
+
+        reg2 = json.loads((server.REGISTRY_PATH).read_text())
+        assert reg2["skills"]["data-wrangling"]["parent"] == "ds-director"
+        assert "data-wrangling" in reg2["skills"]["ds-director"]["referenced_by"]
+
+    def test_same_parent_noop_does_not_duplicate(self, tmp_project):
+        """Setting parent to its existing value must not duplicate in referenced_by."""
+        # color-theory already has parent=design-director, and design-director
+        # already has ["color-theory"] in its referenced_by
+        server.update_skill_metadata("color-theory", parent="design-director")
+
+        reg = json.loads((server.REGISTRY_PATH).read_text())
+        refs = reg["skills"]["design-director"]["referenced_by"]
+        assert refs.count("color-theory") == 1, f"duplicated: {refs}"
+
+    def test_unrelated_metadata_update_does_not_touch_referenced_by(self, tmp_project):
+        """Changing only health_status/manual_rating/etc must leave referenced_by alone."""
+        before = json.loads((server.REGISTRY_PATH).read_text())
+        before_refs = dict((n, list(e.get("referenced_by", [])))
+                           for n, e in before["skills"].items())
+
+        server.update_skill_metadata("color-theory", health_status="warning")
+
+        after = json.loads((server.REGISTRY_PATH).read_text())
+        after_refs = dict((n, list(e.get("referenced_by", [])))
+                          for n, e in after["skills"].items())
+        assert before_refs == after_refs, "referenced_by drifted on unrelated update"
