@@ -2,7 +2,8 @@
 """Wire depends_on + referenced_by for all non-investing domains.
 
 Covers: sommelier, writing, design, game-theory, worldbuilding,
-        data-science, infrastructure, research.
+        data-science, infrastructure, research, world-history,
+        product, biotech-venture.
 
 Run:
     python3 scripts/wire-all-domains.py          # dry-run
@@ -202,6 +203,148 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     "claim-decomposer":    ["spelunker"],
     "evidence-synthesizer":["spelunker", "source-triangulator", "claim-decomposer"],
     "source-triangulator": ["spelunker", "claim-decomposer"],
+
+    # ── WORLD-HISTORY ──────────────────────────────────────────────────────
+    # Directors
+    "political-history":       ["wan-shi-tong"],
+    "economic-history":        ["wan-shi-tong"],
+    "cultural-history":        ["wan-shi-tong"],
+    "military-history":        ["wan-shi-tong"],
+    "intellectual-history":    ["wan-shi-tong"],
+    "world-systems":           ["wan-shi-tong"],
+    "historiography":          ["wan-shi-tong"],
+    "applied-history":         ["wan-shi-tong"],
+    "regional-atlas":          ["wan-shi-tong"],
+    # Political-history children
+    "empires-and-states":                ["political-history"],
+    "revolutions-and-regime-change":     ["political-history"],
+    "diplomacy-and-international-order": ["political-history"],
+    "decolonization-and-sovereignty":    ["political-history"],
+    "historical-analogy-engine":         ["political-history", "applied-history"],
+    # Economic-history children
+    "trade-and-globalization":           ["economic-history"],
+    "money-and-financial-systems":       ["economic-history"],
+    "industrialization-and-development": ["economic-history"],
+    "labor-and-inequality":              ["economic-history"],
+    # Cultural-history children
+    "religions-and-worldviews":          ["cultural-history"],
+    "gender-and-sexuality-history":      ["cultural-history"],
+    "social-movements-and-identity":     ["cultural-history"],
+    "art-and-cultural-production":       ["cultural-history"],
+    "everyday-life-and-material-culture":["cultural-history"],
+    # Military-history children
+    "strategy-and-grand-strategy":       ["military-history"],
+    "warfare-through-the-ages":          ["military-history"],
+    "intelligence-and-information-war":  ["military-history"],
+    "battle-analysis":                   ["military-history"],
+    # Intellectual-history children
+    "scientific-revolutions":            ["intellectual-history"],
+    "political-thought":                 ["intellectual-history", "political-history"],
+    "knowledge-systems":                 ["intellectual-history"],
+    # World-systems children
+    "comparative-civilizations":         ["world-systems"],
+    "environmental-history":             ["world-systems"],
+    "deep-history":                      ["world-systems"],
+    "demographic-and-structural-forces": ["world-systems"],
+    "technology-and-civilizational-change":["world-systems"],
+    "comparative-analysis-engine":       ["world-systems", "applied-history"],
+    # Historiography children
+    "historical-thinking":               ["historiography"],
+    "schools-of-thought":                ["historiography"],
+    "source-criticism":                  ["historiography"],
+    "historical-argument":               ["historiography"],
+    "source-evaluator":                  ["historiography", "source-criticism"],
+    # Applied-history children
+    "historical-pattern-recognition":    ["applied-history"],
+    "history-and-decision-making":       ["applied-history"],
+    "timeline-builder":                  ["applied-history"],
+    "debate-simulator":                  ["applied-history"],
+    "nexus-event-analyzer":              ["applied-history"],
+    # Regional-atlas children
+    "mediterranean-and-near-east":       ["regional-atlas"],
+    "east-asia":                         ["regional-atlas"],
+    "sub-saharan-africa":                ["regional-atlas"],
+    "americas-and-oceania":              ["regional-atlas"],
+
+    # ── PRODUCT ────────────────────────────────────────────────────────────
+    # Directors
+    "sense":      ["the-loom"],
+    "envision":   ["the-loom"],
+    "seed":       ["the-loom", "envision"],
+    "surface":    ["the-loom", "seed"],
+    "evolve":     ["the-loom", "surface"],
+    "synthesize": ["the-loom"],
+    # Sense children
+    "frontier-antenna":     ["sense"],
+    "capability-radar":     ["sense"],
+    "signal-reader":        ["sense"],
+    "emergence-detector":   ["sense"],
+    # Envision children
+    "possibility-mapper":   ["envision"],
+    "thesis-forge":         ["envision"],
+    "vision-architect":     ["envision"],
+    "paradigm-designer":    ["envision"],
+    # Seed children
+    "condition-designer":   ["seed"],
+    "constraint-sculptor":  ["seed"],
+    "prototype-grower":     ["seed"],
+    "feedback-architect":   ["seed"],
+    # Surface children
+    "exposure-strategist":  ["surface"],
+    "value-architect":      ["surface"],
+    "experience-weaver":    ["surface"],
+    "interface-philosopher":["surface"],
+    # Evolve children
+    "learning-loops":       ["evolve"],
+    "pruning-engine":       ["evolve"],
+    "amplifier":            ["evolve"],
+    "adaptation-observer":  ["evolve"],
+    # Synthesize children
+    "initiative-tracker":      ["synthesize"],
+    "narrative-keeper":        ["synthesize"],
+    "product-briefing-engine": ["synthesize"],
+    "pattern-weaver":          ["synthesize"],
+
+    # ── BIOTECH-VENTURE ────────────────────────────────────────────────────
+    # Directors
+    "clinical-development":     ["asclepius"],
+    "probability-of-success":   ["asclepius", "clinical-development"],
+    "asset-valuation":          ["asclepius", "probability-of-success"],
+    "regulatory-strategy":      ["asclepius", "clinical-development"],
+    "competitive-intelligence": ["asclepius"],
+    "manufacturing-ip":         ["asclepius"],
+    "deal-synthesis":           ["asclepius", "asset-valuation", "probability-of-success"],
+    # Clinical-development children
+    "biomarker-enrichment":     ["clinical-development"],
+    "patient-population-sizer": ["clinical-development"],
+    "endpoint-selection":       ["clinical-development"],
+    "trial-design-optimizer":   ["clinical-development"],
+    # Probability-of-success children
+    "pos-calculator":           ["probability-of-success", "pos-base-rates"],
+    "mechanism-risk-adjuster":  ["probability-of-success"],
+    "pos-base-rates":           ["probability-of-success"],
+    # Asset-valuation children
+    "cost-estimator":           ["asset-valuation"],
+    "rnpv-modeler":             ["asset-valuation", "peak-sales-forecaster", "probability-of-success"],
+    "deal-economics":           ["asset-valuation"],
+    "peak-sales-forecaster":    ["asset-valuation"],
+    # Regulatory-strategy children
+    "pathway-analyzer":         ["regulatory-strategy"],
+    "regulatory-precedent":     ["regulatory-strategy"],
+    "regulatory-risk-scorer":   ["regulatory-strategy"],
+    # Competitive-intelligence children
+    "clinical-differentiator":  ["competitive-intelligence"],
+    "market-dynamics":          ["competitive-intelligence"],
+    "pipeline-mapper":          ["competitive-intelligence"],
+    # Manufacturing-ip children
+    "modality-manufacturing":   ["manufacturing-ip"],
+    "ip-valuation":             ["manufacturing-ip"],
+    "patent-analyzer":          ["manufacturing-ip"],
+    "cmc-risk-assessor":        ["manufacturing-ip"],
+    # Deal-synthesis children
+    "portfolio-analyzer":       ["deal-synthesis"],
+    "investment-memo-writer":   ["deal-synthesis", "diligence-scorecard"],
+    "diligence-scorecard":      ["deal-synthesis"],
 }
 
 

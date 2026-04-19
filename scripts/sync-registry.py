@@ -234,7 +234,7 @@ def discover_skills() -> dict[str, dict]:
             "name": skill_name,
             "description": description,
             "location": rel_path,
-            "plugin": "skill-infra",
+            "plugin": f"skill-{structure['domain']}" if structure["domain"] else "skill-infra",
             "type": skill_type,
             "source": "self",
             "context_mode": "inline",
