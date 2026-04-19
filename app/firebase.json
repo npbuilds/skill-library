@@ -18,6 +18,14 @@
         "destination": "/observatory.html"
       },
       {
+        "source": "/infra",
+        "destination": "/infra.html"
+      },
+      {
+        "source": "/infra.html",
+        "destination": "/infra.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
