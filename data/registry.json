@@ -223,9 +223,9 @@
       "depends_on": [
         "aroma-lexicon",
         "deductive-method",
-        "tasting-evaluation",
         "model-evaluation",
-        "statistical-testing"
+        "statistical-testing",
+        "tasting-evaluation"
       ],
       "referenced_by": [
         "model-evaluation"
@@ -1318,9 +1318,9 @@
       "manual_notes": null,
       "composite_score": 73,
       "depends_on": [
-        "wine-market",
         "statistical-analysis",
-        "value-quality"
+        "value-quality",
+        "wine-market"
       ],
       "referenced_by": [
         "cellar-management",
@@ -1653,11 +1653,11 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
+        "feature-engineering",
         "food-pairing",
         "pairing-science",
-        "tasting-evaluation",
-        "feature-engineering",
-        "sommelier-lab"
+        "sommelier-lab",
+        "tasting-evaluation"
       ],
       "referenced_by": [
         "cuisine-pairing",
@@ -1763,8 +1763,8 @@
       "depends_on": [
         "infrastructure-orchestrator",
         "skill-analyze",
-        "skill-registry",
-        "skill-dashboard"
+        "skill-dashboard",
+        "skill-registry"
       ],
       "referenced_by": [
         "skill-scaffold",
@@ -1861,9 +1861,9 @@
       "composite_score": 79,
       "depends_on": [
         "infrastructure-orchestrator",
-        "skill-registry",
-        "skill-health",
         "skill-dashboard",
+        "skill-health",
+        "skill-registry",
         "spelunker"
       ],
       "referenced_by": [
@@ -1912,9 +1912,9 @@
       "composite_score": 73,
       "depends_on": [
         "infrastructure-orchestrator",
-        "skill-scaffold",
+        "skill-analyze",
         "skill-registry",
-        "skill-analyze"
+        "skill-scaffold"
       ],
       "referenced_by": [
         "infrastructure-orchestrator"
@@ -2010,8 +2010,8 @@
       "composite_score": 72,
       "depends_on": [
         "infrastructure-orchestrator",
-        "skill-registry",
         "skill-health",
+        "skill-registry",
         "skill-scaffold"
       ],
       "referenced_by": [
@@ -2203,14 +2203,14 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "visual-communication",
-        "prose-rhythm"
+        "prose-rhythm",
+        "visual-communication"
       ],
       "referenced_by": [
         "design-orchestrator",
         "illustration-direction",
-        "visual-communication",
-        "sentence-craft"
+        "sentence-craft",
+        "visual-communication"
       ],
       "shares_references_with": [
         "color-theory",
@@ -2310,10 +2310,10 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "design-orchestrator",
-        "rhetoric",
         "color-theory",
+        "design-orchestrator",
         "design-principles",
+        "rhetoric",
         "visual-perception"
       ],
       "referenced_by": [
@@ -2323,8 +2323,8 @@
         "illustration-direction",
         "master-artificer",
         "motion-design",
-        "visual-perception",
-        "rhetoric"
+        "rhetoric",
+        "visual-perception"
       ],
       "tags": [
         "domain:design",
@@ -2435,19 +2435,19 @@
       "composite_score": 76,
       "depends_on": [
         "design-orchestrator",
-        "sentence-craft",
         "prose-rhythm",
+        "responsive-type",
+        "sentence-craft",
         "type-fundamentals",
-        "type-pairing",
-        "responsive-type"
+        "type-pairing"
       ],
       "referenced_by": [
         "design-orchestrator",
         "master-artificer",
         "responsive-type",
+        "sentence-craft",
         "type-fundamentals",
-        "type-pairing",
-        "sentence-craft"
+        "type-pairing"
       ],
       "tags": [
         "domain:design",
@@ -2638,10 +2638,10 @@
       "manual_notes": null,
       "composite_score": 73,
       "depends_on": [
-        "design-orchestrator",
         "brand-foundations",
-        "visual-identity",
-        "brand-voice"
+        "brand-voice",
+        "design-orchestrator",
+        "visual-identity"
       ],
       "referenced_by": [
         "aesthetic-identity",
@@ -2839,8 +2839,8 @@
       "manual_notes": null,
       "composite_score": 84,
       "depends_on": [
-        "worldbuilding-orchestrator",
-        "systems-craft"
+        "systems-craft",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "character-belief-tracker",
@@ -2897,24 +2897,24 @@
       "manual_notes": null,
       "composite_score": 80,
       "depends_on": [
-        "world-bible",
-        "worldbuilding-orchestrator",
-        "prose-writer",
-        "point-of-view",
+        "cultures-societies",
         "diction",
-        "naming-system",
-        "magic-system-design",
         "ecology-design",
+        "magic-system-design",
+        "naming-system",
+        "point-of-view",
+        "prose-writer",
         "religion-design",
-        "cultures-societies"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "character-belief-tracker",
         "history-builder",
         "magic-systems",
+        "narrative-craft",
         "narrative-pacing",
-        "worldbuilding-orchestrator",
-        "narrative-craft"
+        "worldbuilding-orchestrator"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -2957,10 +2957,10 @@
       "composite_score": 80,
       "depends_on": [
         "cultures-societies",
-        "world-bible",
-        "worldbuilding-orchestrator",
         "diction",
-        "systems-craft"
+        "systems-craft",
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "lore-writer",
@@ -3007,9 +3007,9 @@
       "manual_notes": null,
       "composite_score": 82,
       "depends_on": [
+        "systems-craft",
         "world-bible",
-        "worldbuilding-orchestrator",
-        "systems-craft"
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "cultures-societies",
@@ -3064,9 +3064,9 @@
       "composite_score": 74,
       "depends_on": [
         "geography-ecology",
-        "worldbuilding-orchestrator",
+        "physical-world",
         "world-bible",
-        "physical-world"
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "lore-writer"
@@ -3114,10 +3114,10 @@
       "manual_notes": null,
       "composite_score": 84,
       "depends_on": [
+        "civilizations",
         "cultures-societies",
-        "worldbuilding-orchestrator",
         "world-bible",
-        "civilizations"
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "lore-writer",
@@ -3170,10 +3170,10 @@
       "composite_score": 73,
       "depends_on": [
         "cultures-societies",
-        "world-bible",
-        "worldbuilding-orchestrator",
+        "lore-writer",
         "point-of-view",
-        "lore-writer"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "narrative-craft"
@@ -3218,11 +3218,11 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
+        "civilizations",
         "lore-writer",
-        "world-bible",
-        "worldbuilding-orchestrator",
         "religion-design",
-        "civilizations"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "extrapolation-engine",
@@ -3322,10 +3322,10 @@
       "manual_notes": null,
       "composite_score": 78,
       "depends_on": [
-        "game-theory-orchestrator",
         "classical-games",
         "cooperative-games",
-        "game-solver"
+        "game-solver",
+        "game-theory-orchestrator"
       ],
       "referenced_by": [
         "behavioral-game-theory",
@@ -3376,20 +3376,20 @@
       "manual_notes": null,
       "composite_score": 86,
       "depends_on": [
-        "strategic-foundations",
-        "second-level-thinking",
+        "dilemma-analyzer",
         "regime-intelligence",
-        "dilemma-analyzer"
+        "second-level-thinking",
+        "strategic-foundations"
       ],
       "referenced_by": [
         "algorithmic-game-theory",
         "cooperative-games",
-        "evolutionary-games",
-        "game-solver",
-        "strategic-foundations",
-        "second-level-thinking",
-        "faction-design",
         "dilemma-analyzer",
+        "evolutionary-games",
+        "faction-design",
+        "game-solver",
+        "second-level-thinking",
+        "strategic-foundations",
         "strategy-and-grand-strategy"
       ],
       "tags": [
@@ -3435,9 +3435,9 @@
       "composite_score": 83,
       "depends_on": [
         "classical-games",
-        "strategic-foundations",
+        "ethics",
         "rights-reasoner",
-        "ethics"
+        "strategic-foundations"
       ],
       "referenced_by": [
         "strategic-foundations",
@@ -3489,8 +3489,8 @@
       "depends_on": [
         "algorithmic-game-theory",
         "classical-games",
-        "strategic-foundations",
-        "cooperative-games"
+        "cooperative-games",
+        "strategic-foundations"
       ],
       "referenced_by": [
         "strategic-foundations"
@@ -3536,21 +3536,21 @@
       "manual_notes": null,
       "composite_score": 78,
       "depends_on": [
+        "auction-theory",
         "game-theory-orchestrator",
         "market-microstructure",
-        "portfolio-construction",
-        "auction-theory",
         "matching-markets",
-        "social-choice",
-        "mechanism-designer"
+        "mechanism-designer",
+        "portfolio-construction",
+        "social-choice"
       ],
       "referenced_by": [
         "auction-theory",
         "game-theory-orchestrator",
+        "market-microstructure",
         "matching-markets",
         "mechanism-designer",
-        "social-choice",
-        "market-microstructure"
+        "social-choice"
       ],
       "tags": [
         "domain:game-theory",
@@ -3594,14 +3594,14 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "mechanism-design",
+        "event-driven",
         "market-microstructure",
-        "event-driven"
+        "mechanism-design"
       ],
       "referenced_by": [
+        "market-microstructure",
         "mechanism-design",
         "mechanism-designer",
-        "market-microstructure",
         "special-situations"
       ],
       "tags": [
@@ -3649,9 +3649,9 @@
         "mechanism-design"
       ],
       "referenced_by": [
+        "market-microstructure",
         "mechanism-design",
-        "mechanism-designer",
-        "market-microstructure"
+        "mechanism-designer"
       ],
       "shares_references_with": [
         "cooperative-games"
@@ -3698,8 +3698,8 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "mechanism-design",
         "justice-analyst",
+        "mechanism-design",
         "political-philosophy"
       ],
       "referenced_by": [
@@ -3799,11 +3799,11 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "game-theory-orchestrator",
-        "reflexivity-sentiment",
+        "evo-simulator",
         "evolutionary-games",
+        "game-theory-orchestrator",
         "population-dynamics",
-        "evo-simulator"
+        "reflexivity-sentiment"
       ],
       "referenced_by": [
         "evo-simulator",
@@ -3998,22 +3998,22 @@
       "auto_score": 81,
       "composite_score": 81,
       "depends_on": [
-        "game-theory-orchestrator",
-        "reflexivity-sentiment",
-        "insider-signals",
-        "second-level-thinking",
-        "signaling-screening",
         "bayesian-persuasion",
-        "info-designer"
+        "game-theory-orchestrator",
+        "info-designer",
+        "insider-signals",
+        "reflexivity-sentiment",
+        "second-level-thinking",
+        "signaling-screening"
       ],
       "referenced_by": [
         "bayesian-persuasion",
         "game-theory-orchestrator",
         "info-designer",
-        "signaling-screening",
-        "second-level-thinking",
+        "intelligence-and-information-war",
         "reflexivity-sentiment",
-        "intelligence-and-information-war"
+        "second-level-thinking",
+        "signaling-screening"
       ],
       "tags": [
         "domain:game-theory",
@@ -4061,8 +4061,8 @@
         "bayesian-persuasion",
         "info-designer",
         "information-economics",
-        "special-situations",
-        "intelligence-and-information-war"
+        "intelligence-and-information-war",
+        "special-situations"
       ],
       "tags": [
         "domain:game-theory",
@@ -4194,9 +4194,9 @@
       "auto_score": 75,
       "composite_score": 75,
       "depends_on": [
-        "game-theory-orchestrator",
         "algorithmic-game-theory",
         "behavioral-game-theory",
+        "game-theory-orchestrator",
         "learning-in-games"
       ],
       "referenced_by": [
@@ -4289,19 +4289,19 @@
       "auto_score": 82,
       "composite_score": 82,
       "depends_on": [
-        "strategic-foundations",
-        "market-psychology",
-        "drawdown-psychology",
-        "decision-architect",
         "bias-detector",
-        "computational-strategy"
+        "computational-strategy",
+        "decision-architect",
+        "drawdown-psychology",
+        "market-psychology",
+        "strategic-foundations"
       ],
       "referenced_by": [
+        "bias-detector",
         "computational-strategy",
-        "learning-in-games",
-        "reflexivity-sentiment",
         "decision-architect",
-        "bias-detector"
+        "learning-in-games",
+        "reflexivity-sentiment"
       ],
       "tags": [
         "domain:game-theory",
@@ -4404,10 +4404,10 @@
       "referenced_by": [
         "chart-selection",
         "data-wrangling",
+        "drift-detection",
         "modeling",
         "responsible-ai",
-        "statistical-analysis",
-        "drift-detection"
+        "statistical-analysis"
       ],
       "tags": [
         "domain:data-science",
@@ -4496,12 +4496,12 @@
       "manual_notes": null,
       "composite_score": 81,
       "depends_on": [
+        "alt-data-monitoring",
+        "data-cleaning",
         "data-wrangling",
         "modeling",
-        "alt-data-monitoring",
-        "sentiment-signals",
         "molecular-pairing",
-        "data-cleaning"
+        "sentiment-signals"
       ],
       "referenced_by": [
         "data-science-orchestrator",
@@ -4552,9 +4552,9 @@
       "manual_notes": null,
       "composite_score": 84,
       "depends_on": [
-        "statistical-analysis",
+        "alt-data-monitoring",
         "factor-exposure",
-        "alt-data-monitoring"
+        "statistical-analysis"
       ],
       "referenced_by": [
         "data-science-orchestrator",
@@ -4610,9 +4610,9 @@
       "manual_notes": null,
       "composite_score": 81,
       "depends_on": [
-        "statistical-analysis",
-        "performance-attribution",
         "factor-exposure",
+        "performance-attribution",
+        "statistical-analysis",
         "statistical-testing"
       ],
       "referenced_by": [
@@ -4663,13 +4663,13 @@
       "manual_notes": null,
       "composite_score": 81,
       "depends_on": [
-        "modeling",
-        "statistical-analysis",
-        "performance-attribution",
-        "tail-risk",
-        "quality-assessment",
         "feature-engineering",
-        "statistical-testing"
+        "modeling",
+        "performance-attribution",
+        "quality-assessment",
+        "statistical-analysis",
+        "statistical-testing",
+        "tail-risk"
       ],
       "referenced_by": [
         "data-science-orchestrator",
@@ -4722,13 +4722,13 @@
       "manual_notes": null,
       "composite_score": 87,
       "depends_on": [
+        "climate-projections",
+        "correlation-regimes",
+        "macro-cycles",
+        "model-evaluation",
         "modeling",
         "statistical-analysis",
-        "macro-cycles",
-        "correlation-regimes",
-        "climate-projections",
-        "statistical-testing",
-        "model-evaluation"
+        "statistical-testing"
       ],
       "referenced_by": [
         "data-science-orchestrator",
@@ -4780,8 +4780,8 @@
       "composite_score": 77,
       "depends_on": [
         "data-science-orchestrator",
-        "statistical-analysis",
-        "modeling"
+        "modeling",
+        "statistical-analysis"
       ],
       "referenced_by": [
         "data-science-orchestrator"
@@ -4828,12 +4828,12 @@
       "manual_notes": null,
       "composite_score": 78,
       "depends_on": [
+        "alt-data-monitoring",
+        "macro-cycles",
+        "model-evaluation",
         "modeling",
         "statistical-analysis",
-        "macro-cycles",
-        "alt-data-monitoring",
-        "statistical-testing",
-        "model-evaluation"
+        "statistical-testing"
       ],
       "referenced_by": [
         "data-science-orchestrator",
@@ -4884,8 +4884,8 @@
       "composite_score": 74,
       "depends_on": [
         "data-science-orchestrator",
-        "modeling",
         "model-evaluation",
+        "modeling",
         "statistical-analysis"
       ],
       "referenced_by": [
@@ -4987,13 +4987,13 @@
         "biostatistics",
         "causal-inference",
         "chart-selection",
+        "demographic-and-structural-forces",
         "drift-detection",
         "model-evaluation",
         "responsible-ai",
         "statistical-testing",
         "time-series",
-        "wine-economics",
-        "demographic-and-structural-forces"
+        "wine-economics"
       ],
       "tags": [
         "domain:data-science",
@@ -5202,6 +5202,7 @@
       ],
       "referenced_by": [
         "character-belief-tracker",
+        "civilizations",
         "cultures-societies",
         "ecology-design",
         "extrapolation-engine",
@@ -5213,12 +5214,11 @@
         "magic-systems",
         "naming-system",
         "narrative-pacing",
-        "religion-design",
-        "technology-progression",
-        "world-bible",
         "physical-world",
-        "civilizations",
-        "systems-craft"
+        "religion-design",
+        "systems-craft",
+        "technology-progression",
+        "world-bible"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5259,17 +5259,17 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "world-bible",
-        "worldbuilding-orchestrator",
         "magic-system-design",
-        "physical-world"
+        "physical-world",
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "cultures-societies",
         "ecology-design",
+        "economic-systems",
         "technology-progression",
-        "worldbuilding-orchestrator",
-        "economic-systems"
+        "worldbuilding-orchestrator"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5312,27 +5312,27 @@
       "manual_notes": null,
       "composite_score": 81,
       "depends_on": [
-        "world-bible",
-        "worldbuilding-orchestrator",
+        "civilizations",
         "dialogue",
-        "rhetoric",
-        "magic-system-design",
         "geography-ecology",
-        "civilizations"
+        "magic-system-design",
+        "rhetoric",
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "character-belief-tracker",
+        "conlang-craft",
+        "dialogue",
+        "dilemma-analyzer",
+        "economic-systems",
         "faction-design",
         "lore-writer",
         "naming-system",
         "religion-design",
-        "worldbuilding-orchestrator",
-        "dialogue",
         "rhetoric",
-        "dilemma-analyzer",
         "rights-reasoner",
-        "economic-systems",
-        "conlang-craft"
+        "worldbuilding-orchestrator"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5380,8 +5380,8 @@
       "depends_on": [
         "lore-writer",
         "magic-system-design",
-        "worldbuilding-orchestrator",
-        "systems-craft"
+        "systems-craft",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [],
       "tags": [
@@ -5562,11 +5562,11 @@
         "evidence-synthesizer"
       ],
       "referenced_by": [
+        "agentic-researcher",
         "claim-decomposer",
         "evidence-synthesizer",
         "skill-scaffold",
-        "source-triangulator",
-        "agentic-researcher"
+        "source-triangulator"
       ],
       "tags": [
         "domain:research",
@@ -5611,10 +5611,10 @@
         "spelunker"
       ],
       "referenced_by": [
+        "belief-auditor",
         "evidence-synthesizer",
         "source-triangulator",
-        "spelunker",
-        "belief-auditor"
+        "spelunker"
       ],
       "tags": [
         "domain:research",
@@ -5660,11 +5660,11 @@
         "spelunker"
       ],
       "referenced_by": [
-        "evidence-synthesizer",
-        "spelunker",
-        "evidence-evaluator",
         "agentic-researcher",
-        "source-criticism"
+        "evidence-evaluator",
+        "evidence-synthesizer",
+        "source-criticism",
+        "spelunker"
       ],
       "tags": [
         "domain:research",
@@ -5789,13 +5789,13 @@
       "manual_rating": null,
       "manual_notes": null,
       "depends_on": [
-        "prose-orchestrator",
-        "typography",
         "design-principles",
-        "prose-rhythm",
         "diction",
+        "prose-orchestrator",
+        "prose-rhythm",
+        "style-dna",
         "syntax-patterns",
-        "style-dna"
+        "typography"
       ],
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
@@ -5822,14 +5822,14 @@
       "composite_score": 78,
       "referenced_by": [
         "diction",
+        "figurative-language",
         "prose-editor",
         "prose-orchestrator",
         "prose-rhythm",
         "prose-writer",
         "style-dna",
         "syntax-patterns",
-        "typography",
-        "figurative-language"
+        "typography"
       ],
       "tags": [
         "domain:writing",
@@ -5875,10 +5875,10 @@
       "auto_score": 75,
       "composite_score": 75,
       "referenced_by": [
+        "design-principles",
         "sentence-craft",
         "syntax-patterns",
-        "typography",
-        "design-principles"
+        "typography"
       ],
       "tags": [
         "domain:writing",
@@ -5926,12 +5926,12 @@
       "composite_score": 79,
       "referenced_by": [
         "concrete-detail",
-        "sentence-craft",
-        "syntax-patterns",
-        "worldbuilding-orchestrator",
+        "figurative-language",
         "lore-writer",
         "naming-system",
-        "figurative-language"
+        "sentence-craft",
+        "syntax-patterns",
+        "worldbuilding-orchestrator"
       ],
       "tags": [
         "domain:writing",
@@ -5998,16 +5998,16 @@
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
       "depends_on": [
-        "prose-orchestrator",
-        "narrative-pacing",
-        "lore-writer",
         "character-belief-tracker",
-        "narrative-arc",
-        "scene-craft",
-        "pacing",
+        "concrete-detail",
         "dialogue",
+        "lore-writer",
+        "narrative-arc",
+        "narrative-pacing",
+        "pacing",
         "point-of-view",
-        "concrete-detail"
+        "prose-orchestrator",
+        "scene-craft"
       ],
       "tags": [
         "domain:writing",
@@ -6041,20 +6041,20 @@
       "auto_score": 81,
       "composite_score": 81,
       "referenced_by": [
+        "character-interiority",
         "concrete-detail",
         "dialogue",
+        "hybrid-forms",
+        "micro-tension",
         "narrative-arc",
+        "narrative-geometry",
         "pacing",
         "point-of-view",
         "prose-orchestrator",
         "prose-writer",
         "scene-craft",
-        "worldbuilding-orchestrator",
-        "character-interiority",
-        "hybrid-forms",
-        "micro-tension",
-        "narrative-geometry",
-        "world-to-story"
+        "world-to-story",
+        "worldbuilding-orchestrator"
       ],
       "invocation": "director"
     },
@@ -6170,8 +6170,8 @@
       "parent": "narrative-craft",
       "depends_on": [
         "narrative-craft",
-        "scene-craft",
-        "narrative-pacing"
+        "narrative-pacing",
+        "scene-craft"
       ],
       "tags": [
         "domain:writing",
@@ -6209,9 +6209,9 @@
         "dialogue",
         "narrative-arc",
         "narrative-craft",
-        "point-of-view",
+        "narrative-geometry",
         "narrative-pacing",
-        "narrative-geometry"
+        "point-of-view"
       ],
       "invocation": "knowledge"
     },
@@ -6223,11 +6223,11 @@
       "plugin": "skill-infra",
       "parent": "narrative-craft",
       "depends_on": [
+        "cultures-societies",
+        "faction-design",
         "narrative-craft",
         "pacing",
-        "scene-craft",
-        "faction-design",
-        "cultures-societies"
+        "scene-craft"
       ],
       "tags": [
         "domain:writing",
@@ -6380,13 +6380,13 @@
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
       "depends_on": [
-        "prose-orchestrator",
-        "cultures-societies",
-        "visual-communication",
-        "rhetorical-appeals",
         "argument-structure",
+        "cultures-societies",
+        "essay-forms",
+        "prose-orchestrator",
+        "rhetorical-appeals",
         "rhetorical-devices",
-        "essay-forms"
+        "visual-communication"
       ],
       "tags": [
         "domain:writing",
@@ -6421,13 +6421,13 @@
       "composite_score": 81,
       "referenced_by": [
         "argument-structure",
+        "cultures-societies",
         "essay-forms",
+        "historical-argument",
         "prose-orchestrator",
         "rhetorical-appeals",
         "rhetorical-devices",
-        "cultures-societies",
-        "visual-communication",
-        "historical-argument"
+        "visual-communication"
       ],
       "invocation": "director"
     },
@@ -6631,8 +6631,8 @@
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
       "depends_on": [
-        "prose-orchestrator",
         "prose-editor",
+        "prose-orchestrator",
         "style-analyzer",
         "style-mutator"
       ],
@@ -6857,10 +6857,10 @@
       "composite_score": 73,
       "depends_on": [
         "lore-writer",
-        "world-bible",
-        "worldbuilding-orchestrator",
+        "narrative-arc",
         "pacing",
-        "narrative-arc"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "narrative-craft",
@@ -6907,10 +6907,10 @@
       "composite_score": 72,
       "depends_on": [
         "geography-ecology",
-        "world-bible",
-        "worldbuilding-orchestrator",
         "magic-system-design",
-        "physical-world"
+        "physical-world",
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [],
       "tags": [
@@ -6953,13 +6953,13 @@
       "manual_notes": null,
       "composite_score": 78,
       "depends_on": [
-        "cultures-societies",
-        "history-builder",
-        "worldbuilding-orchestrator",
-        "dialogue",
+        "civilizations",
         "classical-games",
+        "cultures-societies",
+        "dialogue",
+        "history-builder",
         "world-bible",
-        "civilizations"
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "dialogue",
@@ -7056,12 +7056,12 @@
       "auto_score": 81,
       "composite_score": 81,
       "referenced_by": [
+        "brand-voice",
         "prose-writer",
         "sentence-craft",
         "style-analyzer",
         "style-mixer",
-        "style-mutator",
-        "brand-voice"
+        "style-mutator"
       ],
       "tags": [
         "domain:writing",
@@ -7082,9 +7082,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "depends_on": [
+        "prose-orchestrator",
         "revision-craft",
-        "style-dna",
-        "prose-orchestrator"
+        "style-dna"
       ],
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
@@ -9723,9 +9723,9 @@
       "composite_score": 69,
       "depends_on": [
         "color-theory",
+        "design-orchestrator",
         "design-principles",
-        "visual-communication",
-        "design-orchestrator"
+        "visual-communication"
       ],
       "referenced_by": [
         "design-orchestrator"
@@ -12422,15 +12422,15 @@
       "composite_score": 82,
       "depends_on": [],
       "referenced_by": [
-        "historiography",
         "applied-history",
-        "political-history",
-        "economic-history",
-        "military-history",
-        "intellectual-history",
-        "world-systems",
         "cultural-history",
-        "regional-atlas"
+        "economic-history",
+        "historiography",
+        "intellectual-history",
+        "military-history",
+        "political-history",
+        "regional-atlas",
+        "world-systems"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -12478,10 +12478,10 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
-        "historical-thinking",
-        "source-criticism",
         "historical-argument",
+        "historical-thinking",
         "schools-of-thought",
+        "source-criticism",
         "source-evaluator"
       ],
       "shares_references_with": [],
@@ -12531,11 +12531,13 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
+        "comparative-analysis-engine",
+        "debate-simulator",
+        "historical-analogy-engine",
         "historical-pattern-recognition",
         "history-and-decision-making",
-        "timeline-builder",
-        "debate-simulator",
-        "nexus-event-analyzer"
+        "nexus-event-analyzer",
+        "timeline-builder"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -12778,11 +12780,12 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
-        "empires-and-states",
-        "revolutions-and-regime-change",
-        "diplomacy-and-international-order",
         "decolonization-and-sovereignty",
-        "historical-analogy-engine"
+        "diplomacy-and-international-order",
+        "empires-and-states",
+        "historical-analogy-engine",
+        "political-thought",
+        "revolutions-and-regime-change"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -12825,8 +12828,8 @@
       "manual_notes": null,
       "composite_score": 65,
       "depends_on": [
-        "political-history",
-        "historical-pattern-recognition"
+        "historical-pattern-recognition",
+        "political-history"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -12914,8 +12917,8 @@
       "manual_notes": null,
       "composite_score": 65,
       "depends_on": [
-        "political-history",
-        "cooperative-games"
+        "cooperative-games",
+        "political-history"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -13003,8 +13006,9 @@
       "manual_notes": null,
       "composite_score": 65,
       "depends_on": [
-        "political-history",
-        "historical-pattern-recognition"
+        "applied-history",
+        "historical-pattern-recognition",
+        "political-history"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -13051,10 +13055,10 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
-        "trade-and-globalization",
-        "money-and-financial-systems",
         "industrialization-and-development",
-        "labor-and-inequality"
+        "labor-and-inequality",
+        "money-and-financial-systems",
+        "trade-and-globalization"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13279,10 +13283,10 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
-        "strategy-and-grand-strategy",
-        "warfare-through-the-ages",
+        "battle-analysis",
         "intelligence-and-information-war",
-        "battle-analysis"
+        "strategy-and-grand-strategy",
+        "warfare-through-the-ages"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13325,9 +13329,9 @@
       "manual_notes": null,
       "composite_score": 70,
       "depends_on": [
+        "classical-games",
         "military-history",
-        "strategic-foundations",
-        "classical-games"
+        "strategic-foundations"
       ],
       "referenced_by": [
         "battle-analysis"
@@ -13419,8 +13423,8 @@
       "manual_notes": null,
       "composite_score": 70,
       "depends_on": [
-        "military-history",
         "information-economics",
+        "military-history",
         "signaling-screening"
       ],
       "referenced_by": [],
@@ -13511,13 +13515,13 @@
       "manual_notes": null,
       "composite_score": 70,
       "depends_on": [
-        "wan-shi-tong",
-        "philosophy-orchestrator"
+        "philosophy-orchestrator",
+        "wan-shi-tong"
       ],
       "referenced_by": [
-        "scientific-revolutions",
+        "knowledge-systems",
         "political-thought",
-        "knowledge-systems"
+        "scientific-revolutions"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13605,6 +13609,7 @@
       "composite_score": 65,
       "depends_on": [
         "intellectual-history",
+        "political-history",
         "political-philosophy"
       ],
       "referenced_by": [],
@@ -13696,12 +13701,12 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
+        "comparative-analysis-engine",
         "comparative-civilizations",
-        "environmental-history",
         "deep-history",
         "demographic-and-structural-forces",
-        "technology-and-civilizational-change",
-        "comparative-analysis-engine"
+        "environmental-history",
+        "technology-and-civilizational-change"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13744,9 +13749,9 @@
       "manual_notes": null,
       "composite_score": 70,
       "depends_on": [
-        "world-systems",
         "civilizations",
-        "time-series"
+        "time-series",
+        "world-systems"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -13878,8 +13883,8 @@
       "manual_notes": null,
       "composite_score": 65,
       "depends_on": [
-        "world-systems",
-        "statistical-analysis"
+        "statistical-analysis",
+        "world-systems"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -13967,6 +13972,7 @@
       "manual_notes": null,
       "composite_score": 65,
       "depends_on": [
+        "applied-history",
         "world-systems"
       ],
       "referenced_by": [],
@@ -14014,11 +14020,11 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
-        "religions-and-worldviews",
-        "gender-and-sexuality-history",
-        "social-movements-and-identity",
         "art-and-cultural-production",
-        "everyday-life-and-material-culture"
+        "everyday-life-and-material-culture",
+        "gender-and-sexuality-history",
+        "religions-and-worldviews",
+        "social-movements-and-identity"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -14285,10 +14291,10 @@
         "wan-shi-tong"
       ],
       "referenced_by": [
-        "mediterranean-and-near-east",
+        "americas-and-oceania",
         "east-asia",
-        "sub-saharan-africa",
-        "americas-and-oceania"
+        "mediterranean-and-near-east",
+        "sub-saharan-africa"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -14751,7 +14757,7 @@
       "name": "adaptation-observer",
       "description": "Watch how the product-in-use differs from the product-as-designed. Where are users doing unexpected things? Where is the system developing behaviors beyond its initial seed? Where is it degrading? ...",
       "location": "skills/product/evolve/adaptation-observer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "observer",
       "source": "self",
       "context_mode": "inline",
@@ -14778,7 +14784,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "evolve"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -14803,7 +14811,7 @@
       "name": "amplifier",
       "description": "When adaptation-observer or emergence-detector surfaces something good, amplifier figures out how to strengthen it. Not \"add a feature\" but \"create conditions for more of this behavior.\" Use when a...",
       "location": "skills/product/evolve/amplifier/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -14830,7 +14838,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "evolve"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -14855,7 +14865,7 @@
       "name": "asclepius",
       "description": "Orchestrate biotech venture diligence and investment analysis across clinical development, regulatory strategy, asset valuation, competitive intelligence, manufacturing risk, IP analysis, and deal ...",
       "location": "skills/biotech-venture/asclepius/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "orchestrator",
       "source": "self",
       "context_mode": "inline",
@@ -14914,7 +14924,7 @@
       "name": "asset-valuation",
       "description": "Direct rNPV modeling, peak sales forecasting, development cost estimation, and deal economics questions to the appropriate specialist skill. Activate when building a risk-adjusted valuation for a c...",
       "location": "skills/biotech-venture/asset-valuation/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -14941,10 +14951,14 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "asclepius",
+        "probability-of-success"
+      ],
       "referenced_by": [
         "cost-estimator",
         "deal-economics",
+        "deal-synthesis",
         "peak-sales-forecaster",
         "rnpv-modeler"
       ],
@@ -14970,7 +14984,7 @@
       "name": "biomarker-enrichment",
       "description": "Design biomarker-driven enrichment strategies for clinical trials, predicting responder populations and quantifying the impact of enrichment on statistical power, probability of success, and develo...",
       "location": "skills/biotech-venture/clinical-development/biomarker-enrichment/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -14997,7 +15011,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "clinical-development"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15022,7 +15038,7 @@
       "name": "capability-radar",
       "description": "Produce a living map of what the intelligence system can do today vs. what's been surfaced to users. The gap between \"possible\" and \"exposed\" is the product opportunity space. Use when scanning for...",
       "location": "skills/product/sense/capability-radar/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15049,7 +15065,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "sense"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15074,7 +15092,7 @@
       "name": "clinical-development",
       "description": "Direct clinical trial design, endpoint selection, biomarker enrichment, and patient population sizing questions to the appropriate specialist skill. Activate when evaluating a clinical program's de...",
       "location": "skills/biotech-venture/clinical-development/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -15101,11 +15119,15 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "asclepius"
+      ],
       "referenced_by": [
         "biomarker-enrichment",
         "endpoint-selection",
         "patient-population-sizer",
+        "probability-of-success",
+        "regulatory-strategy",
         "trial-design-optimizer"
       ],
       "shares_references_with": [],
@@ -15130,7 +15152,7 @@
       "name": "clinical-differentiator",
       "description": "Assess clinical differentiation of a therapeutic asset versus competitors using structured cross-trial analysis, competitive positioning matrices, and second-level thinking frameworks. Identifies w...",
       "location": "skills/biotech-venture/competitive-intelligence/clinical-differentiator/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15157,7 +15179,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "competitive-intelligence"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15182,7 +15206,7 @@
       "name": "cmc-risk-assessor",
       "description": "Assess chemistry, manufacturing, and controls risk using FMEA methodology with modality-specific failure modes, severity/occurrence/detection scoring, scalability assessment, COGS trajectory modeli...",
       "location": "skills/biotech-venture/manufacturing-ip/cmc-risk-assessor/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15209,7 +15233,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "manufacturing-ip"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15234,7 +15260,7 @@
       "name": "competitive-intelligence",
       "description": "Direct pipeline mapping, clinical differentiation analysis, and market dynamics questions to the appropriate specialist skill. Activate when evaluating an asset's competitive position, mapping the ...",
       "location": "skills/biotech-venture/competitive-intelligence/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -15261,7 +15287,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "asclepius"
+      ],
       "referenced_by": [
         "clinical-differentiator",
         "market-dynamics",
@@ -15289,7 +15317,7 @@
       "name": "condition-designer",
       "description": "Design the initial conditions for a product to emerge \u2014 what capabilities to combine, what constraints to impose, what feedback signals to listen to, and what to intentionally leave open for emerge...",
       "location": "skills/product/seed/condition-designer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15316,7 +15344,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "seed"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15341,7 +15371,7 @@
       "name": "constraint-sculptor",
       "description": "Frameworks for using constraints as creative tools in product design. The right constraints channel emergence productively; too many kill it; too few produce chaos. Covers scope constraints, interf...",
       "location": "skills/product/seed/constraint-sculptor/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15368,7 +15398,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "seed"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15393,7 +15425,7 @@
       "name": "cost-estimator",
       "description": "Estimate clinical development costs, regulatory costs, and launch costs for a therapeutic program by phase, therapeutic area, and trial complexity using industry benchmarks, cost driver analysis, a...",
       "location": "skills/biotech-venture/asset-valuation/cost-estimator/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15420,7 +15452,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "asset-valuation"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15445,7 +15479,7 @@
       "name": "deal-economics",
       "description": "Apply biotech deal structure frameworks including licensing economics, M&A valuation premiums, royalty rate benchmarks, milestone design principles, and option-based deal architectures for biotech ...",
       "location": "skills/biotech-venture/asset-valuation/deal-economics/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15472,7 +15506,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "asset-valuation"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15497,7 +15533,7 @@
       "name": "deal-synthesis",
       "description": "Direct diligence scorecard generation, investment memo writing, and portfolio analysis to the appropriate specialist skill. Activate when synthesizing a complete investment view on a biotech asset,...",
       "location": "skills/biotech-venture/deal-synthesis/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -15524,7 +15560,11 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "asclepius",
+        "asset-valuation",
+        "probability-of-success"
+      ],
       "referenced_by": [
         "diligence-scorecard",
         "investment-memo-writer",
@@ -15552,7 +15592,7 @@
       "name": "diligence-scorecard",
       "description": "Generate a comprehensive 8-pillar investment diligence scorecard for a therapeutic asset or biotech company by synthesizing clinical, regulatory, competitive, manufacturing, IP, financial, team, an...",
       "location": "skills/biotech-venture/deal-synthesis/diligence-scorecard/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15579,8 +15619,12 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 61,
-      "depends_on": [],
-      "referenced_by": [],
+      "depends_on": [
+        "deal-synthesis"
+      ],
+      "referenced_by": [
+        "investment-memo-writer"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -15604,7 +15648,7 @@
       "name": "emergence-detector",
       "description": "Monitor the skill library for unexpected capability combinations \u2014 behaviors that emerge from cross-domain interaction that nobody explicitly designed. Use when you notice the system doing somethin...",
       "location": "skills/product/sense/emergence-detector/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15631,7 +15675,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "sense"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15656,7 +15702,7 @@
       "name": "endpoint-selection",
       "description": "Apply endpoint selection frameworks for clinical trials across therapeutic areas, distinguishing validated surrogate endpoints from clinical endpoints and mapping FDA/EMA acceptance precedent. Refe...",
       "location": "skills/biotech-venture/clinical-development/endpoint-selection/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15683,7 +15729,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 61,
-      "depends_on": [],
+      "depends_on": [
+        "clinical-development"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15708,7 +15756,7 @@
       "name": "envision",
       "description": "Route product vision work \u2014 designing what the intelligence system should become, exploring new interaction paradigms for AI products, mapping the full possibility space, and crystallizing falsifia...",
       "location": "skills/product/envision/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -15735,10 +15783,13 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 66,
-      "depends_on": [],
+      "depends_on": [
+        "the-loom"
+      ],
       "referenced_by": [
         "paradigm-designer",
         "possibility-mapper",
+        "seed",
         "thesis-forge",
         "vision-architect"
       ],
@@ -15764,7 +15815,7 @@
       "name": "evolve",
       "description": "Route product evolution work \u2014 observing how surfaced products change through use, amplifying emergent successful patterns, pruning what isn't working, and designing self-improving feedback systems...",
       "location": "skills/product/evolve/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -15791,7 +15842,10 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "surface",
+        "the-loom"
+      ],
       "referenced_by": [
         "adaptation-observer",
         "amplifier",
@@ -15820,7 +15874,7 @@
       "name": "experience-weaver",
       "description": "Design the experience layer \u2014 how surfaced capabilities feel in use. The emotional and aesthetic quality of interacting with intelligence. Creates experience briefs that get handed to design and wr...",
       "location": "skills/product/surface/experience-weaver/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15847,7 +15901,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "surface"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15872,7 +15928,7 @@
       "name": "exposure-strategist",
       "description": "Decide which capabilities to surface, when, to whom, and in what sequence. Not everything the system can do should be visible. Sequencing exposure builds trust, reveals complexity gradually, and pr...",
       "location": "skills/product/surface/exposure-strategist/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15899,7 +15955,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "surface"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15924,7 +15982,7 @@
       "name": "feedback-architect",
       "description": "Design the feedback loops that will shape a product's evolution. The feedback architecture IS the growth plan \u2014 what signals the system listens to, how it adapts, what reinforces good behavior, wha...",
       "location": "skills/product/seed/feedback-architect/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -15951,7 +16009,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "seed"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -15976,7 +16036,7 @@
       "name": "frontier-antenna",
       "description": "Translate AI frontier developments into product opportunities. Consumes neocortex/frontier-scanner output and reframes it through a product lens \u2014 not \"what's new in AI\" but \"what does this make bu...",
       "location": "skills/product/sense/frontier-antenna/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16003,7 +16063,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "sense"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16028,7 +16090,7 @@
       "name": "initiative-tracker",
       "description": "Track product initiatives through their organic lifecycle \u2014 from seed to compost. Maintains the initiative log with state transitions, learnings, and portfolio-level views. Use when checking initia...",
       "location": "skills/product/synthesize/initiative-tracker/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16055,7 +16117,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "synthesize"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16080,7 +16144,7 @@
       "name": "interface-philosopher",
       "description": "Deep thinking about how intelligence should meet humans. When is language the right interface? When visual? When ambient? When should the system be proactive vs. responsive? When invisible? The epi...",
       "location": "skills/product/surface/interface-philosopher/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16107,7 +16171,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "surface"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16132,7 +16198,7 @@
       "name": "investment-memo-writer",
       "description": "Generate structured investment committee memos from diligence scorecard outputs. Template covers Executive Summary through Recommendation with assertion-led writing, quantified claims, and explicit...",
       "location": "skills/biotech-venture/deal-synthesis/investment-memo-writer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16159,7 +16225,10 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 61,
-      "depends_on": [],
+      "depends_on": [
+        "deal-synthesis",
+        "diligence-scorecard"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16184,7 +16253,7 @@
       "name": "ip-valuation",
       "description": "IP valuation frameworks for biotech assets including cost approach, market approach (comparable royalty rates), and income approach (relief-from-royalty). Covers royalty rate benchmarks by patent t...",
       "location": "skills/biotech-venture/manufacturing-ip/ip-valuation/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16211,7 +16280,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "manufacturing-ip"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16236,7 +16307,7 @@
       "name": "learning-loops",
       "description": "Frameworks for designing self-improving systems. How does the product get better without manual intervention? Reinforcement from use, capability compounding, knowledge accumulation, behavioral refi...",
       "location": "skills/product/evolve/learning-loops/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16263,7 +16334,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "evolve"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16288,7 +16361,7 @@
       "name": "manufacturing-ip",
       "description": "Direct CMC risk assessment, modality-specific manufacturing analysis, patent landscape mapping, and IP valuation questions to the appropriate specialist skill. Activate when evaluating manufacturin...",
       "location": "skills/biotech-venture/manufacturing-ip/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -16315,7 +16388,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "asclepius"
+      ],
       "referenced_by": [
         "cmc-risk-assessor",
         "ip-valuation",
@@ -16344,7 +16419,7 @@
       "name": "market-dynamics",
       "description": "Therapeutic market dynamics frameworks including game-theoretic competitive modeling, market archetypes, launch sequence impact, class saturation signals, payer adoption curves, and biosimilar eros...",
       "location": "skills/biotech-venture/competitive-intelligence/market-dynamics/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16371,7 +16446,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "competitive-intelligence"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16396,7 +16473,7 @@
       "name": "mechanism-risk-adjuster",
       "description": "Assess mechanism-of-action-specific risk factors that modify base-rate PoS, evaluating target validation depth using Mendelian randomization evidence, preclinical translatability, competitive mecha...",
       "location": "skills/biotech-venture/probability-of-success/mechanism-risk-adjuster/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16423,7 +16500,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "probability-of-success"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16448,7 +16527,7 @@
       "name": "modality-manufacturing",
       "description": "Catalog manufacturing considerations, COGS benchmarks, scalability profiles, and process development timelines for each major therapeutic modality. Reference when assessing whether a company's manu...",
       "location": "skills/biotech-venture/manufacturing-ip/modality-manufacturing/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16475,7 +16554,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "manufacturing-ip"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16500,7 +16581,7 @@
       "name": "narrative-keeper",
       "description": "Maintain the living product narrative \u2014 the evolving story of what this intelligence system is, where it came from, where it's going, and what it believes. Use when updating the product story after...",
       "location": "skills/product/synthesize/narrative-keeper/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16527,7 +16608,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "synthesize"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16552,7 +16635,7 @@
       "name": "paradigm-designer",
       "description": "Catalog, analyze, and create new interaction paradigms for AI products. Covers generative UI, ambient intelligence, agent-to-agent interfaces, conversational surfaces, adaptive experiences, and par...",
       "location": "skills/product/envision/paradigm-designer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16579,7 +16662,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "envision"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16604,7 +16689,7 @@
       "name": "patent-analyzer",
       "description": "Analyze patent landscape and IP risk for biotech assets including patent type taxonomy, patent life calculation with extensions, Orange/Purple Book analysis, Paragraph IV dynamics, biosimilar BPCIA...",
       "location": "skills/biotech-venture/manufacturing-ip/patent-analyzer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16631,7 +16716,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "manufacturing-ip"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16656,7 +16743,7 @@
       "name": "pathway-analyzer",
       "description": "Analyze and recommend optimal FDA and EMA regulatory pathways for a given therapeutic program, quantifying timeline impact, eligibility criteria, and historical conversion rates. Produces actionabl...",
       "location": "skills/biotech-venture/regulatory-strategy/pathway-analyzer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16683,7 +16770,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "regulatory-strategy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16708,7 +16797,7 @@
       "name": "patient-population-sizer",
       "description": "Estimate addressable patient populations from epidemiological data, applying diagnostic rates, treatment-eligible filters, biomarker prevalence, and geographic adjustments to produce treatable popu...",
       "location": "skills/biotech-venture/clinical-development/patient-population-sizer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16735,7 +16824,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "clinical-development"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16760,7 +16851,7 @@
       "name": "pattern-weaver",
       "description": "Cross-product, cross-domain pattern recognition. What's working across multiple surfaces? What principle connects the successful products? What meta-capability is the system developing? Use when yo...",
       "location": "skills/product/synthesize/pattern-weaver/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16787,7 +16878,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "synthesize"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16812,7 +16905,7 @@
       "name": "peak-sales-forecaster",
       "description": "Forecast peak revenue for a therapeutic asset by modeling patient population, market penetration curves, pricing, and competitive dynamics over a 10-year commercial horizon to produce probability-w...",
       "location": "skills/biotech-venture/asset-valuation/peak-sales-forecaster/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16839,8 +16932,12 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
-      "referenced_by": [],
+      "depends_on": [
+        "asset-valuation"
+      ],
+      "referenced_by": [
+        "rnpv-modeler"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -16864,7 +16961,7 @@
       "name": "pipeline-mapper",
       "description": "Map the competitive pipeline for a therapeutic area, target, or mechanism of action using ClinicalTrials.gov, SEC filings, and conference abstracts. Produces a structured competitive landscape matr...",
       "location": "skills/biotech-venture/competitive-intelligence/pipeline-mapper/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16891,7 +16988,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "competitive-intelligence"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16916,7 +17015,7 @@
       "name": "portfolio-analyzer",
       "description": "Portfolio-level analysis for biotech venture funds including PoS-weighted expected portfolio value, portfolio probability of at least one success, therapeutic area concentration (Herfindahl index),...",
       "location": "skills/biotech-venture/deal-synthesis/portfolio-analyzer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -16943,7 +17042,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "deal-synthesis"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -16968,7 +17069,7 @@
       "name": "pos-base-rates",
       "description": "Provide historical clinical trial success rates by phase, therapeutic area, modality, and endpoint type, sourced from BIO/Informa/QLS databases with vintage-year adjustments. Reference when calcula...",
       "location": "skills/biotech-venture/probability-of-success/pos-base-rates/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "orchestrator",
       "source": "self",
       "context_mode": "inline",
@@ -16995,8 +17096,12 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
-      "referenced_by": [],
+      "depends_on": [
+        "probability-of-success"
+      ],
+      "referenced_by": [
+        "pos-calculator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -17020,7 +17125,7 @@
       "name": "pos-calculator",
       "description": "Calculate risk-adjusted probability of success for any therapeutic program using historical base rates, mechanism-based adjustments, and program-specific modifiers. Produce phase-by-phase transitio...",
       "location": "skills/biotech-venture/probability-of-success/pos-calculator/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17047,7 +17152,10 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 61,
-      "depends_on": [],
+      "depends_on": [
+        "pos-base-rates",
+        "probability-of-success"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17072,7 +17180,7 @@
       "name": "possibility-mapper",
       "description": "Map the full space of possible products from current and emerging capabilities \u2014 before filtering to what should be built. Combines capability radar output with frontier signals to explore what COU...",
       "location": "skills/product/envision/possibility-mapper/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17099,7 +17207,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "envision"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17124,7 +17234,7 @@
       "name": "probability-of-success",
       "description": "Direct probability of success estimation, phase transition analysis, and mechanism-based risk adjustment to the appropriate specialist skill. Activate when calculating PoS for a clinical asset, adj...",
       "location": "skills/biotech-venture/probability-of-success/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -17151,11 +17261,17 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "asclepius",
+        "clinical-development"
+      ],
       "referenced_by": [
+        "asset-valuation",
+        "deal-synthesis",
         "mechanism-risk-adjuster",
         "pos-base-rates",
-        "pos-calculator"
+        "pos-calculator",
+        "rnpv-modeler"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -17179,7 +17295,7 @@
       "name": "product-briefing-engine",
       "description": "Generate the Weekly Product Synthesis \u2014 not a status report but a strategic narrative about what the intelligence system is becoming, what it learned this week, what's surprising, what needs attent...",
       "location": "skills/product/synthesize/product-briefing-engine/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17206,7 +17322,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "synthesize"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17231,7 +17349,7 @@
       "name": "prototype-grower",
       "description": "Grow rapid capability prototypes \u2014 not wireframes or mockups but living demonstrations of capability combinations. Shows what happens when you combine specific domains for a product use case. Use w...",
       "location": "skills/product/seed/prototype-grower/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17258,7 +17376,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "seed"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17283,7 +17403,7 @@
       "name": "pruning-engine",
       "description": "Decide what to stop, simplify, or let atrophy. Not \"kill features\" \u2014 compost them. Extract the learnings, preserve what's reusable, let the rest go. Every pruning decision feeds the Sense director ...",
       "location": "skills/product/evolve/pruning-engine/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17310,7 +17430,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "evolve"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17335,7 +17457,7 @@
       "name": "regulatory-precedent",
       "description": "Catalog FDA and EMA regulatory precedents by therapeutic area, including expedited pathway statistics, approval basis, endpoint acceptance, advisory committee outcomes, and Complete Response Letter...",
       "location": "skills/biotech-venture/regulatory-strategy/regulatory-precedent/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17362,7 +17484,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "regulatory-strategy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17387,7 +17511,7 @@
       "name": "regulatory-risk-scorer",
       "description": "Score regulatory risk across six clinical-regulatory dimensions using a structured framework, producing a quantitative risk profile with radar chart scores, aggregate risk rating, and prioritized m...",
       "location": "skills/biotech-venture/regulatory-strategy/regulatory-risk-scorer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17414,7 +17538,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 59,
-      "depends_on": [],
+      "depends_on": [
+        "regulatory-strategy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17439,7 +17565,7 @@
       "name": "regulatory-strategy",
       "description": "Direct FDA/EMA pathway analysis, designation eligibility assessment, regulatory precedent research, and regulatory risk scoring to the appropriate specialist skill. Activate when evaluating a regul...",
       "location": "skills/biotech-venture/regulatory-strategy/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -17466,7 +17592,10 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "asclepius",
+        "clinical-development"
+      ],
       "referenced_by": [
         "pathway-analyzer",
         "regulatory-precedent",
@@ -17494,7 +17623,7 @@
       "name": "rnpv-modeler",
       "description": "Build risk-adjusted net present value models for therapeutic assets incorporating phase-gated probability, peak sales forecasts, development cost estimates, and time-value discounting with optional...",
       "location": "skills/biotech-venture/asset-valuation/rnpv-modeler/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17521,7 +17650,11 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 61,
-      "depends_on": [],
+      "depends_on": [
+        "asset-valuation",
+        "peak-sales-forecaster",
+        "probability-of-success"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17546,7 +17679,7 @@
       "name": "seed",
       "description": "Route product seeding work \u2014 designing initial conditions for product emergence, sculpting constraints that channel behavior productively, growing rapid capability prototypes, and architecting the ...",
       "location": "skills/product/seed/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -17573,12 +17706,16 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "envision",
+        "the-loom"
+      ],
       "referenced_by": [
         "condition-designer",
         "constraint-sculptor",
         "feedback-architect",
-        "prototype-grower"
+        "prototype-grower",
+        "surface"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -17602,7 +17739,7 @@
       "name": "sense",
       "description": "Route product sensing work \u2014 reading frontier signals through a product lens, detecting emergent capability combinations, interpreting external market and technology signals, and mapping the gap be...",
       "location": "skills/product/sense/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -17629,7 +17766,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 66,
-      "depends_on": [],
+      "depends_on": [
+        "the-loom"
+      ],
       "referenced_by": [
         "capability-radar",
         "emergence-detector",
@@ -17658,7 +17797,7 @@
       "name": "signal-reader",
       "description": "Frameworks for reading external signals through a product lens \u2014 market timing, technology adoption curves, readiness levels, competitive shifts, and demand indicators. Use when evaluating whether ...",
       "location": "skills/product/sense/signal-reader/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17685,7 +17824,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "sense"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17710,7 +17851,7 @@
       "name": "surface",
       "description": "Route product surfacing work \u2014 deciding how intelligence meets the world. Interface philosophy, exposure sequencing, experience design, and value architecture. Activates when a capability is ready ...",
       "location": "skills/product/surface/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -17737,8 +17878,12 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [],
+      "depends_on": [
+        "seed",
+        "the-loom"
+      ],
       "referenced_by": [
+        "evolve",
         "experience-weaver",
         "exposure-strategist",
         "interface-philosopher",
@@ -17766,7 +17911,7 @@
       "name": "synthesize",
       "description": "Route product synthesis work \u2014 cross-product pattern recognition, initiative lifecycle tracking, weekly product briefing generation, and product narrative maintenance. Activates when the question s...",
       "location": "skills/product/synthesize/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "director",
       "source": "self",
       "context_mode": "inline",
@@ -17793,7 +17938,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 66,
-      "depends_on": [],
+      "depends_on": [
+        "the-loom"
+      ],
       "referenced_by": [
         "initiative-tracker",
         "narrative-keeper",
@@ -17822,7 +17969,7 @@
       "name": "the-loom",
       "description": "Master AI-native product orchestrator. Cultivates living intelligence products by weaving capabilities from every domain (design, data science, investing, writing, game theory, worldbuilding, resea...",
       "location": "skills/product/the-loom/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "orchestrator",
       "source": "self",
       "context_mode": "inline",
@@ -17880,7 +18027,7 @@
       "name": "thesis-forge",
       "description": "Crystallize a product thesis from vision, signals, and possibility mapping. A thesis is a specific, falsifiable bet: \"We believe [this capability surface] will [create this value] for [these people...",
       "location": "skills/product/envision/thesis-forge/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17907,7 +18054,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "envision"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17932,7 +18081,7 @@
       "name": "trial-design-optimizer",
       "description": "Generate optimized clinical trial designs given a therapeutic hypothesis, target population, and development stage. Incorporates adaptive designs, modern estimand frameworks, and synthetic control ...",
       "location": "skills/biotech-venture/clinical-development/trial-design-optimizer/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-biotech-venture",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -17959,7 +18108,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 57,
-      "depends_on": [],
+      "depends_on": [
+        "clinical-development"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -17984,7 +18135,7 @@
       "name": "value-architect",
       "description": "Design the value exchange for intelligence products \u2014 not just pricing but the full model of how value flows between the system and its users. Handles free vs. paid, usage-based, capability-tiered,...",
       "location": "skills/product/surface/value-architect/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -18011,7 +18162,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "surface"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -18036,7 +18189,7 @@
       "name": "vision-architect",
       "description": "Design the intelligence system's future state in experiential terms \u2014 not feature lists but what it's like to interact with this intelligence. Produces vision documents that describe capabilities a...",
       "location": "skills/product/envision/vision-architect/SKILL.md",
-      "plugin": "skill-infra",
+      "plugin": "skill-product",
       "type": "knowledge",
       "source": "self",
       "context_mode": "inline",
@@ -18063,7 +18216,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 54,
-      "depends_on": [],
+      "depends_on": [
+        "envision"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
