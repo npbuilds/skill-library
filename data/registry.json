@@ -13001,10 +13001,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 70,
       "depends_on": [
         "applied-history",
         "historical-pattern-recognition",
@@ -13603,10 +13603,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 70,
       "depends_on": [
         "intellectual-history",
         "political-history",
@@ -14780,10 +14780,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "evolve"
       ],
@@ -14834,10 +14834,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "evolve"
       ],
@@ -14947,10 +14947,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 72,
       "depends_on": [
         "asclepius",
         "probability-of-success"
@@ -15007,10 +15007,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "clinical-development"
       ],
@@ -15061,10 +15061,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "sense"
       ],
@@ -15115,10 +15115,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 72,
       "depends_on": [
         "asclepius"
       ],
@@ -15175,10 +15175,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "competitive-intelligence"
       ],
@@ -15229,10 +15229,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "manufacturing-ip"
       ],
@@ -15340,10 +15340,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "seed"
       ],
@@ -15394,10 +15394,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "seed"
       ],
@@ -15448,10 +15448,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "asset-valuation"
       ],
@@ -15502,10 +15502,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "asset-valuation"
       ],
@@ -15556,10 +15556,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 72,
       "depends_on": [
         "asclepius",
         "asset-valuation",
@@ -15615,10 +15615,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 61,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 61,
+      "composite_score": 65,
       "depends_on": [
         "deal-synthesis"
       ],
@@ -15671,10 +15671,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "sense"
       ],
@@ -15725,10 +15725,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 61,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 61,
+      "composite_score": 65,
       "depends_on": [
         "clinical-development"
       ],
@@ -15779,10 +15779,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 66,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 70,
       "depends_on": [
         "the-loom"
       ],
@@ -15838,10 +15838,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 72,
       "depends_on": [
         "surface",
         "the-loom"
@@ -15897,10 +15897,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "surface"
       ],
@@ -15951,10 +15951,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "surface"
       ],
@@ -16005,10 +16005,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "seed"
       ],
@@ -16059,10 +16059,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "sense"
       ],
@@ -16113,10 +16113,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "synthesize"
       ],
@@ -16167,10 +16167,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "surface"
       ],
@@ -16221,10 +16221,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 61,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 61,
+      "composite_score": 65,
       "depends_on": [
         "deal-synthesis",
         "diligence-scorecard"
@@ -16276,10 +16276,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "manufacturing-ip"
       ],
@@ -16330,10 +16330,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "evolve"
       ],
@@ -16442,10 +16442,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "competitive-intelligence"
       ],
@@ -16496,10 +16496,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "probability-of-success"
       ],
@@ -16550,10 +16550,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "manufacturing-ip"
       ],
@@ -16604,10 +16604,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "synthesize"
       ],
@@ -16658,10 +16658,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "envision"
       ],
@@ -16712,10 +16712,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "manufacturing-ip"
       ],
@@ -16766,10 +16766,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "regulatory-strategy"
       ],
@@ -16820,10 +16820,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "clinical-development"
       ],
@@ -16874,10 +16874,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "synthesize"
       ],
@@ -16928,10 +16928,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "asset-valuation"
       ],
@@ -16984,10 +16984,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "competitive-intelligence"
       ],
@@ -17038,10 +17038,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "deal-synthesis"
       ],
@@ -17092,10 +17092,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "probability-of-success"
       ],
@@ -17148,10 +17148,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 61,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 61,
+      "composite_score": 65,
       "depends_on": [
         "pos-base-rates",
         "probability-of-success"
@@ -17203,10 +17203,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "envision"
       ],
@@ -17257,10 +17257,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 72,
       "depends_on": [
         "asclepius",
         "clinical-development"
@@ -17318,10 +17318,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "synthesize"
       ],
@@ -17372,10 +17372,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "seed"
       ],
@@ -17426,10 +17426,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "evolve"
       ],
@@ -17480,10 +17480,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "regulatory-strategy"
       ],
@@ -17534,10 +17534,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 63,
       "depends_on": [
         "regulatory-strategy"
       ],
@@ -17646,10 +17646,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 61,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 61,
+      "composite_score": 70,
       "depends_on": [
         "asset-valuation",
         "peak-sales-forecaster",
@@ -17702,10 +17702,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 72,
       "depends_on": [
         "envision",
         "the-loom"
@@ -17820,10 +17820,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "sense"
       ],
@@ -17874,10 +17874,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 72,
       "depends_on": [
         "seed",
         "the-loom"
@@ -18050,10 +18050,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "envision"
       ],
@@ -18104,10 +18104,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 61,
       "depends_on": [
         "clinical-development"
       ],
@@ -18158,10 +18158,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "surface"
       ],
@@ -18212,10 +18212,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [
         "envision"
       ],
