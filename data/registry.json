@@ -2834,10 +2834,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 81,
       "depends_on": [
         "systems-craft",
         "worldbuilding-orchestrator"
@@ -5872,8 +5872,8 @@
         "estimated_tokens_total": 1500,
         "precise_tokens": null
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 72,
+      "composite_score": 72,
       "referenced_by": [
         "design-principles",
         "sentence-craft",
@@ -5977,8 +5977,8 @@
         "estimated_tokens_total": 1840,
         "precise_tokens": null
       },
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "sentence-craft"
       ],
@@ -7000,10 +7000,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 70,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 67,
       "depends_on": [
         "history-builder",
         "world-bible",
@@ -7053,8 +7053,8 @@
         "estimated_tokens_total": 8900,
         "precise_tokens": null
       },
-      "auto_score": 81,
-      "composite_score": 81,
+      "auto_score": 78,
+      "composite_score": 78,
       "referenced_by": [
         "brand-voice",
         "prose-writer",
@@ -12416,10 +12416,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 82,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 79,
       "depends_on": [],
       "referenced_by": [
         "applied-history",
@@ -12470,10 +12470,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 82,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 79,
       "depends_on": [
         "wan-shi-tong"
       ],
