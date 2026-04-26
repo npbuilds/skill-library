@@ -25,7 +25,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SKILLS_DIR = PROJECT_ROOT / "skills"
 REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
 
-SKIP_DIRS = {"_meta", ".obsidian", "references", "agents", "examples"}
+SKIP_DIRS = {".obsidian", "references", "agents", "examples"}
 
 # ── Metadata extraction ────────────────────────────────────────────────
 
@@ -36,8 +36,10 @@ def extract_yaml_frontmatter(text: str) -> dict | None:
         return None
     result = {}
     block = m.group(1)
-    # Handle multi-line description (with > or |)
-    desc_match = re.search(r"^description:\s*[>|]\s*\n((?:[ \t]+.+\n)+)", block, re.MULTILINE)
+    # Handle multi-line description (with > or |). The trailing newline on
+    # the final line is optional — outer frontmatter regex consumes the \n
+    # before the closing ---, so the last description line lacks one.
+    desc_match = re.search(r"^description:\s*[>|]\s*\n((?:[ \t]+.+(?:\n|$))+)", block, re.MULTILINE)
     if desc_match:
         result["description"] = " ".join(
             line.strip() for line in desc_match.group(1).strip().split("\n")
@@ -113,21 +115,68 @@ def extract_description_from_header(text: str) -> str | None:
 
 
 def compute_metrics(text: str, skill_dir: Path) -> dict:
-    """Compute basic metrics for a skill."""
-    words = text.split()
-    sections = len(re.findall(r"^#{1,3} ", text, re.MULTILINE))
-    ref_dir = skill_dir / "references"
-    ref_count = len(list(ref_dir.glob("*.md"))) if ref_dir.exists() else 0
+    """Compute the full canonical metrics block — schema mirrors
+    analyze-skill.sh so downstream scorers (mcp-server/shared.py,
+    autoresearch.py) see identical keys regardless of source.
+
+    body_words counts body only (frontmatter excluded). The legacy
+    body_words = len(full_text) bug is fixed here."""
+    fm_match = re.match(r"^---\s*\n(.*?)\n---\s*(\n|$)", text, re.DOTALL)
+    if fm_match:
+        frontmatter = fm_match.group(1)
+        body = text[fm_match.end():]
+    else:
+        frontmatter = ""
+        body = text
+
+    all_words = text.split()
+    body_words = body.split()
+
+    # description_words: words in the description: field, mirroring analyze-skill.sh
+    desc_words = 0
+    capture = False
+    for line in frontmatter.split("\n"):
+        if re.match(r"^description:", line):
+            capture = True
+            value = re.sub(r"^description:\s*[>|]?\s*", "", line)
+            desc_words += len(value.split())
+            continue
+        if capture and re.match(r"^[A-Za-z_-]+:", line):
+            break
+        if capture:
+            desc_words += len(line.split())
+
+    # Section count: ## headings outside fenced code blocks (only body)
+    section_count = 0
+    in_code = False
+    for line in body.split("\n"):
+        if line.startswith("```"):
+            in_code = not in_code
+            continue
+        if not in_code and line.startswith("## "):
+            section_count += 1
+
+    def _count(subdir: str) -> int:
+        d = skill_dir / subdir
+        return sum(1 for _ in d.iterdir() if _.is_file() and _.name != ".gitkeep") if d.is_dir() else 0
+
+    body_chars = len(body)
+    est_tokens_body = body_chars // 4
+    est_tokens_metadata = (desc_words * 13 + 9) // 10
+    est_tokens_total = est_tokens_metadata + est_tokens_body
 
     return {
-        "word_count": len(words),
-        "body_words": len(words),
-        "section_count": sections,
-        "reference_files": ref_count,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_total": int(len(words) * 1.5),
+        "word_count": len(all_words),
+        "body_words": len(body_words),
+        "description_words": desc_words,
+        "section_count": section_count,
+        "reference_files": _count("references"),
+        "example_files": _count("examples"),
+        "script_files": _count("scripts"),
+        "template_files": _count("templates"),
+        "estimated_tokens_metadata": est_tokens_metadata,
+        "estimated_tokens_body": est_tokens_body,
+        "estimated_tokens_total": est_tokens_total,
     }
 
 
@@ -192,7 +241,6 @@ def discover_skills() -> dict[str, dict]:
 
     for skill_md in SKILLS_DIR.rglob("SKILL.md"):
         skill_dir = skill_md.parent
-        skill_name = skill_dir.name
 
         # Skip meta/hidden directories
         if any(part in SKIP_DIRS for part in skill_md.relative_to(SKILLS_DIR).parts[:-1]):
@@ -206,6 +254,10 @@ def discover_skills() -> dict[str, dict]:
         inline_meta = extract_inline_metadata(text)
         structure = infer_structure(skill_md)
 
+        # Skill key: prefer frontmatter `name` (handles non-conventional layouts
+        # like skills/_meta/SKILL.md → sentinel-prime), fall back to directory.
+        skill_name = (yaml_meta.get("name") or "").strip() or skill_dir.name
+
         # Merge: YAML > inline > inferred
         description = (
             yaml_meta.get("description", "").strip()
@@ -213,9 +265,6 @@ def discover_skills() -> dict[str, dict]:
             or extract_description_from_header(text)
             or f"{skill_name} skill"
         )
-        # Truncate long descriptions
-        if len(description) > 200:
-            description = description[:197] + "..."
 
         skill_type = infer_type(skill_name, text, {**inline_meta, **yaml_meta})
         metrics = compute_metrics(text, skill_dir)
@@ -297,6 +346,19 @@ def sync(apply: bool = False) -> None:
         if disk_loc != reg_loc:
             mismatches.append((name, reg_loc, disk_loc))
 
+    # ── Find description / metrics drift on existing entries ──
+    drift_desc: list[tuple[str, str, str]] = []
+    drift_metrics: list[str] = []
+    for name in set(discovered) & set(existing):
+        cur = existing[name]
+        new = discovered[name]
+        cur_desc = (cur.get("description") or "").strip()
+        new_desc = (new.get("description") or "").strip()
+        if new_desc and cur_desc != new_desc:
+            drift_desc.append((name, cur_desc, new_desc))
+        if cur.get("metrics") != new.get("metrics"):
+            drift_metrics.append(name)
+
     # ── Report ──
     print(f"Registry: {len(existing)} skills")
     print(f"On disk:  {len(discovered)} skills")
@@ -328,6 +390,16 @@ def sync(apply: bool = False) -> None:
     else:
         print("No location mismatches.")
 
+    print()
+    if drift_desc:
+        print(f"DESCRIPTION DRIFT ({len(drift_desc)}):")
+        for name, old, new in sorted(drift_desc)[:5]:
+            print(f"  ~ {name}: {len(old)} → {len(new)} chars")
+        if len(drift_desc) > 5:
+            print(f"    ... and {len(drift_desc) - 5} more")
+    if drift_metrics:
+        print(f"METRICS DRIFT ({len(drift_metrics)} entries will be refreshed)")
+
     # ── Apply changes ──
     if apply:
         print("\n── Applying changes ──")
@@ -339,6 +411,28 @@ def sync(apply: bool = False) -> None:
             existing[name]["location"] = new
             print(f"  Fixed location: {name}")
 
+        for name, _, new_desc in drift_desc:
+            existing[name]["description"] = new_desc
+        if drift_desc:
+            print(f"  Refreshed description on {len(drift_desc)} entries")
+
+        for name in drift_metrics:
+            existing[name]["metrics"] = discovered[name]["metrics"]
+        if drift_metrics:
+            print(f"  Refreshed metrics on {len(drift_metrics)} entries")
+
+        # Re-derive network.domains from on-disk paths so renames
+        # (e.g., meta → _meta) propagate automatically.
+        new_domains: dict[str, list[str]] = {}
+        for name, entry in existing.items():
+            parts = (entry.get("location") or "").split("/")
+            if len(parts) >= 3 and parts[0] == "skills":
+                new_domains.setdefault(parts[1], []).append(name)
+        registry.setdefault("network", {})["domains"] = {
+            dom: sorted(set(names)) for dom, names in sorted(new_domains.items())
+        }
+        print(f"  Re-derived network.domains: {len(new_domains)} domains")
+
         # Update timestamp
         registry["last_scan"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -346,13 +440,20 @@ def sync(apply: bool = False) -> None:
             json.dump(registry, f, indent=2)
             f.write("\n")
 
-        print(f"\nRegistry updated: {len(new_names)} added, {len(mismatches)} locations fixed.")
+        print(
+            f"\nRegistry updated: {len(new_names)} added, "
+            f"{len(mismatches)} locations fixed, "
+            f"{len(drift_desc)} descriptions refreshed, "
+            f"{len(drift_metrics)} metrics refreshed."
+        )
         if ghost_names:
             print(f"NOTE: {len(ghost_names)} ghost(s) left in place — review manually:")
             for n in sorted(ghost_names):
                 print(f"  ! {n}")
     else:
-        total_changes = len(new_names) + len(mismatches)
+        total_changes = (
+            len(new_names) + len(mismatches) + len(drift_desc) + len(drift_metrics)
+        )
         if total_changes:
             print(f"\nDry run complete. {total_changes} change(s) pending.")
             print("Run with --apply to update registry.json")

@@ -355,10 +355,16 @@ def main() -> None:
         registry = json.load(f)
     skills = registry["skills"]
 
-    # Build reverse index
+    # Build reverse index. Skip parent→child edges — the MCP server adds
+    # children to parent's referenced_by from the `parent` field independently,
+    # so including the parent here would double-count and re-introduce the
+    # parent⇄child cycle through referenced_by.
     referenced_by_index: dict[str, set[str]] = defaultdict(set)
     for skill, deps in DEPENDENCY_MAP.items():
+        skill_parent = skills.get(skill, {}).get("parent")
         for dep in deps:
+            if dep == skill_parent:
+                continue
             referenced_by_index[dep].add(skill)
 
     changes: list[str] = []
@@ -372,7 +378,14 @@ def main() -> None:
         # Filter deps to only those that exist in registry
         valid_deps = sorted(d for d in deps if d in skills)
         old_deps = set(entry.get("depends_on", []))
-        merged_deps = sorted(old_deps | set(valid_deps))
+        # depends_on is the capability DAG: drop the skill's `parent` so the
+        # hierarchy field stays the sole carrier of parent→child structure
+        # and the dep graph stays acyclic across parent⇄child pairs.
+        parent = entry.get("parent")
+        merged_deps = old_deps | set(valid_deps)
+        if parent:
+            merged_deps.discard(parent)
+        merged_deps = sorted(merged_deps)
         if sorted(old_deps) != merged_deps:
             changes.append(f"  {skill_name}: deps {sorted(old_deps)} → {merged_deps}")
         if not dry_run:
@@ -390,6 +403,24 @@ def main() -> None:
             changes.append(f"  {target}: referenced_by += {sorted(new_refs - old_refs)}")
         if not dry_run:
             entry["referenced_by"] = sorted(new_refs)
+
+    # Final global pass: strip parent from every skill's depends_on, regardless
+    # of whether the skill is in DEPENDENCY_MAP. Other writers (investing
+    # wiring, manual edits) may have left parent edges that the per-map loop
+    # above never reaches. depends_on is the capability DAG; parent is the
+    # hierarchy. Keeping them disjoint is the invariant.
+    parent_strip_count = 0
+    for skill_name, entry in skills.items():
+        parent = entry.get("parent")
+        if not parent:
+            continue
+        deps = entry.get("depends_on") or []
+        if parent in deps:
+            new_deps = sorted(d for d in deps if d != parent)
+            changes.append(f"  {skill_name}: stripped parent {parent} from depends_on")
+            parent_strip_count += 1
+            if not dry_run:
+                entry["depends_on"] = new_deps
 
     # Summary
     mode = "DRY RUN — " if dry_run else ""
