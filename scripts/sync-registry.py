@@ -160,7 +160,10 @@ def compute_metrics(text: str, skill_dir: Path) -> dict:
         d = skill_dir / subdir
         return sum(1 for _ in d.iterdir() if _.is_file() and _.name != ".gitkeep") if d.is_dir() else 0
 
-    body_chars = len(body)
+    # Token estimate is bytes/4 (matches analyze-skill.sh's wc -c, which
+    # counts bytes). UTF-8 multi-byte chars (em-dashes, curly quotes) need
+    # the byte length, not Python's char count, to stay in sync.
+    body_chars = len(body.encode("utf-8"))
     est_tokens_body = body_chars // 4
     est_tokens_metadata = (desc_words * 13 + 9) // 10
     est_tokens_total = est_tokens_metadata + est_tokens_body
