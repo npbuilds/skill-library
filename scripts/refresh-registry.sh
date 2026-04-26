@@ -21,19 +21,49 @@ fi
 NOW=$(python3 -c "from datetime import datetime, timezone; print(datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'))")
 
 python3 -c "
-import json, sys, os
+import json, sys, os, re
 
 registry_path = sys.argv[1]
 project_root = sys.argv[2]
 timestamp = sys.argv[3]
 skill_names = sys.argv[4:]
 
+# analyze-skill.sh emits computation artifacts that don't belong in the
+# registry: 'path' is a machine-specific absolute filesystem path (already
+# covered by entry['location']), 'name' duplicates the entry key.
+METRICS_BLACKLIST = {'path', 'name'}
+
+FRONTMATTER_RE = re.compile(r'^---\s*\n(.*?)\n---', re.DOTALL)
+DESC_BLOCK_RE = re.compile(
+    r'^description:\s*[>|]\s*\n((?:[ \t]+.+(?:\n|\$))+)', re.MULTILINE
+)
+DESC_INLINE_RE = re.compile(r'^description:\s+(.+?)\s*\$', re.MULTILINE)
+
+
+def read_description(path):
+    try:
+        text = open(path).read()
+    except OSError:
+        return None
+    m = FRONTMATTER_RE.match(text)
+    if not m:
+        return None
+    block = m.group(1)
+    bm = DESC_BLOCK_RE.search(block)
+    if bm:
+        return ' '.join(line.strip() for line in bm.group(1).strip().split('\n'))
+    im = DESC_INLINE_RE.search(block)
+    if im:
+        return im.group(1).strip()
+    return None
+
+
 with open(registry_path, 'r') as f:
     reg = json.load(f)
 
 reg['last_scan'] = timestamp
 
-# Recompute metrics for specific skills if provided
+# Recompute metrics + description for specific skills if provided
 if skill_names:
     import subprocess
     for name in skill_names:
@@ -62,9 +92,19 @@ if skill_names:
                 except json.JSONDecodeError as je:
                     print(f'  WARN {name} — analyze returned non-JSON: {je}', file=sys.stderr)
                     continue
+                # Strip computation artifacts before storing
+                metrics = {k: v for k, v in metrics.items() if k not in METRICS_BLACKLIST}
                 entry['metrics'] = metrics
                 entry['last_modified'] = timestamp[:10]
-                print(f'  OK {name} — metrics refreshed')
+
+                # Refresh description from frontmatter — drift here is the
+                # most common kind, and was unhandled by the prior hook chain.
+                desc = read_description(skill_path)
+                if desc and desc.strip() != (entry.get('description') or '').strip():
+                    entry['description'] = desc
+                    print(f'  OK {name} — metrics + description refreshed')
+                else:
+                    print(f'  OK {name} — metrics refreshed')
             else:
                 print(f'  WARN {name} — analyze failed: {result.stderr.strip()}', file=sys.stderr)
         except Exception as e:
