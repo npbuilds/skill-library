@@ -1,5 +1,6 @@
-# Claude Code local settings
-.claude/
+# Claude Code: settings.json is shared (tracked); everything else local
+.claude/*
+!.claude/settings.json
 
 # OS files
 .DS_Store
