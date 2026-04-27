@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infra Observatory // Skill Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+<style>
+/* ═══════════════════════════════════════════════
+   WEATHERED CYBERPUNK THEME
+   ═══════════════════════════════════════════════ */
+:root {
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --radius: 4px;
+  --ease: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-deep: #06070d;
+  --bg-panel: #0b0d18;
+  --bg-panel-hover: #10132a;
+  --border-dim: #1a1d3a;
+  --border-glow: #2a3a6a;
+  --cyan-faded: #3a8a8a;
+  --cyan-bright: #5acece;
+  --cyan-glow: #3acece44;
+  --magenta-faded: #8a3a6a;
+  --magenta-bright: #ce5aaa;
+  --magenta-glow: #ce3aaa33;
+  --amber-faded: #8a7a3a;
+  --amber-bright: #ceb45a;
+  --amber-glow: #ceb43a33;
+  --red-faded: #8a3a3a;
+  --red-bright: #ce5a5a;
+  --green-faded: #3a8a4a;
+  --green-bright: #5ace6a;
+  --text-primary: #a0aab8;
+  --text-dim: #5a6478;
+  --text-bright: #d0dae8;
+  --scanline-opacity: 0.03;
+  --header-gradient-start: #0d1020;
+  --crt-vignette: rgba(0,0,0,0.4);
+  --noise-opacity: 0.04;
+}
+
+[data-theme="light"] {
+  --bg-deep: #e8ecf2;
+  --bg-panel: #f0f3f8;
+  --bg-panel-hover: #dce2ec;
+  --border-dim: #c0c8d8;
+  --border-glow: #8898b8;
+  --cyan-faded: #1a7070;
+  --cyan-bright: #0e8a8a;
+  --cyan-glow: #0e8a8a22;
+  --magenta-faded: #8a2a5a;
+  --magenta-bright: #a83880;
+  --magenta-glow: #a8388022;
+  --amber-faded: #7a6a20;
+  --amber-bright: #9a8420;
+  --amber-glow: #9a842022;
+  --red-faded: #983030;
+  --red-bright: #c04040;
+  --green-faded: #1a7830;
+  --green-bright: #208a38;
+  --text-primary: #3a4050;
+  --text-dim: #6a7488;
+  --text-bright: #1a2030;
+  --scanline-opacity: 0.015;
+  --header-gradient-start: #d8dfe8;
+  --crt-vignette: rgba(0,0,0,0.06);
+  --noise-opacity: 0.02;
+}
+
+/* Domain colors */
+:root {
+  --d-investing: #5acece;
+  --d-sommelier: #ce5aaa;
+  --d-writing: #ceb45a;
+  --d-worldbuilding: #5ace6a;
+  --d-game-theory: #ce5a5a;
+  --d-design: #8a7ace;
+  --d-data-science: #5a9ace;
+  --d-infrastructure: #8ace5a;
+  --d-research: #ce8a5a;
+  --d-artifacts: #5acea0;
+  --d-meta: #9a9aaa;
+  --d-philosophy: #ce7a8a;
+  --d-neocortex: #aa5ace;
+  --d-biotech-venture: #4aceaa;
+  --d-world-history: #ce9a6a;
+  --d-product: #6aaace;
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CRT scanline overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px,
+    rgba(0,0,0,var(--scanline-opacity)) 2px, rgba(0,0,0,var(--scanline-opacity)) 4px);
+}
+
+/* Noise texture on panels */
+.io-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  border-radius: var(--radius);
+}
+
+::selection { background: var(--cyan-glow); }
+
+/* ═══════════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════════ */
+.io-header {
+  background: linear-gradient(135deg, var(--header-gradient-start), var(--bg-deep));
+  border-bottom: 1px solid var(--border-dim);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Observatory dropdown nav */
+.obs-nav { position: relative; }
+.obs-nav-current {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--green-bright);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+.obs-nav-current span { color: var(--magenta-bright); }
+.obs-nav-current .obs-nav-arrow { color: var(--text-dim); font-size: 12px; margin-left: 4px; }
+.obs-nav-current:hover { background: var(--bg-panel-hover); }
+
+.obs-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 6px;
+  padding: 6px;
+  min-width: 260px;
+  z-index: 500;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  display: none;
+}
+.obs-dropdown.open { display: block; }
+
+.obs-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text-dim);
+  transition: background 0.1s, color 0.1s;
+}
+.obs-dropdown-item:hover { background: var(--bg-panel-hover); color: var(--text-bright); }
+.obs-dropdown-item.active { color: var(--text-bright); background: var(--cyan-glow); }
+
+.obs-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.obs-dropdown-name {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.obs-dropdown-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
+
+.io-stats-bar {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.io-stats-bar .stat-val { color: var(--cyan-bright); }
+.io-stats-bar .stat-label { margin-left: 4px; }
+
+.io-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.io-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 12px;
+  border: 1px solid var(--border-dim);
+  background: var(--bg-panel);
+  color: var(--text-dim);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s var(--ease);
+}
+.io-btn:hover { border-color: var(--cyan-faded); color: var(--cyan-bright); }
+.io-btn.refreshing { animation: spin 0.8s linear infinite; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes logo-flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96% { opacity: 0.8; }
+  97% { opacity: 1; }
+  98% { opacity: 0.7; }
+}
+
+.refresh-status {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-right: 8px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.refresh-status.show { opacity: 1; }
+
+/* ═══════════════════════════════════════════════
+   GRID LAYOUT
+   ═══════════════════════════════════════════════ */
+.io-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  grid-template-rows: auto minmax(400px, 60vh) auto;
+  gap: 1px;
+  background: var(--border-dim);
+}
+
+.io-panel {
+  position: relative;
+  background: var(--bg-panel);
+  padding: 16px;
+  overflow: hidden;
+}
+
+.io-panel-title {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.io-panel-title::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-bright);
+  box-shadow: 0 0 6px var(--green-bright);
+}
+
+/* ═══════════════════════════════════════════════
+   ROW 1: SYSTEM STATS STRIP
+   ═══════════════════════════════════════════════ */
+.io-vitals-strip {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 1px;
+  background: var(--border-dim);
+  overflow-x: auto;
+}
+
+.io-vital-card {
+  flex: 1;
+  min-width: 100px;
+  background: var(--bg-panel);
+  padding: 10px 14px;
+  transition: all 0.2s var(--ease);
+  position: relative;
+}
+.io-vital-card:hover { background: var(--bg-panel-hover); }
+
+.io-vital-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-dim);
+}
+
+.io-vital-value {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-bright);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.io-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.io-status-dot.green { background: var(--green-bright); box-shadow: 0 0 6px var(--green-bright); }
+.io-status-dot.cyan { background: var(--cyan-bright); box-shadow: 0 0 6px var(--cyan-bright); }
+.io-status-dot.amber { background: var(--amber-bright); box-shadow: 0 0 6px var(--amber-bright); }
+
+/* ═══════════════════════════════════════════════
+   ROW 2 LEFT: ARCHITECTURE DIAGRAM
+   ═══════════════════════════════════════════════ */
+#arch-panel {
+  overflow: hidden;
+}
+#arch-panel svg {
+  width: 100%;
+  height: 100%;
+}
+
+.arch-node { cursor: pointer; }
+.arch-node rect {
+  transition: stroke-opacity 0.2s, filter 0.2s;
+}
+.arch-node:hover rect {
+  filter: drop-shadow(0 0 8px currentColor);
+}
+.arch-node text {
+  pointer-events: none;
+}
+.arch-edge {
+  stroke-dasharray: 6 4;
+  animation: dash-flow 1.5s linear infinite;
+  transition: opacity 0.2s;
+}
+@keyframes dash-flow {
+  to { stroke-dashoffset: -10; }
+}
+
+/* Tooltip */
+.io-tooltip {
+  position: fixed;
+  pointer-events: none;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-bright);
+  z-index: 600;
+  max-width: 260px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  display: none;
+}
+.io-tooltip.show { display: block; }
+
+/* ═══════════════════════════════════════════════
+   ROW 2 RIGHT: OPERATIONS SIDEBAR
+   ═══════════════════════════════════════════════ */
+.io-ops {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+}
+
+.io-ops-section {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-dim);
+}
+.io-ops-section:last-child { border-bottom: none; }
+
+.io-ops-title {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Status items */
+.io-status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.io-status-item .label { color: var(--text-primary); flex: 1; }
+.io-status-item .value { color: var(--green-bright); font-size: 10px; }
+
+/* Collection bars */
+.io-coll-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+.io-coll-name { width: 75px; color: var(--text-dim); flex-shrink: 0; }
+.io-coll-count { width: 40px; text-align: right; color: var(--cyan-bright); flex-shrink: 0; }
+.io-coll-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--border-dim);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.io-coll-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s var(--ease);
+}
+
+/* Scoring model */
+.io-score-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+.io-score-name { width: 85px; color: var(--text-dim); flex-shrink: 0; }
+.io-score-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: var(--border-dim);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.io-score-bar {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--green-bright);
+  transition: width 0.6s var(--ease);
+}
+.io-score-pct { width: 30px; text-align: right; color: var(--text-dim); flex-shrink: 0; }
+
+/* Last events */
+.io-meta-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+.io-meta-item .label { color: var(--text-dim); }
+.io-meta-item .value { color: var(--text-primary); }
+
+/* ═══════════════════════════════════════════════
+   ROW 3: BOTTOM PANELS
+   ═══════════════════════════════════════════════ */
+.io-bottom-panels {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1px;
+  background: var(--border-dim);
+  min-height: 300px;
+}
+
+/* Pipeline chevrons */
+.io-pipeline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 0;
+  overflow-x: auto;
+}
+
+.io-pipe-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.io-pipe-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 5px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-glow);
+  background: var(--bg-panel-hover);
+  color: var(--text-bright);
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.io-pipe-pill.cyan { border-color: var(--cyan-faded); color: var(--cyan-bright); }
+.io-pipe-pill.green { border-color: var(--green-faded); color: var(--green-bright); }
+.io-pipe-count {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-dim);
+}
+.io-pipe-arrow {
+  color: var(--text-dim);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Growth chart */
+#growth-svg {
+  width: 100%;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════
+   ACTIVITY LOG
+   ═══════════════════════════════════════════════ */
+.io-changelog-feed {
+  overflow-y: auto;
+  max-height: 260px;
+}
+
+.io-signal-item {
+  padding: 8px 12px;
+  border-left: 3px solid var(--border-dim);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  transition: background 0.15s var(--ease);
+}
+.io-signal-item:hover { background: var(--bg-panel-hover); }
+.io-signal-skill {
+  color: var(--text-bright);
+  font-weight: 600;
+  display: block;
+  font-size: 11px;
+}
+.io-signal-action {
+  color: var(--text-dim);
+  font-size: 10px;
+  display: block;
+  margin-top: 2px;
+}
+.io-signal-time {
+  color: var(--text-dim);
+  font-size: 9px;
+  display: block;
+  margin-top: 2px;
+  opacity: 0.7;
+}
+.io-signal-icon { margin-right: 6px; font-size: 12px; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .io-grid { grid-template-columns: 1fr; }
+  .io-bottom-panels { grid-template-columns: 1fr; }
+  .io-header { flex-wrap: wrap; gap: 10px; }
+  .io-stats-bar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════════ -->
+<header class="io-header">
+  <div class="obs-nav" id="obs-nav">
+    <button class="obs-nav-current" id="obs-nav-btn">
+      INFRA <span>OBSERVATORY</span> <span class="obs-nav-arrow">&#9662;</span>
+    </button>
+    <div class="obs-dropdown" id="obs-dropdown">
+      <a href="/" class="obs-dropdown-item">
+        <span class="obs-dot" style="background:var(--cyan-bright)"></span>
+        <div><div class="obs-dropdown-name">Neural Observatory</div>
+        <div class="obs-dropdown-sub">Skill library visualization</div></div>
+      </a>
+      <a href="/observatory" class="obs-dropdown-item">
+        <span class="obs-dot" style="background:var(--magenta-bright)"></span>
+        <div><div class="obs-dropdown-name">Aesthetic Observatory</div>
+        <div class="obs-dropdown-sub">Inspiration board</div></div>
+      </a>
+      <a href="/infra" class="obs-dropdown-item active">
+        <span class="obs-dot" style="background:var(--green-bright)"></span>
+        <div><div class="obs-dropdown-name">Infra Observatory</div>
+        <div class="obs-dropdown-sub">System architecture</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="io-stats-bar">
+    <div><span class="stat-val" id="stat-collections">-</span><span class="stat-label">collections</span></div>
+    <div><span class="stat-val" id="stat-docs">-</span><span class="stat-label">docs</span></div>
+    <div><span class="stat-val" id="stat-tools">17</span><span class="stat-label">MCP tools</span></div>
+    <div><span class="stat-val" id="stat-endpoints">4</span><span class="stat-label">maint endpoints</span></div>
+  </div>
+
+  <div class="io-controls">
+    <span class="refresh-status" id="refresh-status"></span>
+    <span class="live-badge" style="font-family:var(--font-mono);font-size:9px;color:var(--green-bright);border:1px solid var(--green-faded);padding:2px 6px;border-radius:2px;animation:pulse-dot 2s ease infinite">&#9679; LIVE</span>
+    <button class="io-btn" id="btn-refresh">&#8635; refresh</button>
+    <button class="io-btn" id="btn-theme">light</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════
+     MAIN GRID
+     ═══════════════════════════════════════════════ -->
+<div class="io-grid">
+
+  <!-- ROW 1: System Stats Strip -->
+  <div class="io-vitals-strip" id="vitals-strip"></div>
+
+  <!-- ROW 2 LEFT: Architecture Diagram -->
+  <div class="io-panel" id="arch-panel">
+    <div class="io-panel-title">System Architecture</div>
+    <svg id="arch-svg" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
+
+  <!-- ROW 2 RIGHT: Operations Sidebar -->
+  <div class="io-panel io-ops" id="ops-panel">
+    <div class="io-ops-section">
+      <div class="io-ops-title">System Status</div>
+      <div id="ops-status"></div>
+    </div>
+    <div class="io-ops-section">
+      <div class="io-ops-title">Firestore Collections</div>
+      <div id="ops-collections"></div>
+    </div>
+    <div class="io-ops-section">
+      <div class="io-ops-title">Scoring Model</div>
+      <div id="ops-scoring"></div>
+    </div>
+    <div class="io-ops-section">
+      <div class="io-ops-title">Last Events</div>
+      <div id="ops-meta"></div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Bottom Panels -->
+  <div class="io-bottom-panels">
+    <!-- Growth Engine -->
+    <div class="io-panel" id="growth-panel">
+      <div class="io-panel-title">Growth Engine</div>
+      <div class="io-pipeline" id="pipeline"></div>
+      <svg id="growth-svg" height="200"></svg>
+    </div>
+
+    <!-- Activity Log -->
+    <div class="io-panel" id="changelog-panel">
+      <div class="io-panel-title">Activity Feed</div>
+      <div class="io-changelog-feed" id="changelog-feed"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Tooltip -->
+<div class="io-tooltip" id="tooltip"></div>
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════ -->
+<script>
+const IO = {};
+
+/* ─── Config ─── */
+IO.config = {
+  firebase: {
+    apiKey: 'AIzaSyDzUrhgqUHedNXYlGSqq2sFISBVrc2-Bbg',
+    authDomain: 'skill-library-prod.firebaseapp.com',
+    projectId: 'skill-library-prod',
+    storageBucket: 'skill-library-prod.firebasestorage.app',
+    messagingSenderId: '792932882875',
+    appId: '1:792932882875:web:838c3d1c33afdfd5298c9e',
+  },
+  domainColors: {
+    investing: '#5acece', sommelier: '#ce5aaa', writing: '#ceb45a',
+    worldbuilding: '#5ace6a', 'game-theory': '#ce5a5a', design: '#8a7ace',
+    'data-science': '#5a9ace', infrastructure: '#8ace5a', research: '#ce8a5a',
+    artifacts: '#5acea0', meta: '#9a9aaa', philosophy: '#ce7a8a', neocortex: '#aa5ace',
+    'biotech-venture': '#4aceaa', 'world-history': '#ce9a6a', product: '#6aaace'
+  },
+};
+
+/* ─── Utility ─── */
+IO.esc = function(s) {
+  const el = document.createElement('span');
+  el.textContent = s;
+  return el.innerHTML;
+};
+
+/* ─── Data Module ─── */
+IO.data = {
+  registry: null, skills: null, skillList: [],
+  usage: [], gaps: [], evolution: [], changelogs: {},
+  domains: {}, skillDomain: {}, domainOrder: [],
+
+  async loadAll() {
+    if (!this._db) {
+      firebase.initializeApp(IO.config.firebase);
+      this._db = firebase.firestore();
+      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        try { this._db.useEmulator('localhost', 8080); } catch(e) {}
+      }
+    }
+    const db = this._db;
+
+    const [skillsSnap, metaSnap, usageSnap, gapsSnap, evoSnap, changeSnap] = await Promise.all([
+      db.collection('skills').get(),
+      db.collection('meta').doc('registry').get(),
+      db.collection('usage').orderBy('timestamp', 'desc').get(),
+      db.collection('gaps').get(),
+      db.collection('evolution').orderBy('date', 'asc').get(),
+      db.collection('changelogs').get(),
+    ]);
+
+    // Skills
+    const skills = {};
+    skillsSnap.forEach(d => { skills[d.id] = d.data(); });
+    const meta = metaSnap.exists ? metaSnap.data() : {};
+
+    this.registry = {
+      schema_version: meta.schema_version || 2,
+      plugin_version: meta.plugin_version || '1.0.0',
+      last_scan: meta.last_scan || null,
+      last_recalibration: meta.last_recalibration || null,
+      skills,
+      network: { domains: meta.network_domains || {} },
+    };
+    this.skills = skills;
+    this.skillList = Object.values(skills);
+    this.domains = meta.network_domains || {};
+
+    // Usage
+    this.usage = [];
+    usageSnap.forEach(d => this.usage.push(d.data()));
+
+    // Gaps
+    this.gaps = [];
+    gapsSnap.forEach(d => this.gaps.push(d.data()));
+
+    // Evolution
+    this.evolution = [];
+    evoSnap.forEach(d => this.evolution.push(d.data()));
+
+    // Changelogs
+    this.changelogs = {};
+    changeSnap.forEach(d => {
+      const data = d.data();
+      this.changelogs[data.skill || d.id] = data.entries || data;
+    });
+
+    // Build skill->domain mapping
+    this.skillDomain = {};
+    for (const [d, skillNames] of Object.entries(this.domains)) {
+      for (const s of skillNames) this.skillDomain[s] = d;
+    }
+
+    // Domain order by size
+    this.domainOrder = Object.entries(this.domains)
+      .sort((a, b) => b[1].length - a[1].length)
+      .map(d => d[0]);
+
+    // Collection counts
+    this.collectionCounts = {
+      skills: skillsSnap.size,
+      evolution: evoSnap.size,
+      usage: usageSnap.size,
+      changelogs: changeSnap.size,
+      gaps: gapsSnap.size,
+      meta: metaSnap.exists ? 1 : 0,
+      inspirations: 0,
+    };
+    this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
+
+    // Inspirations (for Aesthetic Observatory)
+    try {
+      const inspSnap = await db.collection('inspirations').get();
+      this.collectionCounts.inspirations = inspSnap.size;
+      this.totalDocs += inspSnap.size;
+    } catch(e) { /* collection may not exist yet */ }
+  }
+};
+
+/* ─── Tooltip ─── */
+IO.tooltip = {
+  el: document.getElementById('tooltip'),
+  show(evt, html) {
+    this.el.innerHTML = html;
+    this.el.classList.add('show');
+    const x = Math.min(evt.clientX + 12, window.innerWidth - 280);
+    const y = Math.min(evt.clientY + 12, window.innerHeight - 100);
+    this.el.style.left = x + 'px';
+    this.el.style.top = y + 'px';
+  },
+  hide() { this.el.classList.remove('show'); }
+};
+
+/* ─── Vitals Strip ─── */
+IO.vitals = {
+  render() {
+    const strip = document.getElementById('vitals-strip');
+    const items = [
+      { label: 'Cloud Run', value: 'skill-library-mcp', dot: 'green',
+        tip: 'MCP server deployed on Google Cloud Run. Handles all skill library tool calls from Claude.' },
+      { label: 'Firestore', value: 'us-central1', dot: 'cyan',
+        tip: 'Real-time cloud database. 6 collections sync live to all three observatory dashboards.' },
+      { label: 'Scheduler', value: 'daily 3AM ET', dot: 'green',
+        tip: 'Cloud Scheduler runs daily maintenance: re-scores all skills and opens a PR if anything changed.' },
+      { label: 'CI/CD', value: '3 workflows', dot: 'green',
+        tip: 'GitHub Actions: CI (test on push), Deploy (build + ship container), Auto-merge (land green bot PRs).' },
+      { label: 'Hooks', value: '2 active', dot: 'green',
+        tip: 'File watcher auto-registers skills on save. Pre-commit check blocks misplaced files.' },
+      { label: 'Agents', value: '3 defined', dot: 'cyan',
+        tip: 'Registry scanner (discovers new skills), Skill auditor (quality checks), Skill tester (validates methodology).' },
+      { label: 'Commands', value: '5 available', dot: 'cyan',
+        tip: 'Slash commands: /skill-catalog, /skill-status, /skill-rate, /skill-infra-upgrade, /spelunker.' },
+      { label: 'Scripts', value: '24 scripts', dot: 'cyan',
+        tip: 'Automation scripts for scoring, migration, graph wiring, community detection, health reports, and more.' },
+    ];
+    strip.innerHTML = items.map((it, i) => `
+      <div class="io-vital-card" data-tip-idx="${i}">
+        <div class="io-vital-label">${it.label}</div>
+        <div class="io-vital-value">
+          <span class="io-status-dot ${it.dot}"></span>
+          ${it.value}
+        </div>
+      </div>
+    `).join('');
+    // Rich tooltips on hover
+    strip.querySelectorAll('.io-vital-card').forEach((card, i) => {
+      card.addEventListener('mouseenter', (evt) => {
+        IO.tooltip.show(evt, `<strong style="color:var(--cyan-bright)">${IO.esc(items[i].label)}</strong><div style="color:var(--text-dim);margin-top:4px;font-size:11px;max-width:220px">${IO.esc(items[i].tip)}</div>`);
+      });
+      card.addEventListener('mouseleave', () => IO.tooltip.hide());
+    });
+  }
+};
+
+/* ─── Architecture Diagram ─── */
+IO.arch = {
+  nodes: [
+    // Column 1: Sources (x=8%)
+    { id: 'github', label: 'GitHub', icon: '\u27E8\u27E9', x: 0.08, y: 0.20, col: 'source', color: '#8ace5a',
+      tip: 'Your code repository on GitHub. All skill files, scripts, and configs live here. Changes pushed here trigger automated workflows.' },
+    { id: 'skillmd', label: 'SKILL.md', icon: '\uD83D\uDCDD', x: 0.08, y: 0.55, col: 'source', color: '#8ace5a',
+      tip: 'When you write or edit a skill file, the file watcher hook automatically registers it, computes metrics, and takes an evolution snapshot.' },
+    { id: 'hooks', label: 'Hooks', icon: '\uD83E\uDE9D', x: 0.08, y: 0.85, col: 'source', color: '#ceb45a',
+      tip: '2 automation hooks: the file watcher (auto-registers new skills on save) and the pre-commit check (blocks files in wrong directories).' },
+
+    // Column 2: Processing (x=30%)
+    { id: 'cicd', label: 'CI/CD', icon: '\u2699', subtitle: '3 workflows', x: 0.30, y: 0.12, col: 'process', color: '#8ace5a',
+      tip: '3 GitHub Actions workflows: CI (runs tests on every push), Deploy (builds container \u2192 Cloud Run), Auto-merge (lands bot PRs that pass CI).' },
+    { id: 'cloudrun', label: 'Cloud Run', icon: '\u25B6', subtitle: 'MCP Server \u00B7 17 tools', x: 0.30, y: 0.42, col: 'process', color: '#8ace5a',
+      tip: 'Your MCP server running in the cloud. Exposes 17 tools (search, scaffold, score, analyze, etc.) so Claude can read and manage your skill library remotely.' },
+    { id: 'scheduler', label: 'Scheduler', icon: '\u23F0', subtitle: 'daily 3AM ET', x: 0.30, y: 0.68, col: 'process', color: '#8ace5a',
+      tip: 'Cloud Scheduler triggers maintenance every day at 3 AM Eastern. It calls the recalibrate endpoint to re-score all skills and open a PR if anything drifted.' },
+    { id: 'artregistry', label: 'Artifact Reg', icon: '\uD83D\uDCE6', x: 0.30, y: 0.90, col: 'process', color: '#8ace5a',
+      tip: 'Artifact Registry stores Docker container images. When CI builds a new version of the MCP server, the image is pushed here, then Cloud Run pulls it.' },
+
+    // Column 3: Storage (x=55%)
+    { id: 'firestore', label: 'Firestore', icon: '\uD83D\uDD25', subtitle: '', x: 0.55, y: 0.15, col: 'storage', color: '#5acece', wide: true,
+      tip: 'Cloud database holding all your skill data. 6 collections with real-time sync \u2014 when data changes here, the dashboards update instantly.' },
+    { id: 'secrets', label: 'Secrets', icon: '\uD83D\uDD12', subtitle: '2 secrets', x: 0.55, y: 0.42, col: 'storage', color: '#5acece',
+      tip: 'Secret Manager securely stores sensitive credentials: your GitHub bot token (for opening maintenance PRs) and the Anthropic API key (for AI-powered enrichment).' },
+    { id: 'registry', label: 'Registry', icon: '\uD83D\uDCCB', subtitle: '', x: 0.55, y: 0.65, col: 'storage', color: '#5acece',
+      tip: 'registry.json \u2014 the master catalog of all skills. Contains metadata, scores, health status, and dependency graph for every skill. Local file synced to Firestore.' },
+    { id: 'storage', label: 'Storage', icon: '\uD83D\uDDBC\uFE0F', x: 0.55, y: 0.88, col: 'storage', color: '#5acece',
+      tip: 'Firebase Storage holds uploaded images for the Aesthetic Observatory inspiration board.' },
+
+    // Column 4: Output (x=82%)
+    { id: 'neural', label: 'Neural Obs', icon: '\uD83E\uDDE0', x: 0.82, y: 0.15, col: 'output', color: '#ce5aaa', link: '/',
+      tip: 'Neural Observatory \u2014 your main skill library dashboard. Shows the cortex map, org chart, chord diagram, usage heatmap, and skill registry table.' },
+    { id: 'aesthetic', label: 'Aesthetic Obs', icon: '\uD83C\uDFA8', x: 0.82, y: 0.42, col: 'output', color: '#ce5aaa', link: '/observatory',
+      tip: 'Aesthetic Observatory \u2014 your inspiration board. Upload images, tag them, extract color palettes, and browse your visual reference library.' },
+    { id: 'infra', label: 'Infra Obs', icon: '\u26A1', x: 0.82, y: 0.65, col: 'output', color: '#ce5aaa', current: true,
+      tip: 'Infra Observatory \u2014 this page. Shows how all the infrastructure pieces connect, system health, and how your library grows over time.' },
+    { id: 'botpr', label: 'Bot PRs', icon: '\uD83E\uDD16', x: 0.82, y: 0.88, col: 'output', color: '#ceb45a',
+      tip: 'Maintenance bot opens pull requests automatically when scores drift or health changes. Green-labeled PRs auto-merge after CI passes. You only review yellow/red ones.' },
+  ],
+  edges: [
+    // Deploy pipeline
+    { from: 'github', to: 'cicd', tip: 'Push to main triggers CI tests' },
+    { from: 'cicd', to: 'artregistry', tip: 'CI builds a Docker image' },
+    { from: 'artregistry', to: 'cloudrun', tip: 'Cloud Run pulls the latest image' },
+    // Skill authoring flow
+    { from: 'skillmd', to: 'hooks', tip: 'File watcher detects SKILL.md saves' },
+    { from: 'hooks', to: 'registry', tip: 'Auto-registers skill + takes snapshot' },
+    // MCP server connections
+    { from: 'cloudrun', to: 'firestore', tip: 'MCP server reads/writes skill data' },
+    { from: 'cloudrun', to: 'registry', tip: 'Server loads registry for tool calls' },
+    { from: 'secrets', to: 'cloudrun', tip: 'Server uses bot token + API key' },
+    // Scheduler loop
+    { from: 'scheduler', to: 'cloudrun', tip: 'Daily 3AM: triggers recalibration' },
+    { from: 'cloudrun', to: 'botpr', tip: 'Opens PR if scores drifted' },
+    { from: 'botpr', to: 'cicd', tip: 'Bot PR triggers CI validation' },
+    { from: 'cicd', to: 'github', tip: 'Auto-merge lands green PRs' },
+    // Dashboard data
+    { from: 'firestore', to: 'neural', tip: 'Real-time skill data feed' },
+    { from: 'firestore', to: 'aesthetic', tip: 'Inspiration metadata' },
+    { from: 'firestore', to: 'infra', tip: 'System metrics feed' },
+    { from: 'storage', to: 'aesthetic', tip: 'Inspiration images' },
+  ],
+
+  render() {
+    const container = document.getElementById('arch-panel');
+    const w = container.clientWidth - 32;
+    const h = container.clientHeight - 48;
+    const svg = d3.select('#arch-svg').attr('viewBox', `0 0 ${w} ${h}`);
+    svg.selectAll('*').remove();
+
+    // Update dynamic subtitles
+    const fNode = this.nodes.find(n => n.id === 'firestore');
+    if (fNode) fNode.subtitle = (IO.data.totalDocs || 0) + ' docs';
+    const rNode = this.nodes.find(n => n.id === 'registry');
+    if (rNode) rNode.subtitle = (IO.data.skillList.length || 0) + ' skills';
+
+    const nodeMap = {};
+    for (const n of this.nodes) {
+      n._x = n.x * w;
+      n._y = n.y * h;
+      nodeMap[n.id] = n;
+    }
+
+    const defs = svg.append('defs');
+    // Glow filter
+    const filter = defs.append('filter').attr('id', 'glow');
+    filter.append('feGaussianBlur').attr('stdDeviation', '3').attr('result', 'blur');
+    const merge = filter.append('feMerge');
+    merge.append('feMergeNode').attr('in', 'blur');
+    merge.append('feMergeNode').attr('in', 'SourceGraphic');
+
+    // Draw edges
+    const edgesG = svg.append('g').attr('class', 'edges');
+    for (const e of this.edges) {
+      const s = nodeMap[e.from];
+      const t = nodeMap[e.to];
+      if (!s || !t) continue;
+      const mx = (s._x + t._x) / 2;
+      const my = (s._y + t._y) / 2 - 15;
+      edgesG.append('path')
+        .attr('class', 'arch-edge')
+        .attr('data-from', e.from)
+        .attr('data-to', e.to)
+        .attr('d', `M${s._x},${s._y} Q${mx},${my} ${t._x},${t._y}`)
+        .attr('fill', 'none')
+        .attr('stroke', 'var(--border-glow)')
+        .attr('stroke-width', 1.5)
+        .attr('stroke-dasharray', '6 3')
+        .attr('opacity', 0.5)
+        .on('mouseenter', function(evt) {
+          d3.select(this).attr('opacity', 1).attr('stroke', 'var(--cyan-bright)').attr('stroke-width', 2.5);
+          if (e.tip) IO.tooltip.show(evt, `<div style="font-size:11px;color:var(--text-primary)">${IO.esc(e.tip)}</div>`);
+        })
+        .on('mouseleave', function() {
+          d3.select(this).attr('opacity', 0.5).attr('stroke', 'var(--border-glow)').attr('stroke-width', 1.5);
+          IO.tooltip.hide();
+        });
+    }
+
+    // Draw nodes
+    const nodesG = svg.append('g').attr('class', 'nodes');
+    for (const n of this.nodes) {
+      const nw = n.wide ? 100 : 80;
+      const nh = 56;
+      const g = nodesG.append('g')
+        .attr('class', 'arch-node')
+        .attr('transform', `translate(${n._x}, ${n._y})`)
+        .attr('data-id', n.id);
+
+      // Background rect
+      g.append('rect')
+        .attr('x', -nw/2).attr('y', -nh/2)
+        .attr('width', nw).attr('height', nh)
+        .attr('rx', 6).attr('ry', 6)
+        .attr('fill', 'var(--bg-panel)')
+        .attr('stroke', n.color)
+        .attr('stroke-width', n.current ? 2 : 1)
+        .attr('stroke-opacity', n.current ? 1 : 0.5);
+
+      // Icon
+      g.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('y', -6)
+        .attr('font-size', '16')
+        .text(n.icon);
+
+      // Label
+      g.append('text')
+        .attr('text-anchor', 'middle')
+        .attr('y', 12)
+        .attr('font-family', 'var(--font-mono)')
+        .attr('font-size', '9')
+        .attr('fill', n.color)
+        .attr('font-weight', '600')
+        .text(n.label);
+
+      // Subtitle
+      if (n.subtitle) {
+        g.append('text')
+          .attr('text-anchor', 'middle')
+          .attr('y', 22)
+          .attr('font-family', 'var(--font-mono)')
+          .attr('font-size', '8')
+          .attr('fill', 'var(--text-dim)')
+          .text(n.subtitle);
+      }
+
+      // Hover interactions
+      const self = this;
+      g.on('mouseenter', function(evt) {
+        const id = n.id;
+        // Highlight connected edges
+        svg.selectAll('.arch-edge').each(function() {
+          const edge = d3.select(this);
+          const connected = edge.attr('data-from') === id || edge.attr('data-to') === id;
+          edge.attr('opacity', connected ? 1 : 0.1)
+              .attr('stroke', connected ? n.color : 'var(--border-glow)')
+              .attr('stroke-width', connected ? 2.5 : 1.5);
+        });
+        // Dim unconnected nodes
+        const connectedIds = new Set([id]);
+        for (const e of self.edges) {
+          if (e.from === id) connectedIds.add(e.to);
+          if (e.to === id) connectedIds.add(e.from);
+        }
+        svg.selectAll('.arch-node').each(function() {
+          const nid = d3.select(this).attr('data-id');
+          d3.select(this).attr('opacity', connectedIds.has(nid) ? 1 : 0.3);
+        });
+        // Tooltip
+        let tipHtml = `<strong style="color:${n.color}">${IO.esc(n.label)}</strong>`;
+        if (n.subtitle) tipHtml += `<div style="color:var(--text-primary);margin-top:2px">${IO.esc(n.subtitle)}</div>`;
+        if (n.tip) tipHtml += `<div style="color:var(--text-dim);margin-top:4px;font-size:11px;line-height:1.4;max-width:240px">${IO.esc(n.tip)}</div>`;
+        if (n.link) tipHtml += `<div style="color:var(--cyan-bright);margin-top:4px;font-size:10px">click to navigate \u2192</div>`;
+        IO.tooltip.show(evt, tipHtml);
+      })
+      .on('mouseleave', function() {
+        svg.selectAll('.arch-edge').attr('opacity', 0.5).attr('stroke', 'var(--border-glow)').attr('stroke-width', 1.5);
+        svg.selectAll('.arch-node').attr('opacity', 1);
+        IO.tooltip.hide();
+      })
+      .on('click', function() {
+        if (n.link) window.location.href = n.link;
+      });
+    }
+  }
+};
+
+/* ─── Operations Sidebar ─── */
+IO.ops = {
+  render() {
+    // System Status
+    const statusItems = [
+      { label: 'Cloud Run', value: 'healthy', dot: 'green',
+        tip: 'MCP server responds to tool calls. 1 CPU, 1GB RAM, max 1 instance.' },
+      { label: 'Firestore', value: 'online', dot: 'green',
+        tip: 'Database accepts reads (public) and writes (authenticated). Free tier.' },
+      { label: 'Scheduler', value: 'active', dot: 'green',
+        tip: 'Cron job fires daily at 3 AM Eastern. Calls /maint/recalibrate.' },
+      { label: 'CI Pipeline', value: 'passing', dot: 'green',
+        tip: 'Tests, registry validation, and score checks run on every push and PR.' },
+      { label: 'Artifact Reg', value: 'active', dot: 'green',
+        tip: 'Docker image store for MCP server container builds.' },
+      { label: 'Firebase Storage', value: 'active', dot: 'green',
+        tip: 'Image storage for Aesthetic Observatory uploads.' },
+    ];
+    const statusEl = document.getElementById('ops-status');
+    statusEl.innerHTML = statusItems.map((it, i) => `
+      <div class="io-status-item" data-idx="${i}">
+        <span class="io-status-dot ${it.dot}"></span>
+        <span class="label">${it.label}</span>
+        <span class="value">${it.value}</span>
+      </div>
+    `).join('');
+    statusEl.querySelectorAll('.io-status-item').forEach((el, i) => {
+      el.addEventListener('mouseenter', (evt) => {
+        IO.tooltip.show(evt, `<strong>${IO.esc(statusItems[i].label)}</strong><div style="color:var(--text-dim);margin-top:4px;font-size:11px;max-width:200px">${IO.esc(statusItems[i].tip)}</div>`);
+      });
+      el.addEventListener('mouseleave', () => IO.tooltip.hide());
+    });
+
+    // Firestore Collections
+    const counts = IO.data.collectionCounts || {};
+    const maxCount = Math.max(...Object.values(counts), 1);
+    const collColors = {
+      skills: 'var(--cyan-bright)', evolution: 'var(--green-bright)',
+      usage: 'var(--amber-bright)', changelogs: 'var(--magenta-bright)',
+      gaps: 'var(--red-bright)', meta: 'var(--text-dim)',
+      inspirations: 'var(--magenta-bright)'
+    };
+    document.getElementById('ops-collections').innerHTML = Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => `
+        <div class="io-coll-item">
+          <span class="io-coll-name">${name}</span>
+          <span class="io-coll-count">${count}</span>
+          <div class="io-coll-bar-wrap">
+            <div class="io-coll-bar" style="width:${(count / maxCount * 100).toFixed(1)}%;background:${collColors[name] || 'var(--cyan-bright)'}"></div>
+          </div>
+        </div>
+      `).join('');
+
+    // Scoring Model
+    const scoringFactors = [
+      { name: 'Structure', pct: 20, tip: 'Section count, frontmatter quality, description clarity' },
+      { name: 'Depth', pct: 25, tip: 'Word count sweet spot (300-5000 words), reference file count' },
+      { name: 'Connectivity', pct: 20, tip: 'Number of depends_on + referenced_by edges in the skill graph' },
+      { name: 'Freshness', pct: 15, tip: 'Days since last modified \u2014 decays over 90 days' },
+      { name: 'Usage', pct: 10, tip: 'How often this skill gets loaded via MCP tools' },
+      { name: 'Feedback', pct: 10, tip: 'Average rating from manual 1-5 star feedback' },
+    ];
+    const scoringEl = document.getElementById('ops-scoring');
+    scoringEl.innerHTML = scoringFactors.map((f, i) => `
+      <div class="io-score-item" data-sidx="${i}">
+        <span class="io-score-name">${f.name}</span>
+        <div class="io-score-bar-wrap">
+          <div class="io-score-bar" style="width:${f.pct * 4}%"></div>
+        </div>
+        <span class="io-score-pct">${f.pct}%</span>
+      </div>
+    `).join('');
+    scoringEl.querySelectorAll('.io-score-item').forEach((el, i) => {
+      el.addEventListener('mouseenter', (evt) => {
+        IO.tooltip.show(evt, `<strong>${IO.esc(scoringFactors[i].name)}</strong> (${scoringFactors[i].pct}%)<div style="color:var(--text-dim);margin-top:4px;font-size:11px;max-width:220px">${IO.esc(scoringFactors[i].tip)}</div>`);
+      });
+      el.addEventListener('mouseleave', () => IO.tooltip.hide());
+    });
+
+    // Last Events
+    const reg = IO.data.registry || {};
+    const lastScan = reg.last_scan ? new Date(reg.last_scan).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown';
+    const lastRecalib = reg.last_recalibration ? new Date(reg.last_recalibration).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown';
+    document.getElementById('ops-meta').innerHTML = [
+      { label: 'Last scan', value: lastScan },
+      { label: 'Last recalib', value: lastRecalib },
+      { label: 'Schema ver', value: reg.schema_version || 2 },
+      { label: 'Plugin ver', value: reg.plugin_version || '1.0.0' },
+    ].map(it => `
+      <div class="io-meta-item">
+        <span class="label">${it.label}:</span>
+        <span class="value">${it.value}</span>
+      </div>
+    `).join('');
+  }
+};
+
+/* ─── Growth Engine ─── */
+IO.growth = {
+  renderPipeline() {
+    const stages = [
+      { label: 'Write', cls: 'cyan', tip: 'You create or edit a SKILL.md file' },
+      { label: 'Watcher', cls: 'green', tip: 'File watcher hook auto-detects the save' },
+      { label: 'Registry', cls: 'cyan', count: (IO.data.skillList.length || 0) + ' skills', tip: 'Skill gets registered with metadata and metrics' },
+      { label: 'Snapshot', cls: 'green', count: (IO.data.evolution.length || 0) + ' snapshots', tip: 'Point-in-time score snapshot saved for tracking growth' },
+      { label: 'Score', cls: 'cyan', tip: 'Daily recalibration computes composite score from 6 factors' },
+      { label: 'Bot PR', cls: 'green', tip: 'If scores drifted, a bot opens a pull request with the changes' },
+      { label: 'CI', cls: 'cyan', tip: 'Automated tests validate the changes' },
+      { label: 'Merge', cls: 'green', tip: 'Green PRs auto-merge. Yellow/red need your review.' },
+    ];
+    document.getElementById('pipeline').innerHTML = stages.map((s, i) => {
+      let html = `<div class="io-pipe-stage" data-pidx="${i}">
+        <div class="io-pipe-pill ${s.cls}">${s.label}</div>`;
+      if (s.count) html += `<div class="io-pipe-count">${s.count}</div>`;
+      html += `</div>`;
+      if (i < stages.length - 1) html += `<span class="io-pipe-arrow">\u2192</span>`;
+      return html;
+    }).join('');
+    document.getElementById('pipeline').querySelectorAll('.io-pipe-stage').forEach((el, i) => {
+      el.addEventListener('mouseenter', (evt) => {
+        IO.tooltip.show(evt, `<strong style="color:var(--cyan-bright)">${IO.esc(stages[i].label)}</strong><div style="color:var(--text-dim);margin-top:4px;font-size:11px;max-width:200px">${IO.esc(stages[i].tip)}</div>`);
+      });
+      el.addEventListener('mouseleave', () => IO.tooltip.hide());
+    });
+  },
+
+  renderChart() {
+    const container = document.getElementById('growth-panel');
+    const svgEl = document.getElementById('growth-svg');
+    const width = container.clientWidth - 32;
+    const height = 200;
+    const svg = d3.select(svgEl).attr('viewBox', `0 0 ${width} ${height}`);
+    svg.selectAll('*').remove();
+
+    // Group skills by created month and domain
+    const skills = IO.data.skillList;
+    if (!skills.length) {
+      svg.append('text').attr('x', width/2).attr('y', height/2)
+        .attr('text-anchor', 'middle').attr('fill', 'var(--text-dim)')
+        .attr('font-family', 'var(--font-mono)').attr('font-size', '11')
+        .text('No skill data');
+      return;
+    }
+
+    // Build monthly cumulative data by domain
+    const monthDomainCounts = {};
+    const monthSet = new Set();
+    for (const s of skills) {
+      const created = s.created || s.last_modified || '2024-01';
+      const month = created.substring(0, 7); // YYYY-MM
+      monthSet.add(month);
+      const domain = IO.data.skillDomain[s.name] || 'unknown';
+      if (!monthDomainCounts[month]) monthDomainCounts[month] = {};
+      monthDomainCounts[month][domain] = (monthDomainCounts[month][domain] || 0) + 1;
+    }
+
+    const months = [...monthSet].sort();
+    const domains = IO.data.domainOrder.length ? IO.data.domainOrder : Object.keys(IO.config.domainColors);
+
+    // Build cumulative stacked data
+    const cumulative = {};
+    const stackData = months.map(month => {
+      const row = { month };
+      for (const d of domains) {
+        cumulative[d] = (cumulative[d] || 0) + (monthDomainCounts[month]?.[d] || 0);
+        row[d] = cumulative[d];
+      }
+      return row;
+    });
+
+    const margin = { top: 10, right: 10, bottom: 30, left: 35 };
+    const iw = width - margin.left - margin.right;
+    const ih = height - margin.top - margin.bottom;
+
+    const x = d3.scalePoint().domain(months).range([0, iw]).padding(0.2);
+    const stack = d3.stack().keys(domains).order(d3.stackOrderNone).offset(d3.stackOffsetNone);
+    const series = stack(stackData);
+    const yMax = d3.max(series, s => d3.max(s, d => d[1])) || 100;
+    const y = d3.scaleLinear().domain([0, yMax]).range([ih, 0]);
+
+    const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
+
+    // Area
+    const area = d3.area()
+      .x(d => x(d.data.month))
+      .y0(d => y(d[0]))
+      .y1(d => y(d[1]))
+      .curve(d3.curveMonotoneX);
+
+    g.selectAll('.area')
+      .data(series)
+      .join('path')
+      .attr('d', area)
+      .attr('fill', d => IO.config.domainColors[d.key] || '#888')
+      .attr('opacity', 0.6);
+
+    // Axes
+    const tickFilter = months.filter((_, i) => i % Math.ceil(months.length / 6) === 0);
+    g.append('g')
+      .attr('transform', `translate(0,${ih})`)
+      .call(d3.axisBottom(x).tickValues(tickFilter))
+      .selectAll('text').attr('fill', 'var(--text-dim)').attr('font-size', '9');
+
+    g.append('g')
+      .call(d3.axisLeft(y).ticks(4))
+      .selectAll('text').attr('fill', 'var(--text-dim)').attr('font-size', '9');
+
+    g.selectAll('.domain').attr('stroke', 'var(--border-dim)');
+    g.selectAll('.tick line').attr('stroke', 'var(--border-dim)');
+  },
+
+  render() {
+    this.renderPipeline();
+    this.renderChart();
+  }
+};
+
+/* ─── Activity Log ─── */
+IO.changelog = {
+  render() {
+    const feed = document.getElementById('changelog-feed');
+    const entries = [];
+
+    // Changelog entries
+    for (const [skill, logs] of Object.entries(IO.data.changelogs)) {
+      if (Array.isArray(logs)) {
+        for (const log of logs) {
+          entries.push({ type: 'change', skill, date: log.date || '', text: (log.action || '') + (log.note ? ': ' + log.note : ''), icon: '\uD83D\uDCDD' });
+        }
+      } else if (logs && typeof logs === 'object') {
+        const arr = logs.entries || [];
+        for (const log of (Array.isArray(arr) ? arr : [])) {
+          entries.push({ type: 'change', skill, date: log.date || '', text: (log.action || '') + (log.note ? ': ' + log.note : ''), icon: '\uD83D\uDCDD' });
+        }
+      }
+    }
+
+    // Usage events
+    for (const e of IO.data.usage) {
+      entries.push({ type: 'usage', skill: e.skill || '', date: e.timestamp || '', text: 'Used via ' + (e.type || 'tool'), icon: '\u26A1' });
+    }
+
+    // Gap events
+    for (const e of IO.data.gaps) {
+      entries.push({ type: 'gap', skill: '', date: e.timestamp || '', text: 'Search gap: "' + (e.query || '') + '"', icon: '\uD83D\uDD0D' });
+    }
+
+    // Recent evolution events (just last recalibration batch)
+    const evoByDate = {};
+    for (const e of IO.data.evolution) {
+      const d = (e.date || '').substring(0, 10);
+      if (!evoByDate[d]) evoByDate[d] = 0;
+      evoByDate[d]++;
+    }
+    for (const [date, count] of Object.entries(evoByDate)) {
+      entries.push({ type: 'evolution', skill: '', date, text: 'Scored ' + count + ' skills', icon: '\uD83D\uDCCA' });
+    }
+
+    // Sort by date descending
+    entries.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+    if (!entries.length) {
+      feed.innerHTML = '<div style="padding:8px;color:var(--text-dim);font-size:11px">No activity</div>';
+      return;
+    }
+
+    // Type colors
+    const typeColors = { change: 'var(--amber-bright)', usage: 'var(--cyan-bright)', gap: 'var(--red-bright)', evolution: 'var(--green-bright)' };
+
+    let html = '';
+    for (const e of entries.slice(0, 60)) {
+      const domain = IO.data.skillDomain[e.skill] || '';
+      const color = domain ? (IO.config.domainColors[domain] || 'var(--border-dim)') : typeColors[e.type] || 'var(--border-dim)';
+      const dateStr = e.date ? new Date(e.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+      html += `<div class="io-signal-item" style="border-left-color:${color}">`;
+      html += `<span class="io-signal-icon">${e.icon}</span>`;
+      if (e.skill) html += `<span class="io-signal-skill">${IO.esc(e.skill)}</span>`;
+      html += `<span class="io-signal-action">${IO.esc(e.text)}</span>`;
+      html += `<span class="io-signal-time">${IO.esc(dateStr)}</span>`;
+      html += `</div>`;
+    }
+    feed.innerHTML = html;
+  }
+};
+
+/* ─── Bootstrap ─── */
+(async function() {
+  try {
+    await IO.data.loadAll();
+  } catch (e) {
+    document.querySelector('.io-grid').innerHTML =
+      `<div class="io-panel" style="grid-column:1/-1;text-align:center;padding:60px">
+        <div style="font-family:var(--font-display);color:var(--red-bright);margin-bottom:8px">DATA LOAD ERROR</div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-dim)">${e.message}</div>
+      </div>`;
+    return;
+  }
+
+  // Update header stats
+  document.getElementById('stat-collections').textContent = Object.keys(IO.data.collectionCounts).length;
+  document.getElementById('stat-docs').textContent = IO.data.totalDocs;
+
+  // Render all panels
+  IO.vitals.render();
+  IO.arch.render();
+  IO.ops.render();
+  IO.growth.render();
+  IO.changelog.render();
+})();
+
+/* ─── Theme Toggle ─── */
+const themeBtn = document.getElementById('btn-theme');
+const savedTheme = localStorage.getItem('io-theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  themeBtn.textContent = savedTheme === 'dark' ? 'light' : 'dark';
+}
+themeBtn.onclick = () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('io-theme', next);
+  themeBtn.textContent = next === 'dark' ? 'light' : 'dark';
+};
+
+/* ─── Refresh ─── */
+const refreshBtn = document.getElementById('btn-refresh');
+const refreshStatus = document.getElementById('refresh-status');
+refreshBtn.onclick = async () => {
+  refreshBtn.classList.add('refreshing');
+  refreshStatus.textContent = 'loading...';
+  refreshStatus.classList.add('show');
+
+  try {
+    await IO.data.loadAll();
+    document.getElementById('stat-collections').textContent = Object.keys(IO.data.collectionCounts).length;
+    document.getElementById('stat-docs').textContent = IO.data.totalDocs;
+    IO.vitals.render();
+    IO.arch.render();
+    IO.ops.render();
+    IO.growth.render();
+    IO.changelog.render();
+    refreshStatus.textContent = 'updated';
+  } catch (e) {
+    refreshStatus.textContent = 'error: ' + e.message;
+  }
+
+  refreshBtn.classList.remove('refreshing');
+  setTimeout(() => refreshStatus.classList.remove('show'), 2000);
+};
+
+/* ─── Observatory Dropdown Nav ─── */
+const navBtn = document.getElementById('obs-nav-btn');
+const dropdown = document.getElementById('obs-dropdown');
+navBtn.onclick = () => dropdown.classList.toggle('open');
+document.addEventListener('click', (e) => {
+  if (!document.getElementById('obs-nav').contains(e.target)) dropdown.classList.remove('open');
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') dropdown.classList.remove('open');
+});
+
+/* ─── Resize Handler ─── */
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    IO.arch.render();
+    IO.growth.renderChart();
+  }, 200);
+});
+
+/* ─── Real-time Firestore Listener ─── */
+(function setupLiveUpdates() {
+  // Wait for DB to be initialized, then listen for changes
+  const interval = setInterval(() => {
+    if (!IO.data._db) return;
+    clearInterval(interval);
+    const db = IO.data._db;
+
+    // Listen for skill collection changes
+    db.collection('skills').onSnapshot(() => {
+      IO.data.loadAll().then(() => {
+        document.getElementById('stat-collections').textContent = Object.keys(IO.data.collectionCounts).length;
+        document.getElementById('stat-docs').textContent = IO.data.totalDocs;
+        IO.vitals.render();
+        IO.ops.render();
+        IO.growth.render();
+        IO.changelog.render();
+        // Don't re-render arch on every snapshot to avoid flicker
+      });
+    }, () => {}); // Silently ignore errors
+  }, 500);
+})();
+</script>
+</body>
+</html>

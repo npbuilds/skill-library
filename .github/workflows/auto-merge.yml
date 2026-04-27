@@ -1,0 +1,76 @@
+name: Auto-merge maintenance PRs
+
+# Merges maint:green PRs after CI passes. Triggers on CI workflow
+# completion (not polling) — avoids check-visibility issues between
+# concurrent workflows.
+#
+# Flow: CI completes → this fires → finds the PR by SHA → checks
+# for maint:green label → merges if labeled.
+#
+# Autonomy tiers (from plan):
+#   conservative (v1): only maint:green auto-merges
+#   standard:          also maint:yellow (add to label grep)
+#   aggressive:        also maint:red (add to label grep)
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Auto-merge if green
+    runs-on: ubuntu-latest
+
+    # Only act when CI passed (not on failure, cancellation, etc.)
+    if: github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Find PR and check label
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          echo "CI passed for SHA: ${SHA}"
+
+          # Find open PR with this head SHA
+          PR=$(gh pr list --repo "${REPO}" --state open \
+            --json number,headRefOid \
+            --jq ".[] | select(.headRefOid == \"${SHA}\") | .number")
+
+          if [ -z "$PR" ]; then
+            echo "No open PR for this SHA (push to main, or PR already merged)"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Found PR #${PR}"
+
+          # Check for maint:green label
+          LABELS=$(gh pr view "${PR}" --repo "${REPO}" --json labels --jq '.labels[].name')
+          echo "Labels: ${LABELS}"
+
+          if echo "$LABELS" | grep -q "^maint:green$"; then
+            echo "PR #${PR} has maint:green label — will merge"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "number=${PR}" >> "$GITHUB_OUTPUT"
+          else
+            echo "PR #${PR} does not have maint:green label — skipping"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Merge PR
+        if: steps.pr.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ steps.pr.outputs.number }}
+        run: |
+          echo "Merging PR #${PR} (squash + delete branch)"
+          gh pr merge "${PR}" --repo "${REPO}" --squash --delete-branch
+          echo "✅ PR #${PR} auto-merged"

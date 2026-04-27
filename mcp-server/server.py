@@ -813,7 +813,20 @@ def update_skill_metadata(
         changes.append(f"status={status}")
 
     if parent is not None:
-        entry["parent"] = parent if parent != "" else None
+        old_parent = entry.get("parent")
+        new_parent = parent if parent != "" else None
+        entry["parent"] = new_parent
+        # Maintain the denormalized referenced_by index on both old and new parents.
+        # Without this the parent→child back-reference silently drifts — see the
+        # same pattern in add_skill_dependency (line ~2056) and scaffold_skill.
+        if old_parent and old_parent in skills and old_parent != new_parent:
+            refs = skills[old_parent].get("referenced_by", [])
+            if skill_name in refs:
+                refs.remove(skill_name)
+        if new_parent and new_parent in skills and old_parent != new_parent:
+            refs = skills[new_parent].setdefault("referenced_by", [])
+            if skill_name not in refs:
+                refs.append(skill_name)
         changes.append(f"parent={'(cleared)' if parent == '' else parent}")
 
     if not changes:
@@ -1486,6 +1499,16 @@ def scaffold_skill(
     skills[name] = entry
     domains_map[domain].append(name)
 
+    # Maintain the denormalized referenced_by index on the parent.
+    # Without this the parent silently loses track of its children — see
+    # the same pattern in add_skill_dependency (line ~2056).
+    if parent:
+        parent_entry = skills.get(parent)
+        if parent_entry is not None:
+            refs = parent_entry.setdefault("referenced_by", [])
+            if name not in refs:
+                refs.append(name)
+
     try:
         atomic_write_registry(registry)
     except OSError as e:
@@ -1585,6 +1608,34 @@ def add_reference_doc(
     entry.setdefault("metrics", {})["reference_files"] = new_count
     entry["last_modified"] = date.today().isoformat()
 
+    # ── Refresh health_status from validate-structure.sh ───────────────────
+    # Without this, adding refs that fix structural warnings leaves stale
+    # "warning" health flags from prior validations. Mirrors the convention
+    # in update_skill_content (line ~1834): warning if any warnings else healthy.
+    # Note: validate-structure.sh exits non-zero on critical issues but still
+    # emits JSON — we parse stdout regardless of exit code, unlike _run_script.
+    health_note = ""
+    try:
+        vresult = subprocess.run(
+            ["bash", str(_SCRIPTS_DIR / "validate-structure.sh"), str(refs_dir.parent)],
+            capture_output=True, text=True, timeout=15,
+        )
+        val = json.loads(vresult.stdout) if vresult.stdout.strip() else None
+    except (subprocess.TimeoutExpired, json.JSONDecodeError, OSError):
+        val = None
+    if val:
+        severities = {iss.get("severity") for iss in val.get("issues", [])}
+        if "critical" in severities:
+            new_health = "critical"
+        elif "warning" in severities:
+            new_health = "warning"
+        else:
+            new_health = "healthy"
+        old_health = entry.get("health_status")
+        entry["health_status"] = new_health
+        if old_health != new_health:
+            health_note = f"\n  Health: {old_health} → {new_health}"
+
     try:
         atomic_write_registry(registry)
     except OSError as e:
@@ -1593,6 +1644,7 @@ def add_reference_doc(
     return (
         f"Added '{filename}' to {skill_name}/references/{overwrite_note}.\n"
         f"  Reference files: {new_count}"
+        f"{health_note}"
     )
 
 

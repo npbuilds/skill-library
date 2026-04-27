@@ -931,6 +931,80 @@ body::after {
   .bottom-panels { grid-template-columns: 1fr; }
   .detail-panel { width: 100%; }
 }
+
+/* ═══════════════════════════════════════════════
+   OBSERVATORY DROPDOWN NAV (shared)
+   ═══════════════════════════════════════════════ */
+.obs-nav { position: relative; }
+.obs-nav-current {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cyan-bright);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: background 0.15s;
+  animation: logo-flicker 4s ease-in-out infinite;
+}
+.obs-nav-current span { color: var(--magenta-bright); }
+.obs-nav-current .obs-nav-arrow { color: var(--text-dim); font-size: 12px; margin-left: 4px; }
+.obs-nav-current:hover { background: var(--bg-panel-hover); }
+
+.obs-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-glow);
+  border-radius: 6px;
+  padding: 6px;
+  min-width: 260px;
+  z-index: 500;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  display: none;
+}
+.obs-dropdown.open { display: block; }
+
+.obs-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text-dim);
+  transition: background 0.1s, color 0.1s;
+}
+.obs-dropdown-item:hover { background: var(--bg-panel-hover); color: var(--text-bright); }
+.obs-dropdown-item.active { color: var(--text-bright); background: var(--cyan-glow); }
+
+.obs-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.obs-dropdown-name {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.obs-dropdown-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 1px;
+}
 </style>
 </head>
 <body>
@@ -958,7 +1032,23 @@ body::after {
 
 <!-- Header -->
 <header class="no-header">
-  <div class="no-logo">NEURAL <span>OBSERVATORY</span></div>
+  <div class="obs-nav" id="obs-nav">
+    <button class="obs-nav-current" id="obs-nav-btn">NEURAL <span>OBSERVATORY</span> <span class="obs-nav-arrow">▾</span></button>
+    <div class="obs-dropdown" id="obs-dropdown">
+      <a href="/" class="obs-dropdown-item active">
+        <span class="obs-dot" style="background:var(--cyan-bright)"></span>
+        <div><div class="obs-dropdown-name">Neural Observatory</div><div class="obs-dropdown-sub">Skill library visualization</div></div>
+      </a>
+      <a href="/observatory" class="obs-dropdown-item">
+        <span class="obs-dot" style="background:var(--magenta-bright)"></span>
+        <div><div class="obs-dropdown-name">Aesthetic Observatory</div><div class="obs-dropdown-sub">Inspiration board</div></div>
+      </a>
+      <a href="/infra" class="obs-dropdown-item">
+        <span class="obs-dot" style="background:var(--green-bright)"></span>
+        <div><div class="obs-dropdown-name">Infra Observatory</div><div class="obs-dropdown-sub">System architecture</div></div>
+      </a>
+    </div>
+  </div>
   <div class="no-stats-bar">
     <div><span class="stat-val" id="stat-skills">-</span><span class="stat-label">skills</span></div>
     <div><span class="stat-val" id="stat-domains">-</span><span class="stat-label">domains</span></div>
@@ -2373,7 +2463,8 @@ NO.palette = {
       investing: '\u{1F4C8}', sommelier: '\u{1F377}', writing: '\u{270F}\uFE0F',
       worldbuilding: '\u{1F30D}', 'game-theory': '\u{265F}\uFE0F', design: '\u{1F3A8}',
       'data-science': '\u{1F4CA}', infrastructure: '\u{2699}\uFE0F', research: '\u{1F50D}',
-      artifacts: '\u{2728}', meta: '\u{1F9E0}', philosophy: '\u{1F4AD}', neocortex: '\u{1F52C}'
+      artifacts: '\u{2728}', meta: '\u{1F9E0}', philosophy: '\u{1F4AD}', neocortex: '\u{1F52C}',
+      'world-history': '\u{1F3DB}\uFE0F', product: '\u{1F4E6}', 'biotech-venture': '\u{1F9EC}'
     };
     this.entries = [];
 
@@ -2777,6 +2868,17 @@ NO.coverage = {
         setTimeout(() => refreshStatus.classList.remove('show'), 3000);
       });
     }
+  });
+
+  // Observatory dropdown nav
+  const obsNavBtn = document.getElementById('obs-nav-btn');
+  const obsDropdown = document.getElementById('obs-dropdown');
+  obsNavBtn.onclick = () => obsDropdown.classList.toggle('open');
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('obs-nav').contains(e.target)) obsDropdown.classList.remove('open');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') obsDropdown.classList.remove('open');
   });
 
 })();
