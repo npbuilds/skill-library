@@ -306,6 +306,18 @@ a:hover { color: var(--text-bright); }
 }
 .ao-form-textarea { resize: vertical; min-height: 60px; }
 
+.ao-form-row {
+  display: flex;
+  gap: 10px;
+}
+.ao-form-col {
+  flex: 1;
+  min-width: 0;
+}
+.ao-form-col .ao-form-select {
+  width: 100%;
+}
+
 .ao-upload-actions {
   display: flex;
   gap: 8px;
@@ -748,6 +760,25 @@ a:hover { color: var(--text-bright); }
   color: var(--text-dim);
 }
 
+.ao-detail-meta-row {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.ao-medium-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  padding: 1px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-bright);
+  border: 1px solid var(--border-glow);
+  background: var(--bg-panel-hover);
+  display: inline-block;
+}
+
 .ao-detail-notes {
   font-family: var(--font-body);
   font-size: 13px;
@@ -944,6 +975,7 @@ a:hover { color: var(--text-bright); }
   </div>
   <div class="ao-controls">
     <a href="/" class="ao-btn" id="ao-dash-link">&larr; Dashboard</a>
+    <a href="/profile" class="ao-btn" style="border-color:rgba(170,90,206,0.5);color:#aa5ace" title="Aesthetic Profile — 17-axis fingerprint">◬ profile</a>
     <button class="ao-btn" id="ao-theme-toggle">&#x25D1;</button>
     <button class="ao-btn" id="ao-auth-btn">Sign In</button>
   </div>
@@ -971,13 +1003,26 @@ a:hover { color: var(--text-bright); }
           <div class="ao-form-label">Title</div>
           <input type="text" class="ao-form-input" id="ao-form-title" placeholder="Inspiration title">
         </div>
-        <div>
-          <div class="ao-form-label">Context</div>
-          <select class="ao-form-select" id="ao-form-context" title="Operational = tools, dashboards, data artifacts (cool, geometric, light). Contemplative = creative, worldbuilding, mood pieces (warm, organic, dark). Reference = neutral inspiration that could inform either.">
-            <option value="operational" title="Tools, dashboards, data artifacts — cool-toned, geometric, precise, light backgrounds">Operational</option>
-            <option value="contemplative" title="Creative work, worldbuilding, mood pieces — warm, organic, gestural, dark backgrounds">Contemplative</option>
-            <option value="reference" title="Neutral inspiration — texture, typography, patterns that could inform either register">Reference</option>
-          </select>
+        <div class="ao-form-row">
+          <div class="ao-form-col">
+            <div class="ao-form-label">Context</div>
+            <select class="ao-form-select" id="ao-form-context" title="Operational = tools, dashboards, data artifacts (cool, geometric, light). Contemplative = creative, worldbuilding, mood pieces (warm, organic, dark). Reference = neutral inspiration that could inform either.">
+              <option value="operational" title="Tools, dashboards, data artifacts — cool-toned, geometric, precise, light backgrounds">Operational</option>
+              <option value="contemplative" title="Creative work, worldbuilding, mood pieces — warm, organic, gestural, dark backgrounds">Contemplative</option>
+              <option value="reference" title="Neutral inspiration — texture, typography, patterns that could inform either register">Reference</option>
+            </select>
+          </div>
+          <div class="ao-form-col">
+            <div class="ao-form-label">Medium</div>
+            <select class="ao-form-select" id="ao-form-medium" title="What kind of image is this? Determines which dimensions Tengan focuses on during analysis.">
+              <option value="photography" title="Camera-captured images — photography, cinematography stills. Tengan analyzes: Light Character, Substrate/Grain, Atmosphere, composition, color grading">Photography</option>
+              <option value="digital-art" title="Digital painting, 3D renders, concept art, generative art. Tengan analyzes: Geometry, Precision, Chromatic Range, Sublime Scale, mood">Digital Art</option>
+              <option value="illustration" title="Hand-drawn, vector illustration, editorial art. Tengan analyzes: Precision, Geometry, Chromatic Range, Emotional Register">Illustration</option>
+              <option value="ui-design" title="Interface design, dashboards, app screens, web design. Tengan analyzes: Density, Geometry, Precision, Information Stance, typography">UI Design</option>
+              <option value="architecture" title="Built environments, spaces, interiors, exteriors. Tengan analyzes: Geometry, Depth, Light Character, Atmosphere, Sublime Scale">Architecture</option>
+              <option value="mixed-media" title="Collage, photo-illustration hybrids, multi-technique works. Tengan analyzes across all dimensions without genre bias">Mixed Media</option>
+            </select>
+          </div>
         </div>
         <div>
           <div class="ao-form-label">Tags (comma-separated)</div>
@@ -1404,6 +1449,7 @@ AO.upload = {
       // Build Firestore document
       const title = document.getElementById('ao-form-title').value.trim() || 'Untitled';
       const context = document.getElementById('ao-form-context').value;
+      const medium = document.getElementById('ao-form-medium').value;
       const tagsRaw = document.getElementById('ao-form-tags').value;
       const tags = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
       const notes = document.getElementById('ao-form-notes').value.trim();
@@ -1411,6 +1457,7 @@ AO.upload = {
       const docData = {
         title,
         context,
+        medium,
         tags,
         notes,
         fullURL,
@@ -1464,6 +1511,7 @@ AO.upload = {
     document.getElementById('ao-palette-preview').innerHTML = '';
     document.getElementById('ao-form-title').value = '';
     document.getElementById('ao-form-context').value = 'operational';
+    document.getElementById('ao-form-medium').value = 'photography';
     document.getElementById('ao-form-tags').value = '';
     document.getElementById('ao-form-notes').value = '';
     document.getElementById('ao-upload-submit').disabled = false;
@@ -1656,10 +1704,21 @@ AO.detail = {
     }
     html += `</div>`;
 
-    // Context
-    html += `<div class="ao-detail-section">`;
-    html += `<div class="ao-detail-label">Context</div>`;
-    html += `<span class="ao-context-badge ao-context-${AO.esc(context)}">${AO.esc(context)}</span>`;
+    // Context + Medium
+    const medium = item.medium || 'photography';
+    const mediumLabels = {
+      'photography': 'Photography',
+      'digital-art': 'Digital Art',
+      'illustration': 'Illustration',
+      'ui-design': 'UI Design',
+      'architecture': 'Architecture',
+      'mixed-media': 'Mixed Media',
+    };
+    html += `<div class="ao-detail-section ao-detail-meta-row">`;
+    html += `<div><div class="ao-detail-label">Context</div>`;
+    html += `<span class="ao-context-badge ao-context-${AO.esc(context)}">${AO.esc(context)}</span></div>`;
+    html += `<div><div class="ao-detail-label">Medium</div>`;
+    html += `<span class="ao-medium-badge">${AO.esc(mediumLabels[medium] || medium)}</span></div>`;
     html += `</div>`;
 
     // Tags
