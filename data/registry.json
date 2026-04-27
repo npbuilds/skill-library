@@ -29,10 +29,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 84,
       "depends_on": [],
       "referenced_by": [
         "cellar-service",
