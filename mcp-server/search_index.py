@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 HAS_BM25 = False
+HAS_NUMPY = False
 HAS_VECTORS = False
 
 try:
@@ -37,10 +38,18 @@ except ImportError:
 
 try:
     import numpy as np
-    from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
-    HAS_VECTORS = True
+    HAS_NUMPY = True
 except ImportError:
     np = None  # type: ignore[assignment]
+
+# sentence-transformers is the heavy dep (pulls PyTorch). Track it
+# independently of numpy so lighter callers — the atomic-write helper, the
+# unit tests — can use numpy even when the embedding stack is absent.
+try:
+    from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
+    HAS_VECTORS = HAS_NUMPY
+except ImportError:
+    pass
 
 
 # ---------------------------------------------------------------------------
