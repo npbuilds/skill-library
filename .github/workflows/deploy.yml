@@ -77,7 +77,7 @@ jobs:
             --platform=managed \
             --no-allow-unauthenticated \
             --max-instances=1 \
-            --memory=1Gi \
+            --memory=2Gi \
             --cpu=1 \
             --timeout=300 \
             --port=8080 \
