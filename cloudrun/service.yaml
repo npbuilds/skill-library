@@ -49,6 +49,14 @@ spec:
               value: "true"
             - name: MAINTENANCE_AUTONOMY
               value: conservative
+            # Force sentence-transformers / HF Hub to load the MiniLM
+            # weights from the image's local cache without a revision
+            # check. Required because Cloud Run cpu-throttling makes the
+            # revision-check round-trip slow enough to time out clients.
+            - name: HF_HUB_OFFLINE
+              value: "1"
+            - name: TRANSFORMERS_OFFLINE
+              value: "1"
             # Bot PAT for maintenance router bot PR operations.
             # Layer 2 live since commit 7d0081d.
             - name: GITHUB_BOT_PAT

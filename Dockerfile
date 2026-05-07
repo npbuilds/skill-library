@@ -42,4 +42,11 @@ WORKDIR /app/mcp-server
 ENV PORT=8080
 ENV MCP_REMOTE=true
 
+# HuggingFace + Transformers should not phone home at runtime. The MiniLM
+# weights are baked into the image (Step 7 above); without these flags,
+# sentence-transformers makes a revision-check API call to huggingface.co
+# on every model load, which times out under Cloud Run cpu-throttling.
+ENV HF_HUB_OFFLINE=1
+ENV TRANSFORMERS_OFFLINE=1
+
 CMD python server.py --remote --port $PORT
