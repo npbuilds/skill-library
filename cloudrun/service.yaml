@@ -37,7 +37,10 @@ spec:
           resources:
             limits:
               cpu: "1"
-              memory: "1Gi"
+              # 2Gi is needed by the sentence-transformers stack:
+              # PyTorch CPU runtime (~500MB resident) + MiniLM model
+              # (~250MB resident at inference) + Python/MCP base.
+              memory: "2Gi"
           env:
             - name: MCP_REMOTE
               value: "true"

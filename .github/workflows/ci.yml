@@ -22,6 +22,10 @@ jobs:
         run: |
           pip install pytest
           pip install -e mcp-server/
+          # numpy is needed by the search-index regression tests; the full
+          # [search] extras (PyTorch + sentence-transformers) are not required
+          # in CI and would add several minutes to install.
+          pip install numpy
 
       - name: Run unit tests
         working-directory: mcp-server

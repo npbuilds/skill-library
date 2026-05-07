@@ -10,14 +10,28 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends git ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Python deps:
-#   mcp  -> MCP protocol + FastMCP + transitive Starlette/Uvicorn
-#   httpx -> GitHub API calls from the maintenance router
+# Python deps. Split across layers so the heavy ML stack is cached
+# independently of the lightweight server deps.
+#
+#   mcp                  -> MCP protocol + FastMCP + transitive Starlette/Uvicorn
+#   httpx                -> GitHub API calls from the maintenance router
+#   anthropic            -> Claude API calls from kb-pipeline (T1 enrichment)
+#   rank-bm25, numpy     -> BM25 signal in HybridSearchIndex
+#   torch (CPU-only)     -> required by sentence-transformers; pulled from
+#                           PyTorch's CPU index to avoid ~600MB of CUDA wheels
+#   sentence-transformers -> vector signal in HybridSearchIndex (MiniLM)
 COPY mcp-server/pyproject.toml mcp-server/
-# mcp      → MCP protocol + FastMCP + transitive Starlette/Uvicorn
-# httpx    → GitHub API calls from the maintenance router
-# anthropic → Claude API calls from kb-pipeline (T1 enrichment)
-RUN pip install --no-cache-dir "mcp>=1.0.0" "httpx>=0.25" "anthropic>=0.30"
+RUN pip install --no-cache-dir \
+      "mcp>=1.0.0" "httpx>=0.25" "anthropic>=0.30" \
+      "rank-bm25>=0.2.2" "numpy>=1.24.0"
+RUN pip install --no-cache-dir \
+      --extra-index-url https://download.pytorch.org/whl/cpu \
+      "torch>=2.0,<3.0" \
+      "sentence-transformers>=2.2.0"
+
+# Pre-download the embedding model into the image so the first request after
+# a cold start does not pay a HuggingFace round-trip. ~80MB on disk.
+RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
 
 # Copy the full project (skills, data, scripts, mcp-server)
 COPY . .

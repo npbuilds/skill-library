@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 HAS_BM25 = False
+HAS_NUMPY = False
 HAS_VECTORS = False
 
 try:
@@ -37,10 +38,18 @@ except ImportError:
 
 try:
     import numpy as np
-    from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
-    HAS_VECTORS = True
+    HAS_NUMPY = True
 except ImportError:
     np = None  # type: ignore[assignment]
+
+# sentence-transformers is the heavy dep (pulls PyTorch). Track it
+# independently of numpy so lighter callers — the atomic-write helper, the
+# unit tests — can use numpy even when the embedding stack is absent.
+try:
+    from sentence_transformers import SentenceTransformer  # type: ignore[import-untyped]
+    HAS_VECTORS = HAS_NUMPY
+except ImportError:
+    pass
 
 
 # ---------------------------------------------------------------------------
@@ -187,7 +196,7 @@ class HybridSearchIndex:
                 cached_names = json.loads(names_path.read_text())
                 if cached_mtime == registry_mtime and cached_names == self._names:
                     return np.load(str(embed_path))
-            except (json.JSONDecodeError, ValueError, OSError):
+            except (json.JSONDecodeError, ValueError, OSError, EOFError):
                 pass
 
         # Rebuild embeddings
@@ -368,9 +377,14 @@ def _get_registry_mtime(data_dir: Path) -> float:
 
 
 def _atomic_write_npy(path: Path, arr: "np.ndarray") -> None:
+    # np.save auto-appends ".npy" if the path doesn't already end in it,
+    # which means a tempfile created with suffix=".npy.tmp" gets the array
+    # written to a *different* path (...".npy.tmp.npy") while os.replace
+    # then renames the empty stub. Use a ".npy" suffix so np.save writes
+    # in place.
     tmp = None
     try:
-        fd, tmp = tempfile.mkstemp(dir=path.parent, suffix=".npy.tmp")
+        fd, tmp = tempfile.mkstemp(dir=path.parent, suffix=".npy")
         os.close(fd)
         np.save(tmp, arr)
         os.replace(tmp, path)
