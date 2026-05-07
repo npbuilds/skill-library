@@ -1,10 +1,13 @@
 """Regression tests for HybridSearchIndex internals."""
 
+import os
+import time
+
 import pytest
 
 np = pytest.importorskip("numpy")
 
-from search_index import _atomic_write_npy  # noqa: E402
+from search_index import _atomic_write_npy, _get_registry_hash  # noqa: E402
 
 
 def test_atomic_write_npy_round_trip(tmp_path):
@@ -18,3 +21,38 @@ def test_atomic_write_npy_round_trip(tmp_path):
     assert target.stat().st_size > 0, f"target wrote 0 bytes; orphans: {list(tmp_path.iterdir())}"
     assert np.array_equal(np.load(target), arr)
     assert list(tmp_path.iterdir()) == [target], "stray tempfile left behind"
+
+
+def test_registry_hash_invariant_to_mtime(tmp_path):
+    """The cache key must depend on registry CONTENT, not its filesystem
+    mtime. Otherwise the embedding cache pre-built into a Docker image is
+    invalidated at runtime when overlayfs reports a different mtime."""
+    reg = tmp_path / "registry.json"
+    reg.write_text('{"skills": {}}')
+    h1 = _get_registry_hash(tmp_path)
+
+    # Mutate mtime without changing content (touch). The hash must not change.
+    later = time.time() + 3600
+    os.utime(reg, (later, later))
+    h2 = _get_registry_hash(tmp_path)
+
+    assert h1 == h2 != ""
+
+
+def test_registry_hash_changes_with_content(tmp_path):
+    """The cache key must invalidate when the registry's content changes."""
+    reg = tmp_path / "registry.json"
+    reg.write_text('{"skills": {"a": 1}}')
+    h1 = _get_registry_hash(tmp_path)
+
+    reg.write_text('{"skills": {"a": 2}}')
+    h2 = _get_registry_hash(tmp_path)
+
+    assert h1 != h2 and h1 and h2
+
+
+def test_registry_hash_missing_file_returns_empty(tmp_path):
+    """A missing registry returns an empty string — the cache check below
+    treats that as a miss, forcing a rebuild rather than silently using a
+    stale cache."""
+    assert _get_registry_hash(tmp_path) == ""

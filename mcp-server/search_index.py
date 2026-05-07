@@ -10,6 +10,7 @@ whichever signals are available.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import logging
 import os
@@ -182,19 +183,29 @@ class HybridSearchIndex:
         return status
 
     def _build_or_load_embeddings(self, corpus_texts: list[str]) -> Optional["np.ndarray"]:
-        """Load cached embeddings if registry hasn't changed, else rebuild."""
+        """Load cached embeddings if the registry's content hasn't changed,
+        else rebuild.
+
+        The cache is keyed on a SHA256 hash of registry.json, not its
+        filesystem mtime. mtime is unreliable across Docker image builds
+        because overlayfs may report different timestamps for the same
+        file inside a build container vs a running container — so an
+        mtime-keyed cache that's pre-built into the image won't be
+        considered valid at runtime. A content hash sidesteps that.
+        """
         embed_path = self.data_dir / "skill_embeddings.npy"
         names_path = self.data_dir / "skill_embed_names.json"
-        mtime_path = self.data_dir / "skill_embed_mtime.json"
+        # Filename retained for back-compat; payload is now {"hash": ...}.
+        key_path = self.data_dir / "skill_embed_mtime.json"
 
-        registry_mtime = _get_registry_mtime(self.data_dir)
+        registry_hash = _get_registry_hash(self.data_dir)
 
         # Check cache validity
-        if embed_path.exists() and names_path.exists() and mtime_path.exists():
+        if embed_path.exists() and names_path.exists() and key_path.exists():
             try:
-                cached_mtime = json.loads(mtime_path.read_text()).get("mtime", 0)
+                cached_hash = json.loads(key_path.read_text()).get("hash", "")
                 cached_names = json.loads(names_path.read_text())
-                if cached_mtime == registry_mtime and cached_names == self._names:
+                if cached_hash and cached_hash == registry_hash and cached_names == self._names:
                     return np.load(str(embed_path))
             except (json.JSONDecodeError, ValueError, OSError, EOFError):
                 pass
@@ -209,7 +220,7 @@ class HybridSearchIndex:
             # Persist atomically
             _atomic_write_npy(embed_path, embeddings)
             _atomic_write_json(names_path, self._names)
-            _atomic_write_json(mtime_path, {"mtime": registry_mtime})
+            _atomic_write_json(key_path, {"hash": registry_hash})
 
             return embeddings
         except Exception as e:
@@ -367,13 +378,19 @@ class HybridSearchIndex:
 # Persistence helpers
 # ---------------------------------------------------------------------------
 
-def _get_registry_mtime(data_dir: Path) -> float:
-    """Get registry.json mtime for cache invalidation."""
+def _get_registry_hash(data_dir: Path) -> str:
+    """Content hash of registry.json, used as the embedding cache key.
+
+    A content hash is robust across Docker image builds and overlay
+    filesystems, where mtime semantics are unreliable. If the registry
+    is missing or unreadable, returns the empty string (which will not
+    match any persisted hash, so the cache check fails closed).
+    """
     reg = data_dir / "registry.json"
     try:
-        return reg.stat().st_mtime
+        return hashlib.sha256(reg.read_bytes()).hexdigest()
     except OSError:
-        return 0.0
+        return ""
 
 
 def _atomic_write_npy(path: Path, arr: "np.ndarray") -> None:
