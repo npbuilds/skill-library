@@ -266,8 +266,13 @@ class HybridSearchIndex:
                     ranked_by_signal["bm25"] = bm25_ranked
 
         # Signal 2: Vector similarity
-        if self._embeddings is not None and self._model is not None:
+        # Lazy-load the model on first vector search. The cache-hit path in
+        # _build_or_load_embeddings sets self._embeddings without loading the
+        # model — but the model is needed here to encode the *query*.
+        if self._embeddings is not None and HAS_VECTORS:
             try:
+                if self._model is None:
+                    self._model = SentenceTransformer(_EMBED_MODEL_NAME)
                 q_embed = self._model.encode([query], show_progress_bar=False)
                 q_embed = np.array(q_embed, dtype=np.float32)
                 # Cosine similarity
