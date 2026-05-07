@@ -33,20 +33,36 @@ RUN pip install --no-cache-dir \
 # a cold start does not pay a HuggingFace round-trip. ~80MB on disk.
 RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
 
+# HuggingFace + Transformers should not phone home — at build time (the
+# embedding pre-build below) or at runtime. The MiniLM weights are baked
+# into the image; without these flags, sentence-transformers makes a
+# revision-check API call to huggingface.co on every model load, which
+# times out under Cloud Run cpu-throttling.
+ENV HF_HUB_OFFLINE=1
+ENV TRANSFORMERS_OFFLINE=1
+
 # Copy the full project (skills, data, scripts, mcp-server)
 COPY . .
 
 WORKDIR /app/mcp-server
 
+# Pre-build the embedding cache so the first MCP request after a cold
+# start doesn't pay the encoding cost (~30s under Cloud Run cpu-throttling
+# for 366 skills). Runtime invalidation via registry mtime check still
+# applies, so editing a skill description after this point regenerates
+# the cache on first request — but the common case (no description
+# changes between deploys) hits the cache and serves the first request
+# in ~1s.
+RUN python -c "import json; from pathlib import Path; \
+from search_index import HybridSearchIndex; \
+reg = json.loads(Path('/app/data/registry.json').read_text()); \
+idx = HybridSearchIndex(Path('/app/skills'), reg, Path('/app/data')); \
+status = idx.build(); \
+print(f'Pre-built index: {status}'); \
+assert status.get('vectors'), f'Embedding pre-build failed: {status}'"
+
 # Cloud Run sets PORT env var; default to 8080
 ENV PORT=8080
 ENV MCP_REMOTE=true
-
-# HuggingFace + Transformers should not phone home at runtime. The MiniLM
-# weights are baked into the image (Step 7 above); without these flags,
-# sentence-transformers makes a revision-check API call to huggingface.co
-# on every model load, which times out under Cloud Run cpu-throttling.
-ENV HF_HUB_OFFLINE=1
-ENV TRANSFORMERS_OFFLINE=1
 
 CMD python server.py --remote --port $PORT
