@@ -82,7 +82,7 @@ jobs:
             --timeout=300 \
             --port=8080 \
             --set-env-vars="MCP_REMOTE=true,MAINTENANCE_AUTONOMY=conservative,GITHUB_VAULT_REPO=npbuilds/skill-library-vault" \
-            --set-secrets="GITHUB_BOT_PAT=github-bot-pat:latest,ANTHROPIC_API_KEY=anthropic-api-key:latest" \
+            --set-secrets="GITHUB_BOT_PAT=github-bot-pat:latest,ANTHROPIC_API_KEY=anthropic-api-key:latest,MAINT_TRIGGER_TOKEN=maint-trigger-token:latest" \
             --quiet
 
       - name: Report deploy
