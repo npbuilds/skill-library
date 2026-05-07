@@ -75,7 +75,7 @@ jobs:
             --region="${{ vars.GCP_REGION }}" \
             --project="${{ vars.GCP_PROJECT_ID }}" \
             --platform=managed \
-            --no-allow-unauthenticated \
+            --allow-unauthenticated \
             --max-instances=1 \
             --memory=2Gi \
             --cpu=1 \

@@ -10,6 +10,9 @@
 #
 # Substitute PROJECT_ID, REGION, and AR_REPO before applying.
 
+# IAM policy: roles/run.invoker is bound to allUsers via the
+# `--allow-unauthenticated` flag in deploy.yml. The MCP server is intended
+# to be publicly invokable so Claude Code can reach it without an auth gate.
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
