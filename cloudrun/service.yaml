@@ -10,6 +10,9 @@
 #
 # Substitute PROJECT_ID, REGION, and AR_REPO before applying.
 
+# IAM policy: roles/run.invoker is bound to allUsers via the
+# `--allow-unauthenticated` flag in deploy.yml. The MCP server is intended
+# to be publicly invokable so Claude Code can reach it without an auth gate.
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
@@ -53,3 +56,12 @@ spec:
                 secretKeyRef:
                   key: latest
                   name: github-bot-pat
+            # Caller-side shared secret for /maint/* endpoints. Required
+            # because the service is `--allow-unauthenticated`; without
+            # this token check, anonymous callers could trigger the
+            # maintenance bot and use its PAT.
+            - name: MAINT_TRIGGER_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: maint-trigger-token
