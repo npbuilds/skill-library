@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path // \"\"') && echo \"$FILE\" | grep -q 'skills/.*/SKILL\\.md' && bash hooks/skill-file-watcher.sh \"$FILE\" || true",
+            "statusMessage": "Checking skill health..."
+          }
+        ]
+      }
+    ]
+  }
+}

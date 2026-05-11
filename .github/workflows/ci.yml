@@ -22,6 +22,10 @@ jobs:
         run: |
           pip install pytest
           pip install -e mcp-server/
+          # numpy is needed by the search-index regression tests; the full
+          # [search] extras (PyTorch + sentence-transformers) are not required
+          # in CI and would add several minutes to install.
+          pip install numpy
 
       - name: Run unit tests
         working-directory: mcp-server
@@ -37,6 +41,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Install validation dependencies
+        run: pip install pyyaml
 
       - name: Validate registry JSON
         run: |
@@ -162,3 +169,43 @@ jobs:
               exit 1
             fi
           fi
+
+      - name: Verify registry is in sync with SKILL.md files
+        # Catches drift that bypassed the post-write hook (commits from
+        # other branches, web UI edits, sessions outside this harness).
+        # `|| true` keeps `set -e` from firing on the substitution before
+        # we get to print the captured output for debugging.
+        run: |
+          output=$(python3 scripts/sync-registry.py 2>&1) || true
+          echo "$output"
+          if echo "$output" | grep -q "Registry is in sync"; then
+            echo "✓ Registry is in sync with SKILL.md files"
+          else
+            echo "::error::Registry has drifted from SKILL.md files. Run: python3 scripts/sync-registry.py --apply && python3 scripts/wire-all-domains.py --apply && python3 scripts/recalibrate_scores.py"
+            exit 1
+          fi
+
+      - name: Run full diagnostic — fail on HIGH or MEDIUM issues
+        # CRITICAL is allowed because 11 lateral cycles in DEPENDENCY_MAP
+        # are intentionally deferred for editorial review. HIGH and MEDIUM
+        # represent drift that should be auto-resolvable by the sync
+        # scripts, so any non-zero count is a real regression.
+        run: |
+          output=$(python3 scripts/full_diagnostic_scan.py 2>&1) || true
+          echo "$output"
+          high=$(echo "$output" | awk '/^[[:space:]]*HIGH[[:space:]]*:/ {print $NF}')
+          medium=$(echo "$output" | awk '/^[[:space:]]*MEDIUM[[:space:]]*:/ {print $NF}')
+          high=${high:-0}
+          medium=${medium:-0}
+          if [ "$high" -gt 0 ] || [ "$medium" -gt 0 ]; then
+            echo "::error::Diagnostic regressions: HIGH=$high MEDIUM=$medium. See log above for details."
+            exit 1
+          fi
+          # Sanity-check: the diagnostic must have actually produced output.
+          # If it crashed (e.g., import error) the awk produces empty results
+          # and we'd silently pass — guard against that.
+          if ! echo "$output" | grep -q "^Severity totals"; then
+            echo "::error::Diagnostic did not run to completion — see output above"
+            exit 1
+          fi
+          echo "✓ Diagnostic clean: HIGH=0 MEDIUM=0"

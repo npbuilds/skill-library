@@ -19,6 +19,7 @@ Conservative autonomy (v1 default): PRs open with label `maint:green`
 and wait for manual merge. Auto-merge workflow comes in a later slice.
 """
 
+import hmac
 import json
 import logging
 import os
@@ -49,6 +50,8 @@ GITHUB_REPO = os.environ.get("GITHUB_BOT_REPO", "npbuilds/skill-library")
 VAULT_REPO = os.environ.get("GITHUB_VAULT_REPO", "npbuilds/skill-library-vault")
 BASE_BRANCH = os.environ.get("GITHUB_BASE_BRANCH", "main")
 BOT_PAT_ENV = "GITHUB_BOT_PAT"
+MAINT_TOKEN_ENV = "MAINT_TRIGGER_TOKEN"
+MAINT_TOKEN_HEADER = "X-Maint-Token"
 BOT_EMAIL = os.environ.get("BOT_EMAIL", "skill-library-bot@users.noreply.github.com")
 BOT_NAME = os.environ.get("BOT_NAME", "skill-library-bot")
 KB_REFRESH_LIMIT = int(os.environ.get("KB_REFRESH_LIMIT", "5"))
@@ -108,6 +111,28 @@ def _require_pat() -> str | JSONResponse:
             status_code=503,
         )
     return pat
+
+
+def _check_maint_token(request: Request) -> JSONResponse | None:
+    """Verify the caller presented the shared maintenance token.
+
+    Returns None when the request is authorized; a 401/503 JSONResponse
+    when it is not. /maint/* endpoints exist on a service that may be
+    publicly reachable, so caller-side auth is required even though the
+    server's bot PAT is not exposed.
+    """
+    expected = os.environ.get(MAINT_TOKEN_ENV) or ""
+    if not expected:
+        # Fail closed: if the server has no token configured, refuse all
+        # /maint/* calls rather than silently allowing them.
+        return JSONResponse(
+            {"error": f"{MAINT_TOKEN_ENV} not set — maintenance endpoints disabled"},
+            status_code=503,
+        )
+    presented = request.headers.get(MAINT_TOKEN_HEADER, "")
+    if not hmac.compare_digest(presented, expected):
+        return JSONResponse({"error": "unauthorized"}, status_code=401)
+    return None
 
 
 def _subprocess_error(e: subprocess.CalledProcessError) -> JSONResponse:
@@ -244,6 +269,9 @@ async def _health(_request: Request) -> JSONResponse:
 async def _recalibrate(request: Request) -> JSONResponse:
     """Run recalibrate_scores.py in a fresh clone. If scores drift,
     commit to a maintenance branch, push, and open a labeled PR."""
+    auth_err = _check_maint_token(request)
+    if auth_err is not None:
+        return auth_err
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
@@ -296,6 +324,9 @@ async def _recalibrate(request: Request) -> JSONResponse:
 async def _validate(request: Request) -> JSONResponse:
     """Spot-check 10 random skills with validate-structure.sh.
     Returns a JSON report. Does NOT open a PR (observation only)."""
+    auth_err = _check_maint_token(request)
+    if auth_err is not None:
+        return auth_err
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
@@ -350,6 +381,9 @@ async def _validate(request: Request) -> JSONResponse:
 async def _snapshot(request: Request) -> JSONResponse:
     """Run snapshot_evolution.py to append time-series data.
     Opens a maint:green PR if new entries were appended."""
+    auth_err = _check_maint_token(request)
+    if auth_err is not None:
+        return auth_err
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
@@ -400,6 +434,9 @@ async def _sentinel(request: Request) -> JSONResponse:
 
     This is a lightweight stand-in for the full Sentinel Prime skill
     invocation which requires Agent SDK (Layer 4)."""
+    auth_err = _check_maint_token(request)
+    if auth_err is not None:
+        return auth_err
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
@@ -455,6 +492,9 @@ async def _kb_refresh(request: Request) -> JSONResponse:
     Enriched vault notes are pushed to skill-library-vault directly
     (not via PR — the vault repo doesn't have CI gating).
     """
+    auth_err = _check_maint_token(request)
+    if auth_err is not None:
+        return auth_err
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
