@@ -1,0 +1,220 @@
+{
+  "timestamp": "2026-05-11T09:00:10.093163+00:00",
+  "total_active": 389,
+  "total_deprecated": 1,
+  "health_breakdown": {
+    "healthy": 389
+  },
+  "low_score_count": 21,
+  "low_score_skills": [
+    {
+      "name": "stakes-assessor",
+      "score": 47
+    },
+    {
+      "name": "polya-method",
+      "score": 48
+    },
+    {
+      "name": "wicked-vs-tame",
+      "score": 48
+    },
+    {
+      "name": "ackoff-mess",
+      "score": 48
+    },
+    {
+      "name": "minto-scqa",
+      "score": 48
+    },
+    {
+      "name": "kahneman-framing",
+      "score": 48
+    },
+    {
+      "name": "statement-grader",
+      "score": 49
+    },
+    {
+      "name": "xy-detector",
+      "score": 49
+    },
+    {
+      "name": "answerability-tester",
+      "score": 49
+    },
+    {
+      "name": "falsifiability-checker",
+      "score": 49
+    },
+    {
+      "name": "scope-bounder",
+      "score": 49
+    },
+    {
+      "name": "bluf-shaper",
+      "score": 49
+    },
+    {
+      "name": "scqa-formatter",
+      "score": 49
+    },
+    {
+      "name": "executive-distiller",
+      "score": 49
+    },
+    {
+      "name": "cursed-speech",
+      "score": 49
+    },
+    {
+      "name": "problem-typology",
+      "score": 49
+    },
+    {
+      "name": "audience-classifier",
+      "score": 49
+    },
+    {
+      "name": "root-vs-symptom-tagger",
+      "score": 49
+    },
+    {
+      "name": "frame-rotator",
+      "score": 49
+    },
+    {
+      "name": "inversion-tool",
+      "score": 49
+    }
+  ],
+  "stale_count": 0,
+  "stale_skills": [],
+  "orphan_count": 54,
+  "orphans": [
+    "amplifier",
+    "biomarker-enrichment",
+    "capability-radar",
+    "character-design",
+    "clinical-differentiator",
+    "cmc-risk-assessor",
+    "condition-designer",
+    "constraint-sculptor",
+    "cost-estimator",
+    "deal-economics",
+    "diligence-scorecard",
+    "emergence-detector",
+    "endpoint-selection",
+    "environmental-storytelling",
+    "experience-weaver",
+    "exposure-strategist",
+    "feedback-architect",
+    "frontier-antenna",
+    "game-mechanics",
+    "hybrid-forms"
+  ],
+  "domain_summary": {
+    "_meta": {
+      "count": 1,
+      "avg_score": 65.0,
+      "min_score": 65,
+      "max_score": 65
+    },
+    "artifacts": {
+      "count": 3,
+      "avg_score": 73.7,
+      "min_score": 69,
+      "max_score": 81
+    },
+    "binding-vow": {
+      "count": 22,
+      "avg_score": 48.8,
+      "min_score": 47,
+      "max_score": 52
+    },
+    "biotech-venture": {
+      "count": 32,
+      "avg_score": 61.1,
+      "min_score": 56,
+      "max_score": 75
+    },
+    "data-science": {
+      "count": 14,
+      "avg_score": 76.1,
+      "min_score": 68,
+      "max_score": 84
+    },
+    "design": {
+      "count": 17,
+      "avg_score": 70.3,
+      "min_score": 66,
+      "max_score": 83
+    },
+    "game-theory": {
+      "count": 22,
+      "avg_score": 74.3,
+      "min_score": 66,
+      "max_score": 83
+    },
+    "infrastructure": {
+      "count": 11,
+      "avg_score": 70.9,
+      "min_score": 50,
+      "max_score": 78
+    },
+    "investing": {
+      "count": 47,
+      "avg_score": 70.2,
+      "min_score": 64,
+      "max_score": 89
+    },
+    "neocortex": {
+      "count": 13,
+      "avg_score": 74.2,
+      "min_score": 67,
+      "max_score": 81
+    },
+    "philosophy": {
+      "count": 29,
+      "avg_score": 69.8,
+      "min_score": 66,
+      "max_score": 78
+    },
+    "product": {
+      "count": 31,
+      "avg_score": 57.5,
+      "min_score": 51,
+      "max_score": 79
+    },
+    "research": {
+      "count": 5,
+      "avg_score": 77.4,
+      "min_score": 69,
+      "max_score": 89
+    },
+    "sommelier": {
+      "count": 36,
+      "avg_score": 68.9,
+      "min_score": 64,
+      "max_score": 80
+    },
+    "world-history": {
+      "count": 51,
+      "avg_score": 66.5,
+      "min_score": 62,
+      "max_score": 79
+    },
+    "worldbuilding": {
+      "count": 25,
+      "avg_score": 71.9,
+      "min_score": 60,
+      "max_score": 84
+    },
+    "writing": {
+      "count": 30,
+      "avg_score": 70.7,
+      "min_score": 58,
+      "max_score": 79
+    }
+  }
+}
