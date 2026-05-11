@@ -368,11 +368,14 @@ def _get_registry_mtime(data_dir: Path) -> float:
 
 
 def _atomic_write_npy(path: Path, arr: "np.ndarray") -> None:
+    # np.save() appends ".npy" if the path arg is a string lacking that
+    # suffix, which silently writes to a different file than os.replace
+    # later renames. Pass an open file object so the suffix is left alone.
     tmp = None
     try:
         fd, tmp = tempfile.mkstemp(dir=path.parent, suffix=".npy.tmp")
-        os.close(fd)
-        np.save(tmp, arr)
+        with os.fdopen(fd, "wb") as f:
+            np.save(f, arr)
         os.replace(tmp, path)
     except OSError:
         if tmp:
