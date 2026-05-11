@@ -17,8 +17,10 @@ This script:
 import json
 import os
 import re
+import subprocess
 import sys
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -26,6 +28,20 @@ SKILLS_DIR = PROJECT_ROOT / "skills"
 REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
 
 SKIP_DIRS = {".obsidian", "references", "agents", "examples"}
+
+
+@lru_cache(maxsize=1)
+def _tracked_files() -> frozenset[str]:
+    """POSIX-relative paths tracked by git (index + HEAD). Empty set if git fails."""
+    try:
+        out = subprocess.check_output(
+            ["git", "-C", str(PROJECT_ROOT), "ls-files"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return frozenset()
+    return frozenset(out.splitlines())
 
 # ── Metadata extraction ────────────────────────────────────────────────
 
@@ -157,8 +173,18 @@ def compute_metrics(text: str, skill_dir: Path) -> dict:
             section_count += 1
 
     def _count(subdir: str) -> int:
+        # Count only git-tracked files so a local apply with untracked files in this dir doesn't drift against CI's clean checkout.
         d = skill_dir / subdir
-        return sum(1 for _ in d.iterdir() if _.is_file() and _.name != ".gitkeep") if d.is_dir() else 0
+        if not d.is_dir():
+            return 0
+        tracked = _tracked_files()
+        if not tracked:  # git unavailable — fall back to raw filesystem count
+            return sum(1 for f in d.iterdir() if f.is_file() and f.name != ".gitkeep")
+        return sum(
+            1 for f in d.iterdir()
+            if f.is_file() and f.name != ".gitkeep"
+            and f.relative_to(PROJECT_ROOT).as_posix() in tracked
+        )
 
     # Token estimate is bytes/4 (matches analyze-skill.sh's wc -c, which
     # counts bytes). UTF-8 multi-byte chars (em-dashes, curly quotes) need
