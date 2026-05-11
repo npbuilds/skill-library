@@ -1,6 +1,8 @@
 # Archon Macro Narrative
 *Last updated: 2026-04-27*
 
+> **Update cadence (as of 2026-05-11):** Append on conviction shift, not daily. Each entry: date, what changed, why, regime context. Briefing-driven daily updates are deactivated alongside `archon/SKILL.md` v2.1's conversational pivot.
+
 ## Current Regime Assessment
 
 **Stagflation — Scenario B Upper Bound, Iran Counter-Offer Layer.** WTI rose to $96-97 (Brent $105-106) over the weekend April 25-27, breaking through the Scenario B mid-range and pressing toward upper-bound territory. The IRGC has now seized 6 vessels in 7 days (MSC Francesca + Epaminondas added April 25-26) — tolerance loop deepening. **Iran initiated a new diplomatic proposal on April 27** (reopen Hormuz + delay nuclear talks via Pakistan mediation) — the first Iran-side counter-offer of the cycle. Trump cancelled the Witkoff/Kushner Pakistan trip on April 25 with "all the cards" framing, suggesting low probability of acceptance pre-FOMC. Scenario B remains base case at 50%; Scenario C at 35% (escalation if Trump publicly rejects offer aggressively); Scenario A at 7% (low probability acceptance pre-FOMC).
