@@ -90,6 +90,14 @@ mcp = FastMCP(
     transport_security=TransportSecuritySettings(
         enable_dns_rebinding_protection=not REMOTE_MODE,
     ),
+    # Cloud Run has cpu-throttling enabled, which stalls the long-lived task
+    # group + SSE streams that stateful streamable-http relies on between
+    # requests — clients see the connection hang after `initialize`. Stateless
+    # mode makes each request a fresh transport with no cross-request state,
+    # which is the FastMCP-recommended config for serverless platforms.
+    # json_response avoids SSE framing entirely (simple JSON request/response).
+    stateless_http=REMOTE_MODE,
+    json_response=REMOTE_MODE,
 )
 
 
@@ -2167,6 +2175,12 @@ if __name__ == "__main__":
         mcp.settings.transport_security = TransportSecuritySettings(
             enable_dns_rebinding_protection=False,
         )
+        # Switch streamable-http into stateless / JSON-response mode so the
+        # transport survives Cloud Run cpu-throttling. Settings are read when
+        # the session manager is lazily constructed inside streamable_http_app(),
+        # which happens during mcp.run(...) below — so this still takes effect.
+        mcp.settings.stateless_http = True
+        mcp.settings.json_response = True
 
     # Resolve transport: explicit flag wins, otherwise infer from mode
     transport = args.transport or ("streamable-http" if (args.remote or REMOTE_MODE) else "stdio")

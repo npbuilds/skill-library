@@ -18,6 +18,14 @@
         "destination": "/observatory.html"
       },
       {
+        "source": "/profile",
+        "destination": "/profile.html"
+      },
+      {
+        "source": "/profile.html",
+        "destination": "/profile.html"
+      },
+      {
         "source": "/infra",
         "destination": "/infra.html"
       },

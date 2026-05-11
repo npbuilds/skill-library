@@ -1,0 +1,270 @@
+{
+  "generatedAt": "2026-04-27T12:07:18.901851+00:00",
+  "lastUpdated": "2026-04-15",
+  "totalDimensions": 17,
+  "totalOutputsTracked": 2,
+  "categories": [
+    "Spatial",
+    "Chromatic",
+    "Form",
+    "Temporal",
+    "Emotional",
+    "Photographic",
+    "Discovered"
+  ],
+  "aggregates": {
+    "avgConfidence": 0.246,
+    "highConfidence": 0,
+    "mediumConfidence": 13,
+    "lowConfidence": 4
+  },
+  "summary": "**Operational register:** Cool-toned, muted, geometric, precise, data-dense, light backgrounds. Clinical futurism with a weathered patina. (Archon dashboards, tooling, data artifacts.)\n**Contemplative register:** Warm-dominant, high-contrast, organic, gestural, atmosphere-forward, dark backgrounds. Sublime cosmic expressionism. (Worldbuilding, creative work, mood pieces.)\n**Shared core:** Serious emotional register, intentional authored aesthetics (never generic), information density (even \"sparse\" compositions are chromatically dense), and a preference for work that rewards sustained attention.",
+  "activeTendencies": [
+    "**Serious emotional register** (Emotional: 0.25, confidence: 0.35) \u2014 strongest signal. Awe-serious and data-serious are both valid. Never whimsical, never frivolous.",
+    "**Geometric precision** (Geometry: 0.28, Precision: 0.22, confidence: 0.30) \u2014 lean toward mechanical, but organic forms now explicitly in range for contemplative contexts",
+    "**Cool palette default** (Temperature: 0.38, confidence: 0.30) \u2014 cool for operational, warm accepted for sublime/cosmic",
+    "**Context-dependent contrast** (Contrast: 0.45, confidence: 0.30) \u2014 muted for operational, high-contrast for contemplative",
+    "**Sublime appetite** (Sublime Scale: 0.75, confidence: 0.30) \u2014 strong pull toward cosmic/vast/numinous imagery",
+    "**Bimodal light/dark** (Light/Dark: 0.35, confidence: 0.30) \u2014 light for tools, dark for atmosphere"
+  ],
+  "dimensions": [
+    {
+      "name": "Density",
+      "category": "Spatial",
+      "poles": [
+        "Sparse/Minimal",
+        "Rich/Layered"
+      ],
+      "position": 0.68,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "How much visual information occupies the canvas. Few elements with generous whitespace vs. many elements creating texture and complexity.",
+      "evidence": "Archon dashboard \u2014 dense data presentation with gauges, tables, sector heat maps, yield curves, SVG charts. Accepted and praised without density complaints. Cosmic flame artwork \u2014 sparse void with concentrated energy mass. User absorbed this as valid alongside dense dashboard layouts. Suggests bimodal density preference: rich for operational, sparse-concentrated for contemplative.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Symmetry",
+      "category": "Spatial",
+      "poles": [
+        "Symmetric/Balanced",
+        "Asymmetric/Dynamic"
+      ],
+      "position": 0.4,
+      "confidence": 0.23,
+      "dataPoints": 1,
+      "measures": "Whether compositions favor equilibrium or deliberate imbalance. Centered, mirrored arrangements vs. off-axis, tension-creating layouts.",
+      "evidence": "Grid-based dashboard layout with symmetric gauge row and balanced card columns. Slightly structured/ordered preference.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Depth",
+      "category": "Spatial",
+      "poles": [
+        "Flat/Planar",
+        "Dimensional/Layered"
+      ],
+      "position": 0.62,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Use of visual depth cues \u2014 shadows, overlapping planes, parallax, blur, z-axis layering vs. single-plane, flat design.",
+      "evidence": "Subtle panel layering, CRT vignette overlay, gauge ring depth, but not heavy shadow/parallax. Moderate depth. Cosmic flame artwork \u2014 extreme atmospheric depth via color layering, luminous bloom effects, and figure-ground scale differential. Deeper than dashboard work.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Temperature",
+      "category": "Chromatic",
+      "poles": [
+        "Cool",
+        "Warm"
+      ],
+      "position": 0.38,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Dominant color temperature across outputs. Blues/greens/violets vs. reds/oranges/ambers/earth tones.",
+      "evidence": "Light mode palette is blue-gray backgrounds (#e8ecf2), deep teal accents (#1a7070). Cool-dominant with warm accent pops (amber, red used for data signaling only). Cosmic flame artwork \u2014 warm-dominant (red/orange/magenta core) accepted for sublime/cosmic contexts. Cool remains default for operational work. Bimodal.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Chromatic Range",
+      "category": "Chromatic",
+      "poles": [
+        "Monochromatic",
+        "Polychromatic"
+      ],
+      "position": 0.65,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "How many distinct hues appear in a typical output. Single-hue with value variation vs. full-spectrum color use.",
+      "evidence": "Multi-hue but restrained \u2014 teal, amber, magenta, red, green all present but muted and purposeful (each color signals different data categories). Cosmic flame artwork \u2014 full spectrum within the flame form (red through orange through magenta through blue-violet). More polychromatic than dashboard palette but still purposeful, not chaotic.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Contrast",
+      "category": "Chromatic",
+      "poles": [
+        "Subtle/Muted",
+        "Bold/High-Impact"
+      ],
+      "position": 0.45,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Value contrast and saturation levels. Soft, close-valued palettes vs. dramatic light/dark and vivid saturation.",
+      "evidence": "\"Faded neon\" was the explicit brief. Light mode uses muted, desaturated accent colors against soft backgrounds. User praised this. Not washed out, but deliberately restrained. Cosmic flame artwork \u2014 maximum contrast (pure white silhouette against pure black void, saturated flame mass). Accepted as valid alongside muted/faded neon. Context-dependent: high contrast for sublime, muted for operational.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Geometry",
+      "category": "Form",
+      "poles": [
+        "Geometric/Rectilinear",
+        "Organic/Flowing"
+      ],
+      "position": 0.28,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Shape language. Hard edges, straight lines, circles/rectangles vs. freeform curves, natural forms, irregular boundaries.",
+      "evidence": "Dashboard uses grid layout, rectangular cards, circular gauge rings, straight-line charts, bar charts. Strongly geometric vocabulary. Cosmic flame artwork \u2014 entirely organic: gestural flame strokes, flowing energy forms, no straight lines. Absorbed as counterweight to geometric default. Organic forms now part of vocabulary for contemplative/creative contexts.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Precision",
+      "category": "Form",
+      "poles": [
+        "Mechanical/Exact",
+        "Expressive/Handmade"
+      ],
+      "position": 0.22,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Finish quality. Pixel-perfect, machine-made feel vs. visible hand, intentional imperfection, textures that suggest physical media.",
+      "evidence": "Monospace typography (Share Tech Mono, Orbitron), pixel-precise alignment, consistent spacing tokens, data-table precision. Very mechanical. Cosmic flame artwork \u2014 maximally expressive. Visible brushstrokes, irregular edges, hand-directed energy. Accepted alongside mechanical precision. Suggests bimodal: mechanical for tools, expressive for creative/worldbuilding.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Motion Feel",
+      "category": "Temporal",
+      "poles": [
+        "Static/Calm",
+        "Kinetic/Energetic"
+      ],
+      "position": 0.55,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Presence and intensity of animation and motion. Still compositions vs. persistent movement, particles, transitions, animated state.",
+      "evidence": "Subtle animation \u2014 header line pulse, CSS digital rain, logo flicker. Present but understated. User praised the overall design including these subtle motions. Cosmic flame artwork \u2014 implied kinetic energy through directional brushwork and flame dynamics. Static image but reads as frozen motion. Suggests appetite for more dynamic motion than dashboard's subtle pulses.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Temporal Register",
+      "category": "Temporal",
+      "poles": [
+        "Retro/Classic",
+        "Futuristic/Novel"
+      ],
+      "position": 0.55,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "The era the aesthetic evokes. Vintage palettes, established patterns, nostalgia vs. bleeding-edge techniques, speculative forms, unfamiliar materiality.",
+      "evidence": "User explicitly requested \"cyberpunk but lived in. Vintage feel.\" CRT scanlines + Orbitron font = retro-futuristic blend. Not purely retro, not purely futuristic \u2014 a synthesis. Cosmic flame artwork \u2014 timeless rather than era-specific. Neither retro nor futuristic \u2014 mythic. Consistent with retro-futuristic blend but adds a \"timeless/mythic\" register.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Emotional Register",
+      "category": "Emotional",
+      "poles": [
+        "Serious/Austere",
+        "Playful/Whimsical"
+      ],
+      "position": 0.25,
+      "confidence": 0.35,
+      "dataPoints": 2,
+      "measures": "The emotional tone conveyed by visual choices. Formal, restrained, dignified vs. lighthearted, surprising, delightful.",
+      "evidence": "Investment intelligence dashboard \u2014 serious data presentation with atmospheric styling. Not austere (has personality), but firmly on the serious side. Cosmic flame artwork \u2014 serious/sublime. Reinforces the serious pole with a new shade: not austere, not data-serious, but *awe*-serious. Strongest confirmation of this dimension.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Information Stance",
+      "category": "Emotional",
+      "poles": [
+        "Data-Forward",
+        "Atmosphere-Forward"
+      ],
+      "position": 0.45,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Priority balance between conveying information and creating a feeling. Clarity and legibility first vs. mood and immersion first.",
+      "evidence": "Dashboard is data-first (14 API feeds, tables, charts, metrics) but wrapped in strong atmospheric cyberpunk theming. Data leads, atmosphere supports. Cosmic flame artwork \u2014 fully atmosphere-forward. No data, pure mood. Accepted alongside data-forward dashboard. Bimodal: data-first for operational, atmosphere-first for creative.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Light Character",
+      "category": "Photographic",
+      "poles": [
+        "Soft/Diffuse",
+        "Hard/Directional"
+      ],
+      "position": 0.5,
+      "confidence": 0.0,
+      "dataPoints": 0,
+      "measures": "Quality and direction of light in an image. Soft ambient diffusion (overcast, shade, fill light, blue hour glow) vs. harsh directional light with strong shadows (noon sun, rim/backlight, spotlight, hard flash). Dimensional landmarks: golden hour (0.65 \u2014 moderately directional, warm), blue hour (0.30 \u2014 soft, cool), harsh noon (0.90 \u2014 hard overhead), rim/backlight (0.80 \u2014 dramatic directional), studio key light (0.70), available light (variable, 0.40-0.60).",
+      "evidence": "No data points yet. Awaiting first inspiration analysis via Tengan.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Substrate/Grain",
+      "category": "Photographic",
+      "poles": [
+        "Clean Digital",
+        "Film/Analog"
+      ],
+      "position": 0.5,
+      "confidence": 0.0,
+      "dataPoints": 0,
+      "measures": "Surface texture quality of the image. Pristine pixel-perfect digital rendering vs. visible grain, noise, analog artifacts, and film stock character. Dimensional landmarks: clean digital sensor (0.10), medium format film (0.45 \u2014 fine grain, rich tonality), Portra 400 (0.55 \u2014 warm shift, moderate grain), Tri-X 400 (0.75 \u2014 bold contrast, strong grain), high ISO noise (0.70 \u2014 gritty digital), CRT/analog display texture (0.80), cross-processed (0.85 \u2014 shifted colors + heavy grain).",
+      "evidence": "No data points yet. However, existing profile shows affinity for CRT textures, \"vintage feel\", and \"faded neon\" \u2014 suggesting potential lean toward analog in contemplative contexts, with clean digital for operational. Awaiting first Tengan analysis.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Atmosphere/Mood",
+      "category": "Photographic",
+      "poles": [
+        "Clear/Bright",
+        "Moody/Dramatic"
+      ],
+      "position": 0.5,
+      "confidence": 0.0,
+      "dataPoints": 0,
+      "measures": "Environmental atmospheric conditions and their contribution to image mood. Clean, well-lit, clear environments vs. suffused with haze, shadow, weather, and dramatic atmospheric phenomena. Dimensional landmarks: bright clear day (0.15), golden hour warmth (0.40), overcast diffusion (0.45), urban haze (0.55), fog/mist (0.75), rain with neon reflections (0.85), heavy shadow + smoke (0.90).",
+      "evidence": "No data points yet. Existing profile signals: \"weathered\", \"lived in\", cyberpunk theming suggest lean toward moody. But operational register prefers clarity. Bimodal potential. Awaiting first Tengan analysis.",
+      "discoveredDate": null
+    },
+    {
+      "name": "Light/Dark Preference",
+      "category": "Discovered",
+      "poles": [
+        "Light Backgrounds",
+        "Dark Backgrounds"
+      ],
+      "position": 0.35,
+      "confidence": 0.3,
+      "dataPoints": 2,
+      "measures": "Preference for background luminance. Light, airy backgrounds vs. dark, immersive backgrounds.",
+      "evidence": "User was presented with both dark cyberpunk and light mode. Explicitly praised light mode: \"i really love the light background design and theme and colors and everything.\" Cosmic flame artwork \u2014 deep black background. User absorbed this willingly. Light mode remains preferred for operational/dashboard contexts, but dark backgrounds are now valid for atmospheric/sublime work. Bimodal.",
+      "discoveredDate": "2026-03-28"
+    },
+    {
+      "name": "Sublime Scale",
+      "category": "Discovered",
+      "poles": [
+        "Intimate/Human-Scale",
+        "Cosmic/Sublime"
+      ],
+      "position": 0.75,
+      "confidence": 0.3,
+      "dataPoints": 1,
+      "measures": "Appetite for awe-scale imagery \u2014 vast cosmic spaces, overwhelming forces, the numinous. Whether compositions feel contained and personal or infinite and overwhelming.",
+      "evidence": "User engaged with cosmic flame artwork featuring a lone figure dwarfed by a massive energy form in a void. Immediately connected it to Cosmere, Cowboy Bebop gate sequences, and requested absorption. The sublime is a distinct aesthetic appetite.",
+      "discoveredDate": "2026-04-15"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
-# Claude Code local settings
-.claude/
+# Claude Code: settings.json is shared (tracked); everything else local
+.claude/*
+!.claude/settings.json
 
 # OS files
 .DS_Store
@@ -16,6 +17,10 @@ firebase-debug.log
 
 # ── Data ──
 data/backups/
+# Embedding cache rebuilt on registry change (see mcp-server/search_index.py)
+data/skill_embeddings.npy
+data/skill_embed_names.json
+data/skill_embed_mtime.json
 
 # ── Firebase / App ──
 app/.firebase/
