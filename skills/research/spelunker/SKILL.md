@@ -58,6 +58,8 @@ If the user doesn't specify depth, default to `standard`. Upgrade to `deep` if e
 
 If unsure, default to investigative. If early decomposition reveals the question is actually generative (most "claims" are design choices rather than verifiable assertions), pivot to `agentic-researcher` at that point.
 
+6. **Pre-check vault (optional)** — if the user has a connected Obsidian vault, before starting Phase 2 decomposition, call `vault-reader` to surface any prior verified investigation. Run `operation: text-search pattern: <key-terms-from-restated-question>` and/or `operation: filter where: {tags: [<topic>]}` against the default folder scope. Surface results with `confidence: likely` or `confidence: confirmed` to the user. If the user confirms the prior investigation is sufficient, skip Phase 2 and cite the surfaced note(s) in Phase 6; otherwise proceed to Phase 2. Treat `Matched: 0` as a finding ("no prior coverage in vault"), not an error.
+
 ### Phase 2 — Decompose
 
 Route to `claim-decomposer` to break the question into atomic verifiable claims.

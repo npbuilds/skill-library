@@ -1,0 +1,194 @@
+{
+  "_snapshot_date": "2026-04-15",
+  "_saved_at": "2026-04-15T08:29:01.335677",
+  "_afternoon_updated_at": "2026-04-15T16:00:00.000000",
+  "_version": "v2",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "subtype": "compound_blockade_deal_signal",
+      "confidence": 0.88,
+      "growth_score": 0.12,
+      "inflation_score": 0.88,
+      "description": "Compound stagflation: US naval blockade active + China 125% tariffs. AFTERNOON UPDATE: VP Vance 'ball in Iran's court' + WH considering talks + Iran reportedly open = deal probability rising sharply. WTI fell to $92 (vs morning est $100-104).",
+      "note": "Scenario distribution shifting toward deal (A). Blockade coercion appears to be working faster than expected. Bimodal distribution compressing toward A. New prediction: iran_talks_resume_week_of_apr15 (0.58).",
+      "scenario_a_probability": 0.38,
+      "scenario_b_probability": 0.35,
+      "scenario_c_probability": 0.18,
+      "scenario_d_probability": 0.09
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 6967.38,
+          "ytd_pct": 1.78,
+          "month_pct": 4.0
+        },
+        "Nasdaq": {
+          "price": 23639.08,
+          "ytd_pct": 1.71,
+          "month_pct": 5.65
+        },
+        "Russell 2000": {
+          "price": 2705.67,
+          "ytd_pct": 9.02,
+          "month_pct": 8.08
+        }
+      },
+      "breadth": {
+        "RSP": {
+          "price": 199.66,
+          "ytd_pct": 4.67
+        },
+        "breadth_divergence": 2.55,
+        "signal": "equal_weight_leading_compressed"
+      },
+      "note": "S&P GREEN for year (+1.78%) during active US naval blockade \u2014 Escalate-to-de-escalate premium fully priced"
+    },
+    "assets": {
+      "VIX": {
+        "spot": 18.36,
+        "3m": 20.82,
+        "6m": 22.77,
+        "term_structure": "contango",
+        "spread": 2.46
+      },
+      "gold_GLD": {
+        "price": 445.09,
+        "ytd_pct": 12.31,
+        "month_pct": -3.33,
+        "spot_est": 4650
+      },
+      "oil_USO": {
+        "price": 123.85,
+        "ytd_pct": 79.08,
+        "month_pct": 7.67,
+        "wti_est": "100-104",
+        "wti_afternoon_actual": 92,
+        "afternoon_note": "WTI fell to ~$92 intraday (-7% to -12% vs morning estimate) on Iran deal optimism. VP Vance signals + WH confirms considering talks + Iran open to Islamabad. Blockade structural floor thesis temporarily challenged."
+      },
+      "bitcoin": {
+        "price": 74210,
+        "ytd_pct": -15.2,
+        "month_pct": 4.21
+      },
+      "DXY": {
+        "price": 98.11,
+        "ytd_pct": -0.18,
+        "month_pct": -1.61
+      },
+      "TLT": {
+        "price": 87.21,
+        "ytd_pct": 1.18,
+        "month_pct": 0.4
+      },
+      "HYG": {
+        "price": 80.5,
+        "ytd_pct": 1.31,
+        "month_pct": 1.81
+      }
+    },
+    "yields": {
+      "2Y": 3.806,
+      "10Y": 4.256,
+      "30Y": 4.868,
+      "3M": 3.612,
+      "spread_10y2y": 0.45,
+      "spread_10y3m": 0.644,
+      "curve_shape": "flattening",
+      "note": "Curve flattening from 0.53 to 0.45 \u2014 bond market pricing growth fear over inflation"
+    },
+    "sectors": {
+      "Energy": {
+        "ytd": 25.96,
+        "month": -2.74
+      },
+      "Materials": {
+        "ytd": 15.2,
+        "month": 5.75
+      },
+      "Industrials": {
+        "ytd": 12.07,
+        "month": 4.68
+      },
+      "Utilities": {
+        "ytd": 9.62,
+        "month": -0.98
+      },
+      "Real Estate": {
+        "ytd": 8.36,
+        "month": 2.68
+      },
+      "Consumer Staples": {
+        "ytd": 5.47,
+        "month": -3.59
+      },
+      "Technology": {
+        "ytd": 2.89,
+        "month": 6.73
+      },
+      "Consumer Disc": {
+        "ytd": -2.29,
+        "month": 3.99
+      },
+      "Communications": {
+        "ytd": -0.67,
+        "month": 1.39
+      },
+      "Healthcare": {
+        "ytd": -3.46,
+        "month": -1.04
+      },
+      "Financials": {
+        "ytd": -4.97,
+        "month": 5.57
+      }
+    },
+    "geopolitical": {
+      "overall_risk": "critical_active_blockade",
+      "hormuz": {
+        "status": "us_naval_blockade_active",
+        "blockade_start": "2026-04-13",
+        "us_policy": "Block all maritime traffic entering/exiting Iranian ports",
+        "iran_response": "Threatened new warfare forms; not yet military response",
+        "uk_position": "Refused to join blockade",
+        "oil_floor": "US military doctrine now provides structural oil floor",
+        "note": "Ceasefire framework superseded by US naval blockade"
+      },
+      "trump_signal": "Iran wants to talk (April 14) — escalate-to-de-escalate dynamic active",
+      "china_arms": "Still unverified; Trump threatened +50% tariffs if confirmed",
+      "afternoon_update": "VP Vance April 15: 'ball is in Iran's court; whether we have further conversations depends on Tehran'. White House confirms 'considering further talks'. Iran reportedly open to restarting Islamabad negotiations as soon as this week. WTI $92 market-pricing deal probability. Scenario A raised to 38%. New prediction: iran_talks_resume_week_of_apr15 (0.58)."
+    },
+    "bank_earnings": {
+      "GS": {
+        "eps_actual": 17.55,
+        "eps_est": 16.41,
+        "beat_pct": 6.9,
+        "trading_revenue": 5.3,
+        "status": "RESOLVED_CORRECT"
+      },
+      "JPM": {
+        "eps_actual": 5.94,
+        "eps_est": 5.46,
+        "beat_pct": 8.8,
+        "nii_guidance": 103,
+        "nii_prior": 104.5,
+        "stock_reaction": -3.0
+      },
+      "Citi": {
+        "revenue": "record_decade",
+        "profit_jump_pct": 42,
+        "equity_underwriting": "+64%"
+      },
+      "WFC": {
+        "nii_guidance": "disappointing"
+      },
+      "BAC": {
+        "status": "probable_beat",
+        "eps_est": 1.01,
+        "yoy_growth": 11.3,
+        "note": "Released 6:45 AM ET April 15. Web confirmation pending. Sector pattern (GS, JPM, Citi all beat) + 14-consecutive-quarter streak = probable beat. Prediction bac_q1_beats_today marked probable_correct. BIZD short closed on this outcome."
+      }
+    }
+  }
+}

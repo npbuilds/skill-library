@@ -1,0 +1,203 @@
+{
+  "_snapshot_date": "2026-04-19",
+  "_saved_at": "2026-04-19T08:00:00.000000",
+  "_version": "v2",
+  "_prior_snapshot": "2026-04-18",
+  "_briefing_day": "Sunday",
+  "_data_quality": "weekend_stale_markets_fresh_geo",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "subtype": "transitional_deal_resolution_pending",
+      "confidence": 0.72,
+      "growth_score": 0.16,
+      "inflation_score": 0.68,
+      "description": "Stagflation transitional — deal resolution pending. Pakistan claimed 'major breakthrough' on Iran nuclear program (April 19). Round 2 Islamabad talks Monday April 20. Ceasefire expires April 21 — 48-hour binary. Gold flat through 5 de-escalation signals = tariff-inflation bid dominant. Warsh dovish nuance reduces Theme 9 conviction. S&P futures +0.5% weekend.",
+      "scenario_a_probability": 0.62,
+      "scenario_b_probability": 0.20,
+      "scenario_c_probability": 0.08,
+      "scenario_d_probability": 0.10,
+      "key_signals": {
+        "pakistan_nuclear_breakthrough": "Pakistani mediators claim 'major breakthrough' on Iran nuclear program; Round 2 talks Monday April 20; enrichment moratorium gap may have narrowed",
+        "ceasefire_expiry": "April 21 — 48-hour binary; deal or Hormuz re-closure risk",
+        "hormuz_status": "OPEN — conditional on Lebanon ceasefire (through ~April 27); US port blockade remains active",
+        "gold_flat_on_deescalation": "Gold ~$4,879 flat through 5 consecutive deal-optimism signals = tariff-inflation bid empirically confirmed as dominant driver",
+        "sp_futures_up": "S&P futures 7,161.50 (+0.5% from 7,126 Friday close); deal premium extending into weekend",
+        "warsh_dovish_nuance": "New signals suggest Warsh may be more Trump-accommodative; Theme 9 conviction H → M",
+        "best_week_since_nov25": "S&P best weekly performance since November 2025; week ended at record 7,126"
+      }
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 7126.06,
+          "futures_est": 7161.50,
+          "ytd_pct": 3.35,
+          "weekly_pct": 4.5,
+          "note": "RECORD; best week since Nov 2025; deal premium fully priced; R/R inverted for new longs"
+        },
+        "VIX": {
+          "spot": 17.48,
+          "fomc_days_remaining": 9,
+          "note": "Deal premium; FOMC 9d = structural vol floor at ~15; deal announcement could push to 14-15 briefly"
+        }
+      }
+    },
+    "assets": {
+      "VIX": {
+        "spot": 17.48,
+        "3m_est": 19.0,
+        "term_structure": "contango_estimated",
+        "fomc_days_remaining": 9,
+        "deal_dip_level": "14-15 on confirmed deal",
+        "fomc_floor": 15
+      },
+      "gold_spot": {
+        "price": 4879,
+        "24h_change": 0,
+        "24h_pct": 0.0,
+        "ytd_pct": 16.4,
+        "target_5000_gap": 121,
+        "deal_floor_est": "4500-4650 (tariff-inflation bid independent of war premium)",
+        "note": "FLAT on de-escalation weekend — DUAL-BID CONFIRMED as permanent regime feature; war premium $150-250/oz; tariff-inflation bid $300-400/oz"
+      },
+      "oil_WTI": {
+        "price_est": 82.5,
+        "24h_change": 0,
+        "note": "Flat from Friday crash; physical floor from -9.13M barrel draw; deal → $72-78; failed deal → $90-95 snap-back",
+        "hormuz_status": "OPEN (conditional — Lebanon ceasefire 10d from April 17)",
+        "port_blockade_status": "ACTIVE"
+      },
+      "treasury_10y": {
+        "yield_estimated": 4.12,
+        "prior_estimated": 4.12,
+        "change_estimated": 0.0,
+        "note": "Stable at oil-crash-driven level; Warsh medium-term target: 4.40-4.70; stop for TLT short: 4.0%"
+      },
+      "tlt_short": {
+        "entry_10y_yield": 4.26,
+        "current_10y_est": 4.12,
+        "unrealized_pct": -0.5,
+        "conviction": "MEDIUM",
+        "stop": "10Y close below 4.0%",
+        "warsh_nuance": "Dovish Warsh reduces structural no-cut conviction; FOMC April 28-29 is the test"
+      }
+    },
+    "macro": {
+      "fed_funds": "3.50-3.75%",
+      "fomc_next": "2026-04-28/29",
+      "fomc_hold_probability": 0.94,
+      "warsh_nomination": {
+        "status": "confirmed",
+        "historical_record": "hawkish (2010 dissent)",
+        "new_nuance": "May be more Trump-accommodative than record implies",
+        "conviction_level": "MEDIUM (down from HIGH)",
+        "implication": "Structural no-cut for 2026 — but degree of hawkishness uncertain until FOMC"
+      },
+      "gdpnow_q1": "negative",
+      "retail_sales_mar": {
+        "yoy_pct": 6.59,
+        "mom_pct": 0.4,
+        "driver": "IRS tax refunds avg $3,521 (+11.1% YoY) — one-time; expires Q2"
+      }
+    },
+    "geopolitical": {
+      "hormuz": {
+        "strait_status": "OPEN (conditional)",
+        "port_blockade_status": "ACTIVE",
+        "opening_condition": "Linked to Lebanon ceasefire (10 days from April 17, ~expiry April 27)"
+      },
+      "iran_deal": {
+        "round": 2,
+        "status": "negotiators_arriving_islamabad_sunday",
+        "talks_scheduled": "Monday April 20",
+        "pakistan_claim": "Major breakthrough on nuclear program",
+        "enrichment_moratorium_gap": {
+          "us_position": "20 years",
+          "iran_position": "5 years",
+          "possible_compromise": "10-12 years (unverified)"
+        },
+        "ceasefire_expiry": "April 21 (conditional; Lebanon ceasefire independent ~April 27)"
+      },
+      "lebanon": {
+        "ceasefire_status": "ACTIVE",
+        "started": "2026-04-17T17:00:00 ET",
+        "expiry_est": "2026-04-27"
+      }
+    },
+    "portfolio": {
+      "equity_est": 1095000,
+      "equity_pct": 9.5,
+      "deployed_pct": 35,
+      "positions": 3,
+      "trades_today": [],
+      "open_positions": [
+        {
+          "symbol": "VIX",
+          "direction": "long",
+          "lots": [
+            {"entry": 10.5, "pnl_pct": 66, "note": "original half-position; dominant P&L driver"},
+            {"entry": 18.36, "pnl_pct": -5, "size_pct": 0.5, "note": "small add Apr 15; within defined risk"}
+          ],
+          "status": "intact",
+          "conviction": "HIGH",
+          "stop": "VIX closes below 15 on confirmed deal + blockade lifted + mine removal",
+          "fomc_days": 9
+        },
+        {
+          "symbol": "GLD",
+          "direction": "long",
+          "size": "75%",
+          "entry_approx": 4750,
+          "current": 4879,
+          "pnl_pct": 2.7,
+          "status": "strong",
+          "conviction": "HIGH",
+          "stop": "sustained close below 4500",
+          "deal_action": "reduce to 50% on confirmed formal deal announcement",
+          "target": 5000,
+          "target_gap_pct": 2.5
+        },
+        {
+          "symbol": "TLT",
+          "direction": "short",
+          "entry_10y": 4.26,
+          "current_10y_est": 4.12,
+          "pnl_pct": -0.5,
+          "status": "temporarily_uncomfortable",
+          "conviction": "MEDIUM",
+          "stop": "10Y closes below 4.0% on Scenario D",
+          "note": "Oil crash headwind; Warsh dovish nuance adds uncertainty; medium-term thesis (4.40-4.70 target) intact"
+        }
+      ]
+    },
+    "predictions": {
+      "new_today": [
+        "deal_signed_by_april21 (0.35, resolve April 21)",
+        "gold_holds_4700_on_deal (0.72, resolve April 28)"
+      ],
+      "key_upgrades": [
+        "iran_talks_resume: 0.88 -> 0.93",
+        "hormuz_remains_open_april22: 0.82 -> 0.90",
+        "iran_deal_before_fomc: 0.48 -> 0.55",
+        "gold_target_5000: 0.72 -> 0.73"
+      ],
+      "key_downgrades": [
+        "vix_above25_prefomc: 0.20 -> 0.15",
+        "f1173bd0: 0.45 -> 0.38",
+        "april_cpi_compounds: 0.70 -> 0.68",
+        "20751b47: 0.60 -> 0.57",
+        "fed_hawk_escalation: 0.45 -> 0.40"
+      ],
+      "resolving_soon": [
+        "iran_talks_resume_week_of_apr15: resolves April 22 — tracking CORRECT (0.93)",
+        "hormuz_remains_open_april22: resolves April 22 — tracking CORRECT (0.90)",
+        "deal_signed_by_april21: resolves April 21 (new; 0.35)",
+        "iran_deal_before_fomc: resolves April 27 (0.55)",
+        "fed_hawk_escalation: resolves April 27 (0.40)",
+        "vix_prefomc_catalyst: resolves April 29 (0.28)",
+        "vix_above25_prefomc: resolves April 27 (0.15)"
+      ]
+    }
+  }
+}

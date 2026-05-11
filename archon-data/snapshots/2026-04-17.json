@@ -1,0 +1,145 @@
+{
+  "_snapshot_date": "2026-04-17",
+  "_saved_at": "2026-04-17T08:00:00.000000",
+  "_version": "v2",
+  "_prior_snapshot": "2026-04-15",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "subtype": "compound_blockade_talks_arranging",
+      "confidence": 0.88,
+      "growth_score": 0.14,
+      "inflation_score": 0.86,
+      "description": "Compound stagflation: US naval blockade active (13 ships stopped) + China 125% tariffs. Second-round Iran talks being arranged; Pakistani mediator in Tehran. S&P 500 at record 7,041. Gold at $4,829 (+3.9% in 48h; EM selling thesis invalidated). Kevin Warsh nominated as Powell replacement (May 2026) — hawkish Fed succession. Retail Sales +6.59% YoY (tax-refund-propped; Q2 cliff identified).",
+      "scenario_a_probability": 0.42,
+      "scenario_b_probability": 0.33,
+      "scenario_c_probability": 0.16,
+      "scenario_d_probability": 0.09,
+      "key_signals": {
+        "warsh_nomination": "Kevin Warsh nominated as Fed chair (May 2026); historically hawkish; extends no-cut posture structurally",
+        "retail_sales": "+0.4% MoM / +6.59% YoY; tax refunds +11.1% YoY propping; Q2 cliff risk",
+        "iran_blockade": "US Navy stopped 13 ships in Gulf of Oman; second-round talks being arranged",
+        "gold_reversal": "$4,650 (Apr 15 PM) -> $4,829 (Apr 16); EM selling thesis invalidated in 36h"
+      }
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 7041.28,
+          "ytd_pct": 2.15,
+          "intraday_high": 7051.23,
+          "note": "NEW RECORD HIGH — closed at 7,041 on April 16"
+        },
+        "VIX": {
+          "spot": 17.81,
+          "open_apr16": 18.73,
+          "note": "Deal premium sustaining; opened Apr 16 at 18.73, closed 17.81"
+        }
+      },
+      "breadth": {
+        "note": "Prior RSP data held; no new breadth data"
+      }
+    },
+    "assets": {
+      "VIX": {
+        "spot": 17.81,
+        "3m_est": 19.5,
+        "term_structure": "contango_estimated",
+        "apr16_open": 18.73,
+        "apr16_close": 17.81
+      },
+      "gold_spot": {
+        "price": 4829,
+        "48h_change": 179,
+        "48h_pct": 3.9,
+        "from_prior": 4650,
+        "target_5000_gap": 171,
+        "note": "EM central bank selling thesis invalidated; dual-bid structure confirmed"
+      },
+      "oil_WTI": {
+        "range_apr16": "90.54-95.00",
+        "settlement_est": 92.5,
+        "inventory_draw_bbl": -9130000,
+        "inventory_expected_bbl": 154000,
+        "inventory_surprise": "MAJOR BULLISH — 9.28M barrel miss",
+        "note": "Deal cap preventing full spike to $95+; physical demand robust"
+      },
+      "bitcoin": {
+        "price_est": 74300,
+        "note": "Flat; no safe-haven bid"
+      }
+    },
+    "macro": {
+      "fed_funds": "3.50-3.75%",
+      "fomc_next": "2026-04-28/29",
+      "fomc_hold_probability": 0.938,
+      "fomc_hike_probability": 0.062,
+      "year_end_hike_probability": 0.52,
+      "warsh_nomination": {
+        "status": "nominated",
+        "start_date": "2026-05 (est.)",
+        "historical_stance": "hawkish (2010 dissent in favor of tighter policy)",
+        "implication": "Structural no-cut posture for remainder of 2026; rate cut probability approaching zero"
+      },
+      "retail_sales_march": {
+        "mom": 0.4,
+        "yoy": 6.59,
+        "core_mom": 0.41,
+        "core_yoy": 7.05,
+        "driver": "IRS tax refunds avg $3,521 (+11.1% YoY)",
+        "signal": "BORROWED CONSUMPTION — Q2 tailwind expires; tariff COGS appears simultaneously"
+      },
+      "yields_estimated": {
+        "10Y": 4.26,
+        "2Y": 3.81,
+        "spread_10y2y": 0.45
+      }
+    },
+    "geopolitical": {
+      "blockade": {
+        "status": "active",
+        "ships_stopped": 13,
+        "interdiction_zone": "Gulf of Oman (not Strait itself)",
+        "iran_response": "Diplomatic; threatened counter-measures but not yet military",
+        "talks_status": "Second-round being arranged; Pakistani mediator visited Tehran April 15",
+        "white_house": "Feels good about prospects; racing to deal before ceasefire window closes"
+      },
+      "china": {
+        "tariff_rate": "125% on US goods (per simulation narrative)",
+        "trump_threat": "+50% if arms-to-Iran confirmed",
+        "arms_status": "Unverified by State/IC",
+        "summit": "May 14-15 Beijing (still on calendar)"
+      }
+    },
+    "portfolio": {
+      "equity_est": 1095000,
+      "equity_pct": 9.5,
+      "deployed_pct": 43,
+      "positions": 5,
+      "trades_today": [
+        {
+          "action": "open",
+          "symbol": "TLT_short",
+          "direction": "short",
+          "conviction": "MEDIUM",
+          "allocation_pct": 8,
+          "rationale": "Warsh nomination + retail resilience + oil floor = no rate cut 2026; 10Y toward 4.60-4.80%",
+          "stop": "10Y closes below 4.0%"
+        },
+        {
+          "action": "conviction_upgrade",
+          "symbol": "GLD",
+          "from": "MEDIUM",
+          "to": "HIGH",
+          "rationale": "EM selling thesis invalidated; dual-bid structure (war + tariff inflation); $5,000 in range"
+        }
+      ]
+    },
+    "predictions": {
+      "resolved_today": ["sp500_record_april (CORRECT)", "bac_q1_beats_today (CORRECT)"],
+      "new_today": ["iran_deal_before_fomc_apr28 (0.32)", "gold_5000_by_may15 (0.60)"],
+      "key_upgrades": ["gold_target_5000: 0.52 -> 0.65", "iran_talks_resume: 0.58 -> 0.72", "20751b47: 0.55 -> 0.62"],
+      "key_downgrades": ["vix_above25_prefomc: 0.52 -> 0.38", "35d668b3: 0.28 -> 0.15", "sp500_reversal_apr10: 0.22 -> 0.10"]
+    }
+  }
+}
