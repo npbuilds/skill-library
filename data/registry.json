@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-05-11T15:42:04Z",
+  "last_scan": "2026-05-11T16:48:13Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -19485,6 +19485,63 @@
           "date": "2026-05-11",
           "action": "created",
           "note": "Built per skill-lab/vault-writer-handoff-v1.md (vault-bridge suite, v1)"
+        }
+      ],
+      "parent": null
+    },
+    "vault-reader": {
+      "name": "vault-reader",
+      "description": "Read structured artifacts from an Obsidian vault following the vault's CLAUDE.md frontmatter schema. Supports four operations: slug lookup, frontmatter filter (with `where` predicates validated aga...",
+      "location": "skills/infrastructure/vault-reader/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "name": "vault-reader",
+        "path": "/Users/nirav/Desktop/Claude Playground/Skill Building/skills/infrastructure/vault-reader/SKILL.md",
+        "word_count": 1625,
+        "body_words": 1507,
+        "description_words": 98,
+        "section_count": 4,
+        "reference_files": 3,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 128,
+        "estimated_tokens_body": 2548,
+        "estimated_tokens_total": 2676
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-05-11T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 50,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 50,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:infrastructure",
+        "layer:action",
+        "suite:vault-bridge"
+      ],
+      "created": "2026-05-11",
+      "last_modified": "2026-05-11",
+      "changelog": [
+        {
+          "date": "2026-05-11",
+          "action": "created",
+          "note": "Built per skill-lab/vault-reader-handoff-v1.md (vault-bridge suite, v1)"
         }
       ],
       "parent": null
