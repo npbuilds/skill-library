@@ -7,6 +7,17 @@ import requests
 
 from .cache import get_cached, set_cached
 
+_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Connection": "keep-alive",
+}
+
 
 def _clean_html(s: str) -> str:
     """Remove HTML tags from a string."""
@@ -23,8 +34,7 @@ def get_insider_buys() -> dict:
 
     try:
         url = "https://openinsider.com/screener?s=&o=&pl=100&ph=&ll=&lh=&fd=30&fdr=&td=0&tdr=&feession=&cession=&sidTabbedPanels1=tab-insider-buy-702&cnt=25&page=1"
-        headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"}
-        resp = requests.get(url, headers=headers, timeout=15)
+        resp = requests.get(url, headers=_HEADERS, timeout=8)
 
         if resp.status_code == 200:
             html = resp.text
@@ -60,6 +70,10 @@ def get_insider_buys() -> dict:
         else:
             result["error"] = f"OpenInsider returned {resp.status_code}"
 
+    except requests.exceptions.ConnectionError:
+        result["error"] = "OpenInsider unreachable (connection refused or DNS failure)"
+    except requests.exceptions.Timeout:
+        result["error"] = "OpenInsider request timed out after 8s"
     except Exception as e:
         result["error"] = str(e)
 
@@ -75,5 +89,7 @@ def get_insider_buys() -> dict:
 
     result["total_transactions"] = len(result["transactions"])
 
-    set_cached("insider_buys", result)
+    # Only cache successful results — don't serve stale errors for 6h
+    if "error" not in result:
+        set_cached("insider_buys", result)
     return result
