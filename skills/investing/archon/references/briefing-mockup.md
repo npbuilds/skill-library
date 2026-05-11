@@ -1,4 +1,7 @@
 # ARCHON DAILY BRIEFING
+
+> **DEPRECATED (2026-05-11):** Retained as reference for the v2 briefing format, but no longer referenced by `archon/SKILL.md` v2.1. Current mode is conversational analysis — see `conversational-loop.md`. If briefings return, this mockup remains a useful structural template.
+
 ## Wednesday, April 9, 2026
 
 **Regime: STAGFLATION** (High confidence) | **Risk posture: DEFENSIVE** | **Portfolio: +2.3% since inception**
