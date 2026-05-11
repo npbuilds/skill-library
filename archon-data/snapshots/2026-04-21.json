@@ -1,0 +1,192 @@
+{
+  "snapshot_date": "2026-04-21",
+  "generated": "2026-04-21T00:00:00Z",
+  "regime": {
+    "classification": "stagflation_escalation_reassertion",
+    "confidence": 0.74,
+    "prior_classification": "stagflation_transitional_deal_resolution_pending",
+    "prior_confidence": 0.72,
+    "change_driver": "48h collapse: Scenario A (62% → 10%); Scenario C (8% → 55%); IRGC ship attacks + Touska seizure + Iran refused talks + ceasefire expiry Wednesday"
+  },
+  "market_data": {
+    "sp500": {
+      "close_apr20": 7109.14,
+      "change_pct_apr20": -0.24,
+      "futures_apr21": 7123.0,
+      "futures_change_pct_apr21": 0.2,
+      "ytd_pct": null,
+      "note": "Deal premium overhang ~400-500pts; Q1 earnings 86% beat rate providing floor; target on Scenario C: 6650-6800"
+    },
+    "vix": {
+      "level": 19.08,
+      "change_pct_1d": 9.15,
+      "prior_level": 17.48,
+      "note": "Escalation repricing; FOMC T-7 days = structural floor; Scenario C confirmation = 23-28 target"
+    },
+    "wti_crude": {
+      "price": 88.09,
+      "change_pct_1d": 6.5,
+      "prior_price": 82.59,
+      "note": "Coiled spring released; inventory draw -9.13M bbl + Hormuz re-closure; XLE re-entry trigger at $90"
+    },
+    "gold": {
+      "price": 4782.14,
+      "change_pct_1d": -0.81,
+      "change_48h": -97.0,
+      "prior_price": 4879.0,
+      "note": "OIL-RATE CHANNEL DISCOVERY: war premium suppressed by oil->inflation->rate hike fears->real yields; tariff bid intact at $4600+ floor"
+    },
+    "ten_year_yield": {
+      "level": 4.23,
+      "prior_level_est": 4.12,
+      "note": "Flight-to-safety partially suppressing; medium-term path 4.40-4.70 with Scenario C"
+    },
+    "dxy": {
+      "level": 98.27,
+      "prior_level": 98.11,
+      "note": "Firm; oil inflation + safe-haven bid"
+    },
+    "tlt": {
+      "direction": "bearish_medium_term",
+      "note": "Oil $88+ -> inflation expectations -> TLT bearish; short thesis approaching breakeven"
+    },
+    "hyg": {
+      "level_est": 80.5,
+      "note": "Credit resilient; Q2 earnings (July) is the test"
+    },
+    "bitcoin": {
+      "level_est": 74300,
+      "note": "Risk-on correlation; no independent signal"
+    }
+  },
+  "geopolitical": {
+    "hormuz_status": "under_irgc_strict_control",
+    "ceasefire_status": "expiring_april_22",
+    "touska_seizure": "USS Spruance seized Iranian cargo ship Touska in Gulf of Oman April 19; Iran vowed retaliation",
+    "irgc_ship_attacks": "IRGC fired on Indian ships and CMA CGM vessel in Hormuz April 20; forced to turn back",
+    "round2_talks": "US delegation traveled to Islamabad; Iran IRNA denied participation",
+    "trump_statement": "ceasefire ends Wednesday evening Washington time; highly unlikely to extend",
+    "pakistan_mediation": "April 19 breakthrough claim not materialized after 48h"
+  },
+  "earnings": {
+    "q1_beat_rate": 0.86,
+    "companies_reported": 50,
+    "upcoming": [
+      {"company": "Tesla (TSLA)", "date": "2026-04-22", "timing": "after-close", "consensus_rev": "21.9B", "consensus_eps": "0.36", "delivery_miss": "358K vs 365K est."},
+      {"company": "Boeing (BA)", "date": "2026-04-22", "timing": "pre-open"},
+      {"company": "Intel (INTC)", "date": "2026-04-20", "note": "EPS expected -90% YoY"}
+    ]
+  },
+  "fed": {
+    "fomc_next": "2026-04-28-29",
+    "days_to_fomc": 7,
+    "hold_probability": 0.94,
+    "blackout_begins": "2026-04-22",
+    "note": "Powell final meeting; Warsh takes over May 15; hawkish hold near-certain; language on oil inflation is the market-moving element"
+  },
+  "scenarios": {
+    "scenario_a_deal": {"probability": 0.10, "prior": 0.62, "change": "COLLAPSED"},
+    "scenario_b_extension": {"probability": 0.20, "prior": 0.20, "change": "stable"},
+    "scenario_c_escalation": {"probability": 0.55, "prior": 0.08, "change": "SURGED"},
+    "scenario_d_full_resolution": {"probability": 0.05, "prior": 0.10, "change": "reduced"}
+  },
+  "portfolio": {
+    "equity_est": 1112000,
+    "return_pct": 11.2,
+    "deployed_pct": 35,
+    "positions": [
+      {
+        "symbol": "VIX",
+        "direction": "long",
+        "sub_position": "half",
+        "entry": 10.5,
+        "current": 19.08,
+        "pnl_pct": 82,
+        "days": 42,
+        "thesis_status": "strong_intact",
+        "stop": "VIX close below 15 on confirmed Scenario A + IRGC stand-down"
+      },
+      {
+        "symbol": "VIX",
+        "direction": "long",
+        "sub_position": "add",
+        "entry": 18.36,
+        "current": 19.08,
+        "pnl_pct": 4,
+        "days": 6,
+        "thesis_status": "intact",
+        "stop": "VIX close below 15 on confirmed Scenario A + IRGC stand-down"
+      },
+      {
+        "symbol": "GLD",
+        "direction": "long",
+        "sub_position": "50_pct_position",
+        "entry_spot": 4750,
+        "current_spot": 4782.14,
+        "pnl_pct": 0.85,
+        "days": 16,
+        "thesis_status": "under_review",
+        "note": "REDUCED from 75% to 50% today — oil-rate channel blind spot correction",
+        "stop": "Sustained close below $4,500"
+      },
+      {
+        "symbol": "TLT",
+        "direction": "short",
+        "entry_10y": 4.26,
+        "current_10y": 4.23,
+        "pnl_pct": -0.3,
+        "days": 4,
+        "thesis_status": "strengthening",
+        "stop": "10Y closes below 4.0% (Scenario D conditions)"
+      }
+    ],
+    "trades_today": [
+      {
+        "action": "reduce",
+        "symbol": "GLD",
+        "from_size": "75_pct_position",
+        "to_size": "50_pct_position",
+        "rationale": "Oil-rate channel discovered (April 20-21): WTI $88+ suppresses war premium via rate hike fears. Reducing by 25% as risk-management for blind spot. Capital to reserves for XLE $90+ trigger or VIX dip."
+      }
+    ]
+  },
+  "predictions_resolved_today": [
+    {
+      "id": "deal_signed_by_april21",
+      "outcome": false,
+      "logged_probability": 0.35,
+      "calibration": "reasonable_defensive_calibration"
+    },
+    {
+      "id": "gold_holds_4700_on_deal",
+      "outcome": null,
+      "status": "voided",
+      "reason": "Condition (deal announcement) never triggered"
+    }
+  ],
+  "predictions_new_today": [
+    "wti_90_by_fomc (0.72)",
+    "ceasefire_collapses_apr22 (0.78)",
+    "sp500_below_7000_by_fomc (0.45)",
+    "gold_holds_4600_base (0.82)"
+  ],
+  "key_risks": [
+    "Ceasefire expires Wednesday April 22 — Scenario C confirmation event",
+    "IRGC operational independence from civilian government — IRGC Firewall",
+    "Tesla earnings April 22 after close — delivery miss already known",
+    "FOMC April 28-29 — Powell final; Warsh succession; oil inflation language",
+    "S&P deal premium overhang (~400-500pts) not yet repriced"
+  ],
+  "key_lessons": [
+    "Lesson 15: Conditional openings in dual-actor states require 0.5-0.6x persistence discount",
+    "Lesson 16: Oil-rate-gold channel above WTI $85-88 suppresses war premium; adjust gold sizing"
+  ],
+  "calibration_errors": [
+    {
+      "prediction": "hormuz_remains_open_april22",
+      "logged_probability": 0.90,
+      "actual": "INCORRECT",
+      "lesson": "IRGC independence was underweighted; conditional opening by civilian government had ~0.5x discount not applied; should not have exceeded 0.65"
+    }
+  ]
+}

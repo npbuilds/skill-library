@@ -1,0 +1,143 @@
+{
+  "_snapshot_date": "2026-04-18",
+  "_saved_at": "2026-04-18T08:00:00.000000",
+  "_version": "v2",
+  "_prior_snapshot": "2026-04-17",
+  "data": {
+    "regime": {
+      "quadrant": "stagflation",
+      "subtype": "transitional_hormuz_relief_phase",
+      "confidence": 0.78,
+      "growth_score": 0.16,
+      "inflation_score": 0.74,
+      "description": "Transitional stagflation: Iran declared Strait of Hormuz open (April 17, linked to Lebanon ceasefire). US port blockade remains. Oil crashed 9.4% to $82.59. Gold rose +$50 to $4,879 (dual-bid confirmed). Second-round US-Iran talks expected this weekend in Islamabad. $20B MOU framework visible. Scenario A probability 55%.",
+      "scenario_a_probability": 0.55,
+      "scenario_b_probability": 0.25,
+      "scenario_c_probability": 0.10,
+      "scenario_d_probability": 0.10,
+      "key_signals": {
+        "hormuz_opening": "Iran declared Hormuz completely open (April 17, 5PM ET), linked to Lebanon ceasefire (10 days); US port blockade remains",
+        "oil_crash": "WTI -9.4% to $82.59; largest daily drop of conflict cycle; narrative pricing ahead of physical reality",
+        "gold_divergence": "Gold +$50 (+1.0%) while oil -$10 (-9.4%); dual-bid separation empirically confirmed",
+        "mou_framework": "$20B frozen funds for Iran uranium stockpile; enrichment moratorium 20yr vs 5yr gap; weekend talks expected",
+        "lebanon_ceasefire": "10-day ceasefire began April 17, 5PM ET; linked to Hormuz opening",
+        "warsh_unchanged": "Kevin Warsh Fed succession unchanged; structural no-cut posture intact"
+      }
+    },
+    "market": {
+      "indices": {
+        "S&P 500": {
+          "price": 7126.06,
+          "ytd_pct": 3.35,
+          "daily_pct": 1.20,
+          "note": "Third consecutive record high; deal premium fully priced"
+        },
+        "VIX": {
+          "spot": 17.48,
+          "prior": 17.81,
+          "change": -0.33,
+          "note": "Deal premium; FOMC 10d is vol floor"
+        }
+      }
+    },
+    "assets": {
+      "VIX": {
+        "spot": 17.48,
+        "3m_est": 19.0,
+        "term_structure": "contango_estimated",
+        "fomc_days_remaining": 10
+      },
+      "gold_spot": {
+        "price": 4879,
+        "24h_change": 50,
+        "24h_pct": 1.04,
+        "ytd_pct": 16.4,
+        "target_5000_gap": 121,
+        "note": "DUAL-BID PROOF: gold rose while oil crashed; tariff-inflation bid dominant over war premium"
+      },
+      "oil_WTI": {
+        "price": 82.59,
+        "24h_change": -10.34,
+        "24h_pct": -9.41,
+        "note": "Hormuz opening; port blockade holds; largest daily drop of cycle; narrative ahead of physical",
+        "hormuz_status": "OPEN (conditional, linked to Lebanon ceasefire)",
+        "port_blockade_status": "ACTIVE"
+      },
+      "treasury_10y": {
+        "yield_estimated": 4.12,
+        "prior_estimated": 4.26,
+        "change_estimated": -0.14,
+        "note": "Oil crash reduced inflation expectations; Warsh succession keeps medium-term yields elevated"
+      }
+    },
+    "macro": {
+      "fed_funds": "3.50-3.75%",
+      "fomc_next": "2026-04-28/29",
+      "fomc_hold_probability": 0.94,
+      "warsh_nomination": {
+        "status": "confirmed",
+        "implication": "Structural no-cut posture for 2026; unchanged by oil crash"
+      }
+    },
+    "geopolitical": {
+      "hormuz": {
+        "strait_status": "OPEN (conditional)",
+        "port_blockade_status": "ACTIVE — Trump confirmed full force",
+        "opening_condition": "Linked to Lebanon ceasefire (10 days from April 17)",
+        "iran_good_faith": true
+      },
+      "iran_deal": {
+        "mou_framework_visible": true,
+        "us_offer": "$20B frozen funds released",
+        "iran_demand_prior": "$27B",
+        "uranium_terms": "US: ship to US; Iran: down-blend in Iran; Compromise: third country + down-blend under monitoring",
+        "enrichment_moratorium_gap": "US: 20yr; Iran: 5yr",
+        "weekend_talks": "Expected Islamabad, likely Sunday April 19-20",
+        "trump_denial": "Truth Social: 'no money will change hands' (negotiating posture)"
+      },
+      "lebanon": {
+        "ceasefire_start": "2026-04-17T17:00:00 ET",
+        "ceasefire_duration": "10 days",
+        "ceasefire_expiry_est": "2026-04-27"
+      }
+    },
+    "portfolio": {
+      "equity_est": 1100000,
+      "equity_pct": 10.0,
+      "deployed_pct": 35,
+      "positions": 3,
+      "trades_today": [
+        {
+          "action": "close",
+          "symbol": "XLE",
+          "direction": "long",
+          "rationale": "Thesis broken by Hormuz opening; oil at $82.59 below thesis floor of $88+; protect capital before weekend binary; re-entry on deal failure",
+          "outcome_classification": "thesis_environment_changed"
+        }
+      ],
+      "open_positions": [
+        {"symbol": "VIX", "direction": "long", "status": "intact", "conviction": "HIGH"},
+        {"symbol": "GLD", "direction": "long", "size": "75%", "status": "strong", "conviction": "HIGH"},
+        {"symbol": "TLT", "direction": "short", "status": "temporarily_uncomfortable", "conviction": "MEDIUM"}
+      ]
+    },
+    "predictions": {
+      "new_today": ["hormuz_remains_open_april22 (0.82)", "oil_below_80_before_fomc (0.42)"],
+      "key_upgrades": [
+        "iran_talks_resume: 0.72 -> 0.88",
+        "iran_deal_before_fomc: 0.32 -> 0.48",
+        "gold_target_5000: 0.65 -> 0.72",
+        "gold_5000_by_may15: 0.60 -> 0.67"
+      ],
+      "key_downgrades": [
+        "vix_above25_prefomc: 0.38 -> 0.20",
+        "vix_prefomc_catalyst: 0.45 -> 0.30",
+        "f1173bd0: 0.68 -> 0.45",
+        "april_cpi_compounds: 0.78 -> 0.70",
+        "57443812: 0.08 -> 0.04",
+        "35d668b3: 0.15 -> 0.08",
+        "sp500_reversal_apr10: 0.10 -> 0.05"
+      ]
+    }
+  }
+}
