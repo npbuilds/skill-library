@@ -167,6 +167,10 @@ Deliver the final research brief to the user. The output format is defined in `e
 - **Next steps**: If the user wants to go deeper, what specific questions would be most productive?
 - **Upgrade paths**: For Speculative and Unverifiable claims, what would be needed to resolve them?
 
+### Persistence (optional)
+
+If the user wants this research brief persisted to their Obsidian vault, call `vault-writer` (`infrastructure/vault-writer`) with the synthesis as a `type: note` artifact in `Notes/<slug>.md`, the full brief as a `Raw/<slug>-research-brief-<date>.md` companion source (set `companion_source_path`), and `index_entry: true` if the topic is new. vault-writer enforces the vault's schema and appends `log.md`. The integrity report it returns will list any unresolved wikilinks the caller should address (either by linking to existing notes or by leaving as known skill-library refs).
+
 ## Depth Mode Selection Guide
 
 | Signal | Mode | Rationale |

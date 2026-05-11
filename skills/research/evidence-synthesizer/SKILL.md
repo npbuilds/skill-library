@@ -116,6 +116,10 @@ Assemble the final output with these sections in order:
 7. **Sources** — Ranked by relevance and authority
 8. **Next Steps** — What to investigate further if the user needs more
 
+#### Step 6 — Persistence (optional)
+
+If the user wants this output persisted to their Obsidian vault, call `vault-writer` (`infrastructure/vault-writer`) with the brief as a `type: note` artifact and the relevant `target_domain`, `slug`, and `tags`. Pass `companion_source_path` if the full output should also be archived to `Raw/`. The vault-writer integrity report will list any unresolved wikilinks the caller should address (either by linking to existing notes or by leaving as known skill-library refs). When invoked standalone (not from spelunker), the synthesizer can call vault-writer directly.
+
 ### Output
 
 A complete research brief formatted per `references/synthesis-templates.md`. The brief is self-contained — a reader should be able to understand the findings, assess their reliability, and identify what remains unknown without needing any additional context.
