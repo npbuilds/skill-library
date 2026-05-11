@@ -151,6 +151,10 @@ The Loom's own reflective intelligence:
 
 Output: **Weekly Product Synthesis** and updated product narrative.
 
+### Phase 7 — Persistence (optional)
+
+If the user wants a sealed product artifact (briefing, narrative snapshot, decision record) persisted to their Obsidian vault, call `vault-writer` (`infrastructure/vault-writer`) with the artifact as a `type: note` and the relevant `target_domain`, `slug`, and `tags`. Pass `companion_source_path` if the full artifact should also be archived to `Raw/`. The vault-writer integrity report will list any unresolved wikilinks the caller should address (either by linking to existing notes or by leaving as known skill-library refs).
+
 ## Cross-Domain Synthesis Patterns
 
 The Loom's superpower is combining domains in non-obvious ways:

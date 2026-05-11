@@ -103,6 +103,10 @@ Score each candidate against the rubric from Phase 1:
 4. **Evidence quality assessment** — gaps that could change the ranking.
 5. **Next steps** — what to validate before committing.
 
+### Phase 6 — Persistence (optional)
+
+If the user wants the ranked recommendations persisted to their Obsidian vault, call `vault-writer` (`infrastructure/vault-writer`) with the brief as a `type: note` artifact and the relevant `target_domain`, `slug`, and `tags`. Pass `companion_source_path` if the full brief should also be archived to `Raw/`. The vault-writer integrity report will list any unresolved wikilinks the caller should address (either by linking to existing notes or by leaving as known skill-library refs).
+
 ### Output Format
 
 ```
