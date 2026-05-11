@@ -420,15 +420,18 @@ def _atomic_write_npy(path: Path, arr: "np.ndarray") -> None:
 
 
 def _atomic_write_json(path: Path, data) -> None:
+    # Capture tmp name BEFORE json.dump so cleanup runs even if dump raises
+    # (e.g. TypeError on non-serializable data). Without this, a failed dump
+    # would leak the NamedTemporaryFile(delete=False) on disk.
     tmp = None
     try:
         with tempfile.NamedTemporaryFile(
             mode="w", dir=path.parent, suffix=".json.tmp", delete=False
         ) as f:
-            json.dump(data, f)
             tmp = f.name
+            json.dump(data, f)
         os.replace(tmp, path)
-    except OSError:
+    except (OSError, TypeError, ValueError):
         if tmp:
             try:
                 os.unlink(tmp)
