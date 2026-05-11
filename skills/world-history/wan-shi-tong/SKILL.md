@@ -49,6 +49,10 @@ History is the study of everything that has ever happened — and the arguments 
        └────── (loop)
 ```
 
+### Persistence (optional)
+
+When a history investigation produces a durable distillation the user wants to keep — a synthesis, a chronological account, a historiographical comparison — call `vault-writer` (`infrastructure/vault-writer`) with the artifact as a `type: note` and `target_domain: history` (or the relevant domain), plus `slug` and `tags`. Pass `companion_source_path` if the full investigation should also be archived to `Raw/`. The vault-writer integrity report will list any unresolved wikilinks the caller should address (either by linking to existing notes or by leaving as known skill-library refs).
+
 ## Routing Table
 
 ### Axis 1 — Thematic Classification
