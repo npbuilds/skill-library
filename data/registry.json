@@ -19691,6 +19691,33 @@
         "bacchus"
       ],
       "referenced_by": [
+        "art",
+        "authentication-provenance",
+        "books-rare",
+        "buying-mechanics",
+        "cards",
+        "coins",
+        "comics",
+        "discovery-sourcing",
+        "fraud-intelligence",
+        "grading-condition",
+        "insurance-risk",
+        "luxury-handbags",
+        "market-intelligence",
+        "memorabilia",
+        "movie-posters",
+        "portfolio-allocation",
+        "sealed-toys-lego",
+        "selling-deaccessioning",
+        "stamps-philately",
+        "storage-preservation",
+        "tax-estate-legal",
+        "vetting-services",
+        "video-games-sealed",
+        "vinyl-records",
+        "watches",
+        "whiskey-collecting",
+        "wine-collecting",
         "wine-market"
       ],
       "shares_references_with": [],
@@ -20406,7 +20433,12 @@
       "manual_notes": null,
       "composite_score": 61,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "ages-and-keys",
+        "comics-market",
+        "grading-pressing",
+        "manga-tankobon"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -20681,7 +20713,12 @@
       "manual_notes": null,
       "composite_score": 61,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "mtg-collecting",
+        "pokemon-cards",
+        "sports-cards",
+        "tcg-other"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -21011,7 +21048,13 @@
       "manual_notes": null,
       "composite_score": 61,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "contemporary",
+        "old-masters",
+        "paintings",
+        "photography",
+        "prints-multiples"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -21344,7 +21387,11 @@
         "bacchus"
       ],
       "referenced_by": [
-        "wine-market"
+        "cellar-strategy",
+        "en-primeur",
+        "wine-as-asset",
+        "wine-market",
+        "wine-provenance"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -21628,7 +21675,11 @@
       "manual_notes": null,
       "composite_score": 63,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "modern-watches",
+        "vintage-watches",
+        "watch-references"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -21848,7 +21899,11 @@
       "manual_notes": null,
       "composite_score": 63,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "die-varieties",
+        "us-coins",
+        "world-coins"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -22068,7 +22123,11 @@
       "manual_notes": null,
       "composite_score": 63,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "autographs",
+        "game-used",
+        "pop-culture"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
