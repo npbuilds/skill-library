@@ -243,8 +243,21 @@ def infer_type(name: str, text: str, meta: dict) -> str:
     return "knowledge"
 
 
-def infer_structure(skill_path: Path) -> dict:
-    """Infer domain, subdomain, parent from directory structure."""
+def infer_structure(
+    skill_path: Path,
+    all_skill_dirs: set[Path] | None = None,
+    domain_orchestrators: dict[str, str] | None = None,
+) -> dict:
+    """Infer domain, subdomain, parent from directory structure.
+
+    The parent is the nearest ancestor directory that has its own SKILL.md.
+    Organizational subdirectories (e.g., `horizontal/`, `vertical/` in the
+    Collector suite) are skipped — they don't have their own SKILL.md so the
+    walk passes through them looking for the next real skill above.
+
+    If no ancestor SKILL.md exists, the skill is attributed to its domain's
+    orchestrator (when one exists and isn't itself).
+    """
     rel = skill_path.relative_to(SKILLS_DIR)
     parts = list(rel.parts[:-1])  # Remove SKILL.md
 
@@ -254,12 +267,83 @@ def infer_structure(skill_path: Path) -> dict:
         info["domain"] = parts[0]
     if len(parts) >= 3:
         info["subdomain"] = parts[1]
-        info["parent"] = parts[-2]  # Direct parent directory
-    elif len(parts) == 2:
-        # Could be domain/skill or domain/subdomain
-        info["parent"] = parts[0] if parts[0] != parts[-1] else None
 
+    # Modern parent inference (preferred): walk up looking for an ancestor SKILL.md.
+    # Falls back to the legacy heuristic when context isn't provided.
+    if all_skill_dirs is not None:
+        skill_dir = skill_path.parent
+        current = skill_dir.parent
+        skills_parent = SKILLS_DIR.parent
+        while current != skills_parent and current != current.parent:
+            if current in all_skill_dirs and current != skill_dir:
+                info["parent"] = current.name
+                return info
+            current = current.parent
+
+        # Fallback: attribute to domain orchestrator if one exists and isn't self.
+        if domain_orchestrators and len(parts) >= 1:
+            domain = parts[0]
+            orchestrator = domain_orchestrators.get(domain)
+            if orchestrator and orchestrator != skill_dir.name:
+                info["parent"] = orchestrator
+                return info
+
+        return info
+
+    # Legacy heuristic — preserved for backward compatibility on direct callers.
+    if len(parts) >= 3:
+        info["parent"] = parts[-2]
+    elif len(parts) == 2:
+        info["parent"] = parts[0] if parts[0] != parts[-1] else None
     return info
+
+
+# ── Cross-reference detection ──────────────────────────────────────────
+
+# H2/H3 headings whose body sections may contain explicit cross-skill routing.
+# Conservative — only sections that describe handoffs / scope boundaries are scanned.
+CROSS_REF_SECTION_KEYWORDS = (
+    "scope and escalat",
+    "scope boundar",
+    "cross-domain",
+    "cross-suite",
+    "cross-axis",
+    "cross-reference",
+    "see also",
+    "hand off",
+    "hand-off",
+    "escalat",  # "Escalations", "Cross-domain escalations"
+    "related skills",
+    "delegation",
+    "routing",
+)
+
+# Matches `tokens-like-this` (single-line backtick-quoted identifiers).
+_BACKTICK_REF_RE = re.compile(r"`([a-z][a-z0-9_-]+)`")
+_HEADING_SPLIT_RE = re.compile(r"^(##+\s+[^\n]+)", re.MULTILINE)
+
+
+def detect_cross_references(text: str, known_skill_names: set[str]) -> set[str]:
+    """Find backtick-quoted skill names in escalation/scope sections.
+
+    Conservative by design:
+      - Only matches inside H2/H3 sections whose headings include a routing keyword.
+      - Only matches tokens that are known registered skill names.
+      - Ignores backtick uses in code blocks (those are dropped by the heading-split).
+    """
+    refs: set[str] = set()
+    sections = _HEADING_SPLIT_RE.split(text)
+    # split() yields: [preamble, heading1, body1, heading2, body2, ...]
+    for i in range(1, len(sections), 2):
+        heading = sections[i].lower()
+        body = sections[i + 1] if i + 1 < len(sections) else ""
+        if not any(kw in heading for kw in CROSS_REF_SECTION_KEYWORDS):
+            continue
+        for m in _BACKTICK_REF_RE.finditer(body):
+            token = m.group(1)
+            if token in known_skill_names:
+                refs.add(token)
+    return refs
 
 
 # ── Main sync logic ────────────────────────────────────────────────────
@@ -268,12 +352,32 @@ def discover_skills() -> dict[str, dict]:
     """Walk disk and return {name: entry_data} for every SKILL.md found."""
     discovered = {}
 
+    # First pass — collect every SKILL.md location and identify the orchestrator
+    # per domain. Needed so `infer_structure` can resolve parents that skip
+    # organizational subdirectories (e.g., `horizontal/`, `vertical/`).
+    candidate_skill_mds: list[Path] = []
+    all_skill_dirs: set[Path] = set()
     for skill_md in SKILLS_DIR.rglob("SKILL.md"):
-        skill_dir = skill_md.parent
-
-        # Skip meta/hidden directories
         if any(part in SKIP_DIRS for part in skill_md.relative_to(SKILLS_DIR).parts[:-1]):
             continue
+        candidate_skill_mds.append(skill_md)
+        all_skill_dirs.add(skill_md.parent)
+
+    domain_orchestrators: dict[str, str] = {}
+    for skill_md in candidate_skill_mds:
+        text = skill_md.read_text(errors="replace")
+        yaml_meta = extract_yaml_frontmatter(text) or {}
+        inline_meta = extract_inline_metadata(text)
+        name = (yaml_meta.get("name") or "").strip() or skill_md.parent.name
+        stype = infer_type(name, text, {**inline_meta, **yaml_meta})
+        if stype == "orchestrator":
+            rel_parts = skill_md.relative_to(SKILLS_DIR).parts
+            if len(rel_parts) >= 1:
+                domain_orchestrators[rel_parts[0]] = name
+
+    # Second pass — build registry entries with the resolved context.
+    for skill_md in candidate_skill_mds:
+        skill_dir = skill_md.parent
 
         rel_path = str(skill_md.relative_to(PROJECT_ROOT))
         text = skill_md.read_text(errors="replace")
@@ -281,7 +385,7 @@ def discover_skills() -> dict[str, dict]:
         # Extract metadata from all formats
         yaml_meta = extract_yaml_frontmatter(text) or {}
         inline_meta = extract_inline_metadata(text)
-        structure = infer_structure(skill_md)
+        structure = infer_structure(skill_md, all_skill_dirs, domain_orchestrators)
 
         # Skill key: prefer frontmatter `name` (handles non-conventional layouts
         # like skills/_meta/SKILL.md → sentinel-prime), fall back to directory.
@@ -388,6 +492,40 @@ def sync(apply: bool = False) -> None:
         if cur.get("metrics") != new.get("metrics"):
             drift_metrics.append(name)
 
+    # ── Cross-reference detection — scan SKILL.md text for backtick-quoted
+    # references in escalation/scope sections and flag any new CROSS-DOMAIN
+    # edges that aren't already recorded in depends_on. Same-domain edges
+    # (director → its own leaves) are out of scope here: they're better
+    # populated by analyze-skill.py's existing dependency-graph logic.
+    # Purely additive: existing edges in depends_on are preserved.
+    all_known_names = set(discovered) | set(existing)
+
+    def _domain_of(skill_name: str) -> str | None:
+        """Return the top-level domain (skills/<domain>/...) for a known skill."""
+        entry = discovered.get(skill_name) or existing.get(skill_name) or {}
+        loc = entry.get("location") or ""
+        parts = loc.split("/")
+        return parts[1] if len(parts) >= 2 and parts[0] == "skills" else None
+
+    new_depends_on: dict[str, set[str]] = {}  # source skill → newly-detected targets
+    for skill_md in SKILLS_DIR.rglob("SKILL.md"):
+        if any(part in SKIP_DIRS for part in skill_md.relative_to(SKILLS_DIR).parts[:-1]):
+            continue
+        text = skill_md.read_text(errors="replace")
+        yaml_meta = extract_yaml_frontmatter(text) or {}
+        name = (yaml_meta.get("name") or "").strip() or skill_md.parent.name
+        if name not in all_known_names:
+            continue
+        src_domain = _domain_of(name)
+        detected = detect_cross_references(text, all_known_names) - {name}
+        # Keep only cross-domain edges
+        detected = {t for t in detected if _domain_of(t) and _domain_of(t) != src_domain}
+        cur_dep = set(existing.get(name, {}).get("depends_on") or [])
+        cur_dep |= set(discovered.get(name, {}).get("depends_on") or [])
+        added = detected - cur_dep
+        if added:
+            new_depends_on[name] = added
+
     # ── Report ──
     print(f"Registry: {len(existing)} skills")
     print(f"On disk:  {len(discovered)} skills")
@@ -428,6 +566,14 @@ def sync(apply: bool = False) -> None:
             print(f"    ... and {len(drift_desc) - 5} more")
     if drift_metrics:
         print(f"METRICS DRIFT ({len(drift_metrics)} entries will be refreshed)")
+    if new_depends_on:
+        total_edges = sum(len(s) for s in new_depends_on.values())
+        print(f"CROSS-REF DRIFT ({total_edges} new edges across {len(new_depends_on)} skills):")
+        for src in sorted(new_depends_on)[:5]:
+            targets = sorted(new_depends_on[src])
+            print(f"  + {src} → {', '.join(targets)}")
+        if len(new_depends_on) > 5:
+            print(f"    ... and {len(new_depends_on) - 5} more")
 
     # ── Apply changes ──
     if apply:
@@ -449,6 +595,34 @@ def sync(apply: bool = False) -> None:
             existing[name]["metrics"] = discovered[name]["metrics"]
         if drift_metrics:
             print(f"  Refreshed metrics on {len(drift_metrics)} entries")
+
+        # Cross-ref edges: additively merge new edges into depends_on, then
+        # mirror into the target's referenced_by. Existing arrays are kept.
+        added_edge_count = 0
+        for src, targets in new_depends_on.items():
+            if src not in existing:
+                continue
+            cur = existing[src].setdefault("depends_on", [])
+            cur_set = set(cur)
+            for t in sorted(targets):
+                if t not in cur_set:
+                    cur.append(t)
+                    cur_set.add(t)
+                    added_edge_count += 1
+                # Mirror into target's referenced_by (additive)
+                if t in existing:
+                    rb = existing[t].setdefault("referenced_by", [])
+                    if src not in set(rb):
+                        rb.append(src)
+        if added_edge_count:
+            # Keep arrays sorted for stable diffs across runs.
+            for name in new_depends_on:
+                if name in existing:
+                    existing[name]["depends_on"] = sorted(set(existing[name].get("depends_on", [])))
+            for entry in existing.values():
+                if "referenced_by" in entry:
+                    entry["referenced_by"] = sorted(set(entry["referenced_by"]))
+            print(f"  Added {added_edge_count} cross-reference edge(s)")
 
         # Re-derive network.domains from on-disk paths so renames
         # (e.g., meta → _meta) propagate automatically.
@@ -481,7 +655,11 @@ def sync(apply: bool = False) -> None:
                 print(f"  ! {n}")
     else:
         total_changes = (
-            len(new_names) + len(mismatches) + len(drift_desc) + len(drift_metrics)
+            len(new_names)
+            + len(mismatches)
+            + len(drift_desc)
+            + len(drift_metrics)
+            + sum(len(s) for s in new_depends_on.values())
         )
         if total_changes:
             print(f"\nDry run complete. {total_changes} change(s) pending.")
