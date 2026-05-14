@@ -182,3 +182,9 @@ Time series evaluation must respect temporal ordering. Random cross-validation i
 
 - **Investing/regime-intelligence/macro-cycles**: Macro cycle positioning is time-series analysis applied to economic indicators — leading indicator decomposition, structural break detection (regime shifts), and trend/cycle separation are the same methods used in different language.
 - **Investing/risk-architecture/correlation-regimes**: Regime-switching models (HMM, Markov-switching GARCH) are time-series models that detect when the correlation structure of assets has fundamentally changed. DCC-GARCH for dynamic correlation monitoring is advanced time-series methodology.
+
+
+
+## Related Skills
+
+- **climate-projections** — Climate-projection forecasting is one applied case of time-series analysis. Same statistical foundations (stationarity, seasonality, trend decomposition) but the climate-projections skill carries the domain-specific priors and data sources.

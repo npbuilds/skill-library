@@ -330,3 +330,9 @@ For any individual company, insider transactions are infrequent. Drawing strong 
 ### Filing Delays and Data Quality
 
 While Form 4 filings are required within two business days, late filings are common. The SEC publishes a delinquent filer report. Data aggregators may have slight delays or errors in parsing. Always verify significant transactions by checking the original Form 4 filing on EDGAR.
+
+
+
+## Related Skills
+
+- **event-driven** — Insider signals are most actionable around event-driven moments. Use the event-driven calendar to time when insider-signal flow matters most.

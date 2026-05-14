@@ -105,3 +105,19 @@ Handle directly at the Archon level when:
 - If any subdomain returns a finding that contradicts another subdomain's finding, the Archon presents both with explicit reasoning about which to weight more heavily — it does NOT silently pick one
 - If regime classification is contested (transition period), present conditional analyses: "If we're in late-cycle, then X; if recession has begun, then Y"
 - If risk analysis reveals that an opportunity fails the risk filter, report this honestly even if the opportunity is compelling — the Archon never overrides Risk Architecture to chase returns
+
+## Cross-Skill Escalation (added 2026-05-11)
+
+These are NOT auto-routed subdomains. They are peers invoked deliberately when archon's investing subdomains can't fully answer.
+
+| Trigger | Escalate to | Why |
+|---|---|---|
+| Critical assumption needs evidence | `spelunker` (research/spelunker) | Confidence-tagged evidence + auto-persists to vault `Notes/` + `Raw/` |
+| Stress-test scenarios for a thesis | `neocortex/foresight/scenario-planner` | Structured what-if branching across regimes |
+| Translate framework across domains | `neocortex/architecture/domain-translator` | E.g., "what does Dalio regime look like in crypto?" |
+| Investing capability feels missing | `neocortex/architecture/skill-evolutionist` | Architecture critique + build sequence |
+| Explain reflexivity (or any concept) simply | `neocortex/architecture/clarity-engine` | Plain-language synthesis |
+
+**Pattern:** name the skill explicitly in chat. Don't auto-invoke — the user should always know when an escalation is happening. See `archon/SKILL.md` "Chat-Mode Routing" Step 5 for the in-conversation phrasing.
+
+**Vault tagging on escalation:** when invoking spelunker from an investment context, request `tags: [investing, <asset-class>, ...]` so the auto-persisted research is discoverable as investment research vs general research. See `_meta/frontmatter-schema.md` in the vault for the asset-class enum.

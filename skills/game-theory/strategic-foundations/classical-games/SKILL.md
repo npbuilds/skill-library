@@ -161,3 +161,9 @@ Read `references/sources.md` for the full bibliography grounding this skill — 
 - **Investing/value-quality/second-level-thinking**: Market consensus IS a Nash equilibrium — the price reflects what everyone expects given what everyone else expects. Second-level thinking (Marks) asks: "What if the consensus equilibrium is wrong?" Contrarian investing is finding non-equilibrium opportunities.
 - **Investing/regime-intelligence**: Cournot/Bertrand competition models determine industry profitability regimes. Understanding whether competitors play quantity games (Cournot) or price games (Bertrand) predicts margins and competitive dynamics.
 - **Investing/market-microstructure/options-mechanics**: Dealer gamma hedging is a repeated game between market makers and directional traders. Pinning effects near expiry are coordination equilibria.
+
+
+
+## Related Skills
+
+- **dilemma-analyzer** — Classical games (prisoner's dilemma, stag hunt, ultimatum) ARE the canonical moral dilemmas. Read alongside dilemma-analyzer when the question has both a strategic structure and an ethical dimension.

@@ -38,8 +38,8 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     # ── Portfolio Construction ────────────────────────────────────────────
     "asset-allocation":    ["portfolio-construction", "regime-intelligence", "risk-architecture", "correlation-regimes"],
     "factor-exposure":     ["portfolio-construction", "equities", "asset-allocation"],
-    "hedging-architecture":["portfolio-construction", "tail-risk", "options-mechanics", "correlation-regimes"],
-    "tax-optimization":    ["portfolio-construction", "asset-allocation", "rebalancing-logic"],
+    "hedging-architecture":["portfolio-construction", "tail-risk", "correlation-regimes"],
+    "tax-optimization":    ["portfolio-construction", "asset-allocation"],
 
     # ── Reflexivity & Sentiment ───────────────────────────────────────────
     "market-psychology":   ["reflexivity-sentiment", "reflexivity-theory", "sentiment-signals"],
@@ -52,18 +52,18 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     "second-level-thinking":["value-quality", "market-psychology", "reflexivity-theory"],
 
     # ── Market Microstructure ─────────────────────────────────────────────
-    "liquidity-topology":  ["market-microstructure", "passive-flow-dynamics"],
-    "options-mechanics":   ["market-microstructure", "hedging-architecture", "tail-risk"],
-    "passive-flow-dynamics":["market-microstructure", "liquidity-topology", "factor-exposure"],
+    "liquidity-topology":  ["market-microstructure"],
+    "options-mechanics":   ["market-microstructure", "tail-risk"],
+    "passive-flow-dynamics":["market-microstructure", "factor-exposure"],
 
     # ── Geopolitical Overlay ──────────────────────────────────────────────
-    "energy-security":     ["geopolitical-overlay", "commodities", "great-power-dynamics"],
-    "great-power-dynamics":["geopolitical-overlay", "secular-themes", "macro-cycles"],
-    "secular-themes":      ["geopolitical-overlay", "great-power-dynamics", "regime-intelligence"],
+    "energy-security":     ["geopolitical-overlay", "great-power-dynamics"],
+    "great-power-dynamics":["geopolitical-overlay", "macro-cycles"],
+    "secular-themes":      ["geopolitical-overlay", "regime-intelligence"],
 
     # ── Asset Universe ────────────────────────────────────────────────────
     "alternatives":        ["asset-universe", "asset-allocation", "correlation-regimes"],
-    "commodities":         ["asset-universe", "energy-security", "macro-cycles"],
+    "commodities":         ["asset-universe", "macro-cycles"],
     "currencies":          ["asset-universe", "monetary-regime", "macro-cycles"],
     "digital-assets":      ["asset-universe", "asset-allocation", "market-microstructure"],
     "equities":            ["asset-universe", "factor-exposure", "regime-intelligence"],
@@ -72,7 +72,7 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     # ── Adaptive Monitoring ───────────────────────────────────────────────
     "alt-data-monitoring":     ["adaptive-monitoring", "sentiment-signals"],
     "performance-attribution": ["adaptive-monitoring", "asset-allocation", "factor-exposure"],
-    "rebalancing-logic":       ["adaptive-monitoring", "asset-allocation", "tax-optimization"],
+    "rebalancing-logic":       ["adaptive-monitoring", "asset-allocation"],
 
     # ── Special Situations ────────────────────────────────────────────────
     "complexity-premium":    ["special-situations", "second-level-thinking", "event-driven"],

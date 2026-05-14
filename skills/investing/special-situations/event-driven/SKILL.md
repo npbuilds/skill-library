@@ -378,3 +378,10 @@ Activist track records vary enormously. An activist with a history of successful
 ### Underestimating Duration Risk
 
 Event-driven situations often take longer than expected. Regulatory reviews extend, court processes drag on, activist campaigns encounter resistance. The annualized return calculation is highly sensitive to the time to resolution — a spread that looks attractive over 90 days may be mediocre over 12 months.
+
+
+
+## Related Skills
+
+- **insider-signals** — Event-driven situations (M&A, spinoffs, restructurings) are precisely where insider-signal analysis has the highest information content. Combine for catalyst + insider context.
+- **spinoffs-restructuring** — Spinoffs and restructurings are a primary sub-class of event-driven trades. Spinoffs-restructuring goes deeper on this specific catalyst type; event-driven gives the broader framework.

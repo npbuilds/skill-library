@@ -86,16 +86,9 @@ def save_daily_snapshot(briefing_data: dict, for_date: str | None = None) -> str
     snapshot_date = for_date or date.today().isoformat()
     path = SNAPSHOT_DIR / f"{snapshot_date}.json"
 
-    # Avoid overwriting existing same-day snapshots — append counter suffix
-    if path.exists():
-        counter = 1
-        while True:
-            alt_path = SNAPSHOT_DIR / f"{snapshot_date}_{counter}.json"
-            if not alt_path.exists():
-                path = alt_path
-                break
-            counter += 1
-
+    # Same-day saves overwrite. Each save refreshes from live collectors,
+    # so the latest call captures the most current state. If a baseline
+    # snapshot needs preserving, rename it before re-saving.
     snapshot = {
         "_snapshot_date": snapshot_date,
         "_saved_at": datetime.now().isoformat(),

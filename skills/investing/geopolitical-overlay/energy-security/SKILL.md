@@ -367,3 +367,7 @@ Apply this framework to any energy transition investment thesis:
 - Management team from finance/consulting rather than engineering/operations
 - No discussion of permitting, grid connection, or infrastructure requirements
 - Comparison to historical cost declines of unrelated technologies (e.g., "hydrogen will follow the solar cost curve")
+
+## Related Skills
+
+- **commodities** — The instruments live in commodities (oil/gas/uranium/grains). Energy-security adds the geopolitical and strategic premium on top of that asset class.

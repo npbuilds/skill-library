@@ -207,3 +207,7 @@ A 5-15% allocation to commodities in a diversified portfolio provides meaningful
 The two biggest regime changes for commodities:
 1. Dollar direction: A sustained dollar weakening cycle is the single best environment for broad commodities.
 2. China policy: China consumes 40-60% of most industrial commodities. A Chinese stimulus program is the most powerful short-term catalyst for commodity prices.
+
+## Related Skills
+
+- **energy-security** — Energy is a commodity sub-class with geopolitical premium. For oil/gas/uranium positioning, energy-security adds the strategic/geopolitical overlay that pure commodity supply-demand analysis misses.

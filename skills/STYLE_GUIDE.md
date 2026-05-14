@@ -32,14 +32,14 @@ name: skill-name
 description: >
   One to three sentences. Must be specific enough for search and routing.
   Describe WHEN to use this skill, not just WHAT it contains.
-tools: Read        # Comma-separated tool list, or omit if knowledge-only
+allowed-tools: Read Write   # Space-separated tool list, or omit if knowledge-only
 ---
 ```
 
 **Rules:**
 - `name` must match the directory name exactly
 - `description` must include activation triggers ("Use when...", "Activate for...")
-- `tools` is optional for pure knowledge skills, required for action/orchestrator/director
+- `allowed-tools` is optional for pure knowledge skills, required for action/orchestrator/director. Tool names are space-separated (agentskills.io spec). Use `scripts/conform-to-agentskills.py` to migrate legacy `tools: A, B` frontmatter.
 
 ---
 
@@ -116,3 +116,5 @@ Optional but encouraged:
 3. **The Ghost** — A registry entry whose file doesn't exist on disk. Run `sync-registry.py` to detect.
 4. **The Drifter** — A skill whose on-disk metadata doesn't match its registry entry. Run `sync-registry.py` to detect.
 5. **The Format Rebel** — A skill using inline metadata (`## skill-metadata`, `**Type:** X`) instead of YAML frontmatter. Migrate it.
+6. **The Mutual Dependency** — Two skills where `A.depends_on` includes B and `B.depends_on` includes A. `depends_on` is a directional capability DAG, not a symmetric "related to" relation. If two skills are peers (neither needs the other to function), document the relationship in a `## Related Skills` section in each SKILL.md body — not via bidirectional `depends_on`. Use `depends_on` only when removing the target would break the source's ability to function. Run `scripts/full_diagnostic_scan.py` to detect cycles.
+7. **The Parent-Echo** — A director's `depends_on` includes its own children (e.g., `mechanism-design.depends_on` listing `auction-theory` when `auction-theory.parent = mechanism-design`). The `parent` field is the canonical parent→child encoding; duplicating it in `depends_on` creates a cycle. Strip parents from `depends_on`; the wire scripts already do this on apply, but hand-edits drift.

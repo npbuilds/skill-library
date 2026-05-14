@@ -207,3 +207,9 @@ For detailed metric formulas, ranges, and trade-off analysis, see `references/me
 
 - **Investing/adaptive-monitoring/performance-attribution**: Model evaluation metrics map to investment performance metrics — calibration (predicted probabilities = true outcomes) parallels risk model calibration (predicted VaR = realized losses). Cross-validation strategies (expanding window, sliding window) ARE walk-forward backtesting of trading strategies.
 - **Investing/risk-architecture/tail-risk**: Evaluating model performance in tails is critical for financial risk — standard metrics (RMSE, accuracy) fail when the cost of errors is asymmetric. Tail-risk evaluation requires metrics that weight extreme outcomes appropriately.
+
+
+
+## Related Skills
+
+- **quality-assessment** — Both formalize "how good is the output" at different levels: model-evaluation for ML model performance against ground truth; quality-assessment for tasting/sensory evaluation. Shared concept (rubric-grounded scoring), different domains.

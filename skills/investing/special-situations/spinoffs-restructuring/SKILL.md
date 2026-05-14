@@ -291,3 +291,9 @@ Spinoff investments carry idiosyncratic risk — they are small, illiquid, and u
 - **Portfolio limits**: No more than 15-20% of total portfolio in spinoffs and restructurings, given the illiquidity and concentration risk
 
 Diversify across spinoff types (industrial, financial, technology) and catalysts (pure spinoffs, merger-related, distressed) to avoid correlation within the special-situations sleeve.
+
+
+
+## Related Skills
+
+- **event-driven** — Spinoffs and restructurings are one case under the event-driven umbrella. Use event-driven for the broader catalyst taxonomy and shared playbook patterns.
