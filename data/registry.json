@@ -5456,15 +5456,19 @@
       ],
       "referenced_by": [
         "agentic-researcher",
+        "bias-and-funding-tracer",
         "claim-decomposer",
         "cold-outreach",
+        "counterfactual-prober",
         "cover-letter-craft",
         "domain-deepdives",
         "ecosystem-mapping",
         "evidence-synthesizer",
+        "paywall-strategist",
         "public-portfolio",
         "skill-scaffold",
         "source-triangulator",
+        "synthesis-translator",
         "vc-interview-prep"
       ],
       "tags": [
