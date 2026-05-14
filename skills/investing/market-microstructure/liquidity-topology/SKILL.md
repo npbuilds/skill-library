@@ -410,3 +410,7 @@ Categorize liquidity into four states:
 4. **VPIN / order flow toxicity** (real-time where available): Rising toxicity precedes market maker withdrawal.
 5. **VIX / realized volatility** (real-time): High volatility = high adverse selection risk = market makers reduce activity.
 6. **Circuit breaker proximity**: How far is the market from LULD bands (single stock) or market-wide halts? As you approach, behavior changes — some participants rush to sell before the halt.
+
+## Related Skills
+
+- **passive-flow-dynamics** — Passive flows reshape liquidity topology: index inclusion/exclusion and rebalance windows concentrate liquidity at predictable times and venues. Combine the two for a complete market-microstructure view.

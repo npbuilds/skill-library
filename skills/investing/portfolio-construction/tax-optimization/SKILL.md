@@ -399,3 +399,7 @@ Ask these questions before executing any trade in a taxable account:
 - Do not sell highly appreciated positions near death — the step-up in basis eliminates the gain for free
 - Do not put tax-inefficient assets in taxable accounts when tax-advantaged space is available
 - Do not over-optimize at the expense of portfolio quality — owning a slightly inferior investment for tax reasons can cost more than the tax saved
+
+## Related Skills
+
+- **rebalancing-logic** — Rebalancing is a primary source of taxable events. Inputs from rebalancing-logic (target drift, rebalance triggers) determine when tax-optimization decisions become live.

@@ -159,3 +159,9 @@ Caveat: [Limitations — e.g., "This scan was based on the information provided;
 **User is defensive about biases:** Normalize: "Everyone has these biases — they're features of human cognition, not personal failings. The goal is awareness, not judgment." Focus on the debiasing strategies, not the diagnosis.
 
 **Retrospective analysis (was the past decision biased?):** Apply hindsight-bias correction first. Evaluate the reasoning based on what was knowable at the time, not on what's known now. A decision can be unbiased and still produce a bad outcome.
+
+
+
+## Related Skills
+
+- **behavioral-game-theory** — Cognitive biases (anchoring, framing, loss aversion) catalogued here recur as strategic patterns in behavioral-game-theory. Use behavioral-game-theory when biases interact across multiple agents.

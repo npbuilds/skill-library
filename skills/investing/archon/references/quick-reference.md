@@ -1,5 +1,6 @@
 # Archon — Quick Reference
 
+> **DEPRECATED (2026-05-11):** This was the briefing-reader cheat sheet. No longer wired into `archon/SKILL.md` v2.1 (current mode is conversational). May be repurposed as a chat-mode routing card in a later phase; until then, treat as archival.
 
 ## Quick Reference
 

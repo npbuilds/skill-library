@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-05-14T02:06:29Z",
+  "last_scan": "2026-05-14T17:10:08Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -235,12 +235,9 @@
       "depends_on": [
         "aroma-lexicon",
         "deductive-method",
-        "model-evaluation",
         "statistical-testing"
       ],
-      "referenced_by": [
-        "model-evaluation"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:sommelier",
         "subdomain:tasting-evaluation",
@@ -1605,18 +1602,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "regions-terroir",
-        "terroir-science",
-        "time-series"
+        "terroir-science"
       ],
-      "referenced_by": [
-        "time-series"
-      ],
+      "referenced_by": [],
       "shares_references_with": [
         "wine-futures"
       ],
@@ -1656,19 +1650,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
-        "feature-engineering",
         "food-pairing",
         "pairing-science",
         "tasting-evaluation"
       ],
       "referenced_by": [
-        "cuisine-pairing",
-        "feature-engineering"
+        "cuisine-pairing"
       ],
       "parent": "sommelier-lab",
       "tags": [
@@ -1700,8 +1692,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 73,
-        "estimated_tokens_body": 1349,
-        "estimated_tokens_total": 1422
+        "estimated_tokens_body": 1352,
+        "estimated_tokens_total": 1425
       },
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
@@ -1710,9 +1702,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 78,
-      "depends_on": [
-        "infrastructure-orchestrator"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "design-orchestrator",
         "infrastructure-orchestrator",
@@ -1754,8 +1744,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 60,
-        "estimated_tokens_body": 1195,
-        "estimated_tokens_total": 1255
+        "estimated_tokens_body": 1199,
+        "estimated_tokens_total": 1259
       },
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
@@ -1765,7 +1755,6 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-dashboard",
         "skill-registry"
@@ -1809,12 +1798,11 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 75,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry"
       ],
@@ -1862,7 +1850,6 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-dashboard",
         "skill-health",
         "skill-registry",
@@ -1912,7 +1899,6 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry",
         "skill-scaffold"
@@ -1948,8 +1934,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 51,
-        "estimated_tokens_body": 943,
-        "estimated_tokens_total": 994
+        "estimated_tokens_body": 947,
+        "estimated_tokens_total": 998
       },
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
@@ -1959,7 +1945,6 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-registry"
       ],
       "referenced_by": [
@@ -2008,7 +1993,6 @@
       "manual_notes": null,
       "composite_score": 71,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-health",
         "skill-registry",
         "skill-scaffold"
@@ -2055,7 +2039,6 @@
       "manual_notes": null,
       "composite_score": 74,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry"
       ],
@@ -2096,12 +2079,11 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-registry"
       ],
       "referenced_by": [
@@ -2141,15 +2123,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-19T00:00:00Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 71,
       "depends_on": [],
       "referenced_by": [
         "design-orchestrator",
-        "illustration-direction",
-        "visual-communication"
+        "illustration-direction"
       ],
       "shares_references_with": [
         "design-principles",
@@ -2201,8 +2182,7 @@
       "referenced_by": [
         "design-orchestrator",
         "illustration-direction",
-        "sentence-craft",
-        "visual-communication"
+        "sentence-craft"
       ],
       "shares_references_with": [
         "color-theory",
@@ -2250,8 +2230,7 @@
       "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
-        "design-orchestrator",
-        "visual-communication"
+        "design-orchestrator"
       ],
       "shares_references_with": [
         "color-theory",
@@ -2293,24 +2272,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
-      "depends_on": [
-        "color-theory",
-        "design-principles",
-        "rhetoric",
-        "visual-perception"
-      ],
+      "composite_score": 72,
+      "depends_on": [],
       "referenced_by": [
         "color-theory",
-        "design-orchestrator",
         "design-principles",
         "illustration-direction",
         "master-artificer",
         "motion-design",
-        "rhetoric",
         "visual-perception"
       ],
       "tags": [
@@ -2357,19 +2329,12 @@
         "color-theory",
         "design-principles",
         "visual-perception",
-        "visual-communication",
-        "typography",
-        "brand-identity",
         "brand-foundations",
         "visual-identity",
         "brand-voice",
         "type-fundamentals",
         "type-pairing",
-        "responsive-type",
-        "aesthetic-identity",
-        "style-evolution-observer",
-        "motion-design",
-        "illustration-direction"
+        "responsive-type"
       ],
       "referenced_by": [
         "aesthetic-identity",
@@ -2414,22 +2379,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 68,
       "depends_on": [
-        "prose-rhythm",
-        "responsive-type",
-        "sentence-craft",
-        "type-fundamentals",
-        "type-pairing"
+        "prose-rhythm"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer",
         "responsive-type",
-        "sentence-craft",
         "type-fundamentals",
         "type-pairing"
       ],
@@ -2476,8 +2435,7 @@
       "referenced_by": [
         "design-orchestrator",
         "responsive-type",
-        "type-pairing",
-        "typography"
+        "type-pairing"
       ],
       "tags": [
         "domain:design",
@@ -2515,16 +2473,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "type-fundamentals"
       ],
       "referenced_by": [
-        "design-orchestrator",
-        "typography"
+        "design-orchestrator"
       ],
       "tags": [
         "domain:design",
@@ -2562,16 +2519,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "type-fundamentals"
       ],
       "referenced_by": [
-        "design-orchestrator",
-        "typography"
+        "design-orchestrator"
       ],
       "tags": [
         "domain:design",
@@ -2609,20 +2565,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
-      "depends_on": [
-        "brand-foundations",
-        "brand-voice",
-        "visual-identity"
-      ],
+      "composite_score": 68,
+      "depends_on": [],
       "referenced_by": [
         "aesthetic-identity",
         "brand-foundations",
         "brand-voice",
-        "design-orchestrator",
         "visual-identity"
       ],
       "tags": [
@@ -2666,7 +2617,6 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "brand-identity",
         "brand-voice",
         "design-orchestrator",
         "narrative-architecture",
@@ -2708,15 +2658,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "brand-foundations"
       ],
       "referenced_by": [
-        "brand-identity",
         "design-orchestrator"
       ],
       "tags": [
@@ -2764,7 +2713,6 @@
         "style-dna"
       ],
       "referenced_by": [
-        "brand-identity",
         "design-orchestrator",
         "narrative-architecture"
       ],
@@ -2874,16 +2822,13 @@
         "point-of-view",
         "prose-writer",
         "religion-design",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "character-belief-tracker",
         "history-builder",
         "magic-systems",
-        "narrative-craft",
-        "narrative-pacing",
-        "worldbuilding-orchestrator"
+        "narrative-pacing"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -2920,20 +2865,18 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 75,
       "depends_on": [
         "cultures-societies",
         "diction",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "conlang-craft",
-        "lore-writer",
-        "worldbuilding-orchestrator"
+        "lore-writer"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -2975,16 +2918,14 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "cultures-societies",
         "geography-ecology",
         "lore-writer",
         "magic-systems",
-        "technology-progression",
-        "worldbuilding-orchestrator"
+        "technology-progression"
       ],
       "shares_references_with": [
         "ecology-design",
@@ -3129,10 +3070,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "cultures-societies",
         "lore-writer",
@@ -3140,9 +3081,7 @@
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [
-        "narrative-craft"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:worldbuilding",
         "level:action",
@@ -3227,17 +3166,11 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 82,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
-      "depends_on": [
-        "strategic-foundations",
-        "mechanism-design",
-        "evolutionary-dynamics",
-        "information-economics",
-        "computational-strategy"
-      ],
+      "composite_score": 78,
+      "depends_on": [],
       "referenced_by": [
         "computational-strategy",
         "evolutionary-dynamics",
@@ -3279,21 +3212,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
-      "depends_on": [
-        "classical-games",
-        "cooperative-games",
-        "game-solver"
-      ],
+      "composite_score": 71,
+      "depends_on": [],
       "referenced_by": [
         "behavioral-game-theory",
         "classical-games",
         "cooperative-games",
         "game-solver",
-        "game-theory-orchestrator",
         "strategy-and-grand-strategy"
       ],
       "tags": [
@@ -3316,39 +3244,34 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1515,
-        "body_words": 1460,
+        "word_count": 1548,
+        "body_words": 1493,
         "description_words": 39,
-        "section_count": 9,
+        "section_count": 10,
         "reference_files": 4,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 51,
-        "estimated_tokens_body": 2704,
-        "estimated_tokens_total": 2755
+        "estimated_tokens_body": 2766,
+        "estimated_tokens_total": 2817
       },
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 85,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 82,
       "depends_on": [
-        "dilemma-analyzer",
-        "regime-intelligence",
-        "second-level-thinking"
+        "regime-intelligence"
       ],
       "referenced_by": [
         "algorithmic-game-theory",
         "cooperative-games",
-        "dilemma-analyzer",
         "evolutionary-games",
         "faction-design",
         "game-solver",
-        "second-level-thinking",
-        "strategic-foundations",
         "strategy-and-grand-strategy"
       ],
       "tags": [
@@ -3387,20 +3310,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 75,
       "depends_on": [
         "classical-games",
-        "ethics",
-        "rights-reasoner"
+        "ethics"
       ],
       "referenced_by": [
         "diplomacy-and-international-order",
-        "game-solver",
-        "rights-reasoner",
-        "strategic-foundations"
+        "game-solver"
       ],
       "tags": [
         "domain:game-theory",
@@ -3447,9 +3367,7 @@
         "classical-games",
         "cooperative-games"
       ],
-      "referenced_by": [
-        "strategic-foundations"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:strategic-foundations",
@@ -3485,22 +3403,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 68,
       "depends_on": [
-        "auction-theory",
-        "market-microstructure",
-        "matching-markets",
-        "mechanism-designer",
-        "portfolio-construction",
-        "social-choice"
+        "portfolio-construction"
       ],
       "referenced_by": [
         "auction-theory",
-        "game-theory-orchestrator",
-        "market-microstructure",
         "matching-markets",
         "mechanism-designer",
         "social-choice"
@@ -3540,17 +3451,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
-        "event-driven",
-        "market-microstructure"
+        "event-driven"
       ],
       "referenced_by": [
-        "market-microstructure",
-        "mechanism-design",
         "mechanism-designer",
         "special-situations"
       ],
@@ -3590,14 +3498,13 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 67,
       "depends_on": [],
       "referenced_by": [
         "market-microstructure",
-        "mechanism-design",
         "mechanism-designer"
       ],
       "shares_references_with": [
@@ -3639,17 +3546,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
-        "justice-analyst",
         "political-philosophy"
       ],
       "referenced_by": [
-        "justice-analyst",
-        "mechanism-design",
         "mechanism-designer"
       ],
       "tags": [
@@ -3698,7 +3602,6 @@
         "social-choice"
       ],
       "referenced_by": [
-        "mechanism-design",
         "values-excavator"
       ],
       "tags": [
@@ -3736,22 +3639,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
-      "depends_on": [
-        "evo-simulator",
-        "evolutionary-games",
-        "population-dynamics",
-        "reflexivity-sentiment"
-      ],
+      "composite_score": 68,
+      "depends_on": [],
       "referenced_by": [
         "evo-simulator",
         "evolutionary-games",
-        "game-theory-orchestrator",
-        "population-dynamics",
-        "reflexivity-sentiment"
+        "population-dynamics"
       ],
       "tags": [
         "domain:game-theory",
@@ -3797,7 +3693,6 @@
       ],
       "referenced_by": [
         "evo-simulator",
-        "evolutionary-dynamics",
         "population-dynamics"
       ],
       "tags": [
@@ -3836,16 +3731,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "evolutionary-games"
       ],
       "referenced_by": [
-        "evo-simulator",
-        "evolutionary-dynamics"
+        "evo-simulator"
       ],
       "tags": [
         "domain:game-theory",
@@ -3883,17 +3777,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "evolutionary-games",
         "population-dynamics"
       ],
-      "referenced_by": [
-        "evolutionary-dynamics"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:evolutionary-dynamics",
@@ -3929,23 +3821,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 71,
+      "composite_score": 71,
       "depends_on": [
-        "bayesian-persuasion",
-        "info-designer",
-        "insider-signals",
-        "reflexivity-sentiment",
-        "second-level-thinking",
-        "signaling-screening"
+        "insider-signals"
       ],
       "referenced_by": [
         "bayesian-persuasion",
-        "game-theory-orchestrator",
         "info-designer",
         "intelligence-and-information-war",
-        "reflexivity-sentiment",
-        "second-level-thinking",
         "signaling-screening"
       ],
       "tags": [
@@ -3992,7 +3876,6 @@
       "referenced_by": [
         "bayesian-persuasion",
         "info-designer",
-        "information-economics",
         "intelligence-and-information-war",
         "special-situations"
       ],
@@ -4032,14 +3915,13 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 66,
+      "composite_score": 66,
       "depends_on": [
         "signaling-screening"
       ],
       "referenced_by": [
-        "info-designer",
-        "information-economics"
+        "info-designer"
       ],
       "tags": [
         "domain:game-theory",
@@ -4077,15 +3959,13 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
-      "composite_score": 68,
+      "auto_score": 63,
+      "composite_score": 63,
       "depends_on": [
         "bayesian-persuasion",
         "signaling-screening"
       ],
-      "referenced_by": [
-        "information-economics"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:information-economics",
@@ -4121,17 +4001,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
-      "composite_score": 72,
-      "depends_on": [
-        "algorithmic-game-theory",
-        "behavioral-game-theory",
-        "learning-in-games"
-      ],
+      "auto_score": 68,
+      "composite_score": 68,
+      "depends_on": [],
       "referenced_by": [
         "algorithmic-game-theory",
         "behavioral-game-theory",
-        "game-theory-orchestrator",
         "learning-in-games"
       ],
       "tags": [
@@ -4169,13 +4044,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 66,
+      "composite_score": 66,
       "depends_on": [
         "classical-games"
       ],
       "referenced_by": [
-        "computational-strategy",
         "game-solver"
       ],
       "tags": [
@@ -4199,34 +4073,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1109,
-        "body_words": 1048,
+        "word_count": 1163,
+        "body_words": 1102,
         "description_words": 45,
-        "section_count": 6,
+        "section_count": 7,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 59,
-        "estimated_tokens_body": 1860,
-        "estimated_tokens_total": 1919
+        "estimated_tokens_body": 1986,
+        "estimated_tokens_total": 2045
       },
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 74,
+      "composite_score": 74,
       "depends_on": [
-        "bias-detector",
-        "decision-architect",
         "drawdown-psychology",
         "market-psychology",
         "strategic-foundations"
       ],
       "referenced_by": [
-        "bias-detector",
-        "computational-strategy",
-        "decision-architect",
         "learning-in-games",
         "reflexivity-sentiment"
       ],
@@ -4271,9 +4140,7 @@
       "depends_on": [
         "behavioral-game-theory"
       ],
-      "referenced_by": [
-        "computational-strategy"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:computational-strategy",
@@ -4321,19 +4188,13 @@
         "causal-inference",
         "model-evaluation",
         "time-series",
-        "chart-selection",
-        "drift-detection",
-        "responsible-ai",
         "biostatistics"
       ],
       "referenced_by": [
         "bacchus",
         "chart-selection",
         "data-wrangling",
-        "drift-detection",
-        "modeling",
-        "responsible-ai",
-        "statistical-analysis"
+        "drift-detection"
       ],
       "tags": [
         "domain:data-science",
@@ -4398,38 +4259,32 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2137,
-        "body_words": 2084,
+        "word_count": 2167,
+        "body_words": 2114,
         "description_words": 37,
-        "section_count": 11,
+        "section_count": 12,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 49,
-        "estimated_tokens_body": 3775,
-        "estimated_tokens_total": 3824
+        "estimated_tokens_body": 3840,
+        "estimated_tokens_total": 3889
       },
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [
-        "alt-data-monitoring",
         "data-cleaning",
-        "modeling",
-        "molecular-pairing",
-        "sentiment-signals"
+        "modeling"
       ],
       "referenced_by": [
-        "alt-data-monitoring",
         "data-science-orchestrator",
-        "model-evaluation",
-        "molecular-pairing",
-        "sentiment-signals"
+        "model-evaluation"
       ],
       "tags": [
         "domain:data-science",
@@ -4467,22 +4322,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
-      "depends_on": [
-        "alt-data-monitoring",
-        "factor-exposure"
-      ],
+      "composite_score": 78,
+      "depends_on": [],
       "referenced_by": [
-        "alt-data-monitoring",
         "biostatistics",
         "causal-inference",
         "data-science-orchestrator",
         "drift-detection",
         "evidence-evaluator",
-        "factor-exposure",
         "model-evaluation",
         "quality-assessment",
         "time-series"
@@ -4523,20 +4373,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 74,
       "depends_on": [
-        "factor-exposure",
-        "performance-attribution",
         "statistical-testing"
       ],
       "referenced_by": [
         "counterfactual-reasoner",
-        "data-science-orchestrator",
-        "factor-exposure",
-        "performance-attribution"
+        "data-science-orchestrator"
       ],
       "tags": [
         "domain:data-science",
@@ -4559,29 +4405,27 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2088,
-        "body_words": 2033,
+        "word_count": 2122,
+        "body_words": 2067,
         "description_words": 39,
-        "section_count": 10,
+        "section_count": 11,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 51,
-        "estimated_tokens_body": 3487,
-        "estimated_tokens_total": 3538
+        "estimated_tokens_body": 3559,
+        "estimated_tokens_total": 3610
       },
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 75,
       "depends_on": [
         "feature-engineering",
-        "performance-attribution",
-        "quality-assessment",
         "statistical-analysis",
         "statistical-testing",
         "tail-risk"
@@ -4590,8 +4434,6 @@
         "bias-detector",
         "data-science-orchestrator",
         "drift-detection",
-        "performance-attribution",
-        "quality-assessment",
         "responsible-ai",
         "time-series"
       ],
@@ -4616,39 +4458,33 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2099,
-        "body_words": 2035,
+        "word_count": 2132,
+        "body_words": 2068,
         "description_words": 48,
-        "section_count": 11,
+        "section_count": 12,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 63,
-        "estimated_tokens_body": 3670,
-        "estimated_tokens_total": 3733
+        "estimated_tokens_body": 3743,
+        "estimated_tokens_total": 3806
       },
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 77,
       "depends_on": [
-        "climate-projections",
-        "correlation-regimes",
-        "macro-cycles",
         "model-evaluation",
         "statistical-analysis",
         "statistical-testing"
       ],
       "referenced_by": [
-        "climate-projections",
         "comparative-civilizations",
-        "correlation-regimes",
-        "data-science-orchestrator",
-        "macro-cycles"
+        "data-science-orchestrator"
       ],
       "tags": [
         "domain:data-science",
@@ -4686,17 +4522,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 69,
       "depends_on": [
         "modeling",
         "statistical-analysis"
       ],
-      "referenced_by": [
-        "data-science-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:data-science",
         "subdomain:visualization",
@@ -4733,22 +4567,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [
-        "alt-data-monitoring",
-        "macro-cycles",
         "model-evaluation",
         "modeling",
         "statistical-analysis",
         "statistical-testing"
       ],
       "referenced_by": [
-        "alt-data-monitoring",
-        "data-science-orchestrator",
-        "macro-cycles",
         "sentiment-signals"
       ],
       "tags": [
@@ -4787,18 +4616,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
-        "data-science-orchestrator",
         "model-evaluation",
         "modeling"
       ],
-      "referenced_by": [
-        "data-science-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:data-science",
         "subdomain:frontier",
@@ -4881,13 +4707,11 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
-      "depends_on": [
-        "data-science-orchestrator"
-      ],
+      "composite_score": 75,
+      "depends_on": [],
       "referenced_by": [
         "biostatistics",
         "causal-inference",
@@ -4938,9 +4762,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "data-science-orchestrator"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "chart-selection",
         "drift-detection",
@@ -5028,10 +4850,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 75,
       "depends_on": [
         "skill-registry",
         "skill-health",
@@ -5044,15 +4866,6 @@
         "skill-export"
       ],
       "referenced_by": [
-        "skill-analyze",
-        "skill-dashboard",
-        "skill-export",
-        "skill-fork",
-        "skill-health",
-        "skill-network",
-        "skill-registry",
-        "skill-scaffold",
-        "skill-test",
         "the-loom"
       ],
       "tags": [
@@ -5093,11 +4906,6 @@
       "manual_notes": null,
       "composite_score": 84,
       "depends_on": [
-        "lore-writer",
-        "naming-system",
-        "magic-system-design",
-        "geography-ecology",
-        "cultures-societies",
         "narrative-craft",
         "prose-writer",
         "diction"
@@ -5106,16 +4914,11 @@
         "bacchus",
         "character-belief-tracker",
         "civilizations",
-        "cultures-societies",
         "ecology-design",
         "extrapolation-engine",
         "faction-design",
-        "geography-ecology",
         "history-builder",
-        "lore-writer",
-        "magic-system-design",
         "magic-systems",
-        "naming-system",
         "narrative-pacing",
         "physical-world",
         "religion-design",
@@ -5162,15 +4965,13 @@
       "composite_score": 75,
       "depends_on": [
         "magic-system-design",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "cultures-societies",
         "ecology-design",
         "economic-systems",
-        "technology-progression",
-        "worldbuilding-orchestrator"
+        "technology-progression"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5212,26 +5013,20 @@
       "manual_notes": null,
       "composite_score": 80,
       "depends_on": [
-        "dialogue",
         "geography-ecology",
         "magic-system-design",
-        "rhetoric",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "character-belief-tracker",
         "conlang-craft",
-        "dialogue",
         "dilemma-analyzer",
         "economic-systems",
         "faction-design",
         "lore-writer",
         "naming-system",
         "religion-design",
-        "rhetoric",
-        "rights-reasoner",
-        "worldbuilding-orchestrator"
+        "rights-reasoner"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5449,13 +5244,10 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 89,
-      "depends_on": [
-        "claim-decomposer",
-        "source-triangulator",
-        "evidence-synthesizer"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "agentic-researcher",
+        "archon",
         "bias-and-funding-tracer",
         "claim-decomposer",
         "cold-outreach",
@@ -5516,8 +5308,7 @@
         "problem-typology",
         "root-vs-symptom-tagger",
         "six-eyes",
-        "source-triangulator",
-        "spelunker"
+        "source-triangulator"
       ],
       "tags": [
         "domain:research",
@@ -5565,8 +5356,7 @@
         "ecosystem-mapping",
         "evidence-evaluator",
         "evidence-synthesizer",
-        "source-criticism",
-        "spelunker"
+        "source-criticism"
       ],
       "tags": [
         "domain:research",
@@ -5602,17 +5392,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 73,
       "depends_on": [
         "claim-decomposer",
         "source-triangulator"
       ],
-      "referenced_by": [
-        "spelunker"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:research",
         "level:action"
@@ -5632,12 +5420,6 @@
       "manual_rating": null,
       "manual_notes": null,
       "depends_on": [
-        "sentence-craft",
-        "narrative-craft",
-        "rhetoric",
-        "revision-craft",
-        "prose-writer",
-        "style-mixer",
         "style-mutator"
       ],
       "created": "2026-03-26",
@@ -5660,8 +5442,8 @@
         "estimated_tokens_body": 2170,
         "estimated_tokens_total": 2238
       },
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 75,
+      "composite_score": 75,
       "referenced_by": [
         "narrative-craft",
         "narrative-keeper",
@@ -5688,12 +5470,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "depends_on": [
-        "design-principles",
-        "diction",
-        "prose-rhythm",
-        "style-dna",
-        "syntax-patterns",
-        "typography"
+        "design-principles"
       ],
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
@@ -5715,18 +5492,16 @@
         "estimated_tokens_body": 1650,
         "estimated_tokens_total": 1726
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 72,
+      "composite_score": 72,
       "referenced_by": [
         "diction",
         "figurative-language",
         "prose-editor",
-        "prose-orchestrator",
         "prose-rhythm",
         "prose-writer",
         "style-dna",
-        "syntax-patterns",
-        "typography"
+        "syntax-patterns"
       ],
       "tags": [
         "domain:writing",
@@ -5770,7 +5545,6 @@
       "composite_score": 72,
       "referenced_by": [
         "design-principles",
-        "sentence-craft",
         "syntax-patterns",
         "typography"
       ],
@@ -5820,7 +5594,6 @@
         "figurative-language",
         "lore-writer",
         "naming-system",
-        "sentence-craft",
         "syntax-patterns",
         "worldbuilding-orchestrator"
       ],
@@ -5866,11 +5639,9 @@
         "estimated_tokens_body": 2182,
         "estimated_tokens_total": 2240
       },
-      "auto_score": 68,
-      "composite_score": 68,
-      "referenced_by": [
-        "sentence-craft"
-      ],
+      "auto_score": 63,
+      "composite_score": 63,
+      "referenced_by": [],
       "tags": [
         "domain:writing",
         "subdomain:sentence-craft",
@@ -5886,17 +5657,7 @@
       "location": "skills/writing/narrative-craft/SKILL.md",
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
-      "depends_on": [
-        "character-belief-tracker",
-        "concrete-detail",
-        "dialogue",
-        "lore-writer",
-        "narrative-arc",
-        "narrative-pacing",
-        "pacing",
-        "point-of-view",
-        "scene-craft"
-      ],
+      "depends_on": [],
       "tags": [
         "domain:writing",
         "subdomain:narrative-craft",
@@ -5938,7 +5699,6 @@
         "narrative-geometry",
         "pacing",
         "point-of-view",
-        "prose-orchestrator",
         "prose-writer",
         "scene-craft",
         "world-to-story",
@@ -5990,7 +5750,6 @@
       "auto_score": 71,
       "composite_score": 71,
       "referenced_by": [
-        "narrative-craft",
         "narrative-geometry",
         "narrative-pacing"
       ],
@@ -6034,13 +5793,12 @@
         "estimated_tokens_body": 868,
         "estimated_tokens_total": 927
       },
-      "auto_score": 73,
-      "composite_score": 73,
+      "auto_score": 69,
+      "composite_score": 69,
       "referenced_by": [
         "concrete-detail",
         "dialogue",
         "narrative-arc",
-        "narrative-craft",
         "pacing",
         "point-of-view"
       ],
@@ -6054,7 +5812,6 @@
       "plugin": "skill-infra",
       "parent": "narrative-craft",
       "depends_on": [
-        "narrative-pacing",
         "scene-craft"
       ],
       "tags": [
@@ -6087,14 +5844,12 @@
         "estimated_tokens_body": 1150,
         "estimated_tokens_total": 1212
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 71,
+      "composite_score": 71,
       "referenced_by": [
         "dialogue",
         "narrative-arc",
-        "narrative-craft",
         "narrative-geometry",
-        "narrative-pacing",
         "point-of-view"
       ],
       "invocation": "knowledge"
@@ -6107,8 +5862,6 @@
       "plugin": "skill-infra",
       "parent": "narrative-craft",
       "depends_on": [
-        "cultures-societies",
-        "faction-design",
         "pacing",
         "scene-craft"
       ],
@@ -6142,13 +5895,10 @@
         "estimated_tokens_body": 1130,
         "estimated_tokens_total": 1185
       },
-      "auto_score": 73,
-      "composite_score": 73,
+      "auto_score": 69,
+      "composite_score": 69,
       "referenced_by": [
-        "cultures-societies",
-        "faction-design",
-        "micro-tension",
-        "narrative-craft"
+        "micro-tension"
       ],
       "invocation": "knowledge"
     },
@@ -6193,13 +5943,12 @@
         "estimated_tokens_body": 1101,
         "estimated_tokens_total": 1146
       },
-      "auto_score": 73,
-      "composite_score": 73,
+      "auto_score": 69,
+      "composite_score": 69,
       "referenced_by": [
         "character-belief-tracker",
         "character-interiority",
-        "lore-writer",
-        "narrative-craft"
+        "lore-writer"
       ],
       "invocation": "knowledge"
     },
@@ -6248,8 +5997,7 @@
       "composite_score": 70,
       "referenced_by": [
         "character-interiority",
-        "figurative-language",
-        "narrative-craft"
+        "figurative-language"
       ],
       "invocation": "knowledge"
     },
@@ -6260,14 +6008,7 @@
       "location": "skills/writing/rhetoric/SKILL.md",
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
-      "depends_on": [
-        "argument-structure",
-        "cultures-societies",
-        "essay-forms",
-        "rhetorical-appeals",
-        "rhetorical-devices",
-        "visual-communication"
-      ],
+      "depends_on": [],
       "tags": [
         "domain:writing",
         "subdomain:rhetoric",
@@ -6285,29 +6026,26 @@
       "created": "2026-03-26T10:01:10",
       "last_modified": "2026-04-13",
       "metrics": {
-        "word_count": 764,
-        "body_words": 704,
+        "word_count": 796,
+        "body_words": 736,
         "description_words": 41,
-        "section_count": 5,
+        "section_count": 6,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 54,
-        "estimated_tokens_body": 1241,
-        "estimated_tokens_total": 1295
+        "estimated_tokens_body": 1307,
+        "estimated_tokens_total": 1361
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "argument-structure",
-        "cultures-societies",
         "essay-forms",
         "historical-argument",
-        "prose-orchestrator",
         "rhetorical-appeals",
-        "rhetorical-devices",
-        "visual-communication"
+        "rhetorical-devices"
       ],
       "invocation": "director"
     },
@@ -6352,7 +6090,6 @@
       "auto_score": 63,
       "composite_score": 63,
       "referenced_by": [
-        "rhetoric",
         "rhetorical-devices"
       ],
       "invocation": "knowledge"
@@ -6400,7 +6137,6 @@
       "referenced_by": [
         "essay-forms",
         "executive-distiller",
-        "rhetoric",
         "six-eyes"
       ],
       "invocation": "knowledge"
@@ -6447,9 +6183,7 @@
       },
       "auto_score": 61,
       "composite_score": 61,
-      "referenced_by": [
-        "rhetoric"
-      ],
+      "referenced_by": [],
       "invocation": "knowledge"
     },
     "essay-forms": {
@@ -6494,9 +6228,7 @@
       },
       "auto_score": 63,
       "composite_score": 63,
-      "referenced_by": [
-        "rhetoric"
-      ],
+      "referenced_by": [],
       "invocation": "knowledge"
     },
     "revision-craft": {
@@ -6506,11 +6238,7 @@
       "location": "skills/writing/revision-craft/SKILL.md",
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
-      "depends_on": [
-        "prose-editor",
-        "style-analyzer",
-        "style-mutator"
-      ],
+      "depends_on": [],
       "tags": [
         "domain:writing",
         "subdomain:revision-craft",
@@ -6540,11 +6268,10 @@
         "estimated_tokens_body": 1173,
         "estimated_tokens_total": 1229
       },
-      "auto_score": 72,
-      "composite_score": 72,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "prose-editor",
-        "prose-orchestrator",
         "style-analyzer",
         "style-mixer",
         "style-mutator"
@@ -6605,8 +6332,7 @@
         "public-speaking",
         "reflection-and-journaling",
         "relationship-stewardship",
-        "resume-craft",
-        "revision-craft"
+        "resume-craft"
       ],
       "invocation": "action"
     },
@@ -6650,10 +6376,9 @@
         "estimated_tokens_body": 994,
         "estimated_tokens_total": 1048
       },
-      "auto_score": 66,
-      "composite_score": 66,
+      "auto_score": 61,
+      "composite_score": 61,
       "referenced_by": [
-        "revision-craft",
         "style-mutator"
       ],
       "invocation": "action"
@@ -6704,7 +6429,6 @@
       "composite_score": 75,
       "referenced_by": [
         "lore-writer",
-        "prose-orchestrator",
         "worldbuilding-orchestrator"
       ],
       "invocation": "action"
@@ -6735,21 +6459,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "lore-writer",
         "narrative-arc",
-        "pacing",
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [
-        "narrative-craft",
-        "pacing"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:worldbuilding",
         "level:knowledge",
@@ -6838,13 +6558,11 @@
       "depends_on": [
         "classical-games",
         "cultures-societies",
-        "dialogue",
         "history-builder",
         "world-bible",
         "worldbuilding-orchestrator"
       ],
       "referenced_by": [
-        "dialogue",
         "justice-analyst"
       ],
       "tags": [
@@ -6932,12 +6650,11 @@
         "estimated_tokens_body": 3369,
         "estimated_tokens_total": 3438
       },
-      "auto_score": 76,
-      "composite_score": 76,
+      "auto_score": 72,
+      "composite_score": 72,
       "referenced_by": [
         "brand-voice",
         "prose-writer",
-        "sentence-craft",
         "style-analyzer",
         "style-mixer",
         "style-mutator"
@@ -6987,7 +6704,6 @@
       "auto_score": 68,
       "composite_score": 68,
       "referenced_by": [
-        "prose-orchestrator",
         "prose-writer"
       ],
       "tags": [
@@ -7035,8 +6751,7 @@
       "auto_score": 67,
       "composite_score": 67,
       "referenced_by": [
-        "prose-orchestrator",
-        "revision-craft"
+        "prose-orchestrator"
       ],
       "tags": [
         "domain:writing",
@@ -7079,7 +6794,6 @@
       "depends_on": [],
       "referenced_by": [
         "alt-data-monitoring",
-        "archon",
         "performance-attribution",
         "rebalancing-logic"
       ],
@@ -7102,37 +6816,27 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3776,
-        "body_words": 3727,
+        "word_count": 3811,
+        "body_words": 3762,
         "description_words": 33,
-        "section_count": 11,
+        "section_count": 12,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 43,
-        "estimated_tokens_body": 6624,
-        "estimated_tokens_total": 6667
+        "estimated_tokens_body": 6693,
+        "estimated_tokens_total": 6736
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
-      "depends_on": [
-        "drift-detection",
-        "feature-engineering",
-        "sentiment-signals",
-        "statistical-testing"
-      ],
-      "referenced_by": [
-        "drift-detection",
-        "feature-engineering",
-        "sentiment-signals",
-        "statistical-testing"
-      ],
+      "composite_score": 59,
+      "depends_on": [],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7167,20 +6871,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 63,
       "depends_on": [
         "asset-allocation",
-        "causal-inference",
-        "factor-exposure",
-        "model-evaluation"
+        "factor-exposure"
       ],
-      "referenced_by": [
-        "causal-inference",
-        "model-evaluation"
-      ],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7200,32 +6899,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2585,
-        "body_words": 2539,
+        "word_count": 2608,
+        "body_words": 2562,
         "description_words": 30,
-        "section_count": 8,
+        "section_count": 9,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 39,
-        "estimated_tokens_body": 4290,
-        "estimated_tokens_total": 4329
+        "estimated_tokens_body": 4340,
+        "estimated_tokens_total": 4379
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "asset-allocation",
-        "tax-optimization"
+        "asset-allocation"
       ],
-      "referenced_by": [
-        "tax-optimization"
-      ],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7236,7 +6932,7 @@
     },
     "archon": {
       "name": "archon",
-      "description": "Orchestrate investment analysis across all markets and asset classes using six analytical frameworks (Dalio regime, Marks contrarian, Soros reflexivity, Taleb tail risk, Tudor Jones defense, Druckenmiller conviction sizing). Generates daily briefings with 7-section structure, manages a paper trading portfolio, and maintains a cumulative macro narrative. Use when the user needs market analysis, regime classification, risk assessment, or investment intelligence.",
+      "description": "Engages as an analytical thinking partner across investment domains, applying six frameworks (Dalio regime, Marks contrarian, Soros reflexivity, Taleb tail risk, Tudor Jones defense, Druckenmiller conviction sizing) conversationally. Routes question-by-question to 10 subdomain directors and escalates to spelunker for verification or neocortex for scenario planning. Optionally persists theses, trades, sessions, and macro views to an Obsidian vault via vault-writer. Use when the user wants to think through a trade idea, regime question, risk scenario, or portfolio decision.",
       "location": "skills/investing/archon/SKILL.md",
       "plugin": "skill-infra",
       "type": "orchestrator",
@@ -7245,36 +6941,27 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 997,
-        "body_words": 913,
-        "description_words": 59,
-        "section_count": 9,
-        "reference_files": 8,
+        "word_count": 1873,
+        "body_words": 1769,
+        "description_words": 77,
+        "section_count": 10,
+        "reference_files": 11,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_metadata": 77,
-        "estimated_tokens_body": 1625,
-        "estimated_tokens_total": 1702
+        "estimated_tokens_metadata": 101,
+        "estimated_tokens_body": 3148,
+        "estimated_tokens_total": 3249
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 89,
+      "auto_score": 87,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 89,
+      "composite_score": 87,
       "depends_on": [
-        "value-quality",
-        "reflexivity-sentiment",
-        "asset-universe",
-        "regime-intelligence",
-        "portfolio-construction",
-        "market-microstructure",
-        "risk-architecture",
-        "special-situations",
-        "adaptive-monitoring",
-        "geopolitical-overlay"
+        "spelunker"
       ],
       "referenced_by": [
         "adaptive-monitoring",
@@ -7336,7 +7023,6 @@
       "depends_on": [],
       "referenced_by": [
         "alternatives",
-        "archon",
         "commodities",
         "currencies",
         "digital-assets",
@@ -7405,32 +7091,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2814,
-        "body_words": 2767,
+        "word_count": 2842,
+        "body_words": 2795,
         "description_words": 31,
-        "section_count": 6,
+        "section_count": 7,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 41,
-        "estimated_tokens_body": 4685,
-        "estimated_tokens_total": 4726
+        "estimated_tokens_body": 4747,
+        "estimated_tokens_total": 4788
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
-        "energy-security",
         "macro-cycles"
       ],
-      "referenced_by": [
-        "energy-security"
-      ],
+      "referenced_by": [],
       "parent": "asset-universe",
       "tags": [
         "domain:investing",
@@ -7551,17 +7234,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
-        "factor-exposure",
         "regime-intelligence"
       ],
-      "referenced_by": [
-        "factor-exposure"
-      ],
+      "referenced_by": [],
       "parent": "asset-universe",
       "tags": [
         "domain:investing",
@@ -7640,13 +7320,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "energy-security",
         "great-power-dynamics",
         "justice-analyst",
@@ -7672,32 +7351,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3642,
-        "body_words": 3587,
+        "word_count": 3667,
+        "body_words": 3612,
         "description_words": 39,
-        "section_count": 11,
+        "section_count": 12,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 51,
-        "estimated_tokens_body": 6401,
-        "estimated_tokens_total": 6452
+        "estimated_tokens_body": 6449,
+        "estimated_tokens_total": 6500
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
-        "commodities",
         "great-power-dynamics"
       ],
-      "referenced_by": [
-        "commodities"
-      ],
+      "referenced_by": [],
       "parent": "geopolitical-overlay",
       "tags": [
         "domain:investing",
@@ -7717,32 +7393,30 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2772,
-        "body_words": 2721,
+        "word_count": 2803,
+        "body_words": 2752,
         "description_words": 35,
-        "section_count": 8,
+        "section_count": 9,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 46,
-        "estimated_tokens_body": 5007,
-        "estimated_tokens_total": 5053
+        "estimated_tokens_body": 5076,
+        "estimated_tokens_total": 5122
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
-        "macro-cycles",
-        "secular-themes"
+        "macro-cycles"
       ],
       "referenced_by": [
-        "energy-security",
-        "secular-themes"
+        "energy-security"
       ],
       "parent": "geopolitical-overlay",
       "tags": [
@@ -7763,32 +7437,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3988,
-        "body_words": 3942,
+        "word_count": 4017,
+        "body_words": 3971,
         "description_words": 30,
-        "section_count": 6,
+        "section_count": 7,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 39,
-        "estimated_tokens_body": 7011,
-        "estimated_tokens_total": 7050
+        "estimated_tokens_body": 7060,
+        "estimated_tokens_total": 7099
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 64,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 59,
       "depends_on": [
-        "great-power-dynamics",
         "regime-intelligence"
       ],
-      "referenced_by": [
-        "great-power-dynamics"
-      ],
+      "referenced_by": [],
       "parent": "geopolitical-overlay",
       "tags": [
         "domain:investing",
@@ -7823,21 +7494,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
-        "auction-theory",
-        "matching-markets",
-        "mechanism-design"
+        "matching-markets"
       ],
       "referenced_by": [
-        "archon",
-        "auction-theory",
         "digital-assets",
         "liquidity-topology",
-        "mechanism-design",
         "options-mechanics",
         "passive-flow-dynamics"
       ],
@@ -7860,31 +7526,27 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3769,
-        "body_words": 3706,
+        "word_count": 3800,
+        "body_words": 3737,
         "description_words": 47,
-        "section_count": 10,
+        "section_count": 11,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 62,
-        "estimated_tokens_body": 5972,
-        "estimated_tokens_total": 6034
+        "estimated_tokens_body": 6036,
+        "estimated_tokens_total": 6098
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 63,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
-      "depends_on": [
-        "passive-flow-dynamics"
-      ],
-      "referenced_by": [
-        "passive-flow-dynamics"
-      ],
+      "composite_score": 59,
+      "depends_on": [],
+      "referenced_by": [],
       "parent": "market-microstructure",
       "tags": [
         "domain:investing",
@@ -7904,32 +7566,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3230,
-        "body_words": 3171,
+        "word_count": 3262,
+        "body_words": 3203,
         "description_words": 43,
-        "section_count": 7,
+        "section_count": 8,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 56,
-        "estimated_tokens_body": 5290,
-        "estimated_tokens_total": 5346
+        "estimated_tokens_body": 5356,
+        "estimated_tokens_total": 5412
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
-        "hedging-architecture",
         "tail-risk"
       ],
-      "referenced_by": [
-        "hedging-architecture"
-      ],
+      "referenced_by": [],
       "parent": "market-microstructure",
       "tags": [
         "domain:investing",
@@ -7949,32 +7608,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3406,
-        "body_words": 3354,
+        "word_count": 3443,
+        "body_words": 3391,
         "description_words": 36,
-        "section_count": 8,
+        "section_count": 9,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 47,
-        "estimated_tokens_body": 5603,
-        "estimated_tokens_total": 5650
+        "estimated_tokens_body": 5669,
+        "estimated_tokens_total": 5716
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
-        "factor-exposure",
-        "liquidity-topology"
+        "factor-exposure"
       ],
-      "referenced_by": [
-        "liquidity-topology"
-      ],
+      "referenced_by": [],
       "parent": "market-microstructure",
       "tags": [
         "domain:investing",
@@ -8015,7 +7671,6 @@
       "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "asset-allocation",
         "factor-exposure",
         "hedging-architecture",
@@ -8109,23 +7764,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
-        "asset-allocation",
-        "causal-inference",
-        "equities",
-        "statistical-testing"
+        "asset-allocation"
       ],
       "referenced_by": [
-        "causal-inference",
-        "equities",
         "passive-flow-dynamics",
         "performance-attribution",
-        "quality-compounders",
-        "statistical-testing"
+        "quality-compounders"
       ],
       "parent": "portfolio-construction",
       "tags": [
@@ -8161,18 +7810,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "correlation-regimes",
-        "options-mechanics",
         "tail-risk"
       ],
-      "referenced_by": [
-        "options-mechanics"
-      ],
+      "referenced_by": [],
       "parent": "portfolio-construction",
       "tags": [
         "domain:investing",
@@ -8192,32 +7838,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3623,
-        "body_words": 3585,
+        "word_count": 3650,
+        "body_words": 3612,
         "description_words": 22,
-        "section_count": 7,
+        "section_count": 8,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 29,
-        "estimated_tokens_body": 5851,
-        "estimated_tokens_total": 5880
+        "estimated_tokens_body": 5906,
+        "estimated_tokens_total": 5935
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 63,
       "depends_on": [
-        "asset-allocation",
-        "rebalancing-logic"
+        "asset-allocation"
       ],
-      "referenced_by": [
-        "rebalancing-logic"
-      ],
+      "referenced_by": [],
       "parent": "portfolio-construction",
       "tags": [
         "domain:investing",
@@ -8252,19 +7895,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [
-        "behavioral-game-theory",
-        "evolutionary-dynamics",
-        "information-economics"
+        "behavioral-game-theory"
       ],
       "referenced_by": [
-        "archon",
-        "evolutionary-dynamics",
-        "information-economics",
         "market-psychology",
         "reflexivity-theory",
         "sentiment-signals"
@@ -8288,17 +7926,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3239,
-        "body_words": 3187,
+        "word_count": 3288,
+        "body_words": 3236,
         "description_words": 36,
-        "section_count": 5,
+        "section_count": 6,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 47,
-        "estimated_tokens_body": 5302,
-        "estimated_tokens_total": 5349
+        "estimated_tokens_body": 5404,
+        "estimated_tokens_total": 5451
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
@@ -8307,19 +7945,14 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 70,
-      "depends_on": [
-        "reflexivity-theory",
-        "sentiment-signals"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "behavioral-game-theory",
         "belief-auditor",
         "bias-detector",
         "drawdown-psychology",
         "historical-pattern-recognition",
-        "reflexivity-theory",
-        "second-level-thinking",
-        "sentiment-signals"
+        "second-level-thinking"
       ],
       "parent": "reflexivity-sentiment",
       "tags": [
@@ -8355,16 +7988,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "macro-cycles",
-        "market-psychology"
+        "macro-cycles"
       ],
       "referenced_by": [
-        "market-psychology",
         "second-level-thinking"
       ],
       "parent": "reflexivity-sentiment",
@@ -8386,36 +8017,30 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3641,
-        "body_words": 3592,
+        "word_count": 3694,
+        "body_words": 3645,
         "description_words": 33,
-        "section_count": 6,
+        "section_count": 7,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 43,
-        "estimated_tokens_body": 6432,
-        "estimated_tokens_total": 6475
+        "estimated_tokens_body": 6543,
+        "estimated_tokens_total": 6586
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 64,
       "depends_on": [
-        "alt-data-monitoring",
-        "drift-detection",
-        "feature-engineering",
-        "market-psychology"
+        "drift-detection"
       ],
       "referenced_by": [
-        "alt-data-monitoring",
-        "feature-engineering",
         "insider-signals",
-        "market-psychology",
         "signaling-screening"
       ],
       "parent": "reflexivity-sentiment",
@@ -8458,7 +8083,6 @@
       "composite_score": 79,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "asset-allocation",
         "classical-games",
         "correlation-regimes",
@@ -8502,17 +8126,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "macro-cycles",
         "monetary-regime"
       ],
       "referenced_by": [
-        "fixed-income",
-        "macro-cycles"
+        "fixed-income"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8548,26 +8170,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
-      "depends_on": [
-        "drift-detection",
-        "fiscal-regime",
-        "monetary-regime",
-        "time-series"
-      ],
+      "composite_score": 74,
+      "depends_on": [],
       "referenced_by": [
         "commodities",
         "currencies",
-        "drift-detection",
-        "fiscal-regime",
         "great-power-dynamics",
-        "monetary-regime",
         "money-and-financial-systems",
-        "reflexivity-theory",
-        "time-series"
+        "reflexivity-theory"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8603,18 +8216,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
-      "depends_on": [
-        "macro-cycles"
-      ],
+      "composite_score": 68,
+      "depends_on": [],
       "referenced_by": [
         "currencies",
         "fiscal-regime",
         "fixed-income",
-        "macro-cycles",
         "money-and-financial-systems"
       ],
       "parent": "regime-intelligence",
@@ -8651,13 +8261,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "asset-allocation",
         "correlation-regimes",
         "drawdown-psychology",
@@ -8698,22 +8307,18 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
-        "regime-intelligence",
-        "tail-risk",
-        "time-series"
+        "regime-intelligence"
       ],
       "referenced_by": [
         "alternatives",
         "asset-allocation",
         "fixed-income",
-        "hedging-architecture",
-        "tail-risk",
-        "time-series"
+        "hedging-architecture"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8795,17 +8400,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "portfolio-construction",
-        "tail-risk"
+        "portfolio-construction"
       ],
       "referenced_by": [
-        "drawdown-psychology",
-        "tail-risk"
+        "drawdown-psychology"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8841,22 +8444,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
-      "depends_on": [
-        "correlation-regimes",
-        "position-sizing"
-      ],
+      "composite_score": 71,
+      "depends_on": [],
       "referenced_by": [
-        "correlation-regimes",
         "counterfactual-reasoner",
         "drawdown-psychology",
         "hedging-architecture",
         "model-evaluation",
-        "options-mechanics",
-        "position-sizing"
+        "options-mechanics"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8901,7 +8499,6 @@
         "signaling-screening"
       ],
       "referenced_by": [
-        "archon",
         "complexity-premium",
         "event-driven",
         "insider-signals",
@@ -8969,34 +8566,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3921,
-        "body_words": 3866,
+        "word_count": 3974,
+        "body_words": 3919,
         "description_words": 39,
-        "section_count": 7,
+        "section_count": 8,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 51,
-        "estimated_tokens_body": 6767,
-        "estimated_tokens_total": 6818
+        "estimated_tokens_body": 6878,
+        "estimated_tokens_total": 6929
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 70,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
-      "depends_on": [
-        "insider-signals",
-        "spinoffs-restructuring"
-      ],
+      "composite_score": 63,
+      "depends_on": [],
       "referenced_by": [
         "auction-theory",
-        "complexity-premium",
-        "insider-signals",
-        "spinoffs-restructuring"
+        "complexity-premium"
       ],
       "parent": "special-situations",
       "tags": [
@@ -9017,17 +8609,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3367,
-        "body_words": 3314,
+        "word_count": 3392,
+        "body_words": 3339,
         "description_words": 37,
-        "section_count": 11,
+        "section_count": 12,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 49,
-        "estimated_tokens_body": 5698,
-        "estimated_tokens_total": 5747
+        "estimated_tokens_body": 5745,
+        "estimated_tokens_total": 5794
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
@@ -9037,11 +8629,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "event-driven",
         "sentiment-signals"
       ],
       "referenced_by": [
-        "event-driven",
         "information-economics",
         "signaling-screening"
       ],
@@ -9064,32 +8654,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3129,
-        "body_words": 3077,
+        "word_count": 3156,
+        "body_words": 3104,
         "description_words": 36,
-        "section_count": 10,
+        "section_count": 11,
         "reference_files": 0,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 47,
-        "estimated_tokens_body": 5322,
-        "estimated_tokens_total": 5369
+        "estimated_tokens_body": 5372,
+        "estimated_tokens_total": 5419
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
-        "event-driven",
         "intrinsic-value"
       ],
-      "referenced_by": [
-        "event-driven"
-      ],
+      "referenced_by": [],
       "parent": "special-situations",
       "tags": [
         "domain:investing",
@@ -9130,7 +8717,6 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "intrinsic-value",
         "quality-compounders",
         "second-level-thinking",
@@ -9170,16 +8756,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "quality-compounders",
         "second-level-thinking"
       ],
       "referenced_by": [
-        "quality-compounders",
         "spinoffs-restructuring"
       ],
       "parent": "value-quality",
@@ -9201,32 +8785,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3901,
-        "body_words": 3858,
+        "word_count": 3929,
+        "body_words": 3886,
         "description_words": 27,
-        "section_count": 11,
+        "section_count": 12,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 36,
-        "estimated_tokens_body": 6536,
-        "estimated_tokens_total": 6572
+        "estimated_tokens_body": 6599,
+        "estimated_tokens_total": 6635
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "factor-exposure",
-        "intrinsic-value"
+        "factor-exposure"
       ],
-      "referenced_by": [
-        "intrinsic-value"
-      ],
+      "referenced_by": [],
       "parent": "value-quality",
       "tags": [
         "domain:investing",
@@ -9261,21 +8842,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
-        "classical-games",
-        "information-economics",
         "market-psychology",
         "reflexivity-theory"
       ],
       "referenced_by": [
-        "classical-games",
         "complexity-premium",
         "dilemma-analyzer",
-        "information-economics",
         "intrinsic-value"
       ],
       "parent": "value-quality",
@@ -9320,7 +8897,6 @@
         "brand-identity"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer",
         "style-evolution-observer"
       ],
@@ -9359,15 +8935,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "aesthetic-identity"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer"
       ],
       "parent": "design-orchestrator",
@@ -9404,15 +8979,14 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 70,
       "depends_on": [
         "visual-communication"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer"
       ],
       "parent": "design-orchestrator",
@@ -9458,9 +9032,7 @@
         "design-principles",
         "visual-communication"
       ],
-      "referenced_by": [
-        "design-orchestrator"
-      ],
+      "referenced_by": [],
       "parent": "design-orchestrator",
       "tags": [
         "domain:design",
@@ -10169,17 +9741,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1034,
-        "body_words": 965,
+        "word_count": 1060,
+        "body_words": 991,
         "description_words": 50,
-        "section_count": 4,
+        "section_count": 5,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 65,
-        "estimated_tokens_body": 1646,
-        "estimated_tokens_total": 1711
+        "estimated_tokens_body": 1698,
+        "estimated_tokens_total": 1763
       },
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
@@ -10189,14 +9761,11 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "classical-games",
         "cultures-societies",
         "religion-design",
         "second-level-thinking"
       ],
-      "referenced_by": [
-        "classical-games"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:ethics",
@@ -10311,32 +9880,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1110,
-        "body_words": 1048,
+        "word_count": 1134,
+        "body_words": 1072,
         "description_words": 43,
-        "section_count": 4,
+        "section_count": 5,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 56,
-        "estimated_tokens_body": 1815,
-        "estimated_tokens_total": 1871
+        "estimated_tokens_body": 1871,
+        "estimated_tokens_total": 1927
       },
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
-        "asset-allocation",
-        "behavioral-game-theory"
+        "asset-allocation"
       ],
-      "referenced_by": [
-        "behavioral-game-theory"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:decision-theory",
@@ -10357,33 +9923,30 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1396,
-        "body_words": 1328,
+        "word_count": 1424,
+        "body_words": 1356,
         "description_words": 49,
-        "section_count": 4,
+        "section_count": 5,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 64,
-        "estimated_tokens_body": 2215,
-        "estimated_tokens_total": 2279
+        "estimated_tokens_body": 2278,
+        "estimated_tokens_total": 2342
       },
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
-        "behavioral-game-theory",
         "market-psychology",
         "model-evaluation"
       ],
-      "referenced_by": [
-        "behavioral-game-theory"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:decision-theory",
@@ -10624,33 +10187,30 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 899,
-        "body_words": 831,
+        "word_count": 938,
+        "body_words": 870,
         "description_words": 49,
-        "section_count": 4,
+        "section_count": 5,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 64,
-        "estimated_tokens_body": 1542,
-        "estimated_tokens_total": 1606
+        "estimated_tokens_body": 1621,
+        "estimated_tokens_total": 1685
       },
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "faction-design",
-        "geopolitical-overlay",
-        "social-choice"
+        "geopolitical-overlay"
       ],
-      "referenced_by": [
-        "social-choice"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:political-philosophy",
@@ -10671,32 +10231,29 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1075,
-        "body_words": 1005,
+        "word_count": 1106,
+        "body_words": 1036,
         "description_words": 51,
-        "section_count": 4,
+        "section_count": 5,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 67,
-        "estimated_tokens_body": 1770,
-        "estimated_tokens_total": 1837
+        "estimated_tokens_body": 1835,
+        "estimated_tokens_total": 1902
       },
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
-        "cooperative-games",
         "cultures-societies"
       ],
-      "referenced_by": [
-        "cooperative-games"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:political-philosophy",
@@ -10985,8 +10542,6 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "foresight",
-        "architecture",
         "frontier-scanner",
         "skill-cartographer",
         "pattern-synthesizer",
@@ -11032,16 +10587,15 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 76,
       "depends_on": [
         "clarity-engine"
       ],
       "referenced_by": [
         "briefing-engine",
-        "foresight",
         "growth-architect",
         "neocortex",
         "scenario-planner"
@@ -11086,7 +10640,6 @@
       "composite_score": 71,
       "depends_on": [],
       "referenced_by": [
-        "architecture",
         "briefing-engine",
         "growth-architect",
         "neocortex",
@@ -11134,7 +10687,6 @@
         "skill-cartographer"
       ],
       "referenced_by": [
-        "architecture",
         "domain-translator",
         "growth-architect",
         "neocortex"
@@ -11173,10 +10725,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 76,
       "depends_on": [
         "frontier-scanner",
         "skill-cartographer",
@@ -11188,7 +10740,6 @@
         "research-curator"
       ],
       "referenced_by": [
-        "architecture",
         "briefing-engine",
         "neocortex"
       ],
@@ -11232,7 +10783,6 @@
       "composite_score": 81,
       "depends_on": [],
       "referenced_by": [
-        "architecture",
         "cursed-speech",
         "executive-distiller",
         "frontier-scanner",
@@ -11274,19 +10824,14 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
-      "depends_on": [
-        "frontier-scanner",
-        "scenario-planner",
-        "briefing-engine"
-      ],
+      "composite_score": 68,
+      "depends_on": [],
       "referenced_by": [
         "briefing-engine",
         "frontier-scanner",
-        "neocortex",
         "scenario-planner"
       ],
       "tags": [
@@ -11323,24 +10868,15 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
-      "depends_on": [
-        "skill-cartographer",
-        "pattern-synthesizer",
-        "skill-evolutionist",
-        "growth-architect",
-        "domain-translator",
-        "research-curator",
-        "clarity-engine"
-      ],
+      "composite_score": 72,
+      "depends_on": [],
       "referenced_by": [
         "clarity-engine",
         "domain-translator",
         "growth-architect",
-        "neocortex",
         "pattern-synthesizer",
         "research-curator",
         "skill-cartographer",
@@ -11380,13 +10916,12 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [
-        "architecture",
         "briefing-engine",
         "growth-architect"
       ],
@@ -11433,7 +10968,6 @@
       ],
       "referenced_by": [
         "briefing-engine",
-        "foresight",
         "growth-architect"
       ],
       "tags": [
@@ -11470,10 +11004,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "frontier-scanner",
         "scenario-planner",
@@ -11481,9 +11015,7 @@
         "skill-evolutionist",
         "growth-architect"
       ],
-      "referenced_by": [
-        "foresight"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:neocortex",
         "level:action"
@@ -11518,15 +11050,14 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 69,
       "depends_on": [
         "pattern-synthesizer"
       ],
       "referenced_by": [
-        "architecture",
         "growth-architect"
       ],
       "tags": [
@@ -11569,7 +11100,6 @@
       "composite_score": 66,
       "depends_on": [],
       "referenced_by": [
-        "architecture",
         "growth-architect"
       ],
       "tags": [

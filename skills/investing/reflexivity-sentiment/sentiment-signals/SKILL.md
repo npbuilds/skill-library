@@ -304,3 +304,10 @@ Beyond volume ratios (which measure daily flow), open interest ratios reveal acc
 
 - **Data-science/data-wrangling/feature-engineering**: Building a sentiment composite is multi-source feature engineering — normalizing heterogeneous signals (VIX, put/call ratios, AAII surveys, NLP scores) into a unified feature space with appropriate weighting and temporal alignment.
 - **Data-science/ml-engineering/drift-detection**: Sentiment signals degrade as they become crowded. Monitoring signal efficacy over time (does extreme fear still predict above-average forward returns?) is drift detection applied to sentiment factors.
+
+
+
+## Related Skills
+
+- **alt-data-monitoring** — Many sentiment signals are built on alternative data feeds. Pair with alt-data-monitoring when the sentiment construction depends on non-traditional inputs (text scrapes, transaction data, satellite).
+- **market-psychology** — Market-psychology provides the qualitative theory that sentiment-signals quantify. Read market-psychology to understand WHY a sentiment regime persists or breaks.

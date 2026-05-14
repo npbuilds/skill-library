@@ -285,3 +285,7 @@ When assessing a geopolitical event for investment implications:
 6. **Determine action timeline** — Act immediately, monitor and prepare, or do nothing?
 
 **Critical principle:** Most geopolitical events are Category 1 noise. The biggest investment mistake is overreacting to events that do not change fundamental value. The second biggest mistake is failing to recognize a Category 3 regime break when it arrives. Calibration between these errors is the core skill.
+
+## Related Skills
+
+- **secular-themes** — Great-power shifts (poles, blocs, alliance realignment) drive multi-decade secular themes (deglobalization, supply-chain reshoring, currency competition). Use secular-themes to translate a great-power read into investable trends.

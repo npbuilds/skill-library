@@ -1,5 +1,7 @@
 # Archon v2 — Daily Briefing Protocol
 
+> **DEPRECATED (2026-05-11):** Retained for future briefing reactivation but no longer referenced by `archon/SKILL.md` v2.1. Current mode is conversational analysis with optional vault persistence — see `conversational-loop.md`. To reactivate briefings, remove this header and rewire from the orchestrator.
+
 The protocol for generating a focused, opinionated daily investment intelligence briefing. Frameworks are invisible scaffolding — applied directly as analytical lenses, never as persona voice blocks.
 
 ## Reference Mockup
