@@ -76,7 +76,7 @@ AI reads the SKILL.md body and suggests improvements.
 For complex skills, AI proposes specific fork strategies.
 
 **With API:**
-- Send the skill content plus the decomposition strategies from `skills/skill-fork/references/decomposition-strategies.md` (when available)
+- Send the skill content plus the decomposition strategies from `skills/infrastructure/skill-fork/references/decomposition-strategies.md` (when available)
 - Ask Claude to identify natural split points, suggest child skill names and scopes
 - Return a structured decomposition plan
 
