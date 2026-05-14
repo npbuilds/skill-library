@@ -9,7 +9,7 @@ metadata:
   author: nirav
   version: "1.0"
 compatibility: Designed for Claude Code
-tools: Read
+allowed-tools: Read
 ---
 
 # Cultural History — The Gallery of Voices
