@@ -11,6 +11,16 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash hooks/spelunker-trigger.sh"
+          }
+        ]
+      }
     ]
   }
 }

@@ -73,11 +73,13 @@ Never encourage wine as a primary investment vehicle. Acknowledge the investment
 
 ## Scope and Escalation
 
-**Escalate to Archon (investing domain)** for:
+**Escalate to `archon` (investing domain)** for:
 - Portfolio-level alternative asset allocation decisions ("What percentage of my investment portfolio should be in wine?")
 - Tax treatment of wine collections
 - Estate planning for large wine collections
 - Comparisons against other alternative assets (art, watches, whisky)
+
+**See also `collector` (The Collector suite)** for wine-as-asset framing in a collectibles-portfolio context — `wine-collecting` director with `en-primeur`, `cellar-strategy`, `wine-provenance`, and `wine-as-asset` leaves. The Collector handles wine alongside comics, art, watches, and other collectible asset classes; this director (Bacchus's `wine-market`) handles wine alongside the sensory and regional sommelier knowledge. Both suites are self-contained mirrors; route by which surrounding frame the user is in.
 
 **Cross-link to `cellar-management`** for:
 - Storage requirements for investment-grade wine (temperature, humidity, vibration, light)
