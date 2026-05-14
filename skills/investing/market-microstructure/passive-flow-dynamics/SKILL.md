@@ -367,3 +367,7 @@ Using the predictable flow calendar to position around known events:
 4. **Cross-stock correlation**: Higher baseline correlation suggests passive flows are dominating price action
 5. **Inclusion/exclusion calendar**: Known upcoming index changes and their estimated flow impact
 6. **Rebalancing pressure estimates**: Quarter-end asset allocation drift → estimated rebalancing flow direction and magnitude
+
+## Related Skills
+
+- **liquidity-topology** — Passive flow effects are mediated by liquidity topology — where venues sit, where market-makers lean, where the resting book is thin. Use liquidity-topology to translate flow magnitude into expected price impact.

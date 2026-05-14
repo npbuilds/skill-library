@@ -377,3 +377,7 @@ Options mechanics do not operate in isolation. Combine with:
 - **Passive flows** (sibling skill): When index rebalancing coincides with OpEx, the combined flow effects are amplified. Check the passive flow calendar against the options expiration calendar.
 - **Liquidity conditions** (sibling skill): Negative gamma + thin market depth = risk of flash-crash-like moves. Always check liquidity before concluding that options flows will dominate.
 - **Fundamental catalysts**: Options mechanics amplify fundamental moves. A negative earnings surprise in a negative gamma environment will produce a much larger price decline than the same surprise in positive gamma. The options environment determines the "gain" on any fundamental signal.
+
+## Related Skills
+
+- **hedging-architecture** — Options are a primary hedging instrument. Hedging-architecture provides the strategic framework (what to hedge, when, with what budget); options-mechanics provides the instrument-level Greek and structure logic.

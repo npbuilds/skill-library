@@ -136,3 +136,7 @@ If you prioritize [capability]: [what follows]
 **User wants a single answer:** Explain the framework structure, then offer to help them identify their own justice priorities (route to ethics/values-excavator), which resolves the question for their specific value commitments.
 
 **Policy involves non-human entities:** The capabilities approach extends most naturally to non-human animals (via Nussbaum's extension). Utilitarian frameworks also include non-human welfare. Note which frameworks can and cannot handle the expanded scope.
+
+## Related Skills
+
+- **social-choice** — Social choice theory provides the formal aggregation mechanisms (voting rules, preference aggregation) that justice-analysis interprets normatively. When evaluating fairness of a collective decision, the *mechanism* lives in social-choice; the *normative claim* lives here.

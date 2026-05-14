@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-05-11T18:18:15Z",
+  "last_scan": "2026-05-11T19:52:19Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -1696,9 +1696,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 78,
-      "depends_on": [
-        "infrastructure-orchestrator"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "design-orchestrator",
         "infrastructure-orchestrator",
@@ -1751,7 +1749,6 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-dashboard",
         "skill-registry"
@@ -1800,7 +1797,6 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry"
       ],
@@ -1848,7 +1844,6 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-dashboard",
         "skill-health",
         "skill-registry",
@@ -1898,7 +1893,6 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry",
         "skill-scaffold"
@@ -1945,7 +1939,6 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-registry"
       ],
       "referenced_by": [
@@ -1994,7 +1987,6 @@
       "manual_notes": null,
       "composite_score": 71,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-health",
         "skill-registry",
         "skill-scaffold"
@@ -2041,7 +2033,6 @@
       "manual_notes": null,
       "composite_score": 74,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry"
       ],
@@ -2087,7 +2078,6 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "infrastructure-orchestrator",
         "skill-registry"
       ],
       "referenced_by": [
@@ -2407,7 +2397,6 @@
       "depends_on": [
         "prose-rhythm",
         "responsive-type",
-        "sentence-craft",
         "type-fundamentals",
         "type-pairing"
       ],
@@ -2416,8 +2405,7 @@
         "master-artificer",
         "responsive-type",
         "type-fundamentals",
-        "type-pairing",
-        "sentence-craft"
+        "type-pairing"
       ],
       "tags": [
         "domain:design",
@@ -3474,10 +3462,7 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "auction-theory",
-        "market-microstructure",
         "matching-markets",
-        "mechanism-designer",
         "portfolio-construction",
         "social-choice"
       ],
@@ -3486,8 +3471,7 @@
         "game-theory-orchestrator",
         "matching-markets",
         "mechanism-designer",
-        "social-choice",
-        "market-microstructure"
+        "social-choice"
       ],
       "tags": [
         "domain:game-theory",
@@ -3529,12 +3513,9 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "event-driven",
-        "market-microstructure"
+        "event-driven"
       ],
       "referenced_by": [
-        "market-microstructure",
-        "mechanism-design",
         "mechanism-designer",
         "special-situations"
       ],
@@ -3628,13 +3609,11 @@
       "manual_notes": null,
       "composite_score": 71,
       "depends_on": [
-        "justice-analyst",
         "political-philosophy"
       ],
       "referenced_by": [
         "mechanism-design",
-        "mechanism-designer",
-        "justice-analyst"
+        "mechanism-designer"
       ],
       "tags": [
         "domain:game-theory",
@@ -3682,7 +3661,6 @@
         "social-choice"
       ],
       "referenced_by": [
-        "mechanism-design",
         "values-excavator"
       ],
       "tags": [
@@ -5026,17 +5004,7 @@
         "skill-network",
         "skill-export"
       ],
-      "referenced_by": [
-        "skill-analyze",
-        "skill-dashboard",
-        "skill-export",
-        "skill-fork",
-        "skill-health",
-        "skill-network",
-        "skill-registry",
-        "skill-scaffold",
-        "skill-test"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:infrastructure",
         "level:orchestrator"
@@ -5660,8 +5628,7 @@
         "diction",
         "prose-rhythm",
         "style-dna",
-        "syntax-patterns",
-        "typography"
+        "syntax-patterns"
       ],
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
@@ -5693,8 +5660,7 @@
         "prose-rhythm",
         "prose-writer",
         "style-dna",
-        "syntax-patterns",
-        "typography"
+        "syntax-patterns"
       ],
       "tags": [
         "domain:writing",
@@ -7176,12 +7142,9 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "asset-allocation",
-        "tax-optimization"
+        "asset-allocation"
       ],
-      "referenced_by": [
-        "tax-optimization"
-      ],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7192,7 +7155,7 @@
     },
     "archon": {
       "name": "archon",
-      "description": "Orchestrate investment analysis across all markets and asset classes using six analytical frameworks (Dalio regime, Marks contrarian, Soros reflexivity, Taleb tail risk, Tudor Jones defense, Druckenmiller conviction sizing). Generates daily briefings with 7-section structure, manages a paper trading portfolio, and maintains a cumulative macro narrative. Use when the user needs market analysis, regime classification, risk assessment, or investment intelligence.",
+      "description": "Engages as an analytical thinking partner across investment domains, applying six frameworks (Dalio regime, Marks contrarian, Soros reflexivity, Taleb tail risk, Tudor Jones defense, Druckenmiller conviction sizing) conversationally. Routes question-by-question to 10 subdomain directors and escalates to spelunker for verification or neocortex for scenario planning. Optionally persists theses, trades, sessions, and macro views to an Obsidian vault via vault-writer. Use when the user wants to think through a trade idea, regime question, risk scenario, or portfolio decision.",
       "location": "skills/investing/archon/SKILL.md",
       "plugin": "skill-infra",
       "type": "orchestrator",
@@ -7201,17 +7164,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 997,
-        "body_words": 913,
-        "description_words": 59,
-        "section_count": 9,
+        "word_count": 1873,
+        "body_words": 1769,
+        "description_words": 77,
+        "section_count": 10,
         "reference_files": 8,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_metadata": 77,
-        "estimated_tokens_body": 1625,
-        "estimated_tokens_total": 1702
+        "estimated_tokens_metadata": 101,
+        "estimated_tokens_body": 3148,
+        "estimated_tokens_total": 3249
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
@@ -7250,7 +7213,7 @@
         "domain:investing",
         "level:orchestrator"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-05-11"
     },
     "asset-universe": {
       "name": "asset-universe",
@@ -7374,12 +7337,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "energy-security",
         "macro-cycles"
       ],
-      "referenced_by": [
-        "energy-security"
-      ],
+      "referenced_by": [],
       "parent": "asset-universe",
       "tags": [
         "domain:investing",
@@ -7641,12 +7601,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "commodities",
         "great-power-dynamics"
       ],
-      "referenced_by": [
-        "commodities"
-      ],
+      "referenced_by": [],
       "parent": "geopolitical-overlay",
       "tags": [
         "domain:investing",
@@ -7686,12 +7643,10 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "macro-cycles",
-        "secular-themes"
+        "macro-cycles"
       ],
       "referenced_by": [
-        "energy-security",
-        "secular-themes"
+        "energy-security"
       ],
       "parent": "geopolitical-overlay",
       "tags": [
@@ -7732,12 +7687,9 @@
       "manual_notes": null,
       "composite_score": 64,
       "depends_on": [
-        "great-power-dynamics",
         "regime-intelligence"
       ],
-      "referenced_by": [
-        "great-power-dynamics"
-      ],
+      "referenced_by": [],
       "parent": "geopolitical-overlay",
       "tags": [
         "domain:investing",
@@ -7777,18 +7729,14 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "auction-theory",
-        "matching-markets",
-        "mechanism-design"
+        "matching-markets"
       ],
       "referenced_by": [
         "archon",
         "digital-assets",
         "liquidity-topology",
         "options-mechanics",
-        "passive-flow-dynamics",
-        "auction-theory",
-        "mechanism-design"
+        "passive-flow-dynamics"
       ],
       "parent": "archon",
       "tags": [
@@ -7828,12 +7776,8 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 63,
-      "depends_on": [
-        "passive-flow-dynamics"
-      ],
-      "referenced_by": [
-        "passive-flow-dynamics"
-      ],
+      "depends_on": [],
+      "referenced_by": [],
       "parent": "market-microstructure",
       "tags": [
         "domain:investing",
@@ -7873,12 +7817,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "hedging-architecture",
         "tail-risk"
       ],
-      "referenced_by": [
-        "hedging-architecture"
-      ],
+      "referenced_by": [],
       "parent": "market-microstructure",
       "tags": [
         "domain:investing",
@@ -7918,12 +7859,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "factor-exposure",
-        "liquidity-topology"
+        "factor-exposure"
       ],
-      "referenced_by": [
-        "liquidity-topology"
-      ],
+      "referenced_by": [],
       "parent": "market-microstructure",
       "tags": [
         "domain:investing",
@@ -8116,12 +8054,9 @@
       "composite_score": 68,
       "depends_on": [
         "correlation-regimes",
-        "options-mechanics",
         "tail-risk"
       ],
-      "referenced_by": [
-        "options-mechanics"
-      ],
+      "referenced_by": [],
       "parent": "portfolio-construction",
       "tags": [
         "domain:investing",
@@ -8161,12 +8096,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "asset-allocation",
-        "rebalancing-logic"
+        "asset-allocation"
       ],
-      "referenced_by": [
-        "rebalancing-logic"
-      ],
+      "referenced_by": [],
       "parent": "portfolio-construction",
       "tags": [
         "domain:investing",
@@ -10593,12 +10525,9 @@
       "composite_score": 71,
       "depends_on": [
         "faction-design",
-        "geopolitical-overlay",
-        "social-choice"
+        "geopolitical-overlay"
       ],
-      "referenced_by": [
-        "social-choice"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:political-philosophy",
