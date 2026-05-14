@@ -113,8 +113,20 @@ Assemble the final output with these sections in order:
 4. **Evidence Map** — Visual provenance chains
 5. **Gaps & Limitations** — What wasn't found and why it matters
 6. **Confidence Summary** — Aggregate assessment
-7. **Sources** — Ranked by relevance and authority
+7. **Sources** — Numbered, ranked by relevance and authority
 8. **Next Steps** — What to investigate further if the user needs more
+
+#### Step 5b — Citation Audit (REQUIRED before delivery)
+
+Before returning the brief to Spelunker Phase 6, run a citation audit. The brief is incomplete if any of the following fail:
+
+1. **Every empirical claim has an inline `[N]` citation marker.** Walk every paragraph of Key Findings and Detailed Findings. For each sentence that asserts a fact, statistic, attribution, or named entity, verify that an `[N]` marker is attached. If a claim has no defensible source, downgrade it to Speculative and append `[no source]` rather than silently dropping the marker.
+2. **Every confidence tag is paired with a because-clause.** "Confirmed" alone is not acceptable.
+3. **The SOURCES section is a numbered list with full identifiers.** Each entry contains number, title, URL or DOI, publication date, tier, and which findings it was used for. Bullet-formatted sources are not acceptable.
+4. **Inaccessible sources are still cited.** If a source was paywalled or unretrievable, cite it with the best available identifier (DOI, archive link, author/title) and mark `[paywalled]` or `[archived]`. Never silently drop a citation because the URL didn't load.
+5. **Citation numbers match between body and SOURCES.** No orphaned `[N]` markers and no SOURCES entries that aren't cited in the body (the latter become "Background reading" if you want to retain them).
+
+If audit fails, return the brief to Step 5 and complete the citations before re-attempting delivery. This is the discipline that makes Spelunker briefs auditable rather than authoritative-sounding.
 
 #### Step 6 — Persistence (optional)
 

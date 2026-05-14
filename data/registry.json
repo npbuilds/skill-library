@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-05-13T15:13:02Z",
+  "last_scan": "2026-05-14T02:06:29Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -3387,10 +3387,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 82,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 79,
       "depends_on": [
         "classical-games",
         "ethics",
@@ -5430,8 +5430,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2462,
-        "body_words": 2360,
+        "word_count": 3139,
+        "body_words": 3037,
         "description_words": 77,
         "section_count": 6,
         "reference_files": 3,
@@ -5439,16 +5439,16 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 101,
-        "estimated_tokens_body": 3987,
-        "estimated_tokens_total": 4088
+        "estimated_tokens_body": 5227,
+        "estimated_tokens_total": 5328
       },
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 88,
+      "auto_score": 89,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 88,
+      "composite_score": 89,
       "depends_on": [
         "claim-decomposer",
         "source-triangulator",
@@ -5473,7 +5473,7 @@
       ],
       "parent": null,
       "created": "2026-03-26",
-      "last_modified": "2026-04-13"
+      "last_modified": "2026-05-14"
     },
     "claim-decomposer": {
       "name": "claim-decomposer",
@@ -5534,8 +5534,8 @@
       "invocation": "programmatic",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1320,
-        "body_words": 1261,
+        "word_count": 1616,
+        "body_words": 1557,
         "description_words": 35,
         "section_count": 2,
         "reference_files": 2,
@@ -5543,16 +5543,16 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 46,
-        "estimated_tokens_body": 2190,
-        "estimated_tokens_total": 2236
+        "estimated_tokens_body": 2656,
+        "estimated_tokens_total": 2702
       },
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 82,
       "depends_on": [
         "claim-decomposer"
       ],
@@ -5570,7 +5570,7 @@
       ],
       "parent": "spelunker",
       "created": "2026-03-26",
-      "last_modified": "2026-04-13"
+      "last_modified": "2026-05-14"
     },
     "evidence-synthesizer": {
       "name": "evidence-synthesizer",
@@ -5583,8 +5583,8 @@
       "invocation": "programmatic",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1174,
-        "body_words": 1114,
+        "word_count": 1413,
+        "body_words": 1353,
         "description_words": 41,
         "section_count": 2,
         "reference_files": 2,
@@ -5592,16 +5592,16 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 54,
-        "estimated_tokens_body": 1934,
-        "estimated_tokens_total": 1988
+        "estimated_tokens_body": 2325,
+        "estimated_tokens_total": 2379
       },
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 78,
       "depends_on": [
         "claim-decomposer",
         "source-triangulator"
@@ -5615,7 +5615,7 @@
       ],
       "parent": "spelunker",
       "created": "2026-03-26",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-05-14"
     },
     "prose-orchestrator": {
       "source": "self",
@@ -6293,8 +6293,8 @@
         "estimated_tokens_body": 1241,
         "estimated_tokens_total": 1295
       },
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 75,
+      "composite_score": 75,
       "referenced_by": [
         "argument-structure",
         "cultures-societies",
@@ -7636,10 +7636,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "archon",
@@ -8299,10 +8299,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [
         "reflexivity-theory",
         "sentiment-signals"
@@ -8544,10 +8544,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 81,
       "depends_on": [
         "drift-detection",
         "fiscal-regime",
@@ -8599,10 +8599,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [
         "macro-cycles"
       ],
@@ -11654,10 +11654,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 69,
       "depends_on": [
         "point-of-view",
         "concrete-detail"
@@ -11706,10 +11706,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 66,
       "depends_on": [
         "character-interiority",
         "dialogue"
@@ -11756,10 +11756,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 64,
       "depends_on": [
         "diction",
         "concrete-detail"
@@ -11806,10 +11806,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 66,
       "depends_on": [
         "narrative-arc",
         "pacing"
@@ -11856,10 +11856,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 66,
       "depends_on": [
         "cultures-societies",
         "geography-ecology"
@@ -11905,10 +11905,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 64,
       "depends_on": [
         "naming-system",
         "cultures-societies"
@@ -11954,10 +11954,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 57,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 57,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -12000,10 +12000,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 57,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 57,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -12047,10 +12047,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 62,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 62,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -12139,10 +12139,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 57,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 57,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -12396,10 +12396,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 57,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 57,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -25559,6 +25559,222 @@
         }
       ],
       "parent": "interview-mastery"
+    },
+    "bias-and-funding-tracer": {
+      "name": "bias-and-funding-tracer",
+      "description": "Trace funding sources, author conflicts of interest, and institutional incentives behind a set of sources. Use when source quality alone is insufficient \u2014 when \"10 sources agree\" might mean \"10 sources funded by the same company agree.\" Especially load-bearing for biotech (industry-funded trials), markets (sell-side analyst incentives), and politically charged topics. Plugged into Phase 3 of Spelunker after source-triangulator completes its sweep.",
+      "location": "skills/research/bias-and-funding-tracer/SKILL.md",
+      "plugin": "skill-research",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 928,
+        "body_words": 845,
+        "description_words": 62,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 81,
+        "estimated_tokens_body": 1389,
+        "estimated_tokens_total": 1470
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-05-14T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 61,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 61,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:research",
+        "layer:knowledge"
+      ],
+      "created": "2026-05-14",
+      "last_modified": "2026-05-14",
+      "changelog": [
+        {
+          "date": "2026-05-14",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "spelunker"
+    },
+    "paywall-strategist": {
+      "name": "paywall-strategist",
+      "description": "Systematically work around source paywalls before tagging a claim Unverifiable. Searches for preprint mirrors (bioRxiv, SSRN, arXiv, institutional repositories), extracts available abstracts, surfaces adjacent open-access work, and generates ask-the-author email templates. Plugged into Spelunker's Reentry Protocol Level 1 \u2014 must be exhausted before escalating to Level 2 (decompose further) or tagging the claim Unverifiable.",
+      "location": "skills/research/paywall-strategist/SKILL.md",
+      "plugin": "skill-research",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1060,
+        "body_words": 985,
+        "description_words": 54,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 71,
+        "estimated_tokens_body": 1683,
+        "estimated_tokens_total": 1754
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-05-14T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 63,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 63,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:research",
+        "layer:knowledge"
+      ],
+      "created": "2026-05-14",
+      "last_modified": "2026-05-14",
+      "changelog": [
+        {
+          "date": "2026-05-14",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "spelunker"
+    },
+    "synthesis-translator": {
+      "name": "synthesis-translator",
+      "description": "Convert a Spelunker research brief into one of four target formats \u2014 executive memo, VC pitch bullets, tweet thread, or decision memo \u2014 while preserving citations and confidence tags. Spelunker has one default output (long-form brief); this skill multiplies that into the formats the user actually publishes/uses. Callable as the optional last step of Spelunker Phase 6, or standalone on any existing brief in `research/`.",
+      "location": "skills/research/synthesis-translator/SKILL.md",
+      "plugin": "skill-research",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 977,
+        "body_words": 893,
+        "description_words": 65,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 85,
+        "estimated_tokens_body": 1544,
+        "estimated_tokens_total": 1629
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-05-14T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 61,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 61,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:research",
+        "layer:knowledge"
+      ],
+      "created": "2026-05-14",
+      "last_modified": "2026-05-14",
+      "changelog": [
+        {
+          "date": "2026-05-14",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "spelunker"
+    },
+    "counterfactual-prober": {
+      "name": "counterfactual-prober",
+      "description": "Active disconfirmation. Given a synthesized brief, generate \"if the conclusion were false, what should we observe in the world?\" predictions and search for those signatures. Stronger than passive adversarial search (\"X debunked\"), which only finds what others have already written. Plugged into Spelunker Phase 5 between the existing adversarial search and backpropagation. Triggered in `deep` mode by default; optional in `standard`.",
+      "location": "skills/research/counterfactual-prober/SKILL.md",
+      "plugin": "skill-research",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1052,
+        "body_words": 970,
+        "description_words": 61,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 80,
+        "estimated_tokens_body": 1640,
+        "estimated_tokens_total": 1720
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-05-14T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 61,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 61,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:research",
+        "layer:knowledge"
+      ],
+      "created": "2026-05-14",
+      "last_modified": "2026-05-14",
+      "changelog": [
+        {
+          "date": "2026-05-14",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "spelunker"
     }
   },
   "network": {
@@ -25932,10 +26148,14 @@
       ],
       "research": [
         "agentic-researcher",
+        "bias-and-funding-tracer",
         "claim-decomposer",
+        "counterfactual-prober",
         "evidence-synthesizer",
+        "paywall-strategist",
         "source-triangulator",
-        "spelunker"
+        "spelunker",
+        "synthesis-translator"
       ],
       "sommelier": [
         "alternative-winemaking",
