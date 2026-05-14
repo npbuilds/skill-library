@@ -91,6 +91,13 @@ def _tokenize(text: str) -> list[str]:
 _EMBED_MODEL_NAME = "all-MiniLM-L6-v2"
 _RRF_K = 60  # standard constant from Cormack et al. 2009
 
+# RRF score floor. Below this, a "match" is single-signal noise (e.g., vector
+# similarity scraping the long tail). With k=60: single-signal rank-1 ≈ 0.0164,
+# two-signal rank-1 ≈ 0.0328. A floor of 0.02 lets through anything strong
+# enough to hit two signals or top-rank one, and filters everything else so
+# the gap-detection feature stays meaningful.
+_MIN_RRF_SCORE = 0.02
+
 
 class HybridSearchIndex:
     """Three-signal hybrid search with RRF fusion.
@@ -236,6 +243,7 @@ class HybridSearchIndex:
         query: str,
         recent_skills: list[str] | None = None,
         limit: int = 15,
+        min_score: float = _MIN_RRF_SCORE,
     ) -> list[dict]:
         """Hybrid search with RRF fusion.
 
@@ -243,6 +251,8 @@ class HybridSearchIndex:
             query:          Natural language or keyword query.
             recent_skills:  Recently-used skill names for graph proximity boost.
             limit:          Max results to return.
+            min_score:      RRF score floor; matches below this are dropped as
+                            single-signal noise. Pass 0 to disable filtering.
 
         Returns list of dicts: [{"name", "rrf_score", "signals"}]
         """
@@ -303,6 +313,12 @@ class HybridSearchIndex:
 
         # RRF fusion
         fused = self._rrf_fuse(*ranked_by_signal.values())
+
+        # Drop sub-threshold matches before applying the result limit so the
+        # caller sees a clean "no real hits" empty list (which lets gap-
+        # detection downstream actually fire on unmatchable queries).
+        if min_score > 0:
+            fused = [(name, score) for name, score in fused if score >= min_score]
 
         results = []
         for name, score in fused[:limit]:
