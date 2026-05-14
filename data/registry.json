@@ -1602,10 +1602,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "regions-terroir",
         "terroir-science"
@@ -1650,10 +1650,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "food-pairing",
         "pairing-science",
@@ -1798,10 +1798,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 75,
       "depends_on": [
         "skill-analyze",
         "skill-registry"
@@ -2079,10 +2079,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "skill-registry"
       ],
@@ -2123,10 +2123,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-19T00:00:00Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 71,
       "depends_on": [],
       "referenced_by": [
         "design-orchestrator",
@@ -2272,10 +2272,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "color-theory",
@@ -2379,10 +2379,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 68,
       "depends_on": [
         "prose-rhythm"
       ],
@@ -2473,10 +2473,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "type-fundamentals"
       ],
@@ -2519,10 +2519,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "type-fundamentals"
       ],
@@ -2565,10 +2565,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "aesthetic-identity",
@@ -2658,10 +2658,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "brand-foundations"
       ],
@@ -2865,10 +2865,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 75,
       "depends_on": [
         "cultures-societies",
         "diction",
@@ -3070,10 +3070,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "cultures-societies",
         "lore-writer",
@@ -3166,10 +3166,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 82,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 78,
       "depends_on": [],
       "referenced_by": [
         "computational-strategy",
@@ -3212,10 +3212,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [],
       "referenced_by": [
         "behavioral-game-theory",
@@ -3259,10 +3259,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 85,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 82,
       "depends_on": [
         "regime-intelligence"
       ],
@@ -3310,10 +3310,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 75,
       "depends_on": [
         "classical-games",
         "ethics"
@@ -3403,10 +3403,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 68,
       "depends_on": [
         "portfolio-construction"
       ],
@@ -3451,10 +3451,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "event-driven"
       ],
@@ -3498,10 +3498,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 67,
       "depends_on": [],
       "referenced_by": [
         "market-microstructure",
@@ -3546,10 +3546,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "political-philosophy"
       ],
@@ -3639,10 +3639,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "evo-simulator",
@@ -3731,10 +3731,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "evolutionary-games"
       ],
@@ -3777,10 +3777,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "evolutionary-games",
         "population-dynamics"
@@ -3821,8 +3821,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 71,
+      "composite_score": 71,
       "depends_on": [
         "insider-signals"
       ],
@@ -3915,8 +3915,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 66,
+      "composite_score": 66,
       "depends_on": [
         "signaling-screening"
       ],
@@ -3959,8 +3959,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
-      "composite_score": 68,
+      "auto_score": 63,
+      "composite_score": 63,
       "depends_on": [
         "bayesian-persuasion",
         "signaling-screening"
@@ -4001,8 +4001,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
-      "composite_score": 72,
+      "auto_score": 68,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "algorithmic-game-theory",
@@ -4044,8 +4044,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 66,
+      "composite_score": 66,
       "depends_on": [
         "classical-games"
       ],
@@ -4088,8 +4088,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 74,
+      "composite_score": 74,
       "depends_on": [
         "drawdown-psychology",
         "market-psychology",
@@ -4274,10 +4274,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [
         "data-cleaning",
         "modeling"
@@ -4322,10 +4322,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 78,
       "depends_on": [],
       "referenced_by": [
         "biostatistics",
@@ -4373,10 +4373,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 74,
       "depends_on": [
         "statistical-testing"
       ],
@@ -4420,10 +4420,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 75,
       "depends_on": [
         "feature-engineering",
         "statistical-analysis",
@@ -4473,10 +4473,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 77,
       "depends_on": [
         "model-evaluation",
         "statistical-analysis",
@@ -4522,10 +4522,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 69,
       "depends_on": [
         "modeling",
         "statistical-analysis"
@@ -4567,10 +4567,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [
         "model-evaluation",
         "modeling",
@@ -4616,10 +4616,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "model-evaluation",
         "modeling"
@@ -4707,10 +4707,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 75,
       "depends_on": [],
       "referenced_by": [
         "biostatistics",
@@ -4850,10 +4850,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 75,
       "depends_on": [
         "skill-registry",
         "skill-health",
@@ -5391,10 +5391,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 73,
       "depends_on": [
         "claim-decomposer",
         "source-triangulator"
@@ -5441,8 +5441,8 @@
         "estimated_tokens_body": 2170,
         "estimated_tokens_total": 2238
       },
-      "auto_score": 78,
-      "composite_score": 78,
+      "auto_score": 75,
+      "composite_score": 75,
       "referenced_by": [
         "narrative-craft",
         "narrative-keeper",
@@ -5491,8 +5491,8 @@
         "estimated_tokens_body": 1650,
         "estimated_tokens_total": 1726
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 72,
+      "composite_score": 72,
       "referenced_by": [
         "diction",
         "figurative-language",
@@ -5638,8 +5638,8 @@
         "estimated_tokens_body": 2182,
         "estimated_tokens_total": 2240
       },
-      "auto_score": 68,
-      "composite_score": 68,
+      "auto_score": 63,
+      "composite_score": 63,
       "referenced_by": [],
       "tags": [
         "domain:writing",
@@ -5792,8 +5792,8 @@
         "estimated_tokens_body": 868,
         "estimated_tokens_total": 927
       },
-      "auto_score": 73,
-      "composite_score": 73,
+      "auto_score": 69,
+      "composite_score": 69,
       "referenced_by": [
         "concrete-detail",
         "dialogue",
@@ -5843,8 +5843,8 @@
         "estimated_tokens_body": 1150,
         "estimated_tokens_total": 1212
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 71,
+      "composite_score": 71,
       "referenced_by": [
         "dialogue",
         "narrative-arc",
@@ -5894,8 +5894,8 @@
         "estimated_tokens_body": 1130,
         "estimated_tokens_total": 1185
       },
-      "auto_score": 73,
-      "composite_score": 73,
+      "auto_score": 69,
+      "composite_score": 69,
       "referenced_by": [
         "micro-tension"
       ],
@@ -5942,8 +5942,8 @@
         "estimated_tokens_body": 1101,
         "estimated_tokens_total": 1146
       },
-      "auto_score": 73,
-      "composite_score": 73,
+      "auto_score": 69,
+      "composite_score": 69,
       "referenced_by": [
         "character-belief-tracker",
         "character-interiority",
@@ -6037,8 +6037,8 @@
         "estimated_tokens_body": 1241,
         "estimated_tokens_total": 1295
       },
-      "auto_score": 75,
-      "composite_score": 75,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "argument-structure",
         "essay-forms",
@@ -6267,8 +6267,8 @@
         "estimated_tokens_body": 1173,
         "estimated_tokens_total": 1229
       },
-      "auto_score": 72,
-      "composite_score": 72,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "prose-editor",
         "style-analyzer",
@@ -6375,8 +6375,8 @@
         "estimated_tokens_body": 994,
         "estimated_tokens_total": 1048
       },
-      "auto_score": 66,
-      "composite_score": 66,
+      "auto_score": 61,
+      "composite_score": 61,
       "referenced_by": [
         "style-mutator"
       ],
@@ -6458,10 +6458,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "lore-writer",
         "narrative-arc",
@@ -6649,8 +6649,8 @@
         "estimated_tokens_body": 3369,
         "estimated_tokens_total": 3438
       },
-      "auto_score": 76,
-      "composite_score": 76,
+      "auto_score": 72,
+      "composite_score": 72,
       "referenced_by": [
         "brand-voice",
         "prose-writer",
@@ -6830,10 +6830,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "parent": "adaptive-monitoring",
@@ -6870,10 +6870,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 63,
       "depends_on": [
         "asset-allocation",
         "factor-exposure"
@@ -6913,10 +6913,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "asset-allocation"
       ],
@@ -7103,10 +7103,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "macro-cycles"
       ],
@@ -7231,10 +7231,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "regime-intelligence"
       ],
@@ -7317,10 +7317,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "energy-security",
@@ -7363,10 +7363,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "great-power-dynamics"
       ],
@@ -7405,10 +7405,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "macro-cycles"
       ],
@@ -7449,10 +7449,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 64,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 59,
       "depends_on": [
         "regime-intelligence"
       ],
@@ -7491,10 +7491,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "matching-markets"
       ],
@@ -7538,10 +7538,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 63,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "parent": "market-microstructure",
@@ -7578,10 +7578,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "tail-risk"
       ],
@@ -7620,10 +7620,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "factor-exposure"
       ],
@@ -7761,10 +7761,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "asset-allocation"
       ],
@@ -7807,10 +7807,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "correlation-regimes",
         "tail-risk"
@@ -7850,10 +7850,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "asset-allocation"
       ],
@@ -7892,10 +7892,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [
         "behavioral-game-theory"
       ],
@@ -7985,10 +7985,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "macro-cycles"
       ],
@@ -8029,10 +8029,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 64,
       "depends_on": [
         "drift-detection"
       ],
@@ -8123,10 +8123,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "monetary-regime"
       ],
@@ -8167,10 +8167,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 74,
       "depends_on": [],
       "referenced_by": [
         "commodities",
@@ -8213,10 +8213,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "currencies",
@@ -8258,10 +8258,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "asset-allocation",
@@ -8304,10 +8304,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "regime-intelligence"
       ],
@@ -8397,10 +8397,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "portfolio-construction"
       ],
@@ -8441,10 +8441,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 71,
       "depends_on": [],
       "referenced_by": [
         "counterfactual-reasoner",
@@ -8578,10 +8578,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 70,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 61,
       "depends_on": [],
       "referenced_by": [
         "auction-theory",
@@ -8666,10 +8666,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 61,
       "depends_on": [
         "intrinsic-value"
       ],
@@ -8753,10 +8753,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "second-level-thinking"
       ],
@@ -8797,10 +8797,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "factor-exposure"
       ],
@@ -8839,10 +8839,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "market-psychology",
         "reflexivity-theory"
@@ -8932,10 +8932,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "aesthetic-identity"
       ],
@@ -8976,10 +8976,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 70,
       "depends_on": [
         "visual-communication"
       ],
@@ -9892,10 +9892,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "asset-allocation"
       ],
@@ -9935,10 +9935,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "market-psychology",
         "model-evaluation"
@@ -10199,10 +10199,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "faction-design",
         "geopolitical-overlay"
@@ -10243,10 +10243,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [
         "cultures-societies"
       ],
@@ -10584,10 +10584,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 76,
       "depends_on": [
         "clarity-engine"
       ],
@@ -10722,10 +10722,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 76,
       "depends_on": [
         "frontier-scanner",
         "skill-cartographer",
@@ -10821,10 +10821,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "briefing-engine",
@@ -10865,10 +10865,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "clarity-engine",
@@ -10913,10 +10913,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [
         "briefing-engine",
@@ -11001,10 +11001,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "frontier-scanner",
         "scenario-planner",
@@ -11047,10 +11047,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 69,
       "depends_on": [
         "pattern-synthesizer"
       ],
