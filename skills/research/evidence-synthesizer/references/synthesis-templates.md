@@ -165,3 +165,24 @@ Note: Spelunker does not pick a winner in contested claims. The evidence is pres
 4. **Sources are ranked, not just listed.** Most relevant and authoritative first.
 5. **Next steps are actionable.** Not "do more research" but "search [specific database] for [specific thing]."
 6. **Plain language in Key Findings, precision in Detailed Findings.** The Key Findings section is for busy readers. The Detailed Findings section is for skeptical readers.
+7. **Citation discipline (REQUIRED).** Every empirical claim — every quantitative figure, every named study, every attributed statement — carries an inline citation marker `[N]` referencing a numbered entry in the SOURCES section. Numbering is sequential by first appearance in Key Findings → Detailed Findings → Evidence Map. The SOURCES section is a numbered list, not bullets, with every entry containing: number, title, URL or DOI, publication date, tier, used-for. If a paragraph contains an empirical claim with no `[N]` marker, the brief is not finished — either find a source or downgrade the claim to Speculative and explicitly mark it `[no source]`.
+
+## Citation Format Examples
+
+```
+GOOD:
+"Passive flows account for ~68% of US fund market as of mid-2025 [1]." Confidence: Likely [1, 2].
+
+BAD:
+"Harvard research finding: passive-ownership share is approximately DOUBLE..."
+(No citation marker — claim is unauditable.)
+```
+
+```
+SOURCES section (required format):
+
+1. Smith J et al. "Passive ownership in US equities." Journal of Finance, 2025-04. https://doi.org/10.1234/jof.2025.04.001 — Tier 1 — Used for: Findings 1, 3
+2. Federal Reserve Economic Data, "US Mutual Fund Assets," accessed 2026-05-13. https://fred.stlouisfed.org/series/MFA — Tier 1 — Used for: Finding 1
+```
+
+If a source is truly inaccessible (paywall reached, URL not retrievable), still cite it with the best available identifier (DOI, ISBN, archive link, author/title) and note `[paywalled]` or `[archived]` in the SOURCES entry — never silently drop it.
