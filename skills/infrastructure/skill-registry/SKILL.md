@@ -116,7 +116,7 @@ For a full system-wide scan (including all installed plugins), use the Agent too
 
 ## Auto-Score Computation
 
-Read `skills/skill-dashboard/references/rating-rubric.md` for the canonical scoring pseudocode and weights. In brief: auto_score (0-100) is a weighted blend of token efficiency, progressive disclosure, description quality, structure, and documentation. Composite score blends auto (70%) with manual rating (30%) when available.
+Read `skills/infrastructure/skill-dashboard/references/rating-rubric.md` for the canonical scoring pseudocode and weights. In brief: auto_score (0-100) is a weighted blend of token efficiency, progressive disclosure, description quality, structure, and documentation. Composite score blends auto (70%) with manual rating (30%) when available.
 
 ## Output Formatting
 
