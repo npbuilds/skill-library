@@ -304,3 +304,10 @@ The index synthesizes seven market indicators on a 0-100 scale (0 = extreme fear
 **Reliability**: Useful as a quick composite but not as a timing tool. Readings below 20 (extreme fear) have historically preceded above-average forward returns. Readings above 80 (extreme greed) have preceded below-average returns. The middle zone (30-70) provides no signal.
 
 **Limitations**: The index weights all seven components equally, which may not reflect actual sentiment dynamics. The junk bond demand and safe haven demand components can be driven by factors other than sentiment (e.g., monetary policy changes).
+
+
+
+## Related Skills
+
+- **reflexivity-theory** — Reflexivity-theory (Soros) is the meta-framework; market-psychology supplies the granular behavioral mechanisms — herding, anchoring, regret — that the reflexive loops act upon.
+- **sentiment-signals** — Sentiment-signals are quantitative observables of market-psychology. Pair when you need to operationalize psychology into a measurable trade input.

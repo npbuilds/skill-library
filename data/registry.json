@@ -229,12 +229,9 @@
       "depends_on": [
         "aroma-lexicon",
         "deductive-method",
-        "model-evaluation",
         "statistical-testing"
       ],
-      "referenced_by": [
-        "model-evaluation"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:sommelier",
         "subdomain:tasting-evaluation",
@@ -1597,12 +1594,9 @@
       "composite_score": 66,
       "depends_on": [
         "regions-terroir",
-        "terroir-science",
-        "time-series"
+        "terroir-science"
       ],
-      "referenced_by": [
-        "time-series"
-      ],
+      "referenced_by": [],
       "shares_references_with": [
         "wine-futures"
       ],
@@ -1647,14 +1641,12 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "feature-engineering",
         "food-pairing",
         "pairing-science",
         "tasting-evaluation"
       ],
       "referenced_by": [
-        "cuisine-pairing",
-        "feature-engineering"
+        "cuisine-pairing"
       ],
       "parent": "sommelier-lab",
       "tags": [
@@ -1754,9 +1746,9 @@
         "skill-registry"
       ],
       "referenced_by": [
-        "skill-scaffold",
+        "infrastructure-orchestrator",
         "skill-fork",
-        "infrastructure-orchestrator"
+        "skill-scaffold"
       ],
       "tags": [
         "domain:infrastructure",
@@ -1801,9 +1793,9 @@
         "skill-registry"
       ],
       "referenced_by": [
+        "infrastructure-orchestrator",
         "skill-health",
-        "skill-scaffold",
-        "infrastructure-orchestrator"
+        "skill-scaffold"
       ],
       "tags": [
         "domain:infrastructure",
@@ -2124,8 +2116,7 @@
       "depends_on": [],
       "referenced_by": [
         "design-orchestrator",
-        "illustration-direction",
-        "visual-communication"
+        "illustration-direction"
       ],
       "shares_references_with": [
         "design-principles",
@@ -2177,8 +2168,7 @@
       "referenced_by": [
         "design-orchestrator",
         "illustration-direction",
-        "sentence-craft",
-        "visual-communication"
+        "sentence-craft"
       ],
       "shares_references_with": [
         "color-theory",
@@ -2226,8 +2216,7 @@
       "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
-        "design-orchestrator",
-        "visual-communication"
+        "design-orchestrator"
       ],
       "shares_references_with": [
         "color-theory",
@@ -2273,20 +2262,13 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 75,
-      "depends_on": [
-        "color-theory",
-        "design-principles",
-        "rhetoric",
-        "visual-perception"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "color-theory",
-        "design-orchestrator",
         "design-principles",
         "illustration-direction",
         "master-artificer",
         "motion-design",
-        "rhetoric",
         "visual-perception"
       ],
       "tags": [
@@ -2333,19 +2315,12 @@
         "color-theory",
         "design-principles",
         "visual-perception",
-        "visual-communication",
-        "typography",
-        "brand-identity",
         "brand-foundations",
         "visual-identity",
         "brand-voice",
         "type-fundamentals",
         "type-pairing",
-        "responsive-type",
-        "aesthetic-identity",
-        "style-evolution-observer",
-        "motion-design",
-        "illustration-direction"
+        "responsive-type"
       ],
       "referenced_by": [
         "aesthetic-identity",
@@ -2395,13 +2370,9 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "prose-rhythm",
-        "responsive-type",
-        "type-fundamentals",
-        "type-pairing"
+        "prose-rhythm"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer",
         "responsive-type",
         "type-fundamentals",
@@ -2450,8 +2421,7 @@
       "referenced_by": [
         "design-orchestrator",
         "responsive-type",
-        "type-pairing",
-        "typography"
+        "type-pairing"
       ],
       "tags": [
         "domain:design",
@@ -2497,7 +2467,6 @@
         "type-fundamentals"
       ],
       "referenced_by": [
-        "typography",
         "design-orchestrator"
       ],
       "tags": [
@@ -2544,7 +2513,6 @@
         "type-fundamentals"
       ],
       "referenced_by": [
-        "typography",
         "design-orchestrator"
       ],
       "tags": [
@@ -2587,16 +2555,11 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "brand-foundations",
-        "brand-voice",
-        "visual-identity"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "aesthetic-identity",
         "brand-foundations",
         "brand-voice",
-        "design-orchestrator",
         "visual-identity"
       ],
       "tags": [
@@ -2640,7 +2603,6 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "brand-identity",
         "brand-voice",
         "design-orchestrator",
         "visual-identity"
@@ -2689,7 +2651,6 @@
         "brand-foundations"
       ],
       "referenced_by": [
-        "brand-identity",
         "design-orchestrator"
       ],
       "tags": [
@@ -2737,7 +2698,6 @@
         "style-dna"
       ],
       "referenced_by": [
-        "brand-identity",
         "design-orchestrator"
       ],
       "tags": [
@@ -2846,16 +2806,13 @@
         "point-of-view",
         "prose-writer",
         "religion-design",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "character-belief-tracker",
         "history-builder",
         "magic-systems",
-        "narrative-craft",
-        "narrative-pacing",
-        "worldbuilding-orchestrator"
+        "narrative-pacing"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -2899,13 +2856,11 @@
       "depends_on": [
         "cultures-societies",
         "diction",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
-        "lore-writer",
-        "worldbuilding-orchestrator",
-        "conlang-craft"
+        "conlang-craft",
+        "lore-writer"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -2947,16 +2902,14 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "cultures-societies",
         "geography-ecology",
         "lore-writer",
         "magic-systems",
-        "technology-progression",
-        "worldbuilding-orchestrator"
+        "technology-progression"
       ],
       "shares_references_with": [
         "ecology-design",
@@ -3057,9 +3010,9 @@
         "worldbuilding-orchestrator"
       ],
       "referenced_by": [
-        "lore-writer",
-        "history-builder",
         "dilemma-analyzer",
+        "history-builder",
+        "lore-writer",
         "religions-and-worldviews"
       ],
       "shares_references_with": [
@@ -3112,9 +3065,7 @@
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [
-        "narrative-craft"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:worldbuilding",
         "level:action",
@@ -3203,13 +3154,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 82,
-      "depends_on": [
-        "strategic-foundations",
-        "mechanism-design",
-        "evolutionary-dynamics",
-        "information-economics",
-        "computational-strategy"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "computational-strategy",
         "evolutionary-dynamics",
@@ -3255,17 +3200,12 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 75,
-      "depends_on": [
-        "classical-games",
-        "cooperative-games",
-        "game-solver"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "behavioral-game-theory",
         "classical-games",
         "cooperative-games",
         "game-solver",
-        "game-theory-orchestrator",
         "strategy-and-grand-strategy"
       ],
       "tags": [
@@ -3308,19 +3248,14 @@
       "manual_notes": null,
       "composite_score": 85,
       "depends_on": [
-        "dilemma-analyzer",
-        "regime-intelligence",
-        "second-level-thinking"
+        "regime-intelligence"
       ],
       "referenced_by": [
         "algorithmic-game-theory",
         "cooperative-games",
-        "dilemma-analyzer",
         "evolutionary-games",
         "faction-design",
         "game-solver",
-        "second-level-thinking",
-        "strategic-foundations",
         "strategy-and-grand-strategy"
       ],
       "tags": [
@@ -3365,14 +3300,11 @@
       "composite_score": 82,
       "depends_on": [
         "classical-games",
-        "ethics",
-        "rights-reasoner"
+        "ethics"
       ],
       "referenced_by": [
-        "strategic-foundations",
-        "game-solver",
-        "rights-reasoner",
-        "diplomacy-and-international-order"
+        "diplomacy-and-international-order",
+        "game-solver"
       ],
       "tags": [
         "domain:game-theory",
@@ -3419,9 +3351,7 @@
         "classical-games",
         "cooperative-games"
       ],
-      "referenced_by": [
-        "strategic-foundations"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:strategic-foundations",
@@ -3462,13 +3392,10 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "matching-markets",
-        "portfolio-construction",
-        "social-choice"
+        "portfolio-construction"
       ],
       "referenced_by": [
         "auction-theory",
-        "game-theory-orchestrator",
         "matching-markets",
         "mechanism-designer",
         "social-choice"
@@ -3562,7 +3489,6 @@
       "depends_on": [],
       "referenced_by": [
         "market-microstructure",
-        "mechanism-design",
         "mechanism-designer"
       ],
       "shares_references_with": [
@@ -3612,7 +3538,6 @@
         "political-philosophy"
       ],
       "referenced_by": [
-        "mechanism-design",
         "mechanism-designer"
       ],
       "tags": [
@@ -3702,18 +3627,11 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "evo-simulator",
-        "evolutionary-games",
-        "population-dynamics",
-        "reflexivity-sentiment"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "evo-simulator",
         "evolutionary-games",
-        "game-theory-orchestrator",
-        "population-dynamics",
-        "reflexivity-sentiment"
+        "population-dynamics"
       ],
       "tags": [
         "domain:game-theory",
@@ -3759,7 +3677,6 @@
       ],
       "referenced_by": [
         "evo-simulator",
-        "evolutionary-dynamics",
         "population-dynamics"
       ],
       "tags": [
@@ -3806,8 +3723,7 @@
         "evolutionary-games"
       ],
       "referenced_by": [
-        "evo-simulator",
-        "evolutionary-dynamics"
+        "evo-simulator"
       ],
       "tags": [
         "domain:game-theory",
@@ -3853,9 +3769,7 @@
         "evolutionary-games",
         "population-dynamics"
       ],
-      "referenced_by": [
-        "evolutionary-dynamics"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:evolutionary-dynamics",
@@ -3894,21 +3808,13 @@
       "auto_score": 78,
       "composite_score": 78,
       "depends_on": [
-        "bayesian-persuasion",
-        "info-designer",
-        "insider-signals",
-        "reflexivity-sentiment",
-        "second-level-thinking",
-        "signaling-screening"
+        "insider-signals"
       ],
       "referenced_by": [
         "bayesian-persuasion",
-        "game-theory-orchestrator",
         "info-designer",
-        "signaling-screening",
-        "second-level-thinking",
-        "reflexivity-sentiment",
-        "intelligence-and-information-war"
+        "intelligence-and-information-war",
+        "signaling-screening"
       ],
       "tags": [
         "domain:game-theory",
@@ -3954,7 +3860,6 @@
       "referenced_by": [
         "bayesian-persuasion",
         "info-designer",
-        "information-economics",
         "intelligence-and-information-war",
         "special-situations"
       ],
@@ -4000,8 +3905,7 @@
         "signaling-screening"
       ],
       "referenced_by": [
-        "info-designer",
-        "information-economics"
+        "info-designer"
       ],
       "tags": [
         "domain:game-theory",
@@ -4045,9 +3949,7 @@
         "bayesian-persuasion",
         "signaling-screening"
       ],
-      "referenced_by": [
-        "information-economics"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:information-economics",
@@ -4085,15 +3987,10 @@
       "status": "active",
       "auto_score": 72,
       "composite_score": 72,
-      "depends_on": [
-        "algorithmic-game-theory",
-        "behavioral-game-theory",
-        "learning-in-games"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "algorithmic-game-theory",
         "behavioral-game-theory",
-        "game-theory-orchestrator",
         "learning-in-games"
       ],
       "tags": [
@@ -4137,7 +4034,6 @@
         "classical-games"
       ],
       "referenced_by": [
-        "computational-strategy",
         "game-solver"
       ],
       "tags": [
@@ -4179,16 +4075,11 @@
       "auto_score": 78,
       "composite_score": 78,
       "depends_on": [
-        "bias-detector",
-        "decision-architect",
         "drawdown-psychology",
         "market-psychology",
         "strategic-foundations"
       ],
       "referenced_by": [
-        "bias-detector",
-        "computational-strategy",
-        "decision-architect",
         "learning-in-games",
         "reflexivity-sentiment"
       ],
@@ -4233,9 +4124,7 @@
       "depends_on": [
         "behavioral-game-theory"
       ],
-      "referenced_by": [
-        "computational-strategy"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:game-theory",
         "subdomain:computational-strategy",
@@ -4283,18 +4172,12 @@
         "causal-inference",
         "model-evaluation",
         "time-series",
-        "chart-selection",
-        "drift-detection",
-        "responsible-ai",
         "biostatistics"
       ],
       "referenced_by": [
         "chart-selection",
         "data-wrangling",
-        "drift-detection",
-        "modeling",
-        "responsible-ai",
-        "statistical-analysis"
+        "drift-detection"
       ],
       "tags": [
         "domain:data-science",
@@ -4379,18 +4262,12 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "alt-data-monitoring",
         "data-cleaning",
-        "modeling",
-        "molecular-pairing",
-        "sentiment-signals"
+        "modeling"
       ],
       "referenced_by": [
         "data-science-orchestrator",
-        "model-evaluation",
-        "alt-data-monitoring",
-        "sentiment-signals",
-        "molecular-pairing"
+        "model-evaluation"
       ],
       "tags": [
         "domain:data-science",
@@ -4432,21 +4309,16 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 81,
-      "depends_on": [
-        "alt-data-monitoring",
-        "factor-exposure"
-      ],
+      "depends_on": [],
       "referenced_by": [
-        "data-science-orchestrator",
-        "causal-inference",
-        "model-evaluation",
-        "time-series",
-        "drift-detection",
         "biostatistics",
-        "alt-data-monitoring",
-        "factor-exposure",
+        "causal-inference",
+        "data-science-orchestrator",
+        "drift-detection",
         "evidence-evaluator",
-        "quality-assessment"
+        "model-evaluation",
+        "quality-assessment",
+        "time-series"
       ],
       "tags": [
         "domain:data-science",
@@ -4489,15 +4361,11 @@
       "manual_notes": null,
       "composite_score": 78,
       "depends_on": [
-        "factor-exposure",
-        "performance-attribution",
         "statistical-testing"
       ],
       "referenced_by": [
-        "data-science-orchestrator",
-        "performance-attribution",
-        "factor-exposure",
-        "counterfactual-reasoner"
+        "counterfactual-reasoner",
+        "data-science-orchestrator"
       ],
       "tags": [
         "domain:data-science",
@@ -4541,20 +4409,16 @@
       "composite_score": 78,
       "depends_on": [
         "feature-engineering",
-        "performance-attribution",
-        "quality-assessment",
         "statistical-analysis",
         "statistical-testing",
         "tail-risk"
       ],
       "referenced_by": [
+        "bias-detector",
         "data-science-orchestrator",
         "drift-detection",
         "responsible-ai",
-        "time-series",
-        "performance-attribution",
-        "bias-detector",
-        "quality-assessment"
+        "time-series"
       ],
       "tags": [
         "domain:data-science",
@@ -4597,19 +4461,13 @@
       "manual_notes": null,
       "composite_score": 84,
       "depends_on": [
-        "climate-projections",
-        "correlation-regimes",
-        "macro-cycles",
         "model-evaluation",
         "statistical-analysis",
         "statistical-testing"
       ],
       "referenced_by": [
-        "data-science-orchestrator",
-        "macro-cycles",
-        "correlation-regimes",
-        "climate-projections",
-        "comparative-civilizations"
+        "comparative-civilizations",
+        "data-science-orchestrator"
       ],
       "tags": [
         "domain:data-science",
@@ -4655,9 +4513,7 @@
         "modeling",
         "statistical-analysis"
       ],
-      "referenced_by": [
-        "data-science-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:data-science",
         "subdomain:visualization",
@@ -4699,17 +4555,12 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "alt-data-monitoring",
-        "macro-cycles",
         "model-evaluation",
         "modeling",
         "statistical-analysis",
         "statistical-testing"
       ],
       "referenced_by": [
-        "data-science-orchestrator",
-        "macro-cycles",
-        "alt-data-monitoring",
         "sentiment-signals"
       ],
       "tags": [
@@ -4753,13 +4604,10 @@
       "manual_notes": null,
       "composite_score": 71,
       "depends_on": [
-        "data-science-orchestrator",
         "model-evaluation",
         "modeling"
       ],
-      "referenced_by": [
-        "data-science-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:data-science",
         "subdomain:frontier",
@@ -4846,9 +4694,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 78,
-      "depends_on": [
-        "data-science-orchestrator"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "biostatistics",
         "causal-inference",
@@ -4899,9 +4745,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "data-science-orchestrator"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "chart-selection",
         "drift-detection",
@@ -5043,11 +4887,6 @@
       "manual_notes": null,
       "composite_score": 84,
       "depends_on": [
-        "lore-writer",
-        "naming-system",
-        "magic-system-design",
-        "geography-ecology",
-        "cultures-societies",
         "narrative-craft",
         "prose-writer",
         "diction"
@@ -5055,16 +4894,11 @@
       "referenced_by": [
         "character-belief-tracker",
         "civilizations",
-        "cultures-societies",
         "ecology-design",
         "extrapolation-engine",
         "faction-design",
-        "geography-ecology",
         "history-builder",
-        "lore-writer",
-        "magic-system-design",
         "magic-systems",
-        "naming-system",
         "narrative-pacing",
         "physical-world",
         "religion-design",
@@ -5111,15 +4945,13 @@
       "composite_score": 75,
       "depends_on": [
         "magic-system-design",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "cultures-societies",
         "ecology-design",
         "economic-systems",
-        "technology-progression",
-        "worldbuilding-orchestrator"
+        "technology-progression"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5161,26 +4993,20 @@
       "manual_notes": null,
       "composite_score": 80,
       "depends_on": [
-        "dialogue",
         "geography-ecology",
         "magic-system-design",
-        "rhetoric",
-        "world-bible",
-        "worldbuilding-orchestrator"
+        "world-bible"
       ],
       "referenced_by": [
         "character-belief-tracker",
         "conlang-craft",
-        "dialogue",
         "dilemma-analyzer",
         "economic-systems",
         "faction-design",
         "lore-writer",
         "naming-system",
         "religion-design",
-        "rhetoric",
-        "rights-reasoner",
-        "worldbuilding-orchestrator"
+        "rights-reasoner"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5398,17 +5224,13 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 85,
-      "depends_on": [
-        "claim-decomposer",
-        "source-triangulator",
-        "evidence-synthesizer"
-      ],
+      "depends_on": [],
       "referenced_by": [
+        "agentic-researcher",
         "claim-decomposer",
         "evidence-synthesizer",
         "skill-scaffold",
-        "source-triangulator",
-        "agentic-researcher"
+        "source-triangulator"
       ],
       "tags": [
         "domain:research",
@@ -5454,8 +5276,7 @@
         "evidence-synthesizer",
         "root-vs-symptom-tagger",
         "six-eyes",
-        "source-triangulator",
-        "spelunker"
+        "source-triangulator"
       ],
       "tags": [
         "domain:research",
@@ -5502,8 +5323,7 @@
         "agentic-researcher",
         "evidence-evaluator",
         "evidence-synthesizer",
-        "source-criticism",
-        "spelunker"
+        "source-criticism"
       ],
       "tags": [
         "domain:research",
@@ -5547,9 +5367,7 @@
         "claim-decomposer",
         "source-triangulator"
       ],
-      "referenced_by": [
-        "spelunker"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:research",
         "level:action"
@@ -5569,12 +5387,6 @@
       "manual_rating": null,
       "manual_notes": null,
       "depends_on": [
-        "sentence-craft",
-        "narrative-craft",
-        "rhetoric",
-        "revision-craft",
-        "prose-writer",
-        "style-mixer",
         "style-mutator"
       ],
       "created": "2026-03-26",
@@ -5624,11 +5436,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "depends_on": [
-        "design-principles",
-        "diction",
-        "prose-rhythm",
-        "style-dna",
-        "syntax-patterns"
+        "design-principles"
       ],
       "created": "2026-03-26",
       "last_modified": "2026-03-28",
@@ -5656,7 +5464,6 @@
         "diction",
         "figurative-language",
         "prose-editor",
-        "prose-orchestrator",
         "prose-rhythm",
         "prose-writer",
         "style-dna",
@@ -5704,7 +5511,6 @@
       "composite_score": 72,
       "referenced_by": [
         "design-principles",
-        "sentence-craft",
         "syntax-patterns",
         "typography"
       ],
@@ -5754,7 +5560,6 @@
         "figurative-language",
         "lore-writer",
         "naming-system",
-        "sentence-craft",
         "syntax-patterns",
         "worldbuilding-orchestrator"
       ],
@@ -5802,9 +5607,7 @@
       },
       "auto_score": 68,
       "composite_score": 68,
-      "referenced_by": [
-        "sentence-craft"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:writing",
         "subdomain:sentence-craft",
@@ -5820,17 +5623,7 @@
       "location": "skills/writing/narrative-craft/SKILL.md",
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
-      "depends_on": [
-        "character-belief-tracker",
-        "concrete-detail",
-        "dialogue",
-        "lore-writer",
-        "narrative-arc",
-        "narrative-pacing",
-        "pacing",
-        "point-of-view",
-        "scene-craft"
-      ],
+      "depends_on": [],
       "tags": [
         "domain:writing",
         "subdomain:narrative-craft",
@@ -5872,7 +5665,6 @@
         "narrative-geometry",
         "pacing",
         "point-of-view",
-        "prose-orchestrator",
         "prose-writer",
         "scene-craft",
         "world-to-story",
@@ -5924,9 +5716,8 @@
       "auto_score": 71,
       "composite_score": 71,
       "referenced_by": [
-        "narrative-craft",
-        "narrative-pacing",
-        "narrative-geometry"
+        "narrative-geometry",
+        "narrative-pacing"
       ],
       "invocation": "knowledge"
     },
@@ -5974,7 +5765,6 @@
         "concrete-detail",
         "dialogue",
         "narrative-arc",
-        "narrative-craft",
         "pacing",
         "point-of-view"
       ],
@@ -5988,7 +5778,6 @@
       "plugin": "skill-infra",
       "parent": "narrative-craft",
       "depends_on": [
-        "narrative-pacing",
         "scene-craft"
       ],
       "tags": [
@@ -6026,9 +5815,7 @@
       "referenced_by": [
         "dialogue",
         "narrative-arc",
-        "narrative-craft",
         "narrative-geometry",
-        "narrative-pacing",
         "point-of-view"
       ],
       "invocation": "knowledge"
@@ -6041,8 +5828,6 @@
       "plugin": "skill-infra",
       "parent": "narrative-craft",
       "depends_on": [
-        "cultures-societies",
-        "faction-design",
         "pacing",
         "scene-craft"
       ],
@@ -6079,9 +5864,6 @@
       "auto_score": 73,
       "composite_score": 73,
       "referenced_by": [
-        "narrative-craft",
-        "faction-design",
-        "cultures-societies",
         "micro-tension"
       ],
       "invocation": "knowledge"
@@ -6130,10 +5912,9 @@
       "auto_score": 73,
       "composite_score": 73,
       "referenced_by": [
-        "narrative-craft",
-        "lore-writer",
         "character-belief-tracker",
-        "character-interiority"
+        "character-interiority",
+        "lore-writer"
       ],
       "invocation": "knowledge"
     },
@@ -6181,7 +5962,6 @@
       "auto_score": 70,
       "composite_score": 70,
       "referenced_by": [
-        "narrative-craft",
         "character-interiority",
         "figurative-language"
       ],
@@ -6194,14 +5974,7 @@
       "location": "skills/writing/rhetoric/SKILL.md",
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
-      "depends_on": [
-        "argument-structure",
-        "cultures-societies",
-        "essay-forms",
-        "rhetorical-appeals",
-        "rhetorical-devices",
-        "visual-communication"
-      ],
+      "depends_on": [],
       "tags": [
         "domain:writing",
         "subdomain:rhetoric",
@@ -6236,12 +6009,9 @@
       "referenced_by": [
         "argument-structure",
         "essay-forms",
-        "prose-orchestrator",
+        "historical-argument",
         "rhetorical-appeals",
-        "rhetorical-devices",
-        "cultures-societies",
-        "visual-communication",
-        "historical-argument"
+        "rhetorical-devices"
       ],
       "invocation": "director"
     },
@@ -6286,7 +6056,6 @@
       "auto_score": 63,
       "composite_score": 63,
       "referenced_by": [
-        "rhetoric",
         "rhetorical-devices"
       ],
       "invocation": "knowledge"
@@ -6334,7 +6103,6 @@
       "referenced_by": [
         "essay-forms",
         "executive-distiller",
-        "rhetoric",
         "six-eyes"
       ],
       "invocation": "knowledge"
@@ -6381,9 +6149,7 @@
       },
       "auto_score": 61,
       "composite_score": 61,
-      "referenced_by": [
-        "rhetoric"
-      ],
+      "referenced_by": [],
       "invocation": "knowledge"
     },
     "essay-forms": {
@@ -6428,9 +6194,7 @@
       },
       "auto_score": 63,
       "composite_score": 63,
-      "referenced_by": [
-        "rhetoric"
-      ],
+      "referenced_by": [],
       "invocation": "knowledge"
     },
     "revision-craft": {
@@ -6440,11 +6204,7 @@
       "location": "skills/writing/revision-craft/SKILL.md",
       "plugin": "skill-infra",
       "parent": "prose-orchestrator",
-      "depends_on": [
-        "prose-editor",
-        "style-analyzer",
-        "style-mutator"
-      ],
+      "depends_on": [],
       "tags": [
         "domain:writing",
         "subdomain:revision-craft",
@@ -6478,7 +6238,6 @@
       "composite_score": 72,
       "referenced_by": [
         "prose-editor",
-        "prose-orchestrator",
         "style-analyzer",
         "style-mixer",
         "style-mutator"
@@ -6527,9 +6286,7 @@
       },
       "auto_score": 63,
       "composite_score": 63,
-      "referenced_by": [
-        "revision-craft"
-      ],
+      "referenced_by": [],
       "invocation": "action"
     },
     "style-analyzer": {
@@ -6575,7 +6332,6 @@
       "auto_score": 66,
       "composite_score": 66,
       "referenced_by": [
-        "revision-craft",
         "style-mutator"
       ],
       "invocation": "action"
@@ -6625,9 +6381,8 @@
       "auto_score": 75,
       "composite_score": 75,
       "referenced_by": [
-        "prose-orchestrator",
-        "worldbuilding-orchestrator",
-        "lore-writer"
+        "lore-writer",
+        "worldbuilding-orchestrator"
       ],
       "invocation": "action"
     },
@@ -6664,14 +6419,10 @@
       "depends_on": [
         "lore-writer",
         "narrative-arc",
-        "pacing",
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [
-        "narrative-craft",
-        "pacing"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:worldbuilding",
         "level:knowledge",
@@ -6760,13 +6511,11 @@
       "depends_on": [
         "classical-games",
         "cultures-societies",
-        "dialogue",
         "history-builder",
         "world-bible",
         "worldbuilding-orchestrator"
       ],
       "referenced_by": [
-        "dialogue",
         "justice-analyst"
       ],
       "tags": [
@@ -6859,7 +6608,6 @@
       "referenced_by": [
         "brand-voice",
         "prose-writer",
-        "sentence-craft",
         "style-analyzer",
         "style-mixer",
         "style-mutator"
@@ -6909,7 +6657,6 @@
       "auto_score": 68,
       "composite_score": 68,
       "referenced_by": [
-        "prose-orchestrator",
         "prose-writer"
       ],
       "tags": [
@@ -6957,7 +6704,6 @@
       "auto_score": 67,
       "composite_score": 67,
       "referenced_by": [
-        "revision-craft",
         "prose-orchestrator"
       ],
       "tags": [
@@ -7001,7 +6747,6 @@
       "depends_on": [],
       "referenced_by": [
         "alt-data-monitoring",
-        "archon",
         "performance-attribution",
         "rebalancing-logic"
       ],
@@ -7043,18 +6788,8 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "drift-detection",
-        "feature-engineering",
-        "sentiment-signals",
-        "statistical-testing"
-      ],
-      "referenced_by": [
-        "sentiment-signals",
-        "statistical-testing",
-        "feature-engineering",
-        "drift-detection"
-      ],
+      "depends_on": [],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7095,14 +6830,9 @@
       "composite_score": 72,
       "depends_on": [
         "asset-allocation",
-        "causal-inference",
-        "factor-exposure",
-        "model-evaluation"
+        "factor-exposure"
       ],
-      "referenced_by": [
-        "causal-inference",
-        "model-evaluation"
-      ],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7183,20 +6913,8 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 89,
-      "depends_on": [
-        "value-quality",
-        "reflexivity-sentiment",
-        "asset-universe",
-        "regime-intelligence",
-        "portfolio-construction",
-        "market-microstructure",
-        "risk-architecture",
-        "special-situations",
-        "adaptive-monitoring",
-        "geopolitical-overlay"
-      ],
+      "depends_on": [],
       "referenced_by": [
-        "values-excavator",
         "adaptive-monitoring",
         "asset-universe",
         "geopolitical-overlay",
@@ -7206,7 +6924,8 @@
         "regime-intelligence",
         "risk-architecture",
         "special-situations",
-        "value-quality"
+        "value-quality",
+        "values-excavator"
       ],
       "parent": null,
       "tags": [
@@ -7248,7 +6967,6 @@
       "depends_on": [],
       "referenced_by": [
         "alternatives",
-        "archon",
         "commodities",
         "currencies",
         "digital-assets",
@@ -7465,12 +7183,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "factor-exposure",
         "regime-intelligence"
       ],
-      "referenced_by": [
-        "factor-exposure"
-      ],
+      "referenced_by": [],
       "parent": "asset-universe",
       "tags": [
         "domain:investing",
@@ -7555,11 +7270,10 @@
       "composite_score": 75,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "energy-security",
         "great-power-dynamics",
-        "secular-themes",
         "justice-analyst",
+        "secular-themes",
         "trade-and-globalization"
       ],
       "parent": "archon",
@@ -7732,7 +7446,6 @@
         "matching-markets"
       ],
       "referenced_by": [
-        "archon",
         "digital-assets",
         "liquidity-topology",
         "options-mechanics",
@@ -7902,13 +7615,12 @@
       "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "asset-allocation",
         "factor-exposure",
         "hedging-architecture",
+        "mechanism-design",
         "position-sizing",
-        "tax-optimization",
-        "mechanism-design"
+        "tax-optimization"
       ],
       "parent": "archon",
       "tags": [
@@ -7955,12 +7667,12 @@
       ],
       "referenced_by": [
         "alternatives",
+        "decision-architect",
         "digital-assets",
         "factor-exposure",
         "performance-attribution",
         "rebalancing-logic",
-        "tax-optimization",
-        "decision-architect"
+        "tax-optimization"
       ],
       "parent": "portfolio-construction",
       "tags": [
@@ -8001,18 +7713,12 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "asset-allocation",
-        "causal-inference",
-        "equities",
-        "statistical-testing"
+        "asset-allocation"
       ],
       "referenced_by": [
-        "equities",
         "passive-flow-dynamics",
         "performance-attribution",
-        "quality-compounders",
-        "statistical-testing",
-        "causal-inference"
+        "quality-compounders"
       ],
       "parent": "portfolio-construction",
       "tags": [
@@ -8138,17 +7844,12 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "behavioral-game-theory",
-        "evolutionary-dynamics",
-        "information-economics"
+        "behavioral-game-theory"
       ],
       "referenced_by": [
-        "archon",
         "market-psychology",
         "reflexivity-theory",
-        "sentiment-signals",
-        "evolutionary-dynamics",
-        "information-economics"
+        "sentiment-signals"
       ],
       "parent": "archon",
       "tags": [
@@ -8188,19 +7889,14 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 73,
-      "depends_on": [
-        "reflexivity-theory",
-        "sentiment-signals"
-      ],
+      "depends_on": [],
       "referenced_by": [
-        "drawdown-psychology",
-        "reflexivity-theory",
-        "second-level-thinking",
-        "sentiment-signals",
         "behavioral-game-theory",
-        "bias-detector",
         "belief-auditor",
-        "historical-pattern-recognition"
+        "bias-detector",
+        "drawdown-psychology",
+        "historical-pattern-recognition",
+        "second-level-thinking"
       ],
       "parent": "reflexivity-sentiment",
       "tags": [
@@ -8241,11 +7937,9 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "macro-cycles",
-        "market-psychology"
+        "macro-cycles"
       ],
       "referenced_by": [
-        "market-psychology",
         "second-level-thinking"
       ],
       "parent": "reflexivity-sentiment",
@@ -8287,17 +7981,11 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "alt-data-monitoring",
-        "drift-detection",
-        "feature-engineering",
-        "market-psychology"
+        "drift-detection"
       ],
       "referenced_by": [
-        "alt-data-monitoring",
         "insider-signals",
-        "market-psychology",
-        "signaling-screening",
-        "feature-engineering"
+        "signaling-screening"
       ],
       "parent": "reflexivity-sentiment",
       "tags": [
@@ -8339,15 +8027,14 @@
       "composite_score": 79,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "asset-allocation",
+        "classical-games",
         "correlation-regimes",
         "equities",
         "fiscal-regime",
         "macro-cycles",
         "monetary-regime",
-        "secular-themes",
-        "classical-games"
+        "secular-themes"
       ],
       "parent": "archon",
       "tags": [
@@ -8388,12 +8075,10 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "macro-cycles",
         "monetary-regime"
       ],
       "referenced_by": [
-        "fixed-income",
-        "macro-cycles"
+        "fixed-income"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8433,22 +8118,13 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 84,
-      "depends_on": [
-        "drift-detection",
-        "fiscal-regime",
-        "monetary-regime",
-        "time-series"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "commodities",
         "currencies",
-        "fiscal-regime",
         "great-power-dynamics",
-        "monetary-regime",
-        "reflexivity-theory",
-        "time-series",
-        "drift-detection",
-        "money-and-financial-systems"
+        "money-and-financial-systems",
+        "reflexivity-theory"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8488,14 +8164,11 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 75,
-      "depends_on": [
-        "macro-cycles"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "currencies",
         "fiscal-regime",
         "fixed-income",
-        "macro-cycles",
         "money-and-financial-systems"
       ],
       "parent": "regime-intelligence",
@@ -8538,7 +8211,6 @@
       "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "asset-allocation",
         "correlation-regimes",
         "drawdown-psychology",
@@ -8584,17 +8256,13 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "regime-intelligence",
-        "tail-risk",
-        "time-series"
+        "regime-intelligence"
       ],
       "referenced_by": [
         "alternatives",
         "asset-allocation",
         "fixed-income",
-        "hedging-architecture",
-        "tail-risk",
-        "time-series"
+        "hedging-architecture"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8681,12 +8349,10 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "portfolio-construction",
-        "tail-risk"
+        "portfolio-construction"
       ],
       "referenced_by": [
-        "drawdown-psychology",
-        "tail-risk"
+        "drawdown-psychology"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8726,18 +8392,13 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 75,
-      "depends_on": [
-        "correlation-regimes",
-        "position-sizing"
-      ],
+      "depends_on": [],
       "referenced_by": [
-        "correlation-regimes",
+        "counterfactual-reasoner",
         "drawdown-psychology",
         "hedging-architecture",
-        "options-mechanics",
-        "position-sizing",
         "model-evaluation",
-        "counterfactual-reasoner"
+        "options-mechanics"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8782,7 +8443,6 @@
         "signaling-screening"
       ],
       "referenced_by": [
-        "archon",
         "complexity-premium",
         "event-driven",
         "insider-signals",
@@ -8869,15 +8529,10 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 70,
-      "depends_on": [
-        "insider-signals",
-        "spinoffs-restructuring"
-      ],
+      "depends_on": [],
       "referenced_by": [
-        "complexity-premium",
-        "insider-signals",
-        "spinoffs-restructuring",
-        "auction-theory"
+        "auction-theory",
+        "complexity-premium"
       ],
       "parent": "special-situations",
       "tags": [
@@ -8918,13 +8573,11 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "event-driven",
         "sentiment-signals"
       ],
       "referenced_by": [
-        "event-driven",
-        "signaling-screening",
-        "information-economics"
+        "information-economics",
+        "signaling-screening"
       ],
       "parent": "special-situations",
       "tags": [
@@ -8965,12 +8618,9 @@
       "manual_notes": null,
       "composite_score": 66,
       "depends_on": [
-        "event-driven",
         "intrinsic-value"
       ],
-      "referenced_by": [
-        "event-driven"
-      ],
+      "referenced_by": [],
       "parent": "special-situations",
       "tags": [
         "domain:investing",
@@ -9011,7 +8661,6 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "archon",
         "intrinsic-value",
         "quality-compounders",
         "second-level-thinking",
@@ -9056,11 +8705,9 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "quality-compounders",
         "second-level-thinking"
       ],
       "referenced_by": [
-        "quality-compounders",
         "spinoffs-restructuring"
       ],
       "parent": "value-quality",
@@ -9102,12 +8749,9 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "factor-exposure",
-        "intrinsic-value"
+        "factor-exposure"
       ],
-      "referenced_by": [
-        "intrinsic-value"
-      ],
+      "referenced_by": [],
       "parent": "value-quality",
       "tags": [
         "domain:investing",
@@ -9147,17 +8791,13 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "classical-games",
-        "information-economics",
         "market-psychology",
         "reflexivity-theory"
       ],
       "referenced_by": [
         "complexity-premium",
-        "intrinsic-value",
-        "classical-games",
-        "information-economics",
-        "dilemma-analyzer"
+        "dilemma-analyzer",
+        "intrinsic-value"
       ],
       "parent": "value-quality",
       "tags": [
@@ -9201,7 +8841,6 @@
         "brand-identity"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer",
         "style-evolution-observer"
       ],
@@ -9248,7 +8887,6 @@
         "aesthetic-identity"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer"
       ],
       "parent": "design-orchestrator",
@@ -9293,7 +8931,6 @@
         "visual-communication"
       ],
       "referenced_by": [
-        "design-orchestrator",
         "master-artificer"
       ],
       "parent": "design-orchestrator",
@@ -9339,9 +8976,7 @@
         "design-principles",
         "visual-communication"
       ],
-      "referenced_by": [
-        "design-orchestrator"
-      ],
+      "referenced_by": [],
       "parent": "design-orchestrator",
       "tags": [
         "domain:design",
@@ -9382,11 +9017,11 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "geography-ecology",
         "ecology-design",
-        "technology-progression",
         "environmental-storytelling",
-        "sensory-worldbuilding"
+        "geography-ecology",
+        "sensory-worldbuilding",
+        "technology-progression"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9428,15 +9063,15 @@
       "composite_score": 75,
       "depends_on": [],
       "referenced_by": [
-        "cultures-societies",
-        "faction-design",
-        "religion-design",
-        "history-builder",
-        "comparative-civilizations",
         "character-belief-tracker",
         "character-design",
+        "comparative-civilizations",
+        "cultures-societies",
         "economic-systems",
-        "lore-writer"
+        "faction-design",
+        "history-builder",
+        "lore-writer",
+        "religion-design"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9478,15 +9113,15 @@
       "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
-        "magic-system-design",
-        "magic-systems",
-        "naming-system",
-        "world-bible",
         "conlang-craft",
         "extrapolation-engine",
         "game-mechanics",
+        "magic-system-design",
+        "magic-systems",
+        "naming-system",
         "narrative-pacing",
-        "weird-worldbuilding"
+        "weird-worldbuilding",
+        "world-bible"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -9574,14 +9209,14 @@
       "composite_score": 78,
       "depends_on": [],
       "referenced_by": [
-        "logic",
+        "decision-theory",
         "dialectical-tools",
         "epistemology",
         "ethics",
-        "decision-theory",
+        "intellectual-history",
+        "logic",
         "philosophy-of-science",
-        "political-philosophy",
-        "intellectual-history"
+        "political-philosophy"
       ],
       "tags": [
         "domain:philosophy",
@@ -9711,9 +9346,9 @@
       "composite_score": 74,
       "depends_on": [],
       "referenced_by": [
-        "six-eyes",
         "frame-rotator",
-        "scope-bounder"
+        "scope-bounder",
+        "six-eyes"
       ],
       "tags": [
         "domain:philosophy",
@@ -9756,10 +9391,10 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
+        "dialectic-engine",
         "socratic-examiner",
         "steel-man-forge",
-        "thought-experiment-lab",
-        "dialectic-engine"
+        "thought-experiment-lab"
       ],
       "tags": [
         "domain:philosophy",
@@ -9889,9 +9524,9 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "evidence-evaluator",
+        "bayesian-reasoner",
         "belief-auditor",
-        "bayesian-reasoner"
+        "evidence-evaluator"
       ],
       "tags": [
         "domain:philosophy",
@@ -9937,8 +9572,8 @@
         "statistical-testing"
       ],
       "referenced_by": [
-        "six-eyes",
-        "answerability-tester"
+        "answerability-tester",
+        "six-eyes"
       ],
       "tags": [
         "domain:philosophy",
@@ -10025,10 +9660,10 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
+        "cooperative-games",
         "dilemma-analyzer",
-        "values-excavator",
         "stakeholder-mapper",
-        "cooperative-games"
+        "values-excavator"
       ],
       "tags": [
         "domain:philosophy",
@@ -10070,14 +9705,11 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "classical-games",
         "cultures-societies",
         "religion-design",
         "second-level-thinking"
       ],
-      "referenced_by": [
-        "classical-games"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:ethics",
@@ -10122,9 +9754,9 @@
         "mechanism-designer"
       ],
       "referenced_by": [
+        "answerability-tester",
         "six-eyes",
-        "stakeholder-rotator",
-        "answerability-tester"
+        "stakeholder-rotator"
       ],
       "tags": [
         "domain:philosophy",
@@ -10167,9 +9799,9 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "decision-architect",
         "bias-detector",
-        "counterfactual-reasoner"
+        "counterfactual-reasoner",
+        "decision-architect"
       ],
       "tags": [
         "domain:philosophy",
@@ -10211,12 +9843,9 @@
       "manual_notes": null,
       "composite_score": 71,
       "depends_on": [
-        "asset-allocation",
-        "behavioral-game-theory"
+        "asset-allocation"
       ],
-      "referenced_by": [
-        "behavioral-game-theory"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:decision-theory",
@@ -10257,13 +9886,10 @@
       "manual_notes": null,
       "composite_score": 71,
       "depends_on": [
-        "behavioral-game-theory",
         "market-psychology",
         "model-evaluation"
       ],
-      "referenced_by": [
-        "behavioral-game-theory"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:decision-theory",
@@ -10349,8 +9975,8 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "methodology-critic",
         "demarcation-judge",
+        "methodology-critic",
         "paradigm-analyst"
       ],
       "tags": [
@@ -10435,8 +10061,8 @@
       "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
-        "six-eyes",
-        "falsifiability-checker"
+        "falsifiability-checker",
+        "six-eyes"
       ],
       "tags": [
         "domain:philosophy",
@@ -10480,9 +10106,9 @@
       "depends_on": [],
       "referenced_by": [
         "justice-analyst",
+        "political-thought",
         "rights-reasoner",
-        "social-choice",
-        "political-thought"
+        "social-choice"
       ],
       "tags": [
         "domain:philosophy",
@@ -10568,12 +10194,9 @@
       "manual_notes": null,
       "composite_score": 68,
       "depends_on": [
-        "cooperative-games",
         "cultures-societies"
       ],
-      "referenced_by": [
-        "cooperative-games"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:philosophy",
         "subdomain:political-philosophy",
@@ -10862,8 +10485,6 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
-        "foresight",
-        "architecture",
         "frontier-scanner",
         "skill-cartographer",
         "pattern-synthesizer",
@@ -10916,11 +10537,10 @@
         "clarity-engine"
       ],
       "referenced_by": [
-        "neocortex",
+        "briefing-engine",
         "growth-architect",
-        "foresight",
-        "scenario-planner",
-        "briefing-engine"
+        "neocortex",
+        "scenario-planner"
       ],
       "tags": [
         "domain:neocortex",
@@ -10962,11 +10582,10 @@
       "composite_score": 71,
       "depends_on": [],
       "referenced_by": [
-        "neocortex",
+        "briefing-engine",
         "growth-architect",
-        "pattern-synthesizer",
-        "architecture",
-        "briefing-engine"
+        "neocortex",
+        "pattern-synthesizer"
       ],
       "tags": [
         "domain:neocortex",
@@ -11010,10 +10629,9 @@
         "skill-cartographer"
       ],
       "referenced_by": [
-        "neocortex",
+        "domain-translator",
         "growth-architect",
-        "architecture",
-        "domain-translator"
+        "neocortex"
       ],
       "tags": [
         "domain:neocortex",
@@ -11064,9 +10682,8 @@
         "research-curator"
       ],
       "referenced_by": [
-        "neocortex",
-        "architecture",
-        "briefing-engine"
+        "briefing-engine",
+        "neocortex"
       ],
       "tags": [
         "domain:neocortex",
@@ -11108,13 +10725,12 @@
       "composite_score": 81,
       "depends_on": [],
       "referenced_by": [
-        "neocortex",
+        "cursed-speech",
+        "executive-distiller",
         "frontier-scanner",
         "growth-architect",
-        "architecture",
-        "six-eyes",
-        "executive-distiller",
-        "cursed-speech"
+        "neocortex",
+        "six-eyes"
       ],
       "tags": [
         "domain:neocortex",
@@ -11154,13 +10770,8 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "frontier-scanner",
-        "scenario-planner",
-        "briefing-engine"
-      ],
+      "depends_on": [],
       "referenced_by": [
-        "neocortex",
         "briefing-engine",
         "frontier-scanner",
         "scenario-planner"
@@ -11203,17 +10814,8 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 75,
-      "depends_on": [
-        "skill-cartographer",
-        "pattern-synthesizer",
-        "skill-evolutionist",
-        "growth-architect",
-        "domain-translator",
-        "research-curator",
-        "clarity-engine"
-      ],
+      "depends_on": [],
       "referenced_by": [
-        "neocortex",
         "clarity-engine",
         "domain-translator",
         "growth-architect",
@@ -11262,9 +10864,8 @@
       "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
-        "architecture",
-        "growth-architect",
-        "briefing-engine"
+        "briefing-engine",
+        "growth-architect"
       ],
       "tags": [
         "domain:neocortex",
@@ -11308,9 +10909,8 @@
         "frontier-scanner"
       ],
       "referenced_by": [
-        "foresight",
-        "growth-architect",
-        "briefing-engine"
+        "briefing-engine",
+        "growth-architect"
       ],
       "tags": [
         "domain:neocortex",
@@ -11357,9 +10957,7 @@
         "skill-evolutionist",
         "growth-architect"
       ],
-      "referenced_by": [
-        "foresight"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:neocortex",
         "level:action"
@@ -11402,7 +11000,6 @@
         "pattern-synthesizer"
       ],
       "referenced_by": [
-        "architecture",
         "growth-architect"
       ],
       "tags": [
@@ -11445,7 +11042,6 @@
       "composite_score": 66,
       "depends_on": [],
       "referenced_by": [
-        "architecture",
         "growth-architect"
       ],
       "tags": [
@@ -12118,15 +11714,15 @@
       "composite_score": 79,
       "depends_on": [],
       "referenced_by": [
-        "historiography",
         "applied-history",
-        "political-history",
-        "economic-history",
-        "military-history",
-        "intellectual-history",
-        "world-systems",
         "cultural-history",
-        "regional-atlas"
+        "economic-history",
+        "historiography",
+        "intellectual-history",
+        "military-history",
+        "political-history",
+        "regional-atlas",
+        "world-systems"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -12174,10 +11770,10 @@
       "composite_score": 75,
       "depends_on": [],
       "referenced_by": [
-        "historical-thinking",
-        "source-criticism",
         "historical-argument",
+        "historical-thinking",
         "schools-of-thought",
+        "source-criticism",
         "source-evaluator"
       ],
       "shares_references_with": [],
@@ -12431,8 +12027,8 @@
         "market-psychology"
       ],
       "referenced_by": [
-        "historical-analogy-engine",
         "empires-and-states",
+        "historical-analogy-engine",
         "history-and-decision-making"
       ],
       "shares_references_with": [],
@@ -12778,10 +12374,10 @@
       "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
-        "trade-and-globalization",
-        "money-and-financial-systems",
         "industrialization-and-development",
-        "labor-and-inequality"
+        "labor-and-inequality",
+        "money-and-financial-systems",
+        "trade-and-globalization"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13023,10 +12619,10 @@
       "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
-        "strategy-and-grand-strategy",
-        "warfare-through-the-ages",
+        "battle-analysis",
         "intelligence-and-information-war",
-        "battle-analysis"
+        "strategy-and-grand-strategy",
+        "warfare-through-the-ages"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13278,9 +12874,9 @@
         "philosophy-orchestrator"
       ],
       "referenced_by": [
-        "scientific-revolutions",
+        "knowledge-systems",
         "political-thought",
-        "knowledge-systems"
+        "scientific-revolutions"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13473,12 +13069,12 @@
       "composite_score": 73,
       "depends_on": [],
       "referenced_by": [
+        "comparative-analysis-engine",
         "comparative-civilizations",
-        "environmental-history",
         "deep-history",
         "demographic-and-structural-forces",
-        "technology-and-civilizational-change",
-        "comparative-analysis-engine"
+        "environmental-history",
+        "technology-and-civilizational-change"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -13816,11 +13412,11 @@
       "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
-        "religions-and-worldviews",
-        "gender-and-sexuality-history",
-        "social-movements-and-identity",
         "art-and-cultural-production",
-        "everyday-life-and-material-culture"
+        "everyday-life-and-material-culture",
+        "gender-and-sexuality-history",
+        "religions-and-worldviews",
+        "social-movements-and-identity"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -14106,10 +13702,10 @@
       "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
-        "mediterranean-and-near-east",
+        "americas-and-oceania",
         "east-asia",
-        "sub-saharan-africa",
-        "americas-and-oceania"
+        "mediterranean-and-near-east",
+        "sub-saharan-africa"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -18320,8 +17916,8 @@
       "composite_score": 67,
       "depends_on": [],
       "referenced_by": [
-        "six-eyes",
-        "frame-rotator"
+        "frame-rotator",
+        "six-eyes"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -18369,8 +17965,8 @@
       "composite_score": 67,
       "depends_on": [],
       "referenced_by": [
-        "six-eyes",
-        "problem-typology"
+        "problem-typology",
+        "six-eyes"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -18418,8 +18014,8 @@
       "composite_score": 67,
       "depends_on": [],
       "referenced_by": [
-        "six-eyes",
-        "problem-typology"
+        "problem-typology",
+        "six-eyes"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -18467,11 +18063,11 @@
       "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
-        "six-eyes",
-        "bluf-shaper",
-        "scqa-formatter",
-        "executive-distiller",
         "audience-classifier",
+        "bluf-shaper",
+        "executive-distiller",
+        "scqa-formatter",
+        "six-eyes",
         "statement-grader"
       ],
       "shares_references_with": [],
@@ -18520,10 +18116,10 @@
       "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
+        "answerability-tester",
         "six-eyes",
         "statement-grader",
-        "xy-detector",
-        "answerability-tester"
+        "xy-detector"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -18574,14 +18170,14 @@
         "minto-scqa"
       ],
       "referenced_by": [
-        "six-eyes",
-        "xy-detector",
         "answerability-tester",
-        "falsifiability-checker",
-        "scope-bounder",
         "cursed-speech",
+        "falsifiability-checker",
         "frame-rotator",
-        "inversion-tool"
+        "inversion-tool",
+        "scope-bounder",
+        "six-eyes",
+        "xy-detector"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -18888,8 +18484,8 @@
         "minto-scqa"
       ],
       "referenced_by": [
-        "six-eyes",
-        "executive-distiller"
+        "executive-distiller",
+        "six-eyes"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -19044,8 +18640,8 @@
         "ackoff-mess"
       ],
       "referenced_by": [
-        "six-eyes",
         "root-vs-symptom-tagger",
+        "six-eyes",
         "stakeholder-rotator"
       ],
       "shares_references_with": [],
@@ -19144,8 +18740,8 @@
       "composite_score": 65,
       "depends_on": [],
       "referenced_by": [
-        "six-eyes",
-        "root-vs-symptom-tagger"
+        "root-vs-symptom-tagger",
+        "six-eyes"
       ],
       "shares_references_with": [],
       "forked_from": null,

@@ -544,3 +544,9 @@ Not all alt data signals are created equal. Score each on:
 - **Data-science/data-wrangling/feature-engineering**: The alt data value chain (raw → cleaned → signal → integration) IS the feature engineering pipeline. Satellite imagery requires spatial features, NLP requires text embeddings (FinBERT), transaction data requires temporal aggregation — all feature engineering applied to financial signals.
 - **Data-science/statistical-analysis/statistical-testing**: Signal validation requires hypothesis testing with multiple comparison correction. Testing dozens of alt data signals and reporting only the ones that "work" is textbook p-hacking — the statistical-testing skill provides the correction methods (Bonferroni, BH).
 - **Data-science/ml-engineering/drift-detection**: Alt data signal decay is drift — a signal that worked for 3 years degrades as it's discovered and arbitraged. Monitoring signal quality over time uses drift detection methodology.
+
+
+
+## Related Skills
+
+- **sentiment-signals** — Alternative data feeds (credit card, satellite, scrape) often serve as raw inputs for sentiment signal construction. Alt-data-monitoring is one input pipeline; sentiment-signals is one downstream framework that consumes it.

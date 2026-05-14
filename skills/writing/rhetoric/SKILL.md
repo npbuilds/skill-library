@@ -74,3 +74,9 @@ This order goes from strategy to tactics: choose the right persuasive mode, orga
 ## Cross-Domain Connections
 
 - **Worldbuilding/cultures-societies**: A culture's value system constrains which rhetorical strategies feel authentic. A collectivist culture emphasizes communal appeals; an honor culture uses shame and glory. Rhetoric written for in-world audiences must respect the target culture's persuasion conventions.
+
+
+
+## Related Skills
+
+- **visual-communication** — Rhetoric and visual-communication are complementary persuasion crafts. Both manage attention, structure arguments, and use contrast/repetition/emphasis to drive meaning — one with words, the other with images.

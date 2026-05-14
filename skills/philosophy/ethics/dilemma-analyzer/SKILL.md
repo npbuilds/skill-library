@@ -148,3 +148,9 @@ If you prioritize [value B]: [what follows]
 **User wants a definitive answer:** Explain that ethical frameworks give different answers because they value different things. Offer to help the user identify which values they prioritize (route to values-excavator), which will often resolve the question for them personally.
 
 **Culturally sensitive topic:** Apply frameworks without cultural bias. All major frameworks are cross-cultural in their formal structure, even though they emerged in specific traditions. Acknowledge that cultural context affects how principles are weighted.
+
+
+
+## Related Skills
+
+- **classical-games** — Many moral dilemmas reduce to classical game-theoretic structures. Use classical-games to expose the underlying strategic incentives beneath an ethical question.

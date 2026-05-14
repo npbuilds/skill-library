@@ -169,3 +169,9 @@ Decision Map:
 **User can't articulate values:** Use comparison-based elicitation. "Would you prefer guaranteed $50K or a 50% chance of $120K?" reveals risk preferences. "If you had to sacrifice X or Y, which goes?" reveals value ranking.
 
 **Decision involves other agents' responses:** Flag that this is a strategic interaction and may benefit from game-theoretic analysis (cross-domain to game-theory). Decision theory handles individual choice; game theory handles interactive choice.
+
+
+
+## Related Skills
+
+- **behavioral-game-theory** — Empirical findings from behavioral-game-theory (non-rational play, framing, reference points) feed directly into decision-architect nudge design and choice architecture.

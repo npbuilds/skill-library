@@ -117,3 +117,10 @@ Read `references/sources.md` for the full bibliography — primary texts (Camere
 
 - **Investing/reflexivity-sentiment/market-psychology**: Level-k thinking explains market anomalies — most investors are level-1 thinkers (best-responding to naive expectations). Behavioral biases catalogued in market psychology (herding, anchoring, disposition effect) map directly to QRE and prospect theory in games. The beauty contest game IS the stock market.
 - **Investing/risk-architecture/drawdown-psychology**: Prospect theory's loss aversion and probability weighting explain why investors hold losers too long and sell winners too early, and why tail-risk hedging is psychologically valuable beyond its expected return.
+
+
+
+## Related Skills
+
+- **bias-detector** — Behavioral-game-theory and bias-detector diagnose the same family of deviations from rational choice. Behavioral-game-theory frames them as strategic regularities; bias-detector frames them as epistemic distortions.
+- **decision-architect** — Decision-architect designs choice environments that take behavioral-game-theory findings as constraints. The two are complementary: behavioral-game-theory predicts deviations; decision-architect intervenes on them.
