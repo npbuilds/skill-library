@@ -114,6 +114,10 @@ Receive back:
 
 If investigation reveals the original question was wrong or incomplete, surface this to the user rather than silently adjusting scope.
 
+**Paywall handling (NEW):** If `source-triangulator` reports any source as paywalled or otherwise inaccessible AND the claim is `critical` priority, route to `paywall-strategist` BEFORE tagging the source as Unverifiable. The strategist tries open-access mirrors, extracts available abstracts/methods, and surfaces adjacent open-access work. Only after the strategist returns `truly_unverifiable` does the gap get logged.
+
+**Bias/funding enrichment (NEW):** After source-triangulator returns the evidence bundle for any `critical` claim, route the bundle to `bias-and-funding-tracer`. It enriches each source with funding, COI, author affiliations, and an independence score, then flags cross-source dependencies (e.g., 3 "independent" sources sharing a funder). If the effectively-independent source count drops below the threshold for the preliminary confidence tier, evidence-synthesizer must use the lower count when finalizing the tag in Phase 4.
+
 ### Phase 4 — Synthesize
 
 Route all evidence bundles to `evidence-synthesizer`.
@@ -161,13 +165,51 @@ After all adversarial checks are complete, walk the dependency graph:
 
 The self-check is NOT optional in `standard` and `deep` modes. It is what makes Spelunker trustworthy.
 
+**Active disconfirmation via `counterfactual-prober` (NEW):**
+
+After the existing passive adversarial search and BEFORE backpropagation, route to `counterfactual-prober` for active disconfirmation:
+
+- In `deep` mode: probe ALL critical claims still tagged Confirmed or Likely, plus the top 2 supporting claims by priority.
+- In `standard` mode: probe the single highest-priority critical claim still tagged Confirmed or Likely.
+- In `quick` mode: skip (consistent with skipping all of Phase 5).
+
+The prober generates "if this claim were false, what should we observe?" predictions and searches for those signatures. Confidence downgrades from the prober feed into the same backpropagation cascade that handles the passive adversarial pass — process them in the same wave.
+
 ### Phase 6 — Present
 
 Deliver the final research brief to the user. The output format is defined in `evidence-synthesizer` but the orchestrator adds:
 
+- **Brief ID**: Generate a short stable identifier for this brief in the form `SPK-YYYYMMDD-<6-char-slug>` (e.g., `SPK-20260513-pasiv9`). Include it in the brief header. The brief ID is the handle for the calibration ledger — users resolve claims later via `/calibrate <brief_id> <claim_id> <true|false|partial>`.
 - **Meta-commentary**: How confident is the overall investigation? Did tool limitations affect coverage?
 - **Next steps**: If the user wants to go deeper, what specific questions would be most productive?
 - **Upgrade paths**: For Speculative and Unverifiable claims, what would be needed to resolve them?
+
+#### Pre-flight check (REQUIRED before delivery)
+
+Before returning the brief to the user, verify the evidence-synthesizer ran its Step 5b citation audit. The orchestrator MUST reject and return to Phase 4 if:
+
+1. Any paragraph in Key Findings or Detailed Findings contains an empirical claim without an inline `[N]` marker (or explicit `[no source]` annotation on Speculative claims).
+2. Any confidence tag is missing a because-clause.
+3. The SOURCES section is bullet-formatted instead of a numbered list, or any entry is missing its date/tier/used-for.
+4. Citation numbers don't match between body and SOURCES (orphan markers or unused entries).
+
+This pre-flight is non-optional. The Guiding Principles ("Never present speculation as fact", "Trace to primary sources") are only enforceable if the brief is auditable. A brief that reads authoritative but cannot be traced to sources violates the contract.
+
+#### Feedback prompt (REQUIRED at end of brief)
+
+After the brief, append a single-line feedback prompt:
+
+```
+─────────────────────────────────────
+Was this brief useful? Reply `/feedback spelunker <1-5> [optional notes]` to log.
+Brief ID: SPK-YYYYMMDD-<slug> · Calibrate later: `/calibrate <brief_id> <claim_id> <true|false|partial>`
+```
+
+This populates `data/feedback.jsonl` (currently empty for spelunker) and the calibration ledger. Without this prompt, the feedback loop closes silently.
+
+### Translation to other formats (optional)
+
+If the user wants the brief in a non-default format (executive memo, VC pitch bullets, tweet thread, decision memo), route the completed brief to `synthesis-translator` with the desired target format. The translator preserves citations and confidence tags, refuses to upgrade tags during compression, and surfaces what was cut. Callable standalone on any existing brief in `research/` — does not require a fresh Spelunker run.
 
 ### Persistence (optional)
 
@@ -188,6 +230,21 @@ If the user wants this research brief persisted to their Obsidian vault, call `v
 ### Agentic Researcher (Generative Mode)
 
 When a question is generative rather than investigative (see Phase 1, step 5), the spelunker routes to `agentic-researcher` which uses an evolutionary generate → evaluate → select → mutate loop to construct and refine candidate solutions. The agentic-researcher shares the spelunker's confidence framework and calls source-triangulator for evidence gathering. Its output (an Agentic Research Brief with ranked recommendations and trade-off maps) is presented using Phase 6 formatting.
+
+### Internal Sub-Skills (for reference)
+
+The Spelunker suite is composed of these directly-orchestrated skills:
+
+| Phase | Skill | Role |
+|-------|-------|------|
+| 2 | `claim-decomposer` | Atomic-claim extraction with dependency graph |
+| 3 | `source-triangulator` | Per-claim evidence gathering, independence verification |
+| 3 | `bias-and-funding-tracer` | Per-source funding/COI enrichment, cross-source independence flags |
+| 3 (Reentry L1) | `paywall-strategist` | Open-access mirror search before declaring a source unverifiable |
+| 4 | `evidence-synthesizer` | Confidence-tagged brief assembly with citation discipline |
+| 5 | `counterfactual-prober` | Active disconfirmation — search for signatures the claim would leave if false |
+| 6 (optional) | `synthesis-translator` | Convert the brief to memo / pitch / thread / decision formats |
+| Generative branch | `agentic-researcher` | Evolutionary candidate generation for "what's the best X?" questions |
 
 ### External Integration
 

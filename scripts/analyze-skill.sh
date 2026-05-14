@@ -47,13 +47,22 @@ DESC_WORDS=$(echo "$FRONTMATTER" | awk '
   in_desc { print }
 ' | wc -w | tr -d ' ')
 
-# Count files in subdirectories
+# Count files in subdirectories.
+# Mirrors sync-registry.py: count only git-tracked files so local untracked
+# files don't inflate metrics and drift against CI's clean checkout.
 count_files() {
   local dir="$1"
-  if [ -d "$dir" ]; then
-    find "$dir" -type f ! -name '.gitkeep' | wc -l | tr -d ' '
-  else
+  if [ ! -d "$dir" ]; then
     echo 0
+    return
+  fi
+  if git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    git -C "$dir" ls-files -- . 2>/dev/null \
+      | grep -Ev '(^|/)\.gitkeep$' \
+      | wc -l | tr -d ' '
+  else
+    # Not in a git repo (e.g., tarball extract) — fall back to raw count.
+    find "$dir" -type f ! -name '.gitkeep' | wc -l | tr -d ' '
   fi
 }
 

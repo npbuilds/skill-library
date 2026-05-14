@@ -84,8 +84,29 @@ For each source found, evaluate using the framework in `references/source-evalua
 
 **Quick evaluation (all sources):**
 - **Authority**: Who produced this? What is their expertise and credibility in this domain?
-- **Recency**: When was this produced? Is it current enough for this claim?
+- **Recency**: Capture the publication date for EVERY source (YYYY-MM-DD if available, YYYY-MM otherwise, YYYY as last resort). If the source has no discoverable date, mark `date: unknown` and treat it as Tier 4 regardless of authority — undated sources cannot anchor a confidence tag because we can't tell if they've been superseded. Apply the recency rule below.
 - **Source type**: Peer-reviewed study / institutional report / news article / blog / social media / other
+
+**Recency rule (REQUIRED in standard and deep modes, advisory in quick mode):**
+
+After all sources for a claim are dated, compute the median source age (months from today). Compare against the domain-specific staleness threshold:
+
+| Claim domain | Staleness threshold | Why |
+|--------------|--------------------|-----|
+| Markets / finance / crypto | 18 months | Fast-moving microstructure, regime changes |
+| Tech / AI / software | 18 months | Capabilities and best practices shift fast |
+| Biotech / pharma / clinical trials | 36 months | Approvals, retractions, and meta-analyses iterate |
+| Regulatory / legal | 24 months | Rulings and guidance evolve |
+| Social / political | 24 months | Polling, sentiment, public positions shift |
+| Foundational science / physics / math | 60 months | Stable, but watch for paradigm-shifting work |
+| Historical / definitional | No threshold | Historical facts don't expire |
+
+**If the median source age exceeds the threshold:**
+1. Append a `Recency warning: median source age = N months, threshold = M months for [domain]` line to the evidence bundle.
+2. Downgrade preliminary confidence by one tier (Confirmed → Likely, Likely → Speculative). Document the downgrade.
+3. Note in Limitations: "Best available evidence is older than the freshness threshold for this domain. A current systematic review or recent primary source would be needed to upgrade confidence."
+
+**Exception:** If the claim is explicitly historical ("What did regulators say in 2018?"), staleness is irrelevant — note the exception and skip the downgrade.
 
 **Deep evaluation (standard and deep modes):**
 - **Methodology**: For studies — was the methodology appropriate? Sample size? Controls?
