@@ -32,6 +32,9 @@ Narrative craft governs everything above the sentence and below the whole piece:
 | Interiority, "getting inside the character's head," free indirect discourse, rendering consciousness, "telling not showing emotions" | `character-interiority` | Consciousness rendering |
 | "Flat prose," "no energy," "why is this boring," page-turning quality without action, engagement in static scenes | `micro-tension` | Line-by-line emotional charge |
 | Autofiction, metafiction, fragmented narrative, genre-bending, experimental forms | `hybrid-forms` | When categories break |
+| Writing in a built world — exposition, infodump avoidance, iceberg-style revelation | `world-to-story` | Bridge to worldbuilding |
+| Rendering a built region's sensory palette in prose; POV attention bias | `sensory-translation` | Bridge to worldbuilding |
+| Characters carrying their culture's vocabulary, idiom, syntax, refusal-to-explain | `cultural-voice` | Bridge to worldbuilding |
 | "This scene doesn't work" (vague) | Diagnose first | Read the scene, identify the primary weakness, then route |
 
 ### Multi-Skill Questions
@@ -86,7 +89,11 @@ This order goes micro to macro: ground the reader first, then inhabit the charac
 
 ## Cross-Domain Connections
 
+**Worldbuilding bridge cluster (siblings within this director):** `world-to-story`, `sensory-translation`, `cultural-voice`. Together these three skills cover the full handoff from a built world to prose written inside it. Load them as a set when the user is writing fiction in an invented setting.
+
 - **Worldbuilding/narrative-pacing**: Worldbuilding has its own pacing system — revelation spirals and tension archetypes (Cassandra, Randy, Penelope) that control how world-information reaches the reader. When writing in a built world, narrative-craft pacing must harmonize with the worldbuilding revelation architecture.
 - **Worldbuilding/lore-writer**: Lore-writer produces in-universe artifacts (letters, myths, reports) using 7 voice registers. These artifacts ARE prose — scene-craft and dialogue principles apply within the artifact's voice constraints.
 - **Worldbuilding/character-belief-tracker**: What a character knows (their belief layer in the revelation architecture) determines their POV reliability and narrative distance. Character beliefs constrain point-of-view decisions.
+- **Worldbuilding/sensory-worldbuilding**: Upstream input to `sensory-translation`. The five-channel palette is built there; this director translates it to prose.
+- **Worldbuilding/cultures-societies + naming-system**: Upstream inputs to `cultural-voice`. Culture is built there; this director translates the seven-pillar profile into voice on the page.
 - The user needs prose *drafted*, not just diagnosed — the orchestrator routes to action skills

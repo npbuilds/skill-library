@@ -230,8 +230,17 @@ This orchestrator handles **fictional world construction and maintenance**. It d
 - Make creative decisions without the user's input (it proposes and the user decides)
 - Evaluate the world's quality as fiction (it ensures consistency, not literary merit)
 
-## Cross-Domain Connections
+## Cross-Domain Routing
 
-- **Writing/narrative-craft**: Worldbuilding produces the substrate that narrative operates on. When the user is both building a world and writing in it, this orchestrator provides consistency constraints that narrative-craft uses as creative parameters. Consult narrative-craft/pacing to align revelation spirals with prose tempo.
-- **Writing/prose-writer**: Lore-writer artifacts need prose craft — scene-craft for rendered moments, dialogue principles for in-world speech, diction for voice-register consistency.
-- **Writing/sentence-craft/diction**: Naming-system establishes linguistic registers per culture. Prose written from a culture's perspective should respect that phonetic and diction palette.
+When the user finishes building (or has enough built to start drafting) and wants to write IN this world, hand off to the prose orchestrator. The worldbuilding orchestrator owns *what is true*; the prose orchestrator owns *how it lands on the page*.
+
+| When the work shifts to... | Hand off to... | Bridge skill |
+|---|---|---|
+| Writing prose in the built world (scenes, chapters, drafts) | `prose-orchestrator` | `skills/writing/narrative-craft/world-to-story/` — iceberg methodology, revelation channels, system → scene translation, exposition techniques |
+| Rendering a built region in prose (sensory immersion) | `prose-orchestrator` | `skills/writing/narrative-craft/sensory-translation/` — translates `sensory-worldbuilding`'s 5 channels into prose detail-selection and POV-based attention bias |
+| Characters speaking and thinking in their culture's voice | `prose-orchestrator` | `skills/writing/narrative-craft/cultural-voice/` — translates `cultures-societies` + `naming-system` into vocabulary domains, idiom, syntax rhythm, metaphor source |
+| In-universe document drafting (letters, myths, reports, intercepted intelligence) | **Stay here** | `lore-writer` already covers this — 7 voice registers, artifact format, frontmatter conventions |
+| Game systems / mechanics design (loops, balance, progression, catch-up systems) | `skills/narrative-design/game-mechanics/` | Relocated from worldbuilding — it is game design, not world construction |
+| Aligning prose pacing with worldbuilding's revelation spiral | `prose-orchestrator` | `narrative-pacing` (here) pairs with `writing/narrative-craft/pacing` — same vocabulary, different scales |
+
+**Operating principle for the handoff:** never hand off prematurely. Establish at least the world-bible axioms, the focal culture(s), and the relevant magic/tech rules before drafting. A scene written before the world supports it will need to be rewritten when the world is filled in. The order is `world-bible → focal cultures → focal factions → relevant systems → hand off`. For one-off lore artifacts, the lore-writer can run on much less.
