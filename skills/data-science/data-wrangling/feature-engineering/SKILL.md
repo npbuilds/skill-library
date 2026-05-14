@@ -190,3 +190,9 @@ Activate this skill when:
 
 - **Investing/adaptive-monitoring/alt-data-monitoring**: Alt data signal extraction IS feature engineering — satellite imagery requires spatial features, earnings calls require NLP features (FinBERT embeddings), transaction data requires temporal aggregation. The alt data value chain (raw → cleaned → signal → integration) maps directly to the feature engineering pipeline.
 - **Investing/reflexivity-sentiment/sentiment-signals**: Building a sentiment composite is multi-source feature engineering — normalizing heterogeneous signals (VIX, put/call ratios, AAII surveys, NLP scores) into a unified feature space with appropriate weighting.
+
+
+
+## Related Skills
+
+- **molecular-pairing** — Molecular-pairing analysis is a niche applied case of feature-engineering (encoding chemical/sensory structure into model-ready features). Useful as an example when illustrating domain-specific feature design.

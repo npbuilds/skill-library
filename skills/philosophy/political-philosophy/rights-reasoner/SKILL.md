@@ -138,3 +138,9 @@ Key Finding: [the core insight about this rights question]
 **Every position violates some right:** This is common and is the reason rights conflicts are among the hardest problems in political philosophy. Present the conflict structure clearly and offer to route to justice-analyst for a broader framework analysis.
 
 **Rights claim is culturally specific:** Acknowledge the cultural context. Some rights are plausibly universal (bodily integrity); others are more culturally embedded (specific property norms). Note where universality is debated.
+
+
+
+## Related Skills
+
+- **cooperative-games** — Cooperative game theory (Shapley value, the core, bargaining solutions) gives formal foundations for distributive-justice questions. Use cooperative-games when a rights claim hinges on fair-allocation reasoning.

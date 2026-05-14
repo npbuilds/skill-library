@@ -392,3 +392,9 @@ First-order effects are obvious. Second-order effects are where the edge is:
 10. **What am I paying?** Run a reverse DCF — what growth is implied by the current price? Is it reasonable, optimistic, or euphoric? What is the owner yield? Would Buffett be comfortable owning this at this price if the stock market closed for 10 years?
 
 If a company passes all 10 questions, it is a rare and valuable business. The correct action is to buy it at a fair price and hold it for a very long time.
+
+
+
+## Related Skills
+
+- **intrinsic-value** — Quality compounders earn premium intrinsic-value calculations (lower discount rate, longer compounding horizon). Pair with intrinsic-value for company-level valuation that respects compounding economics.
