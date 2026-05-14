@@ -392,3 +392,7 @@ IF in a taxable account:
 4. Update tax lot records for future harvesting opportunities
 5. Archive the decision rationale for future attribution reviews
 ```
+
+## Related Skills
+
+- **tax-optimization** — Rebalancing creates taxable events. Coordinate with tax-optimization for after-tax timing, lot-selection, and harvest windows before triggering trades.

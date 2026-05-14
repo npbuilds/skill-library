@@ -416,3 +416,7 @@ When evaluating a secular theme for investment:
 6. **Stress-test the bear case** — What would have to go wrong for this theme to fail? How likely is that?
 7. **Size appropriately** — Thematic positions should be a complement to, not a substitute for, a diversified portfolio. Even high-conviction themes deserve position sizing discipline (5-15% of portfolio, not 50%+).
 8. **Set review triggers** — Define in advance what evidence would cause you to increase, decrease, or exit the position. This prevents both premature exit and stubborn conviction.
+
+## Related Skills
+
+- **great-power-dynamics** — Many secular themes are downstream of great-power-dynamics — read the geopolitical layer first to anchor a theme in its driver, not the reverse.
