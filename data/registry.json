@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-05-14T21:44:52Z",
+  "last_scan": "2026-05-15T00:05:28Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -1703,7 +1703,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 78,
-      "depends_on": [],
+      "depends_on": [
+        "infrastructure-orchestrator"
+      ],
       "referenced_by": [
         "design-orchestrator",
         "infrastructure-orchestrator",
@@ -1756,6 +1758,7 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-dashboard",
         "skill-registry"
@@ -1799,11 +1802,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 79,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry"
       ],
@@ -1851,6 +1855,7 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-dashboard",
         "skill-health",
         "skill-registry",
@@ -1900,6 +1905,7 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry",
         "skill-scaffold"
@@ -1946,6 +1952,7 @@
       "manual_notes": null,
       "composite_score": 75,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-registry"
       ],
       "referenced_by": [
@@ -1994,6 +2001,7 @@
       "manual_notes": null,
       "composite_score": 71,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-health",
         "skill-registry",
         "skill-scaffold"
@@ -2040,6 +2048,7 @@
       "manual_notes": null,
       "composite_score": 74,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry"
       ],
@@ -2080,11 +2089,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 63,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 68,
       "depends_on": [
+        "infrastructure-orchestrator",
         "skill-registry"
       ],
       "referenced_by": [
@@ -2823,7 +2833,8 @@
         "point-of-view",
         "prose-writer",
         "religion-design",
-        "world-bible"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "character-belief-tracker",
@@ -2865,14 +2876,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 79,
       "depends_on": [
         "cultures-societies",
         "diction",
-        "world-bible"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "conlang-craft",
@@ -2913,12 +2925,13 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 79,
       "depends_on": [
-        "world-bible"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "cultures-societies",
@@ -3015,10 +3028,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 78,
       "depends_on": [
         "cultures-societies",
         "world-bible",
@@ -3211,10 +3224,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "behavioral-game-theory",
@@ -3258,10 +3271,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 82,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 79,
       "depends_on": [
         "regime-intelligence"
       ],
@@ -3820,8 +3833,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 68,
+      "composite_score": 68,
       "depends_on": [
         "insider-signals"
       ],
@@ -3866,8 +3879,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
-      "composite_score": 81,
+      "auto_score": 78,
+      "composite_score": 78,
       "depends_on": [
         "insider-signals",
         "sentiment-signals"
@@ -4193,7 +4206,10 @@
         "bacchus",
         "chart-selection",
         "data-wrangling",
-        "drift-detection"
+        "drift-detection",
+        "modeling",
+        "responsible-ai",
+        "statistical-analysis"
       ],
       "tags": [
         "domain:data-science",
@@ -4472,10 +4488,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [
         "model-evaluation",
         "statistical-analysis",
@@ -4615,11 +4631,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 71,
       "depends_on": [
+        "data-science-orchestrator",
         "model-evaluation",
         "modeling"
       ],
@@ -4710,7 +4727,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 75,
-      "depends_on": [],
+      "depends_on": [
+        "data-science-orchestrator"
+      ],
       "referenced_by": [
         "biostatistics",
         "causal-inference",
@@ -4761,7 +4780,9 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [],
+      "depends_on": [
+        "data-science-orchestrator"
+      ],
       "referenced_by": [
         "chart-selection",
         "drift-detection",
@@ -4849,10 +4870,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 78,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 78,
       "depends_on": [
         "skill-registry",
         "skill-health",
@@ -4865,6 +4886,15 @@
         "skill-export"
       ],
       "referenced_by": [
+        "skill-analyze",
+        "skill-dashboard",
+        "skill-export",
+        "skill-fork",
+        "skill-health",
+        "skill-network",
+        "skill-registry",
+        "skill-scaffold",
+        "skill-test",
         "the-loom"
       ],
       "tags": [
@@ -4914,10 +4944,15 @@
         "bacchus",
         "character-belief-tracker",
         "civilizations",
+        "cultures-societies",
         "ecology-design",
         "extrapolation-engine",
         "faction-design",
+        "geography-ecology",
         "history-builder",
+        "lore-writer",
+        "magic-system-design",
+        "naming-system",
         "narrative-pacing",
         "physical-world",
         "prose-orchestrator",
@@ -4965,7 +5000,8 @@
       "composite_score": 75,
       "depends_on": [
         "magic-system-design",
-        "world-bible"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "cultures-societies",
@@ -5015,7 +5051,8 @@
       "depends_on": [
         "geography-ecology",
         "magic-system-design",
-        "world-bible"
+        "world-bible",
+        "worldbuilding-orchestrator"
       ],
       "referenced_by": [
         "character-belief-tracker",
@@ -9073,10 +9110,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "character-belief-tracker",
@@ -9161,7 +9198,7 @@
         "body_words": 1968,
         "description_words": 86,
         "section_count": 10,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -9175,10 +9212,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 55,
+      "auto_score": 60,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 55,
+      "composite_score": 60,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -9218,10 +9255,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 75,
       "depends_on": [],
       "referenced_by": [
         "decision-theory",
@@ -10115,10 +10152,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [
         "justice-analyst",
@@ -12036,10 +12073,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 66,
       "depends_on": [
         "market-psychology"
       ],
@@ -12833,10 +12870,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 61,
       "depends_on": [
         "strategy-and-grand-strategy",
         "warfare-through-the-ages"
@@ -13033,10 +13070,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 57,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 57,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -14051,10 +14088,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 61,
       "depends_on": [
         "source-criticism"
       ],
@@ -14100,10 +14137,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 57,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 57,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -14147,10 +14184,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 61,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 61,
       "depends_on": [
         "schools-of-thought"
       ],
@@ -15517,10 +15554,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 57,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 57,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -22226,12 +22263,11 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "feedback-loops",
-        "performance-review-craft",
         "advisor-board",
+        "idp-and-okrs",
+        "performance-review-craft",
         "reflection-and-journaling",
-        "skill-gap-analysis",
-        "idp-and-okrs"
+        "skill-gap-analysis"
       ],
       "referenced_by": [
         "advisor-board",
@@ -22293,13 +22329,12 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "feedback-loops",
-        "mentorship-design",
-        "relationship-stewardship",
         "360-feedback-design",
         "idp-and-okrs",
-        "the-loom",
-        "reflection-and-journaling"
+        "mentorship-design",
+        "reflection-and-journaling",
+        "relationship-stewardship",
+        "the-loom"
       ],
       "referenced_by": [
         "360-feedback-design",
@@ -22363,15 +22398,14 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "personal-positioning",
         "audience-classifier",
-        "narrative-architecture",
-        "credibility-translation",
-        "resume-craft",
-        "cover-letter-craft",
-        "linkedin-optimization",
         "behavioral-frameworks",
-        "prose-editor"
+        "cover-letter-craft",
+        "credibility-translation",
+        "linkedin-optimization",
+        "narrative-architecture",
+        "prose-editor",
+        "resume-craft"
       ],
       "referenced_by": [
         "cover-letter-craft",
@@ -22436,14 +22470,13 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "interview-mastery",
-        "panel-and-case",
-        "vc-interview-prep",
-        "executive-interview-prep",
+        "asclepius",
         "credibility-translation",
-        "narrative-architecture",
+        "executive-interview-prep",
         "minto-scqa",
-        "asclepius"
+        "narrative-architecture",
+        "panel-and-case",
+        "vc-interview-prep"
       ],
       "referenced_by": [
         "audience-tuning",
@@ -22507,13 +22540,12 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "executive-presence",
-        "executive-communication",
-        "meeting-mastery",
-        "equity-literacy",
-        "executive-interview-prep",
         "archon",
         "asclepius",
+        "equity-literacy",
+        "executive-communication",
+        "executive-interview-prep",
+        "meeting-mastery",
         "role-archetype-mapping"
       ],
       "referenced_by": [
@@ -22576,13 +22608,12 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "network-cultivation",
-        "relationship-stewardship",
-        "introductions-and-referrals",
-        "ecosystem-mapping",
-        "credibility-translation",
         "cover-letter-craft",
+        "credibility-translation",
+        "ecosystem-mapping",
+        "introductions-and-referrals",
         "prose-editor",
+        "relationship-stewardship",
         "spelunker"
       ],
       "referenced_by": [
@@ -22645,15 +22676,14 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "personal-positioning",
-        "spelunker",
-        "credibility-translation",
-        "narrative-architecture",
+        "asclepius",
+        "audience-classifier",
         "audience-tuning",
         "bluf-shaper",
-        "audience-classifier",
+        "credibility-translation",
+        "narrative-architecture",
         "prose-editor",
-        "asclepius"
+        "spelunker"
       ],
       "referenced_by": [
         "audience-tuning",
@@ -22718,15 +22748,14 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "personal-positioning",
-        "narrative-architecture",
+        "asclepius",
+        "audience-classifier",
         "audience-tuning",
-        "resume-craft",
+        "behavioral-frameworks",
         "cover-letter-craft",
         "linkedin-optimization",
-        "behavioral-frameworks",
-        "asclepius",
-        "audience-classifier"
+        "narrative-architecture",
+        "resume-craft"
       ],
       "referenced_by": [
         "audience-tuning",
@@ -22796,19 +22825,18 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "interview-mastery",
         "asclepius",
-        "clinical-development",
-        "regulatory-strategy",
         "asset-valuation",
-        "probability-of-success",
-        "deal-synthesis",
-        "vc-interview-prep",
-        "executive-interview-prep",
         "behavioral-frameworks",
-        "spelunker",
+        "clinical-development",
         "credibility-translation",
-        "the-loom"
+        "deal-synthesis",
+        "executive-interview-prep",
+        "probability-of-success",
+        "regulatory-strategy",
+        "spelunker",
+        "the-loom",
+        "vc-interview-prep"
       ],
       "referenced_by": [
         "executive-interview-prep",
@@ -22869,16 +22897,15 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "network-cultivation",
-        "spelunker",
-        "source-triangulator",
-        "cold-outreach",
-        "relationship-stewardship",
-        "introductions-and-referrals",
-        "cover-letter-craft",
-        "vc-interview-prep",
         "asclepius",
-        "the-loom"
+        "cold-outreach",
+        "cover-letter-craft",
+        "introductions-and-referrals",
+        "relationship-stewardship",
+        "source-triangulator",
+        "spelunker",
+        "the-loom",
+        "vc-interview-prep"
       ],
       "referenced_by": [
         "cold-outreach",
@@ -22943,11 +22970,10 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "negotiation-leverage",
-        "offer-negotiation",
-        "exit-and-transition",
         "archon",
         "asset-valuation",
+        "exit-and-transition",
+        "offer-negotiation",
         "optionality-architecture"
       ],
       "referenced_by": [
@@ -23010,14 +23036,13 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "executive-presence",
-        "bluf-shaper",
-        "executive-distiller",
-        "minto-scqa",
         "audience-classifier",
-        "meeting-mastery",
+        "bluf-shaper",
         "board-readiness",
         "cover-letter-craft",
+        "executive-distiller",
+        "meeting-mastery",
+        "minto-scqa",
         "prose-editor"
       ],
       "referenced_by": [
@@ -23081,14 +23106,13 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "interview-mastery",
-        "board-readiness",
-        "executive-communication",
-        "behavioral-frameworks",
-        "domain-deepdives",
-        "panel-and-case",
         "asclepius",
+        "behavioral-frameworks",
+        "board-readiness",
         "credibility-translation",
+        "domain-deepdives",
+        "executive-communication",
+        "panel-and-case",
         "role-archetype-mapping"
       ],
       "referenced_by": [
@@ -23151,9 +23175,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 68,
-      "depends_on": [
-        "mentor"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "board-readiness",
         "executive-communication",
@@ -23213,11 +23235,10 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "negotiation-leverage",
         "equity-literacy",
+        "narrative-architecture",
         "offer-negotiation",
         "optionality-architecture",
-        "narrative-architecture",
         "relationship-stewardship"
       ],
       "referenced_by": [
@@ -23277,9 +23298,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "mentor"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "360-feedback-design",
         "advisor-board",
@@ -23339,12 +23358,11 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "trajectory-design",
-        "role-archetype-mapping",
-        "skill-gap-analysis",
+        "advisor-board",
         "pivot-sequencing",
         "reflection-and-journaling",
-        "advisor-board",
+        "role-archetype-mapping",
+        "skill-gap-analysis",
         "the-loom"
       ],
       "referenced_by": [
@@ -23404,13 +23422,11 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
-      "depends_on": [
-        "mentor"
-      ],
+      "composite_score": 70,
+      "depends_on": [],
       "referenced_by": [
         "behavioral-frameworks",
         "domain-deepdives",
@@ -23466,19 +23482,18 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [
-        "network-cultivation",
-        "ecosystem-mapping",
-        "relationship-stewardship",
+        "audience-tuning",
         "cold-outreach",
         "credibility-translation",
+        "ecosystem-mapping",
         "narrative-architecture",
-        "audience-tuning",
-        "prose-editor"
+        "prose-editor",
+        "relationship-stewardship"
       ],
       "referenced_by": [
         "cold-outreach",
@@ -23534,18 +23549,17 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 79,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 76,
       "depends_on": [
-        "personal-positioning",
-        "narrative-architecture",
-        "credibility-translation",
+        "audience-classifier",
         "audience-tuning",
-        "public-portfolio",
+        "credibility-translation",
+        "narrative-architecture",
         "prose-editor",
-        "audience-classifier"
+        "public-portfolio"
       ],
       "referenced_by": [
         "audience-tuning",
@@ -23602,17 +23616,16 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [
-        "executive-presence",
-        "executive-communication",
-        "board-readiness",
-        "panel-and-case",
-        "bluf-shaper",
         "audience-classifier",
+        "bluf-shaper",
+        "board-readiness",
+        "executive-communication",
+        "panel-and-case",
         "the-loom"
       ],
       "referenced_by": [
@@ -23737,11 +23750,10 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "network-cultivation",
-        "cold-outreach",
-        "relationship-stewardship",
-        "ecosystem-mapping",
         "advisor-board",
+        "cold-outreach",
+        "ecosystem-mapping",
+        "relationship-stewardship",
         "role-archetype-mapping",
         "the-loom"
       ],
@@ -23803,7 +23815,6 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "personal-positioning",
         "brand-foundations",
         "brand-voice",
         "minto-scqa"
@@ -23874,9 +23885,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 72,
-      "depends_on": [
-        "mentor"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "equity-literacy",
         "exit-and-transition",
@@ -23931,13 +23940,11 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
-      "depends_on": [
-        "mentor"
-      ],
+      "composite_score": 70,
+      "depends_on": [],
       "referenced_by": [
         "cold-outreach",
         "ecosystem-mapping",
@@ -23993,18 +24000,17 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [
-        "negotiation-leverage",
+        "archon",
+        "bluf-shaper",
         "equity-literacy",
-        "title-and-scope",
         "exit-and-transition",
         "optionality-architecture",
-        "archon",
-        "bluf-shaper"
+        "title-and-scope"
       ],
       "referenced_by": [
         "equity-literacy",
@@ -24066,11 +24072,10 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "trajectory-design",
-        "role-archetype-mapping",
-        "pivot-sequencing",
-        "offer-negotiation",
         "archon",
+        "offer-negotiation",
+        "pivot-sequencing",
+        "role-archetype-mapping",
         "the-loom"
       ],
       "referenced_by": [
@@ -24135,18 +24140,17 @@
       "manual_notes": null,
       "composite_score": 79,
       "depends_on": [
-        "interview-mastery",
-        "vc-interview-prep",
-        "executive-interview-prep",
-        "behavioral-frameworks",
-        "domain-deepdives",
         "asclepius",
-        "deal-synthesis",
         "asset-valuation",
-        "meeting-mastery",
-        "executive-communication",
+        "behavioral-frameworks",
         "bluf-shaper",
-        "minto-scqa"
+        "deal-synthesis",
+        "domain-deepdives",
+        "executive-communication",
+        "executive-interview-prep",
+        "meeting-mastery",
+        "minto-scqa",
+        "vc-interview-prep"
       ],
       "referenced_by": [
         "behavioral-frameworks",
@@ -24208,14 +24212,13 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "feedback-loops",
-        "resume-craft",
-        "credibility-translation",
-        "audience-tuning",
         "360-feedback-design",
-        "reflection-and-journaling",
+        "audience-tuning",
+        "credibility-translation",
         "idp-and-okrs",
-        "prose-editor"
+        "prose-editor",
+        "reflection-and-journaling",
+        "resume-craft"
       ],
       "referenced_by": [
         "360-feedback-design",
@@ -24274,9 +24277,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 74,
-      "depends_on": [
-        "mentor"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "audience-tuning",
         "cover-letter-craft",
@@ -24334,18 +24335,17 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [
-        "trajectory-design",
-        "role-archetype-mapping",
-        "skill-gap-analysis",
-        "optionality-architecture",
+        "ecosystem-mapping",
         "idp-and-okrs",
+        "optionality-architecture",
         "public-portfolio",
-        "ecosystem-mapping"
+        "role-archetype-mapping",
+        "skill-gap-analysis"
       ],
       "referenced_by": [
         "idp-and-okrs",
@@ -24407,14 +24407,13 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "personal-positioning",
-        "narrative-architecture",
-        "linkedin-optimization",
-        "credibility-translation",
-        "prose-editor",
         "asclepius",
-        "the-loom",
-        "spelunker"
+        "credibility-translation",
+        "linkedin-optimization",
+        "narrative-architecture",
+        "prose-editor",
+        "spelunker",
+        "the-loom"
       ],
       "referenced_by": [
         "linkedin-optimization",
@@ -24476,13 +24475,12 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "executive-presence",
+        "audience-tuning",
         "executive-communication",
         "meeting-mastery",
-        "public-portfolio",
-        "audience-tuning",
         "minto-scqa",
-        "prose-editor"
+        "prose-editor",
+        "public-portfolio"
       ],
       "referenced_by": [],
       "shares_references_with": [],
@@ -24534,18 +24532,17 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 79,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 76,
       "depends_on": [
-        "feedback-loops",
-        "the-loom",
         "360-feedback-design",
         "advisor-board",
-        "performance-review-craft",
         "idp-and-okrs",
-        "prose-editor"
+        "performance-review-craft",
+        "prose-editor",
+        "the-loom"
       ],
       "referenced_by": [
         "360-feedback-design",
@@ -24607,14 +24604,13 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "network-cultivation",
+        "advisor-board",
         "cold-outreach",
-        "mentorship-design",
-        "introductions-and-referrals",
         "ecosystem-mapping",
-        "the-loom",
+        "introductions-and-referrals",
+        "mentorship-design",
         "prose-editor",
-        "advisor-board"
+        "the-loom"
       ],
       "referenced_by": [
         "advisor-board",
@@ -24673,19 +24669,18 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [
-        "personal-positioning",
-        "narrative-architecture",
-        "credibility-translation",
+        "asclepius",
         "audience-tuning",
-        "linkedin-optimization",
         "cover-letter-craft",
-        "prose-editor",
-        "asclepius"
+        "credibility-translation",
+        "linkedin-optimization",
+        "narrative-architecture",
+        "prose-editor"
       ],
       "referenced_by": [
         "audience-tuning",
@@ -24746,14 +24741,13 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "trajectory-design",
-        "optionality-architecture",
-        "skill-gap-analysis",
-        "pivot-sequencing",
-        "narrative-architecture",
         "ecosystem-mapping",
-        "vc-interview-prep",
-        "executive-interview-prep"
+        "executive-interview-prep",
+        "narrative-architecture",
+        "optionality-architecture",
+        "pivot-sequencing",
+        "skill-gap-analysis",
+        "vc-interview-prep"
       ],
       "referenced_by": [
         "board-readiness",
@@ -24814,18 +24808,17 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 74,
       "depends_on": [
-        "trajectory-design",
-        "role-archetype-mapping",
-        "pivot-sequencing",
-        "idp-and-okrs",
         "360-feedback-design",
         "advisor-board",
-        "public-portfolio"
+        "idp-and-okrs",
+        "pivot-sequencing",
+        "public-portfolio",
+        "role-archetype-mapping"
       ],
       "referenced_by": [
         "360-feedback-design",
@@ -24887,13 +24880,12 @@
       "manual_notes": null,
       "composite_score": 76,
       "depends_on": [
-        "negotiation-leverage",
-        "offer-negotiation",
-        "equity-literacy",
-        "role-archetype-mapping",
-        "optionality-architecture",
         "board-readiness",
-        "narrative-architecture"
+        "equity-literacy",
+        "narrative-architecture",
+        "offer-negotiation",
+        "optionality-architecture",
+        "role-archetype-mapping"
       ],
       "referenced_by": [
         "offer-negotiation"
@@ -24947,13 +24939,11 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
-      "depends_on": [
-        "mentor"
-      ],
+      "composite_score": 70,
+      "depends_on": [],
       "referenced_by": [
         "idp-and-okrs",
         "optionality-architecture",
@@ -25014,19 +25004,18 @@
       "manual_notes": null,
       "composite_score": 77,
       "depends_on": [
-        "interview-mastery",
         "asclepius",
-        "deal-synthesis",
-        "probability-of-success",
         "asset-valuation",
-        "regulatory-strategy",
         "behavioral-frameworks",
-        "panel-and-case",
-        "domain-deepdives",
-        "credibility-translation",
         "cover-letter-craft",
-        "spelunker",
-        "ecosystem-mapping"
+        "credibility-translation",
+        "deal-synthesis",
+        "domain-deepdives",
+        "ecosystem-mapping",
+        "panel-and-case",
+        "probability-of-success",
+        "regulatory-strategy",
+        "spelunker"
       ],
       "referenced_by": [
         "behavioral-frameworks",
@@ -25870,7 +25859,6 @@
         "history-builder",
         "lore-writer",
         "magic-system-design",
-        "magic-systems",
         "naming-system",
         "narrative-pacing",
         "physical-world",
