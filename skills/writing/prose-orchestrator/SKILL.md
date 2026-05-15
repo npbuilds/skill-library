@@ -161,3 +161,18 @@ Consult the relevant subdomain director before making craft decisions. The direc
 - Generate marketing copy or UX writing (different intent — persuasion and clarity over craft)
 - Make publishing or career decisions (it writes prose, not query letters)
 - Replace a human editor's judgment (it surfaces craft principles, the user decides)
+
+## Cross-Domain Routing
+
+Prose work often touches material that belongs to another orchestrator's domain. When that happens, load the relevant orchestrator first to establish the underlying material, then return here for the prose work.
+
+| When the prose involves... | First load... | Then return for... |
+|---|---|---|
+| Fiction set in an invented world (fantasy, SF, alt-history, secondary world) | `worldbuilding-orchestrator` — verify a world-bible exists or build core axioms | Drafting, scene work, voice. Bridge skill: `skills/writing/narrative-craft/world-to-story/` (iceberg methodology, system → scene translation) |
+| Sensory immersion in a built region (how this place feels, smells, sounds) | `worldbuilding/physical-world/sensory-worldbuilding` — the 5-channel sensory palette | `skills/writing/narrative-craft/sensory-translation/` — translates the palette into prose detail-selection and POV bias |
+| Cultural voice / diction (how a character of culture X speaks, what metaphors they reach for) | `worldbuilding/cultures-societies` + `worldbuilding/naming-system` | `skills/writing/narrative-craft/cultural-voice/` — culture → vocabulary, idiom, syntax, metaphor source |
+| Wine writing, tasting notes as a craft form, label copy | `bacchus` for domain content (regions, grapes, sensory vocabulary) | Prose craft (voice, rhythm, image systems) |
+| Investment writing, market commentary, briefings | `archon` for domain content (positions, theses, macro context) | Prose craft (analytical voice, claim density, evidence sequencing) |
+| Biotech / scientific writing for VC audiences | `asclepius` for domain content (PoS, rNPV, mechanism) | Prose craft (precision, hedge calibration, claim ladders) |
+
+The principle: the prose orchestrator owns *how* the words land. Domain orchestrators own *what* the words must be true to. Never invent domain content; consult the source-of-truth orchestrator and bring its output back here for the prose pass.
