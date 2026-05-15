@@ -15,7 +15,7 @@
 |----------|----------|-----------------|
 | Ethics/stakeholder-mapper | Investing/risk-architecture | Both map affected parties and assess impact — stakeholders vs. risk factors |
 | Philosophy/belief-auditor | Investing/reflexivity-sentiment | Both check whether beliefs are coherent and well-calibrated |
-| Worldbuilding/magic-systems | Game-theory/mechanism-design | Both design rule systems with emergent consequences |
+| Worldbuilding/magic-system-design | Game-theory/mechanism-design | Both design rule systems with emergent consequences |
 | Writing/narrative-arc | Investing/macro-cycles | Both model phase transitions (setup → rising action → climax maps to expansion → peak → contraction) |
 
 ## Quick Reference
