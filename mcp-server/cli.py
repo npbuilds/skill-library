@@ -19,6 +19,7 @@ import click
 from shared import (
     REGISTRY_PATH, USAGE_LOG, GAPS_LOG, FEEDBACK_LOG,
     load_log as _load_log,
+    iter_skill_uses,
 )
 
 
@@ -47,7 +48,9 @@ def stats(skill_name):
     feedback = _load_log(FEEDBACK_LOG)
     gaps = _load_log(GAPS_LOG)
 
-    if not usage and not feedback and not gaps:
+    # usage.jsonl mixes skill loads and search events; "no analytics" must
+    # reflect the skill-load subset, not the raw event stream.
+    if not list(iter_skill_uses(usage)) and not feedback and not gaps:
         click.echo("No analytics data yet. Use skills in Claude Desktop to start building stats.")
         return
 
@@ -84,17 +87,18 @@ def _show_skill_stats(name, usage, feedback):
 
 
 def _show_summary(usage, feedback, gaps):
-    # Usage counts
+    # Usage counts — skill loads only; search events are excluded
+    skill_uses = list(iter_skill_uses(usage))
     counts: dict[str, int] = {}
-    for e in usage:
-        s = e.get("skill", "?")
+    for e in skill_uses:
+        s = e["skill"]
         counts[s] = counts.get(s, 0) + 1
 
     if counts:
         click.echo("\n  SKILL USAGE")
         click.echo("  ───────────")
         sorted_usage = sorted(counts.items(), key=lambda x: x[1], reverse=True)
-        click.echo(f"  Total loads: {len(usage)}  |  Unique skills: {len(counts)}\n")
+        click.echo(f"  Total loads: {len(skill_uses)}  |  Unique skills: {len(counts)}\n")
 
         # Bar chart
         max_count = sorted_usage[0][1] if sorted_usage else 1
