@@ -913,7 +913,9 @@ def get_skill_stats(skill_name: str | None = None) -> str:
     feedback_events = _load_log(FEEDBACK_LOG)
     gap_events = _load_log(GAPS_LOG)
 
-    if not usage_events and not feedback_events and not gap_events:
+    # usage.jsonl mixes skill loads and search events; "no analytics" must
+    # reflect the skill-load subset, not the raw event stream.
+    if not list(iter_skill_uses(usage_events)) and not feedback_events and not gap_events:
         return "No analytics data yet. Use skills and give feedback to start building stats."
 
     # ── Single skill detail ──

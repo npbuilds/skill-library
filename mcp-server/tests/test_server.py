@@ -622,12 +622,26 @@ class TestSessionInstrumentation:
         assert "result_count" in search_events[0]
         assert search_events[0]["session_id"] == server._SERVER_SESSION_ID
 
+    def test_no_match_search_logs_to_usage(self, tmp_project):
+        # No-match path is a separate code branch from keyword-match; verify
+        # it also writes a usage event with result_count=0.
+        server.search_skills("quantum-physics")
+        usage = server._load_log(server.USAGE_LOG)
+        search_events = [e for e in usage if e.get("type") == "search"]
+        assert len(search_events) == 1
+        assert search_events[0]["query"] == "quantum-physics"
+        assert search_events[0]["result_count"] == 0
+
     def test_iter_skill_uses_excludes_search_events(self, tmp_project):
         server.search_skills("color")
         server.get_skill("color-theory")
         usage = server._load_log(server.USAGE_LOG)
+        # Pre-filter: both events present (verifies search logging is actually
+        # happening, not silently broken).
+        assert len(usage) == 2
+        assert any(e.get("type") == "search" for e in usage)
         import shared
         skill_uses = list(shared.iter_skill_uses(usage))
-        # Search event filtered out; only the get_skill event remains
+        # Post-filter: only the get_skill event remains
         assert len(skill_uses) == 1
         assert skill_uses[0]["skill"] == "color-theory"

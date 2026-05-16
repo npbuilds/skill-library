@@ -48,7 +48,9 @@ def stats(skill_name):
     feedback = _load_log(FEEDBACK_LOG)
     gaps = _load_log(GAPS_LOG)
 
-    if not usage and not feedback and not gaps:
+    # usage.jsonl mixes skill loads and search events; "no analytics" must
+    # reflect the skill-load subset, not the raw event stream.
+    if not list(iter_skill_uses(usage)) and not feedback and not gaps:
         click.echo("No analytics data yet. Use skills in Claude Desktop to start building stats.")
         return
 

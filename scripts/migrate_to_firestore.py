@@ -162,8 +162,10 @@ def main():
     print(f"  ✓ meta/registry: written {'(dry-run)' if args.dry_run else ''}")
 
     # ── 2. Usage events ───────────────────────────────────────────
+    # Skill-load events only; search events (type=search, no skill field) stay
+    # local. Keeps the Firestore `usage` collection's dashboard semantics intact.
     print("\n▸ Loading usage.jsonl...")
-    usage = parse_jsonl(DATA / "usage.jsonl")
+    usage = [e for e in parse_jsonl(DATA / "usage.jsonl") if e.get("skill")]
     batch_write(db, "usage", usage, dry_run=args.dry_run)
 
     # ── 3. Gaps ───────────────────────────────────────────────────
