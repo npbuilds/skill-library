@@ -318,6 +318,23 @@ class TestGetSkillStats:
         assert "Never used" in result
         assert "data-wrangling" in result
 
+    def test_no_analytics_when_only_search_events(self, tmp_project):
+        # Search-only history (no skill loads, no feedback, no gaps) should
+        # report "No analytics" — search events alone are not skill activity.
+        # Inject directly so we control the log shape without depending on
+        # tmp_project's registry contents to dictate gap thresholds.
+        server.USAGE_LOG.write_text(
+            json.dumps({
+                "session_id": "test-session",
+                "type": "search",
+                "query": "anything",
+                "result_count": 5,
+                "timestamp": "2026-05-16T00:00:00Z",
+            }) + "\n"
+        )
+        result = server.get_skill_stats()
+        assert "No analytics data" in result
+
 
 # ---------------------------------------------------------------------------
 # get_system_overview
