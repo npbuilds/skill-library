@@ -584,3 +584,45 @@ class TestUpdateMetadataReferencedBy:
         after_refs = dict((n, list(e.get("referenced_by", [])))
                           for n, e in after["skills"].items())
         assert before_refs == after_refs, "referenced_by drifted on unrelated update"
+
+
+# ---------------------------------------------------------------------------
+# session_id + query instrumentation (PR #1)
+# ---------------------------------------------------------------------------
+
+
+class TestSessionInstrumentation:
+    @pytest.fixture(autouse=True)
+    def _reset_last_query(self):
+        """Reset cross-test state so each test starts with no captured query."""
+        server._LAST_SEARCH_QUERY = None
+        yield
+        server._LAST_SEARCH_QUERY = None
+
+    def test_session_id_on_usage_event(self, tmp_project):
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        assert usage[0]["session_id"] == server._SERVER_SESSION_ID
+
+    def test_session_id_on_gap_event(self, tmp_project):
+        server.search_skills("quantum-physics")
+        gaps = server._load_log(server.GAPS_LOG)
+        assert gaps[0]["session_id"] == server._SERVER_SESSION_ID
+
+    def test_session_id_consistent_across_events(self, tmp_project):
+        server.search_skills("quantum-physics")
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        gaps = server._load_log(server.GAPS_LOG)
+        assert usage[0]["session_id"] == gaps[0]["session_id"]
+
+    def test_get_skill_captures_prior_search_query(self, tmp_project):
+        server.search_skills("color")
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        assert usage[0].get("query") == "color"
+
+    def test_get_skill_omits_query_without_prior_search(self, tmp_project):
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        assert "query" not in usage[0]

@@ -17,11 +17,24 @@ import fcntl
 import json
 import logging
 import os
+import uuid
 from collections import Counter, deque
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.server import TransportSecuritySettings
+
+# One UUID per server process. Stamped onto every log event so downstream
+# scripts (derive_coactivation, etc.) can group co-retrievals by session.
+# Process == session; restart resets. Stdio: one session per Claude Desktop
+# run. HTTP: one session per Cloud Run instance lifetime.
+_SERVER_SESSION_ID = uuid.uuid4().hex
+
+# Best-effort capture of the most recent search query so subsequent get_skill
+# events can record what query led to the retrieval. Per-process state, not
+# thread-safe by design — coactivation tolerates an approximate signal.
+_LAST_SEARCH_QUERY: Optional[str] = None
 
 # ---------------------------------------------------------------------------
 # Remote mode detection — must happen before tool registration
@@ -46,8 +59,16 @@ from shared import (
 
 
 def _log_event(path: Path, event: dict) -> None:
-    """Append a JSON event to a JSONL log file (with file locking)."""
-    record = {**event, "timestamp": datetime.now(timezone.utc).isoformat()}
+    """Append a JSON event to a JSONL log file (with file locking).
+
+    Every record carries session_id (server-process UUID) and timestamp.
+    Caller can override session_id via the event dict but normally shouldn't.
+    """
+    record = {
+        "session_id": _SERVER_SESSION_ID,
+        **event,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
     try:
         with open(path, "a") as f:
             fcntl.flock(f, fcntl.LOCK_EX)
@@ -334,6 +355,9 @@ def search_skills(query: str) -> str:
     Args:
         query: The search term (e.g. "color", "testing", "design", "accessibility").
     """
+    global _LAST_SEARCH_QUERY
+    _LAST_SEARCH_QUERY = query
+
     try:
         registry = load_registry()
     except RuntimeError as e:
@@ -492,7 +516,10 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
         return f"Skill '{skill_name}' not found. Available skills: {available}"
 
     # Log usage
-    _log_event(USAGE_LOG, {"skill": skill_name, "type": entry.get("type", "unknown")})
+    log_data = {"skill": skill_name, "type": entry.get("type", "unknown")}
+    if _LAST_SEARCH_QUERY is not None:
+        log_data["query"] = _LAST_SEARCH_QUERY
+    _log_event(USAGE_LOG, log_data)
 
     skill_path = resolve_skill_path(entry, skill_name)
     if skill_path is None:
