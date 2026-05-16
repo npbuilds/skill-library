@@ -587,22 +587,17 @@ class TestUpdateMetadataReferencedBy:
 
 
 # ---------------------------------------------------------------------------
-# session_id + query instrumentation (PR #1)
+# session_id + search-event instrumentation (PR #1)
 # ---------------------------------------------------------------------------
 
 
 class TestSessionInstrumentation:
-    @pytest.fixture(autouse=True)
-    def _reset_last_query(self):
-        """Reset cross-test state so each test starts with no captured query."""
-        server._LAST_SEARCH_QUERY = None
-        yield
-        server._LAST_SEARCH_QUERY = None
-
     def test_session_id_on_usage_event(self, tmp_project):
         server.get_skill("color-theory")
         usage = server._load_log(server.USAGE_LOG)
-        assert usage[0]["session_id"] == server._SERVER_SESSION_ID
+        # Find the get_skill event (search events also live in usage.jsonl)
+        skill_event = next(e for e in usage if e.get("skill") == "color-theory")
+        assert skill_event["session_id"] == server._SERVER_SESSION_ID
 
     def test_session_id_on_gap_event(self, tmp_project):
         server.search_skills("quantum-physics")
@@ -614,15 +609,25 @@ class TestSessionInstrumentation:
         server.get_skill("color-theory")
         usage = server._load_log(server.USAGE_LOG)
         gaps = server._load_log(server.GAPS_LOG)
-        assert usage[0]["session_id"] == gaps[0]["session_id"]
+        # All events from one process must share the same session_id
+        assert {e["session_id"] for e in usage} == {server._SERVER_SESSION_ID}
+        assert {e["session_id"] for e in gaps} == {server._SERVER_SESSION_ID}
 
-    def test_get_skill_captures_prior_search_query(self, tmp_project):
+    def test_search_logs_to_usage_with_query(self, tmp_project):
+        server.search_skills("color")
+        usage = server._load_log(server.USAGE_LOG)
+        search_events = [e for e in usage if e.get("type") == "search"]
+        assert len(search_events) == 1
+        assert search_events[0]["query"] == "color"
+        assert "result_count" in search_events[0]
+        assert search_events[0]["session_id"] == server._SERVER_SESSION_ID
+
+    def test_iter_skill_uses_excludes_search_events(self, tmp_project):
         server.search_skills("color")
         server.get_skill("color-theory")
         usage = server._load_log(server.USAGE_LOG)
-        assert usage[0].get("query") == "color"
-
-    def test_get_skill_omits_query_without_prior_search(self, tmp_project):
-        server.get_skill("color-theory")
-        usage = server._load_log(server.USAGE_LOG)
-        assert "query" not in usage[0]
+        import shared
+        skill_uses = list(shared.iter_skill_uses(usage))
+        # Search event filtered out; only the get_skill event remains
+        assert len(skill_uses) == 1
+        assert skill_uses[0]["skill"] == "color-theory"

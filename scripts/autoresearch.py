@@ -450,9 +450,10 @@ def main() -> None:
     skills = reg["skills"]
     all_names = set(skills)
 
-    usage_counts: Counter = Counter()
-    for e in _load_jsonl(USAGE_LOG):
-        usage_counts[e.get("skill", "")] += 1
+    # Skill loads only; search events (no `skill` field) are excluded.
+    usage_counts: Counter = Counter(
+        e["skill"] for e in _load_jsonl(USAGE_LOG) if e.get("skill")
+    )
     feedback_ratings: dict = {}
     for e in _load_jsonl(FEEDBACK_LOG):
         s, r = e.get("skill", ""), e.get("rating")

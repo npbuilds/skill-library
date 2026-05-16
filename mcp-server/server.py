@@ -21,20 +21,15 @@ import uuid
 from collections import Counter, deque
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.server import TransportSecuritySettings
 
 # One UUID per server process. Stamped onto every log event so downstream
 # scripts (derive_coactivation, etc.) can group co-retrievals by session.
 # Process == session; restart resets. Stdio: one session per Claude Desktop
-# run. HTTP: one session per Cloud Run instance lifetime.
+# run. HTTP: one session per Cloud Run instance lifetime (with concurrent
+# requests sharing the same id — coactivation tolerates an approximate signal).
 _SERVER_SESSION_ID = uuid.uuid4().hex
-
-# Best-effort capture of the most recent search query so subsequent get_skill
-# events can record what query led to the retrieval. Per-process state, not
-# thread-safe by design — coactivation tolerates an approximate signal.
-_LAST_SEARCH_QUERY: Optional[str] = None
 
 # ---------------------------------------------------------------------------
 # Remote mode detection — must happen before tool registration
@@ -49,7 +44,7 @@ REMOTE_MODE = os.environ.get("MCP_REMOTE", "false").lower() == "true"
 from shared import (
     PROJECT_ROOT, REGISTRY_PATH, SKILLS_DIR, DATA_DIR,
     USAGE_LOG, GAPS_LOG, FEEDBACK_LOG,
-    load_log,
+    load_log, iter_skill_uses,
     atomic_write_registry,
     compute_auto_score,
     score_structure, score_depth, score_connectivity,
@@ -355,9 +350,6 @@ def search_skills(query: str) -> str:
     Args:
         query: The search term (e.g. "color", "testing", "design", "accessibility").
     """
-    global _LAST_SEARCH_QUERY
-    _LAST_SEARCH_QUERY = query
-
     try:
         registry = load_registry()
     except RuntimeError as e:
@@ -411,6 +403,7 @@ def search_skills(query: str) -> str:
 
             if len(hybrid_results) <= 2:
                 _log_event(GAPS_LOG, {"query": query, "result_count": len(hybrid_results)})
+            _log_event(USAGE_LOG, {"type": "search", "query": query, "result_count": len(hybrid_results)})
 
             return "\n".join(lines)
 
@@ -430,6 +423,7 @@ def search_skills(query: str) -> str:
 
     if not matches:
         _log_event(GAPS_LOG, {"query": query, "result_count": 0})
+        _log_event(USAGE_LOG, {"type": "search", "query": query, "result_count": 0})
         return f"No skills found matching '{query}'. Use the list_skills tool to see all available skills."
 
     # Sort by relevance desc, then composite score desc
@@ -437,6 +431,7 @@ def search_skills(query: str) -> str:
 
     if len(matches) <= 2:
         _log_event(GAPS_LOG, {"query": query, "result_count": len(matches)})
+    _log_event(USAGE_LOG, {"type": "search", "query": query, "result_count": len(matches)})
 
     lines = [f"Found {len(matches)} skill(s) matching '{query}' (keyword):\n"]
     for m in matches:
@@ -516,10 +511,7 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
         return f"Skill '{skill_name}' not found. Available skills: {available}"
 
     # Log usage
-    log_data = {"skill": skill_name, "type": entry.get("type", "unknown")}
-    if _LAST_SEARCH_QUERY is not None:
-        log_data["query"] = _LAST_SEARCH_QUERY
-    _log_event(USAGE_LOG, log_data)
+    _log_event(USAGE_LOG, {"skill": skill_name, "type": entry.get("type", "unknown")})
 
     skill_path = resolve_skill_path(entry, skill_name)
     if skill_path is None:
@@ -971,15 +963,16 @@ def get_skill_stats(skill_name: str | None = None) -> str:
     # ── Summary view ──
     lines = ["=== SKILL ANALYTICS SUMMARY ===\n"]
 
-    # Usage counts
+    # Usage counts — skill loads only; search events are excluded
+    skill_uses = list(iter_skill_uses(usage_events))
     usage_counts: dict[str, int] = {}
-    for e in usage_events:
-        s = e.get("skill", "?")
+    for e in skill_uses:
+        s = e["skill"]
         usage_counts[s] = usage_counts.get(s, 0) + 1
 
     if usage_counts:
         sorted_usage = sorted(usage_counts.items(), key=lambda x: x[1], reverse=True)
-        lines.append(f"Total skill loads: {len(usage_events)}")
+        lines.append(f"Total skill loads: {len(skill_uses)}")
         lines.append(f"Unique skills used: {len(usage_counts)}\n")
 
         lines.append("Most used:")
@@ -1717,7 +1710,7 @@ def recalibrate_scores(
     # Build analytics lookups
     usage_events = load_log(USAGE_LOG)
     feedback_events = load_log(FEEDBACK_LOG)
-    usage_counts: Counter = Counter(e.get("skill", "") for e in usage_events)
+    usage_counts: Counter = Counter(e["skill"] for e in iter_skill_uses(usage_events))
     feedback_ratings: dict[str, list[int]] = {}
     for e in feedback_events:
         s, r = e.get("skill"), e.get("rating")
