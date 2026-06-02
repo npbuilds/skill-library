@@ -9752,10 +9752,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 65,
       "depends_on": [
         "cultures-societies",
         "religion-design",
