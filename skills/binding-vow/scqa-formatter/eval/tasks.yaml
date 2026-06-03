@@ -1,0 +1,163 @@
+# SkillOpt task set for `scqa-formatter` — format-adherence (declarative contract).
+# Prompts are format-agnostic; the SITUATION/COMPLICATION/QUESTION/ANSWER contract
+# is supplied only by the SKILL.md. Grader: scripts/skillopt/contracts.py engine.
+
+meta:
+  skill: scqa-formatter
+  location: skills/binding-vow/scqa-formatter/SKILL.md
+  checker: contract
+  contract:
+    sections: ["SITUATION:", "COMPLICATION:", "QUESTION:", "ANSWER:"]
+    checks:
+      - type: sections_in_order
+      - type: non_empty
+        section: "SITUATION:"
+      - type: non_empty
+        section: "COMPLICATION:"
+      - type: non_empty
+        section: "QUESTION:"
+      - type: one_sentence
+        section: "ANSWER:"
+
+tasks:
+  - id: train-scqa-growth
+    split: train
+    type: scqa
+    checker: contract
+    prompt: |
+      Frame the introduction to a memo for an informed-but-unfocused peer. Context:
+      we've grown 3x in two years, but churn just accelerated to 12%, and analysis
+      points to onboarding. Set it up so the complication earns the conclusion.
+    gold: ""
+  - id: train-scqa-tyk2
+    split: train
+    type: scqa
+    checker: contract
+    prompt: |
+      Open a research brief for a peer scientist: our TYK2 inhibitor showed a CNS
+      signal in healthy volunteers, but CSF-level data doesn't predict retinal
+      exposure, and we must decide whether to advance into NPDR.
+    gold: ""
+  - id: train-scqa-pricing
+    split: train
+    type: scqa
+    checker: contract
+    prompt: |
+      Set up a memo intro for a colleague: our usage-based pricing drove adoption,
+      but enterprise buyers now demand predictable annual costs, and sales cycles are
+      stalling on it.
+    gold: ""
+  - id: train-scqa-hiring
+    split: train
+    type: scqa
+    checker: contract
+    prompt: |
+      Introduce a planning doc for the team: headcount doubled this year, but
+      time-to-productivity for new hires has crept to 4 months, and two key launches
+      depend on ramp speed.
+    gold: ""
+  - id: train-scqa-infra
+    split: train
+    type: scqa
+    checker: contract
+    prompt: |
+      Frame the opening of an architecture proposal for peers: the monolith served us
+      well to 50 engineers, but deploy contention now blocks releases daily, and the
+      next hiring wave will make it worse.
+    gold: ""
+  - id: train-scqa-retention
+    split: train
+    type: scqa
+    checker: contract
+    prompt: |
+      Open a strategy note for a colleague: our flagship app leads on features, but
+      DAU/MAU slipped two quarters running, and a competitor just shipped a simpler
+      free tier.
+    gold: ""
+
+  - id: val-scqa-supplychain
+    split: val
+    type: scqa
+    checker: contract
+    prompt: |
+      Introduce a memo for a peer ops lead: we single-sourced our key component to
+      cut costs, but the supplier just had a 6-week outage, and Q4 builds are at risk.
+    gold: ""
+  - id: val-scqa-research
+    split: val
+    type: scqa
+    checker: contract
+    prompt: |
+      Set up a brief for a fellow analyst: our factor model beat the benchmark for
+      three years, but its edge has decayed since two similar ETFs launched, and the
+      committee wants a call on whether to retire it.
+    gold: ""
+  - id: val-scqa-support
+    split: val
+    type: scqa
+    checker: contract
+    prompt: |
+      Frame an intro for a peer: support CSAT is high, but ticket volume per user is
+      climbing and the team can't scale headcount, so something structural must give.
+    gold: ""
+  - id: val-scqa-security
+    split: val
+    type: scqa
+    checker: contract
+    prompt: |
+      Open a memo for a peer engineer: we passed our last audit, but we've since
+      added three third-party integrations with broad scopes, and a partner just
+      disclosed a breach.
+    gold: ""
+  - id: val-scqa-curriculum
+    split: val
+    type: scqa
+    checker: contract
+    prompt: |
+      Introduce a proposal for a fellow educator: our bootcamp's completion rate is
+      strong, but employer placement slipped, and the market has shifted toward AI
+      tooling we don't teach.
+    gold: ""
+
+  - id: test-scqa-marketplace
+    split: test
+    type: scqa
+    checker: contract
+    prompt: |
+      Frame the intro to a peer memo: our marketplace's GMV is up, but seller churn
+      is rising because payouts lag two weeks, and a rival offers instant payouts.
+    gold: ""
+  - id: test-scqa-clinical
+    split: test
+    type: scqa
+    checker: contract
+    prompt: |
+      Open a brief for a peer clinician: the new protocol cut readmissions, but nurse
+      overtime spiked to deliver it, and the budget review is next week.
+    gold: ""
+  - id: test-scqa-data
+    split: test
+    type: scqa
+    checker: contract
+    prompt: |
+      Set up an intro for a fellow data lead: our dashboards are widely used, but
+      teams increasingly distrust the numbers after two metric definition changes,
+      and a board metric is now in question.
+    gold: ""
+  - id: test-scqa-energy
+    split: test
+    type: scqa
+    checker: contract
+    prompt: |
+      Introduce a memo for a peer: our plants hit reliability targets, but fuel costs
+      doubled and the hedging program expires in two months.
+    gold: ""
+  - id: test-scqa-brand
+    split: test
+    type: scqa
+    checker: contract
+    prompt: |
+      Frame an intro for a colleague in marketing: brand awareness is at an all-time
+      high, but conversion from awareness to trial dropped, and a packaging refresh
+      is being debated.
+    gold: ""

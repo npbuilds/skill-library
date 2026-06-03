@@ -1385,6 +1385,37 @@ NO.detail = {
     // Radar SVG
     html += `<div class="radar-wrap">${this.renderRadar(radarAxes)}</div>`;
 
+    // SkillOpt task_score (GUARDED — skills without it render exactly as before)
+    if (s.task_score && typeof s.task_score === 'object') {
+      const ts = s.task_score;
+      const vMap = {
+        'go':                 ['GO',             '#1f9d55', '#3ee07a'],
+        'no-go-saturated':    ['NO-GO·saturated','#8a6d1f', '#e3c04a'],
+        'no-go-insufficient': ['NO-GO·low-lift', '#8a6d1f', '#e3c04a'],
+      };
+      const v = vMap[ts.verdict] || [String(ts.verdict || 'unknown'), '#555', '#aaa'];
+      const lift = (typeof ts.lift === 'number') ? ts.lift : null;
+      const liftHtml = (lift === null) ? '' :
+        `<span style="font-family:var(--font-mono);font-size:11px;color:${lift > 0 ? '#3ee07a' : (lift < 0 ? '#e0564a' : '#888')}">`
+        + `${lift > 0 ? '▲' : (lift < 0 ? '▼' : '■')} ${lift > 0 ? '+' : ''}${lift.toFixed(0)} lift</span>`;
+      html += `<div class="detail-deps"><h4>SkillOpt · task_score</h4>`;
+      html += `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px">`;
+      html += `<span style="background:${v[1]}33;color:${v[2]};border:1px solid ${v[1]};`
+        + `padding:2px 9px;border-radius:11px;font-family:var(--font-mono);font-size:10px;letter-spacing:.5px">${this.esc(v[0])}</span>`;
+      html += liftHtml;
+      html += `</div>`;
+      html += `<div class="detail-meta-grid">`;
+      if (typeof ts.test === 'number') html += this.metaItem('task_score (test)', ts.test.toFixed(0));
+      if (typeof ts.val === 'number') html += this.metaItem('val', ts.val.toFixed(0));
+      if (typeof ts.no_skill_test === 'number') html += this.metaItem('no-skill', ts.no_skill_test.toFixed(0));
+      if (ts.backend) html += this.metaItem('backend', ts.backend);
+      html += `</div>`;
+      if (ts.last_run) {
+        html += `<div style="margin-top:6px;font-family:var(--font-mono);font-size:10px;color:var(--text-dim)">last run: ${this.esc(String(ts.last_run))}</div>`;
+      }
+      html += `</div>`;
+    }
+
     // Dependencies
     if (s.depends_on?.length) {
       html += `<div class="detail-deps"><h4>Depends On</h4>`;

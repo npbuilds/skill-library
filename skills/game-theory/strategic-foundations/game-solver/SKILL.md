@@ -7,7 +7,7 @@ description: >
   political dynamics, technology competition, and fictional world scenarios.
 metadata:
   author: nirav
-  version: "1.0"
+  version: "1.0.5"
 compatibility: Designed for Claude Code
 allowed-tools: Read Write Glob
 ---
@@ -97,6 +97,21 @@ Specify the characteristic function v(S) for relevant coalitions.
 #### Step 4 — Solve
 
 Apply the appropriate solution concept:
+
+#### Recipe — Zero-Sum Value
+For a zero-sum game the value of the game is the saddle point: take each row's minimum and each column's maximum; when the maximin equals the minimax, that common number is the value to the row player.
+
+#### Recipe — Strictly Dominant Strategy
+A strategy is strictly dominant when it yields a strictly higher payoff against each of the opponent's actions (it strictly dominates every alternative). Check each of your strategies against every opponent action; if none clears that bar for every action, answer "none".
+
+#### Recipe — Pareto-Optimal Outcomes
+An outcome is Pareto-optimal when no other outcome makes one player better off without making the other worse off. Enumerate the cells and discard any cell weakly dominated in both payoffs by another cell.
+
+#### Recipe — Mixed-Strategy Nash (2x2)
+To find a mixed equilibrium, make the opponent indifferent: choose your mixing probability so the opponent's expected payoff is the same across their actions (set expected payoffs equal and solve). Report p (prob the row player plays its first strategy) and q (prob the column player plays its first strategy).
+
+#### Recipe — Maximin / Security Strategy
+A player's maximin (security level) strategy maximizes their guaranteed worst-case payoff: for each of your strategies take the minimum payoff over the opponent's actions, then pick the strategy with the largest such minimum.
 
 | Game Type | Primary Solution | Also Check |
 |-----------|-----------------|------------|
