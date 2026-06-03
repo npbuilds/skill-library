@@ -12,7 +12,7 @@ Parse `$ARGUMENTS` for:
 3. **Notes** (optional) — remaining free text up to the optional `brief-id:` token
 4. **Brief ID** (optional) — token of the form `brief-id:SPK-YYYYMMDD-<slug>`. Spelunker emits this in its Phase 6 footer; other skills may emit similar IDs.
 
-If `$ARGUMENTS` is empty or malformed, list the most recently used skills (from `data/usage.jsonl` tail) and ask the user which one they want to rate.
+If `$ARGUMENTS` is empty or malformed, list the most recently used skills (from `data/usage.jsonl` tail, filtering for entries that have a `skill` field — search events lack one) and ask the user which one they want to rate.
 
 Steps:
 

@@ -162,7 +162,6 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     "history-builder":          ["worldbuilding-orchestrator", "world-bible", "lore-writer"],
     "lore-writer":              ["worldbuilding-orchestrator", "world-bible"],
     "magic-system-design":      ["worldbuilding-orchestrator", "world-bible"],
-    "magic-systems":            ["worldbuilding-orchestrator", "magic-system-design", "lore-writer"],
     "naming-system":            ["worldbuilding-orchestrator", "world-bible", "cultures-societies"],
     "narrative-pacing":         ["worldbuilding-orchestrator", "lore-writer", "world-bible"],
     "religion-design":          ["worldbuilding-orchestrator", "cultures-societies"],

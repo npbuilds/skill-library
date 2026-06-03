@@ -318,6 +318,23 @@ class TestGetSkillStats:
         assert "Never used" in result
         assert "data-wrangling" in result
 
+    def test_no_analytics_when_only_search_events(self, tmp_project):
+        # Search-only history (no skill loads, no feedback, no gaps) should
+        # report "No analytics" — search events alone are not skill activity.
+        # Inject directly so we control the log shape without depending on
+        # tmp_project's registry contents to dictate gap thresholds.
+        server.USAGE_LOG.write_text(
+            json.dumps({
+                "session_id": "test-session",
+                "type": "search",
+                "query": "anything",
+                "result_count": 5,
+                "timestamp": "2026-05-16T00:00:00Z",
+            }) + "\n"
+        )
+        result = server.get_skill_stats()
+        assert "No analytics data" in result
+
 
 # ---------------------------------------------------------------------------
 # get_system_overview
@@ -584,3 +601,64 @@ class TestUpdateMetadataReferencedBy:
         after_refs = dict((n, list(e.get("referenced_by", [])))
                           for n, e in after["skills"].items())
         assert before_refs == after_refs, "referenced_by drifted on unrelated update"
+
+
+# ---------------------------------------------------------------------------
+# session_id + search-event instrumentation (PR #1)
+# ---------------------------------------------------------------------------
+
+
+class TestSessionInstrumentation:
+    def test_session_id_on_usage_event(self, tmp_project):
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        # Find the get_skill event (search events also live in usage.jsonl)
+        skill_event = next(e for e in usage if e.get("skill") == "color-theory")
+        assert skill_event["session_id"] == server._SERVER_SESSION_ID
+
+    def test_session_id_on_gap_event(self, tmp_project):
+        server.search_skills("quantum-physics")
+        gaps = server._load_log(server.GAPS_LOG)
+        assert gaps[0]["session_id"] == server._SERVER_SESSION_ID
+
+    def test_session_id_consistent_across_events(self, tmp_project):
+        server.search_skills("quantum-physics")
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        gaps = server._load_log(server.GAPS_LOG)
+        # All events from one process must share the same session_id
+        assert {e["session_id"] for e in usage} == {server._SERVER_SESSION_ID}
+        assert {e["session_id"] for e in gaps} == {server._SERVER_SESSION_ID}
+
+    def test_search_logs_to_usage_with_query(self, tmp_project):
+        server.search_skills("color")
+        usage = server._load_log(server.USAGE_LOG)
+        search_events = [e for e in usage if e.get("type") == "search"]
+        assert len(search_events) == 1
+        assert search_events[0]["query"] == "color"
+        assert "result_count" in search_events[0]
+        assert search_events[0]["session_id"] == server._SERVER_SESSION_ID
+
+    def test_no_match_search_logs_to_usage(self, tmp_project):
+        # No-match path is a separate code branch from keyword-match; verify
+        # it also writes a usage event with result_count=0.
+        server.search_skills("quantum-physics")
+        usage = server._load_log(server.USAGE_LOG)
+        search_events = [e for e in usage if e.get("type") == "search"]
+        assert len(search_events) == 1
+        assert search_events[0]["query"] == "quantum-physics"
+        assert search_events[0]["result_count"] == 0
+
+    def test_iter_skill_uses_excludes_search_events(self, tmp_project):
+        server.search_skills("color")
+        server.get_skill("color-theory")
+        usage = server._load_log(server.USAGE_LOG)
+        # Pre-filter: both events present (verifies search logging is actually
+        # happening, not silently broken).
+        assert len(usage) == 2
+        assert any(e.get("type") == "search" for e in usage)
+        import shared
+        skill_uses = list(shared.iter_skill_uses(usage))
+        # Post-filter: only the get_skill event remains
+        assert len(skill_uses) == 1
+        assert skill_uses[0]["skill"] == "color-theory"

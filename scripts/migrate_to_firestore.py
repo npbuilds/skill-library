@@ -26,12 +26,13 @@ from pathlib import Path
 
 import subprocess
 
+# Soft-fail so test_migrate_to_firestore.py can import the helpers below
+# without requiring firebase-admin. main() re-checks and exits if missing.
 try:
     import firebase_admin
     from firebase_admin import credentials, firestore
 except ImportError:
-    print("ERROR: firebase-admin not installed. Run: pip install firebase-admin")
-    sys.exit(1)
+    firebase_admin = None
 
 try:
     import google.oauth2.credentials as oauth2_creds
@@ -89,6 +90,43 @@ def batch_write(db, collection: str, docs: list[dict], id_fn=None, dry_run=False
     print(f"  ✓ {collection}: {total} docs total")
 
 
+def build_skill_docs(registry: dict) -> list[dict]:
+    """Per-skill docs: dict(skill) pass-through + domain/name enrichment."""
+    skills = registry.get("skills", {})
+    network_domains = registry.get("network", {}).get("domains", {})
+    skill_domain_map = {}
+    for domain, skill_names in network_domains.items():
+        for sname in skill_names:
+            skill_domain_map[sname] = domain
+    docs = []
+    for name, skill in skills.items():
+        doc = dict(skill)
+        doc["domain"] = skill_domain_map.get(name, "unknown")
+        doc["name"] = name
+        docs.append(doc)
+    return docs
+
+
+def build_meta_doc(registry: dict) -> dict:
+    """meta/registry doc with explicit/computed fields + pass-through for unknown top-level keys."""
+    skills = registry.get("skills", {})
+    network_domains = registry.get("network", {}).get("domains", {})
+    meta_doc = {
+        "schema_version": registry.get("schema_version"),
+        "plugin_version": registry.get("plugin_version"),
+        "last_scan": registry.get("last_scan"),
+        "network_domains": network_domains,
+        "skill_count": len(skills),
+        "domain_count": len(network_domains),
+    }
+    # `skills` has its own collection; `network` is denormalized above.
+    HANDLED = {"schema_version", "plugin_version", "last_scan", "skills", "network"}
+    for key, value in registry.items():
+        if key not in HANDLED and key not in meta_doc:
+            meta_doc[key] = value
+    return meta_doc
+
+
 # ── Main ─────────────────────────────────────────────────────────────
 
 def main():
@@ -96,6 +134,10 @@ def main():
     parser.add_argument("--project", default="skill-library-prod", help="GCP project ID")
     parser.add_argument("--dry-run", action="store_true", help="Parse and validate without writing")
     args = parser.parse_args()
+
+    if firebase_admin is None:
+        print("ERROR: firebase-admin not installed. Run: pip install firebase-admin")
+        sys.exit(1)
 
     print(f"═══ Neural Observatory → Firestore Migration ═══")
     print(f"Project: {args.project}")
@@ -127,43 +169,20 @@ def main():
         sys.exit(1)
 
     registry = json.loads(registry_path.read_text())
-    skills = registry.get("skills", {})
-    print(f"  Found {len(skills)} skills")
-
-    # Build domain mapping from network.domains
-    network_domains = registry.get("network", {}).get("domains", {})
-    skill_domain_map = {}
-    for domain, skill_names in network_domains.items():
-        for sname in skill_names:
-            skill_domain_map[sname] = domain
-
-    # Enrich each skill doc with its domain (denormalized for queries)
-    skill_docs = []
-    for name, skill in skills.items():
-        doc = dict(skill)
-        doc["domain"] = skill_domain_map.get(name, "unknown")
-        # Ensure 'name' is in the doc
-        doc["name"] = name
-        skill_docs.append(doc)
-
+    skill_docs = build_skill_docs(registry)
+    print(f"  Found {len(skill_docs)} skills")
     batch_write(db, "skills", skill_docs, id_fn=lambda d: d["name"], dry_run=args.dry_run)
 
-    # Meta doc: registry-level fields
-    meta_doc = {
-        "schema_version": registry.get("schema_version"),
-        "plugin_version": registry.get("plugin_version"),
-        "last_scan": registry.get("last_scan"),
-        "network_domains": network_domains,  # domain → [skill_names]
-        "skill_count": len(skills),
-        "domain_count": len(network_domains),
-    }
+    meta_doc = build_meta_doc(registry)
     if not args.dry_run:
         db.collection("meta").document("registry").set(meta_doc)
     print(f"  ✓ meta/registry: written {'(dry-run)' if args.dry_run else ''}")
 
     # ── 2. Usage events ───────────────────────────────────────────
+    # Skill-load events only; search events (type=search, no skill field) stay
+    # local. Keeps the Firestore `usage` collection's dashboard semantics intact.
     print("\n▸ Loading usage.jsonl...")
-    usage = parse_jsonl(DATA / "usage.jsonl")
+    usage = [e for e in parse_jsonl(DATA / "usage.jsonl") if e.get("skill")]
     batch_write(db, "usage", usage, dry_run=args.dry_run)
 
     # ── 3. Gaps ───────────────────────────────────────────────────

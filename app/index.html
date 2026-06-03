@@ -8,6 +8,8 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+<script src="https://unpkg.com/3d-force-graph"></script>
+<script src="js/cortex3d.js"></script>
 <style>
 /* ═══════════════════════════════════════════════
    WEATHERED CYBERPUNK THEME
@@ -46,6 +48,37 @@
   --header-gradient-start: #0d1020;
   --crt-vignette: rgba(0,0,0,0.4);
   --noise-opacity: 0.04;
+}
+
+[data-theme="spiderverse"] {
+  /* Spider-Verse: magenta/cyan/yellow CMY comic primaries on a near-black
+     purple background. Saturation pushed past photoreal range — matches the
+     spiderverse-art-analysis grammar (research/spiderverse-art-analysis.md). */
+  --bg-deep: #0a0014;
+  --bg-panel: #14021e;
+  --bg-panel-hover: #1f0530;
+  --border-dim: #4d0a3a;
+  --border-glow: #ff2d95;
+  --cyan-faded: #007a9e;
+  --cyan-bright: #00d4ff;
+  --cyan-glow: #00d4ff55;
+  --magenta-faded: #b30060;
+  --magenta-bright: #ff2d95;
+  --magenta-glow: #ff2d9555;
+  --amber-faded: #8a6a00;
+  --amber-bright: #ffd60a;
+  --amber-glow: #ffd60a44;
+  --red-faded: #8a1020;
+  --red-bright: #ff1744;
+  --green-faded: #1a7830;
+  --green-bright: #20e070;
+  --text-primary: #f0f0f8;
+  --text-dim: #aa88b0;
+  --text-bright: #ffffff;
+  --scanline-opacity: 0.04;
+  --header-gradient-start: #1a0228;
+  --crt-vignette: rgba(8,0,15,0.55);
+  --noise-opacity: 0.06;
 }
 
 [data-theme="light"] {
@@ -316,6 +349,41 @@ body::after {
 }
 .view-svg:active { cursor: grabbing; }
 
+/* 3D popout — full-viewport overlay so the WebGL view escapes the panel.
+   The container becomes its own modal; close button (×) lives top-right. */
+#cortex-3d-close { display: none; }
+#cortex-3d.popped-out {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background: var(--bg-deep);
+}
+#cortex-3d.popped-out #cortex-3d-close {
+  display: block;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 1001;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-glow);
+  background: var(--bg-panel);
+  color: var(--text-bright);
+  font-family: var(--font-mono);
+  font-size: 22px;
+  line-height: 1;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+#cortex-3d.popped-out #cortex-3d-close:hover {
+  background: var(--bg-panel-hover);
+  border-color: var(--magenta-bright);
+  color: var(--magenta-bright);
+}
+
 /* Cortex map */
 .cortex-link { stroke: var(--border-dim); stroke-opacity: 0.3; fill: none; }
 .cortex-link.cross-domain {
@@ -447,25 +515,6 @@ body::after {
   flex-direction: column;
   gap: 1px;
   background: var(--border-dim);
-}
-
-/* Signals feed */
-.signal-item {
-  padding: 8px 12px;
-  border-left: 3px solid var(--border-dim);
-  font-size: 12px;
-  font-family: var(--font-mono);
-  transition: background 0.15s var(--ease);
-}
-.signal-item:hover { background: var(--bg-panel-hover); }
-.signal-item.sig-usage { border-left-color: var(--cyan-faded); }
-.signal-item.sig-gap { border-left-color: var(--red-faded); }
-.signal-item.sig-change { border-left-color: var(--amber-faded); }
-.signal-time {
-  font-size: 10px;
-  color: var(--text-dim);
-  display: block;
-  margin-top: 2px;
 }
 
 /* Heatmap */
@@ -1063,6 +1112,8 @@ body::after {
     <button class="no-btn" id="btn-coverage" title="Toggle used/unused overlay">coverage</button>
     <button class="no-btn" id="btn-trail" title="Toggle learning trail">trail</button>
     <button class="no-btn" id="btn-labels" title="Toggle labels">labels</button>
+    <button class="no-btn" id="btn-constellation" title="Toggle 3D constellation lines" style="display:none">constellation</button>
+    <button class="no-btn" id="btn-expand-3d" title="Expand 3D map to full window (Esc to close)" style="display:none">⤢ expand</button>
     <button class="no-btn" id="btn-theme" title="Toggle theme">light</button>
     <a href="/observatory" class="no-btn" style="border-color:var(--magenta-faded);color:var(--magenta-bright);text-decoration:none" title="Aesthetic Observatory">◈ observatory</a>
     <a href="/profile" class="no-btn" style="border-color:rgba(170,90,206,0.5);color:#aa5ace;text-decoration:none" title="Aesthetic Profile — 17-axis fingerprint">◬ profile</a>
@@ -1080,9 +1131,13 @@ body::after {
     <div class="view-tabs">
       <button class="view-tab active" data-view="cortex">cortex</button>
       <button class="view-tab" data-view="org">org chart</button>
+      <button class="view-tab" data-view="3d">3d cortex</button>
     </div>
     <svg id="cortex-svg" class="view-svg"></svg>
     <svg id="org-svg" class="view-svg" style="display:none"></svg>
+    <div id="cortex-3d" class="view-svg" style="display:none">
+      <button id="cortex-3d-close" type="button" title="Collapse (Esc)" aria-label="Collapse 3D map">×</button>
+    </div>
     <div class="coverage-legend" id="coverage-legend">
       <span><span class="coverage-dot" style="background:var(--cyan-bright)"></span> used</span>
       <span><span class="coverage-dot" style="background:var(--red-faded);opacity:0.4"></span> never used (79%)</span>
@@ -1091,10 +1146,6 @@ body::after {
 
   <!-- Sidebar Stack -->
   <div class="sidebar-stack">
-    <div class="no-panel" id="signals-panel" style="max-height:260px;overflow-y:auto">
-      <div class="no-panel-title">Signals Feed</div>
-      <div id="signals-feed"></div>
-    </div>
     <div class="no-panel" id="heatmap-panel">
       <div class="no-panel-title">Fluency Heatmap</div>
       <div id="heatmap-grid" class="heatmap-grid"></div>
@@ -1502,6 +1553,9 @@ NO.vitals = {
         this.render();
         NO.cortex.filterDomain(this.activeFilter);
         NO.table.render();
+        if (window.Cortex3D && window.Cortex3D.setFilteredDomain) {
+          window.Cortex3D.setFilteredDomain(this.activeFilter);
+        }
       };
     });
   }
@@ -1585,8 +1639,9 @@ NO.cortex = {
     });
     this.domainCenters = domainCenters;
 
-    // Identify recently used skills (last 15 usage events)
-    const recentlyUsed = new Set(NO.data.usage.slice(-15).map(e => e.skill));
+    // Identify recently used skills — NO.data.usage is ordered DESC, so take
+    // from index 0 (head) to get the 15 newest, not from the tail (15 oldest).
+    const recentlyUsed = new Set(NO.data.usage.slice(0, 15).map(e => e.skill));
 
     this.nodes = data.skillList.map(s => ({
       id: s.name,
@@ -2245,38 +2300,6 @@ NO.timeline = {
 };
 
 /* ─── Signals Feed ─── */
-NO.signals = {
-  render() {
-    const feed = document.getElementById('signals-feed');
-    const events = [];
-
-    // Usage events
-    for (const e of NO.data.usage.slice(-30)) {
-      events.push({ type: 'usage', skill: e.skill, text: `Used ${e.skill}`, time: e.timestamp, stype: e.type });
-    }
-
-    // Gap events
-    for (const e of NO.data.gaps) {
-      events.push({ type: 'gap', text: `Gap: "${e.query}"`, time: e.timestamp });
-    }
-
-    // Sort by time desc
-    events.sort((a, b) => (b.time || '').localeCompare(a.time || ''));
-
-    let html = '';
-    for (const e of events.slice(0, 25)) {
-      const cls = e.type === 'usage' ? 'sig-usage' : e.type === 'gap' ? 'sig-gap' : 'sig-change';
-      const timeStr = e.time ? new Date(e.time).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : '';
-      html += `<div class="signal-item ${cls}">`;
-      html += NO.detail.esc(e.text);
-      html += `<span class="signal-time">${NO.detail.esc(timeStr)}</span>`;
-      html += `</div>`;
-    }
-
-    feed.innerHTML = html || '<div style="padding:8px;color:var(--text-dim);font-size:11px">No signals yet</div>';
-  }
-};
-
 /* ─── Fluency Heatmap ─── */
 NO.heatmap = {
   render() {
@@ -2445,12 +2468,17 @@ NO.table = {
 
 /* ─── Theme Toggle ─── */
 NO.theme = {
+  cycle: ['dark', 'light', 'spiderverse'],
+  // Button label tells the user the NEXT state in the cycle.
+  nextLabel: { dark: 'light', light: 'spider-verse', spiderverse: 'dark' },
   current: localStorage.getItem('no-theme') || 'dark',
 
   init() {
+    if (!this.cycle.includes(this.current)) this.current = 'dark';
     this.apply();
     document.getElementById('btn-theme').onclick = () => {
-      this.current = this.current === 'dark' ? 'light' : 'dark';
+      const i = this.cycle.indexOf(this.current);
+      this.current = this.cycle[(i + 1) % this.cycle.length];
       this.apply();
       localStorage.setItem('no-theme', this.current);
     };
@@ -2458,7 +2486,7 @@ NO.theme = {
 
   apply() {
     document.documentElement.setAttribute('data-theme', this.current);
-    document.getElementById('btn-theme').textContent = this.current === 'dark' ? 'light' : 'dark';
+    document.getElementById('btn-theme').textContent = this.nextLabel[this.current] || 'dark';
   }
 };
 
@@ -2784,7 +2812,6 @@ NO.coverage = {
   NO.cortex.init();
   // Org chart is lazy-initialized on first view switch
   NO.timeline.render();
-  NO.signals.render();
   NO.heatmap.render();
   NO.depth.render();
   NO.table.init();
@@ -2794,12 +2821,24 @@ NO.coverage = {
   // Coverage toggle
   document.getElementById('btn-coverage').onclick = () => NO.coverage.toggle();
 
-  // View toggle (cortex ↔ org chart)
+  // View toggle (cortex ↔ org chart ↔ 3d cortex)
   let currentView = 'cortex';
   let orgInitialized = false;
+  let cortex3dInitialized = false;
   const cortexSvg = document.getElementById('cortex-svg');
   const orgSvg = document.getElementById('org-svg');
+  const cortex3dEl = document.getElementById('cortex-3d');
   const viewTitle = document.getElementById('view-title');
+
+  function setCortexButtonsVisible(visible) {
+    const disp = visible ? '' : 'none';
+    document.getElementById('btn-trail').style.display = disp;
+    document.getElementById('btn-labels').style.display = disp;
+  }
+  function setCortex3dButtonsVisible(visible) {
+    document.getElementById('btn-constellation').style.display = visible ? '' : 'none';
+    document.getElementById('btn-expand-3d').style.display = visible ? '' : 'none';
+  }
 
   document.querySelectorAll('.view-tab').forEach(tab => {
     tab.onclick = () => {
@@ -2810,24 +2849,44 @@ NO.coverage = {
       document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
 
+      // Hide all
+      cortexSvg.style.display = 'none';
+      orgSvg.style.display = 'none';
+      cortex3dEl.style.display = 'none';
+      // Collapse any active popout so it doesn't leak across views
+      cortex3dEl.classList.remove('popped-out');
+      // Pause 3D loop whenever it's not the active view
+      if (window.Cortex3D) window.Cortex3D.pause();
+
       if (view === 'cortex') {
         cortexSvg.style.display = 'block';
-        orgSvg.style.display = 'none';
         viewTitle.textContent = 'Cortex Map';
-        // Show cortex-specific buttons
-        document.getElementById('btn-trail').style.display = '';
-        document.getElementById('btn-labels').style.display = '';
-      } else {
-        cortexSvg.style.display = 'none';
+        setCortexButtonsVisible(true);
+        setCortex3dButtonsVisible(false);
+      } else if (view === 'org') {
         orgSvg.style.display = 'block';
         viewTitle.textContent = 'Org Chart';
-        // Hide cortex-specific buttons
-        document.getElementById('btn-trail').style.display = 'none';
-        document.getElementById('btn-labels').style.display = 'none';
-        // Lazy init
+        setCortexButtonsVisible(false);
+        setCortex3dButtonsVisible(false);
         if (!orgInitialized) {
           NO.org.init();
           orgInitialized = true;
+        }
+      } else if (view === '3d') {
+        cortex3dEl.style.display = 'block';
+        viewTitle.textContent = '3D Cortex Map';
+        setCortexButtonsVisible(false);
+        setCortex3dButtonsVisible(true);
+        if (!cortex3dInitialized && window.Cortex3D) {
+          // Only mark initialized if init actually returned a graph instance —
+          // if the CDN failed to load, leave the flag false so a future click retries.
+          const inst = window.Cortex3D.init('#cortex-3d', NO.data, NO.config.domainColors, {
+            onNodeClick: (id) => { if (NO.detail && NO.detail.open) NO.detail.open(id); },
+          });
+          if (inst) cortex3dInitialized = true;
+        } else if (window.Cortex3D) {
+          window.Cortex3D.resize();
+          window.Cortex3D.resume();
         }
       }
     };
@@ -2842,6 +2901,34 @@ NO.coverage = {
     NO.cortex.toggleLabels();
     document.getElementById('btn-labels').classList.toggle('active');
   };
+  document.getElementById('btn-constellation').onclick = () => {
+    if (!window.Cortex3D) return;
+    const next = !window.Cortex3D.isConstellationMode();
+    window.Cortex3D.setConstellationMode(next);
+    document.getElementById('btn-constellation').classList.toggle('active', next);
+  };
+
+  // 3D popout — toggles a full-viewport overlay so the WebGL view escapes the panel.
+  const expandBtn = document.getElementById('btn-expand-3d');
+  const closeBtn3d = document.getElementById('cortex-3d-close');
+  function setCortex3dPopped(popped) {
+    cortex3dEl.classList.toggle('popped-out', popped);
+    expandBtn.textContent = popped ? '⤡ collapse' : '⤢ expand';
+    expandBtn.classList.toggle('active', popped);
+    // Defer the resize one frame so the new container dimensions are read after layout.
+    requestAnimationFrame(() => { if (window.Cortex3D) window.Cortex3D.resize(); });
+  }
+  expandBtn.onclick = () => {
+    setCortex3dPopped(!cortex3dEl.classList.contains('popped-out'));
+  };
+  closeBtn3d.onclick = () => setCortex3dPopped(false);
+  // Esc to collapse — only when popped (don't fight the command palette's Esc).
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cortex3dEl.classList.contains('popped-out')) {
+      e.stopPropagation();
+      setCortex3dPopped(false);
+    }
+  }, true);  // capture phase so we run before the palette's keydown
 
   // Shared refresh function — reloads all data and re-renders every panel
   const refreshBtn = document.getElementById('btn-refresh');
@@ -2865,7 +2952,6 @@ NO.coverage = {
       document.getElementById('stat-edges').textContent = NO.data.totalEdges;
       document.getElementById('stat-cross').textContent = NO.data.crossDomainEdges;
       NO.vitals.render();
-      NO.signals.render();
       NO.heatmap.render();
       NO.depth.render();
       NO.table.render();
