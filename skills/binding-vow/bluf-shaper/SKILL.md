@@ -7,7 +7,7 @@ description: >
   output where the reader has 30 seconds. Returns a structured BLUF block ready for delivery.
 metadata:
   author: nirav
-  version: "1.0"
+  version: "1.0.1"
 compatibility: Designed for Claude Code
 allowed-tools: Read Write
 ---
@@ -63,24 +63,15 @@ What action do you want the reader to take? Approve a budget? Sign a document? C
 
 If the answer is "FYI, no action needed," state that explicitly: "FYI — no decision needed; sharing for awareness."
 
-## Output Format
-
-```
-BOTTOM LINE: [one sentence — the answer or recommendation]
-
+## Output Format — return EXACTLY this block, labels uppercase, in this order:
+BOTTOM LINE: [one sentence answer or recommendation]
 BACKGROUND:
 - [fact 1; minimum context]
 - [fact 2; only if essential]
-
 DISCUSSION:
 1. [strongest reason]
 2. [second-strongest]
-3. [supporting reason; optional if length-constrained]
-
-RECOMMENDATION: [specific action requested, or "FYI — no action needed"]
-
-[OPTIONAL] RISK IF DEFERRED: [single sentence on cost of inaction; only if material]
-```
+RECOMMENDATION: [specific action requested]
 
 ## Failure Modes
 
