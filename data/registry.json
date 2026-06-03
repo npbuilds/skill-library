@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-06-03T17:53:04Z",
+  "last_scan": "2026-06-03T19:20:04Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -6958,7 +6958,7 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1873,
+        "word_count": 1875,
         "body_words": 1769,
         "description_words": 77,
         "section_count": 10,
@@ -6970,13 +6970,13 @@
         "estimated_tokens_body": 3148,
         "estimated_tokens_total": 3249
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 93,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 93,
       "depends_on": [
         "spelunker"
       ],
@@ -7006,7 +7006,7 @@
         "domain:investing",
         "level:orchestrator"
       ],
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-06-03"
     },
     "asset-universe": {
       "name": "asset-universe",
@@ -11764,7 +11764,7 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1084,
+        "word_count": 1086,
         "body_words": 1021,
         "description_words": 45,
         "section_count": 5,
@@ -11782,10 +11782,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 82,
       "depends_on": [],
       "referenced_by": [
         "applied-history",
@@ -11806,7 +11806,7 @@
         "level:orchestrator"
       ],
       "created": "2026-04-13",
-      "last_modified": "2026-04-18",
+      "last_modified": "2026-06-03",
       "parent": null
     },
     "historiography": {
