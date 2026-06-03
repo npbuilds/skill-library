@@ -218,7 +218,7 @@ def find_bridge_candidates(target_name, registry, corpus, idf, threshold=0.05):
 
         # 3. Penalty for infrastructure/meta skills bridging to content skills
         #    (these are usually false positives)
-        meta_domains = {"infrastructure", "neocortex", "meta"}
+        meta_domains = {"infrastructure", "neocortex", "_meta"}
         if (target_domain in meta_domains) != (skill_domain in meta_domains):
             sim *= 0.6
 
@@ -322,7 +322,7 @@ def test_pair(name_a, name_b, registry, corpus, idf):
         boosted_sim *= 1.1
         boosts.append("role match ×1.1")
 
-    meta_domains = {"infrastructure", "neocortex", "meta"}
+    meta_domains = {"infrastructure", "neocortex", "_meta"}
     if (domain_a in meta_domains) != (domain_b in meta_domains):
         boosted_sim *= 0.6
         boosts.append("meta penalty ×0.6")
