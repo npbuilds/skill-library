@@ -102,8 +102,13 @@ def rubric_score(task: dict, answer_text: str, judge=None) -> float:
     return round(100.0 * hits / len(anchors), 1)
 
 
-def grade_one(task: dict, rollout: dict, judge=None) -> dict:
-    """Grade a single rollout dict {answer, raw_text}. Returns a result dict."""
+def grade_one(task: dict, rollout: dict, judge=None, judge_complete=None) -> dict:
+    """Grade a single rollout dict {answer, raw_text}. Returns a result dict.
+
+    `judge` is the keyword/rubric judge; `judge_complete` is a raw
+    complete(system, user)->str backend used by the research-quality suite's
+    DIAGNOSTIC-ONLY structured judge (never affects the gate score).
+    """
     detail = None
     if task["checker"] == "contract":
         import contracts  # local import: only needed for format-adherence skills
@@ -111,6 +116,12 @@ def grade_one(task: dict, rollout: dict, judge=None) -> dict:
         score = res["score"]
         detail = res["checks"]
         passed = score >= 90.0
+    elif task["checker"] == "quality":
+        import quality  # research-quality suite (calibration + citation gate, judged diagnostics)
+        res = quality.score_quality(task, rollout.get("raw_text", ""), judge_complete=judge_complete)
+        score = res["score"]
+        passed = res["passed"]
+        detail = {k: res[k] for k in ("calibration", "citation_integrity", "judged", "weights")}
     elif task["checker"] == "rubric":
         score = rubric_score(task, rollout.get("raw_text", ""), judge=judge)
         passed = score >= 75.0
