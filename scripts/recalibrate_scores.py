@@ -46,6 +46,65 @@ score_usage = _shared.score_usage
 score_feedback = _shared.score_feedback
 
 
+# ── Health classification (aggressive profile) ──────────────────────────────
+# health_status was historically only ever set to "healthy" at creation and
+# flipped to "warning" when a skill was hand-edited or deprecated — so nothing
+# ever surfaced silent degradation. These thresholds let recalibration derive
+# health from the same signals it already computes. "Aggressive" is intentional:
+# it favours surfacing borderline skills over false reassurance.
+HEALTH_CRITICAL_SCORE = 50   # composite below this → critical
+HEALTH_WARNING_SCORE = 70    # composite below this → warning
+HEALTH_STALE_DAYS = 60       # last_modified older than this → warning
+
+
+def _parse_dt(value: str | None):
+    """Parse an ISO-8601 or YYYY-MM-DD timestamp into an aware datetime."""
+    if not value:
+        return None
+    dt = None
+    try:
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        try:
+            dt = datetime.strptime(value, "%Y-%m-%d")
+        except ValueError:
+            return None
+    # Normalise to UTC-aware so arithmetic against an aware `now` is safe.
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt
+
+
+def classify_health(name, entry, composite, skills, usage_counts, now) -> str:
+    """Derive health_status from score, structural integrity, usage, and freshness.
+
+    Order matters: critical conditions are checked before warning conditions.
+    Deprecated skills retain "warning" (their lifecycle marker) regardless.
+    """
+    if entry.get("status") == "deprecated":
+        return "warning"
+
+    # ── Critical: structural breakage or a failing score ──
+    parent = entry.get("parent")
+    if parent and parent not in skills:
+        return "critical"  # dangling parent
+    if any(dep not in skills for dep in entry.get("depends_on", [])):
+        return "critical"  # broken dependency edge
+    if composite < HEALTH_CRITICAL_SCORE:
+        return "critical"
+
+    # ── Warning: weak score, never exercised, or gone stale ──
+    if composite < HEALTH_WARNING_SCORE:
+        return "warning"
+    if usage_counts.get(name, 0) == 0:
+        return "warning"  # never loaded — no evidence it earns its place
+    lm = _parse_dt(entry.get("last_modified"))
+    if lm is not None and (now - lm).days > HEALTH_STALE_DAYS:
+        return "warning"
+
+    return "healthy"
+
+
 def main():
     dry_run = "--dry-run" in sys.argv
 
@@ -69,6 +128,8 @@ def main():
     max_usage = max(usage_counts.values()) if usage_counts else 1
 
     changes = []
+    health_changes = []  # (name, old_health, new_health)
+    health_dist: Counter = Counter()
 
     for name, entry in skills.items():
         metrics = entry.get("metrics", {})
@@ -108,9 +169,19 @@ def main():
                 },
             })
 
+        # Health is derived from the freshly-computed composite so the two
+        # never disagree. Manual quality (manual_rating) still feeds composite
+        # upstream; health classification is purely automatic.
+        new_health = classify_health(name, entry, composite, skills, usage_counts, now)
+        old_health = entry.get("health_status", "healthy")
+        health_dist[new_health] += 1
+        if new_health != old_health:
+            health_changes.append((name, old_health, new_health))
+
         if not dry_run:
             entry["auto_score"] = composite
             entry["composite_score"] = composite
+            entry["health_status"] = new_health
 
     # Summary
     if changes:
@@ -135,7 +206,20 @@ def main():
     else:
         print("No score changes needed.")
 
-    if not dry_run and changes:
+    # Health summary
+    print()
+    print("Health distribution: " + ", ".join(
+        f"{k} {health_dist.get(k, 0)}" for k in ("healthy", "warning", "critical")
+    ))
+    if health_changes:
+        flips = Counter((old, new) for _, old, new in health_changes)
+        print(f"Health reclassified {len(health_changes)} skills:")
+        for (old, new), n in sorted(flips.items(), key=lambda x: -x[1]):
+            print(f"  {old} -> {new}: {n}")
+    else:
+        print("No health changes.")
+
+    if not dry_run and (changes or health_changes):
         try:
             atomic_write_registry(reg)
         except OSError as e:
