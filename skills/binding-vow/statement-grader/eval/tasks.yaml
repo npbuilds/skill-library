@@ -1,0 +1,133 @@
+# SkillOpt task set for `statement-grader` — format-adherence (declarative contract).
+# Prompts ask to audit a problem statement; the six-axis GRADE-CARD contract
+# (the 6 named axes with /5 scores, a Gate line, a re-state level, and hints)
+# comes only from the SKILL.md.
+
+meta:
+  skill: statement-grader
+  location: skills/binding-vow/statement-grader/SKILL.md
+  checker: contract
+  contract:
+    sections: []
+    checks:
+      - type: must_include
+        patterns: ["Specificity", "Falsifiability", "Scope", "Audience-fit", "Answerability", "Root-vs-symptom"]
+        mode: all
+      - type: must_include
+        regex: true
+        patterns: ['\d\s*/\s*5']
+        mode: any
+      - type: must_include
+        patterns: ["Gate:"]
+      - type: must_include
+        patterns: ["Re-state level"]
+      - type: must_include
+        patterns: ["Reformulation hints"]
+
+tasks:
+  - id: train-grade-churn
+    split: train
+    type: grade-card
+    checker: contract
+    prompt: |
+      Audit this problem statement and tell me whether it's good enough to act on:
+      "We need to improve user retention."
+    gold: ""
+  - id: train-grade-perf
+    split: train
+    type: grade-card
+    checker: contract
+    prompt: |
+      Assess the quality of this problem statement before we staff it:
+      "The app feels slow and we should make it faster."
+    gold: ""
+  - id: train-grade-morale
+    split: train
+    type: grade-card
+    checker: contract
+    prompt: |
+      Evaluate whether this statement is ready to act on:
+      "Team morale is low and we have to fix the culture."
+    gold: ""
+  - id: train-grade-sales
+    split: train
+    type: grade-card
+    checker: contract
+    prompt: |
+      Audit this problem statement:
+      "Sales are down and marketing needs to generate more leads."
+    gold: ""
+  - id: train-grade-quality
+    split: train
+    type: grade-card
+    checker: contract
+    prompt: |
+      Judge whether this statement is action-ready:
+      "Our product quality is bad and customers are unhappy."
+    gold: ""
+
+  - id: val-grade-onboarding
+    split: val
+    type: grade-card
+    checker: contract
+    prompt: |
+      Audit this problem statement for whether we can act on it:
+      "New users don't stick around, so we should redesign onboarding."
+    gold: ""
+  - id: val-grade-infra
+    split: val
+    type: grade-card
+    checker: contract
+    prompt: |
+      Assess the quality of this statement before we commit engineers:
+      "Our infrastructure is fragile and needs to be modernized."
+    gold: ""
+  - id: val-grade-hiring
+    split: val
+    type: grade-card
+    checker: contract
+    prompt: |
+      Evaluate this problem statement:
+      "We can't hire fast enough and it's hurting the roadmap."
+    gold: ""
+  - id: val-grade-pricing
+    split: val
+    type: grade-card
+    checker: contract
+    prompt: |
+      Audit whether this statement is good enough to act on:
+      "Customers think we're too expensive and we should lower prices."
+    gold: ""
+
+  - id: test-grade-security
+    split: test
+    type: grade-card
+    checker: contract
+    prompt: |
+      Audit this problem statement for action-readiness:
+      "Security is a concern and we need to be more secure."
+    gold: ""
+  - id: test-grade-data
+    split: test
+    type: grade-card
+    checker: contract
+    prompt: |
+      Assess the quality of this statement:
+      "People don't trust our dashboards, so we should clean up the data."
+    gold: ""
+  - id: test-grade-support
+    split: test
+    type: grade-card
+    checker: contract
+    prompt: |
+      Evaluate whether this is ready to act on:
+      "Support is overwhelmed and we should hire more agents."
+    gold: ""
+  - id: test-grade-growth
+    split: test
+    type: grade-card
+    checker: contract
+    prompt: |
+      Audit this problem statement:
+      "Growth has stalled and we need a new strategy."
+    gold: ""
