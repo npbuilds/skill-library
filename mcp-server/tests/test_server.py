@@ -604,6 +604,64 @@ class TestUpdateMetadataReferencedBy:
 
 
 # ---------------------------------------------------------------------------
+# update_skill_metadata — manual health override (preserved across recalibrate)
+# ---------------------------------------------------------------------------
+# A manual health_status must be recorded as an override (manual_health) so the
+# aggressive auto-classifier in recalibrate_scores.py cannot silently undo it.
+
+
+def _load_recalibrate():
+    """Import scripts/recalibrate_scores.py by path (it has no import side effects)."""
+    import importlib.util
+    import pathlib
+    p = pathlib.Path(__file__).resolve().parents[2] / "scripts" / "recalibrate_scores.py"
+    spec = importlib.util.spec_from_file_location("recalibrate_scores_under_test", p)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+class TestManualHealthOverride:
+    def test_manual_health_records_override_marker(self, tmp_project):
+        """Setting health_status writes both health_status and the manual_health marker."""
+        result = server.update_skill_metadata("color-theory", health_status="warning")
+        assert "manual override" in result
+        e = json.loads((server.REGISTRY_PATH).read_text())["skills"]["color-theory"]
+        assert e["health_status"] == "warning"
+        assert e["manual_health"] == "warning"
+
+    def test_auto_clears_override(self, tmp_project):
+        """health_status='auto' clears the manual_health marker."""
+        server.update_skill_metadata("color-theory", health_status="critical")
+        result = server.update_skill_metadata("color-theory", health_status="auto")
+        assert "cleared" in result
+        e = json.loads((server.REGISTRY_PATH).read_text())["skills"]["color-theory"]
+        assert e["manual_health"] is None
+
+    def test_invalid_health_value_lists_auto(self, tmp_project):
+        result = server.update_skill_metadata("color-theory", health_status="bogus")
+        assert "must be one of" in result and "auto" in result
+
+    def test_classify_health_preserves_manual_override(self):
+        """recalibrate's classifier returns the manual value, ignoring a failing score."""
+        rc = _load_recalibrate()
+        from datetime import datetime, timezone
+        now = datetime(2026, 6, 3, tzinfo=timezone.utc)
+        entry = {"manual_health": "healthy", "depends_on": [], "parent": None,
+                 "last_modified": "2020-01-01"}
+        # composite 10 + never-loaded + stale would normally be "critical"
+        assert rc.classify_health("x", entry, 10, {"x": entry}, {}, now) == "healthy"
+
+    def test_classify_health_auto_without_marker(self):
+        """Without a manual_health marker, classification is purely automatic."""
+        rc = _load_recalibrate()
+        from datetime import datetime, timezone
+        now = datetime(2026, 6, 3, tzinfo=timezone.utc)
+        entry = {"depends_on": [], "parent": None, "last_modified": "2020-01-01"}
+        assert rc.classify_health("x", entry, 10, {"x": entry}, {}, now) == "critical"
+
+
+# ---------------------------------------------------------------------------
 # session_id + search-event instrumentation (PR #1)
 # ---------------------------------------------------------------------------
 

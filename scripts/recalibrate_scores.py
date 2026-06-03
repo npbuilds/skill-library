@@ -78,9 +78,17 @@ def _parse_dt(value: str | None):
 def classify_health(name, entry, composite, skills, usage_counts, now) -> str:
     """Derive health_status from score, structural integrity, usage, and freshness.
 
-    Order matters: critical conditions are checked before warning conditions.
-    Deprecated skills retain "warning" (their lifecycle marker) regardless.
+    Order matters: a manual override wins outright; then critical conditions are
+    checked before warning conditions. Deprecated skills retain "warning" (their
+    lifecycle marker) unless a manual override says otherwise.
     """
+    # A manual override (set via update_skill_metadata) is authoritative — the
+    # auto-classifier must never silently undo a human decision. Cleared by
+    # setting health_status="auto", which nulls manual_health.
+    manual = entry.get("manual_health")
+    if manual:
+        return manual
+
     if entry.get("status") == "deprecated":
         return "warning"
 
