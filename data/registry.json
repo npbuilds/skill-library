@@ -5245,21 +5245,18 @@
       "composite_score": 86,
       "depends_on": [],
       "referenced_by": [
-        "agentic-researcher",
         "archon",
-        "bias-and-funding-tracer",
         "claim-decomposer",
         "cold-outreach",
-        "counterfactual-prober",
         "cover-letter-craft",
         "domain-deepdives",
         "ecosystem-mapping",
+        "evidence-gathering",
         "evidence-synthesizer",
-        "paywall-strategist",
         "public-portfolio",
         "skill-scaffold",
         "source-triangulator",
-        "synthesis-translator",
+        "synthesis-verification",
         "vc-interview-prep"
       ],
       "tags": [
@@ -17986,7 +17983,13 @@
         "demarcation-judge",
         "argument-analyst"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "problem-decomposition",
+        "problem-diagnosis",
+        "problem-reframing",
+        "statement-audit",
+        "statement-compression"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25467,7 +25470,13 @@
       "manual_notes": null,
       "composite_score": 61,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "ackoff-mess",
+        "audience-classifier",
+        "problem-typology",
+        "stakes-assessor",
+        "wicked-vs-tame"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25521,7 +25530,10 @@
       "manual_notes": null,
       "composite_score": 62,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "polya-method",
+        "root-vs-symptom-tagger"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25575,7 +25587,12 @@
       "manual_notes": null,
       "composite_score": 63,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "frame-rotator",
+        "inversion-tool",
+        "kahneman-framing",
+        "stakeholder-rotator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25629,7 +25646,13 @@
       "manual_notes": null,
       "composite_score": 61,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "bluf-shaper",
+        "cursed-speech",
+        "executive-distiller",
+        "minto-scqa",
+        "scqa-formatter"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25683,7 +25706,13 @@
       "manual_notes": null,
       "composite_score": 62,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "answerability-tester",
+        "falsifiability-checker",
+        "scope-bounder",
+        "statement-grader",
+        "xy-detector"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25737,7 +25766,13 @@
       "manual_notes": null,
       "composite_score": 63,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "agentic-researcher",
+        "bias-and-funding-tracer",
+        "claim-decomposer",
+        "paywall-strategist",
+        "source-triangulator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25791,7 +25826,11 @@
       "manual_notes": null,
       "composite_score": 61,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "counterfactual-prober",
+        "evidence-synthesizer",
+        "synthesis-translator"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
