@@ -68,6 +68,7 @@ def score_skill(skill_text: str, tasks: list[dict], client=None) -> tuple[float,
     """Roll out every task with `skill_text` injected; return (task_score, results)."""
     client = client or get_solver_client()
     judge = getattr(client, "judge", None)
+    judge_complete = getattr(client, "_complete", None)  # for the quality suite's diagnostic judge
     use_cache = _cache_enabled()
     results = []
     for task in tasks:
@@ -79,7 +80,7 @@ def score_skill(skill_text: str, tasks: list[dict], client=None) -> tuple[float,
             rollout = client.rollout(skill_text, task)
             if use_cache:
                 _cache_put(key, rollout)
-        results.append(grade_one(task, rollout, judge=judge))
+        results.append(grade_one(task, rollout, judge=judge, judge_complete=judge_complete))
     return aggregate(results), results
 
 

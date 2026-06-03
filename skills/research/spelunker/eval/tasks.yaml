@@ -1,0 +1,267 @@
+# SkillOpt task set for `spelunker` - declarative contract compliance.
+# Prompts are format-agnostic and do not reveal section headers. The contract
+# below is the enforceable output shape expected from the skill.
+
+meta:
+  skill: spelunker
+  location: skills/research/spelunker/SKILL.md
+  checker: contract
+  note: >
+    Contract-first grader for spelunker brief discipline. Checks are structural
+    and regex-verifiable (sections/order, confidence because-clauses, citation
+    markers, sources format, brief-id/footer lines).
+  contract:
+    sections:
+      - RESEARCH BRIEF
+      - KEY FINDINGS
+      - DETAILED FINDINGS
+      - EVIDENCE MAP
+      - GAPS & LIMITATIONS
+      - CONFIDENCE SUMMARY
+      - SOURCES
+      - NEXT STEPS
+    checks:
+      - id: sections-in-order
+        type: sections_in_order
+
+      - id: key-findings-citation-markers
+        type: must_include
+        section: "KEY FINDINGS"
+        patterns: ['\[\d+\]|\[no source\]']
+        regex: true
+
+      - id: detailed-findings-citation-markers
+        type: must_include
+        section: "DETAILED FINDINGS"
+        patterns: ['\[\d+\]|\[no source\]']
+        regex: true
+
+      - id: confidence-because-clause
+        type: must_include
+        section: "DETAILED FINDINGS"
+        patterns:
+          - 'Confidence:\s*(?:\[[^\]]+\]|Confirmed|Likely|Speculative|Contested|Unverifiable).*?\bbecause\b'
+        regex: true
+
+      - id: gaps-section-non-empty
+        type: non_empty
+        section: "GAPS & LIMITATIONS"
+
+      - id: gaps-section-has-list
+        type: list_items
+        section: "GAPS & LIMITATIONS"
+        style: bullet
+        min: 1
+
+      - id: confidence-summary-buckets
+        type: must_include
+        section: "CONFIDENCE SUMMARY"
+        patterns: [Confirmed, Likely, Speculative, Contested, Unverifiable]
+        mode: all
+
+      - id: sources-numbered-with-fields
+        type: must_include
+        section: "SOURCES"
+        patterns:
+          - '(?:^|\n)\s*1\.\s+'
+          - 'Tier\s*\d+'
+          - 'Used for:'
+        regex: true
+        mode: all
+
+      - id: sources-not-bulleted
+        type: must_not_include
+        section: "SOURCES"
+        patterns: ['(?:^|\n)\s*[-*]\s+\S']
+        regex: true
+
+      - id: brief-id-format
+        type: must_include
+        patterns: ['Brief ID:\s*SPK-\d{8}-[a-z0-9]{6}']
+        regex: true
+
+      - id: feedback-line-format
+        type: must_include
+        patterns:
+          - 'Was this brief useful\?\s*Reply `\/feedback spelunker <1-5> \[optional notes\]` to log\.'
+        regex: true
+
+      - id: calibrate-line-format
+        type: must_include
+        patterns:
+          - 'Brief ID:\s*SPK-\d{8}-[a-z0-9]{6}.*Calibrate later:\s*`\/calibrate <brief_id> <claim_id> <true\|false\|partial>`'
+        regex: true
+
+tasks:
+  # -------------------------- TRAIN --------------------------
+  - id: train-grid-battery-fire-risk
+    split: train
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      I need a rigorous investigation before tomorrow's utility committee vote.
+      Claim under debate: grid-scale lithium-iron-phosphate battery farms have
+      lower lifetime fire risk than comparable lithium-nickel-manganese systems
+      once installation scale and operating temperature are controlled for.
+      Include uncertainty honestly and call out what cannot be verified.
+    gold: ""
+
+  - id: train-rsv-vaccine-adults
+    split: train
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Verify this healthcare claim for a policy brief:
+      "RSV vaccination in adults 60+ reduces hospitalization enough to be
+      cost-saving in high-risk populations within two flu seasons."
+      We need evidence quality, disagreement, and practical limitations.
+    gold: ""
+
+  - id: train-seawater-desal-energy
+    split: train
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Investigate whether newer reverse-osmosis retrofits materially lowered
+      energy intensity in large municipal desalination plants after 2018.
+      This is for an infrastructure allocation decision, so prioritize
+      traceable evidence and explicit unknowns.
+    gold: ""
+
+  - id: train-housing-first-outcomes
+    split: train
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      We are reviewing a city homelessness budget.
+      Please test this statement: Housing First programs reduce chronic
+      homelessness and emergency-service usage more than treatment-first
+      approaches over a 24-month window in major US metros.
+      Show where the evidence is weak or contested.
+    gold: ""
+
+  - id: train-cyber-insurance-ransomware
+    split: train
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Research this risk claim for an enterprise security steering group:
+      organizations with standalone cyber insurance experience lower net
+      ransomware loss severity than matched uninsured organizations.
+      We need a decision-ready brief with caveats and unresolved gaps.
+    gold: ""
+
+  # ---------------------------- VAL --------------------------
+  - id: val-heat-pump-cold-climate
+    split: val
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Fact-check this planning claim for a state energy office:
+      cold-climate heat pumps installed in pre-1990 homes maintain comfort and
+      reduce annual operating cost versus gas furnaces in regions with winter
+      design temperatures below -10C.
+      This is high-stakes policy input; be explicit about limitations.
+    gold: ""
+
+  - id: val-wearable-arrhythmia-screening
+    split: val
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Investigate whether consumer wearable arrhythmia alerts lead to improved
+      clinically meaningful outcomes (not just detection volume) in adults over
+      50, compared with usual care.
+      I need confidence-tagged findings and hard evidence traceability.
+    gold: ""
+
+  - id: val-direct-air-capture-costs
+    split: val
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Verify this climate-finance claim:
+      "First-wave direct-air-capture plants can reach sub-$300 per ton CO2
+      removal at commercial scale without heavy hidden subsidy dependence."
+      Please include disconfirming evidence and unresolved uncertainties.
+    gold: ""
+
+  - id: val-llm-support-deflection
+    split: val
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      For a customer-operations strategy review, evaluate whether LLM-based
+      support assistants consistently reduce escalations while preserving CSAT
+      in regulated industries (financial services or healthcare).
+      This needs an auditable research brief, not a generic summary.
+    gold: ""
+
+  - id: val-antibiotic-short-course
+    split: val
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Assess this infectious-disease claim:
+      shorter antibiotic courses (when guideline-concordant) are non-inferior
+      to traditional longer courses for common community-acquired infections in
+      adults, with lower adverse-event burden.
+      Please report where evidence quality or access is constrained.
+    gold: ""
+
+  # --------------------------- TEST --------------------------
+  - id: test-satellite-school-connectivity
+    split: test
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Investigate whether low-earth-orbit satellite internet programs in rural
+      school districts improved measurable instructional continuity compared with
+      terrestrial-only alternatives over the last three years.
+      This is for budget prioritization, so evidence quality matters.
+    gold: ""
+
+  - id: test-congestion-pricing-traffic
+    split: test
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Verify this transport-policy claim:
+      urban congestion pricing schemes reduce peak-hour traffic and emissions
+      without materially harming low-income commuter access when paired with
+      transit reinvestment.
+      I need a brief with confidence, citations, and explicit gaps.
+    gold: ""
+
+  - id: test-open-weight-llm-onprem
+    split: test
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Research whether on-prem deployment of modern open-weight LLMs can meet
+      enterprise privacy/compliance requirements at a lower total cost of
+      ownership than managed API usage for steady high-volume workloads.
+      Include counterevidence and tooling limitations.
+    gold: ""
+
+  - id: test-vertical-farming-economics
+    split: test
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Fact-check this agri-tech claim for an investment committee:
+      leafy-greens vertical farms can achieve durable positive unit economics in
+      major US metros without premium pricing once energy contracts stabilize.
+      We need what is known, unknown, and likely unknowable right now.
+    gold: ""
+
+  - id: test-teen-sleep-school-start
+    split: test
+    type: spelunker-brief
+    checker: contract
+    prompt: |
+      Evaluate whether delaying high-school start times by at least 30 minutes
+      leads to sustained improvements in attendance, mental health, and safety
+      outcomes after implementation effects settle.
+      This is for a district decision and needs a careful evidence brief.
+    gold: ""

@@ -31,6 +31,7 @@ def build_record(name: str, entry: dict, now: str, event: str) -> dict:
     metrics = entry.get("metrics", {})
     # entry.get("task_score") may be absent (most skills) -> emit nulls.
     ts = entry.get("task_score") or {}
+    tsq = entry.get("task_score_quality") or {}  # research-quality suite (sibling key)
     return {
         "skill": name,
         "date": now,
@@ -41,8 +42,10 @@ def build_record(name: str, entry: dict, now: str, event: str) -> dict:
         "connections": len(entry.get("depends_on", []))
         + len(entry.get("referenced_by", [])),
         "reference_files": metrics.get("reference_files", 0),
-        "task_score_test": ts.get("test"),        # None if no task_score
-        "task_score_verdict": ts.get("verdict"),  # None if no task_score
+        "task_score_test": ts.get("test"),                  # None if no task_score
+        "task_score_verdict": ts.get("verdict"),            # None if no task_score
+        "task_score_quality_test": tsq.get("test"),         # None if no quality suite
+        "task_score_quality_verdict": tsq.get("verdict"),   # None if no quality suite
         "event": event,
     }
 

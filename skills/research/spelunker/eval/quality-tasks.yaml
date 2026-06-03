@@ -1,0 +1,195 @@
+# SkillOpt RESEARCH-QUALITY suite for `spelunker` (complements the contract suite
+# in eval/tasks.yaml, which stays intact). Graded by scripts/skillopt/quality.py.
+#
+# GATE-ELIGIBLE (deterministic, 0-100 = 0.7*calibration + 0.3*citation_integrity):
+#   - calibration: does the brief's confidence tag on the CORE claim match the
+#     claim's known epistemic status (`epistemic_status`)? Partial credit for
+#     adjacent tags. Contested claims must be tagged Contested (not Confirmed).
+#     Spelunker has no `Refuted` tag, so refuted claims are graded on a
+#     refutation STANCE (see quality.py) rather than a tag.
+#   - citation_integrity: every inline [N] resolves to a SOURCES entry, no
+#     orphan/unused entries, entries carry Tier N + Used for:.
+# DIAGNOSTIC-ONLY (LLM-as-judge; reported, NEVER gates): see `judge` below.
+#
+# Each claim uses a WELL-DOCUMENTED example with clear consensus on its STATUS
+# (true / refuted / contested) — not on a fashionable position. Splits use
+# distinct claims so the held-out test measures transfer.
+
+meta:
+  skill: spelunker
+  location: skills/research/spelunker/SKILL.md
+  suite: quality
+  checker: quality
+  note: >
+    Prompts ask for a rigorous investigation of one core claim. The grader reads
+    the core claim's confidence tag and the citation hygiene. epistemic_status is
+    the ground-truth label used only by the grader, never shown to the model.
+
+  # Diagnostic judge config (off the gate). The backend is the active llm.py
+  # solver's _complete; criteria/scale are explicit and structured.
+  judge:
+    backend: llm           # uses the active SKILLOPT_LLM backend's _complete
+    scale: [1, 5]
+    return: per-criterion score + one-sentence justification (JSON)
+    criteria:
+      triangulation_depth: multiple genuinely-independent sources, not one source restated
+      disconfirmation_effectiveness: did the adversarial/counterfactual pass stress or change a conclusion
+      primary_source_tracing: citations reach primary sources, not secondary/news/Wikipedia
+      gaps_honesty: GAPS & LIMITATIONS candid and specific about what could not be established
+
+tasks:
+  # ───────────────────────────── TRAIN ─────────────────────────────
+  - id: train-smoking-lung-cancer
+    split: train
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: "true"
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Cigarette smoking causes lung cancer."
+    gold: ""
+  - id: train-ten-percent-brain
+    split: train
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: refuted
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Humans only use 10% of their brains."
+    gold: ""
+  - id: train-intermittent-fasting-weight
+    split: train
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: contested
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Intermittent fasting outperforms continuous calorie restriction for long-term weight loss."
+    gold: ""
+  - id: train-mmr-autism
+    split: train
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: refuted
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "The MMR vaccine causes autism."
+    gold: ""
+  - id: train-saturated-fat-cvd
+    split: train
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: contested
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Dietary saturated fat is a primary driver of cardiovascular disease."
+    gold: ""
+
+  # ────────────────────────────── VAL ──────────────────────────────
+  - id: val-handwashing-infection
+    split: val
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: "true"
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Handwashing reduces the transmission of infectious disease."
+    gold: ""
+  - id: val-vitamin-c-cold
+    split: val
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: refuted
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Megadose vitamin C cures the common cold."
+    gold: ""
+  - id: val-minimum-wage-employment
+    split: val
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: contested
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Modest minimum-wage increases have meaningfully negative employment effects."
+    gold: ""
+  - id: val-co2-greenhouse
+    split: val
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: "true"
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Carbon dioxide is a greenhouse gas that traps infrared radiation."
+    gold: ""
+  - id: val-active-learning-stem
+    split: val
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: contested
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Active learning outperforms traditional lecture for long-term STEM retention."
+    gold: ""
+
+  # ────────────────────────────── TEST ─────────────────────────────
+  - id: test-plate-tectonics
+    split: test
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: "true"
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "The Earth's continents move over geologic time (plate tectonics)."
+    gold: ""
+  - id: test-sugar-hyperactivity
+    split: test
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: refuted
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Eating sugar causes hyperactivity in children."
+    gold: ""
+  - id: test-nuclear-decarbonization
+    split: test
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: contested
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Nuclear power is the most cost-effective path to decarbonizing electricity grids."
+    gold: ""
+  - id: test-vaccines-not-autism
+    split: test
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: "true"
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Childhood vaccines do not cause autism."
+    gold: ""
+  - id: test-dim-light-eyesight
+    split: test
+    type: spelunker-quality
+    checker: quality
+    epistemic_status: refuted
+    prompt: |
+      Investigate rigorously whether the following claim holds, with
+      confidence-tagged findings and explicit gaps:
+      "Reading in dim light permanently damages your eyesight."
+    gold: ""

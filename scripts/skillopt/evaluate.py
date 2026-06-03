@@ -17,8 +17,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from common import (  # noqa: E402
-    BASELINE_SNAPSHOT, OPTIMIZED_SNAPSHOT, REPORT_PATH, SKILLOPT_DIR, SKILL_NAME,
-    read_skill_body, today, ensure_dirs, write_task_score,
+    BASELINE_SNAPSHOT, OPTIMIZED_SNAPSHOT, PROJECT_ROOT, REPORT_PATH, SKILLOPT_DIR,
+    SKILL_NAME, SKILL_PATH, read_skill_body, today, ensure_dirs, write_task_score,
 )
 from llm import get_solver_client  # noqa: E402
 from runner import score_skill, score_by_type, NO_SKILL_TEXT  # noqa: E402
@@ -65,17 +65,38 @@ def task_score_object(result: dict) -> dict:
     }
 
 
-def _states() -> dict[str, str]:
-    current = BASELINE_SNAPSHOT.read_text() if BASELINE_SNAPSHOT.exists() else read_skill_body()
-    optimized = OPTIMIZED_SNAPSHOT.read_text() if OPTIMIZED_SNAPSHOT.exists() else read_skill_body()
+def _states(suite: str = "contract") -> dict[str, str]:
+    body = read_skill_body()
+    # Quality is reported-only: grade the shipped SKILL.md (incl. CORE CLAIM line),
+    # not frozen contract-optimization snapshots.
+    if suite == "quality":
+        return {"no-skill": NO_SKILL_TEXT, "current": body, "optimized": body}
+    current = BASELINE_SNAPSHOT.read_text() if BASELINE_SNAPSHOT.exists() else body
+    optimized = OPTIMIZED_SNAPSHOT.read_text() if OPTIMIZED_SNAPSHOT.exists() else body
     return {"no-skill": NO_SKILL_TEXT, "current": current, "optimized": optimized}
 
 
-def evaluate() -> dict:
+def _suite_config(suite: str) -> dict:
+    """Map a suite name to its task file, registry key, and report path.
+
+    contract = structural output-contract suite (default; registry `task_score`).
+    quality  = research-quality suite (calibration + citation gate + diagnostic
+               judge; registry sibling key `task_score_quality`).
+    """
+    if suite == "quality":
+        return {
+            "tasks_path": SKILL_PATH.parent / "eval" / "quality-tasks.yaml",
+            "registry_key": "task_score_quality",
+            "report_path": SKILLOPT_DIR / f"{SKILL_NAME}-quality.gonogo.md",
+        }
+    return {"tasks_path": None, "registry_key": "task_score", "report_path": REPORT_PATH}
+
+
+def evaluate(tasks_path=None, suite: str = "contract") -> dict:
     client = get_solver_client()
-    states = _states()
-    val_tasks = tasks_for_split("val")
-    test_tasks = tasks_for_split("test")
+    states = _states(suite)
+    val_tasks = tasks_for_split("val", tasks_path)
+    test_tasks = tasks_for_split("test", tasks_path)
 
     scores: dict[str, dict] = {}
     for name, text in states.items():
@@ -236,26 +257,48 @@ def render_report(result: dict) -> str:
 
 
 def main() -> None:
-    result = evaluate()
-    print(f"Rollout backend: {result['backend']}\n")
+    suite = "contract"
+    if "--suite" in sys.argv:
+        suite = sys.argv[sys.argv.index("--suite") + 1]
+    cfg = _suite_config(suite)
+
+    result = evaluate(tasks_path=cfg["tasks_path"], suite=suite)
+    print(f"Rollout backend: {result['backend']} | suite: {suite}\n")
     print(_fmt_table(result["scores"]))
     print()
     report = render_report(result)
     if "--write-report" in sys.argv:
         ensure_dirs()
-        REPORT_PATH.write_text(report)
-        print(f"Wrote report -> {REPORT_PATH}")
+        cfg["report_path"].write_text(report)
+        print(f"Wrote report -> {cfg['report_path']}")
     else:
         print("(use --write-report to save the full go/no-go report)")
 
     if "--write-registry" in sys.argv:
         ts = task_score_object(result)
-        ok = write_task_score(SKILL_NAME, ts)
+        if suite == "quality":
+            # Reported-only: headline = shipped skill (current), lift vs no-skill.
+            s = result["scores"]
+            ts["val"] = s["current"]["val"]
+            ts["test"] = s["current"]["test"]
+            ts["lift"] = round(s["current"]["test"] - s["no-skill"]["test"], 2)
+            ts["verdict"] = (
+                "go" if s["no-skill"]["test"] < SATURATION_THRESHOLD
+                and ts["lift"] >= GO_MARGIN
+                else "no-go-saturated" if s["no-skill"]["test"] >= SATURATION_THRESHOLD
+                else "no-go-insufficient"
+            )
+        ts["suite"] = suite
+        try:
+            ts["report"] = str(cfg["report_path"].relative_to(PROJECT_ROOT))
+        except ValueError:
+            ts["report"] = str(cfg["report_path"])
+        ok = write_task_score(SKILL_NAME, ts, key=cfg["registry_key"])
         if ok:
-            print(f"Wrote task_score to registry for '{SKILL_NAME}': "
+            print(f"Wrote {cfg['registry_key']} for '{SKILL_NAME}': "
                   f"verdict={ts['verdict']} test={ts['test']} lift={ts['lift']:+}")
         else:
-            print(f"WARN: skill '{SKILL_NAME}' not in registry; task_score not written")
+            print(f"WARN: skill '{SKILL_NAME}' not in registry; not written")
 
 
 if __name__ == "__main__":
