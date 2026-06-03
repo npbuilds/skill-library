@@ -109,7 +109,8 @@ skills/
 
 ## Structural Notes
 
-- **5 orphan skills** (no parent director): lore-writer, character-belief-tracker, narrative-pacing, extrapolation-engine, game-mechanics
+- **4 orphan skills** (no parent director): lore-writer, character-belief-tracker, narrative-pacing, extrapolation-engine
+- **game-mechanics** relocated to new `narrative-design` domain — it is tabletop/digital game systems design, not worldbuilding
 - **1 unhealthy skill**: character-interiority (writing domain)
 - **73% of skills have never been used** — usage is concentrated in orchestrators and a handful of action skills
 - **artifacts** and **research** domains are at Level 3 — candidates for structural investment if usage warrants it

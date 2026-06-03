@@ -60,6 +60,17 @@ def load_log(path: Path) -> list[dict]:
     return events
 
 
+def iter_skill_uses(events):
+    """Yield only skill-load events (those with a truthy `skill` field).
+
+    usage.jsonl mixes get_skill events ({skill, type, ...}) with search events
+    ({type: "search", query, ...}). Analytics that count "how many times was
+    skill X used" must skip search events; this helper makes the intent
+    explicit and prevents the empty-string bucket from inflating max_usage.
+    """
+    return (e for e in events if e.get("skill"))
+
+
 def atomic_write_registry(registry: dict) -> None:
     """Write registry.json atomically via temp-file rename.
 

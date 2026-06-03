@@ -36,6 +36,7 @@ USAGE_LOG = _shared.USAGE_LOG
 FEEDBACK_LOG = _shared.FEEDBACK_LOG
 PROJECT_ROOT = _shared.PROJECT_ROOT
 load_log = _shared.load_log
+iter_skill_uses = _shared.iter_skill_uses
 atomic_write_registry = _shared.atomic_write_registry
 score_structure = _shared.score_structure
 score_depth = _shared.score_depth
@@ -53,10 +54,8 @@ def main():
 
     skills = reg.get("skills", {})
 
-    # Load analytics
-    usage_counts: Counter = Counter()
-    for e in load_log(USAGE_LOG):
-        usage_counts[e.get("skill", "")] += 1
+    # Load analytics — skill loads only; search events are excluded
+    usage_counts: Counter = Counter(e["skill"] for e in iter_skill_uses(load_log(USAGE_LOG)))
 
     feedback_ratings: dict[str, list[int]] = {}
     for e in load_log(FEEDBACK_LOG):
