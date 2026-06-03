@@ -1,5 +1,6 @@
 ---
 name: wan-shi-tong
+type: orchestrator
 description: >
   Orchestrate world history learning across nine wings: political, economic, cultural,
   military, intellectual, world-systems, historiography, applied-history, and regional-atlas.
