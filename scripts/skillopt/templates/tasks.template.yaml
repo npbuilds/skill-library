@@ -1,0 +1,125 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# SkillOpt task-set TEMPLATE  (copy to skills/<domain>/<skill>/eval/tasks.yaml)
+#
+# Adding a new format-adherence skill to SkillOpt should require ZERO Python:
+# author this file and you're done. The declarative contract grader
+# (scripts/skillopt/contracts.py) composes the checks below into a 0-100
+# `task_score`. The whole loop (runner -> grader -> optimizer -> evaluate ->
+# registry/evolution) is skill-agnostic and selected via SKILLOPT_SKILL=<skill>.
+#
+# Quick start:
+#   SKILLOPT_SKILL=<skill> SKILLOPT_LLM=cursor python3 scripts/skillopt/evaluate.py \
+#       --write-report --write-registry          # baseline + verdict (no optimize)
+#   SKILLOPT_SKILL=<skill> SKILLOPT_LLM=cursor python3 scripts/skillopt/optimize.py --epochs 2
+# ─────────────────────────────────────────────────────────────────────────────
+
+meta:
+  skill: <skill-name>                 # must match the registry key
+  location: skills/<domain>/<skill>/SKILL.md
+  checker: contract                   # contract | rubric | programmatic
+  note: >
+    Prompts must be FORMAT-AGNOSTIC. The output contract is supplied by the
+    SKILL.md when injected — never restate the headers/structure in the prompt,
+    or the no-skill baseline would trivially comply and you'd measure nothing.
+
+  # Declared ONCE here and inherited by every `checker: contract` task that does
+  # not define its own `contract:` block. Score = 100 * (checks passed / total).
+  contract:
+    # `sections`: the canonical header labels (used for ordering + section
+    # scoping). Matching is case-SENSITIVE and tolerates leading markdown
+    # (#, *, >, backticks). A check with `section: <label>` auto-fails if that
+    # section is absent.
+    sections: [BOTTOM LINE:, BACKGROUND:, DISCUSSION:, RECOMMENDATION:]
+    checks:
+      # 1. required sections present AND in the declared order
+      - type: sections_in_order
+        # labels: [...]   # optional; defaults to `sections` above
+
+      # 2. exactly one sentence in a section (also works on full text w/o `section`)
+      - type: one_sentence
+        section: "BOTTOM LINE:"
+
+      # 3. banned substrings/regex (literal by default; set regex: true for patterns)
+      - type: must_not_include
+        section: "BOTTOM LINE:"
+        patterns: [likely, probably, potentially, perhaps, possibly]
+        # regex: true
+
+      # 4. required substrings/regex. mode: all (default) | any
+      - type: must_include
+        section: "RECOMMENDATION:"
+        patterns: ['\$|\bby\b|\bapprove\b']
+        regex: true
+        mode: any
+
+      # 5. list shape inside a section: style bullet|numbered|any, with min/max
+      - type: list_items
+        section: "BACKGROUND:"
+        style: bullet
+        min: 1
+        max: 3
+      - type: list_items
+        section: "DISCUSSION:"
+        style: numbered
+        min: 1
+        max: 5
+
+      # 6. length budget: unit words|chars, with min and/or max
+      - type: length
+        section: "RECOMMENDATION:"
+        unit: words
+        min: 3
+        max: 40
+
+      # 7. non-empty section
+      - type: non_empty
+        section: "RECOMMENDATION:"
+
+      # 8. valid JSON shape (for skills whose contract IS a JSON object).
+      #    source: auto (fenced ```json``` else first {...}) | fenced | whole
+      # - type: json_valid
+      #   required_keys: [verdict, score]
+      #   types: { verdict: str, score: number }
+
+# Splits:
+#   train  — informs the optimizer's edit proposals (it may read these rollouts)
+#   val    — FROZEN acceptance gate; an edit is kept only if val strictly improves
+#   test   — HELD OUT; never seen by the optimizer; measures transfer
+# Keep val/test small (5-7 each) — live rollouts are slow + nondeterministic.
+# Use 12-22 tasks total with DISTINCT prompts per split.
+tasks:
+  - id: train-example-1
+    split: train
+    type: <skill-type>          # a short label; single type is fine for format skills
+    checker: contract
+    prompt: |
+      A realistic, time-pressured request that does NOT reveal the output format.
+      e.g. "Brief the CFO in 30 seconds: <scenario with 2-3 facts and a decision>."
+    gold: ""                    # unused for contract tasks; keep "" for clarity
+
+  # ... 6-10 train tasks ...
+
+  - id: val-example-1
+    split: val
+    type: <skill-type>
+    checker: contract
+    prompt: |
+      A DIFFERENT scenario from train. Still format-agnostic.
+    gold: ""
+
+  # ... ~5 val tasks ...
+
+  - id: test-example-1
+    split: test
+    type: <skill-type>
+    checker: contract
+    prompt: |
+      A scenario distinct from train AND val (held-out transfer check).
+    gold: ""
+
+  # ... ~5 test tasks ...
+
+# ── Per-task overrides (optional) ────────────────────────────────────────────
+# A task may define its own `contract:` block to override the meta contract,
+# or set `checker: rubric` with `expect_contains: [...]` for open-ended tasks
+# (rubric is kept OFF the val gate to avoid judge noise).

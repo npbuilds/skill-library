@@ -1,0 +1,146 @@
+# SkillOpt task set for `executive-distiller` — format-adherence (declarative contract).
+# Prompts are format-agnostic; the Pyramid memo contract (SCQA intro + numbered
+# body + DISTILLATION METADATA block) comes only from the SKILL.md.
+
+meta:
+  skill: executive-distiller
+  location: skills/binding-vow/executive-distiller/SKILL.md
+  checker: contract
+  contract:
+    sections: ["INTRODUCTION (SCQA):", "BODY:", "DISTILLATION METADATA"]
+    checks:
+      - type: sections_in_order
+      - type: must_include
+        section: "INTRODUCTION (SCQA):"
+        patterns: ["Situation", "Complication", "Question", "Answer"]
+        mode: all
+      - type: list_items
+        section: "BODY:"
+        style: numbered
+        min: 2
+        max: 5
+      - type: must_include
+        section: "DISTILLATION METADATA"
+        patterns: ["pyramid depth", "mece", "length"]
+        mode: all
+
+tasks:
+  - id: train-exec-churn
+    split: train
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Write an executive memo for the board: customer churn rose from 7% to 12%,
+      onboarding is the dominant driver, the fix is ~4 engineer-quarters, and a
+      competitor is circling our at-risk accounts. They'll skim top-down then drill in.
+    gold: ""
+  - id: train-exec-expansion
+    split: train
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Draft a board memo on international expansion: EU demand is strong, but GDPR and
+      data-residency add cost and risk, hiring a local team takes two quarters, and
+      revenue upside is ~$8M/yr. Recommend a path.
+    gold: ""
+  - id: train-exec-platform
+    split: train
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Prepare an executive memo: our platform reliability is good but feature
+      velocity has stalled under tech debt; a 6-month re-architecture would cost 8
+      engineers; deferring risks a major outage. Brief leadership to decide.
+    gold: ""
+  - id: train-exec-pricing
+    split: train
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Write a memo for the exec team on a pricing overhaul: usage-based pricing hurts
+      enterprise predictability, a move to tiered seats could lift NRR but risks SMB
+      churn, and sales wants a decision this quarter.
+    gold: ""
+  - id: train-exec-acquire
+    split: train
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Draft a board memo on a possible acquisition: the target adds a key capability
+      and team, asking price is $60M, integration risk is moderate, and building it
+      ourselves would take 18 months. Recommend buy, build, or pass.
+    gold: ""
+
+  - id: val-exec-security
+    split: val
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Write an executive memo on security investment: we passed audits but third-party
+      integration risk is rising, a $1.5M program would close the gaps over two
+      quarters, and a partner just disclosed a breach. Brief the board to fund it.
+    gold: ""
+  - id: val-exec-layoffs
+    split: val
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Prepare a board memo on restructuring: burn outpaces plan, runway is 11 months,
+      a 15% reduction plus a focus shift extends runway to 20 months but risks morale
+      and roadmap. Recommend a course.
+    gold: ""
+  - id: val-exec-ai
+    split: val
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Draft an executive memo on adopting AI in the product: it could lift engagement
+      and cut support cost, but adds inference cost and model risk, and competitors are
+      shipping fast. Recommend scope and sequencing.
+    gold: ""
+  - id: val-exec-supply
+    split: val
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Write a board memo on supply chain: single-sourcing cut COGS but caused a 6-week
+      outage; dual-sourcing adds 4% cost but de-risks; demand is seasonal and Q4 is
+      critical. Recommend an approach.
+    gold: ""
+
+  - id: test-exec-market-entry
+    split: test
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Write an executive memo on entering the SMB segment: it widens TAM but needs a
+      lower-touch motion, our current sales model is enterprise, and a fast-follower
+      rival already leads SMB. Recommend whether and how to enter.
+    gold: ""
+  - id: test-exec-rebuild
+    split: test
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Prepare a board memo on rebuilding the data platform: analytics latency blocks
+      decisions, a rebuild costs ~$3M over three quarters, and a lighter fix buys a
+      year. Brief leadership to choose.
+    gold: ""
+  - id: test-exec-partnership
+    split: test
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Draft an executive memo on a strategic partnership: it grants distribution to a
+      large channel but cedes 20% margin and some roadmap control, and our direct
+      motion is slower. Recommend whether to sign.
+    gold: ""
+  - id: test-exec-compliance
+    split: test
+    type: exec-memo
+    checker: contract
+    prompt: |
+      Write a board memo on a new regulatory regime: compliance requires process and
+      tooling changes over two quarters at ~$2M, non-compliance risks fines and market
+      access, and timelines are tight. Recommend a plan.
+    gold: ""

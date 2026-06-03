@@ -8,7 +8,7 @@ description: >
   structure with SCQA introduction.
 metadata:
   author: nirav
-  version: "1.0"
+  version: "1.0.2"
 compatibility: Designed for Claude Code
 allowed-tools: Read Write
 ---
@@ -100,6 +100,11 @@ BODY:
 ```
 
 ## Output Format
+
+Executive readers value clarity and brevity.
+
+### Output discipline (mandatory — exact labels)
+Your output MUST use these EXACT uppercase section labels, in this order: `INTRODUCTION (SCQA):` (with Situation:, Complication:, Question:, Answer: inside), then `BODY:` containing 2-5 NUMBERED level-1 points (1., 2., 3.), then a `DISTILLATION METADATA` block (with Pyramid depth, MECE, Length). Do not rename, merge, or omit these headers.
 
 The output is the assembled memo (above). Plus a metadata block for downstream skills:
 

@@ -3387,7 +3387,17 @@
       ],
       "parent": "strategic-foundations",
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-03-28",
+      "task_score": {
+        "verdict": "no-go-saturated",
+        "val": 100.0,
+        "test": 100.0,
+        "lift": 0.0,
+        "no_skill_test": 100.0,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-02",
+        "report": "data/skillopt/game-solver.gonogo.md"
+      }
     },
     "mechanism-design": {
       "name": "mechanism-design",
@@ -5258,7 +5268,17 @@
       ],
       "parent": null,
       "created": "2026-03-26",
-      "last_modified": "2026-05-14"
+      "last_modified": "2026-05-14",
+      "task_score": {
+        "verdict": "no-go-insufficient",
+        "val": 95.0,
+        "test": 88.34,
+        "lift": 21.68,
+        "no_skill_test": 0.0,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-03",
+        "report": "data/skillopt/spelunker.gonogo.md"
+      }
     },
     "claim-decomposer": {
       "name": "claim-decomposer",
@@ -18287,7 +18307,17 @@
       ],
       "created": "2026-05-10",
       "last_modified": "2026-05-10",
-      "parent": null
+      "parent": null,
+      "task_score": {
+        "verdict": "no-go-insufficient",
+        "val": 100.0,
+        "test": 100.0,
+        "lift": 0.0,
+        "no_skill_test": 0.0,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-02",
+        "report": "data/skillopt/statement-grader.gonogo.md"
+      }
     },
     "xy-detector": {
       "name": "xy-detector",
@@ -18549,7 +18579,17 @@
       ],
       "created": "2026-05-10",
       "last_modified": "2026-05-10",
-      "parent": null
+      "parent": null,
+      "task_score": {
+        "verdict": "go",
+        "val": 100.0,
+        "test": 100.0,
+        "lift": 100.0,
+        "no_skill_test": 0.0,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-02",
+        "report": "data/skillopt/bluf-shaper.gonogo.md"
+      }
     },
     "scqa-formatter": {
       "name": "scqa-formatter",
@@ -18600,7 +18640,17 @@
       ],
       "created": "2026-05-10",
       "last_modified": "2026-05-10",
-      "parent": null
+      "parent": null,
+      "task_score": {
+        "verdict": "no-go-insufficient",
+        "val": 80.0,
+        "test": 80.0,
+        "lift": 0.0,
+        "no_skill_test": 0.0,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-02",
+        "report": "data/skillopt/scqa-formatter.gonogo.md"
+      }
     },
     "executive-distiller": {
       "name": "executive-distiller",
@@ -18654,7 +18704,17 @@
       ],
       "created": "2026-05-10",
       "last_modified": "2026-05-10",
-      "parent": null
+      "parent": null,
+      "task_score": {
+        "verdict": "go",
+        "val": 87.5,
+        "test": 75.0,
+        "lift": 50.0,
+        "no_skill_test": 0.0,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-02",
+        "report": "data/skillopt/executive-distiller.gonogo.md"
+      }
     },
     "cursed-speech": {
       "name": "cursed-speech",

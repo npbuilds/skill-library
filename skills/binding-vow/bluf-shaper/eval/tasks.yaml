@@ -1,0 +1,223 @@
+# SkillOpt task set for the `bluf-shaper` skill — a FORMAT-ADHERENCE pilot.
+#
+# Each task is a realistic, time-pressured briefing request. The prompts are
+# deliberately FORMAT-AGNOSTIC: they ask for a fast brief but never specify the
+# BLUF structure, headers, one-sentence rule, or hedging ban. The output
+# CONTRACT is supplied only by skills/binding-vow/bluf-shaper/SKILL.md when it
+# is injected — so the no-skill baseline must comply on its own (it usually
+# doesn't), which is where the headroom comes from.
+#
+# Grading is 100% structural (scripts/skillopt/contracts.py: score_bluf), 0-100:
+#   1 has BOTTOM LINE: header        6 bottom line is exactly ONE sentence
+#   2 has BACKGROUND: header         7 bottom line has NO hedging words
+#   3 has DISCUSSION: header         8 BACKGROUND = 1-3 bullets
+#   4 has RECOMMENDATION: header     9 DISCUSSION = 1-5 NUMBERED points
+#   5 headers in exact order        10 RECOMMENDATION is specific (non-vague)
+#
+# Splits: train informs edits; val is the frozen acceptance gate; test is held
+# out (never seen by the optimizer) for the transfer check.
+
+meta:
+  skill: bluf-shaper
+  location: skills/binding-vow/bluf-shaper/SKILL.md
+  contract: bluf
+  checker: contract
+  note: prompts intentionally do NOT reveal the BLUF format; the skill must.
+
+tasks:
+  # ────────────────────────── TRAIN ──────────────────────────
+  - id: train-cfo-budget
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      I'm walking into a 1:1 with our CFO in 60 seconds. Customer churn jumped from
+      7% to 12% last quarter; our analysis points to onboarding as the dominant
+      driver, and the fix is scoped at about 4 engineer-quarters (~$2M). I want to
+      ask her to fund it now. Brief me — what do I say?
+    gold: ""
+
+  - id: train-oncall-outage
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      I'm the on-call engineer and just paged my eng director at 2am. Checkout error
+      rate is at 30% after the 1am deploy; rolling back takes 8 minutes and is low
+      risk; root-causing live could take an hour. I think we should roll back now.
+      Give me the briefing to send him.
+    gold: ""
+
+  - id: train-ceo-offer
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      The CEO wants a fast read before we extend an offer to a VP Sales candidate.
+      She crushed the interviews and references, wants 20% above band, and has a
+      competing offer expiring Friday. I think we should make the offer at band+15%.
+      What do I tell the CEO?
+    gold: ""
+
+  - id: train-ciso-phish
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      Brief the CISO right now: an employee clicked a phishing link and entered
+      credentials 20 minutes ago; we've disabled the account and see no lateral
+      movement yet; full forensic sweep would take 2 hours. I want approval to force
+      a company-wide password reset. Keep it to a quick brief.
+    gold: ""
+
+  - id: train-sales-discount
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      Quick one for the VP Sales before the forecast call: a $400k deal will close
+      this quarter only if we grant a 15% discount; margin still clears our floor;
+      the customer is a logo we want. I think we approve the discount. What's the
+      headline?
+    gold: ""
+
+  - id: train-board-launch
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      I need to brief the board in a hallway minute. We found a data-loss bug in the
+      new product 48 hours before launch; a fix is 3 days out; pre-orders are
+      modest. I think we delay launch by a week. Tell me what to say.
+    gold: ""
+
+  - id: train-biotech-go
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      Brief the head of R&D fast: our TYK2 asset showed a clean Phase 1 safety
+      profile but the CNS-penetrance signal is weaker than hoped; advancing to Phase
+      2 costs ~$30M; a cheaper bridging study could de-risk it first. I lean toward
+      the bridging study. Give me the brief.
+    gold: ""
+
+  - id: train-ops-vendor
+    split: train
+    type: bluf
+    checker: contract
+    prompt: |
+      The COO has 30 seconds. Our payments vendor raised fees 40% and had two
+      outages this quarter; a migration to a new vendor takes 6 weeks and saves
+      ~$1.2M/yr. I think we switch. What's the bottom line for her?
+    gold: ""
+
+  # ────────────────────────── VAL (frozen gate) ──────────────────────────
+  - id: val-db-migration
+    split: val
+    type: bluf
+    checker: contract
+    prompt: |
+      VP Eng wants a fast read: our primary Postgres is at 85% disk and write
+      latency is creeping; migrating to the larger instance needs a 20-minute
+      maintenance window; waiting risks an outage in ~2 weeks. I think we schedule
+      the migration this weekend. Brief me.
+    gold: ""
+
+  - id: val-ad-spend
+    split: val
+    type: bluf
+    checker: contract
+    prompt: |
+      Brief the CMO before standup: our paid-social channel's CAC doubled over two
+      months while search held steady; pausing social frees ~$300k/quarter; we'd
+      lose some top-of-funnel reach. I recommend pausing social and reallocating to
+      search. What do I say?
+    gold: ""
+
+  - id: val-staffing-surge
+    split: val
+    type: bluf
+    checker: contract
+    prompt: |
+      The hospital administrator needs a 30-second read: flu admissions are up 60%
+      week-over-week, the ED is at capacity, and we can open the overflow ward by
+      pulling 6 nurses from electives. I think we open the overflow ward now. Brief
+      her.
+    gold: ""
+
+  - id: val-acquisition
+    split: val
+    type: bluf
+    checker: contract
+    prompt: |
+      I'm briefing my co-founder before we reply to an acquirer. They've offered
+      $40M cash; our runway is 9 months; our last round valued us at $35M but growth
+      has slowed. I lean toward countering at $55M rather than accepting. Give me the
+      quick brief.
+    gold: ""
+
+  - id: val-feature-rollout
+    split: val
+    type: bluf
+    checker: contract
+    prompt: |
+      PM lead has a minute: the new checkout flow is behind a flag at 5% with metrics
+      slightly up but a small error spike for one browser; full rollout is one click;
+      a fix for the browser bug is a day out. I think we hold at 5% until the fix.
+      What's the headline?
+    gold: ""
+
+  # ────────────────────────── TEST (held out) ──────────────────────────
+  - id: test-framework-adopt
+    split: test
+    type: bluf
+    checker: contract
+    prompt: |
+      The CTO wants a fast read: a new framework would cut our build times in half
+      but require retraining the team and a 4-week migration; our current stack works
+      but is slowing hiring. I lean toward piloting it on one service first. Brief
+      the CTO.
+    gold: ""
+
+  - id: test-fx-hedge
+    split: test
+    type: bluf
+    checker: contract
+    prompt: |
+      Brief the CFO quickly: 40% of next year's revenue is in euros, the euro has
+      moved 8% against us this quarter, and a forward hedge would lock in rates for a
+      ~$200k annual premium. I recommend hedging half the exposure. What do I say?
+    gold: ""
+
+  - id: test-snow-day
+    split: test
+    type: bluf
+    checker: contract
+    prompt: |
+      The principal needs a 30-second read before 5am: 6 inches of snow forecast by
+      7am, buses can run but rural roads are dicey, and a 2-hour delay is an option
+      instead of a full closure. I lean toward a full closure. Give me the brief.
+    gold: ""
+
+  - id: test-add-position
+    split: test
+    type: bluf
+    checker: contract
+    prompt: |
+      Brief the portfolio manager fast: a core holding is down 30% on a soft earnings
+      print, the thesis is intact, and we have dry powder; doubling down raises
+      concentration to 8% of the book. I think we add a half-position, not a full one.
+      What's the bottom line?
+    gold: ""
+
+  - id: test-port-strike
+    split: test
+    type: bluf
+    checker: contract
+    prompt: |
+      The head of logistics has a minute: a port strike will delay 30% of our inbound
+      containers by ~2 weeks; air-freighting the critical SKUs costs $500k but
+      protects the holiday launch. I recommend air-freighting only the top 10 SKUs.
+      Brief her.
+    gold: ""
