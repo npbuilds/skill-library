@@ -5265,7 +5265,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.0.3",
       "metrics": {
         "word_count": 3139,
         "body_words": 3037,
@@ -5311,7 +5311,48 @@
       ],
       "parent": null,
       "created": "2026-03-26",
-      "last_modified": "2026-05-15"
+      "last_modified": "2026-06-03",
+      "changelog": [
+        {
+          "date": "2026-06-03",
+          "action": "quality-patch",
+          "note": "v1.0.3: CORE CLAIM skeleton, pre-flight regenerate-once, refuted-stance guidance, synthetic exemplar; quality test 71.84->85.54 (+32.04 vs no-skill)",
+          "task_score_quality_test": 85.54
+        },
+        {
+          "date": "2026-06-03",
+          "action": "skillopt",
+          "note": "Added 'spk-brief-output-contract' (skills/research/spelunker/SKILL.md); val 56.7->86.7",
+          "val_task_score": 86.66
+        },
+        {
+          "date": "2026-06-03",
+          "action": "skillopt",
+          "note": "Added 'spk-preflight-grader-parity' (skills/research/spelunker/SKILL.md); val 56.7->95.0",
+          "val_task_score": 95.0
+        }
+      ],
+      "task_score": {
+        "verdict": "no-go-insufficient",
+        "val": 95.0,
+        "test": 88.34,
+        "lift": 21.68,
+        "no_skill_test": 0.0,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-03",
+        "report": "data/skillopt/spelunker.gonogo.md"
+      },
+      "task_score_quality": {
+        "verdict": "go",
+        "val": 92.7,
+        "test": 85.54,
+        "lift": 32.04,
+        "no_skill_test": 53.5,
+        "backend": "cursor-agent",
+        "last_run": "2026-06-03",
+        "report": "data/skillopt/spelunker-quality.gonogo.md",
+        "suite": "quality"
+      }
     },
     "claim-decomposer": {
       "name": "claim-decomposer",

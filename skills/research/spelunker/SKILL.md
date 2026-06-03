@@ -10,7 +10,7 @@ description: >
   findings with explicit gaps.
 metadata:
   author: nirav
-  version: "1.0"
+  version: "1.0.3"
 compatibility: Designed for Claude Code
 allowed-tools: Read Write bash Glob Grep Agent WebSearch WebFetch
 ---
@@ -179,6 +179,21 @@ The prober generates "if this claim were false, what should we observe?" predict
 
 Deliver the final research brief to the user. The output format is defined in `evidence-synthesizer` but the orchestrator adds:
 
+**Output contract (graded):** Emit eight standalone UPPERCASE section headers in this order — not `##` variants: RESEARCH BRIEF → KEY FINDINGS → DETAILED FINDINGS → EVIDENCE MAP → GAPS & LIMITATIONS → CONFIDENCE SUMMARY → SOURCES → NEXT STEPS. RESEARCH BRIEF: include a standalone `CORE CLAIM CONFIDENCE: <Tag>` line (Tag ∈ Confirmed | Likely | Speculative | Contested | Unverifiable) stating the overall confidence on the central claim. KEY/DETAILED FINDINGS: `[N]` or `[no source]` on every empirical claim. DETAILED: `Confidence: [Tag] because …` (word *because* required). GAPS: ≥1 `-` bullet. CONFIDENCE SUMMARY: include Confirmed, Likely, Speculative, Contested, Unverifiable. SOURCES: `1.` numbered, `Tier N`, `Used for:`.
+
+**RESEARCH BRIEF skeleton (copy-paste; mandatory placement):** The `CORE CLAIM CONFIDENCE` line must appear inside RESEARCH BRIEF — immediately as the second line after the section title (not buried in KEY FINDINGS). Example:
+
+```
+RESEARCH BRIEF
+CORE CLAIM CONFIDENCE: Contested
+Brief ID: SPK-YYYYMMDD-<slug>
+<One-paragraph bottom line on the central claim, with [1] citations as needed.>
+```
+
+See `references/quick-reference.md` for a minimal fully-compliant synthetic exemplar.
+
+**Refuted claims (when evidence shows the central claim is false):** Spelunker has no `Refuted` tag. When the investigation concludes the claim does **not** hold, the CORE line must still appear and must **not** use `Confirmed` or `Likely`. Prefer `Contested` or `Unverifiable` on the CORE line **and** explicit refutation language in the RESEARCH BRIEF and DETAILED `because`-clauses (e.g. "the claim is false", "not supported", "debunked", "no credible evidence"). `Speculative` alone is **insufficient** when the brief concludes the claim is false — that reads as hedging, not refutation.
+
 - **Brief ID**: Generate a short stable identifier for this brief in the form `SPK-YYYYMMDD-<6-char-slug>` (e.g., `SPK-20260513-pasiv9`). Include it in the brief header. The brief ID is the handle for the calibration ledger — users resolve claims later via `/calibrate <brief_id> <claim_id> <true|false|partial>`.
 - **Meta-commentary**: How confident is the overall investigation? Did tool limitations affect coverage?
 - **Next steps**: If the user wants to go deeper, what specific questions would be most productive?
@@ -192,6 +207,14 @@ Before returning the brief to the user, verify the evidence-synthesizer ran its 
 2. Any confidence tag is missing a because-clause.
 3. The SOURCES section is bullet-formatted instead of a numbered list, or any entry is missing its date/tier/used-for.
 4. Citation numbers don't match between body and SOURCES (orphan markers or unused entries).
+
+5. KEY FINDINGS must include `[N]` or `[no source]` (synthesis-templates.md omits them—do not copy template without markers).
+6. Paste the Feedback prompt footer **verbatim** (exact backticks, `/feedback spelunker <1-5> [optional notes]`, `Brief ID: SPK-... · Calibrate later:` on one line).
+7. CONFIDENCE SUMMARY must name Confirmed, Likely, Speculative, Contested, and Unverifiable.
+8. RESEARCH BRIEF must include a standalone `CORE CLAIM CONFIDENCE: <Tag>` line as the **second line** of that section (immediately under `RESEARCH BRIEF`, before Brief ID or body text). Tag ∈ Confirmed | Likely | Speculative | Contested | Unverifiable.
+9. If check 8 fails, **regenerate the full brief once** (return to Phase 4 synthesis, re-run Step 5b citation audit, re-run this pre-flight). Do not deliver until the CORE line is present. A second failure: deliver only after fixing the CORE line in-place — still include all eight sections.
+10. For refuted central claims: CORE tag must not be Confirmed/Likely; RESEARCH BRIEF or DETAILED must contain explicit refutation language (see Refuted claims above). Reject delivery if the brief affirms a claim the evidence refutes.
+
 
 This pre-flight is non-optional. The Guiding Principles ("Never present speculation as fact", "Trace to primary sources") are only enforceable if the brief is auditable. A brief that reads authoritative but cannot be traced to sources violates the contract.
 
