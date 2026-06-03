@@ -1,0 +1,364 @@
+# SkillOpt task set for the `game-solver` skill.
+#
+# Each task is a programmatically-checkable game-theory problem (or a
+# rubric-graded interpretation task). The optimizer is ONLY allowed to see the
+# `train` split when proposing edits and the `val` split for the acceptance
+# gate. The `test` split is held out and never touched by the optimizer; it is
+# used solely for the final go/no-go generalization check.
+#
+# Schema per task:
+#   id        unique string
+#   split     train | val | test
+#   type      problem type (drives the grader + the deterministic solver)
+#   checker   programmatic | rubric
+#   player    (optional) which player the question is about: "row" | "col"
+#   opponent_strategy (optional, best_response) the fixed opponent strategy
+#   prompt    human-readable problem statement shown to the agent
+#   input     structured game spec:
+#               row_strategies / col_strategies: ordered strategy labels
+#               payoffs[row][col] = [row_payoff, col_payoff]
+#             (sequential games use a `tree` spec instead)
+#   gold      authoritative expected answer (independently re-derivable via
+#             scripts/skillopt/gametheory.py --validate)
+#   expect_contains (rubric only) keyword anchors for the rubric judge
+
+meta:
+  skill: game-solver
+  location: skills/game-theory/strategic-foundations/game-solver/SKILL.md
+  answer_protocol: "Reason, then emit a final line: ANSWER: <json>"
+  splits:
+    train: informs the optimizer's edit proposals (lowest-scoring rollouts)
+    val: frozen acceptance gate; an edit is kept only if val task_score strictly improves
+    test: held out; used only for the final generalization check
+
+tasks:
+  # ────────────────────────── TRAIN ──────────────────────────
+  - id: train-dominant-pd
+    split: train
+    type: strictly_dominant
+    checker: programmatic
+    player: row
+    prompt: |
+      Two firms simultaneously choose to Cooperate (hold price) or Defect (cut price)
+      in a one-shot Prisoner's Dilemma. Does the row player have a strictly dominant
+      strategy? Answer with the strategy label, or "none".
+    input:
+      row_strategies: [Cooperate, Defect]
+      col_strategies: [Cooperate, Defect]
+      payoffs:
+        Cooperate: {Cooperate: [3, 3], Defect: [0, 5]}
+        Defect:    {Cooperate: [5, 0], Defect: [1, 1]}
+    gold: "Defect"
+
+  - id: train-mixed-bos
+    split: train
+    type: mixed_nash_2x2
+    checker: programmatic
+    prompt: |
+      Battle of the Sexes. Compute the mixed-strategy Nash equilibrium. Report p =
+      probability the row player chooses its FIRST strategy (Opera) and q =
+      probability the column player chooses its FIRST strategy (Opera).
+    input:
+      row_strategies: [Opera, Fight]
+      col_strategies: [Opera, Fight]
+      payoffs:
+        Opera: {Opera: [2, 1], Fight: [0, 0]}
+        Fight: {Opera: [0, 0], Fight: [1, 2]}
+    gold: {p: 0.6667, q: 0.3333}
+
+  - id: train-zerosum-saddle
+    split: train
+    type: zero_sum_value
+    checker: programmatic
+    prompt: |
+      A zero-sum game (column payoffs are the negative of the row payoffs shown).
+      Find the value of the game to the row player.
+    input:
+      row_strategies: [Top, Bottom]
+      col_strategies: [Left, Right]
+      payoffs:
+        Top:    {Left: [4, -4], Right: [3, -3]}
+        Bottom: {Left: [2, -2], Right: [1, -1]}
+    gold: 3
+
+  - id: train-maximin
+    split: train
+    type: maximin
+    checker: programmatic
+    player: row
+    prompt: |
+      Find the row player's maximin (security) pure strategy — the strategy that
+      maximizes its guaranteed worst-case payoff.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Right]
+      payoffs:
+        Up:   {Left: [1, 2], Right: [4, 1]}
+        Down: {Left: [3, 0], Right: [2, 3]}
+    gold: "Down"
+
+  - id: train-pareto
+    split: train
+    type: pareto
+    checker: programmatic
+    prompt: |
+      List every Pareto-optimal outcome (strategy profile) of this game. Report a
+      list of [row_strategy, col_strategy] pairs.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Right]
+      payoffs:
+        Up:   {Left: [2, 2], Right: [1, 3]}
+        Down: {Left: [3, 1], Right: [0, 0]}
+    gold: [[Up, Left], [Up, Right], [Down, Left]]
+
+  - id: train-iesds
+    split: train
+    type: iesds
+    checker: programmatic
+    prompt: |
+      Apply iterated elimination of strictly dominated strategies. Report the
+      surviving strategy profile(s) as a list of [row_strategy, col_strategy] pairs.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Middle, Right]
+      payoffs:
+        Up:   {Left: [4, 2], Middle: [3, 3], Right: [2, 1]}
+        Down: {Left: [3, 1], Middle: [2, 2], Right: [1, 4]}
+    gold: [[Up, Middle]]
+
+  - id: train-pure-staghunt
+    split: train
+    type: pure_nash
+    checker: programmatic
+    prompt: |
+      Stag Hunt. List all pure-strategy Nash equilibria as [row_strategy, col_strategy] pairs.
+    input:
+      row_strategies: [Stag, Hare]
+      col_strategies: [Stag, Hare]
+      payoffs:
+        Stag: {Stag: [4, 4], Hare: [0, 3]}
+        Hare: {Stag: [3, 0], Hare: [2, 2]}
+    gold: [[Stag, Stag], [Hare, Hare]]
+
+  - id: train-bestresponse
+    split: train
+    type: best_response
+    checker: programmatic
+    player: row
+    opponent_strategy: Left
+    prompt: |
+      The column player has committed to Left. What is the row player's best response?
+    input:
+      row_strategies: [Top, Bottom]
+      col_strategies: [Left, Right]
+      payoffs:
+        Top:    {Left: [3, 1], Right: [1, 2]}
+        Bottom: {Left: [2, 0], Right: [4, 3]}
+    gold: "Top"
+
+  - id: train-interpret-pd
+    split: train
+    type: interpretation
+    checker: rubric
+    prompt: |
+      In a short paragraph, explain why mutual defection is the unique Nash
+      equilibrium of the Prisoner's Dilemma and why that outcome is Pareto-inefficient.
+    input: {}
+    gold: ""
+    expect_contains: [dominant, defect, best response, pareto, cooperat]
+
+  - id: train-interpret-mixed
+    split: train
+    type: interpretation
+    checker: rubric
+    prompt: |
+      Explain in plain language what it means for a player to play a mixed strategy
+      in equilibrium, and what makes the opponent willing to randomize.
+    input: {}
+    gold: ""
+    expect_contains: [randomi, indifferent, probabilit, expected payoff]
+
+  # ────────────────────────── VAL (frozen gate) ──────────────────────────
+  - id: val-mixed
+    split: val
+    type: mixed_nash_2x2
+    checker: programmatic
+    prompt: |
+      Compute the mixed-strategy Nash equilibrium. Report p = probability the row
+      player plays its FIRST strategy (A) and q = probability the column player
+      plays its FIRST strategy (X).
+    input:
+      row_strategies: [A, B]
+      col_strategies: [X, Y]
+      payoffs:
+        A: {X: [0, 0], Y: [3, 2]}
+        B: {X: [2, 3], Y: [0, 0]}
+    gold: {p: 0.6, q: 0.6}
+
+  - id: val-zerosum
+    split: val
+    type: zero_sum_value
+    checker: programmatic
+    prompt: |
+      Zero-sum game (column payoffs are the negative of the row payoffs). Find the
+      value of the game to the row player.
+    input:
+      row_strategies: [A, B]
+      col_strategies: [X, Y, Z]
+      payoffs:
+        A: {X: [5, -5], Y: [4, -4], Z: [6, -6]}
+        B: {X: [2, -2], Y: [3, -3], Z: [1, -1]}
+    gold: 4
+
+  - id: val-maximin
+    split: val
+    type: maximin
+    checker: programmatic
+    player: col
+    prompt: |
+      Find the column player's maximin (security) pure strategy.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Right]
+      payoffs:
+        Up:   {Left: [0, 2], Right: [0, 1]}
+        Down: {Left: [0, 0], Right: [0, 3]}
+    gold: "Right"
+
+  - id: val-pareto
+    split: val
+    type: pareto
+    checker: programmatic
+    prompt: |
+      List every Pareto-optimal outcome as [row_strategy, col_strategy] pairs.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Right]
+      payoffs:
+        Up:   {Left: [3, 3], Right: [2, 4]}
+        Down: {Left: [4, 2], Right: [1, 1]}
+    gold: [[Up, Left], [Up, Right], [Down, Left]]
+
+  - id: val-dominant
+    split: val
+    type: strictly_dominant
+    checker: programmatic
+    player: row
+    prompt: |
+      Does the row player have a strictly dominant strategy? Answer with the
+      strategy label, or "none".
+    input:
+      row_strategies: [A, B]
+      col_strategies: [Left, Right]
+      payoffs:
+        A: {Left: [5, 1], Right: [4, 2]}
+        B: {Left: [2, 2], Right: [1, 5]}
+    gold: "A"
+
+  - id: val-pure
+    split: val
+    type: pure_nash
+    checker: programmatic
+    prompt: |
+      List all pure-strategy Nash equilibria of the Battle of the Sexes as
+      [row_strategy, col_strategy] pairs.
+    input:
+      row_strategies: [Opera, Fight]
+      col_strategies: [Opera, Fight]
+      payoffs:
+        Opera: {Opera: [2, 1], Fight: [0, 0]}
+        Fight: {Opera: [0, 0], Fight: [1, 2]}
+    gold: [[Opera, Opera], [Fight, Fight]]
+
+  # ────────────────────────── TEST (held out) ──────────────────────────
+  - id: test-mixed
+    split: test
+    type: mixed_nash_2x2
+    checker: programmatic
+    prompt: |
+      Compute the mixed-strategy Nash equilibrium. Report p = probability the row
+      player plays its FIRST strategy (A) and q = probability the column player
+      plays its FIRST strategy (X).
+    input:
+      row_strategies: [A, B]
+      col_strategies: [X, Y]
+      payoffs:
+        A: {X: [4, 1], Y: [0, 0]}
+        B: {X: [0, 0], Y: [1, 4]}
+    gold: {p: 0.8, q: 0.2}
+
+  - id: test-zerosum
+    split: test
+    type: zero_sum_value
+    checker: programmatic
+    prompt: |
+      Zero-sum game (column payoffs are the negative of the row payoffs). Find the
+      value of the game to the row player.
+    input:
+      row_strategies: [Top, Bottom]
+      col_strategies: [Left, Right]
+      payoffs:
+        Top:    {Left: [2, -2], Right: [5, -5]}
+        Bottom: {Left: [1, -1], Right: [3, -3]}
+    gold: 2
+
+  - id: test-maximin
+    split: test
+    type: maximin
+    checker: programmatic
+    player: row
+    prompt: |
+      Find the row player's maximin (security) pure strategy.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Right]
+      payoffs:
+        Up:   {Left: [5, 1], Right: [0, 2]}
+        Down: {Left: [2, 0], Right: [3, 3]}
+    gold: "Down"
+
+  - id: test-pareto
+    split: test
+    type: pareto
+    checker: programmatic
+    prompt: |
+      List every Pareto-optimal outcome as [row_strategy, col_strategy] pairs.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Right]
+      payoffs:
+        Up:   {Left: [5, 5], Right: [0, 6]}
+        Down: {Left: [6, 0], Right: [1, 1]}
+    gold: [[Up, Left], [Up, Right], [Down, Left]]
+
+  - id: test-dominant
+    split: test
+    type: strictly_dominant
+    checker: programmatic
+    player: row
+    prompt: |
+      Does the row player have a strictly dominant strategy? Answer with the
+      strategy label, or "none".
+    input:
+      row_strategies: [A, B]
+      col_strategies: [Left, Right]
+      payoffs:
+        A: {Left: [1, 2], Right: [0, 1]}
+        B: {Left: [4, 0], Right: [3, 2]}
+    gold: "B"
+
+  - id: test-iesds
+    split: test
+    type: iesds
+    checker: programmatic
+    prompt: |
+      Apply iterated elimination of strictly dominated strategies. Report the
+      surviving strategy profile(s) as [row_strategy, col_strategy] pairs.
+    input:
+      row_strategies: [Up, Down]
+      col_strategies: [Left, Middle, Right]
+      payoffs:
+        Up:   {Left: [3, 1], Middle: [2, 2], Right: [1, 0]}
+        Down: {Left: [2, 0], Middle: [1, 1], Right: [0, 2]}
+    gold: [[Up, Middle]]
