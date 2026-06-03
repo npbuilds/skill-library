@@ -1,5 +1,36 @@
 # Spelunker — Quick Reference
 
+## Synthetic exemplar (grading contract)
+
+_Minimal fake brief — not real research. Shows mandatory `CORE CLAIM CONFIDENCE` placement (second line under RESEARCH BRIEF), refutation stance on a false claim, and citation hygiene._
+
+```
+RESEARCH BRIEF
+CORE CLAIM CONFIDENCE: Contested
+Brief ID: SPK-20260603-exemplar
+The claim that megadose vitamin C cures the common cold is false and not supported by credible evidence [1].
+
+KEY FINDINGS
+- Controlled trials show no meaningful cure effect; the claim is debunked [1].
+
+DETAILED FINDINGS
+Core claim — Confidence: Contested because multiple RCTs find no benefit and the claim is unsupported [1].
+
+EVIDENCE MAP
+- Claim ↔ Source 1 (Tier 1): no cure effect.
+
+GAPS & LIMITATIONS
+- No new primary trial was run for this exemplar.
+
+CONFIDENCE SUMMARY
+Confirmed: 0 · Likely: 0 · Speculative: 0 · Contested: 1 · Unverifiable: 0
+
+SOURCES
+1. Cochrane review (synthetic), Tier 1, Used for: null effect of vitamin C on colds.
+
+NEXT STEPS
+- N/A (synthetic exemplar).
+```
 
 ## Depth Mode Selection Guide
 
