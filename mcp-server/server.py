@@ -621,7 +621,7 @@ def get_system_overview() -> str:
 
     # Per-domain analysis
     for domain_name, domain_skills in sorted(domains.items()):
-        if domain_name == "meta":
+        if domain_name == "_meta":
             continue  # Skip meta domain in per-domain listing
 
         lines.append(f"--- {domain_name} ---")
@@ -744,7 +744,7 @@ def get_system_overview() -> str:
 
     # Find domains that could use more structure
     for domain_name, domain_skills in sorted(domains.items()):
-        if domain_name == "meta":
+        if domain_name == "_meta":
             continue
         d_types_r: dict[str, int] = {}
         for sname in domain_skills:
