@@ -237,7 +237,10 @@ def infer_type(name: str, text: str, meta: dict) -> str:
     text_lower = text.lower()
     if "routing table" in text_lower or "child skills" in text_lower:
         return "director"
-    if "## delegate" in text_lower or "## phase" in text_lower:
+    # Match the orchestrator heading "## Phases" (plural). The singular
+    # "## phase" collided with reference skills that document clinical-trial
+    # phases (e.g. "## Phase Transition Probabilities"), mis-typing them.
+    if "## delegate" in text_lower or "## phases" in text_lower:
         return "orchestrator"
 
     return "knowledge"
