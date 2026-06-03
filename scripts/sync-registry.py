@@ -233,15 +233,22 @@ def infer_type(name: str, text: str, meta: dict) -> str:
         if keyword in name:
             return stype
 
-    # Content-based inference
+    # Content-based inference. Check the orchestrator signal BEFORE the
+    # director signal: orchestrators (six-eyes, neocortex, …) frequently also
+    # contain a "## Routing Table" / "## Child Skills" section, and the director
+    # check would otherwise win and mis-type them. That also drops them from
+    # domain_orchestrators, which breaks parent inference for new skills in the
+    # domain (new leaves get parent=None instead of the orchestrator). No
+    # registry director uses "## phases"/"## delegate", so promoting on those
+    # signals first is safe.
     text_lower = text.lower()
-    if "routing table" in text_lower or "child skills" in text_lower:
-        return "director"
     # Match the orchestrator heading "## Phases" (plural). The singular
     # "## phase" collided with reference skills that document clinical-trial
     # phases (e.g. "## Phase Transition Probabilities"), mis-typing them.
     if "## delegate" in text_lower or "## phases" in text_lower:
         return "orchestrator"
+    if "routing table" in text_lower or "child skills" in text_lower:
+        return "director"
 
     return "knowledge"
 
