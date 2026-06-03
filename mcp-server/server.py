@@ -785,17 +785,22 @@ def update_skill_metadata(
         manual_rating: Manual quality score 1-100 (overrides auto_score in composite).
         manual_notes: Short note explaining the manual rating.
         health_status: Override health — "healthy", "warning", or "critical".
+            This is a manual override that recalibrate_scores.py will preserve
+            (it won't be silently overwritten by auto-classification). Pass
+            "auto" to clear the override and hand health back to the classifier.
         status: Lifecycle status — "active" or "deprecated".
         parent: Name of the parent skill (must exist in registry, or pass "" to clear).
     """
     VALID_HEALTH = {"healthy", "warning", "critical"}
+    # "auto" is an input-only sentinel that clears a manual override.
+    VALID_HEALTH_INPUT = VALID_HEALTH | {"auto"}
     VALID_STATUS = {"active", "deprecated"}
 
     # Validate inputs before touching the registry
     if manual_rating is not None and not 1 <= manual_rating <= 100:
         return "manual_rating must be between 1 and 100."
-    if health_status is not None and health_status not in VALID_HEALTH:
-        return f"health_status must be one of: {', '.join(sorted(VALID_HEALTH))}."
+    if health_status is not None and health_status not in VALID_HEALTH_INPUT:
+        return f"health_status must be one of: {', '.join(sorted(VALID_HEALTH_INPUT))}."
     if status is not None and status not in VALID_STATUS:
         return f"status must be one of: {', '.join(sorted(VALID_STATUS))}."
 
@@ -826,8 +831,16 @@ def update_skill_metadata(
         changes.append(f"manual_notes set")
 
     if health_status is not None:
-        entry["health_status"] = health_status
-        changes.append(f"health_status={health_status}")
+        if health_status == "auto":
+            # Clear the manual override; recalibrate_scores.py will recompute
+            # health from score/usage/freshness on its next run.
+            entry["manual_health"] = None
+            changes.append("health_status=auto (manual override cleared)")
+        else:
+            # Record the override so the auto-classifier preserves it.
+            entry["manual_health"] = health_status
+            entry["health_status"] = health_status
+            changes.append(f"health_status={health_status} (manual override)")
 
     if status is not None:
         entry["status"] = status
