@@ -1,5 +1,6 @@
 ---
 name: archon
+type: orchestrator
 description: >
   Engages as an analytical thinking partner across investment domains, applying six frameworks
   (Dalio regime, Marks contrarian, Soros reflexivity, Taleb tail risk, Tudor Jones defense,
