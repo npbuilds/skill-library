@@ -48,6 +48,51 @@ def _safe_collect(name: str, source: str, fn, *args, **kwargs) -> dict:
         )
 
 
+def _parallel_collect(specs: list[tuple], deadline_seconds: float = 22.0) -> dict:
+    """Run several _safe_collect calls concurrently, returning {key: result}.
+
+    Each spec is ``(result_key, source_label, fn)``. Collectors fan out across
+    threads so total wall-time approaches the slowest single collector rather
+    than the sum — the fix for MCP -32001 timeouts when many scraping-dependent
+    sources run on a cold cache.
+
+    A collector that misses the shared deadline yields a degraded _meta entry
+    instead of stalling the whole tool. Stragglers are left to finish on
+    background threads (``shutdown(wait=False)``) so they warm the cache for the
+    next call — a missed deadline becomes self-healing.
+    """
+    from concurrent.futures import ThreadPoolExecutor, wait as _wait
+
+    from processors.health import wrap_with_meta
+
+    ex = ThreadPoolExecutor(max_workers=max(1, len(specs)))
+    future_map = {
+        ex.submit(_safe_collect, key, source, fn): (key, source)
+        for key, source, fn in specs
+    }
+    done, _ = _wait(future_map.keys(), timeout=deadline_seconds)
+
+    results: dict = {}
+    for future, (key, source) in future_map.items():
+        if future in done:
+            try:
+                results[key] = future.result()
+            except Exception as e:  # pragma: no cover - defensive
+                results[key] = wrap_with_meta(
+                    {"error": str(e)}, source, status="failed", degraded_reason=str(e)[:100]
+                )
+        else:
+            results[key] = wrap_with_meta(
+                {"error": f"{source} exceeded {deadline_seconds:.0f}s deadline"},
+                source,
+                status="failed",
+                degraded_reason="collector deadline exceeded",
+            )
+
+    ex.shutdown(wait=False)  # let stragglers finish in the background (warms cache)
+    return results
+
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # CORE DATA TOOLS (6)
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -224,15 +269,15 @@ def get_external_signals() -> dict:
     from collectors.insider import get_insider_buys
     from collectors.sec_edgar import get_special_situation_filings, get_recent_13f_filings
 
-    return {
-        "insider": _safe_collect("insider", "OpenInsider", get_insider_buys),
-        "special_situations": _safe_collect("special_sit", "SEC_EDGAR", get_special_situation_filings),
-        "filings_13f": _safe_collect("13f", "SEC_EDGAR", get_recent_13f_filings),
-        "geopolitical": _safe_collect("geopolitical", "GDELT", get_geopolitical_monitor),
-        "crypto": _safe_collect("crypto", "CoinGecko", get_crypto_dashboard),
-        "earnings": _safe_collect("earnings", "yfinance", get_earnings_calendar),
-        "economic_calendar": _safe_collect("econ_cal", "FRED", get_economic_calendar),
-    }
+    return _parallel_collect([
+        ("insider", "OpenInsider", get_insider_buys),
+        ("special_situations", "SEC_EDGAR", get_special_situation_filings),
+        ("filings_13f", "SEC_EDGAR", get_recent_13f_filings),
+        ("geopolitical", "GDELT", get_geopolitical_monitor),
+        ("crypto", "CoinGecko", get_crypto_dashboard),
+        ("earnings", "yfinance", get_earnings_calendar),
+        ("economic_calendar", "FRED", get_economic_calendar),
+    ])
 
 
 @mcp.tool()
