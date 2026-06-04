@@ -72,3 +72,19 @@ def set_cached(key: str, data: dict) -> None:
         )
     except OSError:
         pass
+
+
+def get_stale(key: str) -> dict | None:
+    """Return the last cached payload regardless of age, or None if missing.
+
+    Fallback for when a live fetch fails: serving last-known-good data (tagged
+    stale by the caller) beats serving nothing. Callers should skip payloads
+    that themselves carry an "error" key.
+    """
+    path = CACHE_DIR / f"{key}.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError):
+        return None

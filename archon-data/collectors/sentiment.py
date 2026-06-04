@@ -5,7 +5,7 @@ from datetime import datetime
 import requests
 import yfinance as yf
 
-from .cache import get_cached, set_cached
+from .cache import get_cached, get_stale, set_cached
 
 
 def get_vix_data() -> dict:
@@ -83,7 +83,17 @@ def get_fear_greed() -> dict:
     except Exception as e:
         result["error"] = str(e)
 
-    set_cached("fear_greed", result)
+    # Only cache successful results — never poison the cache with a sticky error.
+    if "error" not in result:
+        set_cached("fear_greed", result)
+        return result
+
+    # Live fetch failed — serve last-known-good (tagged) rather than a fresh error.
+    stale = get_stale("fear_greed")
+    if stale and "error" not in stale:
+        stale["stale"] = True
+        stale["stale_reason"] = result["error"][:120]
+        return stale
     return result
 
 

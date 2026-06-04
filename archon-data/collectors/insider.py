@@ -5,7 +5,7 @@ from datetime import datetime
 
 import requests
 
-from .cache import get_cached, set_cached
+from .cache import get_cached, get_stale, set_cached
 
 _HEADERS = {
     "User-Agent": (
@@ -92,4 +92,12 @@ def get_insider_buys() -> dict:
     # Only cache successful results — don't serve stale errors for 6h
     if "error" not in result:
         set_cached("insider_buys", result)
+        return result
+
+    # Live fetch failed — serve last-known-good (tagged) rather than nothing.
+    stale = get_stale("insider_buys")
+    if stale and "error" not in stale:
+        stale["stale"] = True
+        stale["stale_reason"] = result["error"][:120]
+        return stale
     return result
