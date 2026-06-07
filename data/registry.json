@@ -10601,13 +10601,13 @@
         "estimated_tokens_body": 1562,
         "estimated_tokens_total": 1613
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "clarity-engine"
       ],
