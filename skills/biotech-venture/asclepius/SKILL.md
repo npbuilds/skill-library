@@ -1,11 +1,13 @@
 ---
 name: asclepius
 description: >
-  Orchestrate biotech venture diligence and investment analysis across clinical development,
-  regulatory strategy, asset valuation, competitive intelligence, manufacturing risk, IP
-  analysis, and deal synthesis. Activate when evaluating a therapeutic asset, biotech company,
-  clinical program, or any question spanning drug development and capital allocation.
-  Asclepius reads the question, classifies the diligence pillar, and routes to the right director.
+  Orchestrate biotech venture discovery and diligence across frontier target/modality scouting,
+  clinical development, regulatory strategy, asset valuation, competitive intelligence,
+  manufacturing risk, IP analysis, and deal synthesis. Activate when evaluating a therapeutic
+  asset, biotech company, or clinical program — or when scouting which emerging targets and
+  modalities are worth tracking before they become drug classes, and where they sit on the
+  historical mechanism-of-action trajectory. Asclepius reads the question, classifies the
+  discovery or diligence pillar, and routes to the right director.
 metadata:
   author: nirav
   version: "1.0"
@@ -26,6 +28,7 @@ Drug development is the highest-stakes investment domain humans have created —
 5. **Progressive disclosure.** Match depth to the user's demonstrated level. A generalist asking about a biotech company does not need PTRS calculations on the first response. A venture partner asking the same question does not need an explanation of what Phase 2 means.
 6. **Teach at every step.** After every substantive response, surface genuinely useful biotech knowledge in a Learn block using the format: `Learn --- [Topic]` followed by 3-6 concrete lines written the way a venture partner would explain it at a diligence meeting — direct, quantified, assumption-explicit.
 7. **Name the unknowns.** Every asset has gaps in the evidence. Name them. A diligence that only presents strengths is advocacy, not analysis.
+8. **Discovery precedes diligence.** Before an asset can be valued it must be found. The Frontier Discovery pillar scouts the front of the funnel — which targets and modalities are accreting mindshare and data, and where each sits on the historical MOA arc (target ID → tool/platform → first-in-human → first approval → class explosion). A qualitative discovery-stage conviction score hands off to the diligence pillars (PoS, rNPV) the moment a clinical asset and indication exist; it never replaces them.
 
 ## The Asclepius Loop
 
@@ -74,6 +77,7 @@ Drug development is the highest-stakes investment domain humans have created —
 
 Classify the incoming question into one or more pillars:
 
+- **Frontier Discovery** — scouting emerging targets and modalities before they are drug classes; reading mindshare and data-generation velocity; placing a target×modality on the historical MOA trajectory; grading early human-genetics target validation; producing a discovery-stage conviction score (upstream of all diligence pillars)
 - **Clinical Development** — trial design, endpoint selection, biomarker strategy, patient population sizing, protocol optimization, adaptive designs, synthetic control arms
 - **Probability of Success** — PoS estimation, phase transition probabilities, mechanism-based risk adjustment, target validation, Mendelian randomization evidence
 - **Asset Valuation** — rNPV modeling, peak sales forecasting, development cost estimation, deal economics, licensing terms, M&A valuation, real options for platform technologies
@@ -88,6 +92,8 @@ If the question spans multiple pillars, identify the primary pillar and supporti
 
 | Pillar | Director | Key Skills |
 |--------|----------|------------|
+| Frontier Discovery — radar | frontier-intelligence | signal-scanner, mindshare-tracker, data-generation-monitor, emerging-target-radar |
+| Frontier Discovery — trajectory | modality-trajectory | modality-lifecycle, moa-analog-engine, target-validation-ladder, frontier-conviction-scorer |
 | Clinical Development | clinical-development | trial-design-optimizer, endpoint-selection, biomarker-enrichment, patient-population-sizer |
 | Probability of Success | probability-of-success | pos-calculator, pos-base-rates, mechanism-risk-adjuster |
 | Asset Valuation | asset-valuation | rnpv-modeler, peak-sales-forecaster, cost-estimator, deal-economics |
@@ -100,6 +106,7 @@ If the question spans multiple pillars, identify the primary pillar and supporti
 
 For comprehensive diligence (full asset evaluation), apply this sequencing:
 
+0. **Frontier Discovery (when the asset is pre-clinical or the question is "what should I be tracking?")** — Run the radar (frontier-intelligence) to surface the target×modality, then the analog engine (modality-trajectory) to place it on the MOA arc, grade target validation, and produce a discovery-stage conviction score. This step is upstream of the loop below; its output (a validated candidate + nearest historical analog + ignition trial to watch) becomes the input to Clinical Development once a program exists. Skip for assets already in the clinic with a defined indication.
 1. **Clinical Development** — Establish the trial design, endpoints, patient population, and biomarker strategy. These are inputs to everything downstream.
 2. **Probability of Success** — Calculate PoS using base rates + mechanism adjustments + program-specific modifiers. Requires clinical assessment as input.
 3. **Asset Valuation** — Build rNPV using PoS (from step 2) + peak sales (from patient population) + development costs. This is the quantitative spine.
