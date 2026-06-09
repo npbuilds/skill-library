@@ -2873,13 +2873,13 @@
         "estimated_tokens_body": 1272,
         "estimated_tokens_total": 1323
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 76,
       "depends_on": [
         "cultures-societies",
         "diction",
@@ -5002,13 +5002,13 @@
         "estimated_tokens_body": 1805,
         "estimated_tokens_total": 1868
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [
         "magic-system-design",
         "world-bible",
@@ -5052,13 +5052,13 @@
         "estimated_tokens_body": 1939,
         "estimated_tokens_total": 1999
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 77,
       "depends_on": [
         "geography-ecology",
         "magic-system-design",
@@ -5581,7 +5581,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "manual_rating": null,
@@ -5607,8 +5607,8 @@
         "estimated_tokens_body": 1802,
         "estimated_tokens_total": 1867
       },
-      "auto_score": 76,
-      "composite_score": 76,
+      "auto_score": 73,
+      "composite_score": 73,
       "referenced_by": [
         "concrete-detail",
         "figurative-language",
@@ -5749,7 +5749,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5769,8 +5769,8 @@
         "estimated_tokens_body": 1492,
         "estimated_tokens_total": 1543
       },
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "narrative-geometry",
         "narrative-pacing"
@@ -5846,7 +5846,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5866,8 +5866,8 @@
         "estimated_tokens_body": 1150,
         "estimated_tokens_total": 1212
       },
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "dialogue",
         "narrative-arc",
@@ -5917,8 +5917,8 @@
         "estimated_tokens_body": 1130,
         "estimated_tokens_total": 1185
       },
-      "auto_score": 69,
-      "composite_score": 69,
+      "auto_score": 66,
+      "composite_score": 66,
       "referenced_by": [
         "micro-tension"
       ],
@@ -5965,8 +5965,8 @@
         "estimated_tokens_body": 1101,
         "estimated_tokens_total": 1146
       },
-      "auto_score": 69,
-      "composite_score": 69,
+      "auto_score": 66,
+      "composite_score": 66,
       "referenced_by": [
         "character-belief-tracker",
         "character-interiority",
@@ -5995,7 +5995,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6015,8 +6015,8 @@
         "estimated_tokens_body": 1115,
         "estimated_tokens_total": 1169
       },
-      "auto_score": 70,
-      "composite_score": 70,
+      "auto_score": 67,
+      "composite_score": 67,
       "referenced_by": [
         "character-interiority",
         "figurative-language"
@@ -7921,10 +7921,10 @@
       "health_status": "warning",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 68,
       "depends_on": [
         "behavioral-game-theory"
       ],
@@ -8102,13 +8102,13 @@
         "estimated_tokens_body": 1558,
         "estimated_tokens_total": 1604
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 79,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 79,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "asset-allocation",
@@ -11655,10 +11655,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 54,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 54,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -11747,10 +11747,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 57,
+      "auto_score": 54,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 57,
+      "composite_score": 54,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -25917,10 +25917,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 65,
       "depends_on": [
         "statistical-analysis"
       ],
@@ -25976,10 +25976,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 74,
       "depends_on": [
         "data-generation-monitor",
         "foresight",
@@ -26038,10 +26038,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 74,
       "depends_on": [
         "mechanism-risk-adjuster",
         "moa-analog-engine",
@@ -26101,10 +26101,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 79,
       "depends_on": [
         "foresight",
         "frontier-antenna",
@@ -26168,10 +26168,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 72,
       "depends_on": [
         "reflexivity-theory",
         "secular-themes"
@@ -26228,10 +26228,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 73,
       "depends_on": [
         "pos-base-rates",
         "spelunker"
@@ -26288,10 +26288,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 70,
       "depends_on": [
         "mechanism-risk-adjuster",
         "modality-manufacturing"
@@ -26348,10 +26348,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 79,
       "depends_on": [
         "frontier-intelligence",
         "mechanism-risk-adjuster",
@@ -26415,10 +26415,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 70,
       "depends_on": [
         "pipeline-mapper",
         "spelunker"
@@ -26475,10 +26475,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 65,
       "depends_on": [
         "mechanism-risk-adjuster"
       ],
