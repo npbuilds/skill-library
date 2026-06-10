@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-06-06T13:09:17Z",
+  "last_scan": "2026-06-10T01:13:48Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -5442,7 +5442,7 @@
         "worldbuilding-orchestrator"
       ],
       "created": "2026-03-26",
-      "last_modified": "2026-05-14",
+      "last_modified": "2026-06-10",
       "name": "prose-orchestrator",
       "description": "Orchestrate prose writing, revision, and craft learning across fiction, nonfiction, and essays. Use when the user needs help drafting prose, revising existing text, analyzing writing style, or learning prose craft. Activates when the task involves sentence-level polish, narrative structure, rhetorical strategy, editing passes, or voice development \u2014 for any genre or form.",
       "location": "skills/writing/prose-orchestrator/SKILL.md",
