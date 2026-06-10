@@ -42,3 +42,8 @@ exports/
 # Everything else in output/ is gitignored
 output/
 !output/visualizations/
+
+# ── Pre-change snapshots & local-only files ──
+data/registry.json.pre-*
+scripts/*.pre-phase*
+*.local-untracked
