@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path // \"\"') && echo \"$FILE\" | grep -q 'skills/.*/SKILL\\.md' && bash hooks/skill-file-watcher.sh \"$FILE\" || true",
+            "statusMessage": "Checking skill health..."
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path // \"\"') && echo \"$FILE\" | grep -q 'skills/.*/SKILL\\.md' && bash hooks/skill-file-watcher.sh \"$FILE\" 2>/dev/null || true",
+            "statusMessage": "Checking skill health..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash hooks/spelunker-trigger.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
