@@ -159,6 +159,23 @@ def test_bm25_only_single_signal_survives_floor(tmp_path):
         "single-signal BM25 match must survive the floor"
 
 
+def test_bm25_only_with_dead_graph_seed_survives_floor(tmp_path):
+    """BM25-only install + a recent_skills seed that ranks NOTHING (unknown /
+    isolated skill) must still return BM25 matches. Graph being *seeded* but
+    *not ranking* must not count toward corroboration, else the full floor
+    filters valid single-signal BM25 results to empty."""
+    idx = _make_index(tmp_path)
+    idx.build()
+    idx._embeddings = None
+    if idx._bm25 is None:
+        pytest.skip("rank-bm25 not installed")
+
+    # Seed is a skill not in the graph adjacency → graph produces no ranking.
+    results = idx.search("alpha", recent_skills=["nonexistent-skill"])
+    assert any(r["name"] == "alpha-skill" for r in results), \
+        "dead graph seed must not inflate capable-signal count"
+
+
 # ---------------------------------------------------------------------------
 # Embedding rebuild locking
 # ---------------------------------------------------------------------------

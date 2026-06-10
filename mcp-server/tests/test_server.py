@@ -208,6 +208,31 @@ class TestListSkillsPagination:
         assert server.list_skills() == server.list_skills()
 
 
+class TestIndexFreshnessKey:
+    def test_key_changes_when_synthetic_queries_change(self, tmp_project):
+        """The search index ingests synthetic_queries.json, so the freshness
+        key must change when that file changes — otherwise a running server
+        serves a stale index after query regeneration without a registry edit."""
+        import json as _json
+        import os as _os
+
+        syn = server.DATA_DIR / "synthetic_queries.json"
+        key1 = server._index_freshness_key()
+        assert key1 is not None and key1[1] == 0.0  # absent → 0.0
+
+        syn.write_text(_json.dumps({"version": 1, "skills": {}}))
+        # Force a later mtime so the change is observable regardless of clock
+        # granularity.
+        future = _os.path.getmtime(server.REGISTRY_PATH) + 100
+        _os.utime(syn, (future, future))
+        key2 = server._index_freshness_key()
+        assert key2 != key1 and key2[1] != 0.0
+
+    def test_key_none_when_registry_missing(self, tmp_path):
+        with patch.object(server, "REGISTRY_PATH", tmp_path / "nope.json"):
+            assert server._index_freshness_key() is None
+
+
 # ---------------------------------------------------------------------------
 # search_skills
 # ---------------------------------------------------------------------------
