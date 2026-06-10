@@ -125,9 +125,30 @@ mcp = FastMCP(
 
 _registry_cache_snapshot: tuple[tuple[str, float], dict] | None = None
 
-# Hybrid search index (lazy-loaded, invalidated by registry mtime)
+# Hybrid search index (lazy-loaded, invalidated by a freshness key)
 _search_index = None  # type: ignore[assignment]
-_search_index_mtime: float = 0.0
+_search_index_key: tuple[float, float] | None = None
+
+
+def _index_freshness_key() -> tuple[float, float] | None:
+    """Freshness token for the in-memory search index.
+
+    The index ingests both registry.json AND data/synthetic_queries.json (the
+    latter via Re-Invoke query expansion), so reuse must invalidate when EITHER
+    changes. Keying on the registry mtime alone would serve a stale index after
+    `generate_synthetic_queries.py` refreshes expansions without touching the
+    registry. Returns None if the registry is unreadable (caller treats as a
+    miss). The synthetic file is optional — absent → 0.0.
+    """
+    try:
+        reg_mtime = REGISTRY_PATH.stat().st_mtime
+    except OSError:
+        return None
+    try:
+        syn_mtime = (DATA_DIR / "synthetic_queries.json").stat().st_mtime
+    except OSError:
+        syn_mtime = 0.0
+    return (reg_mtime, syn_mtime)
 
 
 def load_registry() -> dict:
@@ -156,19 +177,18 @@ def load_registry() -> dict:
 
 
 def _get_search_index():
-    """Return the hybrid search index, rebuilding if registry changed."""
-    global _search_index, _search_index_mtime
+    """Return the hybrid search index, rebuilding if its inputs changed."""
+    global _search_index, _search_index_key
     try:
         from search_index import HybridSearchIndex
     except ImportError:
         return None
 
-    try:
-        mtime = REGISTRY_PATH.stat().st_mtime
-    except OSError:
+    key = _index_freshness_key()
+    if key is None:
         return None
 
-    if _search_index is not None and mtime == _search_index_mtime:
+    if _search_index is not None and key == _search_index_key:
         return _search_index
 
     try:
@@ -176,7 +196,7 @@ def _get_search_index():
         idx = HybridSearchIndex(SKILLS_DIR, registry, DATA_DIR)
         idx.build()
         _search_index = idx
-        _search_index_mtime = mtime
+        _search_index_key = key
         return idx
     except Exception as e:
         logging.getLogger(__name__).warning("Failed to build search index: %s", e)
@@ -481,7 +501,7 @@ def rebuild_search_index() -> str:
     The index auto-rebuilds when the registry changes, but this forces an
     immediate rebuild and reports status.
     """
-    global _search_index, _search_index_mtime
+    global _search_index, _search_index_key
 
     try:
         from search_index import HybridSearchIndex
@@ -501,11 +521,8 @@ def rebuild_search_index() -> str:
     idx = HybridSearchIndex(SKILLS_DIR, registry, DATA_DIR)
     status = idx.build()
 
-    try:
-        _search_index = idx
-        _search_index_mtime = REGISTRY_PATH.stat().st_mtime
-    except OSError:
-        pass
+    _search_index = idx
+    _search_index_key = _index_freshness_key()
 
     lines = [
         "=== Search Index Rebuilt ===",

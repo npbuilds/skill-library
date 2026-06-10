@@ -489,16 +489,24 @@ class HybridSearchIndex:
         # aren't installed and no recent skills seed the graph). There the
         # rank-1 RRF (1/61 ≈ 0.0164) would be filtered wholesale.
         #
-        # Keyed on signals *capable* of ranking, not on how many actually did:
-        # if two signals are available but only one fired, that lack of
+        # Keyed on signals *capable* of corroborating, not on how many fired:
+        # if two signals are available but only one matched, that lack of
         # corroboration is itself the gap signal — keep the full floor so the
         # weak single-signal match is dropped and out-of-scope queries come
-        # back empty (gap detection). Only when ≤1 signal could ever rank do
+        # back empty (gap detection). Only when ≤1 signal could corroborate do
         # we lower the floor so the best-effort match survives.
+        #
+        # BM25 and vectors score *every* skill, so "available" (index built)
+        # means they would rank any query with signal — availability is the
+        # right test. Graph is different: it can be seeded (recent_skills given)
+        # yet rank nothing (isolated/stale seed), so count it only when it
+        # actually produced a ranking. Otherwise a BM25-only install with a
+        # dead graph seed would falsely read as 2 signals and filter valid
+        # single-signal BM25 results to empty.
         capable_signals = (
             (1 if self._bm25 is not None else 0)
             + (1 if (self._embeddings is not None and HAS_VECTORS) else 0)
-            + (1 if recent_skills else 0)
+            + (1 if "graph" in ranked_by_signal else 0)
         )
         if min_score > 0:
             effective_floor = (
