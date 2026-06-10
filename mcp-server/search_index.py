@@ -10,6 +10,7 @@ whichever signals are available.
 """
 from __future__ import annotations
 
+import fcntl
 import hashlib
 import json
 import logging
@@ -96,7 +97,17 @@ _RRF_K = 60  # standard constant from Cormack et al. 2009
 # two-signal rank-1 ≈ 0.0328. A floor of 0.02 lets through anything strong
 # enough to hit two signals or top-rank one, and filters everything else so
 # the gap-detection feature stays meaningful.
+#
+# When BM25 is unavailable (rank-bm25 not installed — a degraded install),
+# the remaining signals rarely corroborate each other, so a 0.02 floor
+# would filter even the rank-1 result (0.0164) — every search would return
+# [] and the server would silently fall back to weak keyword matching. The
+# floor is scaled by _SINGLE_SIGNAL_FLOOR_FACTOR in that case so top hits
+# survive while the long tail is still dropped. When BM25 IS present, the
+# full floor applies even if only one signal matched — that keeps gap
+# detection firing on out-of-scope queries.
 _MIN_RRF_SCORE = 0.02
+_SINGLE_SIGNAL_FLOOR_FACTOR = 0.6  # 0.02 * 0.6 = 0.012 < 0.0164 rank-1
 
 
 class HybridSearchIndex:
@@ -207,8 +218,9 @@ class HybridSearchIndex:
 
         registry_hash = _get_registry_hash(self.data_dir)
 
-        # Check cache validity
-        if embed_path.exists() and names_path.exists() and key_path.exists():
+        def _load_valid_cache() -> Optional["np.ndarray"]:
+            if not (embed_path.exists() and names_path.exists() and key_path.exists()):
+                return None
             try:
                 cached_hash = json.loads(key_path.read_text()).get("hash", "")
                 cached_names = json.loads(names_path.read_text())
@@ -216,20 +228,38 @@ class HybridSearchIndex:
                     return np.load(str(embed_path))
             except (json.JSONDecodeError, ValueError, OSError, EOFError):
                 pass
+            return None
 
-        # Rebuild embeddings
+        cached = _load_valid_cache()
+        if cached is not None:
+            return cached
+
+        # Rebuild embeddings under an exclusive lock so concurrent builders
+        # (e.g. two server processes starting at once) don't interleave
+        # writes to the cache files. Double-checked: another process may
+        # have finished the rebuild while we waited on the lock.
+        lock_path = self.data_dir / ".embed_rebuild.lock"
         try:
-            if self._model is None:
-                self._model = SentenceTransformer(_EMBED_MODEL_NAME)
-            embeddings = self._model.encode(corpus_texts, show_progress_bar=False)
-            embeddings = np.array(embeddings, dtype=np.float32)
+            with open(lock_path, "a") as lock_f:
+                fcntl.flock(lock_f, fcntl.LOCK_EX)
+                try:
+                    cached = _load_valid_cache()
+                    if cached is not None:
+                        return cached
 
-            # Persist atomically
-            _atomic_write_npy(embed_path, embeddings)
-            _atomic_write_json(names_path, self._names)
-            _atomic_write_json(key_path, {"hash": registry_hash})
+                    if self._model is None:
+                        self._model = SentenceTransformer(_EMBED_MODEL_NAME)
+                    embeddings = self._model.encode(corpus_texts, show_progress_bar=False)
+                    embeddings = np.array(embeddings, dtype=np.float32)
 
-            return embeddings
+                    # Persist atomically
+                    _atomic_write_npy(embed_path, embeddings)
+                    _atomic_write_json(names_path, self._names)
+                    _atomic_write_json(key_path, {"hash": registry_hash})
+
+                    return embeddings
+                finally:
+                    fcntl.flock(lock_f, fcntl.LOCK_UN)
         except Exception as e:
             logger.warning("Failed to build embeddings: %s", e)
             return None
@@ -317,8 +347,21 @@ class HybridSearchIndex:
         # Drop sub-threshold matches before applying the result limit so the
         # caller sees a clean "no real hits" empty list (which lets gap-
         # detection downstream actually fire on unmatchable queries).
+        #
+        # The floor is scaled down ONLY when BM25 is unavailable (degraded
+        # install, e.g. rank-bm25 missing) — there the remaining signals
+        # can't corroborate each other and rank-1 (1/61 ≈ 0.0164) would be
+        # filtered wholesale. When BM25 IS available but simply didn't
+        # match, that's evidence of irrelevance, not degradation: keep the
+        # full floor so out-of-scope queries still come back empty and gap
+        # detection fires.
         if min_score > 0:
-            fused = [(name, score) for name, score in fused if score >= min_score]
+            effective_floor = (
+                min_score * _SINGLE_SIGNAL_FLOOR_FACTOR
+                if self._bm25 is None
+                else min_score
+            )
+            fused = [(name, score) for name, score in fused if score >= effective_floor]
 
         results = []
         for name, score in fused[:limit]:

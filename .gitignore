@@ -21,6 +21,7 @@ data/backups/
 data/skill_embeddings.npy
 data/skill_embed_names.json
 data/skill_embed_mtime.json
+data/.embed_rebuild.lock
 
 # ── Firebase / App ──
 app/.firebase/
