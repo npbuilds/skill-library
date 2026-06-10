@@ -115,23 +115,46 @@ def _split_passages(body: str, max_words: int = _BODY_MAX_WORDS,
     return passages
 
 
-def _load_synthetic_queries(data_dir: Path) -> dict[str, list[str]]:
-    """Load index_queries per skill from data/synthetic_queries.json.
+# Number of body chars folded into the synthetic-query content hash. Must
+# match scripts/generate_synthetic_queries.py (which imports the hash below),
+# so a regenerated query set and the index agree on what "unchanged" means.
+SYNTHETIC_BODY_EXCERPT_CHARS = 1200
 
-    Returns {skill_name: [queries]} (index_queries only — eval_queries are
-    held out for the retrieval eval and must never be indexed). Missing or
-    unreadable file → empty dict (the feature is optional).
+
+def synthetic_content_hash(desc: str, skill_md_text: str) -> str:
+    """Canonical hash of a skill's content for synthetic-query staleness.
+
+    Hashes the description plus the frontmatter-stripped SKILL.md body
+    (capped at SYNTHETIC_BODY_EXCERPT_CHARS). The generator stamps this hash
+    onto each skill's queries; the index recomputes it and skips queries whose
+    hash no longer matches, so editing a skill without rerunning the generator
+    doesn't index stale expansions that describe the old meaning.
+    """
+    body = _STRIP_FM_RE.sub("", skill_md_text, count=1).strip()[:SYNTHETIC_BODY_EXCERPT_CHARS]
+    return hashlib.sha256((desc + "\x00" + body).encode("utf-8")).hexdigest()
+
+
+def _load_synthetic_queries(data_dir: Path) -> dict[str, dict]:
+    """Load synthetic-query entries per skill from data/synthetic_queries.json.
+
+    Returns {skill_name: {"content_hash": str, "index_queries": [str]}} for
+    skills with non-empty index_queries (eval_queries are held out for the
+    retrieval eval and must never be indexed). Missing/unreadable file → {}.
+    Freshness is validated by the caller against the live skill content.
     """
     path = data_dir / "synthetic_queries.json"
     try:
         payload = json.loads(path.read_text())
     except (OSError, json.JSONDecodeError):
         return {}
-    out: dict[str, list[str]] = {}
+    out: dict[str, dict] = {}
     for name, entry in payload.get("skills", {}).items():
         qs = entry.get("index_queries") or []
         if isinstance(qs, list) and qs:
-            out[name] = [str(q) for q in qs]
+            out[name] = {
+                "content_hash": entry.get("content_hash", ""),
+                "index_queries": [str(q) for q in qs],
+            }
     return out
 
 
@@ -230,8 +253,14 @@ class HybridSearchIndex:
     # Build
     # ------------------------------------------------------------------
 
-    def build(self) -> dict:
-        """Build all available indexes. Returns a status dict."""
+    def build(self, build_vectors: bool = True) -> dict:
+        """Build all available indexes. Returns a status dict.
+
+        build_vectors=False skips the (expensive) embedding build/load entirely
+        — used by callers that only want BM25 + graph (e.g. the CI eval in
+        bm25,graph mode), so they don't pay the model download/encode cost just
+        to discard the vectors afterward.
+        """
         t0 = time.monotonic()
         skills = self._skills
         self._names = []
@@ -256,7 +285,20 @@ class HybridSearchIndex:
 
             text = _extract_skill_text(skill_dir)
             desc = entry.get("description", "")
-            syn_queries = synthetic.get(name, [])
+
+            # Synthetic queries are only used when their stored content hash
+            # still matches the live skill — otherwise they describe the skill's
+            # old meaning and are skipped until the generator is rerun.
+            syn_entry = synthetic.get(name)
+            syn_queries: list[str] = []
+            if syn_entry:
+                try:
+                    raw_md = (skill_dir / "SKILL.md").read_text(errors="replace")
+                    if syn_entry["content_hash"] == synthetic_content_hash(desc, raw_md):
+                        syn_queries = syn_entry["index_queries"]
+                except OSError:
+                    pass
+
             # Synthetic queries join the BM25 doc so keyword search benefits
             # from user-phrased vocabulary too.
             full_text = f"{name} {desc} {text} {' '.join(syn_queries)}"
@@ -308,7 +350,7 @@ class HybridSearchIndex:
             status["bm25"] = True
 
         # Vector embeddings (chunked: rows ≥ skills)
-        if HAS_VECTORS and corpus_texts:
+        if build_vectors and HAS_VECTORS and corpus_texts:
             self._embeddings = self._build_or_load_embeddings(corpus_texts, chunk_keys)
             status["vectors"] = self._embeddings is not None
             status["chunks_indexed"] = len(corpus_texts)
