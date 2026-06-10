@@ -10,6 +10,7 @@ whichever signals are available.
 """
 from __future__ import annotations
 
+import fcntl
 import hashlib
 import json
 import logging
@@ -84,6 +85,99 @@ def _tokenize(text: str) -> list[str]:
     return [t for t in re.split(r"[^a-z0-9]+", text.lower()) if len(t) >= 3]
 
 
+# Body is split on ## headings then re-packed into word-bounded passages.
+# 150 words ≈ 200 tokens, within MiniLM's 256-token window before truncation.
+_BODY_MAX_WORDS = 150
+_BODY_MAX_CHUNKS = 8
+_HEADING_RE = re.compile(r"^#{2,}\s", re.MULTILINE)
+
+
+def _split_passages(body: str, max_words: int = _BODY_MAX_WORDS,
+                    max_chunks: int = _BODY_MAX_CHUNKS) -> list[str]:
+    """Split body text into heading-aware, word-bounded passages.
+
+    Splits on ## (or deeper) headings first, then packs sections into
+    passages of at most ``max_words`` words. A single oversized section is
+    chunked across multiple passages. Returns at most ``max_chunks``
+    passages so a sprawling skill can't dominate the embedding matrix.
+    """
+    # Split at heading boundaries, keeping the heading with its section.
+    sections = _HEADING_RE.split(body)
+    passages: list[str] = []
+    for section in sections:
+        words = section.split()
+        if not words:
+            continue
+        for i in range(0, len(words), max_words):
+            passages.append(" ".join(words[i:i + max_words]))
+            if len(passages) >= max_chunks:
+                return passages
+    return passages
+
+
+# Number of body chars folded into the synthetic-query content hash. Must
+# match scripts/generate_synthetic_queries.py (which imports the hash below),
+# so a regenerated query set and the index agree on what "unchanged" means.
+SYNTHETIC_BODY_EXCERPT_CHARS = 1200
+
+
+def synthetic_content_hash(desc: str, skill_md_text: str) -> str:
+    """Canonical hash of a skill's content for synthetic-query staleness.
+
+    Hashes the description plus the frontmatter-stripped SKILL.md body
+    (capped at SYNTHETIC_BODY_EXCERPT_CHARS). The generator stamps this hash
+    onto each skill's queries; the index recomputes it and skips queries whose
+    hash no longer matches, so editing a skill without rerunning the generator
+    doesn't index stale expansions that describe the old meaning.
+    """
+    body = _STRIP_FM_RE.sub("", skill_md_text, count=1).strip()[:SYNTHETIC_BODY_EXCERPT_CHARS]
+    return hashlib.sha256((desc + "\x00" + body).encode("utf-8")).hexdigest()
+
+
+def _load_synthetic_queries(data_dir: Path) -> dict[str, dict]:
+    """Load synthetic-query entries per skill from data/synthetic_queries.json.
+
+    Returns {skill_name: {"content_hash": str, "index_queries": [str]}} for
+    skills with non-empty index_queries (eval_queries are held out for the
+    retrieval eval and must never be indexed). Missing/unreadable file → {}.
+    Freshness is validated by the caller against the live skill content.
+    """
+    path = data_dir / "synthetic_queries.json"
+    try:
+        payload = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return {}
+    out: dict[str, dict] = {}
+    for name, entry in payload.get("skills", {}).items():
+        qs = entry.get("index_queries") or []
+        if isinstance(qs, list) and qs:
+            out[name] = {
+                "content_hash": entry.get("content_hash", ""),
+                "index_queries": [str(q) for q in qs],
+            }
+    return out
+
+
+def _extract_chunks(skill_dir: Path, name: str, desc: str) -> list[tuple[str, str]]:
+    """Build (chunk_kind, embed_text) pairs for one skill.
+
+    chunk 0 is the routing-critical "name: description" line; the rest are
+    body passages. Each text is name-prefixed so a passage carries its
+    skill identity into the embedding. References stay BM25-only (they
+    bloat the vector matrix without improving routing precision).
+    """
+    chunks: list[tuple[str, str]] = [("desc", f"{name}: {desc}")]
+
+    skill_md = skill_dir / "SKILL.md"
+    if skill_md.exists():
+        raw = skill_md.read_text(errors="replace")
+        body = _STRIP_FM_RE.sub("", raw, count=1)
+        for i, passage in enumerate(_split_passages(body)):
+            chunks.append((f"body:{i}", f"{name}: {passage}"))
+
+    return chunks
+
+
 # ---------------------------------------------------------------------------
 # Hybrid search index
 # ---------------------------------------------------------------------------
@@ -91,12 +185,36 @@ def _tokenize(text: str) -> list[str]:
 _EMBED_MODEL_NAME = "all-MiniLM-L6-v2"
 _RRF_K = 60  # standard constant from Cormack et al. 2009
 
+# Embedding cache schema version. Bump when the row layout changes (e.g.
+# one-vector-per-skill → one-vector-per-chunk) so stale caches fail closed
+# and rebuild instead of mis-mapping rows to skills.
+_EMBED_CACHE_SCHEMA = 2
+
+# Body-passage chunks are down-weighted relative to the "name: description"
+# chunk when max-pooling per skill. The description is the routing-critical
+# signal (Anthropic Agent Skills guidance); body chunks give every skill 8
+# extra chances to match, which surfaces semantically-adjacent wrong skills
+# if left at parity. At 0.85 a body passage only outranks a description match
+# when it's a markedly stronger semantic hit — so chunks rescue desc misses
+# without outvoting good desc matches. Tuned against scripts/eval_retrieval.py.
+_BODY_CHUNK_WEIGHT = 0.85
+
 # RRF score floor. Below this, a "match" is single-signal noise (e.g., vector
 # similarity scraping the long tail). With k=60: single-signal rank-1 ≈ 0.0164,
 # two-signal rank-1 ≈ 0.0328. A floor of 0.02 lets through anything strong
 # enough to hit two signals or top-rank one, and filters everything else so
 # the gap-detection feature stays meaningful.
+#
+# When only ONE signal produces rankings for a query (e.g. BM25-only because
+# vectors aren't installed and there are no recent skills to seed the graph),
+# a 0.02 floor filters even the rank-1 result (1/61 ≈ 0.0164) — search would
+# return [] and the server would fall back to weak keyword matching. The floor
+# is scaled by _SINGLE_SIGNAL_FLOOR_FACTOR in that case so top single-signal
+# hits survive. With ≥2 signals ranking, the full floor applies: a hit
+# corroborated by two signals clears 0.02 easily, and a lone single-signal
+# long-tail match is correctly dropped (keeping gap detection meaningful).
 _MIN_RRF_SCORE = 0.02
+_SINGLE_SIGNAL_FLOOR_FACTOR = 0.6  # 0.02 * 0.6 = 0.012 < 0.0164 rank-1
 
 
 class HybridSearchIndex:
@@ -115,8 +233,15 @@ class HybridSearchIndex:
         self._registry = registry
         self._skills = registry.get("skills", {})
 
-        # Ordered list of skill names — index positions match BM25/vector arrays
+        # Ordered list of skill names — index positions match BM25 corpus rows.
         self._names: list[str] = []
+        # Per-skill index for each embedding row: embeddings are CHUNKED
+        # (multiple rows per skill), so row i belongs to skill
+        # self._names[self._chunk_skill_idx[i]].
+        self._chunk_skill_idx: list[int] = []
+        # Per-row pooling weight: 1.0 for the description chunk, _BODY_CHUNK_WEIGHT
+        # for body passages (parallel to embedding rows).
+        self._chunk_weight: list[float] = []
         self._bm25: Optional["BM25Okapi"] = None
         self._embeddings: Optional["np.ndarray"] = None
         self._model: Optional["SentenceTransformer"] = None
@@ -128,13 +253,27 @@ class HybridSearchIndex:
     # Build
     # ------------------------------------------------------------------
 
-    def build(self) -> dict:
-        """Build all available indexes. Returns a status dict."""
+    def build(self, build_vectors: bool = True) -> dict:
+        """Build all available indexes. Returns a status dict.
+
+        build_vectors=False skips the (expensive) embedding build/load entirely
+        — used by callers that only want BM25 + graph (e.g. the CI eval in
+        bm25,graph mode), so they don't pay the model download/encode cost just
+        to discard the vectors afterward.
+        """
         t0 = time.monotonic()
         skills = self._skills
         self._names = []
+        self._chunk_skill_idx = []
+        self._chunk_weight = []
+        # Chunk keys (skill, kind) parallel to embedding rows — persisted so a
+        # loaded cache can be validated against the current skill set.
+        chunk_keys: list[tuple[str, str]] = []
         corpus_tokens: list[list[str]] = []
         corpus_texts: list[str] = []
+
+        # Synthetic user queries (Re-Invoke doc expansion) — index_queries only.
+        synthetic = _load_synthetic_queries(self.data_dir)
 
         for name, entry in sorted(skills.items()):
             if entry.get("status") != "active":
@@ -146,13 +285,43 @@ class HybridSearchIndex:
 
             text = _extract_skill_text(skill_dir)
             desc = entry.get("description", "")
-            full_text = f"{name} {desc} {text}"
 
+            # Synthetic queries are only used when their stored content hash
+            # still matches the live skill — otherwise they describe the skill's
+            # old meaning and are skipped until the generator is rerun.
+            syn_entry = synthetic.get(name)
+            syn_queries: list[str] = []
+            if syn_entry:
+                try:
+                    raw_md = (skill_dir / "SKILL.md").read_text(errors="replace")
+                    if syn_entry["content_hash"] == synthetic_content_hash(desc, raw_md):
+                        syn_queries = syn_entry["index_queries"]
+                except OSError:
+                    pass
+
+            # Synthetic queries join the BM25 doc so keyword search benefits
+            # from user-phrased vocabulary too.
+            full_text = f"{name} {desc} {text} {' '.join(syn_queries)}"
+
+            skill_idx = len(self._names)
             self._names.append(name)
             corpus_tokens.append(_tokenize(full_text))
-            # For embeddings: description + first ~200 words of body
-            body_words = text.split()[:200]
-            corpus_texts.append(f"{name}: {desc}. {' '.join(body_words)}")
+
+            # For embeddings: one row per chunk (desc + body passages + each
+            # synthetic query), mapped back to this skill so query-time
+            # max-pooling collapses them into a single per-skill similarity.
+            chunks = _extract_chunks(skill_dir, name, desc)
+            for j, q in enumerate(syn_queries):
+                chunks.append((f"q:{j}", f"{name}: {q}"))
+            for kind, chunk_text in chunks:
+                chunk_keys.append((name, kind))
+                self._chunk_skill_idx.append(skill_idx)
+                # desc and synthetic-query chunks are full-weight routing
+                # signals; body passages are down-weighted (see constant).
+                self._chunk_weight.append(
+                    _BODY_CHUNK_WEIGHT if kind.startswith("body:") else 1.0
+                )
+                corpus_texts.append(chunk_text)
 
         # Build adjacency graph
         self._adj.clear()
@@ -180,56 +349,85 @@ class HybridSearchIndex:
             self._bm25 = BM25Okapi(corpus_tokens)
             status["bm25"] = True
 
-        # Vector embeddings
-        if HAS_VECTORS and corpus_texts:
-            self._embeddings = self._build_or_load_embeddings(corpus_texts)
+        # Vector embeddings (chunked: rows ≥ skills)
+        if build_vectors and HAS_VECTORS and corpus_texts:
+            self._embeddings = self._build_or_load_embeddings(corpus_texts, chunk_keys)
             status["vectors"] = self._embeddings is not None
+            status["chunks_indexed"] = len(corpus_texts)
 
         elapsed = time.monotonic() - t0
         status["build_time_ms"] = round(elapsed * 1000)
         return status
 
-    def _build_or_load_embeddings(self, corpus_texts: list[str]) -> Optional["np.ndarray"]:
-        """Load cached embeddings if the registry's content hasn't changed,
-        else rebuild.
+    def _build_or_load_embeddings(
+        self,
+        corpus_texts: list[str],
+        chunk_keys: list[tuple[str, str]],
+    ) -> Optional["np.ndarray"]:
+        """Load cached chunk embeddings if still valid, else rebuild.
 
-        The cache is keyed on a SHA256 hash of registry.json, not its
-        filesystem mtime. mtime is unreliable across Docker image builds
-        because overlayfs may report different timestamps for the same
-        file inside a build container vs a running container — so an
-        mtime-keyed cache that's pre-built into the image won't be
-        considered valid at runtime. A content hash sidesteps that.
+        Cache is keyed on a SHA256 hash of registry.json (content, not
+        mtime — robust across Docker overlayfs builds). The names sidecar
+        stores the parallel ``chunk_keys`` ([[skill, kind], ...]); a schema
+        marker guards against loading a pre-chunking (v1) cache whose row
+        layout no longer matches. Either mismatch fails closed → rebuild.
         """
         embed_path = self.data_dir / "skill_embeddings.npy"
         names_path = self.data_dir / "skill_embed_names.json"
-        # Filename retained for back-compat; payload is now {"hash": ...}.
+        # Filename retained for back-compat; payload is now {"hash", "schema"}.
         key_path = self.data_dir / "skill_embed_mtime.json"
 
         registry_hash = _get_registry_hash(self.data_dir)
+        # chunk_keys is a list of tuples; JSON round-trips them to lists.
+        expected_keys = [list(k) for k in chunk_keys]
 
-        # Check cache validity
-        if embed_path.exists() and names_path.exists() and key_path.exists():
+        def _load_valid_cache() -> Optional["np.ndarray"]:
+            if not (embed_path.exists() and names_path.exists() and key_path.exists()):
+                return None
             try:
-                cached_hash = json.loads(key_path.read_text()).get("hash", "")
-                cached_names = json.loads(names_path.read_text())
-                if cached_hash and cached_hash == registry_hash and cached_names == self._names:
+                meta = json.loads(key_path.read_text())
+                if meta.get("schema") != _EMBED_CACHE_SCHEMA:
+                    return None  # v1 (or unknown) cache — row layout differs
+                cached_hash = meta.get("hash", "")
+                cached_keys = json.loads(names_path.read_text())
+                if cached_hash and cached_hash == registry_hash and cached_keys == expected_keys:
                     return np.load(str(embed_path))
             except (json.JSONDecodeError, ValueError, OSError, EOFError):
                 pass
+            return None
 
-        # Rebuild embeddings
+        cached = _load_valid_cache()
+        if cached is not None:
+            return cached
+
+        # Rebuild embeddings under an exclusive lock so concurrent builders
+        # (e.g. two server processes starting at once) don't interleave
+        # writes to the cache files. Double-checked: another process may
+        # have finished the rebuild while we waited on the lock.
+        lock_path = self.data_dir / ".embed_rebuild.lock"
         try:
-            if self._model is None:
-                self._model = SentenceTransformer(_EMBED_MODEL_NAME)
-            embeddings = self._model.encode(corpus_texts, show_progress_bar=False)
-            embeddings = np.array(embeddings, dtype=np.float32)
+            with open(lock_path, "a") as lock_f:
+                fcntl.flock(lock_f, fcntl.LOCK_EX)
+                try:
+                    cached = _load_valid_cache()
+                    if cached is not None:
+                        return cached
 
-            # Persist atomically
-            _atomic_write_npy(embed_path, embeddings)
-            _atomic_write_json(names_path, self._names)
-            _atomic_write_json(key_path, {"hash": registry_hash})
+                    if self._model is None:
+                        self._model = SentenceTransformer(_EMBED_MODEL_NAME)
+                    embeddings = self._model.encode(corpus_texts, show_progress_bar=False)
+                    embeddings = np.array(embeddings, dtype=np.float32)
 
-            return embeddings
+                    # Persist atomically
+                    _atomic_write_npy(embed_path, embeddings)
+                    _atomic_write_json(names_path, expected_keys)
+                    _atomic_write_json(
+                        key_path, {"hash": registry_hash, "schema": _EMBED_CACHE_SCHEMA}
+                    )
+
+                    return embeddings
+                finally:
+                    fcntl.flock(lock_f, fcntl.LOCK_UN)
         except Exception as e:
             logger.warning("Failed to build embeddings: %s", e)
             return None
@@ -275,7 +473,7 @@ class HybridSearchIndex:
                 if bm25_ranked:
                     ranked_by_signal["bm25"] = bm25_ranked
 
-        # Signal 2: Vector similarity
+        # Signal 2: Vector similarity (chunked + max-pooled per skill)
         # Lazy-load the model on first vector search. The cache-hit path in
         # _build_or_load_embeddings sets self._embeddings without loading the
         # model — but the model is needed here to encode the *query*.
@@ -285,15 +483,25 @@ class HybridSearchIndex:
                     self._model = SentenceTransformer(_EMBED_MODEL_NAME)
                 q_embed = self._model.encode([query], show_progress_bar=False)
                 q_embed = np.array(q_embed, dtype=np.float32)
-                # Cosine similarity
+                # Cosine similarity over every chunk row.
                 norms = np.linalg.norm(self._embeddings, axis=1, keepdims=True)
                 norms = np.where(norms == 0, 1, norms)
                 normed = self._embeddings / norms
                 q_norm = q_embed / np.where(
                     np.linalg.norm(q_embed) == 0, 1, np.linalg.norm(q_embed)
                 )
-                sims = (normed @ q_norm.T).flatten()
-                indexed = sorted(enumerate(sims), key=lambda x: -x[1])
+                chunk_sims = (normed @ q_norm.T).flatten()
+                # Down-weight body passages so the description chunk anchors
+                # routing; body chunks only win when markedly stronger.
+                chunk_sims = chunk_sims * np.asarray(self._chunk_weight, dtype=np.float32)
+                # Max-pool chunk similarities into one score per skill: a query
+                # matches a single passage, so the best-matching chunk defines
+                # the skill's relevance (mean would dilute it across sections).
+                pooled = np.full(len(self._names), -1.0, dtype=np.float32)
+                np.maximum.at(
+                    pooled, np.asarray(self._chunk_skill_idx, dtype=np.intp), chunk_sims
+                )
+                indexed = sorted(enumerate(pooled), key=lambda x: -x[1])
                 vec_ranked = [
                     self._names[i] for i, s in indexed if s > 0.1
                 ][:limit * 3]
@@ -317,8 +525,38 @@ class HybridSearchIndex:
         # Drop sub-threshold matches before applying the result limit so the
         # caller sees a clean "no real hits" empty list (which lets gap-
         # detection downstream actually fire on unmatchable queries).
+        #
+        # The floor is scaled down only when the index is STRUCTURALLY limited
+        # to a single signal for this query (e.g. BM25-only because vectors
+        # aren't installed and no recent skills seed the graph). There the
+        # rank-1 RRF (1/61 ≈ 0.0164) would be filtered wholesale.
+        #
+        # Keyed on signals *capable* of corroborating, not on how many fired:
+        # if two signals are available but only one matched, that lack of
+        # corroboration is itself the gap signal — keep the full floor so the
+        # weak single-signal match is dropped and out-of-scope queries come
+        # back empty (gap detection). Only when ≤1 signal could corroborate do
+        # we lower the floor so the best-effort match survives.
+        #
+        # BM25 and vectors score *every* skill, so "available" (index built)
+        # means they would rank any query with signal — availability is the
+        # right test. Graph is different: it can be seeded (recent_skills given)
+        # yet rank nothing (isolated/stale seed), so count it only when it
+        # actually produced a ranking. Otherwise a BM25-only install with a
+        # dead graph seed would falsely read as 2 signals and filter valid
+        # single-signal BM25 results to empty.
+        capable_signals = (
+            (1 if self._bm25 is not None else 0)
+            + (1 if (self._embeddings is not None and HAS_VECTORS) else 0)
+            + (1 if "graph" in ranked_by_signal else 0)
+        )
         if min_score > 0:
-            fused = [(name, score) for name, score in fused if score >= min_score]
+            effective_floor = (
+                min_score
+                if capable_signals >= 2
+                else min_score * _SINGLE_SIGNAL_FLOOR_FACTOR
+            )
+            fused = [(name, score) for name, score in fused if score >= effective_floor]
 
         results = []
         for name, score in fused[:limit]:
@@ -400,18 +638,27 @@ class HybridSearchIndex:
 # ---------------------------------------------------------------------------
 
 def _get_registry_hash(data_dir: Path) -> str:
-    """Content hash of registry.json, used as the embedding cache key.
+    """Composite content hash of the inputs that determine the embeddings.
 
-    A content hash is robust across Docker image builds and overlay
-    filesystems, where mtime semantics are unreliable. If the registry
-    is missing or unreadable, returns the empty string (which will not
-    match any persisted hash, so the cache check fails closed).
+    Hashes registry.json plus synthetic_queries.json (if present), so that
+    regenerating synthetic queries invalidates the embedding cache and
+    forces a rebuild. A content hash is robust across Docker image builds
+    and overlay filesystems, where mtime semantics are unreliable. If the
+    registry is missing or unreadable, returns the empty string (which
+    won't match any persisted hash, so the cache check fails closed).
     """
     reg = data_dir / "registry.json"
     try:
-        return hashlib.sha256(reg.read_bytes()).hexdigest()
+        h = hashlib.sha256(reg.read_bytes())
     except OSError:
         return ""
+    # Synthetic queries are optional; fold them in when present.
+    try:
+        h.update(b"\x00synthetic\x00")
+        h.update((data_dir / "synthetic_queries.json").read_bytes())
+    except OSError:
+        pass
+    return h.hexdigest()
 
 
 def _atomic_write_npy(path: Path, arr: "np.ndarray") -> None:

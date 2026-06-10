@@ -17,6 +17,7 @@ import fcntl
 import json
 import logging
 import os
+import sys
 import uuid
 from collections import Counter, deque
 from datetime import datetime, timezone
@@ -72,8 +73,13 @@ def _log_event(path: Path, event: dict) -> None:
                 f.flush()
             finally:
                 fcntl.flock(f, fcntl.LOCK_UN)
-    except OSError:
-        pass  # Never let logging break a tool call
+    except OSError as e:
+        # Never let logging break a tool call — but don't lose the failure
+        # either. stderr is captured by Cloud Logging in remote mode.
+        print(
+            f"skill-library: failed to write log {path.name}: {e}",
+            file=sys.stderr,
+        )
 
 
 _load_log = load_log  # backward-compatible alias
@@ -119,9 +125,30 @@ mcp = FastMCP(
 
 _registry_cache_snapshot: tuple[tuple[str, float], dict] | None = None
 
-# Hybrid search index (lazy-loaded, invalidated by registry mtime)
+# Hybrid search index (lazy-loaded, invalidated by a freshness key)
 _search_index = None  # type: ignore[assignment]
-_search_index_mtime: float = 0.0
+_search_index_key: tuple[float, float] | None = None
+
+
+def _index_freshness_key() -> tuple[float, float] | None:
+    """Freshness token for the in-memory search index.
+
+    The index ingests both registry.json AND data/synthetic_queries.json (the
+    latter via Re-Invoke query expansion), so reuse must invalidate when EITHER
+    changes. Keying on the registry mtime alone would serve a stale index after
+    `generate_synthetic_queries.py` refreshes expansions without touching the
+    registry. Returns None if the registry is unreadable (caller treats as a
+    miss). The synthetic file is optional — absent → 0.0.
+    """
+    try:
+        reg_mtime = REGISTRY_PATH.stat().st_mtime
+    except OSError:
+        return None
+    try:
+        syn_mtime = (DATA_DIR / "synthetic_queries.json").stat().st_mtime
+    except OSError:
+        syn_mtime = 0.0
+    return (reg_mtime, syn_mtime)
 
 
 def load_registry() -> dict:
@@ -150,19 +177,18 @@ def load_registry() -> dict:
 
 
 def _get_search_index():
-    """Return the hybrid search index, rebuilding if registry changed."""
-    global _search_index, _search_index_mtime
+    """Return the hybrid search index, rebuilding if its inputs changed."""
+    global _search_index, _search_index_key
     try:
         from search_index import HybridSearchIndex
     except ImportError:
         return None
 
-    try:
-        mtime = REGISTRY_PATH.stat().st_mtime
-    except OSError:
+    key = _index_freshness_key()
+    if key is None:
         return None
 
-    if _search_index is not None and mtime == _search_index_mtime:
+    if _search_index is not None and key == _search_index_key:
         return _search_index
 
     try:
@@ -170,7 +196,7 @@ def _get_search_index():
         idx = HybridSearchIndex(SKILLS_DIR, registry, DATA_DIR)
         idx.build()
         _search_index = idx
-        _search_index_mtime = mtime
+        _search_index_key = key
         return idx
     except Exception as e:
         logging.getLogger(__name__).warning("Failed to build search index: %s", e)
@@ -218,6 +244,8 @@ def list_skills(
     domain: str | None = None,
     skill_type: str | None = None,
     subdomain: str | None = None,
+    limit: int = 100,
+    offset: int = 0,
 ) -> str:
     """List all available skills in the library.
 
@@ -225,6 +253,8 @@ def list_skills(
         domain: Optional filter — only show skills in this domain (e.g. "design", "infrastructure").
         skill_type: Optional filter — only show this type ("knowledge", "action", "director", "orchestrator", or "observer").
         subdomain: Optional filter — only show skills in this subdomain (e.g. "visual-communication").
+        limit: Max skills per page (default 100). Pass 0 for no limit.
+        offset: Number of matching skills to skip — use with limit to paginate.
     """
     try:
         registry = load_registry()
@@ -271,9 +301,22 @@ def list_skills(
     if not results:
         return "No skills found matching those filters."
 
+    # Deterministic order so offset-based pagination is stable across calls.
+    results.sort(key=lambda s: (s["domain"], s["name"]))
+
+    total = len(results)
+    offset = max(0, offset)
+    if offset >= total:
+        return (
+            f"Found {total} skill(s), but offset={offset} is past the end. "
+            f"Use offset < {total}."
+        )
+    page = results[offset:offset + limit] if limit > 0 else results[offset:]
+    end = offset + len(page)
+
     # Build a readable summary
-    lines = [f"Found {len(results)} skill(s):\n"]
-    for s in results:
+    lines = [f"Found {total} skill(s), showing {offset + 1}–{end}:\n"]
+    for s in page:
         parent_info = f", parent: {s['parent']}" if s["parent"] else ""
         lines.append(
             f"  [{s['type']}] {s['name']}  "
@@ -282,18 +325,25 @@ def list_skills(
         lines.append(f"    {s['description'].strip()}")
         lines.append("")
 
-    # Also list available domains and subdomains for discoverability
-    all_domains = set()
-    all_subdomains = set()
-    for entry in skills.values():
-        for tag in entry.get("tags", []):
-            if tag.startswith("domain:"):
-                all_domains.add(tag.split(":")[1])
-            elif tag.startswith("subdomain:"):
-                all_subdomains.add(tag.split(":")[1])
-    lines.append(f"Available domains: {', '.join(sorted(all_domains))}")
-    if all_subdomains:
-        lines.append(f"Available subdomains: {', '.join(sorted(all_subdomains))}")
+    if end < total:
+        lines.append(
+            f"({total - end} more — call again with offset={end} for the next page.)"
+        )
+
+    # List available domains/subdomains for discoverability, first page only
+    # so paginated follow-ups stay lean.
+    if offset == 0:
+        all_domains = set()
+        all_subdomains = set()
+        for entry in skills.values():
+            for tag in entry.get("tags", []):
+                if tag.startswith("domain:"):
+                    all_domains.add(tag.split(":")[1])
+                elif tag.startswith("subdomain:"):
+                    all_subdomains.add(tag.split(":")[1])
+        lines.append(f"Available domains: {', '.join(sorted(all_domains))}")
+        if all_subdomains:
+            lines.append(f"Available subdomains: {', '.join(sorted(all_subdomains))}")
 
     return "\n".join(lines)
 
@@ -451,7 +501,7 @@ def rebuild_search_index() -> str:
     The index auto-rebuilds when the registry changes, but this forces an
     immediate rebuild and reports status.
     """
-    global _search_index, _search_index_mtime
+    global _search_index, _search_index_key
 
     try:
         from search_index import HybridSearchIndex
@@ -471,11 +521,8 @@ def rebuild_search_index() -> str:
     idx = HybridSearchIndex(SKILLS_DIR, registry, DATA_DIR)
     status = idx.build()
 
-    try:
-        _search_index = idx
-        _search_index_mtime = REGISTRY_PATH.stat().st_mtime
-    except OSError:
-        pass
+    _search_index = idx
+    _search_index_key = _index_freshness_key()
 
     lines = [
         "=== Search Index Rebuilt ===",
