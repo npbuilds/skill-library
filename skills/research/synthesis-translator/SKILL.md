@@ -28,7 +28,7 @@ Spelunker produces auditable research briefs. But auditable briefs are rarely th
 
 ### Input
 
-- A Spelunker research brief (Markdown, in the format defined by `evidence-synthesizer/references/synthesis-templates.md`)
+- A Spelunker research brief (Markdown, in the format defined by `../evidence-synthesizer/references/synthesis-templates.md`)
 - A target format: `memo` | `pitch` | `thread` | `decision`
 - Optional: target audience descriptor (e.g., "VC partner with biotech focus", "personal Twitter followers", "internal product team") — affects tone but not content
 
