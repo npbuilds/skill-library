@@ -17,6 +17,7 @@ import fcntl
 import json
 import logging
 import os
+import sys
 import uuid
 from collections import Counter, deque
 from datetime import datetime, timezone
@@ -72,8 +73,13 @@ def _log_event(path: Path, event: dict) -> None:
                 f.flush()
             finally:
                 fcntl.flock(f, fcntl.LOCK_UN)
-    except OSError:
-        pass  # Never let logging break a tool call
+    except OSError as e:
+        # Never let logging break a tool call — but don't lose the failure
+        # either. stderr is captured by Cloud Logging in remote mode.
+        print(
+            f"skill-library: failed to write log {path.name}: {e}",
+            file=sys.stderr,
+        )
 
 
 _load_log = load_log  # backward-compatible alias
@@ -218,6 +224,8 @@ def list_skills(
     domain: str | None = None,
     skill_type: str | None = None,
     subdomain: str | None = None,
+    limit: int = 100,
+    offset: int = 0,
 ) -> str:
     """List all available skills in the library.
 
@@ -225,6 +233,8 @@ def list_skills(
         domain: Optional filter — only show skills in this domain (e.g. "design", "infrastructure").
         skill_type: Optional filter — only show this type ("knowledge", "action", "director", "orchestrator", or "observer").
         subdomain: Optional filter — only show skills in this subdomain (e.g. "visual-communication").
+        limit: Max skills per page (default 100). Pass 0 for no limit.
+        offset: Number of matching skills to skip — use with limit to paginate.
     """
     try:
         registry = load_registry()
@@ -271,9 +281,22 @@ def list_skills(
     if not results:
         return "No skills found matching those filters."
 
+    # Deterministic order so offset-based pagination is stable across calls.
+    results.sort(key=lambda s: (s["domain"], s["name"]))
+
+    total = len(results)
+    offset = max(0, offset)
+    if offset >= total:
+        return (
+            f"Found {total} skill(s), but offset={offset} is past the end. "
+            f"Use offset < {total}."
+        )
+    page = results[offset:offset + limit] if limit > 0 else results[offset:]
+    end = offset + len(page)
+
     # Build a readable summary
-    lines = [f"Found {len(results)} skill(s):\n"]
-    for s in results:
+    lines = [f"Found {total} skill(s), showing {offset + 1}–{end}:\n"]
+    for s in page:
         parent_info = f", parent: {s['parent']}" if s["parent"] else ""
         lines.append(
             f"  [{s['type']}] {s['name']}  "
@@ -282,18 +305,25 @@ def list_skills(
         lines.append(f"    {s['description'].strip()}")
         lines.append("")
 
-    # Also list available domains and subdomains for discoverability
-    all_domains = set()
-    all_subdomains = set()
-    for entry in skills.values():
-        for tag in entry.get("tags", []):
-            if tag.startswith("domain:"):
-                all_domains.add(tag.split(":")[1])
-            elif tag.startswith("subdomain:"):
-                all_subdomains.add(tag.split(":")[1])
-    lines.append(f"Available domains: {', '.join(sorted(all_domains))}")
-    if all_subdomains:
-        lines.append(f"Available subdomains: {', '.join(sorted(all_subdomains))}")
+    if end < total:
+        lines.append(
+            f"({total - end} more — call again with offset={end} for the next page.)"
+        )
+
+    # List available domains/subdomains for discoverability, first page only
+    # so paginated follow-ups stay lean.
+    if offset == 0:
+        all_domains = set()
+        all_subdomains = set()
+        for entry in skills.values():
+            for tag in entry.get("tags", []):
+                if tag.startswith("domain:"):
+                    all_domains.add(tag.split(":")[1])
+                elif tag.startswith("subdomain:"):
+                    all_subdomains.add(tag.split(":")[1])
+        lines.append(f"Available domains: {', '.join(sorted(all_domains))}")
+        if all_subdomains:
+            lines.append(f"Available subdomains: {', '.join(sorted(all_subdomains))}")
 
     return "\n".join(lines)
 
