@@ -22,10 +22,10 @@
       "inflation",
       "tariffs"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": true,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "CONFIRMED TRUE. April 2026 CPI (released May 12) printed +3.8% YoY \u2014 highest since May 2023, up from 3.3% in March, above the 3.7% forecast; energy/oil-shock driven. >3.5% threshold cleared. (BLS / CNBC / CNN, 2026-05-12)",
     "probability_history": [
       {
         "date": "2026-04-11",
@@ -67,10 +67,10 @@
       "geopolitical",
       "scenario_c"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": true,
+    "resolved_date": "2026-06-06",
+    "resolution_notes": "TRUE (user-authorized resolution, 2026-06-06). VIX traded into the high-20s in April 2026 (after spiking >30 in late March), clearing the 25 threshold before the April 28-29 FOMC, then retreated to mid-teens by late May. (market commentary, multiple sources)",
     "probability_history": [
       {
         "date": "2026-04-11",
@@ -109,10 +109,10 @@
       "complacency",
       "stagflation"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": true,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "TRUE (easily). VIX was in the high-20s through April 2026 \u2014 well above the 20 trigger \u2014 long before the May 10 deadline. p=0.97 was well calibrated.",
     "probability_history": [
       {
         "date": "2026-04-10",
@@ -153,10 +153,10 @@
       "inflation",
       "real-assets"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": false,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "FALSE. Gold peaked ~$4,800 in mid-April and traded $4,453\u2013$4,773 in May \u2014 never reached $5,000 within the window (by May 25). (The 2026 ATH of $5,589 was back on Jan 28, pre-window.) Miss vs p=0.62. (Fortune/goldsilver, Apr-May 2026)",
     "probability_history": [
       {
         "date": "2026-04-11",
@@ -195,10 +195,10 @@
       "cftc",
       "squeeze"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": false,
+    "resolved_date": "2026-06-06",
+    "resolution_notes": "FALSE (user-authorized, best-evidence call, 2026-06-06). The short-squeeze thesis required Hormuz closure to EXTEND; instead the ceasefire held and Hormuz reopened intermittently (oil plunged ~12% to $83.85 on Apr 17; fell again early May as the ceasefire stayed in place). With the bullish catalyst removed, a full spec short-cover to +5% net OI by May 9 is not supported by price action. Note: exact CFTC positioning not directly verified \u2014 resolved on directional evidence.",
     "probability_history": [
       {
         "date": "2026-04-09",
@@ -244,10 +244,10 @@
       "cftc",
       "contrarian"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": false,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "FALSE (correctly low p=0.04). Gold's May low was ~$4,453.53 \u2014 only ~-6% from the ~$4,750 April-9 reference, never reaching the ~$4,370 that a -8% move required. Structural tariff bid held the floor, as the low probability anticipated.",
     "probability_history": [
       {
         "date": "2026-04-09",
@@ -434,10 +434,10 @@
       "cpi",
       "reversal"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": false,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "FALSE (correctly low p=0.05). S&P 500 was 7,000+ through April (7,022 on Apr 15, 7,138 on Apr 27) and never approached the 6,600 retest target by May 1. Earnings floor + ceasefire relief held, as the low probability anticipated.",
     "probability_history": [
       {
         "date": "2026-04-10",
@@ -595,10 +595,10 @@
       "scenario_c",
       "fomc"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": true,
+    "resolved_date": "2026-06-06",
+    "resolution_notes": "TRUE (user-authorized resolution, 2026-06-06). WTI settled $92.96/bbl on April 22, 2026 (and ~$94.40 on April 24) \u2014 above $90 before the April 28-29 FOMC, as the ceasefire extension failed to reopen Hormuz exports. (CNBC, 2026-04-22/24)",
     "probability_history": [
       {
         "date": "2026-04-21",
@@ -662,10 +662,10 @@
       "fomc",
       "deal_premium"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": false,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "FALSE. S&P 500 stayed above 7,000 into the FOMC \u2014 7,022.95 close on Apr 15, 7,138.80 on Apr 27 (support held at ~7,050); no sub-7,000 close before the April 28-29 meeting. Earnings/ceasefire support outweighed the deal-premium-unwind thesis. (MarketPulse / CNBC, Apr 2026)",
     "probability_history": [
       {
         "date": "2026-04-21",
@@ -695,10 +695,10 @@
       "structural_bid",
       "floor"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null,
+    "status": "resolved",
+    "outcome": true,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "TRUE through the window. Gold was >$4,800 on April 14 and $4,642 on April 30, holding above $4,600 through May 1, 2026. (It subsequently broke below \u2014 May range $4,453\u2013$4,773 \u2014 but that was after the resolve date.) (Fortune gold trackers)",
     "probability_history": [
       {
         "date": "2026-04-21",
@@ -730,10 +730,10 @@
       "negotiation",
       "fomc"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null
+    "status": "resolved",
+    "outcome": true,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "TRUE. Trump publicly rejected Iran's offer to reopen Hormuz while postponing nuclear talks, insisting the blockade stays until a nuclear deal; reported April 29, 2026 (Axios exclusive) alongside the cancelled Kushner/Witkoff Pakistan meeting. Public rejection occurred on/around the FOMC day. (Axios, 2026-04-29)"
   },
   {
     "id": "636d6a1f",
@@ -758,10 +758,10 @@
       "tariffs",
       "guidance"
     ],
-    "status": "open",
-    "outcome": null,
-    "resolved_date": null,
-    "resolution_notes": null
+    "status": "resolved",
+    "outcome": true,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "TRUE. Meta fell ~6% after raising 2026 capex guidance to $125\u2013145B (forward cost/profitability outlook disappointed); Microsoft slipped ~2.5% on AI-buildout costs. A >=3% single-stock move on forward-guidance disappointment clearly occurred (Apr 29-30 reports). Alphabet was the lone gainer. (Motley Fool / Yahoo, 2026-04-30)"
   },
   {
     "id": "4205b820",
@@ -785,6 +785,299 @@
       "warsh",
       "regime",
       "framework"
+    ],
+    "status": "resolved",
+    "outcome": false,
+    "resolved_date": "2026-06-05",
+    "resolution_notes": "FALSE. At his final meeting (Apr 29) Powell referenced \"our framework\" generically (balancing the dual mandate across four supply shocks) but the statement/presser did NOT use \"regime change,\" \"regime shift,\" \"monetary regime,\" \"policy framework review,\" or \"long-run framework reconsideration.\" Institutional discipline (avoiding Warsh-transition framing) prevailed \u2014 the counter-argument the prediction itself flagged. (Fed presser transcript, 2026-04-29)"
+  },
+  {
+    "id": "8a58d9d7",
+    "claim": "[ARC-2026-0605-01 | BOT] RoboStrategy (BOT) premium-to-NAV compresses materially from its post-listing peak \u2014 premium falls >=50% from peak, or trades at a discount, on a 20-day-average basis.",
+    "probability": 0.72,
+    "framework": "Archon (Marks pendulum + CEF mean-reversion)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "cef",
+      "premium-to-nav",
+      "SPK-20260605-bot"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "3033d35f",
+    "claim": "[ARC-2026-0605-02 | BOT] BOT actively draws on the $2B Roth committed equity facility (issues new shares above NAV) by year-end 2026 \u2014 the premium-harvesting flywheel runs.",
+    "probability": 0.7,
+    "framework": "Archon (Soros reflexivity)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2026-12-31",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "dilution",
+      "equity-facility",
+      "SPK-20260605-bot"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "bd85fa9d",
+    "claim": "[ARC-2026-0605-03 | BOT] At least one top-3 holding (Figure AI / Dyna / Apptronik = ~77% of NAV) has its carrying mark revised via a new round or valuation event by mid-2027.",
+    "probability": 0.75,
+    "framework": "Archon (Taleb tail risk)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "level-3-marks",
+      "SPK-20260605-bot"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "9b897dfd",
+    "claim": "[ARC-2026-0605-04 | BOT] BOT delivers a negative 12-month price return from its ~$29-34 (2026-06-05) level \u2014 base/bear modal outcome dominates the premium.",
+    "probability": 0.65,
+    "framework": "Archon (data-science scenario weighting)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-05",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "price-return",
+      "SPK-20260605-bot"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "0c0ed953",
+    "claim": "[ARC-2026-0605-05 | BOT] None of BOT's disclosed private holdings completes an IPO or is acquired at-or-above its carried mark by mid-2027 \u2014 NAV stays dependent on private model marks.",
+    "probability": 0.78,
+    "framework": "Archon (illiquidity / exit-gating)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "private-markets",
+      "SPK-20260605-bot"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "edbdea60",
+    "claim": "[ARC-2026-0605-06 | Figure] Figure AI does NOT close a primary up-round above its ~$39B Sept-2025 mark by Q1-2027 (mark goes stale or re-rates rather than stepping up).",
+    "probability": 0.62,
+    "framework": "Archon (Marks + down-round base rate)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-03-31",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "figure-ai",
+      "humanoid",
+      "private-valuation",
+      "SPK-20260605-figure"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "2f2e8845",
+    "claim": "[ARC-2026-0605-07 | Figure] Figure AI trailing-12-month revenue stays below $100M through mid-2027 \u2014 pilots do not convert to scaled revenue.",
+    "probability": 0.75,
+    "framework": "Archon (commercialization S-curve)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "figure-ai",
+      "revenue",
+      "SPK-20260605-figure"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "ffdd3d20",
+    "claim": "[ARC-2026-0605-08 | Figure] At least one more documented competitive loss / non-exclusive split emerges at a Figure marquee account (BMW, UPS, Catalyst) by mid-2027, confirming non-exclusivity.",
+    "probability": 0.6,
+    "framework": "Archon (competitive dynamics)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "figure-ai",
+      "commercial",
+      "SPK-20260605-figure"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "880d27ab",
+    "claim": "[ARC-2026-0605-09 | Figure] Tesla Optimus achieves NO at-volume (>10 units) deployment at a non-Tesla customer by mid-2027 \u2014 the humanoid field stays without a clear commercial leader.",
+    "probability": 0.7,
+    "framework": "Archon (competitive dynamics)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "tesla-optimus",
+      "humanoid",
+      "SPK-20260605-figure"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "393bdec7",
+    "claim": "[ARC-2026-0605-10 | BOT] BOT's price-to-NAV falls below 3.0x on at least one month-end by Q1-2027 (premium compresses as private-mark scrutiny + hostile tape bite).",
+    "probability": 0.7,
+    "framework": "Archon (CEF mean-reversion)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-03-31",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "premium-to-nav",
+      "SPK-20260605-figure"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "ad3c9978",
+    "claim": "[ARC-2026-0605-11 | BOT] A Figure or Dyna re-mark / flat-down round cuts BOT NAV >=5% from the $7.31 (3/31/2026) level (ex-new-contributions) by Q3-2027.",
+    "probability": 0.65,
+    "framework": "Archon (concentration / self-marking risk)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-09-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "nav-quality",
+      "SPK-20260605-bot-portfolio"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "eb71ad97",
+    "claim": "[ARC-2026-0605-12 | BOT] Path Robotics is impaired further \u2014 BOT marks Path <=$4.2M (from $6.0M) or the Series D-2 is reported as a down / pay-to-play recap by Q1-2027.",
+    "probability": 0.62,
+    "framework": "Archon (Level-3 markdown signal)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-03-31",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "path-robotics",
+      "impairment",
+      "SPK-20260605-bot-portfolio"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "e1cdd178",
+    "claim": "[ARC-2026-0605-13 | BOT] Apptronik holds as the relative anchor \u2014 its carried mark stays flat-or-up (absent dilution) while >=1 STRETCHED holding re-rates down, confirming the FAIR rating, through mid-2027.",
+    "probability": 0.55,
+    "framework": "Archon (relative mark quality)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-06-30",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "apptronik",
+      "nav-quality",
+      "SPK-20260605-bot-portfolio"
+    ],
+    "status": "open",
+    "outcome": null,
+    "resolved_date": null,
+    "resolution_notes": null
+  },
+  {
+    "id": "5e69abef",
+    "claim": "[ARC-2026-0605-14 | BOT] At least 3 of BOT's 6 STRETCHED holdings (Figure, Dyna, Path, REK, GMI, Endiatx) experience a down/flat round, markdown, or write-down by year-end 2027.",
+    "probability": 0.62,
+    "framework": "Archon (portfolio down-round base rate)",
+    "category": "equity",
+    "created": "2026-06-05",
+    "resolve_by": "2027-12-31",
+    "regime_context": "reflation_lowconf_riskoff_elevated_rates_2026H1",
+    "evidence": [],
+    "tags": [
+      "BOT",
+      "robostrategy",
+      "stretched-bucket",
+      "SPK-20260605-bot-portfolio"
     ],
     "status": "open",
     "outcome": null,

@@ -6,6 +6,7 @@ set -euo pipefail
 # Files allowed at root (exact match)
 ALLOWED_ROOT_FILES=(
   "CLAUDE\.md"
+  "AGENTS\.md"
   "README\.md"
   "Dockerfile"
   "\.dockerignore"

@@ -1,0 +1,1049 @@
+{
+  "generated_at": "2026-05-16T16:01:55.644725+00:00",
+  "summary": {
+    "build_status": {
+      "skills_indexed": 490,
+      "bm25": true,
+      "vectors": false,
+      "graph": true,
+      "build_time_ms": 1388
+    },
+    "total_queries": 32,
+    "queries_with_gold": 30,
+    "queries_negative": 2,
+    "strict": {
+      "recall_at_1": 0.0,
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0
+    },
+    "lenient": {
+      "recall_at_1": 0.0,
+      "recall_at_3": 0.0,
+      "recall_at_5": 0.0,
+      "recall_at_10": 0.0
+    },
+    "no_hit_strict_count": 30,
+    "no_hit_lenient_count": 30,
+    "magnet_intrusion_count_top3": 0
+  },
+  "by_domain": {
+    "sommelier": {
+      "n": 8,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "biotech-venture": {
+      "n": 5,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "data-science": {
+      "n": 4,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "philosophy": {
+      "n": 2,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "game-theory": {
+      "n": 2,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "research": {
+      "n": 3,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "world-history": {
+      "n": 2,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "worldbuilding": {
+      "n": 1,
+      "hit3": 0,
+      "ranks": [
+        null
+      ],
+      "recall_at_3": 0.0
+    },
+    "writing": {
+      "n": 3,
+      "hit3": 0,
+      "ranks": [
+        null,
+        null,
+        null
+      ],
+      "recall_at_3": 0.0
+    }
+  },
+  "no_hit_strict": [
+    {
+      "query": "how should I taste this glass of wine",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "what wine should I pair with rack of lamb",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "tell me about cabernet sauvignon",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "what makes Burgundy different from Bordeaux",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "is this 2010 Bordeaux a good investment",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "my wine smells like wet cardboard, is it corked",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "what temperature should I serve a champagne",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "decant a young Barolo or not",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "calculate rNPV for an oncology asset",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "design a phase 2 trial for a PD-L1 inhibitor",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "how do I enrich for biomarker responders",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "how does this drug differentiate vs Keytruda",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "forecast peak sales for a small molecule oncology drug",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "my dataset has 30% missing values, what should I do",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "how do I encode categorical features for xgboost",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "forecast monthly revenue with seasonality",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "my production model performance is degrading",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "evaluate this syllogism for validity",
+      "domain": "philosophy",
+      "top10": []
+    },
+    {
+      "query": "translate this English claim into propositional logic",
+      "domain": "philosophy",
+      "top10": []
+    },
+    {
+      "query": "find the Nash equilibrium of this 2x2 game",
+      "domain": "game-theory",
+      "top10": []
+    },
+    {
+      "query": "design an auction for spectrum rights",
+      "domain": "game-theory",
+      "top10": []
+    },
+    {
+      "query": "research whether GLP-1s reduce alzheimer risk",
+      "domain": "research",
+      "top10": []
+    },
+    {
+      "query": "break this question into atomic verifiable claims",
+      "domain": "research",
+      "top10": []
+    },
+    {
+      "query": "triangulate sources for this contested claim",
+      "domain": "research",
+      "top10": []
+    },
+    {
+      "query": "what does the great divergence debate say about industrialization",
+      "domain": "world-history",
+      "top10": []
+    },
+    {
+      "query": "how should I evaluate a primary historical source",
+      "domain": "world-history",
+      "top10": []
+    },
+    {
+      "query": "design the climate and biomes for a fantasy world",
+      "domain": "worldbuilding",
+      "top10": []
+    },
+    {
+      "query": "how do I render a character's stream of consciousness",
+      "domain": "writing",
+      "top10": []
+    },
+    {
+      "query": "the line-by-line tension is missing from my chapter",
+      "domain": "writing",
+      "top10": []
+    },
+    {
+      "query": "when should I use metaphor vs simile",
+      "domain": "writing",
+      "top10": []
+    }
+  ],
+  "no_hit_lenient": [
+    {
+      "query": "how should I taste this glass of wine",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "what wine should I pair with rack of lamb",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "tell me about cabernet sauvignon",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "what makes Burgundy different from Bordeaux",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "is this 2010 Bordeaux a good investment",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "my wine smells like wet cardboard, is it corked",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "what temperature should I serve a champagne",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "decant a young Barolo or not",
+      "domain": "sommelier",
+      "top10": []
+    },
+    {
+      "query": "calculate rNPV for an oncology asset",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "design a phase 2 trial for a PD-L1 inhibitor",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "how do I enrich for biomarker responders",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "how does this drug differentiate vs Keytruda",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "forecast peak sales for a small molecule oncology drug",
+      "domain": "biotech-venture",
+      "top10": []
+    },
+    {
+      "query": "my dataset has 30% missing values, what should I do",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "how do I encode categorical features for xgboost",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "forecast monthly revenue with seasonality",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "my production model performance is degrading",
+      "domain": "data-science",
+      "top10": []
+    },
+    {
+      "query": "evaluate this syllogism for validity",
+      "domain": "philosophy",
+      "top10": []
+    },
+    {
+      "query": "translate this English claim into propositional logic",
+      "domain": "philosophy",
+      "top10": []
+    },
+    {
+      "query": "find the Nash equilibrium of this 2x2 game",
+      "domain": "game-theory",
+      "top10": []
+    },
+    {
+      "query": "design an auction for spectrum rights",
+      "domain": "game-theory",
+      "top10": []
+    },
+    {
+      "query": "research whether GLP-1s reduce alzheimer risk",
+      "domain": "research",
+      "top10": []
+    },
+    {
+      "query": "break this question into atomic verifiable claims",
+      "domain": "research",
+      "top10": []
+    },
+    {
+      "query": "triangulate sources for this contested claim",
+      "domain": "research",
+      "top10": []
+    },
+    {
+      "query": "what does the great divergence debate say about industrialization",
+      "domain": "world-history",
+      "top10": []
+    },
+    {
+      "query": "how should I evaluate a primary historical source",
+      "domain": "world-history",
+      "top10": []
+    },
+    {
+      "query": "design the climate and biomes for a fantasy world",
+      "domain": "worldbuilding",
+      "top10": []
+    },
+    {
+      "query": "how do I render a character's stream of consciousness",
+      "domain": "writing",
+      "top10": []
+    },
+    {
+      "query": "the line-by-line tension is missing from my chapter",
+      "domain": "writing",
+      "top10": []
+    },
+    {
+      "query": "when should I use metaphor vs simile",
+      "domain": "writing",
+      "top10": []
+    }
+  ],
+  "magnet_intrusions": [],
+  "results": [
+    {
+      "query": "how should I taste this glass of wine",
+      "domain": "sommelier",
+      "intent": "tasting",
+      "gold_strict": [
+        "bacchus",
+        "deductive-method",
+        "tasting-evaluation"
+      ],
+      "gold_lenient_added": [
+        "aroma-lexicon",
+        "cellar-service",
+        "fault-diagnosis",
+        "food-pairing",
+        "grape-encyclopedia",
+        "quality-assessment",
+        "regions-terroir",
+        "sommelier-lab",
+        "wine-market",
+        "winemaking"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "what wine should I pair with rack of lamb",
+      "domain": "sommelier",
+      "intent": "pairing",
+      "gold_strict": [
+        "bacchus",
+        "food-pairing"
+      ],
+      "gold_lenient_added": [
+        "cellar-service",
+        "cuisine-pairing",
+        "grape-encyclopedia",
+        "pairing-engine",
+        "pairing-science",
+        "regions-terroir",
+        "sommelier-lab",
+        "tasting-evaluation",
+        "wine-market",
+        "winemaking"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "tell me about cabernet sauvignon",
+      "domain": "sommelier",
+      "intent": "grape-lookup",
+      "gold_strict": [
+        "bacchus",
+        "grape-encyclopedia"
+      ],
+      "gold_lenient_added": [
+        "cellar-service",
+        "food-pairing",
+        "grape-expression",
+        "indigenous-varieties",
+        "noble-grapes",
+        "regions-terroir",
+        "sommelier-lab",
+        "tasting-evaluation",
+        "wine-market",
+        "winemaking"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "what makes Burgundy different from Bordeaux",
+      "domain": "sommelier",
+      "intent": "region-compare",
+      "gold_strict": [
+        "bacchus",
+        "regions-terroir"
+      ],
+      "gold_lenient_added": [
+        "appellation-law",
+        "cellar-service",
+        "food-pairing",
+        "grape-encyclopedia",
+        "new-world-atlas",
+        "old-world-atlas",
+        "sommelier-lab",
+        "tasting-evaluation",
+        "terroir-science",
+        "wine-market",
+        "winemaking"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "is this 2010 Bordeaux a good investment",
+      "domain": "sommelier",
+      "intent": "investment",
+      "gold_strict": [
+        "bacchus",
+        "wine-market"
+      ],
+      "gold_lenient_added": [
+        "cellar-service",
+        "collecting-investment",
+        "food-pairing",
+        "grape-encyclopedia",
+        "regions-terroir",
+        "sommelier-lab",
+        "tasting-evaluation",
+        "wine-economics",
+        "wine-futures",
+        "winemaking"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "my wine smells like wet cardboard, is it corked",
+      "domain": "sommelier",
+      "intent": "fault",
+      "gold_strict": [
+        "fault-diagnosis",
+        "tasting-evaluation"
+      ],
+      "gold_lenient_added": [
+        "aroma-lexicon",
+        "deductive-method",
+        "quality-assessment"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "what temperature should I serve a champagne",
+      "domain": "sommelier",
+      "intent": "service",
+      "gold_strict": [
+        "bacchus",
+        "cellar-service",
+        "service-protocol"
+      ],
+      "gold_lenient_added": [
+        "cellar-management",
+        "food-pairing",
+        "grape-encyclopedia",
+        "regions-terroir",
+        "sommelier-lab",
+        "tasting-evaluation",
+        "wine-market",
+        "winemaking"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "decant a young Barolo or not",
+      "domain": "sommelier",
+      "intent": "service-decision",
+      "gold_strict": [
+        "cellar-service",
+        "service-protocol"
+      ],
+      "gold_lenient_added": [
+        "cellar-management"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "calculate rNPV for an oncology asset",
+      "domain": "biotech-venture",
+      "intent": "rnpv",
+      "gold_strict": [
+        "asclepius",
+        "asset-valuation"
+      ],
+      "gold_lenient_added": [
+        "clinical-development",
+        "competitive-intelligence",
+        "cost-estimator",
+        "deal-economics",
+        "deal-synthesis",
+        "manufacturing-ip",
+        "peak-sales-forecaster",
+        "probability-of-success",
+        "regulatory-strategy",
+        "rnpv-modeler"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "design a phase 2 trial for a PD-L1 inhibitor",
+      "domain": "biotech-venture",
+      "intent": "trial-design",
+      "gold_strict": [
+        "asclepius",
+        "clinical-development",
+        "trial-design-optimizer"
+      ],
+      "gold_lenient_added": [
+        "asset-valuation",
+        "biomarker-enrichment",
+        "competitive-intelligence",
+        "deal-synthesis",
+        "endpoint-selection",
+        "manufacturing-ip",
+        "patient-population-sizer",
+        "probability-of-success",
+        "regulatory-strategy"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "how do I enrich for biomarker responders",
+      "domain": "biotech-venture",
+      "intent": "enrichment",
+      "gold_strict": [
+        "biomarker-enrichment",
+        "clinical-development"
+      ],
+      "gold_lenient_added": [
+        "endpoint-selection",
+        "patient-population-sizer",
+        "trial-design-optimizer"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "how does this drug differentiate vs Keytruda",
+      "domain": "biotech-venture",
+      "intent": "differentiation",
+      "gold_strict": [
+        "asclepius",
+        "clinical-differentiator"
+      ],
+      "gold_lenient_added": [
+        "asset-valuation",
+        "clinical-development",
+        "competitive-intelligence",
+        "deal-synthesis",
+        "manufacturing-ip",
+        "probability-of-success",
+        "regulatory-strategy"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "forecast peak sales for a small molecule oncology drug",
+      "domain": "biotech-venture",
+      "intent": "forecasting",
+      "gold_strict": [
+        "asclepius",
+        "asset-valuation"
+      ],
+      "gold_lenient_added": [
+        "clinical-development",
+        "competitive-intelligence",
+        "cost-estimator",
+        "deal-economics",
+        "deal-synthesis",
+        "manufacturing-ip",
+        "peak-sales-forecaster",
+        "probability-of-success",
+        "regulatory-strategy",
+        "rnpv-modeler"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "my dataset has 30% missing values, what should I do",
+      "domain": "data-science",
+      "intent": "missing-data",
+      "gold_strict": [
+        "data-cleaning",
+        "data-science-orchestrator"
+      ],
+      "gold_lenient_added": [
+        "chart-selection",
+        "drift-detection"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "how do I encode categorical features for xgboost",
+      "domain": "data-science",
+      "intent": "encoding",
+      "gold_strict": [
+        "data-science-orchestrator",
+        "feature-engineering"
+      ],
+      "gold_lenient_added": [
+        "chart-selection",
+        "drift-detection"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "forecast monthly revenue with seasonality",
+      "domain": "data-science",
+      "intent": "forecast",
+      "gold_strict": [
+        "data-science-orchestrator",
+        "time-series"
+      ],
+      "gold_lenient_added": [
+        "chart-selection",
+        "drift-detection"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "my production model performance is degrading",
+      "domain": "data-science",
+      "intent": "drift",
+      "gold_strict": [
+        "data-science-orchestrator",
+        "drift-detection"
+      ],
+      "gold_lenient_added": [
+        "chart-selection"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "evaluate this syllogism for validity",
+      "domain": "philosophy",
+      "intent": "argument",
+      "gold_strict": [
+        "argument-analyst",
+        "formal-logic",
+        "logic"
+      ],
+      "gold_lenient_added": [
+        "assumption-excavator"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "translate this English claim into propositional logic",
+      "domain": "philosophy",
+      "intent": "formalize",
+      "gold_strict": [
+        "formal-logic",
+        "logic"
+      ],
+      "gold_lenient_added": [
+        "argument-analyst",
+        "assumption-excavator"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "find the Nash equilibrium of this 2x2 game",
+      "domain": "game-theory",
+      "intent": "nash",
+      "gold_strict": [
+        "classical-games",
+        "game-theory-orchestrator",
+        "strategic-foundations"
+      ],
+      "gold_lenient_added": [
+        "computational-strategy",
+        "cooperative-games",
+        "evolutionary-dynamics",
+        "game-solver",
+        "information-economics",
+        "mechanism-design"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "design an auction for spectrum rights",
+      "domain": "game-theory",
+      "intent": "auction",
+      "gold_strict": [
+        "game-theory-orchestrator",
+        "mechanism-design"
+      ],
+      "gold_lenient_added": [
+        "auction-theory",
+        "computational-strategy",
+        "evolutionary-dynamics",
+        "information-economics",
+        "matching-markets",
+        "mechanism-designer",
+        "social-choice",
+        "strategic-foundations"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "research whether GLP-1s reduce alzheimer risk",
+      "domain": "research",
+      "intent": "deep-research",
+      "gold_strict": [
+        "spelunker"
+      ],
+      "gold_lenient_added": [
+        "agentic-researcher",
+        "bias-and-funding-tracer",
+        "claim-decomposer",
+        "counterfactual-prober",
+        "evidence-synthesizer",
+        "paywall-strategist",
+        "source-triangulator",
+        "synthesis-translator"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "break this question into atomic verifiable claims",
+      "domain": "research",
+      "intent": "decompose",
+      "gold_strict": [
+        "claim-decomposer",
+        "spelunker"
+      ],
+      "gold_lenient_added": [
+        "agentic-researcher",
+        "bias-and-funding-tracer",
+        "counterfactual-prober",
+        "evidence-synthesizer",
+        "paywall-strategist",
+        "source-triangulator",
+        "synthesis-translator"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "triangulate sources for this contested claim",
+      "domain": "research",
+      "intent": "triangulate",
+      "gold_strict": [
+        "source-triangulator",
+        "spelunker"
+      ],
+      "gold_lenient_added": [
+        "agentic-researcher",
+        "bias-and-funding-tracer",
+        "claim-decomposer",
+        "counterfactual-prober",
+        "evidence-synthesizer",
+        "paywall-strategist",
+        "synthesis-translator"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "what does the great divergence debate say about industrialization",
+      "domain": "world-history",
+      "intent": "great-divergence",
+      "gold_strict": [
+        "applied-history",
+        "industrialization-and-development",
+        "wan-shi-tong"
+      ],
+      "gold_lenient_added": [
+        "cultural-history",
+        "debate-simulator",
+        "economic-history",
+        "historical-pattern-recognition",
+        "historiography",
+        "history-and-decision-making",
+        "intellectual-history",
+        "military-history",
+        "nexus-event-analyzer",
+        "political-history",
+        "regional-atlas",
+        "timeline-builder",
+        "world-systems"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "how should I evaluate a primary historical source",
+      "domain": "world-history",
+      "intent": "source-eval",
+      "gold_strict": [
+        "historiography",
+        "wan-shi-tong"
+      ],
+      "gold_lenient_added": [
+        "applied-history",
+        "cultural-history",
+        "economic-history",
+        "historical-argument",
+        "historical-thinking",
+        "intellectual-history",
+        "military-history",
+        "political-history",
+        "regional-atlas",
+        "schools-of-thought",
+        "source-criticism",
+        "source-evaluator",
+        "world-systems"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "design the climate and biomes for a fantasy world",
+      "domain": "worldbuilding",
+      "intent": "worldbuilding-physical",
+      "gold_strict": [
+        "physical-world"
+      ],
+      "gold_lenient_added": [
+        "ecology-design",
+        "environmental-storytelling",
+        "geography-ecology",
+        "sensory-worldbuilding",
+        "technology-progression"
+      ],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "how do I render a character's stream of consciousness",
+      "domain": "writing",
+      "intent": "interiority",
+      "gold_strict": [
+        "character-interiority"
+      ],
+      "gold_lenient_added": [],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "the line-by-line tension is missing from my chapter",
+      "domain": "writing",
+      "intent": "tension",
+      "gold_strict": [
+        "micro-tension"
+      ],
+      "gold_lenient_added": [],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "when should I use metaphor vs simile",
+      "domain": "writing",
+      "intent": "figurative",
+      "gold_strict": [
+        "figurative-language"
+      ],
+      "gold_lenient_added": [],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "how do I tie a windsor knot",
+      "domain": "negative",
+      "intent": "out-of-scope-fashion",
+      "gold_strict": [],
+      "gold_lenient_added": [],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    },
+    {
+      "query": "write a python function to reverse a string",
+      "domain": "negative",
+      "intent": "out-of-scope-coding",
+      "gold_strict": [],
+      "gold_lenient_added": [],
+      "strict_rank": null,
+      "lenient_rank": null,
+      "top10": []
+    }
+  ]
+}
