@@ -31,6 +31,33 @@ jobs:
         working-directory: mcp-server
         run: pytest tests/ -v
 
+  retrieval-eval:
+    name: Retrieval Regression Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -e mcp-server/
+          # BM25 + numpy only. The vector signal (PyTorch + sentence-
+          # transformers) is intentionally NOT installed here — it would add
+          # minutes to the job. The gate therefore runs --signals bm25,graph
+          # and the committed baseline is recorded in the same mode, so the
+          # gate measures retrieval regressions, not the CI environment.
+          pip install numpy rank-bm25 pyyaml
+
+      - name: Retrieval regression gate
+        run: |
+          python3 scripts/eval_retrieval.py \
+            --queries all --signals bm25,graph --sample 300 --seed 7 \
+            --baseline data/health/eval_baseline.json --check
+
   validate:
     name: Registry & Skill Validation
     runs-on: ubuntu-latest
