@@ -115,6 +115,26 @@ def _split_passages(body: str, max_words: int = _BODY_MAX_WORDS,
     return passages
 
 
+def _load_synthetic_queries(data_dir: Path) -> dict[str, list[str]]:
+    """Load index_queries per skill from data/synthetic_queries.json.
+
+    Returns {skill_name: [queries]} (index_queries only — eval_queries are
+    held out for the retrieval eval and must never be indexed). Missing or
+    unreadable file → empty dict (the feature is optional).
+    """
+    path = data_dir / "synthetic_queries.json"
+    try:
+        payload = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return {}
+    out: dict[str, list[str]] = {}
+    for name, entry in payload.get("skills", {}).items():
+        qs = entry.get("index_queries") or []
+        if isinstance(qs, list) and qs:
+            out[name] = [str(q) for q in qs]
+    return out
+
+
 def _extract_chunks(skill_dir: Path, name: str, desc: str) -> list[tuple[str, str]]:
     """Build (chunk_kind, embed_text) pairs for one skill.
 
@@ -162,14 +182,14 @@ _BODY_CHUNK_WEIGHT = 0.85
 # enough to hit two signals or top-rank one, and filters everything else so
 # the gap-detection feature stays meaningful.
 #
-# When BM25 is unavailable (rank-bm25 not installed — a degraded install),
-# the remaining signals rarely corroborate each other, so a 0.02 floor
-# would filter even the rank-1 result (0.0164) — every search would return
-# [] and the server would silently fall back to weak keyword matching. The
-# floor is scaled by _SINGLE_SIGNAL_FLOOR_FACTOR in that case so top hits
-# survive while the long tail is still dropped. When BM25 IS present, the
-# full floor applies even if only one signal matched — that keeps gap
-# detection firing on out-of-scope queries.
+# When only ONE signal produces rankings for a query (e.g. BM25-only because
+# vectors aren't installed and there are no recent skills to seed the graph),
+# a 0.02 floor filters even the rank-1 result (1/61 ≈ 0.0164) — search would
+# return [] and the server would fall back to weak keyword matching. The floor
+# is scaled by _SINGLE_SIGNAL_FLOOR_FACTOR in that case so top single-signal
+# hits survive. With ≥2 signals ranking, the full floor applies: a hit
+# corroborated by two signals clears 0.02 easily, and a lone single-signal
+# long-tail match is correctly dropped (keeping gap detection meaningful).
 _MIN_RRF_SCORE = 0.02
 _SINGLE_SIGNAL_FLOOR_FACTOR = 0.6  # 0.02 * 0.6 = 0.012 < 0.0164 rank-1
 
@@ -223,6 +243,9 @@ class HybridSearchIndex:
         corpus_tokens: list[list[str]] = []
         corpus_texts: list[str] = []
 
+        # Synthetic user queries (Re-Invoke doc expansion) — index_queries only.
+        synthetic = _load_synthetic_queries(self.data_dir)
+
         for name, entry in sorted(skills.items()):
             if entry.get("status") != "active":
                 continue
@@ -233,20 +256,28 @@ class HybridSearchIndex:
 
             text = _extract_skill_text(skill_dir)
             desc = entry.get("description", "")
-            full_text = f"{name} {desc} {text}"
+            syn_queries = synthetic.get(name, [])
+            # Synthetic queries join the BM25 doc so keyword search benefits
+            # from user-phrased vocabulary too.
+            full_text = f"{name} {desc} {text} {' '.join(syn_queries)}"
 
             skill_idx = len(self._names)
             self._names.append(name)
             corpus_tokens.append(_tokenize(full_text))
 
-            # For embeddings: one row per chunk (desc + body passages), each
-            # mapped back to this skill so query-time max-pooling can collapse
-            # them into a single per-skill similarity.
-            for kind, chunk_text in _extract_chunks(skill_dir, name, desc):
+            # For embeddings: one row per chunk (desc + body passages + each
+            # synthetic query), mapped back to this skill so query-time
+            # max-pooling collapses them into a single per-skill similarity.
+            chunks = _extract_chunks(skill_dir, name, desc)
+            for j, q in enumerate(syn_queries):
+                chunks.append((f"q:{j}", f"{name}: {q}"))
+            for kind, chunk_text in chunks:
                 chunk_keys.append((name, kind))
                 self._chunk_skill_idx.append(skill_idx)
+                # desc and synthetic-query chunks are full-weight routing
+                # signals; body passages are down-weighted (see constant).
                 self._chunk_weight.append(
-                    1.0 if kind == "desc" else _BODY_CHUNK_WEIGHT
+                    _BODY_CHUNK_WEIGHT if kind.startswith("body:") else 1.0
                 )
                 corpus_texts.append(chunk_text)
 
@@ -453,18 +484,27 @@ class HybridSearchIndex:
         # caller sees a clean "no real hits" empty list (which lets gap-
         # detection downstream actually fire on unmatchable queries).
         #
-        # The floor is scaled down ONLY when BM25 is unavailable (degraded
-        # install, e.g. rank-bm25 missing) — there the remaining signals
-        # can't corroborate each other and rank-1 (1/61 ≈ 0.0164) would be
-        # filtered wholesale. When BM25 IS available but simply didn't
-        # match, that's evidence of irrelevance, not degradation: keep the
-        # full floor so out-of-scope queries still come back empty and gap
-        # detection fires.
+        # The floor is scaled down only when the index is STRUCTURALLY limited
+        # to a single signal for this query (e.g. BM25-only because vectors
+        # aren't installed and no recent skills seed the graph). There the
+        # rank-1 RRF (1/61 ≈ 0.0164) would be filtered wholesale.
+        #
+        # Keyed on signals *capable* of ranking, not on how many actually did:
+        # if two signals are available but only one fired, that lack of
+        # corroboration is itself the gap signal — keep the full floor so the
+        # weak single-signal match is dropped and out-of-scope queries come
+        # back empty (gap detection). Only when ≤1 signal could ever rank do
+        # we lower the floor so the best-effort match survives.
+        capable_signals = (
+            (1 if self._bm25 is not None else 0)
+            + (1 if (self._embeddings is not None and HAS_VECTORS) else 0)
+            + (1 if recent_skills else 0)
+        )
         if min_score > 0:
             effective_floor = (
-                min_score * _SINGLE_SIGNAL_FLOOR_FACTOR
-                if self._bm25 is None
-                else min_score
+                min_score
+                if capable_signals >= 2
+                else min_score * _SINGLE_SIGNAL_FLOOR_FACTOR
             )
             fused = [(name, score) for name, score in fused if score >= effective_floor]
 
@@ -548,18 +588,27 @@ class HybridSearchIndex:
 # ---------------------------------------------------------------------------
 
 def _get_registry_hash(data_dir: Path) -> str:
-    """Content hash of registry.json, used as the embedding cache key.
+    """Composite content hash of the inputs that determine the embeddings.
 
-    A content hash is robust across Docker image builds and overlay
-    filesystems, where mtime semantics are unreliable. If the registry
-    is missing or unreadable, returns the empty string (which will not
-    match any persisted hash, so the cache check fails closed).
+    Hashes registry.json plus synthetic_queries.json (if present), so that
+    regenerating synthetic queries invalidates the embedding cache and
+    forces a rebuild. A content hash is robust across Docker image builds
+    and overlay filesystems, where mtime semantics are unreliable. If the
+    registry is missing or unreadable, returns the empty string (which
+    won't match any persisted hash, so the cache check fails closed).
     """
     reg = data_dir / "registry.json"
     try:
-        return hashlib.sha256(reg.read_bytes()).hexdigest()
+        h = hashlib.sha256(reg.read_bytes())
     except OSError:
         return ""
+    # Synthetic queries are optional; fold them in when present.
+    try:
+        h.update(b"\x00synthetic\x00")
+        h.update((data_dir / "synthetic_queries.json").read_bytes())
+    except OSError:
+        pass
+    return h.hexdigest()
 
 
 def _atomic_write_npy(path: Path, arr: "np.ndarray") -> None:

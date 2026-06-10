@@ -124,10 +124,10 @@ def test_degraded_install_results_survive_floor(tmp_path):
     assert results[0]["name"] == "beta-skill"  # 1 hop from alpha
 
 
-def test_full_floor_when_bm25_present(tmp_path):
-    """With BM25 available, the original 0.02 floor applies even when only
-    one signal matched — single-signal long-tail noise stays filtered so
-    gap detection keeps firing on out-of-scope queries."""
+def test_full_floor_with_two_ranking_signals(tmp_path):
+    """When ≥2 signals produce rankings, the full 0.02 floor applies — a
+    lone single-list long-tail match stays filtered so gap detection keeps
+    firing on out-of-scope queries."""
     idx = _make_index(tmp_path)
     idx.build()
     idx._embeddings = None
@@ -135,11 +135,28 @@ def test_full_floor_when_bm25_present(tmp_path):
         pytest.skip("rank-bm25 not installed")
 
     # BM25 matches alpha (query term in body); graph ranks beta/gamma from
-    # alpha seed. No skill appears in both lists, so every fused score is
-    # single-list: rank-1 = 0.0164 < 0.02 — all filtered under the 2-signal floor.
+    # alpha seed. Two signals rank, but no skill appears in BOTH lists, so
+    # every fused score is single-list: rank-1 = 0.0164 < 0.02 — all filtered
+    # under the full (≥2-signal) floor.
     results = idx.search("alpha", recent_skills=["alpha-skill"])
     for r in results:
         assert r["rrf_score"] >= _MIN_RRF_SCORE
+
+
+def test_bm25_only_single_signal_survives_floor(tmp_path):
+    """BM25 as the SOLE ranking signal (vectors absent, no graph seed — the
+    mode the CI eval runs in) must return real matches, not be filtered to
+    empty by the full floor. Regression guard for the CI 0.000-recall bug."""
+    idx = _make_index(tmp_path)
+    idx.build()
+    idx._embeddings = None
+    if idx._bm25 is None:
+        pytest.skip("rank-bm25 not installed")
+
+    # No recent_skills → graph inert. BM25 is the only signal.
+    results = idx.search("alpha", recent_skills=None)
+    assert any(r["name"] == "alpha-skill" for r in results), \
+        "single-signal BM25 match must survive the floor"
 
 
 # ---------------------------------------------------------------------------
@@ -319,3 +336,84 @@ def test_v1_cache_rejected_and_rebuilt(tmp_path, monkeypatch):
     # New cache carries the v2 schema marker.
     meta = json.loads((data_dir / "skill_embed_mtime.json").read_text())
     assert meta["schema"] == _EMBED_CACHE_SCHEMA
+
+
+# ---------------------------------------------------------------------------
+# Synthetic query indexing (PR3)
+# ---------------------------------------------------------------------------
+
+from search_index import _load_synthetic_queries  # noqa: E402
+
+
+def _write_synthetic(data_dir, mapping):
+    """mapping: {skill: [index_queries]} → synthetic_queries.json on disk."""
+    payload = {
+        "version": 1,
+        "generated_with": "test",
+        "skills": {
+            name: {"content_hash": "x", "index_queries": qs, "eval_queries": ["held"]}
+            for name, qs in mapping.items()
+        },
+    }
+    (data_dir / "synthetic_queries.json").write_text(json.dumps(payload))
+
+
+def test_load_synthetic_queries_index_only(tmp_path):
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    _write_synthetic(data_dir, {"alpha-skill": ["how do I alpha", "alpha please"]})
+    loaded = _load_synthetic_queries(data_dir)
+    assert loaded == {"alpha-skill": ["how do I alpha", "alpha please"]}
+
+
+def test_load_synthetic_queries_missing_file(tmp_path):
+    (tmp_path / "data").mkdir()
+    assert _load_synthetic_queries(tmp_path / "data") == {}
+
+
+def test_synthetic_queries_added_as_chunks(tmp_path, monkeypatch):
+    import search_index as si
+    monkeypatch.setattr(si, "HAS_VECTORS", True)
+
+    idx = _make_index(tmp_path)
+    _write_synthetic(tmp_path / "data", {"beta-skill": ["tell me about beta", "beta help"]})
+    idx._model = _FakeModel()
+    idx.build()
+
+    # beta-skill now has q:0 and q:1 chunks in addition to desc + body.
+    beta_idx = idx._names.index("beta-skill")
+    beta_kinds = [
+        # reconstruct kinds by re-extracting isn't exposed; assert via counts:
+        i for i, s in enumerate(idx._chunk_skill_idx) if s == beta_idx
+    ]
+    # alpha (no synthetic) vs beta (2 synthetic) — beta must have >= 2 more
+    # chunks than its synthetic-free description+body baseline. Simplest check:
+    # beta has more chunks than alpha (which has none).
+    alpha_idx = idx._names.index("alpha-skill")
+    alpha_chunks = sum(1 for s in idx._chunk_skill_idx if s == alpha_idx)
+    assert len(beta_kinds) >= alpha_chunks + 2
+
+
+def test_synthetic_queries_in_bm25_doc(tmp_path):
+    """A distinctive synthetic-query term should make the skill findable via
+    BM25 even if that term isn't in the description or body."""
+    idx = _make_index(tmp_path)
+    if idx._bm25 is None:
+        pytest.skip("rank-bm25 not installed")
+    _write_synthetic(tmp_path / "data", {"gamma-skill": ["xyzzy plugh frobnicate"]})
+    idx.build()
+    idx._embeddings = None  # isolate BM25
+
+    results = idx.search("frobnicate")
+    assert any(r["name"] == "gamma-skill" for r in results)
+
+
+def test_synthetic_file_invalidates_cache_hash(tmp_path):
+    """Regenerating synthetic queries must change the embedding cache key."""
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "registry.json").write_text('{"skills": {}}')
+    h_before = _get_registry_hash(data_dir)
+    _write_synthetic(data_dir, {"alpha-skill": ["new query"]})
+    h_after = _get_registry_hash(data_dir)
+    assert h_before != h_after and h_before and h_after
