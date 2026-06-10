@@ -17,6 +17,10 @@ firebase-debug.log
 
 # ── Data ──
 data/backups/
+# Dated diagnostic eval reports are noise; the committed baseline
+# (data/health/eval_baseline.json) is the tracked artifact.
+data/health/eval_retrieval_*.json
+data/health/eval_structural_*.json
 # Embedding cache rebuilt on registry change (see mcp-server/search_index.py)
 data/skill_embeddings.npy
 data/skill_embed_names.json
