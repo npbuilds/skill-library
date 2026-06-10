@@ -1,5 +1,6 @@
 """Regression tests for HybridSearchIndex internals."""
 
+import json
 import os
 import time
 
@@ -176,10 +177,11 @@ def test_concurrent_rebuild_encodes_once(tmp_path):
     idx_b._model = model
 
     corpus = [f"{n}: text" for n in idx_a._names]
+    keys = [(n, "desc") for n in idx_a._names]
     results = [None, None]
 
     def run(idx, slot):
-        results[slot] = idx._build_or_load_embeddings(corpus)
+        results[slot] = idx._build_or_load_embeddings(corpus, keys)
 
     t1 = threading.Thread(target=run, args=(idx_a, 0))
     t2 = threading.Thread(target=run, args=(idx_b, 1))
@@ -200,11 +202,120 @@ def test_rebuild_lock_releases_on_failure(tmp_path):
             raise RuntimeError("encode failed")
 
     idx._model = _Boom()
-    assert idx._build_or_load_embeddings(["x"]) is None
+    assert idx._build_or_load_embeddings(["x"], [("x", "desc")]) is None
 
     # Lock must be reacquirable: a healthy rebuild succeeds afterwards.
     idx2 = _make_index(tmp_path)
     idx2.build()
     idx2._model = _FakeModel()
     corpus = [f"{n}: text" for n in idx2._names]
-    assert idx2._build_or_load_embeddings(corpus) is not None
+    keys = [(n, "desc") for n in idx2._names]
+    assert idx2._build_or_load_embeddings(corpus, keys) is not None
+
+
+# ---------------------------------------------------------------------------
+# Chunked multi-vector embeddings (PR2)
+# ---------------------------------------------------------------------------
+
+from search_index import (  # noqa: E402
+    _split_passages,
+    _extract_chunks,
+    _EMBED_CACHE_SCHEMA,
+)
+
+
+def test_split_passages_respects_word_cap():
+    body = " ".join(f"w{i}" for i in range(400))  # one 400-word section
+    passages = _split_passages(body, max_words=150, max_chunks=8)
+    assert all(len(p.split()) <= 150 for p in passages)
+    assert len(passages) == 3  # 400 / 150 → 3 passages
+
+
+def test_split_passages_caps_chunk_count():
+    body = " ".join(f"w{i}" for i in range(5000))
+    passages = _split_passages(body, max_words=150, max_chunks=8)
+    assert len(passages) == 8  # hard cap honored
+
+
+def test_split_passages_splits_on_headings():
+    body = "## Intro\nalpha beta\n\n## Method\ngamma delta\n\n## Results\nepsilon"
+    passages = _split_passages(body, max_words=150, max_chunks=8)
+    # Three headings → three passages; heading text drops out, body words stay.
+    assert len(passages) == 3
+    assert any("alpha" in p for p in passages)
+    assert any("epsilon" in p for p in passages)
+
+
+def test_extract_chunks_desc_first(tmp_path):
+    sd = tmp_path / "skills" / "x"
+    sd.mkdir(parents=True)
+    (sd / "SKILL.md").write_text("---\nname: x\n---\n## Body\nhello world here\n")
+    chunks = _extract_chunks(sd, "x-skill", "the description")
+    assert chunks[0][0] == "desc"
+    assert chunks[0][1] == "x-skill: the description"
+    assert any(k.startswith("body:") for k, _ in chunks)
+    # Every chunk is name-prefixed so it carries skill identity.
+    assert all(t.startswith("x-skill: ") for _, t in chunks)
+
+
+def test_max_pool_returns_each_skill_once(tmp_path, monkeypatch):
+    """A skill with multiple body chunks must appear exactly once in vector
+    results, scored by its best-matching chunk."""
+    import search_index as si
+
+    monkeypatch.setattr(si, "HAS_VECTORS", True)
+    idx = _make_index(tmp_path)
+
+    # Deterministic fake model: encode returns a fixed 4-dim vector per text,
+    # so we control which chunk is "closest" to the query.
+    class _Model:
+        def encode(self, texts, show_progress_bar=False):
+            out = []
+            for t in texts:
+                if "query" in t:
+                    out.append([1.0, 0.0, 0.0, 0.0])
+                elif "beta-skill" in t:
+                    out.append([0.9, 0.1, 0.0, 0.0])  # high sim to query
+                else:
+                    out.append([0.0, 1.0, 0.0, 0.0])  # orthogonal
+            return np.array(out, dtype=np.float32)
+
+    idx._model = _Model()
+    idx.build()  # builds chunk embeddings via the fake model
+    assert idx._embeddings is not None
+    assert len(idx._chunk_skill_idx) == idx._embeddings.shape[0]
+    assert len(idx._chunk_skill_idx) > len(idx._names)  # genuinely chunked
+
+    results = idx.search("query", limit=10)
+    names = [r["name"] for r in results]
+    assert len(names) == len(set(names)), "max-pool must dedupe chunks to skills"
+
+
+def test_v1_cache_rejected_and_rebuilt(tmp_path, monkeypatch):
+    """A pre-chunking (schema-v1) cache on disk must be ignored, not loaded
+    with a mismatched row layout."""
+    import search_index as si
+
+    monkeypatch.setattr(si, "HAS_VECTORS", True)
+    idx = _make_index(tmp_path)
+    idx._model = _FakeModel()  # avoid loading a real model during build()
+    idx.build()
+    data_dir = tmp_path / "data"
+
+    # Write a v1-style cache: names = flat skill list, key has no schema.
+    np.save(str(data_dir / "skill_embeddings.npy"), np.zeros((3, 8), dtype=np.float32))
+    (data_dir / "skill_embed_names.json").write_text(json.dumps(idx._names))
+    (data_dir / "skill_embed_mtime.json").write_text(
+        json.dumps({"hash": _get_registry_hash(data_dir)})
+    )
+
+    model = _FakeModel()
+    idx._model = model
+    corpus = [f"{n}: t" for n in idx._names for _ in range(2)]
+    keys = [(n, f"body:{j}") for n in idx._names for j in range(2)]
+    result = idx._build_or_load_embeddings(corpus, keys)
+    assert result is not None
+    assert model.calls == 1, "v1 cache must be rejected, forcing a rebuild"
+    # New cache carries the v2 schema marker.
+    meta = json.loads((data_dir / "skill_embed_mtime.json").read_text())
+    assert meta["schema"] == _EMBED_CACHE_SCHEMA
