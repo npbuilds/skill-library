@@ -359,16 +359,31 @@ def test_v1_cache_rejected_and_rebuilt(tmp_path, monkeypatch):
 # Synthetic query indexing (PR3)
 # ---------------------------------------------------------------------------
 
-from search_index import _load_synthetic_queries  # noqa: E402
+from search_index import _load_synthetic_queries, synthetic_content_hash  # noqa: E402
 
 
-def _write_synthetic(data_dir, mapping):
-    """mapping: {skill: [index_queries]} → synthetic_queries.json on disk."""
+def _skill_hash(tmp_path, name):
+    """Canonical content hash for a skill built by _make_index (desc + body)."""
+    raw = (tmp_path / "skills" / "test" / name / "SKILL.md").read_text()
+    return synthetic_content_hash(f"The {name} description.", raw)
+
+
+def _write_synthetic(data_dir, mapping, hashes=None):
+    """mapping: {skill: [index_queries]} → synthetic_queries.json on disk.
+
+    hashes: optional {skill: content_hash}; defaults to "x" (treated as stale
+    by a real build, which is fine for loader-only tests).
+    """
+    hashes = hashes or {}
     payload = {
         "version": 1,
         "generated_with": "test",
         "skills": {
-            name: {"content_hash": "x", "index_queries": qs, "eval_queries": ["held"]}
+            name: {
+                "content_hash": hashes.get(name, "x"),
+                "index_queries": qs,
+                "eval_queries": ["held"],
+            }
             for name, qs in mapping.items()
         },
     }
@@ -380,7 +395,10 @@ def test_load_synthetic_queries_index_only(tmp_path):
     data_dir.mkdir()
     _write_synthetic(data_dir, {"alpha-skill": ["how do I alpha", "alpha please"]})
     loaded = _load_synthetic_queries(data_dir)
-    assert loaded == {"alpha-skill": ["how do I alpha", "alpha please"]}
+    assert loaded == {
+        "alpha-skill": {"content_hash": "x",
+                        "index_queries": ["how do I alpha", "alpha please"]}
+    }
 
 
 def test_load_synthetic_queries_missing_file(tmp_path):
@@ -393,7 +411,11 @@ def test_synthetic_queries_added_as_chunks(tmp_path, monkeypatch):
     monkeypatch.setattr(si, "HAS_VECTORS", True)
 
     idx = _make_index(tmp_path)
-    _write_synthetic(tmp_path / "data", {"beta-skill": ["tell me about beta", "beta help"]})
+    _write_synthetic(
+        tmp_path / "data",
+        {"beta-skill": ["tell me about beta", "beta help"]},
+        hashes={"beta-skill": _skill_hash(tmp_path, "beta-skill")},  # fresh
+    )
     idx._model = _FakeModel()
     idx.build()
 
@@ -414,15 +436,35 @@ def test_synthetic_queries_added_as_chunks(tmp_path, monkeypatch):
 def test_synthetic_queries_in_bm25_doc(tmp_path):
     """A distinctive synthetic-query term should make the skill findable via
     BM25 even if that term isn't in the description or body."""
-    idx = _make_index(tmp_path)
+    idx = _make_index(tmp_path)  # creates data dir + skill files
+    _write_synthetic(
+        tmp_path / "data",
+        {"gamma-skill": ["xyzzy plugh frobnicate"]},
+        hashes={"gamma-skill": _skill_hash(tmp_path, "gamma-skill")},  # fresh
+    )
+    idx.build()  # build AFTER writing synthetic so it's ingested
     if idx._bm25 is None:
         pytest.skip("rank-bm25 not installed")
-    _write_synthetic(tmp_path / "data", {"gamma-skill": ["xyzzy plugh frobnicate"]})
-    idx.build()
     idx._embeddings = None  # isolate BM25
 
     results = idx.search("frobnicate")
     assert any(r["name"] == "gamma-skill" for r in results)
+
+
+def test_stale_synthetic_queries_skipped(tmp_path):
+    """Synthetic queries whose stored content_hash no longer matches the live
+    skill must NOT be indexed — they describe the skill's old meaning."""
+    idx = _make_index(tmp_path)
+    # Wrong hash (default "x") → the distinctive term must not be findable.
+    _write_synthetic(tmp_path / "data", {"gamma-skill": ["xyzzy plugh frobnicate"]})
+    idx.build()
+    if idx._bm25 is None:
+        pytest.skip("rank-bm25 not installed")
+    idx._embeddings = None
+
+    results = idx.search("frobnicate")
+    assert not any(r["name"] == "gamma-skill" for r in results), \
+        "stale synthetic queries must be skipped"
 
 
 def test_synthetic_file_invalidates_cache_hash(tmp_path):

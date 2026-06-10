@@ -432,7 +432,9 @@ def main():
     signals = {s.strip() for s in args.signals.split(",") if s.strip()}
     registry = json.loads(REGISTRY.read_text())
     idx = HybridSearchIndex(SKILLS_DIR, registry, DATA_DIR)
-    build_status = idx.build()
+    # Skip the (expensive) embedding build when vectors are disabled — e.g. the
+    # bm25,graph CI mode — instead of building then discarding them.
+    build_status = idx.build(build_vectors="vector" in signals)
     _restrict_signals(idx, signals)
 
     curated = run_curated(idx, registry, build_status)

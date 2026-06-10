@@ -35,7 +35,6 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import os
 import re
@@ -48,29 +47,34 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
 OUTPUT_PATH = PROJECT_ROOT / "data" / "synthetic_queries.json"
 
+# Use the index's canonical content hash so the generator's stored hashes and
+# the index's staleness check can never drift apart.
+sys.path.insert(0, str(PROJECT_ROOT / "mcp-server"))
+from search_index import synthetic_content_hash, SYNTHETIC_BODY_EXCERPT_CHARS  # noqa: E402
+
 BATCH_SIZE = 8
 QUERIES_PER_SKILL = 10
-INDEX_SPLIT = 7  # first 7 index, last 3 eval
-BODY_EXCERPT_CHARS = 1200  # cap body sent to the model to control cost
+INDEX_SPLIT = 7  # nominal index/eval split; _filter_and_split adapts it
+# Cap shared with the canonical hash so the prompt excerpt and the hashed body
+# stay aligned.
+BODY_EXCERPT_CHARS = SYNTHETIC_BODY_EXCERPT_CHARS
 DEFAULT_MODEL = "haiku"
 
 _STRIP_FM_RE = re.compile(r"^---\s*\n.*?\n---\s*\n", re.DOTALL)
 _FENCE_RE = re.compile(r"^```(?:json)?\s*|\s*```$", re.MULTILINE)
 
 
-def _skill_body(location: str) -> str:
-    """Read a skill's SKILL.md body (frontmatter stripped), capped."""
-    path = PROJECT_ROOT / location
+def _read_skill_md(location: str) -> str:
+    """Read a skill's raw SKILL.md text (with frontmatter)."""
     try:
-        raw = path.read_text(errors="replace")
+        return (PROJECT_ROOT / location).read_text(errors="replace")
     except OSError:
         return ""
-    body = _STRIP_FM_RE.sub("", raw, count=1).strip()
-    return body[:BODY_EXCERPT_CHARS]
 
 
-def _content_hash(desc: str, body: str) -> str:
-    return hashlib.sha256((desc + "\x00" + body).encode("utf-8")).hexdigest()
+def _body_excerpt(raw_md: str) -> str:
+    """Frontmatter-stripped, capped body for the generation prompt."""
+    return _STRIP_FM_RE.sub("", raw_md, count=1).strip()[:BODY_EXCERPT_CHARS]
 
 
 def _echoes_name(query: str, name: str) -> bool:
@@ -208,8 +212,9 @@ def main() -> int:
         if only is not None and name not in only:
             continue
         desc = entry.get("description", "")
-        body = _skill_body(entry.get("location", ""))
-        chash = _content_hash(desc, body)
+        raw_md = _read_skill_md(entry.get("location", ""))
+        body = _body_excerpt(raw_md)
+        chash = synthetic_content_hash(desc, raw_md)
         prev = existing.get(name)
         is_stale = (prev is None) or (prev.get("content_hash") != chash)
         if not args.force and not is_stale:
