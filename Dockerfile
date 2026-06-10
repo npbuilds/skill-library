@@ -48,11 +48,12 @@ WORKDIR /app/mcp-server
 
 # Pre-build the embedding cache so the first MCP request after a cold
 # start doesn't pay the encoding cost (~30s under Cloud Run cpu-throttling
-# for 366 skills). Runtime invalidation via registry mtime check still
-# applies, so editing a skill description after this point regenerates
-# the cache on first request — but the common case (no description
-# changes between deploys) hits the cache and serves the first request
-# in ~1s.
+# for ~4.5k chunk embeddings across 509 skills). The cache is schema-v2
+# (one vector per body/desc chunk, max-pooled per skill at query time) and
+# keyed on a registry content hash; a stale or pre-chunking cache fails
+# closed and rebuilds. Editing a skill after this point regenerates on
+# first request — the common case (no changes between deploys) hits the
+# cache and serves the first request in ~1s.
 RUN python -c "import json; from pathlib import Path; \
 from search_index import HybridSearchIndex; \
 reg = json.loads(Path('/app/data/registry.json').read_text()); \

@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "signals": [
+      "bm25",
+      "graph"
+    ],
+    "curated_n": 30,
+    "synthetic_n": 300,
+    "generated_at": "2026-06-10T11:56:53.303612+00:00"
+  },
+  "curated": {
+    "strict": {
+      "recall_at_1": 0.567,
+      "recall_at_3": 0.8,
+      "recall_at_5": 0.867,
+      "recall_at_10": 0.933
+    },
+    "lenient": {
+      "recall_at_1": 0.833,
+      "recall_at_3": 0.933,
+      "recall_at_5": 0.933,
+      "recall_at_10": 0.967
+    }
+  },
+  "synthetic": {
+    "recall_at_1": 0.467,
+    "recall_at_5": 0.777
+  }
+}

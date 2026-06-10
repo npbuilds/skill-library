@@ -13,6 +13,7 @@ import re
 import sys
 from collections import defaultdict
 from datetime import datetime, timezone
+from difflib import SequenceMatcher
 from pathlib import Path
 
 import yaml
@@ -27,6 +28,75 @@ REQUIRED_FRONTMATTER = ["name", "description"]
 RECOMMENDED_FRONTMATTER = ["type", "tags"]
 
 FM_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+
+# Description lint (Anthropic Agent Skills guidance). These are RATCHET
+# warnings, not hard gates — 509 legacy skills predate the convention.
+DESC_MAX_LEN = 1024  # Anthropic frontmatter limit
+# First/second-person openers — descriptions must be third person because the
+# description is injected into the system prompt for skill selection.
+_VOICE_RE = re.compile(
+    r"^\s*(i\s|i'm\b|i\s+can\b|we\s|we'll\b|we\s+can\b|you\s+can\b|you'll\b|"
+    r"helps?\s+you\b|lets?\s+you\b|use\s+this\s+to\s+help\s+you\b)",
+    re.IGNORECASE,
+)
+# A good description names its trigger CONDITION or CONTEXT — "Use when...",
+# "Activate when...", "Use during <phase>", "Called by/Coordinates with...".
+# This is intentionally broad: the lint flags descriptions that state only
+# WHAT a skill does with no signal of WHEN/WHERE it applies.
+_TRIGGER_RE = re.compile(
+    r"\b(use\s+when|use\s+this\s+when|use\s+during|use\s+for\b|activate\s+when|"
+    r"activate\s+during|invoke\s+when|trigger\b|called\s+by|coordinat(es|e)\s+with|"
+    r"during\s+\w+('s)?\s+phase|when\s+(you|the\s+user|a\s|an\s|someone|asked|"
+    r"evaluating|building|designing|writing|analyzing|the\s+question))",
+    re.IGNORECASE,
+)
+SIBLING_DUPE_RATIO = 0.85  # difflib ratio above which two siblings are near-dupes
+
+
+def lint_descriptions(disk_skills: dict, reg_skills: dict) -> dict:
+    """Lint descriptions for voice, trigger phrasing, length, sibling dupes.
+
+    Returns a dict of issue-name -> list. All findings are warnings.
+    """
+    voice = []
+    no_trigger = []
+    overlong = []
+    by_parent = defaultdict(list)  # parent -> [(name, description)]
+
+    for name, entry in disk_skills.items():
+        desc = (entry["fm"].get("description") or "").strip()
+        if not desc:
+            continue
+        if _VOICE_RE.match(desc):
+            voice.append({"name": name, "path": entry["path"], "opens": desc[:50]})
+        if not _TRIGGER_RE.search(desc):
+            no_trigger.append({"name": name, "path": entry["path"]})
+        if len(desc) > DESC_MAX_LEN:
+            overlong.append({"name": name, "len": len(desc), "path": entry["path"]})
+        parent = reg_skills.get(name, {}).get("parent")
+        if parent:
+            by_parent[parent].append((name, desc))
+
+    # Sibling near-duplicates: descriptions too similar to a same-parent peer
+    # blur routing between them.
+    sibling_dupes = []
+    for parent, sibs in by_parent.items():
+        for i in range(len(sibs)):
+            for j in range(i + 1, len(sibs)):
+                ratio = SequenceMatcher(None, sibs[i][1], sibs[j][1]).ratio()
+                if ratio > SIBLING_DUPE_RATIO:
+                    sibling_dupes.append({
+                        "parent": parent,
+                        "skills": [sibs[i][0], sibs[j][0]],
+                        "ratio": round(ratio, 3),
+                    })
+
+    return {
+        "desc-voice-not-third-person": voice,
+        "desc-no-trigger-phrase": no_trigger,
+        "desc-overlong": overlong,
+        "desc-sibling-near-duplicates": sibling_dupes,
+    }
 
 
 def parse_skill_file(path: Path):
@@ -116,6 +186,12 @@ def main():
     findings["counts"]["registry_skills"] = len(reg_skills)
     findings["counts"]["registry_schema_version"] = reg.get("schema_version")
     findings["counts"]["registry_last_scan"] = reg.get("last_scan")
+
+    # ---- Description lint (ratchet warnings) ----
+    lint = lint_descriptions(disk_skills, reg_skills)
+    for key, items in lint.items():
+        findings["issues"][key] = items
+    findings["summary"]["description_lint"] = {k: len(v) for k, v in lint.items()}
 
     # ---- Disk <-> Registry sync ----
     disk_names = set(disk_skills.keys())
@@ -214,6 +290,7 @@ def main():
             len(location_mismatches)
             + len(rb_drift)
             + len(short_descriptions)
+            + sum(len(v) for v in lint.values())
         ),
     }
     findings["summary"]["severity_counts"] = severity
@@ -248,6 +325,12 @@ def main():
     print(f"  location drift:                 {len(location_mismatches)}")
     print(f"  referenced_by drift:            {len(rb_drift)}")
     print(f"  short descriptions (<60 chars): {len(short_descriptions)}")
+    print()
+    print("Description lint (ratchet warnings):")
+    print(f"  not third person:               {len(lint['desc-voice-not-third-person'])}")
+    print(f"  no trigger phrase:              {len(lint['desc-no-trigger-phrase'])}")
+    print(f"  overlong (>1024 chars):         {len(lint['desc-overlong'])}")
+    print(f"  sibling near-duplicates:        {len(lint['desc-sibling-near-duplicates'])}")
     print()
     print("Distributions:")
     print(f"  health_status: {dict(by_health)}")

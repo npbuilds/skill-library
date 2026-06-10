@@ -168,6 +168,71 @@ class TestListSkills:
         assert "No skills found" in result
 
 
+class TestListSkillsPagination:
+    def test_limit_slices_results(self, tmp_project):
+        result = server.list_skills(limit=2)
+        assert "Found 3 skill(s), showing 1–2" in result
+        assert "call again with offset=2" in result
+        # Sorted by (domain, name): "data-science" < "design", so the page is
+        # data-wrangling, color-theory. design-director (page 2) appears only
+        # as color-theory's parent annotation, not as an entry.
+        assert "data-wrangling" in result
+        assert "[director] design-director" not in result
+
+    def test_offset_returns_next_page(self, tmp_project):
+        page1 = server.list_skills(limit=2)
+        page2 = server.list_skills(limit=2, offset=2)
+        assert "showing 3–3" in page2
+        assert "design-director" in page2
+        assert "data-wrangling" not in page2
+        # No overlap between pages
+        assert "color-theory" in page1 and "color-theory" not in page2
+
+    def test_offset_past_end(self, tmp_project):
+        result = server.list_skills(offset=99)
+        assert "past the end" in result
+        assert "offset < 3" in result
+
+    def test_domains_footer_first_page_only(self, tmp_project):
+        page1 = server.list_skills(limit=2)
+        page2 = server.list_skills(limit=2, offset=2)
+        assert "Available domains:" in page1
+        assert "Available domains:" not in page2
+
+    def test_limit_zero_returns_all(self, tmp_project):
+        result = server.list_skills(limit=0)
+        assert "showing 1–3" in result
+        assert "call again with offset" not in result
+
+    def test_deterministic_order_across_calls(self, tmp_project):
+        assert server.list_skills() == server.list_skills()
+
+
+class TestIndexFreshnessKey:
+    def test_key_changes_when_synthetic_queries_change(self, tmp_project):
+        """The search index ingests synthetic_queries.json, so the freshness
+        key must change when that file changes — otherwise a running server
+        serves a stale index after query regeneration without a registry edit."""
+        import json as _json
+        import os as _os
+
+        syn = server.DATA_DIR / "synthetic_queries.json"
+        key1 = server._index_freshness_key()
+        assert key1 is not None and key1[1] == 0.0  # absent → 0.0
+
+        syn.write_text(_json.dumps({"version": 1, "skills": {}}))
+        # Force a later mtime so the change is observable regardless of clock
+        # granularity.
+        future = _os.path.getmtime(server.REGISTRY_PATH) + 100
+        _os.utime(syn, (future, future))
+        key2 = server._index_freshness_key()
+        assert key2 != key1 and key2[1] != 0.0
+
+    def test_key_none_when_registry_missing(self, tmp_path):
+        with patch.object(server, "REGISTRY_PATH", tmp_path / "nope.json"):
+            assert server._index_freshness_key() is None
+
+
 # ---------------------------------------------------------------------------
 # search_skills
 # ---------------------------------------------------------------------------
@@ -383,6 +448,15 @@ class TestLogEvent:
         bad_path = tmp_path / "no" / "such" / "dir" / "log.jsonl"
         # Should not raise
         server._log_event(bad_path, {"action": "test"})
+
+    def test_write_errors_reported_to_stderr(self, tmp_path, capsys):
+        """Failed log writes must not raise, but must not vanish either —
+        they go to stderr where Cloud Logging picks them up."""
+        bad_path = tmp_path / "no" / "such" / "dir" / "log.jsonl"
+        server._log_event(bad_path, {"action": "test"})
+        captured = capsys.readouterr()
+        assert "failed to write log" in captured.err
+        assert "log.jsonl" in captured.err
 
 
 class TestLoadLog:
