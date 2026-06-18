@@ -5461,8 +5461,8 @@
         "estimated_tokens_body": 2664,
         "estimated_tokens_total": 2732
       },
-      "auto_score": 84,
-      "composite_score": 84,
+      "auto_score": 81,
+      "composite_score": 81,
       "referenced_by": [
         "narrative-craft",
         "narrative-keeper",
@@ -11850,10 +11850,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
         "historical-argument",
