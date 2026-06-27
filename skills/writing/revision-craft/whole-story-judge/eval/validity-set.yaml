@@ -1,0 +1,123 @@
+# Validity set for `whole-story-judge` — sound-vs-broken story-STRUCTURE pairs.
+#
+# WHY: a macro judge can fail two ways — pass a story that's broken at the whole (dropped setup,
+# no arc, episodic, bait-and-switch), or fail a sound-but-unconventional whole (an earned, marked
+# subversion — a gun deliberately not fired, an ambiguous ending). This tests both.
+#
+# The control "passages" are compact STORY SKELETONS / outlines — the macro properties live in the
+# skeleton (setups ledger, arc, causal chain, promise), so a whole novel isn't needed. Each item:
+# fail_passage (a valid judge must FAIL) vs pass_passage (must PASS), tagged by `kind` = dimension.
+# Graded by score-validity.py.
+
+meta:
+  skill: whole-story-judge
+  location: skills/writing/revision-craft/whole-story-judge/SKILL.md
+  suite: validity
+  level: draft
+  note: >
+    Gold labels never shown to the judge. Run it blind on each skeleton, record PASS/FAIL on the
+    target dimension, then score. Headline metrics: dropped-setup tolerance (let a broken whole
+    through) and macro-conformity (failed an earned subversion).
+
+items:
+  - id: payoff-01
+    kind: payoff-trap
+    dimension: Payoff realization
+    trap: the broken one has a vivid, memorable setup — which makes the silent drop easy to miss
+    fail_passage: >
+      Ch.2 makes much of a sealed western door no one will discuss, and a key the heroine pockets.
+      The novel is a tense court intrigue; she wins her place, the season ends, the book closes. The
+      door is never mentioned again; the key is never used.
+    pass_passage: >
+      Ch.2 plants the sealed western door and the pocketed key. At the climax she finally opens it —
+      finding not treasure but her predecessor's bones, which is why the court fears the room. The
+      key turns the ending.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: a prominent setup silently dropped (the Chekhov's-gun gap). Pass: the setup fires and
+      pays off, reframing the ending.
+
+  - id: arc-01
+    kind: arc-trap
+    dimension: Arc shape
+    trap: the shapeless one is full of incident — busy reads as "plot"
+    fail_passage: >
+      The detective solves a pickpocketing, then a missing dog, then a tax dispute, then a minor
+      forgery. Each case is neat and self-contained. The book ends after the fourth, no larger
+      stake having risen and none resolved.
+    pass_passage: >
+      A small theft pulls the detective into a larger fraud, which implicates her own mentor, forcing
+      the climactic choice between loyalty and the truth — which she makes, and lives with. The cases
+      escalate into one arc.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: episodic, no escalation, no climax — incident without shape. Pass: complication escalates
+      to a climactic turn the whole builds to.
+
+  - id: causal-01
+    kind: causal-trap
+    dimension: Causal connectivity
+    trap: both have the same events in the same order — only one connects them causally
+    fail_passage: >
+      The king dies. Then the queen takes a lover. Then war breaks out. Then the harvest fails. Then
+      the prince returns. Things happen, one after another, to the same people.
+    pass_passage: >
+      The king dies, so the queen — unprotected — must take a powerful lover; his rivals read the
+      match as a claim and march; the war pulls the men from the fields, so the harvest fails, which
+      is what finally brings the prince home.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: and-then sequence (a list). Pass: this-because-that chain (a plot). Same beats, opposite
+      connectivity — the classic Forster distinction.
+
+  - id: coherence-01
+    kind: coherence-trap
+    dimension: Global coherence
+    trap: each scene is locally fine; the contradiction only appears across the whole
+    fail_passage: >
+      Ch.1 establishes the heroine cannot read — a wound she hides. Ch.9, with no learning shown,
+      she silently reads a crucial letter alone and acts on it. Each scene works; together they
+      contradict.
+    pass_passage: >
+      Ch.1: she cannot read. Ch.9: she must get a letter read, so she's forced to trust the one
+      person who can — the very rival she'd avoided — and the dependence costs her. The wound holds
+      and drives the scene.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: a character-fact contradiction across the whole (drift). Pass: the established fact holds
+      and is used, not violated.
+
+  - id: promise-01
+    kind: promise-trap
+    dimension: Promise kept
+    trap: the bait-and-switch ending is competent on its own terms — it just answers a different book
+    fail_passage: >
+      Opens as a tight locked-room murder mystery — a body, suspects, a ticking clock. Two-thirds in
+      it abandons the murder unsolved and becomes a sweeping romance between two suspects; the book
+      ends on their wedding, the death forgotten.
+    pass_passage: >
+      Opens as a locked-room mystery; the romance grows between two suspects but the solution lands
+      at the climax — and the murderer is the lover, so the romance and the mystery resolve in the
+      same blow.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: the opening promises (and stakes) a mystery; the ending delivers a different book. Pass:
+      the opening's promise is kept and fused with the romance, not discarded.
+
+  - id: subversion-01
+    kind: subversion-trap
+    dimension: Payoff realization
+    trap: the SOUND one deliberately does NOT fire a setup — a conformity judge wrongly FAILs it
+    fail_passage: >
+      A soldier carries his father's pistol through the whole war, the narration noting it at each
+      turn. In the final battle the author simply forgot it — he fights with a rifle, the pistol
+      never mentioned, no weight given to its absence.
+    pass_passage: >
+      A soldier carries his father's pistol through the whole war. At the climax he reaches for it —
+      and doesn't fire; he lowers it and walks away. The gun pointedly never goes off, and that
+      refusal IS the ending: he will not become his father.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Both leave the gun unfired. Fail: silently dropped — the text forgot. Pass: deliberately,
+      markedly unfired — the non-payoff IS the payoff (an earned subversion). A judge that fails
+      every unfired gun is a conformity engine and would flunk every literary open ending.
