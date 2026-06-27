@@ -61,12 +61,26 @@ Run these checks in this exact order. Failing any sets `aborted` and returns `[]
 
 ```
 accounts = get_accounts()
-target = first account where account_number == strategist.account_lock
+
+if strategist.account_lock is not null:
+    # Autotrader-bound strategists hard-pin to a specific account number.
+    target = first account where account_number == strategist.account_lock
+else:
+    # Profile-bound strategists (account_lock: null) use the loaded profile's
+    # default account. In Claude Code analyst mode this is the user's
+    # is_default account (likely a margin account); in a future
+    # options-trader Hermes profile, the profile's HERMES_PROFILE_ACCOUNT
+    # env var overrides — fall through to is_default if not set.
+    if env.HERMES_PROFILE_ACCOUNT is set:
+        target = first account where account_number == env.HERMES_PROFILE_ACCOUNT
+    else:
+        target = first account where is_default == true
+
 if target is null: abort "account_lock_failed"
 if target.agentic_allowed != true: abort "account_lock_failed"
 ```
 
-Record `target.account_number` and `target.option_level` for later checks.
+Record `target.account_number` and `target.option_level` for later checks. Surface the resolved account number in the `tick_decision.notes` field on any abort, so misconfigurations are diagnosable.
 
 ### 1.2 Live portfolio
 
@@ -84,7 +98,8 @@ If any are missing or zero when the strategist needs to size: still proceed but 
 For each entry in `strategist.capability_requires`:
 
 - `"option_level_2"` → require `target.option_level in {"option_level_2", "option_level_3"}`
-- `"fractional_eligible"` → require `target.fractional_eligible == true` (if absent on the account object, assume true on cash accounts and false on margin — Robinhood doesn't always report)
+
+Robinhood does not expose a `fractional_eligible` field on `get_accounts`. Strategists that need fractional shares declare `assumes.fractional_shares: true` in frontmatter instead — a documented assumption, not a runtime capability check. (Cash individual accounts support fractional shares on market+regular_hours orders by default; margin accounts and IRAs may not.) If a future broker change requires runtime gating, add a `fractional_eligible` check here when the MCP starts reporting it.
 
 Any failure → abort `"capability_gated"`.
 

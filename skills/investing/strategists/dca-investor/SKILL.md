@@ -21,7 +21,9 @@ strategist:
   allowlist: [SPY, VOO, VTI, QQQ, BND]
   max_position_pct: 50
   max_concurrent_positions: 5
-  capability_requires: [fractional_eligible]
+  capability_requires: []
+  assumes:
+    fractional_shares: true   # cash individual accounts on Robinhood; not a capability the broker reports
   profile_compatibility: [autotrader]
   requires_directors: [regime-intelligence]
 basket:
