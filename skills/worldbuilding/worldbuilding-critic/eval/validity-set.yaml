@@ -1,0 +1,145 @@
+# Validity set for `worldbuilding-critic` — sound-vs-unsound invented-system pairs.
+#
+# WHY: a soundness judge can fail two ways — pass an UNSOUND system (free/unbounded/decorative)
+# or fail a SOUND-but-unconventional one (e.g. a deliberately soft magic). This set tests both
+# with known answers, mirroring the quality-critic harness.
+#
+# Each item: fail_passage (a valid critic must FAIL it) vs pass_passage (must PASS it), tagged by
+# `kind` = the rubric dimension under test. Graded by score-validity.py.
+
+meta:
+  skill: worldbuilding-critic
+  location: skills/worldbuilding/worldbuilding-critic/SKILL.md
+  suite: validity
+  scope: system
+  note: >
+    Gold labels are never shown to the critic. Run it blind on each passage, record PASS/FAIL on
+    the target dimension, then score. Headline metrics: false-pass (let an unsound system through)
+    and false-fail (rejected a sound one — e.g. punished a deliberately soft magic).
+
+items:
+  - id: cost-01
+    kind: cost-trap
+    dimension: Cost is real
+    trap: the unsound one sounds powerful and vivid; power without price reads as "strong magic"
+    fail_passage: >
+      The Adept simply wills a thing and the world rearranges to match — a wall becomes a door, a
+      wound becomes whole skin, an enemy becomes ash. There is no limit to how often, and it costs
+      the Adept nothing but the wanting.
+    pass_passage: >
+      Every shaping burns a memory the shaper never gets back — and the Art takes the dearest ones
+      first. A master can level a keep, once, and wake not knowing her children's names.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: consequence-less, unlimited power — nothing is spent. Pass: a real, escalating, legible
+      cost that shapes every choice to use it.
+
+  - id: limits-01
+    kind: limits-trap
+    dimension: Limits > powers
+    trap: unlimited power reads as generous; the bounded one feels small
+    fail_passage: >
+      The Art has no fixed shape. Whatever the practitioner can imagine, the Art can do — fire,
+      flight, foresight, raising the dead — bounded only by their cleverness and will.
+    pass_passage: >
+      The Art moves water, and only water, and only downhill. From that single permission the whole
+      civilization is built: its canals, its sieges, its priesthood of the slope.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: defined by powers, effectively unbounded — no struggle, no shape. Pass: defined by a
+      hard limit that generates the entire culture.
+
+  - id: propagation-01
+    kind: propagation-trap
+    dimension: Propagation (Rule of Consequence)
+    trap: the decorative axiom is colorful; the propagated one is plumbing
+    fail_passage: >
+      Dragons rule the high peaks, ancient and proud. They keep to themselves and are rarely seen.
+      The kingdoms below farm, trade, and war much as kingdoms always have.
+    pass_passage: >
+      Iron is poison to the fae — so whoever holds the iron mines holds the realm. The aristocracy
+      is the smith-clans, marriages are sealed in iron, and the border wars are all, underneath,
+      fights over ore.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: a vivid axiom that ripples into nothing (kingdoms are "as kingdoms always have") —
+      decoration. Pass: one axiom propagating through class, marriage, and war.
+
+  - id: brightline-01
+    kind: brightline-trap
+    dimension: Bright-line on escalation
+    trap: both describe healing; only one rules the escalation to mind-control
+    fail_passage: >
+      The Menders reweave living flesh — knitting bone, clearing fever, regrowing a hand. The living
+      body is theirs to rewrite, and they are very good at it.
+    pass_passage: >
+      The Menders reweave flesh — but never the mind. The brain is the one tissue the Art slides
+      off of; no one can say why, only that every Mender feels the wall and none has ever crossed it.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: "rewrite the living body" leaves mind-editing one inference away and unruled — a latent
+      god-power. Pass: the bright line is drawn explicitly (flesh yes, mind no).
+
+  - id: plausibility-enforcement-01
+    kind: plausibility-trap
+    dimension: Plausibility / explanatory power
+    trap: both assert a monopoly; only one mechanizes it
+    fail_passage: >
+      The Guild controls all magic in the realm. No one may cast without the Guild's permission, and
+      this rule has held for a thousand years.
+    pass_passage: >
+      Magic needs a guild-grown symbiote seeded in the blood; raw force without it cooks the caster
+      from the inside. The monopoly isn't a law you could break — it's in your veins or it isn't.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: a monopoly asserted with no mechanism — nothing physically stops a defector, so "held
+      for a thousand years" is implausible. Pass: the monopoly is mechanized (biological gate).
+
+  - id: soft-magic-01
+    kind: soft-magic-trap
+    dimension: Bright-line on escalation
+    trap: the SOUND one is a deliberately soft/unexplained magic — a conformity-style judge wrongly FAILs it
+    fail_passage: >
+      No one understands the old power in the hills, and the hero doesn't either — until the final
+      battle, when he reaches for it and it simply destroys the dark lord, problem solved.
+    pass_passage: >
+      No one understands the old power in the hills. It is never explained and never wielded to win;
+      it haunts the edges of the tale, granting only dread and wonder, never a solution.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Soft magic is valid (Sanderson's 1st Law) IF it doesn't resolve the conflict. Fail: the
+      unexplained power is used as a deus ex machina to win — the one thing soft magic must not do.
+      Pass: soft magic owned correctly (atmosphere, never plot-solution). A conformity judge that
+      reflexively fails "unexplained magic" gets this wrong.
+
+  - id: access-01
+    kind: access-trap
+    dimension: Access is defined
+    trap: the unsound one sounds egalitarian; defined access can read as "restrictive"
+    fail_passage: >
+      Some people can work the loom-magic and some can't. It has never been worked out why, and it
+      does not much matter who does — they simply do, here and there, as needed.
+    pass_passage: >
+      Only the salt-born can work it — those birthed in the tidal marshes — so the marsh-villages,
+      once dirt-poor, now hold the guilds hostage, and noble houses pay fortunes to birth their
+      heirs in the mud.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: access is undefined ("never worked out why") and casts no social shadow. Pass: access is
+      specified (salt-born) AND the rule reshapes the whole class structure.
+
+  - id: generativity-01
+    kind: generativity-trap
+    dimension: Generativity
+    trap: the inert system is consistent, safe, and pleasant — it just generates nothing
+    fail_passage: >
+      The glow-crystals light every home. They are common, cheap, and perfectly safe; everyone has
+      them, no one lacks them, and no one has ever had cause to fight over them.
+    pass_passage: >
+      The glow-crystals shine only in the hand of someone telling the truth — so courts are built
+      around them, lovers dread them, spies are useless near them, and a black market in
+      dampening-cloth quietly thrives.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Fail: internally consistent but inert — it produces no conflict, institution, or story. Pass:
+      one property spawns law, romance, espionage, and a black market.

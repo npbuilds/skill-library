@@ -61,10 +61,13 @@ Determine which worldbuilding skill(s) apply. Most requests touch multiple skill
 | Trace consequences of an axiom | `extrapolation-engine` | `world-bible` | "And Then What?" drill, domain cascade |
 | Build weird/numinous/alien worlds that resist systematization | `weird-worldbuilding` | `magic-system-design`, `world-bible` | The Glimpse, unreliable world, numinous objects |
 | Consistency check across artifacts | `world-bible` | All others | The bible is the authority |
+| Evaluate whether a system is SOUND (costed, limited, propagated), not just consistent | `worldbuilding-critic` | `extrapolation-engine`, `world-bible` | Sanderson's Laws + Rule-of-Consequence + "And Then What?" stress-tests; runs after the consistency check |
 | "Build me a world from scratch" | All, in sequence | — | Full pipeline (see Phase 3) |
 
 **Classification decision tree:**
 
+0. **Intent gate — judge or build?** Is this asking to **evaluate** whether an *existing* system is **sound** (costed, limited, propagated) — not to build or define one ("is this magic system sound?", "does this hold up?")?
+   - Yes → `worldbuilding-critic` (after a `world-bible` consistency check passes). *Check this first — otherwise "magic system" matches the rules branch below and never reaches the critic.*
 1. Is this about the **rules** of the world (physics, magic, resources, constraints)?
    - Yes → `world-bible`
 2. Is this about how something **sounds** (names, language, phonetics)?
@@ -173,6 +176,7 @@ Route to the appropriate skill, passing accumulated context.
 | `sensory-worldbuilding` | knowledge | What the world feels/smells/sounds like — five sensory channels |
 | `environmental-storytelling` | knowledge | Physical spaces narrating history — Jenkins' four types, archaeology method |
 | `weird-worldbuilding` | knowledge | Anti-systematic worldbuilding — the Glimpse, numinous objects, estrangement |
+| `worldbuilding-critic` | action | Judges whether an invented system is *sound* (cost/limits/access/propagation/bright-line) — runs after the consistency check |
 
 When delegating, always pass:
 - Current world-bible state (relevant axioms)
@@ -236,11 +240,15 @@ When the user finishes building (or has enough built to start drafting) and want
 
 | When the work shifts to... | Hand off to... | Bridge skill |
 |---|---|---|
-| Writing prose in the built world (scenes, chapters, drafts) | `prose-orchestrator` | `skills/writing/narrative-craft/world-to-story/` — iceberg methodology, revelation channels, system → scene translation, exposition techniques |
-| Rendering a built region in prose (sensory immersion) | `prose-orchestrator` | `skills/writing/narrative-craft/sensory-translation/` — translates `sensory-worldbuilding`'s 5 channels into prose detail-selection and POV-based attention bias |
-| Characters speaking and thinking in their culture's voice | `prose-orchestrator` | `skills/writing/narrative-craft/cultural-voice/` — translates `cultures-societies` + `naming-system` into vocabulary domains, idiom, syntax rhythm, metaphor source |
+| Writing prose in the built world (scenes, chapters, drafts) | **prose-orchestrator** | `skills/writing/narrative-craft/world-to-story/` — iceberg methodology, revelation channels, system → scene translation, exposition techniques |
+| Rendering a built region in prose (sensory immersion) | **prose-orchestrator** | `skills/writing/narrative-craft/sensory-translation/` — translates `sensory-worldbuilding`'s 5 channels into prose detail-selection and POV-based attention bias |
+| Characters speaking and thinking in their culture's voice | **prose-orchestrator** | `skills/writing/narrative-craft/cultural-voice/` — translates `cultures-societies` + `naming-system` into vocabulary domains, idiom, syntax rhythm, metaphor source |
 | In-universe document drafting (letters, myths, reports, intercepted intelligence) | **Stay here** | `lore-writer` already covers this — 7 voice registers, artifact format, frontmatter conventions |
 | Game systems / mechanics design (loops, balance, progression, catch-up systems) | `skills/narrative-design/game-mechanics/` | Relocated from worldbuilding — it is game design, not world construction |
-| Aligning prose pacing with worldbuilding's revelation spiral | `prose-orchestrator` | `narrative-pacing` (here) pairs with `writing/narrative-craft/pacing` — same vocabulary, different scales |
+| Aligning prose pacing with worldbuilding's revelation spiral | **prose-orchestrator** | `narrative-pacing` (here) pairs with `writing/narrative-craft/pacing` — same vocabulary, different scales |
 
 **Operating principle for the handoff:** never hand off prematurely. Establish at least the world-bible axioms, the focal culture(s), and the relevant magic/tech rules before drafting. A scene written before the world supports it will need to be rewritten when the world is filled in. The order is `world-bible → focal cultures → focal factions → relevant systems → hand off`. For one-off lore artifacts, the lore-writer can run on much less.
+
+## Related Skills
+
+The prose orchestrator (writing domain) is the downstream consumer of this orchestrator's output: worldbuilding owns *what is true*, prose owns *how it lands on the page*. The dependency is **directional** — prose-orchestrator depends on worldbuilding-orchestrator (a story needs a world before it can be written), but **not** the reverse: a world bible is built without writing a single scene. That is why the handoff above points to **prose-orchestrator** in plain text rather than as a `depends_on` edge — it is a forward handoff, not a dependency of this orchestrator (see STYLE_GUIDE #6, "The Mutual Dependency").
