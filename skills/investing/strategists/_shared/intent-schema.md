@@ -67,29 +67,54 @@ The single source of truth for how a strategist hands trade ideas to the executo
 
 ## Executor return shape
 
-The executor returns `RealizedAction[]` back to the calling strategist:
+The executor returns a structured envelope, NOT a bare `RealizedAction[]`. The envelope carries pre-flight outcomes (`aborted`, `circuit_breaker_tripped`) AND the realized actions in one object:
 
 ```json
-[
-  {
-    "symbol": "SPY",
-    "side": "buy",
-    "quantity_type": "notional",
-    "qty": 0.103,
-    "notional_usd": 50.00,
-    "intent_price": 481.50,
-    "realized_review_price": 482.07,
-    "status": "placed",
-    "reason": "DCA tranche 2 of 4 for the week",
-    "order_id": "f3a8...",
-    "alerts": []
-  }
-]
+{
+  "aborted": null,
+  "circuit_breaker_tripped": false,
+  "account_value": 1000.00,
+  "buying_power": 998.50,
+  "actions": [
+    {
+      "symbol": "SPY",
+      "side": "buy",
+      "quantity_type": "notional",
+      "qty": 0.103,
+      "notional_usd": 50.00,
+      "original_qty": null,
+      "original_notional_usd": 50.00,
+      "intent_price": 481.50,
+      "realized_review_price": 482.07,
+      "status": "placed",
+      "reason": "DCA tranche 2 of 4 for the week",
+      "order_id": "f3a8...",
+      "alerts": []
+    }
+  ]
+}
 ```
 
+### Envelope field semantics
+
+| Field | Required | Notes |
+|---|---|---|
+| `aborted` | always | One of: `null`, `promotion_blocked`, `mode_mismatch`, `manifest_missing`, `manifest_path_invalid`, `manifest_identity_mismatch`, `account_lock_failed`, `capability_gated`, `outside_time_window`, `profile_compatibility_failed`, `broker_unavailable`, `data_anomaly`. When non-null, `actions` MUST be `[]` and no broker call was made. The strategist propagates this to `tick_decision.aborted`. |
+| `circuit_breaker_tripped` | always | True if SOUL's daily-loss circuit breaker fired in pre-flight. When true, only close-side intents survive. |
+| `account_value` | non-aborted ticks only | From `get_portfolio.total_value` captured at the start of the tick. 0 when `aborted`. |
+| `buying_power` | non-aborted ticks only | From `get_portfolio.buying_power.buying_power`. 0 when `aborted`. |
+| `actions` | always | Array of RealizedAction. Empty when `aborted`. |
+
+### RealizedAction field semantics
+
 - `qty` and `notional_usd` are always both populated in the return, even when only one was in the input. The executor computes the other from the live quote.
-- `status` reflects what actually happened: `reviewed`, `placed`, `skipped`, `review_anomaly`, `slippage_aborted`.
-- `order_id` is populated only on `status: placed`.
+- `original_qty` and `original_notional_usd` are the strategist's pre-cap values, captured at phase 2.4 entry. The drift check at phase 3.5 compares against these. Whichever doesn't apply to the intent's `quantity_type` is `null`.
+- `status` reflects what actually happened. Valid values (matched verbatim to SOUL):
+  - `reviewed`, `placed`, `skipped`, `review_anomaly`, `slippage_aborted`
+  - `intent_drift_aborted` (phase 3.5 — SOUL 1% rule)
+  - `duplicate_symbol_in_tick` (phase 2.0 — SOUL one-per-symbol rule)
+  - `place_failed` (phase 4 — broker rejected or 5xx twice)
+- `order_id` is populated only on `status: placed`. May be present-but-failed on `status: place_failed` if the broker returned an id with the error.
 - `alerts` carries Robinhood's `order_checks` array verbatim — useful for the strategist to log but not act on (the executor has already adjudicated them).
 
-The strategist embeds this array directly into its `tick_decision.actions` JSON block.
+The strategist embeds the envelope's `actions` array directly into its `tick_decision.actions` JSON block, and copies `aborted`, `circuit_breaker_tripped`, `account_value`, `buying_power` to the tick_decision top-level.

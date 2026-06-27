@@ -29,8 +29,21 @@ Every strategist's final output is exactly one JSON block titled `## tick_decisi
 | `buying_power` | from pre-flight `get_portfolio` | `buying_power.buying_power` field. |
 | `actions` | executor's `RealizedAction[]` return | Verbatim. Empty `[]` is valid. |
 | `circuit_breaker_tripped` | pre-flight | True if today's realized P&L ≤ −5% of day-start portfolio value. When true, only close-side actions are permitted. |
-| `aborted` | pre-flight | One of: `null`, `"account_lock_failed"`, `"capability_gated"`, `"outside_time_window"`, `"profile_compatibility_failed"`. When non-null, `actions` MUST be `[]` and no broker calls were made. |
+| `aborted` | pre-flight | One of: `null`, `"promotion_blocked"`, `"mode_mismatch"`, `"manifest_missing"`, `"manifest_path_invalid"`, `"manifest_identity_mismatch"`, `"account_lock_failed"`, `"capability_gated"`, `"outside_time_window"`, `"profile_compatibility_failed"`, `"broker_unavailable"`, `"data_anomaly"`. When non-null, `actions` MUST be `[]` and no broker calls were made. See SOUL.md for per-value semantics. |
 | `notes` | strategist | One short sentence at most. Use for human-readable context the structured fields don't capture. |
+
+## Action status values
+
+| Status | Phase | Meaning |
+|---|---|---|
+| `reviewed` | 4 | `review_equity_order` succeeded; place skipped per run-context (chat-no-EXECUTE, claude-code, or cron+review). |
+| `placed` | 4 | `place_equity_order` succeeded; `order_id` populated. |
+| `skipped` | 2 | In-tick validation failed (allowlist, position constraint, expiry, etc.); see `reason`. No broker call. |
+| `duplicate_symbol_in_tick` | 2.0 | A prior intent in the same tick targeted this symbol; FIFO-first wins. Enforces SOUL "one order per symbol per tick". |
+| `review_anomaly` | 3.4 | Review surfaced an unexpected field (price collar, restriction, margin, PDT, halt, unsupported); place aborted. |
+| `slippage_aborted` | 3.3 | Realized review price exceeded `max_slippage_pct` vs intent price. |
+| `intent_drift_aborted` | 3.5 | Final notional drifted >1% from original after cap/rounding; place aborted. Enforces SOUL "never place an order whose notional differs by more than 1%". |
+| `place_failed` | 4 | Broker rejected the order (4xx) or transient 5xx twice. |
 
 ## Abort vs. no-op
 
