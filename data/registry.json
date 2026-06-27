@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-06-27T05:57:21Z",
+  "last_scan": "2026-06-27T15:45:38Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -3080,6 +3080,7 @@
       ],
       "referenced_by": [
         "quality-critic",
+        "scheherazade",
         "whole-story-judge"
       ],
       "tags": [
@@ -4928,6 +4929,7 @@
         "physical-world",
         "prose-orchestrator",
         "religion-design",
+        "scheherazade",
         "systems-craft",
         "technology-progression",
         "world-bible",
@@ -5429,6 +5431,7 @@
         "prose-writer",
         "revision-craft",
         "rhetoric",
+        "scheherazade",
         "sentence-craft",
         "style-mixer"
       ],
@@ -6592,7 +6595,9 @@
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
       "tags": [
         "domain:worldbuilding",
         "level:knowledge",
@@ -11523,12 +11528,14 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -26392,7 +26399,9 @@
       "depends_on": [
         "character-belief-tracker"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -26449,7 +26458,9 @@
       "depends_on": [
         "character-belief-tracker"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -26499,12 +26510,14 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 66,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 70,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -26522,6 +26535,69 @@
         }
       ],
       "parent": "worldbuilding-orchestrator"
+    },
+    "scheherazade": {
+      "name": "scheherazade",
+      "description": "Meta-orchestrator for the agentic world\u2192character\u2192story loop. Generates (or extends) a fictional world, its characters, and a story set in it by driving the worldbuilding and writing domains over one shared world-state, closed by the critic suite (consistency + quality + macro) with human checkpoints at the creative forks. Use to generate a world and a story end-to-end, or to draft quality-gated prose grounded in an existing world-bible. Not for single-skill asks (just worldbuild or just draft) \u2014 those route to the domain orchestrators.",
+      "location": "skills/narrative/scheherazade/SKILL.md",
+      "plugin": "skill-narrative",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 872,
+        "body_words": 764,
+        "description_words": 83,
+        "section_count": 7,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 108,
+        "estimated_tokens_body": 1365,
+        "estimated_tokens_total": 1473
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 79,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 79,
+      "depends_on": [
+        "character-belief-tracker",
+        "extrapolation-engine",
+        "prose-orchestrator",
+        "quality-critic",
+        "whole-story-judge",
+        "world-to-story",
+        "worldbuilding-critic",
+        "worldbuilding-orchestrator"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:narrative",
+        "layer:orchestrator"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": null
     }
   },
   "network": {
@@ -26784,6 +26860,9 @@
         "tail-risk",
         "tax-optimization",
         "value-quality"
+      ],
+      "narrative": [
+        "scheherazade"
       ],
       "neocortex": [
         "architecture",
