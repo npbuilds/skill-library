@@ -57,6 +57,15 @@ The single source of truth for how a strategist hands trade ideas to the executo
 | `expires_at` | always | ISO-8601 timestamp. If the executor evaluates the intent after this, it skips with `status: skipped` and `reason: "expired"`. |
 | `asset_class` | always | `"equity"` for stocks/ETFs. `"option-l2"` for single-leg options (only valid when the strategist's `profile_compatibility` includes `options-trader` AND the loaded profile is `options-trader`). |
 | `option_leg` | asset_class == "option-l2" | Object with `option_id`, `position_effect: open\|close`, `ratio_quantity` (defaults to 1). The executor calls `get_option_instruments` to validate. |
+| `allow_cap_downsize` | optional, default `false` | When `true`, the executor's per-name cap may trim the order to fit `max_position_pct` without aborting at the phase 3.5 intent-drift check. Strategists that explicitly opt in to "fill at smaller size" accept the cap-shrunk order; strategists that don't get an `intent_drift_aborted` action when the cap would trim by more than 1%. Most strategists should leave this `false` — accidental cap trims are usually a bug, not a feature. |
+| `allow_multiple_per_symbol` | optional, default `false` | **Not currently supported.** Reserved for a future v0.3 change. Today the executor's phase 2.0 always drops same-symbol duplicates with `status: "duplicate_symbol_in_tick"`. Setting this `true` has no effect and is silently ignored. Strategists that need split-order semantics must split across ticks. |
+
+### Optional opt-in flags
+
+Both flags above are *strategist opt-ins* to behavior that's otherwise blocked by the executor's safety contract. They are not safety overrides — they shift the trade-off between "this order is bigger/smaller than I asked for" and "the order didn't happen". A strategist sets them when its decision rules already accommodate the alternative outcome.
+
+- **Set `allow_cap_downsize: true`** when the strategist would rather get *some* exposure than none. Example: a rebalancer trimming an overweight position can accept a smaller trim than requested.
+- **Leave `allow_cap_downsize` unset (default `false`)** when the strategist's sizing is load-bearing for the strategy thesis. Example: DCA tranches are calibrated; a smaller tranche distorts the schedule. Better to abort and log than to silently underweight.
 
 ### What strategists must NOT do
 
