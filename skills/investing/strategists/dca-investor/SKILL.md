@@ -7,6 +7,7 @@ description: >
   just a metronome. Use when the user asks "DCA into X", "set up automated buying",
   "schedule weekly investments", or "what does the DCA strategist say". Default
   mode is review-only; live mode requires explicit promotion.
+disclaimer: "DCA is chosen for behavioral consistency and lower variance of entry timing, NOT expected alpha vs. lump-sum. Vanguard (2012) and PWL Capital (2024) document lump-sum investing outperforming DCA in ~66% of rolling 12-month windows, with median 2.2% return advantage on 100% equity over 30+ years. In bear-market entry regimes the gap narrows to ~25bps annualized — DCA loses less, never wins more. Use this strategist if you want behavioral discipline; use lump-sum if you want statistical expectation."
 metadata:
   author: nirav
   version: "0.1"

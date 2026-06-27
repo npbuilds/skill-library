@@ -7,6 +7,9 @@ description: >
   on the gap, exits at +3% or 5 trading days. Equity-only in v1; an options
   variant lives in options-strategist. Use when user asks "earnings setups
   today", "did X beat", or "what does the earnings trader see". Review-only default.
+do_not_promote: true
+kill_reason: wrong_universe_pead_absent_mega_cap
+kill_reason_long: "PEAD (post-earnings announcement drift) literature documents the beat-but-down reversion on small-caps. The allowlist is entirely mega-cap, where institutional traders price-discover within minutes and PEAD is minimal-to-absent. Wrong-universe is a thesis-level problem, not a parameter tune. Per the v0.2 dive (see _shared/v0.2-improvement-spec.md). SKILL.md retained for analyst-mode use; this strategist must not be promoted to mode: live."
 metadata:
   author: nirav
   version: "0.1"
