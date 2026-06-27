@@ -57,6 +57,47 @@ The "EXECUTE:" directive in chat must match the intent's symbol and side at mini
 
 Run these checks in this exact order. Failing any sets `aborted` and returns `[]` to the strategist. The strategist must include the matching `aborted` field in its `tick_decision`.
 
+### 1.0 Strategist manifest gate (authoritative source)
+
+The payload `mode` and `strategy` fields are NOT authoritative — they are caller-supplied and can be forged, stale, or accidentally mutated. The executor must re-read the strategist's SKILL.md frontmatter and treat that as the only source of truth for mode, account_lock, profile_compatibility, capability_requires, and the `do_not_promote` flag.
+
+```
+strategy_name = payload.strategy
+manifest_path = "skills/investing/strategists/" + strategy_name + "/SKILL.md"
+
+# Path safety
+if strategy_name contains "/" or ".." or is empty: abort "manifest_path_invalid"
+if manifest_path does not exist: abort "manifest_missing"
+
+manifest = parse_yaml_frontmatter(read(manifest_path))
+
+# Identity check — frontmatter name must match payload
+if manifest.name != strategy_name: abort "manifest_identity_mismatch"
+
+# Promotion gate — the kill-list lives here
+if manifest.do_not_promote == true:
+    abort "promotion_blocked"
+
+# Mode authentication — payload mode is advisory; frontmatter mode rules
+if payload.mode == "live" and manifest.strategist.mode != "live":
+    abort "mode_mismatch"
+
+# From this point forward, EVERY downstream check uses manifest.strategist.*,
+# never payload.* — even when they agree. The payload exists only to identify
+# the strategist; it is not a privileged config channel.
+
+mode = manifest.strategist.mode               # canonical
+account_lock = manifest.strategist.account_lock
+profile_compatibility = manifest.strategist.profile_compatibility
+capability_requires = manifest.strategist.capability_requires
+time_window = manifest.strategist.time_window
+allowlist = manifest.strategist.allowlist
+max_position_pct = manifest.strategist.max_position_pct
+max_concurrent_positions = manifest.strategist.max_concurrent_positions
+```
+
+This gate also bars the do_not_promote escape hatch: even if a strategist's frontmatter `mode` is somehow flipped to `live`, the `do_not_promote: true` check fires first and aborts. The two flags are AND'd at the gate — promotion requires both `do_not_promote != true` AND `mode == "live"`.
+
 ### 1.1 Account lock
 
 ```
@@ -144,6 +185,30 @@ Return value if any abort fires: empty array. The strategist sees the aborts via
 
 For each intent that survived pre-flight:
 
+### 2.0 Duplicate-symbol guard (BEFORE per-intent validation)
+
+SOUL: *"Never place more than one order per symbol per tick."* The executor enforces this collectively across the intent set BEFORE individual intents are validated.
+
+```
+seen_symbols = {}    # symbol → first intent index that touched it
+deduped = []
+for i, intent in enumerate(payload.intents):
+    if intent.symbol in seen_symbols:
+        # Drop the duplicate — first-wins, FIFO
+        emit RealizedAction:
+          status: "skipped"
+          reason: "duplicate_symbol_in_tick"
+          first_seen_at_index: seen_symbols[intent.symbol]
+        continue
+    seen_symbols[intent.symbol] = i
+    deduped.append(intent)
+intents_for_phase_2_1 = deduped
+```
+
+A buy-then-sell pair on the same symbol in the same tick is treated identically — both are dropped except the first. The strategist should not have emitted the pair. (Real cross-strategy buy/sell collision on the same symbol is the cross-strategy inflight mutex's job, not this guard's; see v0.2 improvement spec.)
+
+The first-wins rule is a conservative default. A strategist that NEEDS multiple-intents-per-symbol semantics (e.g., split orders for size) must split across ticks or pass `allow_multiple_per_symbol: true` in the payload — which this version does NOT support. Adding support is a v0.3 change with a corresponding SOUL update.
+
 ### 2.1 Asset class gate
 
 - `intent.asset_class == "equity"` → continue.
@@ -168,6 +233,16 @@ if intent.side == "sell":
 
 ### 2.4 Per-name cap
 
+Before any mutation, capture the strategist's original intent so phase 3.5 can enforce SOUL's 1% intent-drift rule:
+
+```
+intent.original_qty = intent.qty
+intent.original_notional_usd = intent.notional_usd
+# These fields are read-only after this point; only used for drift comparison.
+```
+
+Then evaluate the cap:
+
 ```
 quote = get_equity_quotes([intent.symbol])
 live_price = quote.last_trade_price
@@ -187,6 +262,8 @@ if notional > cap:
     else:
         intent.notional_usd = cap
 ```
+
+Any trim here is a mutation that phase 3.5 must reconcile against SOUL's 1% drift rule. If the strategist explicitly wants downsize-on-cap behavior, it must pass `allow_cap_downsize: true` in the intent payload (defaults to false). Without that flag, a cap-trimmed intent will be aborted at phase 3.5 rather than placed at the smaller size.
 
 ### 2.5 Concurrent position count
 
@@ -260,6 +337,43 @@ If `review.alerts` contains any of these strings (case-insensitive), tag `status
 - `"price collar"`, `"restriction"`, `"margin"`, `"pdt"`, `"halt"`, `"unsupported"`
 
 Record the alerts verbatim in the RealizedAction's `alerts` field.
+
+### 3.5 Intent-drift check (SOUL 1% rule)
+
+SOUL: *"Never place an order whose notional differs from the strategy's stated intent by more than 1%."*
+
+After all review-time data is in hand (`realized_review_price`, alerts, anomaly tags) but BEFORE place:
+
+```
+# Reconstruct final notional using the actually-traded quantity and review price
+if intent.quantity_type == "shares":
+    final_notional   = intent.qty * realized_review_price
+    original_notional = intent.original_qty * intent.intent_price
+else:  # "notional"
+    final_notional   = intent.notional_usd
+    original_notional = intent.original_notional_usd
+
+if original_notional == 0:
+    drop intent: status: "intent_drift_aborted", reason: "original_notional_zero"
+
+drift_pct = abs(final_notional - original_notional) / original_notional * 100
+
+if drift_pct > 1.0:
+    if intent.allow_cap_downsize == true and final_notional < original_notional:
+        # Strategist explicitly opted into downsize; allow.
+        record: notes: "drift_within_downsize_consent: {drift_pct:.2f}%"
+        continue
+    else:
+        drop intent: status: "intent_drift_aborted"
+        reason: f"drift {drift_pct:.2f}% > 1% (original=${original_notional:.2f}, final=${final_notional:.2f})"
+```
+
+This check is *separate* from the slippage check (3.3). Slippage compares review-time price to intent-time price; drift compares final notional cost to the strategist's stated notional. They fail in different scenarios:
+
+- **Slippage**: quote moved between decision and review. Intent value unchanged; market changed.
+- **Drift**: executor's own caps/rounding trimmed the order size. Intent value changed; market may not have.
+
+Both have to clear independently for a place to proceed.
 
 ## Phase 4 — Place (only if routing table says yes)
 
