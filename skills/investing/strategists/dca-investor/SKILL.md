@@ -25,7 +25,7 @@ strategist:
   capability_requires: []
   assumes:
     fractional_shares: true   # cash individual accounts on Robinhood; not a capability the broker reports
-  profile_compatibility: [autotrader]
+  profile_compatibility: [autotrader, claude-code]
   requires_directors: [regime-intelligence]
 basket:
   SPY: 0.50
