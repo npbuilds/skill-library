@@ -28,15 +28,18 @@ Revision is where prose gets good. First drafts are about getting material on th
 | "Does this flow?" "Is the structure right?" | `prose-editor` (structural pass) | Structural assessment |
 | "How does this author write?" "What makes this prose distinctive?" | `style-analyzer` | Author style analysis |
 | "Make this sound more like McCarthy" "Push toward VanderMeer" "Surprise me with a mutation" | `style-mutator` | Voice transformation — shifts existing prose along style-DNA axes without changing content |
+| "Is this scene working?" "Is the prose any good?" "Judge this" | `quality-critic` | Boolean craft *verdict* + diagnosis at scene level — it describes nothing and edits nothing; it judges and hands the diagnosis to `prose-editor` |
+| "Does the whole thing hold together?" "Does it add up?" "Is the arc working?" "Are the setups paid off?" | `whole-story-judge` | Macro gate over a complete draft — payoff, arc, causality, promise (runs above the scene judge) |
 
 ### Multi-Skill Questions
 
-When the user wants a comprehensive revision:
+When the user wants a comprehensive revision, the order is **describe → judge → edit** (and judging precedes editing — you fix what the verdict diagnoses, not what you guess):
 
-1. `style-analyzer` first — characterize what's there before changing it
-2. `prose-editor` — apply the appropriate editing passes
+1. `style-analyzer` — characterize what's there before changing it
+2. **For narrative/fiction only** — `quality-critic` judges whether the scene *works* (verdict + diagnosis); `whole-story-judge` for the whole narrative draft. *Skip the judge for essays/nonfiction* — those evaluate against rhetoric craft (`argument-structure`, `essay-forms`), not the narrative rubric.
+3. `prose-editor` — apply the editing passes the diagnosis calls for
 
-This order prevents the editor from imposing a style without first understanding what the writer is doing.
+This order prevents the editor from imposing a style without first understanding what the writer is doing — and (for fiction) from polishing prose that the judge would reject wholesale.
 
 ### The Editing-Pass Hierarchy
 
@@ -56,6 +59,7 @@ This is the most important concept in revision-craft. Professional editors work 
 ### Level Progression
 - **Foundational**: `prose-editor`, `style-analyzer`
 - **Intermediate**: `style-mutator` — transform existing prose by shifting its position in the 14-dimension style space
+- **Evaluation (the judges)**: `quality-critic` (scene-level craft verdict) and `whole-story-judge` (macro gate) — they judge what the editor then fixes; both instantiate `_shared/critic-core`
 - **Advanced**: (future) developmental editing, editorial voice, style coaching
 
 ## Conflict Resolution
