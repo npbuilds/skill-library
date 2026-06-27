@@ -171,8 +171,13 @@ Prose work often touches material that belongs to another orchestrator's domain.
 | Fiction set in an invented world (fantasy, SF, alt-history, secondary world) | `worldbuilding-orchestrator` — verify a world-bible exists or build core axioms | Drafting, scene work, voice. Bridge skill: `skills/writing/narrative-craft/world-to-story/` (iceberg methodology, system → scene translation) |
 | Sensory immersion in a built region (how this place feels, smells, sounds) | `worldbuilding/physical-world/sensory-worldbuilding` — the 5-channel sensory palette | `skills/writing/narrative-craft/sensory-translation/` — translates the palette into prose detail-selection and POV bias |
 | Cultural voice / diction (how a character of culture X speaks, what metaphors they reach for) | `worldbuilding/cultures-societies` + `worldbuilding/naming-system` | `skills/writing/narrative-craft/cultural-voice/` — culture → vocabulary, idiom, syntax, metaphor source |
-| Wine writing, tasting notes as a craft form, label copy | `bacchus` for domain content (regions, grapes, sensory vocabulary) | Prose craft (voice, rhythm, image systems) |
 | Investment writing, market commentary, briefings | `archon` for domain content (positions, theses, macro context) | Prose craft (analytical voice, claim density, evidence sequencing) |
 | Biotech / scientific writing for VC audiences | `asclepius` for domain content (PoS, rNPV, mechanism) | Prose craft (precision, hedge calibration, claim ladders) |
 
 The principle: the prose orchestrator owns *how* the words land. Domain orchestrators own *what* the words must be true to. Never invent domain content; consult the source-of-truth orchestrator and bring its output back here for the prose pass.
+
+## Related Skills
+
+Peer orchestrators consulted for domain content but **not** required for prose craft to function — documented here rather than encoded as `depends_on` edges (see STYLE_GUIDE #6, "The Mutual Dependency"). For invented-world fiction, prose genuinely depends on `worldbuilding-orchestrator` (the world must exist before it can be rendered), so that edge stays in the routing table above and in the capability DAG; the relationships below are collaborative, not dependencies.
+
+- **bacchus** (sommelier domain) — for wine writing, tasting notes as a craft form, and label copy. Consult Bacchus for domain content (regions, grapes, sensory vocabulary), then bring it back here for the prose pass (voice, rhythm, image systems). Prose can write about wine without it; this is a content handoff, not a dependency.

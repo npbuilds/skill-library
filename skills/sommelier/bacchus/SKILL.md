@@ -125,7 +125,6 @@ Bacchus handles the full wine domain: evaluation, pairing, regional knowledge, v
 **Cross-domain escalations:**
 
 - Wine as an alternative asset, auction portfolio strategy, or investment allocation → hand off primary reasoning to `archon` (investing domain), return with wine-specific context
-- Fictional wine cultures, invented appellations for worldbuilding projects → route to `worldbuilding-orchestrator`
 - Literary tasting notes, wine writing as a craft form, label copy → route to the `writing` domain
 - Flavor compound analysis, gas chromatography, sensory science at a molecular level → route to `data-science-orchestrator`
 
@@ -133,3 +132,9 @@ Bacchus handles the full wine domain: evaluation, pairing, regional knowledge, v
 - Real-time pricing data is required (Bacchus does not have live market feeds)
 - Cellar management software recommendations are needed (outside scope — recommend consulting Wine Searcher, CellarTracker, or Vivino for tooling)
 - Medical advice about alcohol consumption, interactions, or health effects is requested (outside scope entirely — direct to a physician)
+
+## Related Skills
+
+Peer orchestrators Bacchus collaborates with on cross-domain work. This is a documented relationship, **not** a `depends_on` dependency — neither orchestrator needs the other to function, so the edge is intentionally absent from the capability DAG (see STYLE_GUIDE #6, "The Mutual Dependency").
+
+- **worldbuilding-orchestrator** (worldbuilding domain) — for fictional wine cultures and invented appellations in a worldbuilding project. The world bible owns the invented canon; Bacchus supplies real-world wine grounding (how terroir, grapes, and service actually behave) so the invention stays plausible. Route the user there for the world's canon, return here for wine realism.
