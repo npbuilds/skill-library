@@ -89,12 +89,14 @@ When a user opens a question:
 - `portfolio` — "how's my book?"; position review
 - `monitoring` — "is the thesis still valid?"; revisit
 - `education` — "explain X"; framework or concept
+- `execution` — "place a trade", "DCA into X", "rebalance", "what does the day-trader say"; routes to a strategist
 
-**Step 2 — Identify operative subdomains** from the routing table in `references/delegation-rules.md`. Most chats touch 1-2 subdomains; some touch 3+ (e.g., a thesis question may pull regime + value + risk).
+**Step 2 — Identify operative subdomains** from the routing table in `references/delegation-rules.md`. Most chats touch 1-2 subdomains; some touch 3+ (e.g., a thesis question may pull regime + value + risk). `execution` questions usually route to exactly one strategist (see the "Strategist Routing" section of delegation-rules).
 
 **Step 3 — Route.**
 - Single-domain → invoke that director's frame; reply in-voice; ask one follow-up.
 - Multi-domain → invoke primary director; flag the secondary in the reply ("this also touches risk-architecture — want to go there next?").
+- `execution` → load the matching strategist via the `Skill` tool. Strategists handle their own director composition. The strategist will emit a `## tick_decision` block — surface it to the user without paraphrasing.
 
 **Step 4 — Maintain session context.** Track and surface:
 - Current regime classification (from the first regime-relevant turn)

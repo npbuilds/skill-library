@@ -92,3 +92,24 @@ When the user's request matches any of these signals, automatically invoke `/spe
 - Depth cues: "I need to be sure", "this is for a decision", "comprehensive analysis"
 
 Do NOT trigger for simple factual lookups that a single web search would answer. Spelunker is for multi-source, confidence-tagged research — not quick answers.
+
+### Investing Strategists (Execution Layer)
+
+When the user's request matches an execution-class signal, route directly to the matching strategist under `skills/investing/strategists/`. Strategists are loadable individually via the `Skill` tool. The full routing table is in `skills/investing/archon/references/delegation-rules.md` §"Strategist Routing".
+
+Signal → strategist:
+
+- "DCA into X" / "automated weekly investing" / "schedule buys" → `dca-investor`
+- "Rebalance my book" / "drift from target" / "am I overweight X" → `rebalancer`
+- "Swing trade X" / "is X oversold" / "RSI buy candidate" → `swing-trader`
+- "Day trade X" / "intraday setup" / "opening range" → `day-trader`
+- "Earnings setup X" / "beat-but-down" / "post-earnings" → `earnings-event-trader`
+- "Reflexive setup X" / "narrative trade" / "Soros-style" → `reflexivity-trader`
+- "Macro overlay" / "what regime / how to tilt" → `macro-overlay-trader`
+- "CSP on X" / "covered call" / "options income" → `options-strategist` (Claude Code analyst mode only; not loadable in `autotrader` Hermes profile)
+
+Important:
+- Strategists default to `mode: review`. They produce a `## tick_decision` JSON block; never paraphrase it — surface verbatim.
+- Live placement happens only in the `autotrader` Hermes profile, never in Claude Code (executor enforces). Claude Code is analyst-only.
+- The `_shared/executor` skill is the single broker gate. Never invoke it directly from CLAUDE.md or Archon — only strategists call it.
+- If the user asks about live execution while in Claude Code, explain that placement requires the Hermes `autotrader` profile and is paper-mode by default (see plan at `~/.claude/plans/i-have-a-skill-replicated-tide.md`).
