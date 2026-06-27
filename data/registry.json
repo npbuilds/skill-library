@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-06-27T01:50:26Z",
+  "last_scan": "2026-06-27T18:18:03Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -14,36 +14,34 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1396,
-        "body_words": 1314,
+        "word_count": 1480,
+        "body_words": 1398,
         "description_words": 64,
-        "section_count": 4,
+        "section_count": 5,
         "reference_files": 3,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 84,
-        "estimated_tokens_body": 2495,
-        "estimated_tokens_total": 2579
+        "estimated_tokens_body": 2641,
+        "estimated_tokens_total": 2725
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 78,
+      "auto_score": 87,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 87,
       "depends_on": [
         "archon",
-        "data-science-orchestrator",
-        "worldbuilding-orchestrator"
+        "data-science-orchestrator"
       ],
       "referenced_by": [
         "cellar-service",
         "collector",
         "food-pairing",
         "grape-encyclopedia",
-        "prose-orchestrator",
         "regions-terroir",
         "sommelier-lab",
         "tasting-evaluation",
@@ -56,7 +54,7 @@
         "level:orchestrator"
       ],
       "created": "2026-03-28",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-06-27",
       "parent": null
     },
     "tasting-evaluation": {
@@ -1708,7 +1706,6 @@
       ],
       "referenced_by": [
         "design-orchestrator",
-        "infrastructure-orchestrator",
         "sentinel-prime",
         "skill-analyze",
         "skill-dashboard",
@@ -1764,7 +1761,6 @@
         "skill-registry"
       ],
       "referenced_by": [
-        "infrastructure-orchestrator",
         "skill-fork",
         "skill-scaffold"
       ],
@@ -1802,17 +1798,16 @@
       "health_status": "warning",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "infrastructure-orchestrator",
         "skill-analyze",
         "skill-registry"
       ],
       "referenced_by": [
-        "infrastructure-orchestrator",
         "skill-health",
         "skill-scaffold"
       ],
@@ -1862,7 +1857,6 @@
         "spelunker"
       ],
       "referenced_by": [
-        "infrastructure-orchestrator",
         "skill-fork",
         "skill-test"
       ],
@@ -1910,9 +1904,7 @@
         "skill-registry",
         "skill-scaffold"
       ],
-      "referenced_by": [
-        "infrastructure-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:infrastructure",
         "level:tool"
@@ -1956,7 +1948,6 @@
         "skill-registry"
       ],
       "referenced_by": [
-        "infrastructure-orchestrator",
         "skill-dashboard",
         "skill-health",
         "skill-network",
@@ -2006,9 +1997,7 @@
         "skill-registry",
         "skill-scaffold"
       ],
-      "referenced_by": [
-        "infrastructure-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:infrastructure",
         "level:tool"
@@ -2052,9 +2041,7 @@
         "skill-analyze",
         "skill-registry"
       ],
-      "referenced_by": [
-        "infrastructure-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:infrastructure",
         "level:tool"
@@ -2089,17 +2076,15 @@
       "health_status": "warning",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
-      "auto_score": 65,
+      "auto_score": 60,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 60,
       "depends_on": [
         "infrastructure-orchestrator",
         "skill-registry"
       ],
-      "referenced_by": [
-        "infrastructure-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:infrastructure",
         "level:tool"
@@ -3082,10 +3067,10 @@
       "health_status": "warning",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 65,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 69,
       "depends_on": [
         "cultures-societies",
         "lore-writer",
@@ -3093,7 +3078,11 @@
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "quality-critic",
+        "scheherazade",
+        "whole-story-judge"
+      ],
       "tags": [
         "domain:worldbuilding",
         "level:action",
@@ -4199,19 +4188,11 @@
       "health_status": "warning",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
-      "depends_on": [
-        "data-cleaning",
-        "feature-engineering",
-        "statistical-testing",
-        "causal-inference",
-        "model-evaluation",
-        "time-series",
-        "biostatistics"
-      ],
+      "composite_score": 74,
+      "depends_on": [],
       "referenced_by": [
         "bacchus",
         "chart-selection",
@@ -4260,7 +4241,6 @@
       "composite_score": 63,
       "depends_on": [],
       "referenced_by": [
-        "data-science-orchestrator",
         "feature-engineering"
       ],
       "tags": [
@@ -4308,7 +4288,6 @@
         "modeling"
       ],
       "referenced_by": [
-        "data-science-orchestrator",
         "model-evaluation"
       ],
       "tags": [
@@ -4355,7 +4334,6 @@
       "referenced_by": [
         "biostatistics",
         "causal-inference",
-        "data-science-orchestrator",
         "drift-detection",
         "evidence-evaluator",
         "model-evaluation",
@@ -4398,16 +4376,15 @@
       "health_status": "warning",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 66,
       "depends_on": [
         "statistical-testing"
       ],
       "referenced_by": [
-        "counterfactual-reasoner",
-        "data-science-orchestrator"
+        "counterfactual-reasoner"
       ],
       "tags": [
         "domain:data-science",
@@ -4457,7 +4434,6 @@
       ],
       "referenced_by": [
         "bias-detector",
-        "data-science-orchestrator",
         "drift-detection",
         "responsible-ai",
         "time-series"
@@ -4508,8 +4484,7 @@
         "statistical-testing"
       ],
       "referenced_by": [
-        "comparative-civilizations",
-        "data-science-orchestrator"
+        "comparative-civilizations"
       ],
       "tags": [
         "domain:data-science",
@@ -4694,9 +4669,7 @@
       "depends_on": [
         "statistical-testing"
       ],
-      "referenced_by": [
-        "data-science-orchestrator"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:data-science",
         "subdomain:statistical-analysis",
@@ -4881,21 +4854,11 @@
       "health_status": "warning",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
-      "depends_on": [
-        "skill-registry",
-        "skill-health",
-        "skill-dashboard",
-        "skill-scaffold",
-        "skill-test",
-        "skill-analyze",
-        "skill-fork",
-        "skill-network",
-        "skill-export"
-      ],
+      "composite_score": 72,
+      "depends_on": [],
       "referenced_by": [
         "skill-analyze",
         "skill-dashboard",
@@ -4926,33 +4889,31 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2269,
-        "body_words": 2186,
+        "word_count": 2485,
+        "body_words": 2402,
         "description_words": 60,
-        "section_count": 5,
+        "section_count": 6,
         "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 4033,
-        "estimated_tokens_total": 4111
+        "estimated_tokens_body": 4408,
+        "estimated_tokens_total": 4486
       },
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 84,
+      "auto_score": 90,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 90,
       "depends_on": [
         "diction",
         "narrative-craft",
-        "prose-orchestrator",
         "prose-writer"
       ],
       "referenced_by": [
-        "bacchus",
         "character-belief-tracker",
         "civilizations",
         "cultures-societies",
@@ -4968,16 +4929,18 @@
         "physical-world",
         "prose-orchestrator",
         "religion-design",
+        "scheherazade",
         "systems-craft",
         "technology-progression",
-        "world-bible"
+        "world-bible",
+        "worldbuilding-critic"
       ],
       "tags": [
         "domain:worldbuilding",
         "level:orchestrator"
       ],
       "created": "2026-03-25",
-      "last_modified": "2026-05-14"
+      "last_modified": "2026-06-27"
     },
     "geography-ecology": {
       "name": "geography-ecology",
@@ -5437,41 +5400,40 @@
       "depends_on": [
         "archon",
         "asclepius",
-        "bacchus",
         "style-mutator",
         "worldbuilding-orchestrator"
       ],
       "created": "2026-03-26",
-      "last_modified": "2026-06-10",
+      "last_modified": "2026-06-27",
       "name": "prose-orchestrator",
       "description": "Orchestrate prose writing, revision, and craft learning across fiction, nonfiction, and essays. Use when the user needs help drafting prose, revising existing text, analyzing writing style, or learning prose craft. Activates when the task involves sentence-level polish, narrative structure, rhetorical strategy, editing passes, or voice development \u2014 for any genre or form.",
       "location": "skills/writing/prose-orchestrator/SKILL.md",
       "plugin": "skill-infra",
       "type": "orchestrator",
       "metrics": {
-        "word_count": 1554,
-        "body_words": 1479,
+        "word_count": 1722,
+        "body_words": 1647,
         "description_words": 52,
-        "section_count": 5,
+        "section_count": 6,
         "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 68,
-        "estimated_tokens_body": 2664,
-        "estimated_tokens_total": 2732
+        "estimated_tokens_body": 2963,
+        "estimated_tokens_total": 3031
       },
-      "auto_score": 81,
-      "composite_score": 81,
+      "auto_score": 84,
+      "composite_score": 84,
       "referenced_by": [
         "narrative-craft",
         "narrative-keeper",
         "prose-writer",
         "revision-craft",
         "rhetoric",
+        "scheherazade",
         "sentence-craft",
-        "style-mixer",
-        "worldbuilding-orchestrator"
+        "style-mixer"
       ],
       "tags": [
         "domain:writing",
@@ -6276,10 +6238,10 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-06-27",
       "metrics": {
-        "word_count": 757,
-        "body_words": 695,
+        "word_count": 934,
+        "body_words": 872,
         "description_words": 43,
         "section_count": 4,
         "reference_files": 1,
@@ -6287,16 +6249,18 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 56,
-        "estimated_tokens_body": 1173,
-        "estimated_tokens_total": 1229
+        "estimated_tokens_body": 1471,
+        "estimated_tokens_total": 1527
       },
-      "auto_score": 65,
-      "composite_score": 65,
+      "auto_score": 78,
+      "composite_score": 78,
       "referenced_by": [
         "prose-editor",
+        "quality-critic",
         "style-analyzer",
         "style-mixer",
-        "style-mutator"
+        "style-mutator",
+        "whole-story-judge"
       ],
       "invocation": "director"
     },
@@ -6631,7 +6595,9 @@
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
       "tags": [
         "domain:worldbuilding",
         "level:knowledge",
@@ -11562,12 +11528,14 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 58,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 58,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -22362,22 +22330,18 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "advisor-board",
         "idp-and-okrs",
-        "performance-review-craft",
         "reflection-and-journaling",
         "skill-gap-analysis"
       ],
       "referenced_by": [
-        "advisor-board",
-        "performance-review-craft",
-        "reflection-and-journaling",
-        "skill-gap-analysis"
+        "performance-review-craft"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -22428,24 +22392,19 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [
-        "360-feedback-design",
         "idp-and-okrs",
-        "mentorship-design",
-        "reflection-and-journaling",
         "relationship-stewardship",
         "the-loom"
       ],
       "referenced_by": [
         "360-feedback-design",
-        "idp-and-okrs",
         "mentorship-design",
         "reflection-and-journaling",
-        "relationship-stewardship",
         "skill-gap-analysis"
       ],
       "shares_references_with": [],
@@ -22506,14 +22465,10 @@
         "behavioral-frameworks",
         "cover-letter-craft",
         "credibility-translation",
-        "linkedin-optimization",
         "narrative-architecture",
-        "prose-editor",
-        "resume-craft"
+        "prose-editor"
       ],
       "referenced_by": [
-        "cover-letter-craft",
-        "credibility-translation",
         "introductions-and-referrals",
         "linkedin-optimization",
         "performance-review-craft",
@@ -22569,22 +22524,18 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [
         "asclepius",
         "credibility-translation",
-        "executive-interview-prep",
         "minto-scqa",
-        "narrative-architecture",
-        "panel-and-case",
-        "vc-interview-prep"
+        "narrative-architecture"
       ],
       "referenced_by": [
         "audience-tuning",
-        "credibility-translation",
         "domain-deepdives",
         "executive-interview-prep",
         "panel-and-case",
@@ -22639,22 +22590,19 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [
         "archon",
         "asclepius",
         "equity-literacy",
         "executive-communication",
         "executive-interview-prep",
-        "meeting-mastery",
         "role-archetype-mapping"
       ],
       "referenced_by": [
-        "executive-communication",
-        "executive-interview-prep",
         "meeting-mastery",
         "title-and-scope"
       ],
@@ -22707,24 +22655,21 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [
         "cover-letter-craft",
         "credibility-translation",
         "ecosystem-mapping",
-        "introductions-and-referrals",
         "prose-editor",
         "relationship-stewardship",
         "spelunker"
       ],
       "referenced_by": [
-        "ecosystem-mapping",
         "introductions-and-referrals",
-        "mentorship-design",
-        "relationship-stewardship"
+        "mentorship-design"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -22782,7 +22727,6 @@
       "depends_on": [
         "asclepius",
         "audience-classifier",
-        "audience-tuning",
         "bluf-shaper",
         "credibility-translation",
         "narrative-architecture",
@@ -22792,7 +22736,6 @@
       "referenced_by": [
         "audience-tuning",
         "cold-outreach",
-        "credibility-translation",
         "ecosystem-mapping",
         "executive-communication",
         "resume-craft",
@@ -22854,12 +22797,7 @@
       "depends_on": [
         "asclepius",
         "audience-classifier",
-        "audience-tuning",
-        "behavioral-frameworks",
-        "cover-letter-craft",
-        "linkedin-optimization",
-        "narrative-architecture",
-        "resume-craft"
+        "narrative-architecture"
       ],
       "referenced_by": [
         "audience-tuning",
@@ -22943,9 +22881,7 @@
         "vc-interview-prep"
       ],
       "referenced_by": [
-        "executive-interview-prep",
-        "panel-and-case",
-        "vc-interview-prep"
+        "panel-and-case"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -23002,14 +22938,10 @@
       "composite_score": 75,
       "depends_on": [
         "asclepius",
-        "cold-outreach",
         "cover-letter-craft",
-        "introductions-and-referrals",
-        "relationship-stewardship",
         "source-triangulator",
         "spelunker",
-        "the-loom",
-        "vc-interview-prep"
+        "the-loom"
       ],
       "referenced_by": [
         "cold-outreach",
@@ -23076,14 +23008,12 @@
       "depends_on": [
         "archon",
         "asset-valuation",
-        "exit-and-transition",
         "offer-negotiation",
         "optionality-architecture"
       ],
       "referenced_by": [
         "board-readiness",
         "exit-and-transition",
-        "offer-negotiation",
         "title-and-scope"
       ],
       "shares_references_with": [],
@@ -23142,10 +23072,8 @@
       "depends_on": [
         "audience-classifier",
         "bluf-shaper",
-        "board-readiness",
         "cover-letter-craft",
         "executive-distiller",
-        "meeting-mastery",
         "minto-scqa",
         "prose-editor"
       ],
@@ -23205,26 +23133,21 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [
         "asclepius",
         "behavioral-frameworks",
-        "board-readiness",
         "credibility-translation",
-        "domain-deepdives",
         "executive-communication",
-        "panel-and-case",
         "role-archetype-mapping"
       ],
       "referenced_by": [
-        "behavioral-frameworks",
         "board-readiness",
         "domain-deepdives",
-        "panel-and-case",
-        "role-archetype-mapping"
+        "panel-and-case"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -23334,10 +23257,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "equity-literacy",
         "narrative-architecture",
@@ -23345,10 +23268,7 @@
         "optionality-architecture",
         "relationship-stewardship"
       ],
-      "referenced_by": [
-        "equity-literacy",
-        "offer-negotiation"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -23457,16 +23377,12 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 72,
       "depends_on": [
-        "advisor-board",
-        "pivot-sequencing",
-        "reflection-and-journaling",
         "role-archetype-mapping",
-        "skill-gap-analysis",
         "the-loom"
       ],
       "referenced_by": [
@@ -23599,11 +23515,7 @@
         "prose-editor",
         "relationship-stewardship"
       ],
-      "referenced_by": [
-        "cold-outreach",
-        "ecosystem-mapping",
-        "relationship-stewardship"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -23662,12 +23574,9 @@
         "audience-tuning",
         "credibility-translation",
         "narrative-architecture",
-        "prose-editor",
-        "public-portfolio"
+        "prose-editor"
       ],
       "referenced_by": [
-        "audience-tuning",
-        "credibility-translation",
         "public-portfolio",
         "resume-craft"
       ],
@@ -23733,9 +23642,6 @@
         "the-loom"
       ],
       "referenced_by": [
-        "board-readiness",
-        "executive-communication",
-        "panel-and-case",
         "public-speaking"
       ],
       "shares_references_with": [],
@@ -23861,10 +23767,7 @@
         "role-archetype-mapping",
         "the-loom"
       ],
-      "referenced_by": [
-        "advisor-board",
-        "relationship-stewardship"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -24111,15 +24014,11 @@
       "depends_on": [
         "archon",
         "bluf-shaper",
-        "equity-literacy",
-        "exit-and-transition",
-        "optionality-architecture",
-        "title-and-scope"
+        "optionality-architecture"
       ],
       "referenced_by": [
         "equity-literacy",
         "exit-and-transition",
-        "optionality-architecture",
         "title-and-scope"
       ],
       "shares_references_with": [],
@@ -24171,14 +24070,12 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [
         "archon",
-        "offer-negotiation",
-        "pivot-sequencing",
         "role-archetype-mapping",
         "the-loom"
       ],
@@ -24187,7 +24084,6 @@
         "exit-and-transition",
         "offer-negotiation",
         "pivot-sequencing",
-        "role-archetype-mapping",
         "title-and-scope"
       ],
       "shares_references_with": [],
@@ -24252,15 +24148,11 @@
         "domain-deepdives",
         "executive-communication",
         "executive-interview-prep",
-        "meeting-mastery",
         "minto-scqa",
         "vc-interview-prep"
       ],
       "referenced_by": [
-        "behavioral-frameworks",
-        "executive-interview-prep",
-        "meeting-mastery",
-        "vc-interview-prep"
+        "meeting-mastery"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -24324,10 +24216,7 @@
         "reflection-and-journaling",
         "resume-craft"
       ],
-      "referenced_by": [
-        "360-feedback-design",
-        "reflection-and-journaling"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -24451,12 +24340,7 @@
         "role-archetype-mapping",
         "skill-gap-analysis"
       ],
-      "referenced_by": [
-        "idp-and-okrs",
-        "optionality-architecture",
-        "role-archetype-mapping",
-        "skill-gap-analysis"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -24506,10 +24390,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [
         "asclepius",
         "credibility-translation",
@@ -24520,7 +24404,6 @@
         "the-loom"
       ],
       "referenced_by": [
-        "linkedin-optimization",
         "pivot-sequencing",
         "public-speaking",
         "skill-gap-analysis"
@@ -24641,17 +24524,13 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "360-feedback-design",
         "advisor-board",
         "idp-and-okrs",
-        "performance-review-craft",
         "prose-editor",
         "the-loom"
       ],
       "referenced_by": [
         "360-feedback-design",
-        "advisor-board",
-        "idp-and-okrs",
         "performance-review-craft"
       ],
       "shares_references_with": [],
@@ -24703,23 +24582,18 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [
-        "advisor-board",
-        "cold-outreach",
         "ecosystem-mapping",
-        "introductions-and-referrals",
-        "mentorship-design",
         "prose-editor",
         "the-loom"
       ],
       "referenced_by": [
         "advisor-board",
         "cold-outreach",
-        "ecosystem-mapping",
         "exit-and-transition",
         "introductions-and-referrals",
         "mentorship-design"
@@ -24787,8 +24661,6 @@
         "prose-editor"
       ],
       "referenced_by": [
-        "audience-tuning",
-        "credibility-translation",
         "performance-review-craft"
       ],
       "shares_references_with": [],
@@ -24846,11 +24718,7 @@
       "composite_score": 73,
       "depends_on": [
         "ecosystem-mapping",
-        "executive-interview-prep",
         "narrative-architecture",
-        "optionality-architecture",
-        "pivot-sequencing",
-        "skill-gap-analysis",
         "vc-interview-prep"
       ],
       "referenced_by": [
@@ -24917,18 +24785,14 @@
       "manual_notes": null,
       "composite_score": 70,
       "depends_on": [
-        "360-feedback-design",
         "advisor-board",
         "idp-and-okrs",
-        "pivot-sequencing",
         "public-portfolio",
         "role-archetype-mapping"
       ],
       "referenced_by": [
         "360-feedback-design",
-        "idp-and-okrs",
-        "pivot-sequencing",
-        "role-archetype-mapping"
+        "pivot-sequencing"
       ],
       "shares_references_with": [],
       "forked_from": null,
@@ -24991,9 +24855,7 @@
         "optionality-architecture",
         "role-archetype-mapping"
       ],
-      "referenced_by": [
-        "offer-negotiation"
-      ],
+      "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25114,17 +24976,13 @@
         "cover-letter-craft",
         "credibility-translation",
         "deal-synthesis",
-        "domain-deepdives",
         "ecosystem-mapping",
-        "panel-and-case",
         "probability-of-success",
         "regulatory-strategy",
         "spelunker"
       ],
       "referenced_by": [
-        "behavioral-frameworks",
         "domain-deepdives",
-        "ecosystem-mapping",
         "panel-and-case",
         "role-archetype-mapping"
       ],
@@ -26504,6 +26362,243 @@
       ],
       "parent": "modality-trajectory"
     },
+    "quality-critic": {
+      "name": "quality-critic",
+      "description": "Judge whether a piece of prose is actually good \u2014 not whether it is consistent, and not by describing its features, but by ruling PASS/FAIL on a boolean craft rubric with a floor gate. Use after the consistency gate passes, when prose needs an objective quality verdict before revision, when running a generate\u2192critique\u2192refine loop, or when the user asks \"is this scene working?\" Emits a diagnosis for prose-editor, never a score for the writer to chase.",
+      "location": "skills/writing/revision-craft/quality-critic/SKILL.md",
+      "plugin": "skill-writing",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1558,
+        "body_words": 1460,
+        "description_words": 76,
+        "section_count": 5,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 99,
+        "estimated_tokens_body": 2505,
+        "estimated_tokens_total": 2604
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "character-belief-tracker"
+      ],
+      "referenced_by": [
+        "scheherazade"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:revision-craft",
+        "layer:action"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "revision-craft"
+    },
+    "whole-story-judge": {
+      "name": "whole-story-judge",
+      "description": "Judge whether a whole story works as a whole \u2014 not scene by scene. Checks the macro properties that only exist at the level of the complete draft: are the setups paid off, does the arc have a shape, do events connect causally, is the opening's promise kept, is it globally consistent? Use after the scene-level quality gate passes, on a complete draft or outline, when a story is \"fine scene by scene but doesn't add up,\" or when the user asks \"does the whole thing hold together?\"",
+      "location": "skills/writing/revision-craft/whole-story-judge/SKILL.md",
+      "plugin": "skill-writing",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 867,
+        "body_words": 757,
+        "description_words": 88,
+        "section_count": 3,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 115,
+        "estimated_tokens_body": 1329,
+        "estimated_tokens_total": 1444
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 67,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 67,
+      "depends_on": [
+        "character-belief-tracker"
+      ],
+      "referenced_by": [
+        "scheherazade"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:revision-craft",
+        "layer:action"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "revision-craft"
+    },
+    "worldbuilding-critic": {
+      "name": "worldbuilding-critic",
+      "description": "Judge whether an invented system \u2014 a magic system, an economy, a society, a technology \u2014 is actually SOUND, not merely internally consistent. Use after the consistency audit passes, when a world-bible needs a quality verdict, when designing or stress-testing a fantasy/SF system, or when the user asks \"does this magic system / faction structure hold up?\" Emits a diagnosis of the offending axioms and un-propagated consequences, never a score.",
+      "location": "skills/worldbuilding/worldbuilding-critic/SKILL.md",
+      "plugin": "skill-worldbuilding",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 779,
+        "body_words": 687,
+        "description_words": 70,
+        "section_count": 3,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 91,
+        "estimated_tokens_body": 1285,
+        "estimated_tokens_total": 1376
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [],
+      "referenced_by": [
+        "scheherazade"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "layer:action"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "worldbuilding-orchestrator"
+    },
+    "scheherazade": {
+      "name": "scheherazade",
+      "description": "Meta-orchestrator for the agentic world\u2192character\u2192story loop. Generates (or extends) a fictional world, its characters, and a story set in it by driving the worldbuilding and writing domains over one shared world-state, closed by the critic suite (consistency + quality + macro) with human checkpoints at the creative forks. Use to generate a world and a story end-to-end, or to draft quality-gated prose grounded in an existing world-bible. Not for single-skill asks (just worldbuild or just draft) \u2014 those route to the domain orchestrators.",
+      "location": "skills/narrative/scheherazade/SKILL.md",
+      "plugin": "skill-narrative",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 872,
+        "body_words": 764,
+        "description_words": 83,
+        "section_count": 7,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 108,
+        "estimated_tokens_body": 1365,
+        "estimated_tokens_total": 1473
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 79,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 79,
+      "depends_on": [
+        "character-belief-tracker",
+        "extrapolation-engine",
+        "prose-orchestrator",
+        "quality-critic",
+        "whole-story-judge",
+        "world-to-story",
+        "worldbuilding-critic",
+        "worldbuilding-orchestrator"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:narrative",
+        "layer:orchestrator"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": null
+    },
     "day-trader": {
       "name": "day-trader",
       "description": "Opening-range breakout intraday trader. After the first 15 minutes of RTH, watches for breakouts above the opening high (long) or below the opening low (short \u2014 disabled in v1, cash account) with VWAP confirmation. Hard exit by 15:55 ET. 5-minute tick cadence during RTH. Use when asked \"what does the day trader say\" or \"intraday setup on X\". Default review-only.",
@@ -26515,11 +26610,11 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 738,
+        "word_count": 802,
         "body_words": 615,
         "description_words": 60,
         "section_count": 4,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -26570,11 +26665,11 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1049,
+        "word_count": 1143,
         "body_words": 926,
         "description_words": 57,
         "section_count": 5,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -26625,11 +26720,11 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 633,
+        "word_count": 693,
         "body_words": 506,
         "description_words": 60,
         "section_count": 4,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -26680,8 +26775,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1661,
-        "body_words": 1566,
+        "word_count": 2523,
+        "body_words": 2428,
         "description_words": 60,
         "section_count": 10,
         "reference_files": 0,
@@ -26689,8 +26784,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 3055,
-        "estimated_tokens_total": 3133
+        "estimated_tokens_body": 4793,
+        "estimated_tokens_total": 4871
       },
       "health_status": "healthy",
       "issues": [],
@@ -26735,11 +26830,11 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 675,
+        "word_count": 690,
         "body_words": 520,
         "description_words": 56,
         "section_count": 4,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -26794,7 +26889,7 @@
         "body_words": 863,
         "description_words": 72,
         "section_count": 5,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -26845,11 +26940,11 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 736,
+        "word_count": 751,
         "body_words": 609,
         "description_words": 57,
         "section_count": 4,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -26900,11 +26995,11 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 714,
+        "word_count": 787,
         "body_words": 575,
         "description_words": 55,
         "section_count": 4,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -26959,7 +27054,7 @@
         "body_words": 603,
         "description_words": 48,
         "section_count": 4,
-        "reference_files": 0,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -27270,6 +27365,9 @@
         "tax-optimization",
         "value-quality"
       ],
+      "narrative": [
+        "scheherazade"
+      ],
       "neocortex": [
         "architecture",
         "briefing-engine",
@@ -27522,6 +27620,7 @@
         "technology-progression",
         "weird-worldbuilding",
         "world-bible",
+        "worldbuilding-critic",
         "worldbuilding-orchestrator"
       ],
       "writing": [
@@ -27544,6 +27643,7 @@
         "prose-orchestrator",
         "prose-rhythm",
         "prose-writer",
+        "quality-critic",
         "revision-craft",
         "rhetoric",
         "rhetorical-appeals",
@@ -27556,6 +27656,7 @@
         "style-mixer",
         "style-mutator",
         "syntax-patterns",
+        "whole-story-judge",
         "world-to-story"
       ]
     },

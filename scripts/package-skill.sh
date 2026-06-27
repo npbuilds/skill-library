@@ -54,6 +54,11 @@ if [ -d "$SKILL_DIR/examples" ]; then
   cp -r "$SKILL_DIR/examples" "$EXPORT_DIR/examples"
 fi
 
+# Copy eval/ if it exists (validation harnesses — referenced by SKILL.md bodies)
+if [ -d "$SKILL_DIR/eval" ]; then
+  cp -r "$SKILL_DIR/eval" "$EXPORT_DIR/eval"
+fi
+
 # Extract metadata for manifest
 DESCRIPTION=$(awk '
   BEGIN { in_fm=0; in_desc=0; desc="" }
