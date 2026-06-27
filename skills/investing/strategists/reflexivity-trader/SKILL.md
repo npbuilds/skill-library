@@ -8,6 +8,9 @@ description: >
   by the director's reported conviction. Weekly cadence, ≤30 day holds. Use
   when user asks "is X a reflexive setup", "narrative trade ideas", or "what
   does the reflexivity trader see". Default review-only.
+do_not_promote: true
+kill_reason: uncontracted_signal_max_reflexive_cohort
+kill_reason_long: "Load-bearing on reflexivity-sentiment, which is a router not a typed contract — JSON-mode prompts may fail 5-10% of ticks without defensive parsing. No published rule-based reflexivity system exists (Agent A: Confirmed absence). The allowlist is the most-reflexive-downside cohort (SMCI/MSTR/PLTR/COIN/etc.), so a misclassified validation→exhaustion turn is asymmetric loss. Per the v0.2 dive (see _shared/v0.2-improvement-spec.md). SKILL.md retained for analyst-mode thesis exploration; this strategist must not be promoted to mode: live."
 metadata:
   author: nirav
   version: "0.1"

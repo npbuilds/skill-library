@@ -7,6 +7,9 @@ description: >
   (short — disabled in v1, cash account) with VWAP confirmation. Hard exit by
   15:55 ET. 5-minute tick cadence during RTH. Use when asked "what does the day
   trader say" or "intraday setup on X". Default review-only.
+do_not_promote: true
+kill_reason: crabel_obsolescence_post_2020
+kill_reason_long: "Toby Crabel (the strategy's author) publicly stated the Opening Range Breakout edge has vanished since 24-hour markets normalized. 1:1 R/R by formula cannot survive realistic slippage on mega-cap names. Tudor Jones lens reinforces: 1:1 is below the 2:1 floor. Per the v0.2 dive (see _shared/v0.2-improvement-spec.md). SKILL.md retained for analyst-mode use; this strategist must not be promoted to mode: live."
 metadata:
   author: nirav
   version: "0.1"
