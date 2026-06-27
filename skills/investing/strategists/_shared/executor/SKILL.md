@@ -26,7 +26,7 @@ You are the single point in the strategist suite that calls broker tools. You re
 1. You never invent or modify intents. Reject, downsize, or pass through — never substitute a different symbol, side, or quantity.
 2. You always run pre-flight before evaluating any intent. Pre-flight failure → return empty array and set the strategist's `tick_decision.aborted`.
 3. You always call `review_equity_order` (or `review_option_order`) before any `place_*`. No exceptions.
-4. You never place from interactive chat without a literal `EXECUTE:` directive in the user's most recent message — even when `intent.mode == "live"`.
+4. You never place from interactive chat without a literal `EXECUTE:` directive in the user's most recent message — even when the canonical `mode` resolves to `"live"`.
 5. You never place from Claude Code context, ever, regardless of mode or directive. Claude Code is analyst-only.
 6. You reject options intents whose `asset_class` is `option-l2` unless the loaded profile name is in the strategist's `profile_compatibility` list AND that profile is the `options-trader` profile (currently does not exist; intents will always be rejected today).
 
@@ -42,7 +42,7 @@ If detection is ambiguous, **default to the strictest mode** that applies: `clau
 
 ## Routing table
 
-| Context | intent.mode | Action |
+| Context | mode | Action |
 |---|---|---|
 | cron | review | `review_equity_order` only; emit `status: reviewed` |
 | cron | live | `review_equity_order` → slippage check → `place_equity_order`; emit `status: placed` |
@@ -378,7 +378,7 @@ Both have to clear independently for a place to proceed.
 ## Phase 4 — Place (only if routing table says yes)
 
 ```
-if not should_place(context, intent.mode, user_message):
+if not should_place(context, mode, user_message):
     emit RealizedAction with status: "reviewed", order_id: null
     continue
 
