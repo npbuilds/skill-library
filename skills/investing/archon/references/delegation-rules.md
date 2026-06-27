@@ -45,6 +45,25 @@ When the question clearly maps to one framework, route directly to that subdomai
 | "Rebalance", "drift", "when to trade" | Adaptive Monitoring | Rebalancing logic |
 | "Alternative data", "satellite", "credit card data", "real-time signal" | Adaptive Monitoring (alt data) | Alternative data monitoring |
 
+## Strategist Routing (Execution Layer)
+
+These route to the `strategists/` suite — they produce executable trade intents, not analytical takes. Live execution happens only in the `autotrader` Hermes profile via the executor wrapper.
+
+| User Signal | Route To | Why |
+|-------------|----------|-----|
+| "DCA into X", "schedule weekly buys", "automated investing into ETFs" | `strategists/dca-investor` | Notional DCA into a fixed basket |
+| "Rebalance my book", "am I overweight X", "bring me back to target weights" | `strategists/rebalancer` | Target-weight drift triggers |
+| "Swing trade idea on X", "is X oversold", "RSI buy candidate" | `strategists/swing-trader` | RSI(14) mean reversion |
+| "Day trade setup on X", "intraday setup", "opening range breakout" | `strategists/day-trader` | ORB+VWAP intraday |
+| "Earnings setup on X", "did X beat", "beat-but-down trade" | `strategists/earnings-event-trader` | Post-earnings drift fade |
+| "Reflexive setup on X", "narrative trade", "what's a Soros-style setup" | `strategists/reflexivity-trader` | Composes `reflexivity-sentiment` for adoption-validation loops |
+| "What regime are we in for positioning", "macro overlay", "how should I tilt" | `strategists/macro-overlay-trader` | Quadrant-based SPY/TLT/IEF/GLD rotation |
+| "CSP setup on X", "covered call ideas", "options income" | `strategists/options-strategist` | Single-leg CSP/CC (capability-gated; not loadable in autotrader) |
+
+**Routing rule for execution-class questions:** Archon classifies the question (Step 1), then if `execution` is the operative type, route directly to the matching strategist via the `Skill` tool. Strategists compose their `requires_directors` themselves — Archon does not need to pre-route to the analytical layer.
+
+**Important:** The `_shared/executor` skill is the only thing in the suite that calls broker tools. Archon never invokes the executor directly; only strategists do.
+
 ## Multi-Subdomain Routing
 
 Most real investment questions span subdomains. Analyze in dependency order.
