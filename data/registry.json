@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-06-27T01:17:07Z",
+  "last_scan": "2026-06-27T05:57:21Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -3067,10 +3067,10 @@
       "health_status": "warning",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 65,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 69,
       "depends_on": [
         "cultures-societies",
         "lore-writer",
@@ -3078,7 +3078,10 @@
         "world-bible",
         "worldbuilding-orchestrator"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "quality-critic",
+        "whole-story-judge"
+      ],
       "tags": [
         "domain:worldbuilding",
         "level:action",
@@ -4885,8 +4888,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2367,
-        "body_words": 2284,
+        "word_count": 2485,
+        "body_words": 2402,
         "description_words": 60,
         "section_count": 6,
         "reference_files": 2,
@@ -4894,8 +4897,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 4196,
-        "estimated_tokens_total": 4274
+        "estimated_tokens_body": 4408,
+        "estimated_tokens_total": 4486
       },
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
@@ -4927,7 +4930,8 @@
         "religion-design",
         "systems-craft",
         "technology-progression",
-        "world-bible"
+        "world-bible",
+        "worldbuilding-critic"
       ],
       "tags": [
         "domain:worldbuilding",
@@ -5405,8 +5409,8 @@
       "plugin": "skill-infra",
       "type": "orchestrator",
       "metrics": {
-        "word_count": 1650,
-        "body_words": 1575,
+        "word_count": 1722,
+        "body_words": 1647,
         "description_words": 52,
         "section_count": 6,
         "reference_files": 1,
@@ -5414,8 +5418,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 68,
-        "estimated_tokens_body": 2828,
-        "estimated_tokens_total": 2896
+        "estimated_tokens_body": 2963,
+        "estimated_tokens_total": 3031
       },
       "auto_score": 84,
       "composite_score": 84,
@@ -6231,10 +6235,10 @@
       "manual_rating": null,
       "manual_notes": "",
       "created": "2026-03-26T10:01:10",
-      "last_modified": "2026-03-28",
+      "last_modified": "2026-06-27",
       "metrics": {
-        "word_count": 757,
-        "body_words": 695,
+        "word_count": 934,
+        "body_words": 872,
         "description_words": 43,
         "section_count": 4,
         "reference_files": 1,
@@ -6242,16 +6246,18 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 56,
-        "estimated_tokens_body": 1173,
-        "estimated_tokens_total": 1229
+        "estimated_tokens_body": 1471,
+        "estimated_tokens_total": 1527
       },
-      "auto_score": 65,
-      "composite_score": 65,
+      "auto_score": 78,
+      "composite_score": 78,
       "referenced_by": [
         "prose-editor",
+        "quality-critic",
         "style-analyzer",
         "style-mixer",
-        "style-mutator"
+        "style-mutator",
+        "whole-story-judge"
       ],
       "invocation": "director"
     },
@@ -26348,6 +26354,174 @@
         }
       ],
       "parent": "modality-trajectory"
+    },
+    "quality-critic": {
+      "name": "quality-critic",
+      "description": "Judge whether a piece of prose is actually good \u2014 not whether it is consistent, and not by describing its features, but by ruling PASS/FAIL on a boolean craft rubric with a floor gate. Use after the consistency gate passes, when prose needs an objective quality verdict before revision, when running a generate\u2192critique\u2192refine loop, or when the user asks \"is this scene working?\" Emits a diagnosis for prose-editor, never a score for the writer to chase.",
+      "location": "skills/writing/revision-craft/quality-critic/SKILL.md",
+      "plugin": "skill-writing",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1558,
+        "body_words": 1460,
+        "description_words": 76,
+        "section_count": 5,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 99,
+        "estimated_tokens_body": 2505,
+        "estimated_tokens_total": 2604
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "character-belief-tracker"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:revision-craft",
+        "layer:action"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "revision-craft"
+    },
+    "whole-story-judge": {
+      "name": "whole-story-judge",
+      "description": "Judge whether a whole story works as a whole \u2014 not scene by scene. Checks the macro properties that only exist at the level of the complete draft: are the setups paid off, does the arc have a shape, do events connect causally, is the opening's promise kept, is it globally consistent? Use after the scene-level quality gate passes, on a complete draft or outline, when a story is \"fine scene by scene but doesn't add up,\" or when the user asks \"does the whole thing hold together?\"",
+      "location": "skills/writing/revision-craft/whole-story-judge/SKILL.md",
+      "plugin": "skill-writing",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 867,
+        "body_words": 757,
+        "description_words": 88,
+        "section_count": 3,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 115,
+        "estimated_tokens_body": 1329,
+        "estimated_tokens_total": 1444
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 67,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 67,
+      "depends_on": [
+        "character-belief-tracker"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:writing",
+        "subdomain:revision-craft",
+        "layer:action"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "revision-craft"
+    },
+    "worldbuilding-critic": {
+      "name": "worldbuilding-critic",
+      "description": "Judge whether an invented system \u2014 a magic system, an economy, a society, a technology \u2014 is actually SOUND, not merely internally consistent. Use after the consistency audit passes, when a world-bible needs a quality verdict, when designing or stress-testing a fantasy/SF system, or when the user asks \"does this magic system / faction structure hold up?\" Emits a diagnosis of the offending axioms and un-propagated consequences, never a score.",
+      "location": "skills/worldbuilding/worldbuilding-critic/SKILL.md",
+      "plugin": "skill-worldbuilding",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 779,
+        "body_words": 687,
+        "description_words": 70,
+        "section_count": 3,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 91,
+        "estimated_tokens_body": 1285,
+        "estimated_tokens_total": 1376
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-06-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 66,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 66,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "layer:action"
+      ],
+      "created": "2026-06-27",
+      "last_modified": "2026-06-27",
+      "changelog": [
+        {
+          "date": "2026-06-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "worldbuilding-orchestrator"
     }
   },
   "network": {
@@ -26863,6 +27037,7 @@
         "technology-progression",
         "weird-worldbuilding",
         "world-bible",
+        "worldbuilding-critic",
         "worldbuilding-orchestrator"
       ],
       "writing": [
@@ -26885,6 +27060,7 @@
         "prose-orchestrator",
         "prose-rhythm",
         "prose-writer",
+        "quality-critic",
         "revision-craft",
         "rhetoric",
         "rhetorical-appeals",
@@ -26897,6 +27073,7 @@
         "style-mixer",
         "style-mutator",
         "syntax-patterns",
+        "whole-story-judge",
         "world-to-story"
       ]
     },
