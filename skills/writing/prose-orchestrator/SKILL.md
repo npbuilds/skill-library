@@ -62,7 +62,9 @@ Determine which subdomain(s) apply and route through the appropriate director.
 |--------|--------------|-----------------|
 | `DRAFT` | Form-appropriate director(s) + `prose-writer` action skill | Sentence Craft for polish pass |
 | `DRAFT` with voice blend | `style-mixer` → Voice Card → `prose-writer` | Style DNA for author profiles |
-| `REVISE` | Revision Craft director → `prose-editor` | Sentence Craft or Narrative Craft as needed |
+| `REVISE` | Revision Craft director → `prose-editor` (for an explicit quality verdict *first*, route via `JUDGE` / `EVALUATE` below) | Sentence Craft or Narrative Craft as needed |
+| `JUDGE` / `EVALUATE` (narrative) | Revision Craft → `quality-critic` (scene); for a whole narrative draft, `whole-story-judge` **after** the scene gate passes | Boolean craft verdict + diagnosis; describes nothing, edits nothing |
+| `JUDGE` / `EVALUATE` (essay / nonfiction) | Rhetoric director (`argument-structure`, `essay-forms`) — **not** the story judge | `whole-story-judge` is narrative-specific (payoff/arc/promise); wrong rubric for non-fiction |
 | `MUTATE` | `style-mutator` (warp existing prose toward a target voice) | Style DNA for dimension definitions |
 | `DESIGN VOICE` | `style-mixer` → outputs a reusable Voice Card | Style DNA for author profiles |
 | `ANALYZE` | Revision Craft → `style-analyzer` | Style DNA for 14-dimension mapping |

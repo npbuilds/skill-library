@@ -1,0 +1,215 @@
+# Validity set for `quality-critic` — adversarial control pairs of three KINDS.
+#
+# WHY: An LLM judge can fail in two opposite directions. It can be (1) fooled by polish —
+# passing hollow-but-pretty prose (style bias); or (2) a conformity engine — failing
+# alive-but-unconventional prose (crushing creativity). A trustworthy critic does NEITHER.
+# This set tests both directions with known answers.
+#
+# EACH ITEM is a matched pair with two NEUTRAL slots:
+#   - fail_passage:  the one a valid critic must FAIL (expected: FAIL)
+#   - pass_passage:  the one a valid critic must PASS (expected: PASS)
+# The `kind` says what trap the pair sets:
+#   - style-trap:         fail = polished-but-hollow      · pass = plain-but-substantive
+#   - transgression-trap: fail = pretentious/unearned     · pass = rule-breaking-but-brilliant
+#   - originality-trap:   fail = competent-but-generic     · pass = fresh-and-surprising
+#
+# A style-biased judge fails the style-traps (passes the hollow one). A CONFORMITY engine
+# fails the transgression-traps (fails the earned rule-break) — that is the metric that
+# guards creativity. Graded by score-validity.py. See README.md.
+
+meta:
+  skill: quality-critic
+  location: skills/writing/revision-craft/quality-critic/SKILL.md
+  suite: validity
+  profile: literary-fiction
+  level: scene
+  note: >
+    Ground-truth labels (expected) are gold, never shown to the critic. Run the critic blind
+    on each passage, record PASS/FAIL on the TARGET dimension, then score. Headline metrics:
+    style-bias susceptibility (let a hollow passage through) and conformity rate (failed an
+    earned transgression).
+
+items:
+  # ── STYLE-TRAPS — fail the polished-hollow, pass the plain-substantive ──────────────
+  - id: interiority-01
+    kind: style-trap
+    dimension: Interiority
+    trap: lush abstract vocabulary and sea/moon imagery standing in for rendered feeling
+    fail_passage: >
+      An exquisite desolation bloomed within her, a sorrow as vast and silvered as the
+      moonlit sea, and she felt the unbearable weight of a grief beyond the reach of language.
+    pass_passage: >
+      She read the text twice, then put the kettle on. Water, she thought. The kettle needs
+      water. She stood with the empty kettle in her hand and could not remember what came next.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Hollow NAMES the emotion in ornate diction (told). Plain renders grief through a broken,
+      looping action and a memory gap.
+
+  - id: micro-tension-01
+    kind: style-trap
+    dimension: Micro-tension
+    trap: pretty, peaceful, even-toned lyricism reads as "good writing"
+    fail_passage: >
+      The garden was beautiful in the morning light. The roses were red and the dew was
+      bright. She loved it here, and everything was peaceful and good.
+    pass_passage: >
+      Her mother's roses were doing well this year. She hated that she'd noticed. She hated
+      more that she had driven past the house to check.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Hollow is even-toned with no contradiction. Plain holds an unresolved contradiction
+      (attachment vs. resentment) in three plain sentences.
+
+  - id: dialogue-subtext-01
+    kind: style-trap
+    dimension: Dialogue subtext
+    trap: eloquent, emotionally articulate dialogue feels "well-written"
+    fail_passage: >
+      "I am furious that you abandoned me at the very moment I needed you most," she
+      declared, her voice trembling with an eloquent and righteous rage.
+    pass_passage: >
+      "You ate already?" she said. "There's a plate in the fridge," he said. "It's fine. I
+      wasn't hungry." She put the plate back without looking at him.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Hollow states feeling and intent — zero subtext. Plain means more than it says: hurt and
+      distance under a conversation about a plate of food.
+
+  - id: show-vs-tell-01
+    kind: style-trap
+    dimension: Show vs. tell
+    trap: epic, sonorous worldbuilding cadence masquerading as depth
+    fail_passage: >
+      The kingdom of Aelthwaite had endured three centuries of war, its people hardened by
+      loss, its venerable institutions forged in the crucible of relentless strife and
+      noble sacrifice.
+    pass_passage: >
+      The baker weighed the bread short and nobody argued. They had all learned. You took
+      what was on the shelf and you did not ask about last week.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Hollow summarizes history in the abstract (telling). Plain enacts a war-hardened society
+      in one concrete transaction.
+
+  - id: scene-turns-01
+    kind: style-trap
+    dimension: Scene turns
+    trap: graceful movement through a beautiful space feels like a scene
+    fail_passage: >
+      She walked the long marble corridor, admiring the portraits of her ancestors, the
+      gilded frames glinting in the candlelight, until at last she reached the great door,
+      her heart full of the old house's terrible beauty.
+    pass_passage: >
+      He came to ask for the money. He left having agreed to lend her his car instead, and
+      walking home he could not work out how that had happened.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Hollow has no turn — admiration to admiration. Plain turns hard: came to take, left
+      having given, and doesn't understand the reversal.
+
+  - id: voice-consistency-01
+    kind: style-trap
+    dimension: Voice consistency
+    trap: the opening clause is lavish enough to read as "literary"
+    fail_passage: >
+      The twilight draped its melancholy mantle upon the ancient spires, and honestly the
+      whole vibe was super depressing and she was just so over it.
+    pass_passage: >
+      The light went out of the sky early now. She did not mind. Early dark meant the day
+      was over and she could stop pretending it would get better.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Hollow breaks register violently mid-sentence (unmotivated drift). Plain holds one
+      consistent register throughout.
+
+  - id: double-trap-01
+    kind: style-trap
+    dimension: Micro-tension
+    trap: maximal purple prose — the hardest style-bias lure in the set
+    fail_passage: >
+      In the cathedral of her heart a thousand candles of longing guttered against the
+      encroaching dark of an ineffable melancholy, each flame a memory, each shadow a
+      regret, and she wept for all that was and could never be again.
+    pass_passage: >
+      She kept his number in her phone. She told herself it was for emergencies. She knew
+      there would be no emergency. She kept it anyway.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Hollow is maximally ornate and entirely told. Plain holds the contradiction (knowing
+      there is no reason / keeping it anyway) in four plain sentences.
+
+  # ── TRANSGRESSION-TRAPS — fail the pretentious-unearned, pass the earned rule-break ──
+  # These are the creativity guard: a conformity engine fails the pass_passage.
+  - id: transgression-flat-affect-01
+    kind: transgression-trap
+    dimension: Micro-tension
+    trap: both passages are flat and affectless — only one earns it
+    fail_passage: >
+      He walked to the store. He bought milk. He paid for the milk. He walked home. He put
+      the milk in the refrigerator. He sat down on the chair. He was sitting there.
+    pass_passage: >
+      They rode on. The dead man lay in the road and they did not stop. The boy looked back
+      once. The man told him not to. They rode on through the ash and did not speak of it.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Both are flat and undecorated. The fail is inert — the flatness achieves nothing. The
+      pass (McCarthy register) makes the flatness *enact* a deadened, dangerous world and the
+      cost of survival; the unspoken (the boy looking back, told not to) is the charge. A
+      conformity engine fails both for "even tone"; a valid critic passes the earned one.
+
+  - id: transgression-run-on-01
+    kind: transgression-trap
+    dimension: Voice consistency
+    trap: both passages run on without stops — only one earns it
+    fail_passage: >
+      She went to the thing and then the other thing happened and also he was there but not
+      really and the dog and then later it was different and the kitchen and she thought
+      about it maybe or not and anyway.
+    pass_passage: >
+      And she ran and the platform was already sliding away or the train was leaving she
+      could not tell which and her mother's face in the glass getting smaller and she kept
+      running even when there was no more platform left to run on.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Both refuse punctuation. The fail is just confused — the run-on achieves nothing and is
+      unreadable. The pass (Saramago/Woolf register) makes the breathless unbroken syntax
+      *enact* panic and loss; the missing stops are the feeling. A conformity engine fails the
+      pass for "register break"; a valid critic passes it on earned intent.
+
+  - id: transgression-static-01
+    kind: transgression-trap
+    dimension: Scene turns
+    trap: both passages are nearly motionless — only one accrues weight
+    fail_passage: >
+      She sat in the chair. The room was quiet. The clock ticked. She looked at the wall.
+      Nothing in particular happened. After a while she was still sitting in the chair.
+    pass_passage: >
+      She sat with the cooling cup and let the afternoon go. There was the girl she had been
+      and the woman she had become and the long quiet distance between them that no apology
+      would close. She did not move. She had decided something without knowing she'd decided it.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      Both are static. The fail is inert — nothing accrues. The pass (Robinson register) makes
+      the stillness *accrue* a recognition; an internal turn happens without motion. A
+      conformity engine fails the pass for "no scene turn"; a valid critic sees the earned
+      interior turn.
+
+  # ── ORIGINALITY-TRAPS — fail the competent-but-generic, pass the fresh-and-surprising ──
+  - id: originality-01
+    kind: originality-trap
+    dimension: Originality / surprise
+    trap: technically correct, grammatical, emotionally on-topic — and utterly predictable
+    fail_passage: >
+      Her heart shattered into a million pieces. Tears streamed down her face like rivers.
+      She had never felt so alone, as if the whole world had turned its back on her. It was
+      the darkest day of her life.
+    pass_passage: >
+      She found she was checking the weather in a city she would never visit again, his city,
+      as if the temperature there could tell her anything about whether he was warm.
+    expected: { fail_passage: FAIL, pass_passage: PASS }
+    rationale: >
+      The fail is competent and clean but every image is a cliché — zero surprise, dead on
+      arrival. The pass renders grief through an oblique, specific, unexpected behavior. A
+      checklist critic passes the fail (grammatical, on-emotion); a creativity-aware critic
+      fails it on Originality and passes the fresh one.
