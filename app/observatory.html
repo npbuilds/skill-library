@@ -1175,9 +1175,20 @@ AO.auth = {
 
   signIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    // Use redirect (more reliable than popup — no blocker issues)
-    AO._authInstance.signInWithRedirect(provider).catch(err => {
-      console.error('Auth redirect error:', err);
+    // Prefer popup: signInWithRedirect breaks under modern browser cookie
+    // partitioning when authDomain (…firebaseapp.com) differs from the app
+    // origin (…web.app), leaving currentUser null after the round-trip.
+    // Fall back to redirect only if the popup is actually blocked.
+    AO._authInstance.signInWithPopup(provider).catch(err => {
+      if (err.code === 'auth/popup-blocked' || err.code === 'auth/operation-not-supported-in-this-environment') {
+        AO._authInstance.signInWithRedirect(provider).catch(rErr => {
+          console.error('Auth redirect error:', rErr);
+        });
+        return;
+      }
+      if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
+        console.error('Auth popup error:', err);
+      }
     });
   },
 

@@ -1775,9 +1775,9 @@ NO.cortex = {
         const color = NO.config.domainColors[d.domain] || '#888';
         const usages = NO.data.usageCounts[d.id] || 0;
         NO.tooltip.show(e,
-          `<div class="tt-name" style="color:${color}">${d.id}</div>` +
-          `<div class="tt-dim">${d.domain} / ${d.type}${d.recent ? ' &bull; recent' : ''}</div>` +
-          `<div>Score: ${d.score} | Words: ${d.words.toLocaleString()} | Used: ${usages}x</div>`
+          `<div class="tt-name" style="color:${color}">${NO.detail.esc(d.id)}</div>` +
+          `<div class="tt-dim">${NO.detail.esc(d.domain)} / ${NO.detail.esc(d.type)}${d.recent ? ' &bull; recent' : ''}</div>` +
+          `<div>Score: ${NO.detail.esc(d.score)} | Words: ${d.words.toLocaleString()} | Used: ${usages}x</div>`
         );
         // Dim unconnected nodes
         const connected = new Set();
@@ -2176,7 +2176,7 @@ NO.org = {
       this.render(d);
     }).on('mouseover', (e, d) => {
       if (d.data.description) {
-        NO.tooltip.show(e, `<div class="tt-name" style="color:${d.data.color || 'var(--text-bright)'}">${d.data.name}</div><div>${d.data.description}</div>${d.data.score ? '<div class="tt-dim">Score: ' + d.data.score + '</div>' : ''}`);
+        NO.tooltip.show(e, `<div class="tt-name" style="color:${d.data.color || 'var(--text-bright)'}">${NO.detail.esc(d.data.name)}</div><div>${NO.detail.esc(d.data.description)}</div>${d.data.score ? '<div class="tt-dim">Score: ' + NO.detail.esc(d.data.score) + '</div>' : ''}`);
       }
     }).on('mouseout', () => NO.tooltip.hide());
 
