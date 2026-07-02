@@ -593,10 +593,17 @@ async def _kb_refresh(request: Request) -> JSONResponse:
 # Registration
 # ---------------------------------------------------------------------------
 
-async def _status(_request: Request) -> JSONResponse:
+async def _status(request: Request) -> JSONResponse:
     """System status — last-run-per-job, config, health signals.
     Reads from in-memory notifier state (resets on container restart;
-    Cloud Logging is the durable substrate)."""
+    Cloud Logging is the durable substrate).
+
+    Token-gated: the payload exposes config booleans (p0/p1 configured,
+    autonomy level) that shouldn't be readable on a public endpoint. Use
+    /health for an unauthenticated liveness probe."""
+    auth_err = _check_maint_token(request)
+    if auth_err is not None:
+        return auth_err
     notify = get_notifier()
     return JSONResponse(notify.status())
 
