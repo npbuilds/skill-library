@@ -1088,10 +1088,6 @@ body::after {
         <span class="obs-dot" style="background:var(--cyan-bright)"></span>
         <div><div class="obs-dropdown-name">Neural Observatory</div><div class="obs-dropdown-sub">Skill library visualization</div></div>
       </a>
-      <a href="/observatory" class="obs-dropdown-item">
-        <span class="obs-dot" style="background:var(--magenta-bright)"></span>
-        <div><div class="obs-dropdown-name">Aesthetic Observatory</div><div class="obs-dropdown-sub">Inspiration board</div></div>
-      </a>
       <a href="/infra" class="obs-dropdown-item">
         <span class="obs-dot" style="background:var(--green-bright)"></span>
         <div><div class="obs-dropdown-name">Infra Observatory</div><div class="obs-dropdown-sub">System architecture</div></div>
@@ -1115,7 +1111,6 @@ body::after {
     <button class="no-btn" id="btn-constellation" title="Toggle 3D constellation lines" style="display:none">constellation</button>
     <button class="no-btn" id="btn-expand-3d" title="Expand 3D map to full window (Esc to close)" style="display:none">⤢ expand</button>
     <button class="no-btn" id="btn-theme" title="Toggle theme">light</button>
-    <a href="/observatory" class="no-btn" style="border-color:var(--magenta-faded);color:var(--magenta-bright);text-decoration:none" title="Aesthetic Observatory">◈ observatory</a>
     <a href="/profile" class="no-btn" style="border-color:rgba(170,90,206,0.5);color:#aa5ace;text-decoration:none" title="Aesthetic Profile — 17-axis fingerprint">◬ profile</a>
   </div>
 </header>
@@ -1236,7 +1231,7 @@ NO.data = {
       db.collection('meta').doc('registry').get(),
       db.collection('usage').orderBy('timestamp', 'desc').get(),
       db.collection('gaps').get(),
-      db.collection('evolution').orderBy('date', 'asc').get(),
+      db.collection('evolution_daily').orderBy('date', 'asc').get(),
       db.collection('changelogs').get(),
     ]);
 
@@ -1775,9 +1770,9 @@ NO.cortex = {
         const color = NO.config.domainColors[d.domain] || '#888';
         const usages = NO.data.usageCounts[d.id] || 0;
         NO.tooltip.show(e,
-          `<div class="tt-name" style="color:${color}">${d.id}</div>` +
-          `<div class="tt-dim">${d.domain} / ${d.type}${d.recent ? ' &bull; recent' : ''}</div>` +
-          `<div>Score: ${d.score} | Words: ${d.words.toLocaleString()} | Used: ${usages}x</div>`
+          `<div class="tt-name" style="color:${color}">${NO.detail.esc(d.id)}</div>` +
+          `<div class="tt-dim">${NO.detail.esc(d.domain)} / ${NO.detail.esc(d.type)}${d.recent ? ' &bull; recent' : ''}</div>` +
+          `<div>Score: ${NO.detail.esc(d.score)} | Words: ${d.words.toLocaleString()} | Used: ${usages}x</div>`
         );
         // Dim unconnected nodes
         const connected = new Set();
@@ -2176,7 +2171,7 @@ NO.org = {
       this.render(d);
     }).on('mouseover', (e, d) => {
       if (d.data.description) {
-        NO.tooltip.show(e, `<div class="tt-name" style="color:${d.data.color || 'var(--text-bright)'}">${d.data.name}</div><div>${d.data.description}</div>${d.data.score ? '<div class="tt-dim">Score: ' + d.data.score + '</div>' : ''}`);
+        NO.tooltip.show(e, `<div class="tt-name" style="color:${d.data.color || 'var(--text-bright)'}">${NO.detail.esc(d.data.name)}</div><div>${NO.detail.esc(d.data.description)}</div>${d.data.score ? '<div class="tt-dim">Score: ' + NO.detail.esc(d.data.score) + '</div>' : ''}`);
       }
     }).on('mouseout', () => NO.tooltip.hide());
 
@@ -2232,29 +2227,17 @@ NO.timeline = {
       return;
     }
 
-    // Get unique dates and domains
-    const dateSet = new Set();
-    const domainScores = {};
-    for (const e of evoData) {
-      const day = e.date?.substring(0, 10);
-      if (!day) continue;
-      dateSet.add(day);
-      const domain = NO.data.skillDomain[e.skill] || 'unknown';
-      if (!domainScores[day]) domainScores[day] = {};
-      if (!domainScores[day][domain]) domainScores[day][domain] = [];
-      domainScores[day][domain].push(e.composite_score || 0);
-    }
-
-    const dates = [...dateSet].sort();
+    // evoData is the pre-aggregated evolution_daily rollup: one doc per date,
+    // each already holding the average composite_score per domain.
+    const byDate = {};
+    for (const e of evoData) if (e.date) byDate[e.date] = e.domains || {};
+    const dates = Object.keys(byDate).sort();
     const domains = NO.data.domainOrder;
 
     // Build stacked data: average score per domain per date
     const stackData = dates.map(day => {
       const row = { date: day };
-      for (const d of domains) {
-        const scores = domainScores[day]?.[d] || [];
-        row[d] = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
-      }
+      for (const d of domains) row[d] = byDate[day]?.[d] || 0;
       return row;
     });
 
