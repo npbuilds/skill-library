@@ -636,11 +636,6 @@ body::after {
         <div><div class="obs-dropdown-name">Neural Observatory</div>
         <div class="obs-dropdown-sub">Skill library visualization</div></div>
       </a>
-      <a href="/observatory" class="obs-dropdown-item">
-        <span class="obs-dot" style="background:var(--magenta-bright)"></span>
-        <div><div class="obs-dropdown-name">Aesthetic Observatory</div>
-        <div class="obs-dropdown-sub">Inspiration board</div></div>
-      </a>
       <a href="/infra" class="obs-dropdown-item active">
         <span class="obs-dot" style="background:var(--green-bright)"></span>
         <div><div class="obs-dropdown-name">Infra Observatory</div>
@@ -831,16 +826,8 @@ IO.data = {
       changelogs: changeSnap.size,
       gaps: gapsSnap.size,
       meta: metaSnap.exists ? 1 : 0,
-      inspirations: 0,
     };
     this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
-
-    // Inspirations (for Aesthetic Observatory)
-    try {
-      const inspSnap = await db.collection('inspirations').get();
-      this.collectionCounts.inspirations = inspSnap.size;
-      this.totalDocs += inspSnap.size;
-    } catch(e) { /* collection may not exist yet */ }
   }
 };
 
@@ -866,7 +853,7 @@ IO.vitals = {
       { label: 'Cloud Run', value: 'skill-library-mcp', dot: 'green',
         tip: 'MCP server deployed on Google Cloud Run. Handles all skill library tool calls from Claude.' },
       { label: 'Firestore', value: 'us-central1', dot: 'cyan',
-        tip: 'Real-time cloud database. 6 collections sync live to all three observatory dashboards.' },
+        tip: 'Real-time cloud database. 6 collections sync live to both observatory dashboards.' },
       { label: 'Scheduler', value: 'daily 3AM ET', dot: 'green',
         tip: 'Cloud Scheduler runs daily maintenance: re-scores all skills and opens a PR if anything changed.' },
       { label: 'CI/CD', value: '3 workflows', dot: 'green',
@@ -927,14 +914,10 @@ IO.arch = {
       tip: 'Secret Manager securely stores sensitive credentials: your GitHub bot token (for opening maintenance PRs) and the Anthropic API key (for AI-powered enrichment).' },
     { id: 'registry', label: 'Registry', icon: '\uD83D\uDCCB', subtitle: '', x: 0.55, y: 0.65, col: 'storage', color: '#5acece',
       tip: 'registry.json \u2014 the master catalog of all skills. Contains metadata, scores, health status, and dependency graph for every skill. Local file synced to Firestore.' },
-    { id: 'storage', label: 'Storage', icon: '\uD83D\uDDBC\uFE0F', x: 0.55, y: 0.88, col: 'storage', color: '#5acece',
-      tip: 'Firebase Storage holds uploaded images for the Aesthetic Observatory inspiration board.' },
 
     // Column 4: Output (x=82%)
     { id: 'neural', label: 'Neural Obs', icon: '\uD83E\uDDE0', x: 0.82, y: 0.15, col: 'output', color: '#ce5aaa', link: '/',
       tip: 'Neural Observatory \u2014 your main skill library dashboard. Shows the cortex map, org chart, chord diagram, usage heatmap, and skill registry table.' },
-    { id: 'aesthetic', label: 'Aesthetic Obs', icon: '\uD83C\uDFA8', x: 0.82, y: 0.42, col: 'output', color: '#ce5aaa', link: '/observatory',
-      tip: 'Aesthetic Observatory \u2014 your inspiration board. Upload images, tag them, extract color palettes, and browse your visual reference library.' },
     { id: 'infra', label: 'Infra Obs', icon: '\u26A1', x: 0.82, y: 0.65, col: 'output', color: '#ce5aaa', current: true,
       tip: 'Infra Observatory \u2014 this page. Shows how all the infrastructure pieces connect, system health, and how your library grows over time.' },
     { id: 'botpr', label: 'Bot PRs', icon: '\uD83E\uDD16', x: 0.82, y: 0.88, col: 'output', color: '#ceb45a',
@@ -959,9 +942,7 @@ IO.arch = {
     { from: 'cicd', to: 'github', tip: 'Auto-merge lands green PRs' },
     // Dashboard data
     { from: 'firestore', to: 'neural', tip: 'Real-time skill data feed' },
-    { from: 'firestore', to: 'aesthetic', tip: 'Inspiration metadata' },
     { from: 'firestore', to: 'infra', tip: 'System metrics feed' },
-    { from: 'storage', to: 'aesthetic', tip: 'Inspiration images' },
   ],
 
   render() {
@@ -1124,8 +1105,6 @@ IO.ops = {
         tip: 'Tests, registry validation, and score checks run on every push and PR.' },
       { label: 'Artifact Reg', value: 'active', dot: 'green',
         tip: 'Docker image store for MCP server container builds.' },
-      { label: 'Firebase Storage', value: 'active', dot: 'green',
-        tip: 'Image storage for Aesthetic Observatory uploads.' },
     ];
     const statusEl = document.getElementById('ops-status');
     statusEl.innerHTML = statusItems.map((it, i) => `
@@ -1148,8 +1127,7 @@ IO.ops = {
     const collColors = {
       skills: 'var(--cyan-bright)', evolution: 'var(--green-bright)',
       usage: 'var(--amber-bright)', changelogs: 'var(--magenta-bright)',
-      gaps: 'var(--red-bright)', meta: 'var(--text-dim)',
-      inspirations: 'var(--magenta-bright)'
+      gaps: 'var(--red-bright)', meta: 'var(--text-dim)'
     };
     document.getElementById('ops-collections').innerHTML = Object.entries(counts)
       .sort((a, b) => b[1] - a[1])

@@ -47,17 +47,5 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Aesthetic Observatory — inspiration images.
-    // Unlike the collections above, this one has a legitimate client-side
-    // writer: app/observatory.html lets the signed-in owner upload, edit, and
-    // archive inspirations via the client SDK. Gate on the owner's UID so only
-    // that one account can write — `request.auth != null` alone would grant
-    // write to any Google account on the internet.
-    // Owner UID — only this account may write inspirations from the client.
-    match /inspirations/{inspirationId} {
-      allow read: if true;
-      allow write: if request.auth != null
-                   && request.auth.uid == 'l2Q28Abg39QsMiRQzH3yL2a0tN13';
-    }
   }
 }
