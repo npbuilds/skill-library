@@ -50,3 +50,6 @@ scripts/*.pre-phase*
 
 # Local backup of removed Aesthetic Observatory data (not for commit)
 app/_inspirations-backup/
+
+# Derived evolution rollup (regenerated from evolution.jsonl by migrate/aggregate scripts)
+data/evolution_daily.json
