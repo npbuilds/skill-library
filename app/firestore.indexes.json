@@ -23,14 +23,6 @@
         { "fieldPath": "skill", "order": "ASCENDING" },
         { "fieldPath": "date", "order": "ASCENDING" }
       ]
-    },
-    {
-      "collectionGroup": "inspirations",
-      "queryScope": "COLLECTION",
-      "fields": [
-        { "fieldPath": "archived", "order": "ASCENDING" },
-        { "fieldPath": "createdAt", "order": "DESCENDING" }
-      ]
     }
   ],
   "fieldOverrides": []

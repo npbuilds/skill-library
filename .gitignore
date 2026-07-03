@@ -47,3 +47,6 @@ output/
 data/registry.json.pre-*
 scripts/*.pre-phase*
 *.local-untracked
+
+# Local backup of removed Aesthetic Observatory data (not for commit)
+app/_inspirations-backup/

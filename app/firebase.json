@@ -8,15 +8,14 @@
       "storage.rules",
       "**/node_modules/**"
     ],
+    "redirects": [
+      {
+        "source": "/observatory{,.html}",
+        "destination": "/",
+        "type": 301
+      }
+    ],
     "rewrites": [
-      {
-        "source": "/observatory",
-        "destination": "/observatory.html"
-      },
-      {
-        "source": "/observatory.html",
-        "destination": "/observatory.html"
-      },
       {
         "source": "/profile",
         "destination": "/profile.html"
