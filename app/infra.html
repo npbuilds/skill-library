@@ -762,13 +762,14 @@ IO.data = {
     }
     const db = this._db;
 
-    const [skillsSnap, metaSnap, usageSnap, gapsSnap, evoSnap, changeSnap] = await Promise.all([
+    const [skillsSnap, metaSnap, usageSnap, gapsSnap, evoSnap, changeSnap, evoCount] = await Promise.all([
       db.collection('skills').get(),
       db.collection('meta').doc('registry').get(),
       db.collection('usage').orderBy('timestamp', 'desc').get(),
       db.collection('gaps').get(),
-      db.collection('evolution').orderBy('date', 'asc').get(),
+      db.collection('evolution_daily').orderBy('date', 'asc').get(),
       db.collection('changelogs').get(),
+      db.collection('evolution').count().get(),  // true doc count, 1 read (not 27k)
     ]);
 
     // Skills
@@ -796,9 +797,11 @@ IO.data = {
     this.gaps = [];
     gapsSnap.forEach(d => this.gaps.push(d.data()));
 
-    // Evolution
+    // Evolution — daily rollup docs ({date, count, domains}); the raw
+    // collection's true size comes from the count() aggregation above.
     this.evolution = [];
     evoSnap.forEach(d => this.evolution.push(d.data()));
+    this.evolutionCount = evoCount.data().count;
 
     // Changelogs
     this.changelogs = {};
@@ -821,11 +824,11 @@ IO.data = {
     // Collection counts
     this.collectionCounts = {
       skills: skillsSnap.size,
-      evolution: evoSnap.size,
       usage: usageSnap.size,
       changelogs: changeSnap.size,
       gaps: gapsSnap.size,
       meta: metaSnap.exists ? 1 : 0,
+      evolution: this.evolutionCount,
     };
     this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
   }
@@ -1192,7 +1195,7 @@ IO.growth = {
       { label: 'Write', cls: 'cyan', tip: 'You create or edit a SKILL.md file' },
       { label: 'Watcher', cls: 'green', tip: 'File watcher hook auto-detects the save' },
       { label: 'Registry', cls: 'cyan', count: (IO.data.skillList.length || 0) + ' skills', tip: 'Skill gets registered with metadata and metrics' },
-      { label: 'Snapshot', cls: 'green', count: (IO.data.evolution.length || 0) + ' snapshots', tip: 'Point-in-time score snapshot saved for tracking growth' },
+      { label: 'Snapshot', cls: 'green', count: (IO.data.evolutionCount || 0) + ' snapshots', tip: 'Point-in-time score snapshot saved for tracking growth' },
       { label: 'Score', cls: 'cyan', tip: 'Daily recalibration computes composite score from 6 factors' },
       { label: 'Bot PR', cls: 'green', tip: 'If scores drifted, a bot opens a pull request with the changes' },
       { label: 'CI', cls: 'cyan', tip: 'Automated tests validate the changes' },
@@ -1335,15 +1338,12 @@ IO.changelog = {
       entries.push({ type: 'gap', skill: '', date: e.timestamp || '', text: 'Search gap: "' + (e.query || '') + '"', icon: '\uD83D\uDD0D' });
     }
 
-    // Recent evolution events (just last recalibration batch)
-    const evoByDate = {};
+    // Recent evolution events \u2014 one per snapshot day; count is pre-aggregated
+    // in the evolution_daily rollup.
     for (const e of IO.data.evolution) {
-      const d = (e.date || '').substring(0, 10);
-      if (!evoByDate[d]) evoByDate[d] = 0;
-      evoByDate[d]++;
-    }
-    for (const [date, count] of Object.entries(evoByDate)) {
-      entries.push({ type: 'evolution', skill: '', date, text: 'Scored ' + count + ' skills', icon: '\uD83D\uDCCA' });
+      const date = (e.date || '').substring(0, 10);
+      if (!date) continue;
+      entries.push({ type: 'evolution', skill: '', date, text: 'Scored ' + (e.count || 0) + ' skills', icon: '\uD83D\uDCCA' });
     }
 
     // Sort by date descending

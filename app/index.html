@@ -1231,7 +1231,7 @@ NO.data = {
       db.collection('meta').doc('registry').get(),
       db.collection('usage').orderBy('timestamp', 'desc').get(),
       db.collection('gaps').get(),
-      db.collection('evolution').orderBy('date', 'asc').get(),
+      db.collection('evolution_daily').orderBy('date', 'asc').get(),
       db.collection('changelogs').get(),
     ]);
 
@@ -2227,29 +2227,17 @@ NO.timeline = {
       return;
     }
 
-    // Get unique dates and domains
-    const dateSet = new Set();
-    const domainScores = {};
-    for (const e of evoData) {
-      const day = e.date?.substring(0, 10);
-      if (!day) continue;
-      dateSet.add(day);
-      const domain = NO.data.skillDomain[e.skill] || 'unknown';
-      if (!domainScores[day]) domainScores[day] = {};
-      if (!domainScores[day][domain]) domainScores[day][domain] = [];
-      domainScores[day][domain].push(e.composite_score || 0);
-    }
-
-    const dates = [...dateSet].sort();
+    // evoData is the pre-aggregated evolution_daily rollup: one doc per date,
+    // each already holding the average composite_score per domain.
+    const byDate = {};
+    for (const e of evoData) if (e.date) byDate[e.date] = e.domains || {};
+    const dates = Object.keys(byDate).sort();
     const domains = NO.data.domainOrder;
 
     // Build stacked data: average score per domain per date
     const stackData = dates.map(day => {
       const row = { date: day };
-      for (const d of domains) {
-        const scores = domainScores[day]?.[d] || [];
-        row[d] = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : 0;
-      }
+      for (const d of domains) row[d] = byDate[day]?.[d] || 0;
       return row;
     });
 
