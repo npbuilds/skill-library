@@ -235,14 +235,11 @@ def main():
             sys.exit(1)
         print(f"\nRegistry updated.")
 
-        # Append evolution snapshot after successful recalibration
-        import subprocess
-        snapshot_script = Path(__file__).resolve().parent / "snapshot_evolution.py"
-        if snapshot_script.exists():
-            subprocess.run(
-                [sys.executable, str(snapshot_script), "--event=recalibrate"],
-                capture_output=True,
-            )
+        # Evolution snapshots are no longer appended here. They persist to
+        # Firestore via the "Daily maintenance (Firestore)" GitHub Action
+        # (scripts/snapshot_to_firestore.py). data/evolution.jsonl is gitignored,
+        # so appending during recalibration would be discarded dead work and
+        # would silently drop the snapshot instead of persisting it.
     elif dry_run:
         print("\n(dry run — no changes written)")
 
