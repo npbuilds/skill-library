@@ -110,6 +110,16 @@ def build_skill_docs(registry: dict) -> list[dict]:
     return docs
 
 
+def evo_id(doc: dict) -> str:
+    """Deterministic Firestore doc ID for an evolution row: skill_date_event.
+    Same key `build_evolution_daily` dedupes on, so the raw `evolution`
+    collection and the daily rollup stay consistent."""
+    skill = doc.get("skill", "unknown")
+    date = (doc.get("date") or "unknown")[:10]
+    event = doc.get("event", "snapshot")
+    return f"{skill}_{date}_{event}"
+
+
 def build_evolution_daily(evolution: list[dict], registry: dict) -> list[dict]:
     """Roll up raw evolution rows into one summary doc per date.
 
@@ -258,12 +268,6 @@ def main():
     # ── 4. Evolution snapshots ────────────────────────────────────
     print("\n▸ Loading evolution.jsonl...")
     evolution = parse_jsonl(DATA / "evolution.jsonl")
-    # Give each evolution doc a deterministic ID: skill + date
-    def evo_id(doc):
-        skill = doc.get("skill", "unknown")
-        date = doc.get("date", "unknown")[:10]
-        event = doc.get("event", "snapshot")
-        return f"{skill}_{date}_{event}"
     batch_write(db, "evolution", evolution, id_fn=evo_id, dry_run=args.dry_run)
 
     # Per-date rollup the dashboards actually read (keeps a page load at ~90
