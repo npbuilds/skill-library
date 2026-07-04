@@ -1363,7 +1363,7 @@ IO.changelog = {
       const color = domain ? (IO.config.domainColors[domain] || 'var(--border-dim)') : typeColors[e.type] || 'var(--border-dim)';
       const dateStr = e.date ? new Date(e.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
       html += `<div class="io-signal-item" style="border-left-color:${color}">`;
-      html += `<span class="io-signal-icon">${e.icon}</span>`;
+      html += `<span class="io-signal-icon">${IO.esc(e.icon)}</span>`;
       if (e.skill) html += `<span class="io-signal-skill">${IO.esc(e.skill)}</span>`;
       html += `<span class="io-signal-action">${IO.esc(e.text)}</span>`;
       html += `<span class="io-signal-time">${IO.esc(dateStr)}</span>`;
