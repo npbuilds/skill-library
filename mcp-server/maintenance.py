@@ -380,12 +380,14 @@ async def _validate(request: Request) -> JSONResponse:
 
 async def _snapshot(request: Request) -> JSONResponse:
     """Retired. Evolution snapshots now write straight to Firestore from a
-    scheduled GitHub Action (.github/workflows/snapshot.yml via
+    scheduled GitHub Action (.github/workflows/daily-firestore.yml via
     scripts/snapshot_to_firestore.py), instead of appending data/evolution.jsonl
     and opening a PR. That old flow was the dominant driver of git-history bloat.
 
-    The endpoint is kept as a no-op so the Cloud Scheduler job (if still pointed
-    here) degrades gracefully; remove that scheduler trigger at your convenience."""
+    The endpoint is kept as a no-op so a Cloud Scheduler job still pointed here
+    degrades gracefully; remove that scheduler trigger at your convenience.
+    Returns 200 (not 410): Cloud Scheduler treats any non-2xx as a failed
+    execution and would retry/alert, which defeats the graceful no-op."""
     auth_err = _check_maint_token(request)
     if auth_err is not None:
         return auth_err
@@ -395,10 +397,9 @@ async def _snapshot(request: Request) -> JSONResponse:
         {
             "status": "retired",
             "message": "Evolution snapshots moved to Firestore via the "
-                       "'Evolution snapshot' GitHub Action; this endpoint no "
-                       "longer appends evolution.jsonl or opens a PR.",
-        },
-        status_code=410,
+                       "'Daily maintenance (Firestore)' GitHub Action; this "
+                       "endpoint no longer appends evolution.jsonl or opens a PR.",
+        }
     )
 
 
@@ -408,7 +409,8 @@ async def _sentinel(request: Request) -> JSONResponse:
     GitHub Action (scripts/health-report.py --firestore), instead of committing
     a dated data/health/*.json file and opening a PR — that flow accreted git
     history. Kept as a no-op so a lingering Cloud Scheduler trigger degrades
-    gracefully; remove that trigger at your convenience."""
+    gracefully; remove that trigger at your convenience. Returns 200 (not 410)
+    so Cloud Scheduler doesn't treat the retired job as a failed execution."""
     auth_err = _check_maint_token(request)
     if auth_err is not None:
         return auth_err
@@ -420,8 +422,7 @@ async def _sentinel(request: Request) -> JSONResponse:
             "message": "Health reports moved to Firestore via the 'Daily "
                        "maintenance (Firestore)' GitHub Action; this endpoint no "
                        "longer writes data/health/ or opens a PR.",
-        },
-        status_code=410,
+        }
     )
 
 
