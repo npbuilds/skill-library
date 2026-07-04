@@ -53,5 +53,11 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Daily health reports (sentinel) — written by the CI maintenance job
+    match /health_reports/{date} {
+      allow read: if true;
+      allow write: if false;
+    }
+
   }
 }

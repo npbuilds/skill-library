@@ -403,57 +403,26 @@ async def _snapshot(request: Request) -> JSONResponse:
 
 
 async def _sentinel(request: Request) -> JSONResponse:
-    """Run health-report.py (sentinel lite) to scan registry for issues.
-    Writes a dated JSON report to data/health/ and opens a maint:green PR.
-
-    This is a lightweight stand-in for the full Sentinel Prime skill
-    invocation which requires Agent SDK (Layer 4)."""
+    """Retired. The daily health report now writes straight to Firestore
+    (`health_reports` collection) from the 'Daily maintenance (Firestore)'
+    GitHub Action (scripts/health-report.py --firestore), instead of committing
+    a dated data/health/*.json file and opening a PR — that flow accreted git
+    history. Kept as a no-op so a lingering Cloud Scheduler trigger degrades
+    gracefully; remove that trigger at your convenience."""
     auth_err = _check_maint_token(request)
     if auth_err is not None:
         return auth_err
-    pat = _require_pat()
-    if isinstance(pat, JSONResponse):
-        return pat
-
     notify = get_notifier()
-    bot = _BotPR(pat, "sentinel")
-    try:
-        bot.clone()
-        result = _run(
-            ["python3", "scripts/health-report.py"],
-            cwd=bot.tmpdir, capture=True,
-        )
-        stdout = (result.stdout or "").strip()
-
-        if not bot.has_changes():
-            notify.p2_log("sentinel", {"status": "no_changes"})
-            return JSONResponse({"status": "no_changes", "stdout": stdout})
-
-        pr = await bot.open_pr(
-            title=f"chore(maint): sentinel health report {bot.ts}",
-            body=(
-                "Daily health sweep (sentinel lite).\n\n"
-                f"```\n{stdout}\n```\n\n"
-                "**Tier**: `maint:green` (mechanical registry scan).\n\n"
-                "Full report in `data/health/` directory.\n\n"
-                "_Opened by `skill-library-bot` via `/maint/sentinel`._"
-            ),
-            labels=["maint:green"],
-        )
-        notify.p2_log("sentinel", {"status": "pr_opened", **pr})
-        return JSONResponse({"status": "pr_opened", **pr})
-
-    except subprocess.CalledProcessError as e:
-        await notify.p1("sentinel", e)
-        return _subprocess_error(e)
-    except httpx.HTTPStatusError as e:
-        await notify.p1("sentinel", e)
-        return _github_api_error(e)
-    except Exception as e:
-        await notify.p0(f"Unexpected failure in sentinel: {e}", {"job": "sentinel"})
-        return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
-    finally:
-        bot.cleanup()
+    notify.p2_log("sentinel", {"status": "retired"})
+    return JSONResponse(
+        {
+            "status": "retired",
+            "message": "Health reports moved to Firestore via the 'Daily "
+                       "maintenance (Firestore)' GitHub Action; this endpoint no "
+                       "longer writes data/health/ or opens a PR.",
+        },
+        status_code=410,
+    )
 
 
 async def _kb_refresh(request: Request) -> JSONResponse:
