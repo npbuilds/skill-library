@@ -1,8 +1,9 @@
-name: Evolution snapshot
+name: Daily maintenance (Firestore)
 
-# Daily evolution snapshot written straight to Firestore (Phase 1 of the
-# git-bloat remediation — replaces the old /maint/snapshot flow that appended
-# data/evolution.jsonl and committed it, which bloated git history).
+# Daily maintenance jobs that write straight to Firestore instead of committing
+# to git — the git-bloat remediation (Phases 1-2). Replaces the old
+# /maint/snapshot and /maint/sentinel flows that appended data/evolution.jsonl /
+# data/health/*.json and committed them, bloating git history.
 #
 # Runs in CI (not the public Cloud Run service) so Firestore writes use the
 # WIF-authenticated CI service account and the Cloud Run runtime SA can stay
@@ -22,12 +23,12 @@ permissions:
   id-token: write          # required for Workload Identity Federation
 
 concurrency:
-  group: evolution-snapshot
+  group: daily-firestore-maintenance
   cancel-in-progress: false
 
 jobs:
-  snapshot:
-    name: Snapshot → Firestore
+  maintenance:
+    name: Snapshot + health → Firestore
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -47,5 +48,8 @@ jobs:
       - name: Install dependencies
         run: pip install google-cloud-firestore
 
-      - name: Write daily snapshot to Firestore
+      - name: Write daily evolution snapshot to Firestore
         run: python3 scripts/snapshot_to_firestore.py --event scheduled --project "${{ vars.GCP_PROJECT_ID }}"
+
+      - name: Write daily health report to Firestore
+        run: python3 scripts/health-report.py --firestore --project "${{ vars.GCP_PROJECT_ID }}"
