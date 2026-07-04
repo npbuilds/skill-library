@@ -1,0 +1,51 @@
+name: Evolution snapshot
+
+# Daily evolution snapshot written straight to Firestore (Phase 1 of the
+# git-bloat remediation — replaces the old /maint/snapshot flow that appended
+# data/evolution.jsonl and committed it, which bloated git history).
+#
+# Runs in CI (not the public Cloud Run service) so Firestore writes use the
+# WIF-authenticated CI service account and the Cloud Run runtime SA can stay
+# least-privilege.
+#
+# One-time prereq: grant the deploy SA (vars.DEPLOY_SA_EMAIL) Firestore write:
+#   gcloud projects add-iam-policy-binding <PROJECT> \
+#     --member="serviceAccount:<DEPLOY_SA_EMAIL>" --role="roles/datastore.user"
+
+on:
+  schedule:
+    - cron: "0 8 * * *"   # 08:00 UTC daily
+  workflow_dispatch:       # manual trigger
+
+permissions:
+  contents: read
+  id-token: write          # required for Workload Identity Federation
+
+concurrency:
+  group: evolution-snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    name: Snapshot → Firestore
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOY_SA_EMAIL }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install google-cloud-firestore
+
+      - name: Write daily snapshot to Firestore
+        run: python3 scripts/snapshot_to_firestore.py --event scheduled --project "${{ vars.GCP_PROJECT_ID }}"

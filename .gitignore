@@ -53,3 +53,7 @@ app/_inspirations-backup/
 
 # Derived evolution rollup (regenerated from evolution.jsonl by migrate/aggregate scripts)
 data/evolution_daily.json
+
+# Evolution snapshots now persist to Firestore (scripts/snapshot_to_firestore.py);
+# no longer committed to git. See skill-lab git-bloat remediation.
+data/evolution.jsonl
