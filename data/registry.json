@@ -25784,10 +25784,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 62,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 62,
+      "composite_score": 59,
       "depends_on": [
         "statistical-analysis"
       ],
@@ -25843,10 +25843,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 71,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 68,
       "depends_on": [
         "data-generation-monitor",
         "foresight",
@@ -25905,10 +25905,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 71,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 68,
       "depends_on": [
         "mechanism-risk-adjuster",
         "moa-analog-engine",
@@ -25968,10 +25968,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "foresight",
         "frontier-antenna",
@@ -26035,10 +26035,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 66,
       "depends_on": [
         "reflexivity-theory",
         "secular-themes"
@@ -26095,10 +26095,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 67,
       "depends_on": [
         "pos-base-rates",
         "spelunker"
@@ -26155,10 +26155,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 64,
       "depends_on": [
         "mechanism-risk-adjuster",
         "modality-manufacturing"
@@ -26215,10 +26215,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "frontier-intelligence",
         "mechanism-risk-adjuster",
@@ -26282,10 +26282,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 64,
       "depends_on": [
         "pipeline-mapper",
         "spelunker"
@@ -26342,10 +26342,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 62,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 62,
+      "composite_score": 59,
       "depends_on": [
         "mechanism-risk-adjuster"
       ],
