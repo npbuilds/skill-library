@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-11T15:07:46Z",
+  "last_scan": "2026-07-11T15:19:23Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2886,7 +2886,7 @@
     },
     "magic-system-design": {
       "name": "magic-system-design",
-      "description": "Framework for designing systematic magic, metaphysical, or speculative technology systems. Reference when creating the fantasy element of a world \u2014 defining its source, cost, limits, access, and interaction with physics. Covers the hard/soft spectrum, Sanderson's laws as design constraints, and cost structure patterns.",
+      "description": "Framework for designing systematic magic, metaphysical, or speculative technology systems. Reference when creating the fantasy element of a world \u2014 defining its source, cost, limits, access, and interaction with physics. Covers the hard/soft spectrum, Sanderson's laws as design constraints, cost structure patterns, a 20-system case-study library, and an evidenced failure-mode catalog.",
       "location": "skills/worldbuilding/magic-system-design/SKILL.md",
       "plugin": "skill-infra",
       "type": "knowledge",
@@ -2895,25 +2895,25 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1539,
-        "body_words": 1480,
-        "description_words": 43,
+        "word_count": 1753,
+        "body_words": 1686,
+        "description_words": 51,
         "section_count": 5,
-        "reference_files": 2,
+        "reference_files": 4,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
-        "estimated_tokens_metadata": 56,
-        "estimated_tokens_body": 2491,
-        "estimated_tokens_total": 2547
+        "estimated_tokens_metadata": 67,
+        "estimated_tokens_body": 2893,
+        "estimated_tokens_total": 2960
       },
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 85,
+      "auto_score": 86,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 86,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator"
