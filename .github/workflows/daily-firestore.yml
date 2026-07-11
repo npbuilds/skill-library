@@ -78,3 +78,88 @@ jobs:
           else
             echo "Open firestore-divergence issue already exists; not duplicating."
           fi
+
+  # Telemetry pull loop (split-brain fix Phase 3): export cloud usage/gap/
+  # feedback events from Firestore into the committed jsonl files that
+  # recalibrate_scores.py reads, via a maint:green bot PR that rides CI +
+  # auto-merge. Serial after `maintenance` to share the Firestore quota window.
+  telemetry-pull:
+    name: Telemetry → git (bot PR)
+    runs-on: ubuntu-latest
+    needs: maintenance
+    steps:
+      # This job commits to a fresh branch — checkout the current main tip,
+      # no head_sha pin.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOY_SA_EMAIL }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install google-cloud-firestore
+
+      - name: Pull telemetry from Firestore
+        run: python3 scripts/pull_telemetry_from_firestore.py --project "${{ vars.GCP_PROJECT_ID }}"
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet -- data/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new telemetry; nothing to commit."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Recalibrate in the same commit so the PR passes CI's score-idempotency
+      # gate (usage counts feed score_usage).
+      - name: Recalibrate scores
+        if: ${{ steps.diff.outputs.changed == 'true' }}
+        run: python3 scripts/recalibrate_scores.py
+
+      # The bot PAT lives in GCP Secret Manager (not GitHub secrets). PRs
+      # must be pushed/created with it, NOT github.token — GITHUB_TOKEN-created
+      # PRs don't trigger CI, so auto-merge.yml would never fire.
+      - name: Fetch bot PAT from Secret Manager
+        if: ${{ steps.diff.outputs.changed == 'true' }}
+        id: pat
+        run: |
+          BOT_PAT=$(gcloud secrets versions access latest \
+            --secret=github-bot-pat --project="${{ vars.GCP_PROJECT_ID }}")
+          echo "::add-mask::$BOT_PAT"
+          echo "token=$BOT_PAT" >> "$GITHUB_OUTPUT"
+
+      - name: Open telemetry-sync bot PR
+        if: ${{ steps.diff.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ steps.pat.outputs.token }}
+        run: |
+          EXISTING=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open \
+            --json headRefName --jq '[.[] | select(.headRefName | startswith("maintenance/telemetry-sync-"))] | length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "An open telemetry-sync PR already exists; skipping (it will be superseded tomorrow)."
+            exit 0
+          fi
+          BRANCH="maintenance/telemetry-sync-$(date -u +%Y%m%d%H%M%S)"
+          git config user.name "skill-library-bot"
+          git config user.email "bot@skill-library"
+          git checkout -b "$BRANCH"
+          git add data/
+          git commit -m "chore(telemetry): pull cloud telemetry from Firestore + recalibrate"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$BRANCH"
+          gh pr create --repo "$GITHUB_REPOSITORY" \
+            --head "$BRANCH" --base main --label "maint:green" \
+            --title "chore(telemetry): daily cloud telemetry pull $(date -u +%Y-%m-%d)" \
+            --body "Automated daily export of cloud usage/gap/feedback events from Firestore into git jsonl (+ score recalibration in the same commit so CI's idempotency gate passes). Rides auto-merge via maint:green."
