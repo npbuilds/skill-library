@@ -4,38 +4,55 @@ migrate_to_firestore.py — Push local data files into Firestore.
 
 Reads:
   data/registry.json   → Firestore 'skills' collection + 'meta/registry' doc
-  data/usage.jsonl     → Firestore 'usage' collection
-  data/gaps.jsonl      → Firestore 'gaps' collection
-  data/evolution.jsonl → Firestore 'evolution' collection
+  data/changelogs.json → Firestore 'changelogs' collection
+  data/evolution.jsonl → Firestore 'evolution' collection (legacy; file retired)
                        → Firestore 'evolution_daily' collection (per-date rollup;
                          what the dashboards read, so a page load costs ~90 reads
                          instead of the full ~27k evolution docs)
-  data/changelogs.json → Firestore 'changelogs' collection
+  data/usage.jsonl     → Firestore 'usage' collection    (--include-telemetry only)
+  data/gaps.jsonl      → Firestore 'gaps' collection     (--include-telemetry only)
 
 Usage:
-  pip install firebase-admin
+  pip install google-cloud-firestore
   python3 scripts/migrate_to_firestore.py [--project skill-library-prod] [--dry-run]
+
+CI mode (sync-firestore.yml runs this on every merge to main):
+  python3 scripts/migrate_to_firestore.py --registry-only --prune --sha <git-sha>
+
+Flags:
+  --registry-only     Sync only skills + changelogs + meta/registry (the
+                      merge-triggered CI subset; skips evolution + telemetry).
+  --prune             With --registry-only: delete Firestore skills/changelogs
+                      docs whose IDs are no longer in the registry. Refuses to
+                      run if the registry holds fewer than PRUNE_SAFETY_FLOOR
+                      skills (protects against a truncated registry wiping the
+                      collection).
+  --sha SHA           Git commit SHA stamped into meta/registry.synced_sha —
+                      the divergence check in daily-firestore.yml compares it
+                      against origin/main.
+  --include-telemetry ⚠ Push local usage.jsonl/gaps.jsonl with AUTO-GENERATED
+                      doc IDs. Re-running DUPLICATES those collections, and
+                      after the telemetry pull loop (Phase 3) local jsonl
+                      contains rows that ORIGINATED in Firestore — pushing
+                      them back double-counts dashboard usage. Backfill/
+                      recovery only; never run from CI.
+
+Write ordering (failure-honest): skills + changelogs are upserted first, prune
+runs only if every upsert batch committed, and meta/registry is written LAST as
+the commit marker. A mid-run failure leaves meta/registry describing the
+previous complete snapshot.
 
 Requires either:
   - GOOGLE_APPLICATION_CREDENTIALS env var pointing to a service account key, OR
-  - gcloud auth application-default login (ADC)
+  - gcloud auth application-default login (ADC), OR
+  - a gcloud CLI login (access-token fallback)
 """
 
 import argparse
 import json
-import os
+import subprocess
 import sys
 from pathlib import Path
-
-import subprocess
-
-# Soft-fail so test_migrate_to_firestore.py can import the helpers below
-# without requiring firebase-admin. main() re-checks and exits if missing.
-try:
-    import firebase_admin
-    from firebase_admin import credentials, firestore
-except ImportError:
-    firebase_admin = None
 
 try:
     import google.oauth2.credentials as oauth2_creds
@@ -44,6 +61,12 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
+
+# --prune refuses to delete anything if the registry holds fewer skills than
+# this — a truncated/corrupt registry must never be able to empty the live
+# collection. Library is 522 skills as of 2026-07; revisit if it ever shrinks
+# legitimately below this.
+PRUNE_SAFETY_FLOOR = 100
 
 # ── Helpers ──────────────────────────────────────────────────────────
 
@@ -91,6 +114,35 @@ def batch_write(db, collection: str, docs: list[dict], id_fn=None, dry_run=False
             batch_count = 0
 
     print(f"  ✓ {collection}: {total} docs total")
+
+
+def list_doc_ids(db, collection: str) -> set[str]:
+    """Stream only document IDs from a collection (empty projection — no field
+    reads billed beyond the doc scan)."""
+    return {snap.id for snap in db.collection(collection).select([]).stream()}
+
+
+def prune_collection(db, collection: str, keep_ids: set[str], dry_run=False) -> list[str]:
+    """Delete docs whose IDs are not in keep_ids. Returns the pruned IDs."""
+    existing = list_doc_ids(db, collection)
+    stale = sorted(existing - keep_ids)
+    if not stale:
+        print(f"  {collection}: nothing to prune ({len(existing)} docs all current)")
+        return []
+    batch = db.batch()
+    batch_count = 0
+    for i, doc_id in enumerate(stale):
+        batch.delete(db.collection(collection).document(doc_id))
+        batch_count += 1
+        if batch_count >= 500 or i == len(stale) - 1:
+            if not dry_run:
+                batch.commit()
+            batch = db.batch()
+            batch_count = 0
+    for doc_id in stale:
+        print(f"  {collection}: pruned '{doc_id}'{' (dry-run)' if dry_run else ''}")
+    print(f"  ✓ {collection}: {len(stale)} stale docs pruned{' (dry-run)' if dry_run else ''}")
+    return stale
 
 
 def build_skill_docs(registry: dict) -> list[dict]:
@@ -176,7 +228,7 @@ def build_evolution_daily(evolution: list[dict], registry: dict) -> list[dict]:
     return docs
 
 
-def build_meta_doc(registry: dict) -> dict:
+def build_meta_doc(registry: dict, synced_sha: str | None = None) -> dict:
     """meta/registry doc with explicit/computed fields + pass-through for unknown top-level keys."""
     skills = registry.get("skills", {})
     network_domains = registry.get("network", {}).get("domains", {})
@@ -188,12 +240,24 @@ def build_meta_doc(registry: dict) -> dict:
         "skill_count": len(skills),
         "domain_count": len(network_domains),
     }
+    if synced_sha:
+        meta_doc["synced_sha"] = synced_sha
     # `skills` has its own collection; `network` is denormalized above.
     HANDLED = {"schema_version", "plugin_version", "last_scan", "skills", "network"}
     for key, value in registry.items():
         if key not in HANDLED and key not in meta_doc:
             meta_doc[key] = value
     return meta_doc
+
+
+def load_changelog_docs() -> list[dict]:
+    """data/changelogs.json ({skill: entries}) → [{skill, entries}] docs."""
+    changelog_path = DATA / "changelogs.json"
+    if not changelog_path.exists():
+        print("  ⚠ changelogs.json not found, skipping")
+        return []
+    changelogs = json.loads(changelog_path.read_text())
+    return [{"skill": name, "entries": data} for name, data in changelogs.items()]
 
 
 # ── Main ─────────────────────────────────────────────────────────────
@@ -217,89 +281,126 @@ def get_db(project: str):
         return db
 
 
+def sync_registry(db, registry: dict, args) -> dict:
+    """Upsert skills + changelogs, optionally prune, then write meta/registry
+    LAST as the commit marker. Returns summary counts."""
+    skill_docs = build_skill_docs(registry)
+    print(f"  Found {len(skill_docs)} skills")
+    batch_write(db, "skills", skill_docs, id_fn=lambda d: d["name"], dry_run=args.dry_run)
+
+    print("\n▸ Loading changelogs.json...")
+    changelog_docs = load_changelog_docs()
+    batch_write(db, "changelogs", changelog_docs,
+                id_fn=lambda d: d["skill"], dry_run=args.dry_run)
+
+    pruned = []
+    if args.prune:
+        print("\n▸ Pruning stale docs...")
+        if len(skill_docs) < PRUNE_SAFETY_FLOOR:
+            print(f"  ✗ REFUSING to prune: registry has only {len(skill_docs)} skills "
+                  f"(safety floor: {PRUNE_SAFETY_FLOOR}). Is the registry truncated?")
+            sys.exit(1)
+        keep_skills = {d["name"] for d in skill_docs}
+        pruned += prune_collection(db, "skills", keep_skills, dry_run=args.dry_run)
+        if changelog_docs:
+            keep_logs = {d["skill"] for d in changelog_docs}
+            pruned += prune_collection(db, "changelogs", keep_logs, dry_run=args.dry_run)
+
+    # meta/registry written LAST: the commit marker. If anything above raised,
+    # this never runs and the dashboard's headline metadata still describes the
+    # previous complete snapshot.
+    meta_doc = build_meta_doc(registry, synced_sha=args.sha)
+    if not args.dry_run:
+        db.collection("meta").document("registry").set(meta_doc)
+    print(f"  ✓ meta/registry: written {'(dry-run)' if args.dry_run else ''}"
+          f"{f' [synced_sha={args.sha[:12]}…]' if args.sha else ''}")
+
+    return {"skills": len(skill_docs), "changelogs": len(changelog_docs),
+            "pruned": len(pruned)}
+
+
 def main():
     parser = argparse.ArgumentParser(description="Migrate local skill data to Firestore")
     parser.add_argument("--project", default="skill-library-prod", help="GCP project ID")
     parser.add_argument("--dry-run", action="store_true", help="Parse and validate without writing")
+    parser.add_argument("--registry-only", action="store_true",
+                        help="Sync only skills + changelogs + meta/registry (CI merge subset)")
+    parser.add_argument("--prune", action="store_true",
+                        help="With --registry-only: delete Firestore docs no longer in the registry")
+    parser.add_argument("--sha", default=None,
+                        help="Git commit SHA to stamp into meta/registry.synced_sha")
+    parser.add_argument("--include-telemetry", action="store_true",
+                        help="⚠ Push usage.jsonl/gaps.jsonl (auto-ID docs — re-running "
+                             "DUPLICATES them; backfill only, never CI)")
     args = parser.parse_args()
 
-    if firebase_admin is None:
-        print("ERROR: firebase-admin not installed. Run: pip install firebase-admin")
-        sys.exit(1)
+    if args.prune and not args.registry_only:
+        parser.error("--prune requires --registry-only")
+    if args.include_telemetry and args.registry_only:
+        parser.error("--include-telemetry conflicts with --registry-only")
 
     print(f"═══ Neural Observatory → Firestore Migration ═══")
     print(f"Project: {args.project}")
     print(f"Data dir: {DATA}")
+    print(f"Mode: {'registry-only' if args.registry_only else 'full'}"
+          f"{' + prune' if args.prune else ''}")
     print(f"Dry run: {args.dry_run}")
     print()
 
     # Initialize Firestore client — try ADC, fall back to gcloud token
     db = get_db(args.project)
 
-    # ── 1. Registry → skills collection + meta doc ────────────────
+    # ── 1. Registry → skills + changelogs + meta (meta LAST) ─────
     print("▸ Loading registry.json...")
     registry_path = DATA / "registry.json"
     if not registry_path.exists():
         print("  ERROR: registry.json not found!")
         sys.exit(1)
-
     registry = json.loads(registry_path.read_text())
-    skill_docs = build_skill_docs(registry)
-    print(f"  Found {len(skill_docs)} skills")
-    batch_write(db, "skills", skill_docs, id_fn=lambda d: d["name"], dry_run=args.dry_run)
+    summary = sync_registry(db, registry, args)
 
-    meta_doc = build_meta_doc(registry)
-    if not args.dry_run:
-        db.collection("meta").document("registry").set(meta_doc)
-    print(f"  ✓ meta/registry: written {'(dry-run)' if args.dry_run else ''}")
+    usage, gaps, evolution, evolution_daily = [], [], [], []
+    if not args.registry_only:
+        # ── 2. Evolution snapshots (legacy local file; Firestore-native
+        # via daily-firestore.yml — this is a no-op when the file is gone)
+        print("\n▸ Loading evolution.jsonl...")
+        evolution = parse_jsonl(DATA / "evolution.jsonl")
+        batch_write(db, "evolution", evolution, id_fn=evo_id, dry_run=args.dry_run)
 
-    # ── 2. Usage events ───────────────────────────────────────────
-    # Skill-load events only; search events (type=search, no skill field) stay
-    # local. Keeps the Firestore `usage` collection's dashboard semantics intact.
-    print("\n▸ Loading usage.jsonl...")
-    usage = [e for e in parse_jsonl(DATA / "usage.jsonl") if e.get("skill")]
-    batch_write(db, "usage", usage, dry_run=args.dry_run)
+        # Per-date rollup the dashboards actually read (keeps a page load at
+        # ~90 reads instead of the full evolution collection).
+        evolution_daily = build_evolution_daily(evolution, registry)
+        batch_write(db, "evolution_daily", evolution_daily,
+                    id_fn=lambda d: d["date"], dry_run=args.dry_run)
 
-    # ── 3. Gaps ───────────────────────────────────────────────────
-    print("\n▸ Loading gaps.jsonl...")
-    gaps = parse_jsonl(DATA / "gaps.jsonl")
-    batch_write(db, "gaps", gaps, dry_run=args.dry_run)
+        # ── 3. Telemetry (opt-in only — auto-ID docs duplicate on re-run,
+        # and post-Phase-3 local jsonl contains rows that ORIGINATED in
+        # Firestore; pushing them back double-counts dashboard usage) ──
+        if args.include_telemetry:
+            print("\n  ⚠ --include-telemetry: pushing usage/gaps with auto-generated IDs.")
+            print("    Re-running this duplicates those collections. Backfill only.")
+            # Skill-load events only; search events (type=search, no skill
+            # field) stay local. Keeps dashboard `usage` semantics intact.
+            print("\n▸ Loading usage.jsonl...")
+            usage = [e for e in parse_jsonl(DATA / "usage.jsonl") if e.get("skill")]
+            batch_write(db, "usage", usage, dry_run=args.dry_run)
 
-    # ── 4. Evolution snapshots ────────────────────────────────────
-    print("\n▸ Loading evolution.jsonl...")
-    evolution = parse_jsonl(DATA / "evolution.jsonl")
-    batch_write(db, "evolution", evolution, id_fn=evo_id, dry_run=args.dry_run)
-
-    # Per-date rollup the dashboards actually read (keeps a page load at ~90
-    # reads instead of the full evolution collection).
-    evolution_daily = build_evolution_daily(evolution, registry)
-    batch_write(db, "evolution_daily", evolution_daily,
-                id_fn=lambda d: d["date"], dry_run=args.dry_run)
-
-    # ── 5. Changelogs ─────────────────────────────────────────────
-    print("\n▸ Loading changelogs.json...")
-    changelog_path = DATA / "changelogs.json"
-    if changelog_path.exists():
-        changelogs = json.loads(changelog_path.read_text())
-        # changelogs is a dict: { skill_name: changelog_data }
-        changelog_docs = [
-            {"skill": name, "entries": data}
-            for name, data in changelogs.items()
-        ]
-        batch_write(db, "changelogs", changelog_docs,
-                    id_fn=lambda d: d["skill"], dry_run=args.dry_run)
-    else:
-        print("  ⚠ changelogs.json not found, skipping")
+            print("\n▸ Loading gaps.jsonl...")
+            gaps = parse_jsonl(DATA / "gaps.jsonl")
+            batch_write(db, "gaps", gaps, dry_run=args.dry_run)
 
     # ── Summary ───────────────────────────────────────────────────
     print()
     print("═══ Migration Summary ═══")
-    print(f"  Skills:    {len(skill_docs)}")
-    print(f"  Usage:     {len(usage)}")
-    print(f"  Gaps:      {len(gaps)}")
-    print(f"  Evolution: {len(evolution)} raw → {len(evolution_daily)} daily rollup")
-    if changelog_path.exists():
-        print(f"  Changelogs: {len(changelogs)}")
+    print(f"  Skills:     {summary['skills']}")
+    print(f"  Changelogs: {summary['changelogs']}")
+    if args.prune:
+        print(f"  Pruned:     {summary['pruned']}")
+    if not args.registry_only:
+        print(f"  Evolution:  {len(evolution)} raw → {len(evolution_daily)} daily rollup")
+        if args.include_telemetry:
+            print(f"  Usage:      {len(usage)}")
+            print(f"  Gaps:       {len(gaps)}")
     if args.dry_run:
         print("\n  ⚠ DRY RUN — no data was written to Firestore")
         print("  Remove --dry-run to execute the migration")
