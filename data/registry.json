@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-11T15:10:09Z",
+  "last_scan": "2026-07-11T15:19:23Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2899,7 +2899,7 @@
         "body_words": 1686,
         "description_words": 51,
         "section_count": 5,
-        "reference_files": 2,
+        "reference_files": 4,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -2910,10 +2910,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 85,
+      "auto_score": 86,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 85,
+      "composite_score": 86,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator"
