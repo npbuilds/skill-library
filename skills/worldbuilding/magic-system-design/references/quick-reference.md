@@ -1,60 +1,54 @@
 # Magic System Design — Quick Reference
 
+One-page cheat sheet. Full rationale, examples, and tables live in the parent `SKILL.md`.
 
-## 1. Source — Where does it come from?
-
-| Pattern | Example | World Implication |
-|---------|---------|-------------------|
-| **Ambient** — exists in the environment | The Force, cursed energy (JJK) | Power is everywhere; sensitivity determines access |
-| **Inherited** — genetic or bloodline | X-Men mutations, Allomancy | Creates aristocracies or persecuted minorities |
-| **Extracted** — from a material/substance | Spice (Dune), Dust (His Dark Materials) | Whoever controls the resource controls the power |
-| **Granted** — by an entity or pact | Warlock pacts, Binding Vows (JJK) | Creates hierarchies of patrons and dependents |
-| **Learned** — through study/training | Nen (HxH), Sympathy (Kingkiller) | Creates institutions: academies, guilds, traditions |
-| **Emotional** — from feeling/will | Cursed energy (JJK), bending (Avatar) | Power tied to psychological state; coming-of-age narratives |
-| **Technological** — built, not born | Alchemy (FMA), cybernetics | Power is manufactured; access is economic |
-
-## Quick Reference
-
-| Cost Type | Example | Narrative Effect |
-|-----------|---------|-----------------|
-| **Physical** — energy, health, lifespan | Blood magic, physical exhaustion | Creates urgency; users must choose when to spend |
-| **Cognitive** — memory, sanity, identity | Forgotten memories, madness | Horror and tragedy; the user loses themselves |
-| **Material** — rare substance consumed | Metals in Allomancy, spell components | Economic pressure; supply chain as conflict |
-| **Social** — reputation, relationships, oaths | Binding vows (JJK), geas | Creates obligations; power comes with strings |
-| **Moral** — ethical compromise, corruption | Dark side (Star Wars), One Ring | Temptation as narrative engine |
-| **Temporal** — time, aging, delay | Years of training, cooldown periods | Patience vs. urgency; experience matters |
-
-## 4. Access — Who can use it?
-
-| Access Pattern | World Implication |
-|---------------|-------------------|
-| **Universal** — anyone can learn it | Egalitarian potential; institutions gatekeep knowledge, not ability |
-| **Genetic** — bloodline determines ability | Natural aristocracy or persecution; breeding programs; mixed-heritage tension |
-| **Economic** — requires expensive resources | Plutocratic; the rich are powerful, the poor are powerless |
-| **Random** — appears unpredictably | Disrupts social order; creates fear and opportunity |
-| **Conditional** — triggered by trauma, oaths, near-death | Creates a cost to entry; users share a common experience |
-
-## 5. Interaction with Physics
-
-| Approach | Example | Feel |
-|----------|---------|------|
-| **Parallel** — operates alongside physics, doesn't break it | The Force operates through midichlorians | "Science we don't understand yet" |
-| **Alternative** — replaces one physical law | FTL but everything else is real physics | Hard SF with one exception |
-| **Orthogonal** — different energy source, same thermodynamics | Sympathy (Kingkiller) — uses real thermodynamics | Rigorous, satisfying |
-| **Metaphysical** — operates on a different layer of reality | Cursed energy, the Dreaming (Sandman) | Mysterious, deep |
-| **Violating** — explicitly breaks physics | Teleportation, creation ex nihilo | Requires strong internal rules to compensate |
-
-## Formula / Pseudocode
+## Hard/Soft Spectrum
 
 ```
-HARD ◄──────────────────────────────────► SOFT
-Allomancy (Sanderson)              The Force (early Star Wars)
-Alchemy (FMA)                      Earthsea (Le Guin)
-Nen (HxH)                         Gandalf's magic (LotR)
-Cursed Energy (JJK)               The Endless (Sandman)
-
-Rules are explicit.                Rules are mysterious.
-Readers understand costs.          Readers feel wonder.
-Can solve problems.                Cannot solve problems.
-Creates strategic tension.         Creates atmospheric tension.
+HARD (explicit rules, magic solves plot)  ◄────►  SOFT (mystery, magic creates wonder)
+        Allomancy · Nen · FMA                    early Force · Earthsea · Gandalf
 ```
+
+Aim for the middle: rules clear enough for strategy, edges vague enough for awe.
+
+**Sanderson's Laws, compressed:**
+1. Magic may only solve problems in proportion to how well the reader understands it.
+2. Design limitations before powers — costs first, abilities last.
+3. Deepen the system you have before adding another.
+
+## The Six Axes
+
+| # | Axis | Question | Pattern menu |
+|---|------|----------|--------------|
+| 1 | **Source** | Where does it come from? | ambient · inherited · extracted · granted · learned · emotional · technological |
+| 2 | **Cost** | What does using it take? | physical · cognitive · material · social · moral · temporal — combine ≥2 |
+| 3 | **Limits** | What can it never do? | hard (absolute prohibitions) vs. soft (prohibitive price — breakable at climax) |
+| 4 | **Access** | Who can use it? | universal · genetic · economic · random · conditional |
+| 5 | **Physics** | How does it relate to natural law? | parallel · alternative · orthogonal · metaphysical · violating |
+| 6 | **Society** | How do institutions absorb it? | regulated · institutional · hidden · feared · integrated · stratifying |
+
+Axis heuristics:
+- **Cost is the master axis** — it sets pacing, risk tolerance, and conflict type.
+- **Access + cost = political landscape** (universal+high cost → democratic but dangerous; genetic+low cost → aristocracy; economic → plutocracy).
+- **Soft limits beat hard limits narratively** — they can be crossed when the stakes justify the price.
+
+## Design Workflow (order matters)
+
+Cost → Limits → Access → Societal consequences → Abilities → one signature ability in full detail → propagation test → validate ("does it create more interesting problems than it solves?").
+
+## Propagation Test
+
+Every design decision must ripple into at least **4 of 7**: governance · economy · military · religion · culture · ecology · history. Fewer than four → it's decoration, not worldbuilding.
+
+## Mistake Checklist
+
+- [ ] Every capability has a cost (else: why isn't the world a utopia?)
+- [ ] No hero-only powers without a world-level reason
+- [ ] Magic resists full systematization (it isn't software)
+- [ ] Second-order effects traced (healers → medicine, warfare, value of life)
+- [ ] One system deepened, not several shallow ones
+
+## See Also
+
+- `cost-structure-patterns.md` (same directory) — detailed cost design patterns
+- Output target: `skills/worldbuilding/world-bible/references/world-axioms.md`
