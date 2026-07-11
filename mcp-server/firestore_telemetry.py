@@ -43,20 +43,25 @@ _seq = itertools.count()
 def _get_client():
     """Lazy singleton. Returns None if the library is missing or the client
     can't be constructed (auth/config); failure is remembered so a broken
-    environment doesn't pay a retry cost on every event."""
+    environment doesn't pay a retry cost on every event.
+
+    An already-set client wins over the library check — an injected client
+    (tests, future DI) must work even without google-cloud-firestore
+    installed."""
     global _client, _client_failed
+    if _client is not None:
+        return _client
     if _firestore is None or _client_failed:
         return None
-    if _client is None:
-        with _lock:
-            if _client is None and not _client_failed:
-                try:
-                    project = os.environ.get("FIRESTORE_PROJECT") or None
-                    _client = _firestore.Client(project=project)
-                except Exception as e:
-                    _client_failed = True
-                    print(f"skill-library: firestore telemetry disabled: {e}",
-                          file=sys.stderr)
+    with _lock:
+        if _client is None and not _client_failed:
+            try:
+                project = os.environ.get("FIRESTORE_PROJECT") or None
+                _client = _firestore.Client(project=project)
+            except Exception as e:
+                _client_failed = True
+                print(f"skill-library: firestore telemetry disabled: {e}",
+                      file=sys.stderr)
     return _client
 
 
