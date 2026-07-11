@@ -1,24 +1,30 @@
-# Cloud Run least-privilege service account (prep)
+# Cloud Run least-privilege service account
 
-**Status:** not yet applied. This is a runbook to fix audit Finding #3 — the
-`skill-library-mcp` Cloud Run service currently runs as the project's **default
-Compute Engine service account**, which holds broad `Editor`. The service is
-`--allow-unauthenticated` (public) and holds a repo-write PAT, so a code-exec bug
-or leaked token would inherit project-wide `Editor`. Pin a dedicated SA with only
-the roles the service actually needs.
+**Status:** applied 2026-07-11 as part of the split-brain fix Phase 2. The
+`skill-library-mcp` Cloud Run service is pinned to a dedicated runtime SA via
+`--service-account` in `.github/workflows/deploy.yml` (repo var
+`RUNTIME_SA_EMAIL`), with a post-deploy verification step that fails the deploy
+if the running SA differs. Previously the service ran as the project's default
+Compute Engine service account with broad `Editor` — unacceptable for a public
+`--allow-unauthenticated` service holding a repo-write PAT.
 
 ## What the service actually needs
 
 Verified against `mcp-server/`:
 - **Secret Manager read** for the three secrets the deploy injects:
   `github-bot-pat`, `anthropic-api-key`, `maint-trigger-token`.
+- **Firestore writes** (`roles/datastore.user`) for telemetry mirroring:
+  `firestore_telemetry.py` mirrors usage/gap/feedback events to the `usage`,
+  `gaps`, and `feedback` collections (gated on `MCP_REMOTE=true` +
+  `TELEMETRY_FIRESTORE=1`). The local jsonl these events also append to is
+  ephemeral on Cloud Run; the Firestore mirror is what the telemetry pull loop
+  exports back into git. **Removing this role silently kills telemetry** — the
+  mirror is best-effort by design and will not fail tool calls.
 - **Nothing else.** The server reads skills/registry from files baked into the
   image (`COPY . .`), and the maintenance bot writes back via GitHub PRs using
-  `GITHUB_BOT_PAT` — neither path calls Firestore, GCS, or other GCP APIs. So
-  `roles/secretmanager.secretAccessor` (scoped to the three secrets) is the whole
-  role set.
+  `GITHUB_BOT_PAT`.
 
-## Steps
+## Setup (one-time, already applied)
 
 Set your values (from `.github/workflows/deploy.yml` repo vars):
 
@@ -27,8 +33,8 @@ PROJECT=skill-library-prod
 REGION=us-central1
 SA=skill-library-mcp-runtime
 SA_EMAIL="${SA}@${PROJECT}.iam.gserviceaccount.com"
-# The identity CI deploys as (Workload Identity Federation SA), = vars.GCP_SERVICE_ACCOUNT
-DEPLOYER_SA="<paste vars.GCP_SERVICE_ACCOUNT from repo settings>"
+# The identity CI deploys as (Workload Identity Federation SA), = vars.DEPLOY_SA_EMAIL
+DEPLOYER_SA="<paste vars.DEPLOY_SA_EMAIL from repo settings>"
 ```
 
 **1. Create the runtime SA**
@@ -48,7 +54,14 @@ for S in github-bot-pat anthropic-api-key maint-trigger-token; do
 done
 ```
 
-**3. Let the CI deployer act as the new SA** (required to deploy a service that
+**3. Grant Firestore write for telemetry mirroring**
+```bash
+gcloud projects add-iam-policy-binding "$PROJECT" \
+  --member="serviceAccount:${SA_EMAIL}" \
+  --role="roles/datastore.user"
+```
+
+**4. Let the CI deployer act as the new SA** (required to deploy a service that
 runs *as* it)
 ```bash
 gcloud iam service-accounts add-iam-policy-binding "$SA_EMAIL" \
@@ -57,30 +70,28 @@ gcloud iam service-accounts add-iam-policy-binding "$SA_EMAIL" \
   --role="roles/iam.serviceAccountUser"
 ```
 
-**4. Pin it in the deploy pipeline** — add ONE flag to the `gcloud run deploy`
-step in `.github/workflows/deploy.yml` (do this only after steps 1–3, or the
-deploy will fail with a missing-SA error):
-```diff
-           --allow-unauthenticated \
-+          --service-account="skill-library-mcp-runtime@skill-library-prod.iam.gserviceaccount.com" \
-           --max-instances=1 \
-```
-(If you also keep `cloudrun/service.yaml` in sync for documentation, set
-`spec.template.spec.serviceAccountName` there too — but note CI deploys via flags,
-not that file.)
-
-**5. Deploy & verify**
+**5. Set the repo variable** consumed by `deploy.yml`:
 ```bash
-# trigger the normal deploy (merge to main), then confirm the running SA:
+gh variable set RUNTIME_SA_EMAIL --body "$SA_EMAIL"
+```
+
+**6. Deploy & verify** — the deploy workflow now does this automatically: it
+passes `--service-account="${{ vars.RUNTIME_SA_EMAIL }}"` and then fails the
+run if `gcloud run services describe` reports a different SA. Manual check:
+```bash
 gcloud run services describe skill-library-mcp \
   --region="$REGION" --project="$PROJECT" \
   --format="value(spec.template.spec.serviceAccountName)"
 # → skill-library-mcp-runtime@skill-library-prod.iam.gserviceaccount.com
 ```
-Then hit `/health` (should still be 200) and exercise a `/maint/*` endpoint with
-the token (confirms secret access still works under the new SA).
+Then hit `/health` (should still be 200), exercise a `/maint/*` endpoint with
+the token (confirms secret access), and call `search_skills` then check the
+Firestore `usage`/`gaps` collections for the mirrored event (confirms
+`datastore.user`).
 
 ## Rollback
-Remove the `--service-account` flag from `deploy.yml` and redeploy; the service
-reverts to the default Compute SA. The dedicated SA and its bindings can be left
-in place or deleted (`gcloud iam service-accounts delete "$SA_EMAIL"`).
+
+Remove the `--service-account` flag and the "Verify runtime service account"
+step from `deploy.yml` and redeploy; the service reverts to the default
+Compute SA. The dedicated SA and its bindings can be left in place or deleted
+(`gcloud iam service-accounts delete "$SA_EMAIL"`).
