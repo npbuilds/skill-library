@@ -17,13 +17,15 @@ RUN apt-get update \
 #   httpx                -> GitHub API calls from the maintenance router
 #   anthropic            -> Claude API calls from kb-pipeline (T1 enrichment)
 #   rank-bm25, numpy     -> BM25 signal in HybridSearchIndex
+#   google-cloud-firestore -> durable telemetry mirroring (firestore_telemetry.py)
 #   torch (CPU-only)     -> required by sentence-transformers; pulled from
 #                           PyTorch's CPU index to avoid ~600MB of CUDA wheels
 #   sentence-transformers -> vector signal in HybridSearchIndex (MiniLM)
 COPY mcp-server/pyproject.toml mcp-server/
 RUN pip install --no-cache-dir \
       "mcp>=1.0.0" "httpx>=0.25" "anthropic>=0.30" \
-      "rank-bm25>=0.2.2" "numpy>=1.24.0"
+      "rank-bm25>=0.2.2" "numpy>=1.24.0" \
+      "google-cloud-firestore>=2.14"
 RUN pip install --no-cache-dir \
       --extra-index-url https://download.pytorch.org/whl/cpu \
       "torch>=2.0,<3.0" \
