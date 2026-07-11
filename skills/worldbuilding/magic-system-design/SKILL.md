@@ -4,10 +4,11 @@ description: >
   Framework for designing systematic magic, metaphysical, or speculative technology systems.
   Reference when creating the fantasy element of a world — defining its source, cost, limits,
   access, and interaction with physics. Covers the hard/soft spectrum, Sanderson's laws as
-  design constraints, and cost structure patterns.
+  design constraints, cost structure patterns, a 20-system case-study library, and an
+  evidenced failure-mode catalog.
 metadata:
   author: nirav
-  version: "1.0"
+  version: "1.1"
 compatibility: Designed for Claude Code
 ---
 
@@ -36,6 +37,10 @@ Creates strategic tension.         Creates atmospheric tension.
 
 Most effective systems sit somewhere in the middle — hard enough to create strategic tension, soft enough to preserve wonder. JJK does this well: cursed energy has clear rules (binding vows, domain expansions) but the *feel* is visceral and mysterious.
 
+**Caveats on the spectrum** (corpus evidence in `references/case-study-library.md`):
+- The spectrum conflates *reader knowledge* with *rule-boundedness* — readers have filed Earthsea, the same system, at both poles. Supplementary axes that resolve the ambiguity: **instrumentalism vs. wonder** (does magic behave as controllable technology, or exceed control?) and **Platonic vs. Emergent** (magic via ideal forms/essences vs. manipulable mechanisms).
+- The convergence toward the middle holds specifically for systems that *solve plot problems*. Acclaimed fully-soft systems (Jonathan Strange & Mr Norrell, Malazan) stay acclaimed by never letting magic be the solution — softness is only punished where hardness was promised.
+
 ### Sanderson's Laws as Design Constraints
 
 **First Law**: Your ability to resolve conflict with magic is proportional to how well the reader understands the magic. *Design implication*: If you want magic to solve problems in the plot, the rules must be established before the payoff. If you want magic to create wonder, keep the rules hidden.
@@ -43,6 +48,8 @@ Most effective systems sit somewhere in the middle — hard enough to create str
 **Second Law**: Limitations are more interesting than powers. *Design implication*: Design the costs first, the abilities second. Ask "what can't it do?" and "what does it take?" before "what can it do?"
 
 **Third Law**: Expand what you have before you add something new. *Design implication*: One well-explored system with deep implications beats three shallow ones. When you feel the urge to add a new power, instead ask: what happens when the existing power interacts with a new constraint?
+
+Two nuances from Sanderson's own framing: he presents the laws as **descriptive observations about his practice, not prescriptive rules**, and his lecture-taught Zeroth Law — "Err on the side of AWESOME" — subordinates rule-adherence to wonder. Treat the laws as constraints to design against, not commandments.
 
 ## The Six Design Axes
 
@@ -138,7 +145,7 @@ How does the system interact with institutions?
 7. Run the **propagation test** (below).
 8. Validate: does the system create more interesting problems than it solves?
 
-Read `references/cost-structure-patterns.md` for detailed cost design patterns.
+Read `references/cost-structure-patterns.md` for detailed cost design patterns, `references/case-study-library.md` for twenty landmark systems annotated on all six axes (find your concept's nearest neighbors before designing), and `references/failure-modes.md` for the evidenced failure catalog.
 
 ## The Propagation Test
 
@@ -162,3 +169,5 @@ If the fantasy system doesn't affect at least four of these categories, it's dec
 3. **Magic as technology.** Treating spells like software — modular, predictable, scalable. Magic should feel different from technology. Something about it should resist full systematization.
 4. **Ignoring second-order effects.** "Healers exist." What does that do to medicine, warfare casualty rates, the value of human life, insurance?
 5. **Multiple unrelated systems.** Three kinds of magic that don't interact. Sanderson's Third Law: expand what you have before adding something new.
+
+These five are assertions from craft doctrine; `references/failure-modes.md` catalogs seven failure modes with named works and documented reception evidence (balefire, the Eagles/time-turner, worldbuilder's disease, Dragon Ball power creep, videogame-ification, JJK's presentation trap, Buffy's metaphor override) plus guardrails for each.
