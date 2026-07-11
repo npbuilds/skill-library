@@ -21,6 +21,7 @@ on:
 permissions:
   contents: read
   id-token: write          # required for Workload Identity Federation
+  issues: write            # divergence check opens an alert issue on failure
 
 concurrency:
   group: daily-firestore-maintenance
@@ -33,6 +34,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # divergence check needs full history for ancestor test
 
       - name: Authenticate to GCP (Workload Identity Federation)
         uses: google-github-actions/auth@v2
@@ -53,3 +56,25 @@ jobs:
 
       - name: Write daily health report to Firestore
         run: python3 scripts/health-report.py --firestore --project "${{ vars.GCP_PROJECT_ID }}"
+
+      # Split-brain detection: sync-firestore.yml stamps synced_sha on every
+      # merge-triggered sync; alert if Firestore has silently fallen behind git.
+      - name: Check git↔Firestore divergence
+        id: divergence
+        run: python3 scripts/check_firestore_divergence.py --project "${{ vars.GCP_PROJECT_ID }}"
+
+      - name: Open alert issue on divergence
+        if: ${{ failure() && steps.divergence.outcome == 'failure' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" \
+            --label "firestore-divergence" --state open --json number --jq 'length')
+          if [ "$EXISTING" = "0" ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "Firestore has diverged from main (synced_sha check failed)" \
+              --label "firestore-divergence" \
+              --body "The daily divergence check failed: Firestore meta/registry.synced_sha does not match a recent main HEAD. See the failed run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID — recover by re-running sync-firestore.yml via workflow_dispatch."
+          else
+            echo "Open firestore-divergence issue already exists; not duplicating."
+          fi
