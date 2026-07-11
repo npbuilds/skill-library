@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-06-27T18:18:03Z",
+  "last_scan": "2026-07-11T15:07:46Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2907,13 +2907,13 @@
         "estimated_tokens_body": 2491,
         "estimated_tokens_total": 2547
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 85,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 85,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator"
@@ -2935,7 +2935,7 @@
       ],
       "parent": "systems-craft",
       "created": "2026-03-26",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-07-11"
     },
     "ecology-design": {
       "name": "ecology-design",
