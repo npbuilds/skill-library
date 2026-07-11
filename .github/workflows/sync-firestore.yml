@@ -1,0 +1,70 @@
+name: Sync registry to Firestore
+
+# Pushes registry metadata (skills + changelogs + meta/registry) to Firestore
+# on every CI-green merge to main, so the Neural Observatory dashboard stays in
+# lockstep with the repo — closing the split-brain gap where the Cloud Run MCP
+# server auto-deployed on merge (deploy.yml) but Firestore waited for a manual
+# migrate_to_firestore.py run.
+#
+# Deliberately a SEPARATE workflow from deploy.yml (failure isolation): a
+# Firestore outage must not block MCP deploys, and vice versa. The trade-off —
+# consumers can briefly diverge — is detected by the synced_sha consistency
+# check in daily-firestore.yml, never silent.
+#
+# Prereq (shared with daily-firestore.yml): deploy SA needs roles/datastore.user.
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:  # manual trigger for recovery/backfill
+
+permissions:
+  contents: read
+  id-token: write  # required for Workload Identity Federation
+
+concurrency:
+  group: sync-firestore
+  # Never cancel a destructive sync mid-prune. Queued runs each write a
+  # complete snapshot, so last-writer-wins converges regardless.
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Registry → Firestore
+    runs-on: ubuntu-latest
+
+    # Only run on CI success (or manual trigger); never on CI failure.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      # Pin to the exact commit CI validated — same pattern as deploy.yml.
+      # NOT $GITHUB_SHA: on workflow_run that is the default-branch HEAD at
+      # trigger time, which races with subsequent pushes and would stamp a
+      # synced_sha that disagrees with the data actually synced.
+      - name: Checkout CI-validated commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Authenticate to GCP (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOY_SA_EMAIL }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install google-cloud-firestore
+
+      - name: Sync registry to Firestore
+        run: >
+          python3 scripts/migrate_to_firestore.py
+          --registry-only --prune
+          --sha "${{ github.event.workflow_run.head_sha || github.sha }}"
+          --project "${{ vars.GCP_PROJECT_ID }}"
