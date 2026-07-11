@@ -54,11 +54,27 @@ from shared import (
 )
 
 
+# On Cloud Run the local jsonl below is ephemeral (lost on cold start), so
+# telemetry is mirrored to Firestore. Requires BOTH remote mode and an explicit
+# TELEMETRY_FIRESTORE=1 opt-in (set by deploy.yml) — remote-mode gating alone
+# would let a local `--remote` dev run write into prod Firestore via ADC.
+_MIRROR_TELEMETRY = REMOTE_MODE and os.environ.get("TELEMETRY_FIRESTORE") == "1"
+_MIRROR_COLLECTIONS = {
+    "usage.jsonl": "usage",
+    "gaps.jsonl": "gaps",
+    "feedback.jsonl": "feedback",
+}
+
+
 def _log_event(path: Path, event: dict) -> None:
     """Append a JSON event to a JSONL log file (with file locking).
 
     Every record carries session_id (server-process UUID) and timestamp.
     Caller can override session_id via the event dict but normally shouldn't.
+
+    In remote mode (with TELEMETRY_FIRESTORE=1) the record is also mirrored to
+    Firestore — the local file is ephemeral on Cloud Run, and the mirror is
+    what the telemetry pull loop exports back into git.
     """
     record = {
         "session_id": _SERVER_SESSION_ID,
@@ -80,6 +96,17 @@ def _log_event(path: Path, event: dict) -> None:
             f"skill-library: failed to write log {path.name}: {e}",
             file=sys.stderr,
         )
+
+    if _MIRROR_TELEMETRY:
+        collection = _MIRROR_COLLECTIONS.get(path.name)
+        # The dashboard's `usage` collection holds skill-load events only
+        # (migrate_to_firestore filters e.get("skill")); type=search events
+        # stay out of it — their gap value already lands in `gaps`.
+        if collection == "usage" and not record.get("skill"):
+            collection = None
+        if collection:
+            from firestore_telemetry import mirror_event
+            mirror_event(collection, record)
 
 
 _load_log = load_log  # backward-compatible alias
