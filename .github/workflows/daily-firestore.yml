@@ -113,10 +113,15 @@ jobs:
       - name: Pull telemetry from Firestore
         run: python3 scripts/pull_telemetry_from_firestore.py --project "${{ vars.GCP_PROJECT_ID }}"
 
+      # git status --porcelain, NOT git diff: the pull can create new files
+      # (first-run .telemetry_watermark bootstrap, future data/archive/
+      # rotation) and git diff only sees tracked changes — an untracked
+      # watermark would be silently discarded and the loop would re-bootstrap
+      # forever.
       - name: Detect changes
         id: diff
         run: |
-          if git diff --quiet -- data/; then
+          if [ -z "$(git status --porcelain -- data/)" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No new telemetry; nothing to commit."
           else
