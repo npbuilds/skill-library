@@ -32,6 +32,16 @@ Twenty systems annotated against the six design axes (Source, Cost, Limits, Acce
 | **Cursed energy** (JJK) | Emotional — negative human emotion | Binding vows; revealing rules amplifies power | Technique-bound | Conditional (exposure) | Metaphysical | Sorcerer schools/clans | Creator-acknowledged Nen descendant; hard-presenting system that drew documented inconsistency criticism — the presentation trap |
 | **Equivalent exchange** (FMA) | Technological — alchemy as science | Equal-value exchange, stated as the story's first law | Human transmutation taboo | Learned | Alternative | State military alchemists | Cost as opening thesis; the narrative payoff lives where the pricing breaks down (Philosopher's Stone = front-loaded human cost) |
 | **Bending** (ATLA) | Emotional/innate + elemental nations | Physical skill, training | One element (Avatar excepted); real martial-arts grounding | Genetic-cultural | Parallel (momentum, effort legible) | Nation-defining | Embodied hard magic: audience learns rules by watching bodies move — exposition solved somatically |
+| **Geass** (Code Geass) | Granted by Faustian contract with a Code-bearer (C.C.) | **Escalating: "Runaway Geass"** — leaks with use, one eye then both become permanently active; consumes a weak-willed holder | One absolute command per person, ever (non-editable, non-removable); requires direct eye contact; each Geass unique with its own rule | Conditional (granted per contract) | Metaphysical, rule-compensated | Monarchy-weaponized; rebellion tool | Legible rules + real cost + built-in counterplay (know the rule, break it) = a power that generates plot; the Euphemia incident is the cost made catastrophic |
+
+### Hard-SF boundary cases
+
+These are science-fiction power/tech systems, not magic — included (like the Spice row in Modern Prose) because the six axes still illuminate them and they are the cleanest cross-media examples of two design principles.
+
+| System | Source | Cost | Limits | Access | Physics | Societal Integration | Verdict |
+|---|---|---|---|---|---|---|---|
+| **Minovsky physics** (Gundam) | Ambient — Minovsky particles saturate the battlespace | Reactor fuel; the particles also blind your own sensors | Jam radar/comms → combat forced to visual range | Universal (tech, economically gated) | Hard-SF, self-consistent | The whole war machine (mobile suits) is built on it | **The legibility-anchor archetype**: one invented rule (particles jam sensors) reverse-engineered so the impossible premise (humanoid mecha melee) becomes legible — the hard-SF cousin of Allomancy-on-Newton |
+| **Newtypes** (Gundam) | Inherited/emergent — evolved cognition | Under-defined | Vague by design ("amorphous and esoteric") | Random/genetic | Soft psychic | Founded as political doctrine (Deikun), weaponized as racial-superiority propaganda (Gihren) | **The cautionary tale**: an under-defined soft power that escalates into magnitude-based deus ex machina (Axis Shock "plot tech... no foreshadowing"; "really overpowered"); ideology-as-mechanic done well, power-scaling done badly |
 
 ## Games / TTRPG
 
@@ -48,3 +58,5 @@ Twenty systems annotated against the six design axes (Source, Cost, Limits, Acce
 2. **Convergence, refined:** systems that *solve plot problems* cluster at hard-rules-plus-preserved-mystery (Rowling per Sanderson's own essay, Kingkiller, Nen). Systems exempt themselves by never letting magic be the solution (Tolkien, JS&MN, Malazan).
 3. **The societal-integration axis is the best predictor of acclaim** in this corpus: Fulcrum, Roke, Final Empire, consensus-reality Paradox — the systems remembered as great are the ones their societies are built from.
 4. **Adaptation pressure:** any system built for play or serialization selects for administrable, meterable magic (Vancian slots, mana bars) — design for the medium's bookkeeping demands or they will redesign your system for you.
+5. **The legibility anchor:** the impossible becomes usable-for-plot when bound to one rule the audience already models — Newton (Allomancy), martial-arts effort (bending), sensor-jamming particles (Minovsky). Anchor first; the rest of the system follows for free.
+6. **Ideology-as-mechanic vs. magnitude-as-progression:** Newtypes (Gundam) show both poles in one system — the power designed as ideology (evolved empathy weaponized into racial propaganda) is its strength; the power that scales by raw magnitude into unforeshadowed deus ex machina is its documented failure. Cross-reference `failure-modes.md`.
