@@ -44,6 +44,14 @@ Named by Sanderson (hard pole's self-diagnosis), theorized by Harrison (worldbui
 
 **Guardrail:** build the system so it can carry the metaphor without being the metaphor. When the metaphor needs the system to behave differently than established, the metaphor loses.
 
+## 8. The soft power that escalates into deus ex machina
+
+**Case: Newtypes (Gundam).** An under-defined psychic power ("amorphous and esoteric," little detail given) escalates across the franchise into magnitude-based problem-solving: the Axis Shock in *Char's Counterattack* is "a magic piece of plot tech that exists for no other reason... with no foreshadowing," pilots become "really overpowered," and a wiki names creator Tomino as the "fundamental cause" of Newtypes becoming "increasingly fantastical" (several load-bearing quotes are search-surfaced; TV Tropes/NamuWiki block direct fetch). This is the mirror of the presentation trap (mode 6): there, promised hardness went unhonored; here, unpromised softness quietly *becomes* a problem-solver.
+
+**Guardrail:** if a soft power is left under-defined, it must also stay *out of the load-bearing plot resolutions* — the First-Law rule. Softness earns wonder only by not solving the climax. The moment a vague power wins the final battle, it reads as cheating, and each escalation makes the next one cheaper (the power-creep coupling, mode 4).
+
+**Contrast — the same franchise does costed/rule-bound well:** Geass (Code Geass) is a hard neighbor — contract, eye-contact, one-command-per-person, escalating "Runaway" cost, built-in counterplay — and generates plot instead of resolving it (see `case-study-library.md`). The lesson is not "avoid psychic powers" but "define the rules and pay the cost, or keep it out of the solutions."
+
 ## Caution: mischaracterized backlash
 
 The most prominent "anti-hard-magic backlash" evidence — Wired's 2023 Sanderson profile — attacked his *prose*, not hard magic as a design pattern, and the mass response ran in Sanderson's defense. Do not design defensively against a critical consensus that, on the evidence, is one hostile profile plus blog discourse.
