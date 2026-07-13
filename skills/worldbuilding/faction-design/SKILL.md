@@ -3,11 +3,11 @@ name: faction-design
 description: >
   Design factions with internal structure, competing interests, and dynamic relationships.
   Reference when creating political entities, organizations, secret societies, or any group
-  that acts with purpose in the world. Covers the pyramid technique, SUPREME method, and
-  fractal organizational modeling.
+  that acts with purpose in the world. Covers the pyramid technique, SUPREME method,
+  fractal organizational modeling, and a "no clean side" case-study library.
 metadata:
   author: nirav
-  version: "1.0"
+  version: "1.1"
 compatibility: Designed for Claude Code
 ---
 
@@ -113,6 +113,8 @@ A power vacuum:
 Power vacuums are excellent narrative catalysts. Defining "what happens if faction X disappears" is a worldbuilding exercise that reveals the true structure of your political landscape.
 
 ## Common Mistakes
+
+For worked examples of these mistakes' opposites — factions annotated on the Four Essentials, typed-edge relationships, and Power Vacuums — see `references/case-study-library.md` ("no clean side" military-political anime: LOGH, Code Geass, Gundam, 86).
 
 1. **Monolithic factions.** "The Empire is evil." No — the Empire has generals who believe in order, bureaucrats who believe in efficiency, dissidents who believe in reform, and soldiers who just want to survive. Internal diversity is what makes factions feel real.
 2. **Factions without vulnerabilities.** An invincible faction creates no tension. Every faction must need something it can't provide for itself.
