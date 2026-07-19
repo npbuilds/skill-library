@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-13T00:56:55Z",
+  "last_scan": "2026-07-19T13:41:41Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2757,6 +2757,7 @@
       ],
       "referenced_by": [
         "character-belief-tracker",
+        "conflict-design",
         "cultures-societies",
         "ecology-design",
         "extrapolation-engine",
@@ -3269,6 +3270,7 @@
       ],
       "referenced_by": [
         "algorithmic-game-theory",
+        "conflict-design",
         "cooperative-games",
         "evolutionary-games",
         "faction-design",
@@ -3320,6 +3322,7 @@
         "ethics"
       ],
       "referenced_by": [
+        "conflict-design",
         "diplomacy-and-international-order",
         "game-solver"
       ],
@@ -4099,14 +4102,15 @@
       "health_status": "warning",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 75,
+      "composite_score": 75,
       "depends_on": [
         "drawdown-psychology",
         "market-psychology",
         "strategic-foundations"
       ],
       "referenced_by": [
+        "conflict-design",
         "learning-in-games",
         "reflexivity-sentiment"
       ],
@@ -4889,8 +4893,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2485,
-        "body_words": 2402,
+        "word_count": 2535,
+        "body_words": 2452,
         "description_words": 60,
         "section_count": 6,
         "reference_files": 2,
@@ -4898,16 +4902,16 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 4408,
-        "estimated_tokens_total": 4486
+        "estimated_tokens_body": 4494,
+        "estimated_tokens_total": 4572
       },
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 87,
+      "auto_score": 90,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 87,
+      "composite_score": 90,
       "depends_on": [
         "diction",
         "narrative-craft",
@@ -4916,6 +4920,7 @@
       "referenced_by": [
         "character-belief-tracker",
         "civilizations",
+        "conflict-design",
         "cultures-societies",
         "ecology-design",
         "extrapolation-engine",
@@ -4940,7 +4945,7 @@
         "level:orchestrator"
       ],
       "created": "2026-03-25",
-      "last_modified": "2026-06-27"
+      "last_modified": "2026-07-19"
     },
     "geography-ecology": {
       "name": "geography-ecology",
@@ -5030,6 +5035,7 @@
       ],
       "referenced_by": [
         "character-belief-tracker",
+        "conflict-design",
         "conlang-craft",
         "dilemma-analyzer",
         "economic-systems",
@@ -6549,6 +6555,7 @@
         "worldbuilding-orchestrator"
       ],
       "referenced_by": [
+        "conflict-design",
         "justice-analyst"
       ],
       "tags": [
@@ -9125,6 +9132,7 @@
         "character-belief-tracker",
         "character-design",
         "comparative-civilizations",
+        "conflict-design",
         "cultures-societies",
         "economic-systems",
         "faction-design",
@@ -12196,7 +12204,9 @@
       "depends_on": [
         "historical-pattern-recognition"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "conflict-design"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -12238,12 +12248,14 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 56,
+      "auto_score": 60,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 56,
+      "composite_score": 60,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "conflict-design"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -27102,6 +27114,71 @@
         }
       ],
       "parent": "archon"
+    },
+    "conflict-design": {
+      "name": "conflict-design",
+      "description": "Design a conflict \u2014 war, insurgency, revolution, cold or economic conflict, feud \u2014 as a system: why it starts, how it escalates, what equilibrium holds it, how it ends, and how it corrupts its participants. Reference when building the central conflict of a world or story, a war between factions, a rebellion, or a rivalry. Covers the five conflict axes (each a stated/felt dual), conflict as a metastable game tipped by emotional variance, and the strategist who manages the variance gradient.",
+      "location": "skills/worldbuilding/conflict-design/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1232,
+        "body_words": 1135,
+        "description_words": 81,
+        "section_count": 5,
+        "reference_files": 5,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 106,
+        "estimated_tokens_body": 1870,
+        "estimated_tokens_total": 1976
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-07-19T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 80,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 80,
+      "depends_on": [
+        "behavioral-game-theory",
+        "classical-games",
+        "cooperative-games",
+        "cultures-societies",
+        "empires-and-states",
+        "faction-design",
+        "revolutions-and-regime-change",
+        "world-bible",
+        "worldbuilding-orchestrator"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:worldbuilding",
+        "level:knowledge",
+        "level:intermediate"
+      ],
+      "created": "2026-07-19",
+      "last_modified": "2026-07-19",
+      "changelog": [
+        {
+          "date": "2026-07-19",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "civilizations"
     }
   },
   "network": {
@@ -27608,6 +27685,7 @@
         "character-belief-tracker",
         "character-design",
         "civilizations",
+        "conflict-design",
         "conlang-craft",
         "cultures-societies",
         "ecology-design",
