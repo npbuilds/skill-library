@@ -78,5 +78,4 @@ Conflict-design consumes and extends several skills — cross-link, don't restat
 - `revolutions-and-regime-change` — Brinton's stages, Skocpol's structural conditions, and the "revolution devours its own" dynamic feeding the insurgency lifecycle.
 - `empires-and-states` — Weber's legitimacy typology and the legitimacy-coercion trade-off for the Legitimacy axis.
 - `magic-system-design` — the sibling method: its First Law (don't resolve conflict with a force the reader doesn't understand) generalizes to *all* conflict resolution.
-
-Output populates the world-bible's `references/faction-conflict-web.md`.
+- `world-bible` — the source of truth this builds on; conflict-design's output populates its `references/faction-conflict-web.md`.
