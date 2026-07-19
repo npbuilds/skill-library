@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "skill-library": {
+      "type": "http",
+      "url": "https://skill-library-mcp-ifvybw46na-uc.a.run.app/mcp",
+      "enabled_tools": [
+        "list_skills",
+        "search_skills",
+        "get_skill",
+        "get_skill_details",
+        "get_system_overview"
+      ],
+      "default_tools_approval_mode": "approve"
+    }
+  }
+}

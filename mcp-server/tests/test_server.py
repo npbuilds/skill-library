@@ -1,9 +1,10 @@
 """Tests for the Skill Library MCP server."""
 
 import json
+import os
 import threading
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -376,6 +377,19 @@ class TestGetSkillStats:
         assert "Total skill loads: 3" in result
         assert "color-theory: 2" in result
         assert "quantum" in result
+
+    def test_summary_labels_redacted_remote_gaps(self, tmp_project):
+        with (
+            patch.object(server, "REMOTE_MODE", True),
+            patch.dict(os.environ, {}, clear=False),
+        ):
+            os.environ.pop("TELEMETRY_SEARCH_QUERIES", None)
+            server.search_skills("private-unmatched-query")
+
+        result = server.get_skill_stats()
+        assert "[redacted remote queries]" in result
+        assert "1 search(es), 1 with no results" in result
+        assert '"?"' not in result
 
     def test_shows_unused_skills(self, tmp_project):
         server.get_skill("color-theory")
@@ -780,6 +794,110 @@ class TestSessionInstrumentation:
         assert len(search_events) == 1
         assert search_events[0]["query"] == "quantum-physics"
         assert search_events[0]["result_count"] == 0
+
+    def test_remote_search_omits_query_text_by_default(self, tmp_project):
+        with (
+            patch.object(server, "REMOTE_MODE", True),
+            patch.dict(os.environ, {}, clear=False),
+        ):
+            os.environ.pop("TELEMETRY_SEARCH_QUERIES", None)
+            server.search_skills("confidential-client-project")
+
+        usage = server._load_log(server.USAGE_LOG)
+        gaps = server._load_log(server.GAPS_LOG)
+        assert usage[0]["type"] == "search"
+        assert usage[0]["result_count"] == 0
+        assert "query" not in usage[0]
+        assert usage[0]["query_redacted"] is True
+        assert gaps[0]["type"] == "search"
+        assert "query" not in gaps[0]
+        assert gaps[0]["query_redacted"] is True
+
+    def test_remote_search_query_text_can_be_opted_in(self, tmp_project):
+        with (
+            patch.object(server, "REMOTE_MODE", True),
+            patch.dict(os.environ, {"TELEMETRY_SEARCH_QUERIES": "1"}),
+        ):
+            server.search_skills("explicit-opt-in-query")
+
+        usage = server._load_log(server.USAGE_LOG)
+        gaps = server._load_log(server.GAPS_LOG)
+        assert usage[0]["query"] == "explicit-opt-in-query"
+        assert gaps[0]["query"] == "explicit-opt-in-query"
+        assert "query_redacted" not in usage[0]
+
+    def test_cli_remote_mode_uses_privacy_default(self, tmp_project):
+        with (
+            patch.object(server, "REMOTE_MODE", False),
+            patch.dict(os.environ, {}, clear=False),
+        ):
+            os.environ.pop("TELEMETRY_SEARCH_QUERIES", None)
+            server.REMOTE_MODE = True
+            server.search_skills("late-cli-remote-mode")
+
+        usage = server._load_log(server.USAGE_LOG)
+        assert usage[0]["result_count"] == 0
+        assert "query" not in usage[0]
+
+    def test_cli_remote_mode_enables_firestore_mirroring(self):
+        with (
+            patch.object(server, "REMOTE_MODE", False),
+            patch.dict(os.environ, {"TELEMETRY_FIRESTORE": "1"}),
+        ):
+            assert server._mirror_telemetry_enabled() is False
+            server.REMOTE_MODE = True
+            assert server._mirror_telemetry_enabled() is True
+
+
+class TestRuntimeMode:
+    @pytest.mark.parametrize("transport", ["sse", "streamable-http"])
+    def test_http_transport_forces_remote_mode(self, transport):
+        with patch.object(server, "REMOTE_MODE", False):
+            assert server._remote_mode_requested(False, transport) is True
+
+    def test_stdio_transport_stays_local_without_remote_flag(self):
+        with patch.object(server, "REMOTE_MODE", False):
+            assert server._remote_mode_requested(False, "stdio") is False
+
+    def test_remote_flag_restricts_stdio_too(self):
+        with patch.object(server, "REMOTE_MODE", False):
+            assert server._remote_mode_requested(True, "stdio") is True
+
+    def test_remote_setup_fails_closed_on_removal_error(self):
+        fake_mcp = MagicMock()
+        fake_mcp.remove_tool.side_effect = RuntimeError("removal failed")
+        with (
+            patch.object(server, "mcp", fake_mcp),
+            patch.object(server, "REMOTE_MODE", False),
+            patch.object(server, "_REMOTE_MODE_CONFIGURED", False),
+        ):
+            with pytest.raises(RuntimeError, match="removal failed"):
+                server._enable_remote_mode()
+            assert server.REMOTE_MODE is False
+            assert server._REMOTE_MODE_CONFIGURED is False
+
+    def test_remote_setup_fails_if_write_tool_survives(self):
+        fake_mcp = MagicMock()
+        fake_mcp._tool_manager._tools = {"update_skill_content": object()}
+        with (
+            patch.object(server, "mcp", fake_mcp),
+            patch.object(server, "REMOTE_MODE", False),
+            patch.object(server, "_REMOTE_MODE_CONFIGURED", False),
+        ):
+            with pytest.raises(RuntimeError, match="update_skill_content"):
+                server._enable_remote_mode()
+            assert server.REMOTE_MODE is False
+
+    def test_remote_setup_is_idempotent_after_success(self):
+        fake_mcp = MagicMock()
+        with (
+            patch.object(server, "mcp", fake_mcp),
+            patch.object(server, "REMOTE_MODE", False),
+            patch.object(server, "_REMOTE_MODE_CONFIGURED", True),
+        ):
+            server._enable_remote_mode()
+            assert server.REMOTE_MODE is True
+            fake_mcp.remove_tool.assert_not_called()
 
     def test_iter_skill_uses_excludes_search_events(self, tmp_project):
         server.search_skills("color")

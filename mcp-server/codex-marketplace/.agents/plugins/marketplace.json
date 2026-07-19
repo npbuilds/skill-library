@@ -1,0 +1,20 @@
+{
+  "name": "skill-building-local",
+  "interface": {
+    "displayName": "Skill Building Local"
+  },
+  "plugins": [
+    {
+      "name": "skill-library",
+      "source": {
+        "source": "local",
+        "path": "./plugins/skill-library"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
