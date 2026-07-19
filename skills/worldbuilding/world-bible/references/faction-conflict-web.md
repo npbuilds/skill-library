@@ -3,6 +3,8 @@
 Maps the relationships between all major factions, civilizations, and power groups in the world. Every political artifact, intercepted communication, or historical account is shaped by these relationships.
 
 > This document is a living graph. Add factions as they're created, then define the edges between them.
+>
+> To design a *conflict itself* (why a war/rebellion/rivalry starts, how it escalates, what holds it, how it ends), use the `conflict-design` skill — its output (the five stated/felt axes, the metastable equilibrium and what tips it) populates the edges below.
 
 ## How to Use This Document
 
