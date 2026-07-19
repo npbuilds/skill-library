@@ -157,6 +157,7 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     "cultures-societies":       ["worldbuilding-orchestrator", "world-bible"],
     "ecology-design":           ["worldbuilding-orchestrator", "geography-ecology"],
     "extrapolation-engine":     ["worldbuilding-orchestrator", "world-bible", "history-builder"],
+    "conflict-design":          ["worldbuilding-orchestrator", "faction-design", "cultures-societies", "world-bible"],
     "faction-design":           ["worldbuilding-orchestrator", "cultures-societies", "history-builder"],
     "geography-ecology":        ["worldbuilding-orchestrator", "world-bible"],
     "history-builder":          ["worldbuilding-orchestrator", "world-bible", "lore-writer"],
