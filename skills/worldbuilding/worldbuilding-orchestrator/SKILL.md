@@ -56,6 +56,7 @@ Determine which worldbuilding skill(s) apply. Most requests touch multiple skill
 | Track who knows what | `character-belief-tracker` | `world-bible`, `lore-writer` | Belief graph against revelation layers |
 | Design factions, organizations | `faction-design` | `cultures-societies`, `world-bible` | Pyramid technique, SUPREME method |
 | Design political dynamics, conflict web | `world-bible` | `faction-design`, `cultures-societies` | Faction conflict web |
+| Design a conflict, war, rebellion, or rivalry (how it starts, escalates, and ends) | `conflict-design` | `faction-design`, `world-bible` | Five axes (stated/felt), metastable game tipped by emotional variance |
 | Design technology levels, innovation | `technology-progression` | `magic-system-design`, `world-bible` | Tech trees, fantasy system disruption |
 | Control pacing, tension curves | `narrative-pacing` | `lore-writer`, `world-bible` | Storyteller archetypes, revelation spiral pacing |
 | Trace consequences of an axiom | `extrapolation-engine` | `world-bible` | "And Then What?" drill, domain cascade |
@@ -169,6 +170,7 @@ Route to the appropriate skill, passing accumulated context.
 | `narrative-pacing` | knowledge | Tension curves, storyteller archetypes, pacing by artifact type |
 | `technology-progression` | knowledge | Tech trees, innovation pathways, fantasy system disruption |
 | `faction-design` | knowledge | Pyramid technique, SUPREME method, power vacuums |
+| `conflict-design` | knowledge | Conflict as a system — five stated/felt axes, metastable game tipped by emotional variance |
 | `extrapolation-engine` | knowledge | "And Then What?" drill, cascading consequences across domains |
 | `economic-systems` | knowledge | Fictional economies — trade, currency, scarcity, Five Questions framework |
 | `conlang-craft` | knowledge | Constructed languages — morphology, Sapir-Whorf, conlang-to-culture pipeline |
