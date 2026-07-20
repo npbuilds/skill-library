@@ -4,7 +4,8 @@ Exposes your skill library to Claude Desktop via the Model Context Protocol.
 
 Supports two modes:
   - Local (default): stdio transport, all tools (read + write). Used by Claude Desktop.
-  - Remote: HTTP transport, read-only tools. Used by claude.ai (web + mobile).
+  - Remote: HTTP transport, content-read tools plus telemetry. Used by claude.ai
+    (web + mobile).
 
 Usage:
   python server.py                              # local stdio (default)
@@ -58,12 +59,16 @@ from shared import (
 # telemetry is mirrored to Firestore. Requires BOTH remote mode and an explicit
 # TELEMETRY_FIRESTORE=1 opt-in (set by deploy.yml) — remote-mode gating alone
 # would let a local `--remote` dev run write into prod Firestore via ADC.
-_MIRROR_TELEMETRY = REMOTE_MODE and os.environ.get("TELEMETRY_FIRESTORE") == "1"
 _MIRROR_COLLECTIONS = {
     "usage.jsonl": "usage",
     "gaps.jsonl": "gaps",
     "feedback.jsonl": "feedback",
 }
+
+
+def _mirror_telemetry_enabled() -> bool:
+    """Evaluate durable telemetry gating against the active runtime mode."""
+    return REMOTE_MODE and os.environ.get("TELEMETRY_FIRESTORE") == "1"
 
 
 def _log_event(path: Path, event: dict) -> None:
@@ -97,7 +102,7 @@ def _log_event(path: Path, event: dict) -> None:
             file=sys.stderr,
         )
 
-    if _MIRROR_TELEMETRY:
+    if _mirror_telemetry_enabled():
         collection = _MIRROR_COLLECTIONS.get(path.name)
         # The dashboard's `usage` collection holds skill-load events only
         # (migrate_to_firestore filters e.get("skill")); type=search events
@@ -107,6 +112,34 @@ def _log_event(path: Path, event: dict) -> None:
         if collection:
             from firestore_telemetry import mirror_event
             mirror_event(collection, record)
+
+
+def _search_event(query: str, result_count: int) -> dict:
+    """Build privacy-safe search telemetry for the active runtime.
+
+    Local/stdio mode retains query text for the existing Claude workflow.
+    Remote mode records counts only unless TELEMETRY_SEARCH_QUERIES is
+    explicitly enabled by the service owner.
+    """
+    event = {"type": "search", "result_count": result_count}
+    include_query_text = (
+        not REMOTE_MODE
+        or os.environ.get("TELEMETRY_SEARCH_QUERIES", "false").lower()
+        in {"1", "true", "yes"}
+    )
+    if include_query_text:
+        event["query"] = query
+    else:
+        event["query_redacted"] = True
+    return event
+
+
+def _log_search(query: str, result_count: int, *, gap: bool = False) -> None:
+    """Record one search event, optionally including the gap stream."""
+    event = _search_event(query, result_count)
+    if gap:
+        _log_event(GAPS_LOG, event)
+    _log_event(USAGE_LOG, event)
 
 
 _load_log = load_log  # backward-compatible alias
@@ -478,9 +511,11 @@ def search_skills(query: str) -> str:
                 lines.append(f"    tags: {', '.join(tags)}")
                 lines.append("")
 
-            if len(hybrid_results) <= 2:
-                _log_event(GAPS_LOG, {"query": query, "result_count": len(hybrid_results)})
-            _log_event(USAGE_LOG, {"type": "search", "query": query, "result_count": len(hybrid_results)})
+            _log_search(
+                query,
+                len(hybrid_results),
+                gap=len(hybrid_results) <= 2,
+            )
 
             return "\n".join(lines)
 
@@ -499,16 +534,13 @@ def search_skills(query: str) -> str:
             })
 
     if not matches:
-        _log_event(GAPS_LOG, {"query": query, "result_count": 0})
-        _log_event(USAGE_LOG, {"type": "search", "query": query, "result_count": 0})
+        _log_search(query, 0, gap=True)
         return f"No skills found matching '{query}'. Use the list_skills tool to see all available skills."
 
     # Sort by relevance desc, then composite score desc
     matches.sort(key=lambda m: (-m["_rel"], -(m["score"] or 0)))
 
-    if len(matches) <= 2:
-        _log_event(GAPS_LOG, {"query": query, "result_count": len(matches)})
-    _log_event(USAGE_LOG, {"type": "search", "query": query, "result_count": len(matches)})
+    _log_search(query, len(matches), gap=len(matches) <= 2)
 
     lines = [f"Found {len(matches)} skill(s) matching '{query}' (keyword):\n"]
     for m in matches:
@@ -1099,11 +1131,24 @@ def get_skill_stats(skill_name: str | None = None) -> str:
     if gap_events:
         lines.append("\n--- Gaps (searches with poor/no results) ---")
         gap_queries: dict[str, int] = {}
+        redacted_count = 0
+        redacted_zero_results = 0
         for e in gap_events:
-            q = e.get("query", "?")
-            gap_queries[q] = gap_queries.get(q, 0) + 1
+            q = e.get("query")
+            if q:
+                gap_queries[q] = gap_queries.get(q, 0) + 1
+            else:
+                redacted_count += 1
+                if e.get("result_count", 0) == 0:
+                    redacted_zero_results += 1
         for q, count in sorted(gap_queries.items(), key=lambda x: x[1], reverse=True)[:10]:
             lines.append(f"  \"{q}\" — searched {count} time(s)")
+        if redacted_count:
+            lines.append(
+                "  [redacted remote queries] — "
+                f"{redacted_count} search(es), "
+                f"{redacted_zero_results} with no results"
+            )
 
     return "\n".join(lines)
 
@@ -2232,7 +2277,7 @@ def add_skill_dependency(
 
 
 # ---------------------------------------------------------------------------
-# Remote mode: remove write tools (keeps read-only surface for claude.ai)
+# Remote mode: remove write tools (keeps the content-read surface for claude.ai)
 # ---------------------------------------------------------------------------
 
 _WRITE_TOOLS = {
@@ -2244,10 +2289,42 @@ _WRITE_TOOLS = {
     "deprecate_skill",
     "add_skill_dependency",
 }
+_REMOTE_MODE_CONFIGURED = False
 
-if REMOTE_MODE:
+
+def _remote_mode_requested(remote_flag: bool, transport: str | None) -> bool:
+    """Treat every HTTP transport as remote unless the process is stdio-only."""
+    return REMOTE_MODE or remote_flag or transport in {"sse", "streamable-http"}
+
+
+def _enable_remote_mode() -> None:
+    """Apply remote restrictions once and abort if any write tool survives."""
+    global REMOTE_MODE, _REMOTE_MODE_CONFIGURED
+    if _REMOTE_MODE_CONFIGURED:
+        REMOTE_MODE = True
+        return
+
     for _name in _WRITE_TOOLS:
         mcp.remove_tool(_name)
+
+    remaining_write_tools = _WRITE_TOOLS.intersection(
+        mcp._tool_manager._tools.keys()
+    )
+    if remaining_write_tools:
+        names = ", ".join(sorted(remaining_write_tools))
+        raise RuntimeError(f"remote mode still exposes write tools: {names}")
+
+    mcp.settings.transport_security = TransportSecuritySettings(
+        enable_dns_rebinding_protection=False,
+    )
+    mcp.settings.stateless_http = True
+    mcp.settings.json_response = True
+    REMOTE_MODE = True
+    _REMOTE_MODE_CONFIGURED = True
+
+
+if REMOTE_MODE:
+    _enable_remote_mode()
 
 
 # ---------------------------------------------------------------------------
@@ -2260,36 +2337,25 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Skill Library MCP Server")
     parser.add_argument(
         "--remote", action="store_true",
-        help="Enable remote mode (HTTP transport, read-only tools)",
+        help="Enable remote mode (HTTP transport, content-read tools plus telemetry)",
     )
     parser.add_argument(
         "--transport",
         choices=["stdio", "sse", "streamable-http"],
         default=None,
-        help="Transport protocol (default: stdio local, streamable-http remote)",
+        help=(
+            "Transport protocol (default: stdio local, streamable-http remote; "
+            "explicit HTTP transports enforce restricted remote mode)"
+        ),
     )
     parser.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
     parser.add_argument("--port", type=int, default=8742, help="Bind port (default: 8742)")
     args = parser.parse_args()
 
-    # --remote flag also sets REMOTE_MODE for tool gating
-    if args.remote and not REMOTE_MODE:
-        REMOTE_MODE = True
-        for _name in _WRITE_TOOLS:
-            try:
-                mcp.remove_tool(_name)
-            except Exception:
-                pass
-        # Disable DNS rebinding protection (missed at import time)
-        mcp.settings.transport_security = TransportSecuritySettings(
-            enable_dns_rebinding_protection=False,
-        )
-        # Switch streamable-http into stateless / JSON-response mode so the
-        # transport survives Cloud Run cpu-throttling. Settings are read when
-        # the session manager is lazily constructed inside streamable_http_app(),
-        # which happens during mcp.run(...) below — so this still takes effect.
-        mcp.settings.stateless_http = True
-        mcp.settings.json_response = True
+    # HTTP transports are always restricted remote runtimes. This prevents an
+    # explicit --transport flag from exposing mutation tools on 0.0.0.0.
+    if _remote_mode_requested(args.remote, args.transport):
+        _enable_remote_mode()
 
     # Resolve transport: explicit flag wins, otherwise infer from mode
     transport = args.transport or ("streamable-http" if (args.remote or REMOTE_MODE) else "stdio")
