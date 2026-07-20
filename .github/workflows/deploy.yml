@@ -68,6 +68,10 @@ jobs:
       - name: Push image
         run: docker push "${{ steps.image.outputs.uri }}"
 
+      # --service-account pins the least-privilege runtime SA (Secret Manager
+      # accessor on the three secrets + roles/datastore.user for telemetry).
+      # Without it Cloud Run falls back to the default Compute SA with broad
+      # Editor — an unacceptable identity for a public unauthenticated service.
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy "${{ env.SERVICE_NAME }}" \
@@ -76,14 +80,27 @@ jobs:
             --project="${{ vars.GCP_PROJECT_ID }}" \
             --platform=managed \
             --allow-unauthenticated \
+            --service-account="${{ vars.RUNTIME_SA_EMAIL }}" \
             --max-instances=1 \
             --memory=2Gi \
             --cpu=1 \
             --timeout=300 \
             --port=8080 \
-            --set-env-vars="MCP_REMOTE=true,MAINTENANCE_AUTONOMY=conservative,GITHUB_VAULT_REPO=npbuilds/skill-library-vault,HF_HUB_OFFLINE=1,TRANSFORMERS_OFFLINE=1" \
+            --set-env-vars="MCP_REMOTE=true,TELEMETRY_FIRESTORE=1,MAINTENANCE_AUTONOMY=conservative,GITHUB_VAULT_REPO=npbuilds/skill-library-vault,HF_HUB_OFFLINE=1,TRANSFORMERS_OFFLINE=1" \
             --set-secrets="GITHUB_BOT_PAT=github-bot-pat:latest,ANTHROPIC_API_KEY=anthropic-api-key:latest,MAINT_TRIGGER_TOKEN=maint-trigger-token:latest" \
             --quiet
+
+      - name: Verify runtime service account
+        run: |
+          DEPLOYED_SA=$(gcloud run services describe "${{ env.SERVICE_NAME }}" \
+            --region="${{ vars.GCP_REGION }}" \
+            --project="${{ vars.GCP_PROJECT_ID }}" \
+            --format='value(spec.template.spec.serviceAccountName)')
+          if [ "$DEPLOYED_SA" != "${{ vars.RUNTIME_SA_EMAIL }}" ]; then
+            echo "::error::Service is running as '$DEPLOYED_SA', expected '${{ vars.RUNTIME_SA_EMAIL }}'"
+            exit 1
+          fi
+          echo "✓ Runtime SA verified: $DEPLOYED_SA"
 
       - name: Report deploy
         run: |

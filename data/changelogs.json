@@ -563,6 +563,11 @@
       "date": "2026-03-26",
       "action": "created",
       "note": "Research-driven addition \u2014 Sanderson's laws, hard/soft spectrum, cost structure patterns"
+    },
+    {
+      "date": "2026-07-11",
+      "action": "updated",
+      "note": "Rebuilt references/quick-reference.md as a true condensed cheat sheet (all six axes, corrected headings, no verbatim duplication of SKILL.md tables)"
     }
   ],
   "ecology-design": [

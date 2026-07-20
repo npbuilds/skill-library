@@ -21,6 +21,7 @@ on:
 permissions:
   contents: read
   id-token: write          # required for Workload Identity Federation
+  issues: write            # divergence check opens an alert issue on failure
 
 concurrency:
   group: daily-firestore-maintenance
@@ -33,6 +34,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # divergence check needs full history for ancestor test
 
       - name: Authenticate to GCP (Workload Identity Federation)
         uses: google-github-actions/auth@v2
@@ -53,3 +56,115 @@ jobs:
 
       - name: Write daily health report to Firestore
         run: python3 scripts/health-report.py --firestore --project "${{ vars.GCP_PROJECT_ID }}"
+
+      # Split-brain detection: sync-firestore.yml stamps synced_sha on every
+      # merge-triggered sync; alert if Firestore has silently fallen behind git.
+      - name: Check git↔Firestore divergence
+        id: divergence
+        run: python3 scripts/check_firestore_divergence.py --project "${{ vars.GCP_PROJECT_ID }}"
+
+      - name: Open alert issue on divergence
+        if: ${{ failure() && steps.divergence.outcome == 'failure' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" \
+            --label "firestore-divergence" --state open --json number --jq 'length')
+          if [ "$EXISTING" = "0" ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" \
+              --title "Firestore has diverged from main (synced_sha check failed)" \
+              --label "firestore-divergence" \
+              --body "The daily divergence check failed: Firestore meta/registry.synced_sha does not match a recent main HEAD. See the failed run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID — recover by re-running sync-firestore.yml via workflow_dispatch."
+          else
+            echo "Open firestore-divergence issue already exists; not duplicating."
+          fi
+
+  # Telemetry pull loop (split-brain fix Phase 3): export cloud usage/gap/
+  # feedback events from Firestore into the committed jsonl files that
+  # recalibrate_scores.py reads, via a maint:green bot PR that rides CI +
+  # auto-merge. Serial after `maintenance` to share the Firestore quota window.
+  telemetry-pull:
+    name: Telemetry → git (bot PR)
+    runs-on: ubuntu-latest
+    needs: maintenance
+    steps:
+      # This job commits to a fresh branch — checkout the current main tip,
+      # no head_sha pin.
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOY_SA_EMAIL }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install google-cloud-firestore
+
+      - name: Pull telemetry from Firestore
+        run: python3 scripts/pull_telemetry_from_firestore.py --project "${{ vars.GCP_PROJECT_ID }}"
+
+      # git status --porcelain, NOT git diff: the pull can create new files
+      # (first-run .telemetry_watermark bootstrap, future data/archive/
+      # rotation) and git diff only sees tracked changes — an untracked
+      # watermark would be silently discarded and the loop would re-bootstrap
+      # forever.
+      - name: Detect changes
+        id: diff
+        run: |
+          if [ -z "$(git status --porcelain -- data/)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new telemetry; nothing to commit."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Recalibrate in the same commit so the PR passes CI's score-idempotency
+      # gate (usage counts feed score_usage).
+      - name: Recalibrate scores
+        if: ${{ steps.diff.outputs.changed == 'true' }}
+        run: python3 scripts/recalibrate_scores.py
+
+      # The bot PAT lives in GCP Secret Manager (not GitHub secrets). PRs
+      # must be pushed/created with it, NOT github.token — GITHUB_TOKEN-created
+      # PRs don't trigger CI, so auto-merge.yml would never fire.
+      - name: Fetch bot PAT from Secret Manager
+        if: ${{ steps.diff.outputs.changed == 'true' }}
+        id: pat
+        run: |
+          BOT_PAT=$(gcloud secrets versions access latest \
+            --secret=github-bot-pat --project="${{ vars.GCP_PROJECT_ID }}")
+          echo "::add-mask::$BOT_PAT"
+          echo "token=$BOT_PAT" >> "$GITHUB_OUTPUT"
+
+      - name: Open telemetry-sync bot PR
+        if: ${{ steps.diff.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ steps.pat.outputs.token }}
+        run: |
+          EXISTING=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open \
+            --json headRefName --jq '[.[] | select(.headRefName | startswith("maintenance/telemetry-sync-"))] | length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "An open telemetry-sync PR already exists; skipping (it will be superseded tomorrow)."
+            exit 0
+          fi
+          BRANCH="maintenance/telemetry-sync-$(date -u +%Y%m%d%H%M%S)"
+          git config user.name "skill-library-bot"
+          git config user.email "bot@skill-library"
+          git checkout -b "$BRANCH"
+          git add data/
+          git commit -m "chore(telemetry): pull cloud telemetry from Firestore + recalibrate"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$BRANCH"
+          gh pr create --repo "$GITHUB_REPOSITORY" \
+            --head "$BRANCH" --base main --label "maint:green" \
+            --title "chore(telemetry): daily cloud telemetry pull $(date -u +%Y-%m-%d)" \
+            --body "Automated daily export of cloud usage/gap/feedback events from Firestore into git jsonl (+ score recalibration in the same commit so CI's idempotency gate passes). Rides auto-merge via maint:green."

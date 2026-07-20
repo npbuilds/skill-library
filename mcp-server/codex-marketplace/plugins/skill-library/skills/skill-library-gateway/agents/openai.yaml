@@ -1,0 +1,13 @@
+interface:
+  display_name: "Skill Library Gateway"
+  short_description: "Use the shared Claude and Codex skill library"
+  default_prompt: "Use $skill-library-gateway to find and apply the best library skill for this task."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "skill-library"
+      description: "Restricted content access to the canonical shared skill library"
+      transport: "streamable_http"
+      url: "https://skill-library-mcp-ifvybw46na-uc.a.run.app/mcp"
+policy:
+  allow_implicit_invocation: true
