@@ -3929,8 +3929,8 @@
       "health_status": "warning",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 63,
-      "composite_score": 63,
+      "auto_score": 62,
+      "composite_score": 62,
       "depends_on": [
         "signaling-screening"
       ],
