@@ -262,6 +262,8 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     # Regional-atlas children
     "mediterranean-and-near-east":       ["regional-atlas"],
     "east-asia":                         ["regional-atlas"],
+    "south-asia":                        ["regional-atlas"],
+    "southeast-asia":                    ["regional-atlas"],
     "sub-saharan-africa":                ["regional-atlas"],
     "americas-and-oceania":              ["regional-atlas"],
 
