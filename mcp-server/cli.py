@@ -141,11 +141,17 @@ def _show_summary(usage, feedback, gaps):
         click.echo("\n  GAPS")
         click.echo("  ────")
         gap_counts: dict[str, int] = {}
+        redacted_count = 0
         for e in gaps:
-            q = e.get("query", "?")
-            gap_counts[q] = gap_counts.get(q, 0) + 1
+            q = e.get("query")
+            if q:
+                gap_counts[q] = gap_counts.get(q, 0) + 1
+            else:
+                redacted_count += 1
         for q, count in sorted(gap_counts.items(), key=lambda x: x[1], reverse=True)[:5]:
             click.echo(f"  \"{q}\" — {count}x")
+        if redacted_count:
+            click.echo(f"  [redacted remote queries] — {redacted_count}x")
 
     click.echo()
 
@@ -202,8 +208,15 @@ def gaps():
         return
 
     gap_counts: dict[str, dict] = {}
+    redacted = {"count": 0, "zero_results": 0, "last": ""}
     for e in gap_events:
-        q = e.get("query", "?")
+        q = e.get("query")
+        if not q:
+            redacted["count"] += 1
+            if e.get("result_count", 0) == 0:
+                redacted["zero_results"] += 1
+            redacted["last"] = e.get("timestamp", "?")[:10]
+            continue
         if q not in gap_counts:
             gap_counts[q] = {"count": 0, "zero_results": 0, "last": ""}
         gap_counts[q]["count"] += 1
@@ -211,11 +224,21 @@ def gaps():
             gap_counts[q]["zero_results"] += 1
         gap_counts[q]["last"] = e.get("timestamp", "?")[:10]
 
-    click.echo(f"\n  SEARCH GAPS ({len(gap_counts)} unique queries)\n")
+    summary = f"{len(gap_counts)} named queries"
+    if redacted["count"]:
+        summary += f", {redacted['count']} redacted events"
+    click.echo(f"\n  SEARCH GAPS ({summary})\n")
     for q, info in sorted(gap_counts.items(), key=lambda x: x[1]["count"], reverse=True):
         zero_pct = (info["zero_results"] / info["count"]) * 100
         click.echo(f"  \"{q}\"")
         click.echo(f"    searched {info['count']}x  |  {zero_pct:.0f}% found nothing  |  last: {info['last']}")
+    if redacted["count"]:
+        zero_pct = (redacted["zero_results"] / redacted["count"]) * 100
+        click.echo("  [redacted remote queries]")
+        click.echo(
+            f"    searched {redacted['count']}x  |  "
+            f"{zero_pct:.0f}% found nothing  |  last: {redacted['last']}"
+        )
     click.echo()
 
 
