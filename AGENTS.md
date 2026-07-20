@@ -65,10 +65,22 @@ exports/            # Obsidian vault exports
 
 ## Data Flow
 
+Git is the single source of truth. Merge to main (CI green) fans out automatically:
+
 ```
-Local:   data/registry.json ──→ scripts/migrate_to_firestore.py ──→ Firestore
-Live:    MCP server tools ──→ Firestore collections ──→ app/index.html (real-time)
+Merge to main (CI green)
+  ├─ deploy.yml         → Cloud Run image (registry + skills + search index baked in)
+  ├─ sync-firestore.yml → Firestore skills/meta/changelogs (dashboard)
+  └─ (daily) daily-firestore.yml → evolution snapshot + health
+                                 + telemetry pull → maint:green bot PR
+
+Cloud MCP server: read-only tools + record_skill_feedback; usage/gap/feedback
+telemetry → Firestore (durable; local jsonl is ephemeral on Cloud Run).
+Structural writes: local stdio tools or /maint bot PRs only.
 Desktop: Neural Observatory.webloc ──→ https://skill-library-prod.web.app
+
+INVARIANT: merge to main converges all consumers within minutes; divergence is
+detected daily (meta/registry.synced_sha check) and alerted, never silent.
 ```
 
 ## Conventions
@@ -77,7 +89,8 @@ Desktop: Neural Observatory.webloc ──→ https://skill-library-prod.web.app
 - Registry is the source of truth for skill metadata: `data/registry.json`
 - Scripts that modify registry should go through `scripts/sync-registry.py`
 - The MCP server (`mcp-server/server.py`) exposes skill library tools to Codex
-- After adding skills locally, run `python3 scripts/migrate_to_firestore.py` to sync to Firestore
+- Firestore sync is owned by CI (`sync-firestore.yml` on merge). Manual
+  `python3 scripts/migrate_to_firestore.py` runs are backfill/recovery only
 - Deploy app changes: `cd app && npx firebase-tools deploy --only hosting`
 
 ## Auto-Trigger Skills

@@ -1,0 +1,36 @@
+{
+  "name": "skill-library",
+  "version": "0.1.0+codex.local-20260719-232435-260980",
+  "description": "Search and apply a shared, Git-backed library of Claude-authored skills from Codex through a thin compatibility gateway.",
+  "author": {
+    "name": "Nirav"
+  },
+  "homepage": "https://skill-library-prod.web.app",
+  "repository": "https://github.com/npbuilds/skill-library",
+  "keywords": [
+    "skills",
+    "skill-library",
+    "claude",
+    "codex",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Skill Library",
+    "shortDescription": "Use the shared Claude and Codex skill library",
+    "longDescription": "Find and apply the best methodology from the canonical skill library without copying or rewriting its Claude-authored SKILL.md files. A Codex gateway adapts tool names and runtime-specific instructions while the restricted MCP surface supplies current skill content and privacy-safe telemetry.",
+    "developerName": "Nirav",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://skill-library-prod.web.app",
+    "defaultPrompt": [
+      "Find and use the best library skill for this task",
+      "Show me the skills relevant to this problem",
+      "Use a named skill from my shared library"
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

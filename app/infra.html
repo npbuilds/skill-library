@@ -1335,7 +1335,10 @@ IO.changelog = {
 
     // Gap events
     for (const e of IO.data.gaps) {
-      entries.push({ type: 'gap', skill: '', date: e.timestamp || '', text: 'Search gap: "' + (e.query || '') + '"', icon: '\uD83D\uDD0D' });
+      const gapText = e.query
+        ? 'Search gap: "' + e.query + '"'
+        : 'Redacted search gap — ' + (e.result_count ?? 0) + ' result(s)';
+      entries.push({ type: 'gap', skill: '', date: e.timestamp || '', text: gapText, icon: '\uD83D\uDD0D' });
     }
 
     // Recent evolution events \u2014 one per snapshot day; count is pre-aggregated
