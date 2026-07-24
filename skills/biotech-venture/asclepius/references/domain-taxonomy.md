@@ -5,6 +5,18 @@
 ```
 asclepius (orchestrator) — God of Medicine
 |
++-- frontier-intelligence (director) — Frontier Discovery: radar [upstream of diligence]
+|   +-- signal-scanner (action) — Second-derivative signal detection across sources
+|   +-- mindshare-tracker (action) — Weighted attention/mindshare scoring
+|   +-- data-generation-monitor (action) — Data-engine velocity monitoring
+|   +-- emerging-target-radar (action) — Target×modality watchlist integration
+|
++-- modality-trajectory (director) — Frontier Discovery: trajectory [upstream of diligence]
+|   +-- modality-lifecycle (knowledge) — Modality maturity S-curve placement
+|   +-- moa-analog-engine (action) — Historical MOA-arc analog matching
+|   +-- target-validation-ladder (action) — Genetic/biological validation grading
+|   +-- frontier-conviction-scorer (action) — Discovery-stage conviction score
+|
 +-- clinical-development (director)
 |   +-- endpoint-selection (knowledge) — FDA/EMA endpoint acceptance by TA
 |   +-- trial-design-optimizer (action) — Protocol design with adaptive/synthetic controls
@@ -48,11 +60,13 @@ asclepius (orchestrator) — God of Medicine
 
 | Type | Count | Percentage |
 |---|---|---|
-| Orchestrator | 1 | 3% |
-| Director | 7 | 22% |
-| Knowledge | 7 | 22% |
-| Action | 17 | 53% |
-| **Total** | **32** | 100% |
+| Orchestrator | 1 | 2% |
+| Director | 9 | 21% |
+| Knowledge | 8 | 19% |
+| Action | 24 | 57% |
+| **Total** | **42** | 100% |
+
+> Registry note: `data/registry.json` types every non-director/orchestrator skill flatly as `knowledge` (32 knowledge / 9 director / 1 orchestrator). The Knowledge-vs-Action split above is a finer *descriptive* classification used in this taxonomy only.
 
 ## Innovation Features (Unique to Asclepius)
 
@@ -64,3 +78,5 @@ asclepius (orchestrator) — God of Medicine
 6. **Game-Theoretic Dynamics** — Competitive modeling using mechanism-design (market-dynamics)
 7. **Second-Level Clinical Thinking** — Contrarian analysis of consensus data (clinical-differentiator)
 8. **Digital Biomarkers** — Wearable/sensor endpoint feasibility (biomarker-enrichment)
+9. **Historical MOA Trajectory** — Placing a target×modality on the target-ID → tool → first-in-human → first-approval → class-explosion arc (moa-analog-engine)
+10. **Genetics-Calibrated Target Validation** — MR/allelic-series evidence ladder with ~2.6× success-rate calibration (target-validation-ladder)

@@ -18,6 +18,8 @@ allowed-tools: Read, WebSearch, WebFetch
 
 Individual deal quality is necessary but not sufficient for fund returns. A portfolio of individually strong biotech investments can still produce poor fund-level returns if the assets are correlated (all in the same therapeutic area, same phase, same mechanism class), under-reserved (insufficient capital for follow-on), or poorly timed (vintage concentration). This skill analyzes biotech venture portfolios at the fund level, evaluating concentration, correlation, expected value, and construction.
 
+> **Fund-construction benchmarks:** MOIC/PoS thresholds, HHI bands, correlation-by-risk-source, phase-mix, and reserve ratios are in `references/portfolio-construction-benchmarks.md` (LOA base rates live in pos-base-rates' `transition-probability-tables.md`).
+
 ## How to Run
 
 ### Input

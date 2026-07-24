@@ -4,6 +4,8 @@
 
 | Question Signal | Primary Director | Supporting Directors |
 |---|---|---|
+| "emerging target", "frontier", "what should I track", "mindshare", "signal", "data-generation velocity", "watchlist", "pre-clinical scouting" | frontier-intelligence | modality-trajectory |
+| "MOA arc", "modality maturity", "S-curve", "analog", "target validation", "Mendelian randomization", "genetic evidence", "conviction score", "position on arc" | modality-trajectory | frontier-intelligence, probability-of-success |
 | "trial design", "endpoint", "sample size", "biomarker", "patient population", "adaptive", "protocol" | clinical-development | probability-of-success |
 | "probability of success", "PoS", "likelihood of approval", "LOA", "attrition", "base rate", "mechanism risk" | probability-of-success | clinical-development |
 | "rNPV", "valuation", "peak sales", "discount rate", "NPV", "deal terms", "royalty", "milestone", "cost" | asset-valuation | probability-of-success |
@@ -17,6 +19,12 @@
 When deal-synthesis is the primary director (full asset evaluation), apply this sequencing:
 
 ```
+Step 0 (pre-clinical / "what should I track?" only):
+  frontier-intelligence (radar) -> modality-trajectory (place on MOA arc,
+  grade target validation, discovery-stage conviction score)
+  Upstream of the loop; hands off to Step 1 once a clinical program exists.
+    |
+    v
 Step 1: clinical-development (establish trial/endpoint/population)
     |
     v

@@ -152,6 +152,8 @@ Scale-Up Risk:
 
 #### Step 4 — COGS Trajectory Modeling
 
+> **Pull COGS baselines from `modality-manufacturing/references/modality-cogs-profiles.md`** (the single source) rather than re-embedding them here — then layer the FMEA occurrence/scalability adjustments on top. Respect its provenance tags: most per-modality COGS are internal estimates, not sourced benchmarks.
+
 Project cost-of-goods from current state through commercial maturity:
 
 | Phase | COGS/Dose Estimate | Key Driver |

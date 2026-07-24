@@ -24,6 +24,8 @@ The core principle: **the platform fix, not new biology, is what converts a stal
 
 This skill is dual-use by design. For a clinician-scientist it is a map of where each modality actually stands and what unlocks the next tissue. For an investor it supplies the **P(modality deliverable)** term that the conviction scorer multiplies against P(biology holds), arc-position, and competitive timing — the discipline that stops a great target from being funded inside an undeliverable modality.
 
+> **Maturity map:** the per-modality S-curve placement, delivery-wall lookup, and platform-fix registry are versioned in `references/modality-maturity-map.md` (a 2026 point-in-time snapshot — the most perishable data in the pillar).
+
 ## How to Run
 
 ### Input

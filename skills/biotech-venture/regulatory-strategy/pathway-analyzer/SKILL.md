@@ -20,6 +20,8 @@ The difference between a standard and an expedited regulatory pathway is not jus
 
 This skill goes beyond listing pathway options. It applies the physician-scientist's clinical judgment to assess realistic eligibility, predict FDA behavior based on precedent, and quantify the financial impact of each pathway on the asset's value.
 
+> **Designation eligibility & grant rates:** the FDA + EMA eligibility-criteria matrix and consolidated grant/conversion stats are in `references/designation-eligibility-and-grant-rates.md` (which points to regulatory-precedent's `approval-precedent-database.md` for BTD-by-TA detail).
+
 ## FDA Expedited Pathway Decision Tree
 
 ### Step 1: Serious or Life-Threatening Condition?

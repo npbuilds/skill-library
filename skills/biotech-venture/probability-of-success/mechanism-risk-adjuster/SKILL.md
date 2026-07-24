@@ -34,6 +34,8 @@ The critical innovation here is combining genetic epidemiology (MR evidence), co
 
 ### Steps
 
+> **Genetic-evidence corpus:** For sourced per-target genetic validation (evidence tier, effect direction, drug outcome) and the ~2×/2.6× success-multiplier calibration, use the shared `modality-trajectory/target-validation-ladder/references/validated-target-library.md` — reference it rather than duplicating rows. The MR-quality checklist and adjustment ladder live in `pos-calculator/references/adjustment-factor-catalog.md`.
+
 #### Step 1 — Score Target Validation Depth
 
 Assign the target a tier on the validation ladder. Each tier carries a different base adjustment:
