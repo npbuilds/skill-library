@@ -200,7 +200,7 @@ Monte Carlo (if run):
 
 | Scenario | Response |
 |---|---|
-| No peak sales estimate available | Use therapeutic area benchmarks from peak-sales-forecaster reference tables |
+| No peak sales estimate available | Use therapeutic-area benchmarks from `peak-sales-forecaster/references/launch-analog-benchmarks.md` |
 | No PoS available | Use base rates from pos-base-rates; flag as "unajusted base rate — high uncertainty" |
 | Discount rate uncertainty | Present at 3 rates: 8%, 12%, 15% to bracket range |
 | Multiple indications | Calculate rNPV per indication; sum for total pipeline value |

@@ -22,6 +22,8 @@ The physician-scientist in venture must understand enough about manufacturing to
 
 ## Modality Manufacturing Profiles
 
+> **COGS data:** The authoritative, provenance-tagged cross-modality COGS/margin/capex table (incl. autologous cell therapy and the few externally-verified anchors) lives in `references/modality-cogs-profiles.md`. Primary COGS data is scarce — most figures are internal estimates; the reference doc tags each by confidence and lists refuted "lore" (titer ladder, CAR-T parallelization). Use it as the single source; `cmc-risk-assessor` delegates to it too.
+
 ### Small Molecule
 
 | Parameter | Typical Range | Notes |

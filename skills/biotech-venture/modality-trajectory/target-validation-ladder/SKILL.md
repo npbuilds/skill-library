@@ -39,6 +39,8 @@ This skill turns that into a gradeable rubric. It is the **earliest-stage** vali
 
 ### Steps
 
+> **Grading corpus:** Grade a candidate by its nearest analog in `references/validated-target-library.md` — 9+ primary-sourced targets (PCSK9, HMGCR, NPC1L1, ASGR1, Lp(a), TYK2, TL1A, TREM2, LRRK2…) with evidence type, effect direction, drug outcome, and tier, plus the ladder-calibration multipliers (Nelson 2× → Minikel 2.6×, OMIM RS 3.7, Open Targets dose-response) and a genetics-vs-clinical divergence watch.
+
 #### Step 1 — Pull the genetics-only association and the pre-computed rank
 
 Establish the prior before grading by hand:

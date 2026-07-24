@@ -5,6 +5,8 @@
 
 | Pillar | Director | Key Skills |
 |--------|----------|------------|
+| Frontier Discovery — radar | frontier-intelligence | signal-scanner, mindshare-tracker, data-generation-monitor, emerging-target-radar |
+| Frontier Discovery — trajectory | modality-trajectory | modality-lifecycle, moa-analog-engine, target-validation-ladder, frontier-conviction-scorer |
 | Clinical Development | clinical-development | trial-design-optimizer, endpoint-selection, biomarker-enrichment, patient-population-sizer |
 | Probability of Success | probability-of-success | pos-calculator, pos-base-rates, mechanism-risk-adjuster |
 | Asset Valuation | asset-valuation | rnpv-modeler, peak-sales-forecaster, cost-estimator, deal-economics |

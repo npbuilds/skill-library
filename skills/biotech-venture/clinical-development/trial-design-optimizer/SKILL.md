@@ -18,6 +18,8 @@ allowed-tools: Read, WebSearch, WebFetch
 
 Trial design is where clinical development budgets are won or lost. A well-designed Phase 2 with an adaptive enrichment strategy can deliver the same signal as a conventional Phase 3 at one-third the cost. A poorly designed pivotal trial burns $150-300M and 3-4 years before delivering an uninterpretable result. The physician-scientist's edge in venture is recognizing design flaws that financial analysts cannot see: an inadequate run-in period, a composite endpoint that dilutes signal, a control arm that will be obsolete by readout.
 
+> **Trial-cost benchmarks:** for per-phase / per-patient trial cost and SCA/platform savings, use cost-estimator's `references/development-cost-benchmarks.md` rather than a separate table here.
+
 ## ICH E9 R1 Estimand Framework
 
 Every modern trial design begins with the estimand — the precise question the trial is designed to answer. ICH E9 R1 (2019) formalized this into five attributes that must be specified before choosing a statistical method:

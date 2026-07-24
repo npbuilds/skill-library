@@ -24,6 +24,8 @@ The core insight this skill encodes: **a new data-engine release is not "more da
 
 The discipline cuts both ways. The same release can be inflated by platform noise (Olink Explore HT median CV ~35.7% vs SomaScan 11k ~6.8% — platform choice changes which targets even get nominated) and by AI-discovery hype (AI compresses *design*, not Phase 2/3 biology). This skill nominates targets *and* applies the haircuts that separate a durable convergence from an artifact.
 
+> **Data-engine catalog:** the source/feed catalog (UKB-PPP, deCODE, DepMap, FinnGen, …) with scales and versions is in `references/data-engine-catalog.md`, versioned separately so dataset releases (FinnGen R-series, UKB-PPP phases) track cleanly.
+
 ## How to Run
 
 ### Input

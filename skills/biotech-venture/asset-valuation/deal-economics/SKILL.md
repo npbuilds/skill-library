@@ -20,6 +20,8 @@ The biotech deal market has undergone a structural shift in 2024-2025: upfronts 
 
 ## Core Frameworks
 
+> **Comparables data:** For sourced, vintage-tagged royalty/upfront/milestone splits, modality deal cuts, M&A benchmarks, and named 2023–2024 transactions, use `references/deal-comps-benchmarks.md`. These numbers stale within 6–12 months — re-pull from primary sources before a live memo.
+
 ### Framework 1 — Licensing Deal Structure
 
 A biotech licensing deal has four economic components, each serving a different function:

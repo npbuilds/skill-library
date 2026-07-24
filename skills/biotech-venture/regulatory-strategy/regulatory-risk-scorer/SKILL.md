@@ -20,6 +20,8 @@ Regulatory risk is the most frequently underestimated variable in biotech ventur
 
 This skill provides a structured, six-dimension scoring framework that translates qualitative clinical-regulatory judgment into a quantitative risk profile. Each dimension is scored 1-5, weighted by its empirical contribution to approval outcomes, and aggregated into an overall risk rating.
 
+> **Scoring calibration:** the 1–5 anchor definitions, dimension weights, and aggregate-score → regulatory-PoS mapping are in `references/scoring-calibration.md` — an internal expert-judgment rubric (flagged as such), not an empirically-fitted model.
+
 ## The Six Dimensions of Regulatory Risk
 
 ### Dimension 1: Endpoint Validation Strength (Weight: 25%)

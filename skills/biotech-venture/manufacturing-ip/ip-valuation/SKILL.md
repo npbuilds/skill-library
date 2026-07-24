@@ -18,6 +18,8 @@ allowed-tools: Read, WebSearch, WebFetch
 
 IP valuation bridges the gap between legal analysis ("the patent expires in 2034") and financial analysis ("the patent is worth $400M"). For biotech venture investors, IP value manifests in two ways: the duration and magnitude of premium-priced revenue before generic/biosimilar erosion, and the licensing economics when IP is transacted between parties. This skill provides the frameworks for both.
 
+> **Royalty & IP-value benchmarks:** royalty-rate-by-patent-type, adjustment factors, and the relief-from-royalty formulas are in `references/ip-value-benchmarks.md` (internal estimates — cross-check against deal-economics' externally-sourced `deal-comps-benchmarks.md`).
+
 ## Three Approaches to IP Valuation
 
 ### Approach 1 — Cost Approach

@@ -18,6 +18,8 @@ Peak sales is the single most influential variable in biotech valuation. A 2x di
 
 The fundamental equation is deceptively simple: **Revenue = Patients x Share x Price x Compliance**. The complexity lives in forecasting each variable over time and across geographies.
 
+> **Uptake & peak-sales data:** launch-curve archetypes, pricing-by-category, compliance rates, and verified peak-sales analogs (Keytruda, Humira) live in `references/launch-analog-benchmarks.md`; the erosion tail is in market-dynamics' `launch-and-erosion-benchmarks.md`.
+
 ## How to Run
 
 ### Input

@@ -24,6 +24,8 @@ This skill is the **integrator**. It does not generate raw velocity, attention, 
 
 The core discipline is anti-hype. Mindshare is reflexive — capital manufactures the attention it claims to detect — so a candidate's rank is a *positioning/timing* instrument, never a measure of biological merit. Every velocity signal must be gated by an evidence-maturity check and normalized against the financing regime (Q1 2025 was the lowest US biotech startup formation in a decade, ~70% off the 2021 peak, so a single NewCo means more in 2025 than it did in 2021).
 
+> **Watchlist:** the dated target×modality candidate roster is versioned separately in `references/watchlist.md` (a point-in-time snapshot to refresh on cadence); the scoring method stays here.
+
 ## How to Run
 
 ### Input

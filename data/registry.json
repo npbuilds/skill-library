@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-20T13:09:17Z",
+  "last_scan": "2026-07-24T03:02:50Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2748,10 +2748,10 @@
       "health_status": "warning",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 79,
       "depends_on": [
         "worldbuilding-orchestrator"
       ],
@@ -5529,8 +5529,8 @@
         "estimated_tokens_body": 1529,
         "estimated_tokens_total": 1593
       },
-      "auto_score": 69,
-      "composite_score": 69,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "design-principles",
         "syntax-patterns",
@@ -6645,8 +6645,8 @@
         "estimated_tokens_body": 3369,
         "estimated_tokens_total": 3438
       },
-      "auto_score": 69,
-      "composite_score": 69,
+      "auto_score": 68,
+      "composite_score": 68,
       "referenced_by": [
         "brand-voice",
         "prose-writer",
@@ -14765,8 +14765,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1530,
-        "body_words": 1467,
+        "word_count": 1566,
+        "body_words": 1503,
         "description_words": 41,
         "section_count": 3,
         "reference_files": 1,
@@ -14774,8 +14774,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 54,
-        "estimated_tokens_body": 2493,
-        "estimated_tokens_total": 2547
+        "estimated_tokens_body": 2572,
+        "estimated_tokens_total": 2626
       },
       "health_status": "warning",
       "issues": [],
@@ -14784,10 +14784,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 56,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 56,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -14799,7 +14799,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -14988,17 +14988,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1684,
-        "body_words": 1625,
+        "word_count": 1725,
+        "body_words": 1666,
         "description_words": 39,
         "section_count": 2,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 51,
-        "estimated_tokens_body": 2793,
-        "estimated_tokens_total": 2844
+        "estimated_tokens_body": 2881,
+        "estimated_tokens_total": 2932
       },
       "health_status": "warning",
       "issues": [],
@@ -15007,10 +15007,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15022,7 +15022,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -15043,17 +15043,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1702,
-        "body_words": 1653,
+        "word_count": 1736,
+        "body_words": 1687,
         "description_words": 29,
         "section_count": 3,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 38,
-        "estimated_tokens_body": 2811,
-        "estimated_tokens_total": 2849
+        "estimated_tokens_body": 2885,
+        "estimated_tokens_total": 2923
       },
       "health_status": "warning",
       "issues": [],
@@ -15062,10 +15062,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15077,7 +15077,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -15840,17 +15840,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1596,
-        "body_words": 1521,
+        "word_count": 1619,
+        "body_words": 1544,
         "description_words": 53,
         "section_count": 6,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 69,
-        "estimated_tokens_body": 2605,
-        "estimated_tokens_total": 2674
+        "estimated_tokens_body": 2674,
+        "estimated_tokens_total": 2743
       },
       "health_status": "warning",
       "issues": [],
@@ -15859,10 +15859,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 56,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 56,
+      "composite_score": 65,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15874,7 +15874,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16009,17 +16009,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1650,
-        "body_words": 1565,
+        "word_count": 1696,
+        "body_words": 1611,
         "description_words": 50,
         "section_count": 8,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 65,
-        "estimated_tokens_body": 2959,
-        "estimated_tokens_total": 3024
+        "estimated_tokens_body": 3064,
+        "estimated_tokens_total": 3129
       },
       "health_status": "warning",
       "issues": [],
@@ -16028,10 +16028,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 56,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 56,
+      "composite_score": 65,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16043,7 +16043,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16064,8 +16064,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1519,
-        "body_words": 1467,
+        "word_count": 1558,
+        "body_words": 1506,
         "description_words": 32,
         "section_count": 2,
         "reference_files": 1,
@@ -16073,8 +16073,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 42,
-        "estimated_tokens_body": 2545,
-        "estimated_tokens_total": 2587
+        "estimated_tokens_body": 2653,
+        "estimated_tokens_total": 2695
       },
       "health_status": "warning",
       "issues": [],
@@ -16083,10 +16083,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "frontier-conviction-scorer",
@@ -16103,7 +16103,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16124,17 +16124,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1894,
-        "body_words": 1830,
+        "word_count": 1952,
+        "body_words": 1888,
         "description_words": 42,
         "section_count": 5,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 55,
-        "estimated_tokens_body": 3119,
-        "estimated_tokens_total": 3174
+        "estimated_tokens_body": 3234,
+        "estimated_tokens_total": 3289
       },
       "health_status": "warning",
       "issues": [],
@@ -16143,10 +16143,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
         "modality-lifecycle",
@@ -16161,7 +16161,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16294,17 +16294,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1723,
-        "body_words": 1654,
+        "word_count": 1747,
+        "body_words": 1678,
         "description_words": 47,
         "section_count": 3,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 62,
-        "estimated_tokens_body": 2802,
-        "estimated_tokens_total": 2864
+        "estimated_tokens_body": 2863,
+        "estimated_tokens_total": 2925
       },
       "health_status": "warning",
       "issues": [],
@@ -16313,10 +16313,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16328,7 +16328,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16349,17 +16349,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1533,
-        "body_words": 1465,
+        "word_count": 1560,
+        "body_words": 1492,
         "description_words": 46,
         "section_count": 6,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 60,
-        "estimated_tokens_body": 2638,
-        "estimated_tokens_total": 2698
+        "estimated_tokens_body": 2710,
+        "estimated_tokens_total": 2770
       },
       "health_status": "warning",
       "issues": [],
@@ -16368,10 +16368,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 56,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 56,
+      "composite_score": 65,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16383,7 +16383,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16404,17 +16404,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1462,
-        "body_words": 1411,
+        "word_count": 1506,
+        "body_words": 1455,
         "description_words": 31,
         "section_count": 2,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 41,
-        "estimated_tokens_body": 2434,
-        "estimated_tokens_total": 2475
+        "estimated_tokens_body": 2532,
+        "estimated_tokens_total": 2573
       },
       "health_status": "warning",
       "issues": [],
@@ -16423,10 +16423,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16438,7 +16438,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16514,17 +16514,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1397,
-        "body_words": 1343,
+        "word_count": 1423,
+        "body_words": 1369,
         "description_words": 34,
         "section_count": 2,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 45,
-        "estimated_tokens_body": 2305,
-        "estimated_tokens_total": 2350
+        "estimated_tokens_body": 2373,
+        "estimated_tokens_total": 2418
       },
       "health_status": "warning",
       "issues": [],
@@ -16533,10 +16533,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 58,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 58,
+      "composite_score": 67,
       "depends_on": [],
       "referenced_by": [
         "rnpv-modeler"
@@ -16550,7 +16550,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -16630,17 +16630,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1733,
-        "body_words": 1658,
+        "word_count": 1755,
+        "body_words": 1680,
         "description_words": 53,
         "section_count": 3,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 69,
-        "estimated_tokens_body": 2844,
-        "estimated_tokens_total": 2913
+        "estimated_tokens_body": 2909,
+        "estimated_tokens_total": 2978
       },
       "health_status": "warning",
       "issues": [],
@@ -16649,10 +16649,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 54,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 54,
+      "composite_score": 63,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16664,7 +16664,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -17145,17 +17145,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1733,
-        "body_words": 1663,
+        "word_count": 1762,
+        "body_words": 1692,
         "description_words": 48,
         "section_count": 5,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 63,
-        "estimated_tokens_body": 2907,
-        "estimated_tokens_total": 2970
+        "estimated_tokens_body": 2971,
+        "estimated_tokens_total": 3034
       },
       "health_status": "warning",
       "issues": [],
@@ -17164,10 +17164,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 56,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 56,
+      "composite_score": 65,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -17179,7 +17179,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -17262,8 +17262,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1357,
-        "body_words": 1282,
+        "word_count": 1354,
+        "body_words": 1279,
         "description_words": 41,
         "section_count": 3,
         "reference_files": 2,
@@ -17271,8 +17271,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 54,
-        "estimated_tokens_body": 2194,
-        "estimated_tokens_total": 2248
+        "estimated_tokens_body": 2200,
+        "estimated_tokens_total": 2254
       },
       "health_status": "warning",
       "issues": [],
@@ -17281,10 +17281,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 77,
       "depends_on": [
         "peak-sales-forecaster",
         "probability-of-success"
@@ -17302,7 +17302,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -17749,8 +17749,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1447,
-        "body_words": 1373,
+        "word_count": 1468,
+        "body_words": 1394,
         "description_words": 52,
         "section_count": 7,
         "reference_files": 1,
@@ -17758,8 +17758,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 68,
-        "estimated_tokens_body": 2505,
-        "estimated_tokens_total": 2573
+        "estimated_tokens_body": 2553,
+        "estimated_tokens_total": 2621
       },
       "health_status": "warning",
       "issues": [],
@@ -17768,10 +17768,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 56,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 56,
+      "composite_score": 65,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -17783,7 +17783,7 @@
         "layer:knowledge"
       ],
       "created": "2026-04-14",
-      "last_modified": "2026-04-19",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-04-14",
@@ -25779,17 +25779,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2305,
-        "body_words": 2206,
+        "word_count": 2334,
+        "body_words": 2235,
         "description_words": 77,
         "section_count": 3,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 101,
-        "estimated_tokens_body": 4043,
-        "estimated_tokens_total": 4144
+        "estimated_tokens_body": 4106,
+        "estimated_tokens_total": 4207
       },
       "health_status": "warning",
       "issues": [],
@@ -25798,10 +25798,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 65,
       "depends_on": [
         "statistical-analysis"
       ],
@@ -25817,7 +25817,7 @@
         "layer:knowledge"
       ],
       "created": "2026-06-06",
-      "last_modified": "2026-06-06",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-06-06",
@@ -25838,17 +25838,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1954,
-        "body_words": 1862,
+        "word_count": 1978,
+        "body_words": 1886,
         "description_words": 70,
         "section_count": 3,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 91,
-        "estimated_tokens_body": 3474,
-        "estimated_tokens_total": 3565
+        "estimated_tokens_body": 3523,
+        "estimated_tokens_total": 3614
       },
       "health_status": "warning",
       "issues": [],
@@ -25857,10 +25857,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 74,
       "depends_on": [
         "data-generation-monitor",
         "foresight",
@@ -25879,7 +25879,7 @@
         "layer:knowledge"
       ],
       "created": "2026-06-06",
-      "last_modified": "2026-06-06",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-06-06",
@@ -26150,17 +26150,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1755,
-        "body_words": 1646,
+        "word_count": 1783,
+        "body_words": 1674,
         "description_words": 89,
         "section_count": 3,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 116,
-        "estimated_tokens_body": 2949,
-        "estimated_tokens_total": 3065
+        "estimated_tokens_body": 3008,
+        "estimated_tokens_total": 3124
       },
       "health_status": "warning",
       "issues": [],
@@ -26169,10 +26169,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 70,
       "depends_on": [
         "mechanism-risk-adjuster",
         "modality-manufacturing"
@@ -26189,7 +26189,7 @@
         "layer:knowledge"
       ],
       "created": "2026-06-06",
-      "last_modified": "2026-06-06",
+      "last_modified": "2026-07-24",
       "changelog": [
         {
           "date": "2026-06-06",
@@ -26337,17 +26337,17 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 2087,
-        "body_words": 1985,
+        "word_count": 2141,
+        "body_words": 2039,
         "description_words": 82,
         "section_count": 3,
-        "reference_files": 1,
+        "reference_files": 2,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 107,
-        "estimated_tokens_body": 3455,
-        "estimated_tokens_total": 3562
+        "estimated_tokens_body": 3561,
+        "estimated_tokens_total": 3668
       },
       "health_status": "warning",
       "issues": [],
@@ -26356,10 +26356,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 59,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 59,
+      "composite_score": 65,
       "depends_on": [
         "mechanism-risk-adjuster"
       ],
@@ -26375,7 +26375,7 @@
         "layer:knowledge"
       ],
       "created": "2026-06-06",
-      "last_modified": "2026-06-06",
+      "last_modified": "2026-07-21",
       "changelog": [
         {
           "date": "2026-06-06",

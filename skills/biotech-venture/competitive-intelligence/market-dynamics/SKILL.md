@@ -147,6 +147,8 @@ Payer behavior determines realized revenue, not just prescriptions written. Mode
 
 ## Biosimilar Erosion Patterns
 
+> **Erosion & launch data:** For sourced, vintage-tagged benchmarks — order-of-entry share decay (Porath 33→19→13→6), generic erosion curves (IQVIA/FDA), biosimilar volume-vs-net-price divergence (Humira), gross-to-net dynamics, and named peak-sales analogs — use `references/launch-and-erosion-benchmarks.md`. It also lists refuted "lore" figures (e.g. the ">90% first-three-in-class" claim) not to reuse.
+
 Post-LOE dynamics differ fundamentally by modality:
 
 **Small Molecule Generics:**
