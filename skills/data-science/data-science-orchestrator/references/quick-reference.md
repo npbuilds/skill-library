@@ -19,7 +19,7 @@
 | Data Wrangling | `skills/data-science/data-wrangling/SKILL.md` | Data cleaning, transformation, encoding, feature engineering |
 | Statistical Analysis | `skills/data-science/statistical-analysis/SKILL.md` | Hypothesis testing, causal inference, biostatistics, survival analysis |
 | Modeling | `skills/data-science/modeling/SKILL.md` | Prediction, forecasting, model selection, evaluation |
-| Visualization | (no director yet — route directly) | Chart selection, data communication |
+| Visualization | `skills/data-science/visualization/SKILL.md` | Chart selection, dashboards & rendering at scale, data storytelling |
 | ML Engineering | (no director yet — route directly) | Production monitoring, drift detection |
 | Frontier | (no director yet — route directly) | Fairness, bias, governance, responsible AI |
 
@@ -34,7 +34,9 @@
 | Biostatistics | `skills/data-science/statistical-analysis/biostatistics/SKILL.md` | Survival analysis, clinical trial design, diagnostic tests, epidemiological measures, meta-analysis, regulatory stats |
 | Model Evaluation | `skills/data-science/modeling/model-evaluation/SKILL.md` | Metrics, validation, model comparison, calibration, fairness |
 | Time Series | `skills/data-science/modeling/time-series/SKILL.md` | Temporal data, forecasting, seasonality, trend analysis |
-| Chart Selection | `skills/data-science/visualization/chart-selection/SKILL.md` | Choosing charts, design principles, accessibility |
+| Chart Selection | `skills/data-science/visualization/chart-selection/SKILL.md` | Choosing charts, design principles, accessibility (WCAG 2.2) |
+| Interactive Dashboards | `skills/data-science/visualization/interactive-dashboards/SKILL.md` | Rendering by data volume, 2026 framework choice, dashboards, streaming, embedded |
+| Data Storytelling | `skills/data-science/visualization/data-storytelling/SKILL.md` | Narrative structure, annotation-as-message, scrollytelling, pacing |
 | Drift Detection | `skills/data-science/ml-engineering/drift-detection/SKILL.md` | Production monitoring, drift types, retraining triggers |
 | Responsible AI | `skills/data-science/frontier/responsible-ai/SKILL.md` | Fairness metrics, bias, governance, model cards |
 
@@ -45,6 +47,6 @@
 | Data Wrangling | data-cleaning, feature-engineering | Data preparation, transformation, encoding |
 | Statistical Analysis | statistical-testing, causal-inference, biostatistics | Inference, hypothesis testing, treatment effects, survival analysis, clinical trials |
 | Modeling | model-evaluation, time-series | Prediction, forecasting, model selection |
-| Visualization | chart-selection | Data communication, chart design |
+| Visualization | chart-selection, interactive-dashboards, data-storytelling | Chart design, dashboards & rendering at scale, data storytelling |
 | ML Engineering | drift-detection | Production monitoring, model degradation |
 | Frontier | responsible-ai | Fairness, bias, governance, compliance |

@@ -85,17 +85,24 @@ Architectures (CNN, RNN, Transformer), transfer learning, fine-tuning, training 
 **NLP** (not yet built)
 Text preprocessing, embeddings, classification, NER, summarization, RAG patterns.
 
-### 4. Visualization (Communication)
+### 4. Visualization (Communication) — has a director as of 2026-07
+
+Director: `visualization` | Status: Active
 
 **Chart Selection**
-Message-first chart design, type selection, accessibility, anti-patterns.
+Message-first chart design, type selection, accessibility (WCAG 2.2, Wong palette), anti-patterns.
 Skill: `chart-selection` | Status: Active
 
-**Dashboard Design** (not yet built)
-Layout principles, metric selection, interactivity, real-time updates, stakeholder-driven design.
+**Interactive Dashboards**
+Rendering by data volume (SVG/Canvas/WebGL-WebGPU), 2026 framework selection (ECharts 6, Recharts/Visx/Nivo, deck.gl 9, Vega-Lite 6), linked views, progressive disclosure, streaming, embedded analytics.
+Skill: `interactive-dashboards` | Status: Active
 
-**Storytelling with Data** (not yet built)
-Narrative structure, annotation strategies, progressive disclosure, audience adaptation.
+**Data Storytelling**
+Narrative spine, annotation-as-message, guided reveal & pacing, scrollytelling (Scrollama), context adaptation.
+Skill: `data-storytelling` | Status: Active
+
+**Geospatial / Animation / Notebook-EDA visualization** (not yet built)
+Map-based encoding, transitions-as-explanation, notebook-native exploratory plots.
 
 ### 5. ML Engineering (Production)
 
