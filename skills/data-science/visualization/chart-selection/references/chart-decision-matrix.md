@@ -1,5 +1,9 @@
 # Chart Decision Matrix — Complete Reference
 
+> This matrix is the durable, principle layer (chart types, palettes, annotation, small multiples) and is
+> library-agnostic. For the fast-moving 2026 library/rendering layer see `library-landscape-2026.md`; for
+> accessibility standards (WCAG 2.2, Wong palette) see `accessibility-standards.md`.
+
 ## Full Chart Type Matrix
 
 The following table covers 24 chart types with detailed selection criteria. Use the message type and data characteristics to identify candidates, then check the constraints and limits columns to confirm suitability.
@@ -93,6 +97,7 @@ Use for: distinguishing discrete categories with no inherent order.
 
 | Palette | Max Distinct Categories | Notes |
 |---|---|---|
+| **Wong (Nature Methods)** | 8 | **Recommended default** — safe across protanopia/deuteranopia/tritanopia; hexes in `accessibility-standards.md` |
 | **ColorBrewer Set2** | 8 | Muted, colorblind-safe, professional |
 | **ColorBrewer Dark2** | 8 | Higher contrast, good for thin lines and small points |
 | **Tableau 10** | 10 | Widely recognized, good separation |

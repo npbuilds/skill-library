@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-24T03:02:50Z",
+  "last_scan": "2026-07-24T04:05:12Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -4177,8 +4177,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1574,
-        "body_words": 1490,
+        "word_count": 1623,
+        "body_words": 1539,
         "description_words": 61,
         "section_count": 4,
         "reference_files": 3,
@@ -4186,32 +4186,32 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 80,
-        "estimated_tokens_body": 2857,
-        "estimated_tokens_total": 2937
+        "estimated_tokens_body": 3002,
+        "estimated_tokens_total": 3082
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 83,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 83,
       "depends_on": [],
       "referenced_by": [
         "bacchus",
-        "chart-selection",
         "data-wrangling",
         "drift-detection",
         "modeling",
         "responsible-ai",
-        "statistical-analysis"
+        "statistical-analysis",
+        "visualization"
       ],
       "tags": [
         "domain:data-science",
         "level:orchestrator"
       ],
       "created": "2026-03-22",
-      "last_modified": "2026-03-28"
+      "last_modified": "2026-07-24"
     },
     "data-cleaning": {
       "name": "data-cleaning",
@@ -4511,30 +4511,33 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1923,
-        "body_words": 1870,
+        "word_count": 2320,
+        "body_words": 2267,
         "description_words": 37,
-        "section_count": 9,
-        "reference_files": 2,
+        "section_count": 10,
+        "reference_files": 4,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 49,
-        "estimated_tokens_body": 3060,
-        "estimated_tokens_total": 3109
+        "estimated_tokens_body": 3787,
+        "estimated_tokens_total": 3836
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 82,
       "depends_on": [
         "modeling",
         "statistical-analysis"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "data-storytelling",
+        "interactive-dashboards"
+      ],
       "tags": [
         "domain:data-science",
         "subdomain:visualization",
@@ -4542,8 +4545,8 @@
         "level:knowledge"
       ],
       "created": "2026-03-22",
-      "last_modified": "2026-03-28",
-      "parent": "data-science-orchestrator"
+      "last_modified": "2026-07-24",
+      "parent": "visualization"
     },
     "drift-detection": {
       "name": "drift-detection",
@@ -15007,10 +15010,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15062,10 +15065,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15859,10 +15862,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16028,10 +16031,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16143,10 +16146,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [
         "modality-lifecycle",
@@ -16313,10 +16316,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16368,10 +16371,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16423,10 +16426,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16533,10 +16536,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [
         "rnpv-modeler"
@@ -16649,10 +16652,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -17164,10 +17167,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 68,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -25798,10 +25801,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 68,
       "depends_on": [
         "statistical-analysis"
       ],
@@ -25857,10 +25860,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 77,
       "depends_on": [
         "data-generation-monitor",
         "foresight",
@@ -26169,10 +26172,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 73,
       "depends_on": [
         "mechanism-risk-adjuster",
         "modality-manufacturing"
@@ -26356,10 +26359,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 68,
       "depends_on": [
         "mechanism-risk-adjuster"
       ],
@@ -27212,13 +27215,11 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
-      "depends_on": [
-        "regional-atlas"
-      ],
+      "composite_score": 63,
+      "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -27269,13 +27270,11 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
-      "depends_on": [
-        "regional-atlas"
-      ],
+      "composite_score": 63,
+      "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -27295,6 +27294,183 @@
         }
       ],
       "parent": "regional-atlas"
+    },
+    "visualization": {
+      "name": "visualization",
+      "description": "Direct the visualization subdomain \u2014 route a data-communication need to the right specialist: single-chart messaging, at-scale or interactive dashboards, or narrative data storytelling. Use when the user needs to choose a chart, build a dashboard, render large data, or tell a story with data. Resolves conflicts between clarity, scale, and narrative.",
+      "location": "skills/data-science/visualization/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "director",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 891,
+        "body_words": 821,
+        "description_words": 51,
+        "section_count": 4,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 67,
+        "estimated_tokens_body": 1475,
+        "estimated_tokens_total": 1542
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-07-24T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 74,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 74,
+      "depends_on": [
+        "data-science-orchestrator"
+      ],
+      "referenced_by": [
+        "chart-selection",
+        "data-storytelling",
+        "interactive-dashboards"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:visualization",
+        "level:director"
+      ],
+      "created": "2026-07-24",
+      "last_modified": "2026-07-24",
+      "changelog": [
+        {
+          "date": "2026-07-24",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": null
+    },
+    "interactive-dashboards": {
+      "name": "interactive-dashboards",
+      "description": "Build interactive, at-scale, and real-time data visualizations. Reference when choosing a rendering technology by data volume (SVG vs Canvas vs WebGL/WebGPU), selecting a 2026 charting framework (ECharts, Recharts, Visx, Nivo, deck.gl, Vega-Lite, Plotly), designing dashboards with linked views and progressive disclosure, or handling streaming and embedded analytics.",
+      "location": "skills/data-science/visualization/interactive-dashboards/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1192,
+        "body_words": 1129,
+        "description_words": 47,
+        "section_count": 7,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 62,
+        "estimated_tokens_body": 1863,
+        "estimated_tokens_total": 1925
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-07-24T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 72,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 72,
+      "depends_on": [
+        "chart-selection"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:visualization",
+        "level:intermediate",
+        "level:knowledge"
+      ],
+      "created": "2026-07-24",
+      "last_modified": "2026-07-24",
+      "changelog": [
+        {
+          "date": "2026-07-24",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "visualization"
+    },
+    "data-storytelling": {
+      "name": "data-storytelling",
+      "description": "Design data narratives \u2014 sequence visualizations into a story that holds attention and lands a decision. Use when turning a set of charts into an argument, building a scrollytelling piece or data-driven report, pacing a guided reveal, choosing annotation-as-message, or adapting a narrative across dashboard, presentation, and report contexts.",
+      "location": "skills/data-science/visualization/data-storytelling/SKILL.md",
+      "plugin": "data-science",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1047,
+        "body_words": 982,
+        "description_words": 49,
+        "section_count": 7,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 64,
+        "estimated_tokens_body": 1549,
+        "estimated_tokens_total": 1613
+      },
+      "health_status": "warning",
+      "issues": [],
+      "last_checked": "2026-07-24T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 69,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 69,
+      "depends_on": [
+        "chart-selection"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:data-science",
+        "subdomain:visualization",
+        "level:advanced",
+        "level:knowledge"
+      ],
+      "created": "2026-07-24",
+      "last_modified": "2026-07-24",
+      "changelog": [
+        {
+          "date": "2026-07-24",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "visualization"
     }
   },
   "network": {
@@ -27442,15 +27618,18 @@
         "chart-selection",
         "data-cleaning",
         "data-science-orchestrator",
+        "data-storytelling",
         "data-wrangling",
         "drift-detection",
         "feature-engineering",
+        "interactive-dashboards",
         "model-evaluation",
         "modeling",
         "responsible-ai",
         "statistical-analysis",
         "statistical-testing",
-        "time-series"
+        "time-series",
+        "visualization"
       ],
       "design": [
         "aesthetic-identity",
