@@ -20,6 +20,8 @@ Patent protection determines how long a drug generates premium revenue before ge
 
 This skill provides the methodology for rigorous patent landscape analysis.
 
+> **LOE precedents & statutory clocks:** exclusivity terms, patent-life math, and verified generic/biosimilar erosion precedents are in `references/loe-precedents.md`; full erosion curves in market-dynamics' `launch-and-erosion-benchmarks.md`.
+
 ## How to Run
 
 ### Input

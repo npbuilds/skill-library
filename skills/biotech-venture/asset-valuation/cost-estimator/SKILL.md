@@ -35,6 +35,8 @@ Getting costs right matters for two reasons: it determines how much capital a co
 
 ### Steps
 
+> **Benchmark data:** For sourced capitalized-vs-out-of-pocket cost ranges (DiMasi / Wouters / ASPE), the 3.6–4.6× therapeutic-area spread, per-study trial costs by phase, and success-rate context, use `references/development-cost-benchmarks.md`. Always state method, base year, and out-of-pocket vs capitalized when quoting a cost-per-drug figure.
+
 #### Step 1 — Establish Phase-by-Phase Cost Benchmarks
 
 Start with industry median costs by phase. These benchmarks derive from Tufts CSDD, DiMasi et al. (Journal of Health Economics, 2016), and updated with 2023-2025 CRO market data:

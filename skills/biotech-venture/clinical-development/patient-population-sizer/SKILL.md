@@ -33,6 +33,8 @@ Every biotech pitch deck inflates patient numbers. This skill deflates them to r
 
 ### Steps
 
+> **Epidemiology data:** For sourced prevalence/incidence/survival (SEER 2026, GLOBOCAN 2022), cardiometabolic/CNS/immunology base rates (CDC, GBD), and a worked line-of-therapy attrition funnel, use `references/epidemiology-by-indication.md`. It is the single source of truth for biomarker/disease prevalence in the suite. Note global GBD figures understate US/EU addressable populations.
+
 #### Step 1 — Establish Disease Burden (Top of Funnel)
 
 Start with the broadest defensible population estimate. Use the data source hierarchy — always cite the highest-tier source available:
