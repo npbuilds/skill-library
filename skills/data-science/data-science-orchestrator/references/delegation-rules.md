@@ -13,7 +13,9 @@ Rules for routing questions to the right skill when the classification is ambigu
 | "Clean up this dataset" | data-cleaning | data-cleaning | Straightforward, but ask about downstream use to set cleaning depth |
 | "Build a model" | model-evaluation | feature-engineering → model-evaluation | Can't evaluate without features; pipeline both |
 | "Is my model biased?" | responsible-ai | responsible-ai + model-evaluation | Need evaluation metrics to quantify bias |
-| "Visualize these results" | chart-selection | chart-selection | But ask: what message should the chart convey? |
+| "Visualize these results" | chart-selection | visualization (→ chart-selection) | But ask: what message should the chart convey? |
+| "Build a dashboard" / "this chart is slow / crashes" / "millions of points" | chart-selection | visualization (→ interactive-dashboards) | Delivery + rendering-by-volume, not chart-type choice |
+| "Tell a story with this data" / "scrollytelling" / "report narrative" | chart-selection | visualization (→ data-storytelling) | Sequencing + annotation, not a single chart |
 | "Monitor this model" | drift-detection | drift-detection | But ask: what metrics matter most in production? |
 | "Which features matter?" | feature-engineering | feature-engineering + model-evaluation | Feature importance requires a model; pipeline both |
 

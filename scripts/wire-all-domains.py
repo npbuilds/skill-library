@@ -184,8 +184,12 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     "biostatistics":        ["statistical-analysis"],
     "causal-inference":     ["statistical-analysis"],
     "statistical-testing":  ["statistical-analysis"],
+    # Visualization — director-led subdomain (added 2026-07)
+    "visualization":          ["data-science-orchestrator"],
+    "chart-selection":        ["visualization", "statistical-analysis"],
+    "interactive-dashboards": ["visualization", "chart-selection"],
+    "data-storytelling":      ["visualization", "chart-selection"],
     # Standalone
-    "chart-selection":      ["data-science-orchestrator", "statistical-analysis"],
     "responsible-ai":       ["data-science-orchestrator", "modeling"],
 
     # ── INFRASTRUCTURE ─────────────────────────────────────────────────────

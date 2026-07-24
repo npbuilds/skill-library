@@ -69,16 +69,19 @@ The following table covers the most common selections. For the full matrix with 
 
 ## Accessibility
 
-Accessible visualizations reach a wider audience and are often better designed for everyone. Follow this checklist:
+Accessible visualizations reach a wider audience and are often better designed for everyone. The current standard is **WCAG 2.2**, complemented by the W3C "Data Visualization Accessibility" note. Follow this checklist:
 
-- [ ] **Never rely on color alone** to convey meaning. Pair color with shape, pattern, label, or position.
-- [ ] **Use colorblind-safe palettes.** ColorBrewer2 palettes are tested for deuteranopia, protanopia, and tritanopia. Avoid red-green pairings as the sole differentiator.
-- [ ] **Ensure sufficient contrast.** Text and data elements should meet WCAG 2.1 AA contrast ratios (4.5:1 for normal text, 3:1 for large text and graphical elements).
+- [ ] **Never rely on color alone** to convey meaning. Pair color with shape, pattern, label, or position. Roughly 1 in 12 men and 1 in 200 women have a color vision deficiency.
+- [ ] **Use a colorblind-safe palette.** The **Wong palette** (8 colors safe across protanopia, deuteranopia, tritanopia) is the concrete default: black `#000000`, orange `#E69F00`, sky blue `#56B4E9`, bluish green `#009E73`, yellow `#F0E442`, blue `#0072B2`, vermillion `#D55E00`, reddish purple `#CC79A7`. ColorBrewer2 and viridis-family sequential/diverging scales are also tested. Avoid red-green pairings as the sole differentiator.
+- [ ] **Ensure sufficient contrast.** Text and data elements should meet **WCAG 2.2** AA contrast ratios (4.5:1 for normal text, 3:1 for large text and graphical elements).
 - [ ] **Provide text alternatives.** Every chart should have a descriptive alt-text or caption summarizing the key message and data range. Screen readers cannot interpret a PNG.
 - [ ] **Use pattern fills for print.** When a chart may be printed in grayscale, supplement color with hatching, dots, or crosshatch patterns.
 - [ ] **Label axes and units explicitly.** Never assume the audience knows the unit. Include currency symbols, percentage signs, and date formats.
 - [ ] **Avoid thin lines and small points.** Minimum line weight of 2px and point size of 6px for legibility.
 - [ ] **Test at reduced size.** If the chart will appear in a mobile view or as a dashboard tile, verify readability at 50% of the design size.
+- [ ] **Make the data reachable without the visual.** SVG charts should expose an ARIA role and label; interactive charts should support keyboard navigation of data points and offer an alternative data-table view. Sonification (data-to-audio) is emerging for time-series. This matters most when a chart moves to WebGL and loses DOM-level accessibility for free — rebuild it deliberately.
+
+For the WCAG 2.2 mapping, full Wong palette rationale, and the emerging sonification / keyboard-nav / alt-table patterns, see `references/accessibility-standards.md`.
 
 ## Anti-Patterns
 
@@ -124,17 +127,26 @@ These patterns mislead audiences or waste cognitive effort. Avoid them.
 
 ## Implementation Libraries
 
-| Purpose | Python | R | JavaScript |
-|---------|--------|---|------------|
-| Foundational plotting, full control | `matplotlib` | base `graphics` | `D3.js` |
-| Statistical visualization, sensible defaults | `seaborn` | `ggplot2` | `Observable Plot` |
-| Interactive charts, dashboards | `plotly` | `plotly` | `Plotly.js` |
-| Declarative grammar of graphics | `altair` (Vega-Lite) | `ggplot2` | `Vega-Lite` |
-| Interactive web-based visualization | `bokeh` | `shiny` + `plotly` | `D3.js` |
-| Quick EDA visualization | `seaborn`, `pandas.plot` | `ggplot2` + `GGally` | — |
-| Dashboard frameworks | `streamlit`, `dash` | `shiny` | `React` + `Recharts` |
+Two rules govern library choice in 2026, before any specific tool:
 
-**Recommended starting stack (Python):** `matplotlib` for full control + `seaborn` for statistical plots + `plotly` for interactivity. Use `altair` if you prefer declarative specification over imperative code.
+1. **Rendering follows data volume, not preference.** SVG below ~10k marks, Canvas ~10k–500k, WebGL/WebGPU above ~500k into the millions. Canvas libraries (ECharts included) degrade past ~500k–1M points. This decision belongs to the `interactive-dashboards` skill — route there for anything large or interactive.
+2. **The 90/10 rule.** Use a charting library for the standard 90% of charts; reserve raw D3 for the bespoke 10% a library cannot express. Hand-writing D3 for standard charts is a 2026 anti-pattern.
+
+**Quick starting picks:**
+
+| Purpose | Python | JavaScript |
+|---------|--------|------------|
+| Foundational plotting, full control | `matplotlib` | `D3.js` (bespoke 10% only) |
+| Statistical visualization, sensible defaults | `seaborn` | Observable Plot |
+| Interactive charts / 3D | `plotly` | Plotly.js, ECharts 6 |
+| Declarative grammar of graphics | `altair` (Vega-Lite 6) | Vega-Lite 6 |
+| Quick EDA visualization | `seaborn`, `pandas.plot` | Observable Plot |
+| React dashboards | `streamlit` / `dash` | Recharts (simple) · Visx (control) · Nivo |
+| Millions of points / geospatial | (aggregate server-side) | deck.gl 9 (WebGL/WebGPU) |
+
+**Recommended starting stack (Python):** `matplotlib` for full control + `seaborn` for statistical plots + `plotly` for interactivity; `altair` if you prefer declarative specification. **For web:** Recharts (React) · ECharts 6 (universal) · Observable Plot (report/blog) cover ~80% of needs.
+
+For the full 2026 framework matrix with versions, rendering model, and provenance, see `references/library-landscape-2026.md` and the `interactive-dashboards` skill.
 
 ## When This Applies
 
@@ -146,4 +158,14 @@ Use this skill whenever you are:
 - Critiquing or improving an existing chart
 - Building exploratory plots during data analysis
 
-For the full decision matrix covering 20+ chart types with detailed constraints, palette recommendations, annotation patterns, and the small multiples decision guide, see `references/chart-decision-matrix.md`.
+For a one-page message-to-chart lookup, see `references/quick-reference.md`. For the full decision matrix covering 20+ chart types with detailed constraints, palette recommendations, annotation patterns, and the small multiples decision guide, see `references/chart-decision-matrix.md`.
+
+## Related Skills
+
+This skill owns chart-*type* selection and single-chart design. Within the visualization subdomain, hand off when the job changes shape:
+
+- **`interactive-dashboards`** — when the chart must render at scale (rendering by data volume: SVG/Canvas/WebGL), be interactive, stream in real time, or embed in a product, or when you need to pick a 2026 framework (ECharts, Recharts, Visx, deck.gl, Vega-Lite).
+- **`data-storytelling`** — when several charts must be sequenced into a narrative, annotated as an argument, or built into a scrollytelling/report piece.
+- **`visualization`** (director) — coordinates all three and resolves conflicts between clarity, scale, and narrative.
+
+Complementary Claude-native tooling: the `dataviz` skill (visual-system design + a validated color palette) pairs with this skill's chart-*type* logic; see `research/dataviz-landscape-2026.md` for the full Claude Code dataviz workflow (Artifacts, browser-preview verification, `show_widget`).
