@@ -5786,8 +5786,8 @@
         "estimated_tokens_body": 868,
         "estimated_tokens_total": 927
       },
-      "auto_score": 66,
-      "composite_score": 66,
+      "auto_score": 65,
+      "composite_score": 65,
       "referenced_by": [
         "concrete-detail",
         "dialogue",
@@ -6174,8 +6174,8 @@
         "estimated_tokens_body": 1034,
         "estimated_tokens_total": 1093
       },
-      "auto_score": 58,
-      "composite_score": 58,
+      "auto_score": 57,
+      "composite_score": 57,
       "referenced_by": [],
       "invocation": "knowledge"
     },
@@ -6371,8 +6371,8 @@
         "estimated_tokens_body": 994,
         "estimated_tokens_total": 1048
       },
-      "auto_score": 58,
-      "composite_score": 58,
+      "auto_score": 57,
+      "composite_score": 57,
       "referenced_by": [
         "style-mutator"
       ],
