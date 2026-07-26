@@ -762,8 +762,14 @@ IO.data = {
     }
     const db = this._db;
 
-    const [skillsSnap, metaSnap, rollupSnap, gapsSnap, evoSnap, changeSnap, evoCount,
-           usageCount] = await Promise.all([
+    // NOTE: no count() aggregation anywhere below. The compat SDK loaded by
+    // this page (firebase-firestore-compat 11.7.1) exposes NO aggregation API
+    // — not on CollectionReference, not on Query, and there is no
+    // AggregateField in the namespace. `db.collection(x).count()` throws
+    // "count is not a function" and killed this page's whole data load.
+    // Counts are derived from documents already fetched instead — see
+    // `evolutionCount` and `collectionCounts` below.
+    const [skillsSnap, metaSnap, rollupSnap, gapsSnap, evoSnap, changeSnap] = await Promise.all([
       db.collection('skills').get(),
       db.collection('meta').doc('registry').get(),
       // meta/usage_rollup, not the raw `usage` collection: that collection is
@@ -774,12 +780,6 @@ IO.data = {
       db.collection('gaps').get(),
       db.collection('evolution_daily').orderBy('date', 'asc').get(),
       db.collection('changelogs').get(),
-      db.collection('evolution').count().get(),  // true doc count, 1 read (not 27k)
-      // This panel reports literal Firestore doc counts, so it must count the
-      // real `usage` collection — which holds only cloud-mirrored events —
-      // rather than the rollup's (larger) all-writers total. Aggregation, so
-      // 1 read instead of a full scan.
-      db.collection('usage').count().get(),
     ]);
 
     // Skills
@@ -844,13 +844,16 @@ IO.data = {
     gapsSnap.forEach(d => this.gaps.push(d.data()));
 
     // Evolution — daily rollup docs ({date, count, domains}); the raw
-    // collection's true size comes from the count() aggregation above.
+    // collection's size is summed from their `count` fields just below.
     this.evolution = [];
     evoSnap.forEach(d => this.evolution.push(d.data()));
-    this.evolutionCount = evoCount.data().count;
-    // Docs in the raw `usage` collection (cloud-mirrored events only). Distinct
-    // from usageBySource, which totals all writers via the committed rollup.
-    this.usageDocCount = usageCount.data().count;
+    // Raw `evolution` doc count, derived rather than aggregated. Each
+    // evolution_daily doc's `count` is that date's deduped raw-row count (see
+    // build_evolution_daily in migrate_to_firestore.py), keyed on the same
+    // (skill, date, event) tuple the raw collection is keyed on — so summing
+    // them reproduces the raw doc count from ~90 docs we already hold, with no
+    // extra reads and no aggregation API.
+    this.evolutionCount = this.evolution.reduce((n, e) => n + (e.count || 0), 0);
 
     // Changelogs
     this.changelogs = {};
@@ -870,15 +873,25 @@ IO.data = {
       .sort((a, b) => b[1].length - a[1].length)
       .map(d => d[0]);
 
-    // Collection counts
+    // Collection doc counts. Every entry is an exact count of docs actually
+    // fetched (or derived from them) — nothing here is an estimate.
+    //
+    // `usage` is deliberately ABSENT. This page no longer reads that
+    // collection wholesale (it reads meta/usage_rollup plus a watermark-bounded
+    // tail), and the compat SDK has no aggregation to count it with. Reporting
+    // the rollup's event_count here would be wrong twice over: it counts all
+    // writers from committed git, not cloud-mirrored docs, and it would inflate
+    // a Firestore-docs headline with a non-Firestore number. Usage totals are
+    // shown by source in the activity feed instead; usageOmittedFromCounts
+    // makes the gap visible rather than silent.
     this.collectionCounts = {
       skills: skillsSnap.size,
-      usage: this.usageDocCount,
       changelogs: changeSnap.size,
       gaps: gapsSnap.size,
       meta: (metaSnap.exists ? 1 : 0) + (rollupSnap.exists ? 1 : 0),
       evolution: this.evolutionCount,
     };
+    this.usageOmittedFromCounts = true;
     this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
   }
 };
@@ -1191,7 +1204,13 @@ IO.ops = {
             <div class="io-coll-bar" style="width:${(count / maxCount * 100).toFixed(1)}%;background:${collColors[name] || 'var(--cyan-bright)'}"></div>
           </div>
         </div>
-      `).join('');
+      `).join('')
+      + (IO.data.usageOmittedFromCounts ? `
+        <div class="io-coll-item" style="opacity:0.6">
+          <span class="io-coll-name">usage</span>
+          <span class="io-coll-count" title="This page reads meta/usage_rollup plus a watermark-bounded tail rather than the whole usage collection, and the compat Firestore SDK has no count() aggregation to size it with. Usage totals by source are in the activity feed.">n/a</span>
+          <div class="io-coll-bar-wrap"></div>
+        </div>` : '');
 
     // Scoring Model
     const scoringFactors = [
