@@ -76,6 +76,16 @@ Merge to main (CI green)
 
 Cloud MCP server: read-only tools + record_skill_feedback; usage/gap/feedback
 telemetry → Firestore (durable; local jsonl is ephemeral on Cloud Run).
+
+Usage telemetry has two producers, segmented by the `source` field:
+  source=mcp    → server.py get_skill (MCP tool calls; mirrored to Firestore)
+  source=plugin → hooks/skill-invocation-telemetry.sh (Claude Code's native
+                  Skill tool + slash commands, which never touch the MCP
+                  server) → scripts/log_skill_invocation.py → data/usage.jsonl
+The plugin hook is registered in ~/.claude/settings.json, not this repo's
+.claude/settings.json — plugin skills are invoked from other projects, and a
+project-scoped hook would miss them (registering both would double-count).
+
 Structural writes: local stdio tools or /maint bot PRs only.
 Desktop: Neural Observatory.webloc ──→ https://skill-library-prod.web.app
 
@@ -95,6 +105,16 @@ detected daily (meta/registry.synced_sha check) and alerted, never silent.
   `skill-library` in `~/.claude.json` at a local stdio server
   (`python3 mcp-server/server.py`), not the Cloud Run URL
 - Deploy app changes: `cd app && npx firebase-tools deploy --only hosting`
+- Plugin-native skill loads are attributed via `data/skill_aliases.json`
+  (invocation name → registry name). Unmapped names are logged unscored as
+  `skill_raw`; run `python3 scripts/log_skill_invocation.py --report` to see
+  what is pending a mapping. The map is empty by design: a command that
+  already calls `get_skill` is counted by the MCP path, so aliasing it would
+  double-credit the same load. Add an entry only for a command that loads a
+  library skill WITHOUT going through `get_skill`
+- Committing new `data/usage.jsonl` rows shifts usage scores, so run
+  `python3 scripts/recalibrate_scores.py` in the same commit — CI's
+  idempotency gate fails on drift over 5 points
 
 ## Auto-Trigger Skills
 

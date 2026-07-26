@@ -47,6 +47,7 @@ from shared import (
     PROJECT_ROOT, REGISTRY_PATH, SKILLS_DIR, DATA_DIR,
     USAGE_LOG, GAPS_LOG, FEEDBACK_LOG,
     load_log, iter_skill_uses,
+    SOURCE_MCP, event_source, source_breakdown,
     atomic_write_registry,
     compute_auto_score,
     score_structure, score_depth, score_connectivity,
@@ -616,8 +617,13 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
         available = ", ".join(sorted(skills.keys()))
         return f"Skill '{skill_name}' not found. Available skills: {available}"
 
-    # Log usage
-    _log_event(USAGE_LOG, {"skill": skill_name, "type": entry.get("type", "unknown")})
+    # Log usage. `source` segments this stream from the plugin-native loads
+    # recorded by hooks/skill-invocation-telemetry.sh.
+    _log_event(USAGE_LOG, {
+        "skill": skill_name,
+        "type": entry.get("type", "unknown"),
+        "source": SOURCE_MCP,
+    })
 
     skill_path = resolve_skill_path(entry, skill_name)
     if skill_path is None:
@@ -1046,6 +1052,11 @@ def get_skill_stats(skill_name: str | None = None) -> str:
         lines.append(f"Total uses: {len(uses)}")
 
         if uses:
+            by_source = source_breakdown(uses)
+            lines.append(
+                "By source: "
+                + ", ".join(f"{s} {c}" for s, c in sorted(by_source.items()))
+            )
             first = uses[0].get("timestamp", "?")[:10]
             last = uses[-1].get("timestamp", "?")[:10]
             lines.append(f"First used: {first}")
@@ -1094,7 +1105,22 @@ def get_skill_stats(skill_name: str | None = None) -> str:
     if usage_counts:
         sorted_usage = sorted(usage_counts.items(), key=lambda x: x[1], reverse=True)
         lines.append(f"Total skill loads: {len(skill_uses)}")
-        lines.append(f"Unique skills used: {len(usage_counts)}\n")
+        lines.append(f"Unique skills used: {len(usage_counts)}")
+        by_source = source_breakdown(skill_uses)
+        lines.append(
+            "By source: "
+            + ", ".join(f"{s} {c}" for s, c in sorted(by_source.items()))
+        )
+        unattributed = sum(
+            1 for e in usage_events
+            if e.get("skill_raw") and event_source(e) != SOURCE_MCP
+        )
+        if unattributed:
+            lines.append(
+                f"Unattributed plugin loads: {unattributed} "
+                "(names missing from data/skill_aliases.json)"
+            )
+        lines.append("")
 
         lines.append("Most used:")
         for name, count in sorted_usage[:10]:

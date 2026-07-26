@@ -90,8 +90,20 @@ jobs:
     steps:
       # This job commits to a fresh branch — checkout the current main tip,
       # no head_sha pin.
+      #
+      # persist-credentials: false is load-bearing. checkout otherwise writes
+      # http.https://github.com/.extraheader with GITHUB_TOKEN, and that
+      # Authorization header beats the userinfo in the push URL below — so the
+      # push authenticated as github-actions[bot] (contents: read) instead of
+      # the bot PAT, and every run since 2026-07-11 died with:
+      #   remote: Permission to <repo>.git denied to github-actions[bot]
+      # It failed AFTER the pull + commit, so the telemetry was discarded
+      # nightly and the watermark froze. No other step here does a network git
+      # operation, so dropping the persisted credentials is safe.
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Authenticate to GCP (Workload Identity Federation)
         uses: google-github-actions/auth@v2

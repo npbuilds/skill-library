@@ -20,6 +20,7 @@ from shared import (
     REGISTRY_PATH, USAGE_LOG, GAPS_LOG, FEEDBACK_LOG,
     load_log as _load_log,
     iter_skill_uses,
+    source_breakdown,
 )
 
 
@@ -72,6 +73,8 @@ def _show_skill_stats(name, usage, feedback):
         first = uses[0].get("timestamp", "?")[:10]
         last = uses[-1].get("timestamp", "?")[:10]
         click.echo(f"  First: {first}  Last: {last}")
+        by_source = source_breakdown(uses)
+        click.echo("  Source: " + ", ".join(f"{s} {c}" for s, c in sorted(by_source.items())))
 
     if fb:
         ratings = [e["rating"] for e in fb if "rating" in e]
@@ -98,7 +101,10 @@ def _show_summary(usage, feedback, gaps):
         click.echo("\n  SKILL USAGE")
         click.echo("  ───────────")
         sorted_usage = sorted(counts.items(), key=lambda x: x[1], reverse=True)
-        click.echo(f"  Total loads: {len(skill_uses)}  |  Unique skills: {len(counts)}\n")
+        by_source = source_breakdown(skill_uses)
+        source_str = ", ".join(f"{s} {c}" for s, c in sorted(by_source.items()))
+        click.echo(f"  Total loads: {len(skill_uses)}  |  Unique skills: {len(counts)}"
+                   f"  |  {source_str}\n")
 
         # Bar chart
         max_count = sorted_usage[0][1] if sorted_usage else 1
