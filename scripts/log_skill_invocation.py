@@ -69,9 +69,8 @@ SOURCE = "plugin"
 # not 300 units of evidence that the skill is valuable.
 SESSION_DAILY_CAP = 50
 
-# Only scan the tail of the log for the cap check — the whole file is loaded
-# nowhere in the hot path, and this keeps the hook O(1) as history grows.
-CAP_SCAN_LINES = 2000
+# (There is deliberately no scan-window constant. See over_session_cap: a fixed
+# window made the cap fail open once the log outgrew it.)
 
 
 def load_registry_skills() -> dict:
@@ -167,34 +166,73 @@ def build_event(payload: dict, skills: dict, aliases: dict) -> dict | None:
     return event
 
 
-def _tail_lines(path: Path, limit: int) -> list[str]:
+def _iter_lines_backwards(path: Path, chunk_size: int = 65536):
+    """Yield non-empty lines from the end of the file toward the start.
+
+    Streams fixed-size chunks instead of loading the file. Backwards matters:
+    the newest rows are the ones the cap check cares about, so the common case
+    touches a single chunk no matter how large the log has grown.
+    """
     try:
         with open(path, "rb") as f:
             f.seek(0, os.SEEK_END)
-            size = f.tell()
-            # ~200 bytes/event; read enough to cover `limit` events.
-            window = min(size, limit * 400)
-            f.seek(size - window)
-            chunk = f.read().decode("utf-8", errors="ignore")
+            pos = f.tell()
+            carry = b""
+            while pos > 0:
+                step = min(chunk_size, pos)
+                pos -= step
+                f.seek(pos)
+                buf = f.read(step) + carry
+                parts = buf.split(b"\n")
+                # parts[0] may be a partial line continued in the next (earlier)
+                # chunk — hold it back rather than parsing a fragment.
+                carry = parts[0]
+                for part in reversed(parts[1:]):
+                    if part.strip():
+                        yield part.decode("utf-8", errors="ignore")
+            if carry.strip():
+                yield carry.decode("utf-8", errors="ignore")
     except OSError:
-        return []
-    return chunk.splitlines()[-limit:]
+        return
 
 
 def over_session_cap(event: dict, path: Path = USAGE_LOG, cap: int = SESSION_DAILY_CAP) -> bool:
-    """True if this (session_id, UTC day) already has `cap` plugin events."""
+    """True if this (session_id, UTC day) already has `cap` plugin events.
+
+    Scans the whole log backwards, stopping the moment `cap` matches are found.
+    Two things this deliberately does NOT do, both of which looked like free
+    optimisations and are actually correctness bugs:
+
+    - No fixed line/byte window. An earlier version scanned only the last 2000
+      lines, so once a session's rows scrolled past that window the cap silently
+      stopped applying — the runaway-loop guard failed open exactly when a
+      runaway loop had made the log long. Since recalibrate_scores.py divides by
+      max_usage, one inflated skill becomes the denominator and deflates every
+      other skill's usage score, so failing open here is worse than the scan.
+    - No early break when an older date appears. The log is append-ORDERED but
+      not chronological: pull_telemetry_from_firestore.py appends cloud rows
+      whose timestamps predate local rows already in the file, so "we reached
+      yesterday" never implies "today's rows are all behind us".
+
+    Cost is bounded in practice by the early exit. The worst case is an
+    under-cap fire, which scans the whole log; measured on this machine that is
+    0.4 ms at 500 rows, 4 ms at 5k, and 33 ms at 50k (~4.5 MB) — linear, and
+    the hook fires once per plugin skill load from every project. If it ever
+    matters, rotate the log into data/archive/ (the watermark makes rotation
+    safe — see pull_telemetry_from_firestore.py); do NOT reintroduce a scan
+    window, which is the bug this replaced.
+    """
     session = event.get("session_id")
     day = str(event.get("timestamp", ""))[:10]
     if not session or not day:
         return False
     seen = 0
-    for line in _tail_lines(path, CAP_SCAN_LINES):
-        line = line.strip()
-        if not line:
-            continue
+    for line in _iter_lines_backwards(path):
         try:
             row = json.loads(line)
         except json.JSONDecodeError:
+            continue
+        if not isinstance(row, dict):
             continue
         if (
             row.get("source") == SOURCE

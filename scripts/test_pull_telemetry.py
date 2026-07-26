@@ -67,11 +67,34 @@ def test_dry_run_writes_nothing():
         assert path.read_text() == "", "dry-run must not write"
 
 
+def test_append_survives_a_non_dict_row_in_the_local_log():
+    """The dedupe reads `row.get("_fs_id")` over the whole local file, so one
+    non-dict row used to raise AttributeError inside the nightly bot-PR job —
+    the same job whose push this work repaired. parse_jsonl now drops such rows
+    at the parse boundary; this pins that the dedupe still sees the real ids."""
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / "usage.jsonl"
+        path.write_text(
+            '{"skill": "a", "_fs_id": "s_1"}\n'
+            '"a bare string"\n'
+            '[1,2]\n'
+            '{"skill": "b", "_fs_id": "s_2"}\n'
+        )
+        # s_2 is already present, s_3 is new — the known id must still dedupe.
+        appended = append_events(
+            path, [("s_2", {"skill": "b"}), ("s_3", {"skill": "c"})], dry_run=False
+        )
+        assert appended == 1, appended
+        rows = [json.loads(l) for l in path.read_text().splitlines() if l.strip()]
+        assert [r.get("_fs_id") for r in rows if isinstance(r, dict)][-1] == "s_3"
+
+
 def main():
     tests = [
         test_cap_bounds_per_session_per_day,
         test_append_dedupes_on_fs_id,
         test_dry_run_writes_nothing,
+        test_append_survives_a_non_dict_row_in_the_local_log,
     ]
     failed = 0
     for t in tests:

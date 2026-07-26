@@ -161,7 +161,17 @@ def build_usage_rollup(
       recent_limit / domain_day_active_days / recent_truncated
                            so the client can tell a capped tail from a whole one
     """
-    events = [r for r in usage_rows if r.get("skill")]
+    # Must stay equivalent to shared.iter_skill_uses — pinned by
+    # test_rollup_filter_is_identical_to_shared_iter_skill_uses.
+    # The str guard keeps a corrupt row from aborting the whole Firestore sync:
+    # a non-str skill survives Counter but raises in sorted() below, and this
+    # runs before the meta/registry commit marker. The dict guard is
+    # belt-and-braces — parse_jsonl already drops non-dict rows — so this stays
+    # safe when handed a list built some other way.
+    events = [
+        r for r in usage_rows
+        if isinstance(r, dict) and isinstance(r.get("skill"), str) and r["skill"]
+    ]
 
     totals: Counter = Counter()
     by_source: Counter = Counter()

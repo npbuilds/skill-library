@@ -54,7 +54,17 @@ def record_feedback_entry(skill_name: str, rating: int, note: str = "") -> str:
 
 
 def load_log(path: Path) -> list[dict]:
-    """Load all events from a JSONL log file."""
+    """Load all events from a JSONL log file.
+
+    Enforces the `list[dict]` return type rather than merely annotating it. A
+    jsonl line like `"foo"`, `[1,2]`, `123` or `null` parses without error and
+    is not a dict, and every consumer here treats rows as mappings — the raw
+    `e.get(...)` in get_skill_stats' unattributed count, cli's _show_skill_stats,
+    source_breakdown, and pull_telemetry's _fs_id dedupe all raise
+    AttributeError on one. Guarding each call site is whack-a-mole; the parse
+    boundary is the one place that covers them, so a malformed line degrades to
+    a skipped row exactly like a JSONDecodeError already does.
+    """
     if not path.exists():
         return []
     events = []
@@ -62,21 +72,43 @@ def load_log(path: Path) -> list[dict]:
         line = line.strip()
         if line:
             try:
-                events.append(json.loads(line))
+                event = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            if isinstance(event, dict):
+                events.append(event)
     return events
 
 
 def iter_skill_uses(events):
-    """Yield only skill-load events (those with a truthy `skill` field).
+    """Yield only skill-load events (those with a truthy string `skill` field).
 
     usage.jsonl mixes get_skill events ({skill, type, ...}) with search events
     ({type: "search", query, ...}). Analytics that count "how many times was
     skill X used" must skip search events; this helper makes the intent
     explicit and prevents the empty-string bucket from inflating max_usage.
+
+    The `str` check is load-bearing, not paranoia. This is the ONE filter every
+    usage consumer shares — recalibrate_scores.py's usage_counts,
+    get_skill_stats, the CLI, and scripts/usage_rollup.py's dashboard totals —
+    so anything it admits must be usable as a dict key by all of them. A row
+    whose `skill` is a number or a list reaches Counter fine but then explodes
+    in `sorted()` (mixed-type comparison) or as an unhashable key, and because
+    the rollup is built inside sync_registry before the meta/registry commit
+    marker, that exception silently aborts the WHOLE Firestore registry sync.
+    Skipping such rows here keeps every consumer in agreement by construction,
+    which is what makes "usage on the dashboard == usage behind auto_score"
+    hold.
+
+    The `isinstance(e, dict)` check is belt-and-braces: load_log already drops
+    non-dict rows at the parse boundary, which is what protects the call sites
+    that never come through here. Keeping it means this helper is also safe on
+    a hand-built list.
     """
-    return (e for e in events if e.get("skill"))
+    return (
+        e for e in events
+        if isinstance(e, dict) and isinstance(e.get("skill"), str) and e["skill"]
+    )
 
 
 def event_source(event: dict) -> str:
