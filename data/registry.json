@@ -18318,10 +18318,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 75,
       "depends_on": [
         "kahneman-framing",
         "minto-scqa"
