@@ -474,3 +474,5 @@
 {"session_id": "d82e08b9a82c4760b693bdc038c35399", "skill": "frame-rotator", "type": "action", "timestamp": "2026-07-26T01:23:29.639208+00:00"}
 {"session_id": "d82e08b9a82c4760b693bdc038c35399", "skill": "spelunker", "type": "orchestrator", "timestamp": "2026-07-26T02:18:39.256571+00:00"}
 {"session_id": "d82e08b9a82c4760b693bdc038c35399", "type": "search", "result_count": 20, "query": "pos-calculator probability of success", "timestamp": "2026-07-26T16:02:42.759980+00:00"}
+{"session_id": "6b6de82a-d661-43a4-a542-9f88963bb5fb", "source": "plugin", "timestamp": "2026-07-26T23:07:08.955018+00:00", "skill_raw": "grade", "type": "unresolved"}
+{"session_id": "d82e08b9a82c4760b693bdc038c35399", "skill": "statement-grader", "type": "action", "timestamp": "2026-07-26T23:07:45.392475+00:00"}
