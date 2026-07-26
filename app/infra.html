@@ -893,6 +893,18 @@ IO.data = {
     };
     this.usageOmittedFromCounts = true;
     this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
+  },
+
+  /* Number of collections the Firestore panel actually lists.
+   *
+   * NOT Object.keys(collectionCounts).length: `usage` is rendered as an extra
+   * "n/a" row (it has no countable value, see above), so keying the header off
+   * collectionCounts alone reported 5 while the panel showed 6 — a dashboard
+   * about data integrity disagreeing with itself one panel apart. Both the
+   * header stat and the panel derive from this. */
+  collectionsShown() {
+    return Object.keys(this.collectionCounts || {}).length
+      + (this.usageOmittedFromCounts ? 1 : 0);
   }
 };
 
@@ -1461,7 +1473,7 @@ IO.changelog = {
   }
 
   // Update header stats
-  document.getElementById('stat-collections').textContent = Object.keys(IO.data.collectionCounts).length;
+  document.getElementById('stat-collections').textContent = IO.data.collectionsShown();
   document.getElementById('stat-docs').textContent = IO.data.totalDocs;
 
   // Render all panels
@@ -1497,7 +1509,7 @@ refreshBtn.onclick = async () => {
 
   try {
     await IO.data.loadAll();
-    document.getElementById('stat-collections').textContent = Object.keys(IO.data.collectionCounts).length;
+    document.getElementById('stat-collections').textContent = IO.data.collectionsShown();
     document.getElementById('stat-docs').textContent = IO.data.totalDocs;
     IO.vitals.render();
     IO.arch.render();
@@ -1545,7 +1557,7 @@ window.addEventListener('resize', () => {
     // Listen for skill collection changes
     db.collection('skills').onSnapshot(() => {
       IO.data.loadAll().then(() => {
-        document.getElementById('stat-collections').textContent = Object.keys(IO.data.collectionCounts).length;
+        document.getElementById('stat-collections').textContent = IO.data.collectionsShown();
         document.getElementById('stat-docs').textContent = IO.data.totalDocs;
         IO.vitals.render();
         IO.ops.render();

@@ -14,6 +14,7 @@ Covers the properties the rollup exists to guarantee:
 Run: python3 scripts/test_usage_rollup.py
 """
 
+import json
 import sys
 from collections import Counter
 from pathlib import Path
@@ -95,6 +96,55 @@ def test_normalize_source_agrees_with_shared_event_source():
     for row in [{}, {"source": "mcp"}, {"source": "plugin"}, {"source": "cli"},
                 {"skill": "a"}, {"source": None}, {"source": ""}]:
         assert normalize_source(row) == event_source(row), row
+
+
+def test_corrupt_rows_cannot_abort_the_firestore_sync():
+    """A row whose `skill` is not a usable dict key must be skipped, not raise.
+
+    build_usage_rollup runs inside sync_registry BEFORE the meta/registry
+    commit marker, so an exception here silently aborts the entire Firestore
+    registry sync and freezes the dashboard at the previous snapshot. A non-str
+    skill survives Counter but explodes in sorted() (mixed-type compare) or as
+    an unhashable key; a jsonl line that parses to a bare string has no .get.
+    """
+    hostile = [
+        {"skill": "alpha", "timestamp": "2026-07-01T00:00:00+00:00"},
+        {"skill": 7, "timestamp": "2026-07-01T01:00:00+00:00"},        # sorted() TypeError
+        {"skill": {"a": 1}, "timestamp": "2026-07-01T02:00:00+00:00"},  # unhashable
+        {"skill": ["a"], "timestamp": "2026-07-01T03:00:00+00:00"},     # unhashable
+        {"skill": True, "timestamp": "2026-07-01T04:00:00+00:00"},      # bool is not str
+        "a bare string line",                                           # no .get
+        ["a", "list", "line"],
+        None,
+        {"skill": "beta", "source": 7, "timestamp": "2026-07-01T05:00:00+00:00"},
+    ]
+    roll = build_usage_rollup(hostile, DOMAINS)          # must not raise
+    assert roll["totals"] == {"alpha": 1, "beta": 1}, roll["totals"]
+    assert roll["event_count"] == 2
+    # A non-str `source` falls back to the default rather than becoming a key.
+    assert roll["by_source"] == {"mcp": 2}, roll["by_source"]
+    # And the doc must still be JSON-serialisable for the Firestore write.
+    json.dumps(roll)
+
+
+def test_rollup_filter_is_identical_to_shared_iter_skill_uses():
+    """The rollup's inline filter duplicates shared.iter_skill_uses (it cannot
+    import it — sync-firestore.yml installs only google-cloud-firestore). Pin
+    them on hostile input too, or "dashboard usage == auto_score usage" breaks
+    exactly when the data is weird."""
+    from shared import iter_skill_uses
+
+    rows = [
+        {"skill": "alpha", "timestamp": "2026-07-01T00:00:00+00:00"},
+        {"skill": 7}, {"skill": {"a": 1}}, {"skill": ["a"]}, {"skill": True},
+        {"skill": ""}, {"skill": None}, {"skill": 0},
+        {"type": "search", "query": "x"},
+        "bare string", ["list"], None,
+        {"skill_raw": "codex:review", "type": "unresolved"},
+    ]
+    expected = Counter(e["skill"] for e in iter_skill_uses(rows))
+    roll = build_usage_rollup(rows, DOMAINS)
+    assert roll["totals"] == dict(expected), (roll["totals"], expected)
 
 
 def test_skill_raw_rows_are_never_counted():
@@ -274,6 +324,8 @@ def main():
         test_search_events_excluded,
         test_source_attribution_and_legacy_default,
         test_normalize_source_agrees_with_shared_event_source,
+        test_corrupt_rows_cannot_abort_the_firestore_sync,
+        test_rollup_filter_is_identical_to_shared_iter_skill_uses,
         test_skill_raw_rows_are_never_counted,
         test_unknown_source_is_not_relabelled_mcp,
         test_domain_day_skips_undomained_and_keys_correctly,

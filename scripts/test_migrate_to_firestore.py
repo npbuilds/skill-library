@@ -232,8 +232,28 @@ def test_prune_collection_noop_when_current():
     assert set(db.store["skills"]) == {"a", "b"}
 
 
+def test_parse_jsonl_enforces_list_of_dicts():
+    """`"foo"`, `[1,2]`, `123`, `null` are valid JSON but not objects. Every
+    consumer treats rows as mappings — build_usage_rollup's totals and
+    pull_telemetry's `row.get("_fs_id")` dedupe (which runs in the nightly
+    bot-PR job) both raise AttributeError on one — so the parse boundary drops
+    them rather than each call site guarding separately."""
+    import json as _json
+    import tempfile
+    from pathlib import Path as _Path
+    from migrate_to_firestore import parse_jsonl
+
+    with tempfile.TemporaryDirectory() as d:
+        path = _Path(d) / "u.jsonl"
+        path.write_text('{"a": 1}\n"bare"\n[1,2]\n123\nnull\ntrue\n{"broken\n{"b": 2}\n')
+        rows = parse_jsonl(path)
+        assert rows == [{"a": 1}, {"b": 2}], rows
+        assert all(isinstance(r, dict) for r in rows)
+
+
 def main():
     tests = [
+        test_parse_jsonl_enforces_list_of_dicts,
         test_skill_doc_passthrough,
         test_meta_doc_passthrough,
         test_meta_doc_synced_sha,
