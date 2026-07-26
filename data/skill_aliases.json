@@ -1,0 +1,4 @@
+{
+  "_doc": "Maps plugin-native invocation names (Claude Code Skill tool / slash commands) onto registry skill names, for telemetry attribution. Deliberately EMPTY: the commands that looked like alias candidates (/diligence, /scan, /teardown, /grade) all instruct a real skill-library get_skill on the very skills an alias would name, so aliasing them would credit the same load twice — once from the PostToolUse hook, once from the MCP server. Add an entry only for a command that loads a library skill WITHOUT going through get_skill; anything else is already counted. Unmapped names are still recorded in data/usage.jsonl as skill_raw (unscored, un-synced) — run `python3 scripts/log_skill_invocation.py --report` to see them.",
+  "aliases": {}
+}

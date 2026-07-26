@@ -36,6 +36,7 @@ jobs:
         run: |
           python3 scripts/test_migrate_to_firestore.py
           python3 scripts/test_pull_telemetry.py
+          python3 scripts/test_log_skill_invocation.py
 
   retrieval-eval:
     name: Retrieval Regression Gate
