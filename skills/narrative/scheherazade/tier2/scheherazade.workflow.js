@@ -499,7 +499,11 @@ try {
   if (!beats.length) throw new Error('scheherazade: args.chapter_brief is empty — nothing to write')
   for (const beat of beats) {
     // Proactive back-edge: build world the beat needs before drafting.
-    const probe = await ask(discoverStubsPrompt(beat, accepted, _args), { schema: STUB_SCHEMA, label: `probe:${beat.id || ''}`, phase: 'Story loop' })
+    // beat.skip_probe lets a spine that has pre-built its world opt out (the reactive
+    // back-edge in runScene still catches anything the probe would have).
+    const probe = beat.skip_probe
+      ? { stubs: [] }
+      : await ask(discoverStubsPrompt(beat, accepted, _args), { schema: STUB_SCHEMA, label: `probe:${beat.id || ''}`, phase: 'Story loop' })
     await drainStubs(probe.stubs, _args)
 
     // Run the scene; a reactive back-edge (missing_world found post-draft) drains then retries.
