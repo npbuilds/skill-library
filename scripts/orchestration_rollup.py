@@ -201,6 +201,67 @@ def rollup(reps):
           "choosing by feel audits the shaky predictions and inflates accuracy on the rest.")
     w("")
 
+    # --- life-level (v1.4, Phase 0) — these outrank everything above ---
+    w("### Life-level measures (v1.4 — these outrank practitioner and system layers)")
+    w("")
+    # craft floor (P12): solo reps per pursuit
+    solo = [r for r in protocol if r.get("execution_mode") == "solo"]
+    by_pursuit = defaultdict(int)
+    for r in solo:
+        by_pursuit[r.get("pursuit") or "unknown"] += 1
+    w(f"- **P12 craft floor** — unaided (`solo`) reps logged: **{len(solo)}**"
+      + (f" → {', '.join(f'{k}:{v}' for k, v in sorted(by_pursuit.items()))}" if solo else ""))
+    if not solo:
+        w("  - ⚠ no unaided reps logged. Floor is ≥1/month per kept domain, ≥2 for clinical judgment and prose. "
+          "Deskilling is measured, not hypothetical — an empty solo column is a P12 breach, not a gap in bookkeeping.")
+    w(f"- **Execution mode mix** — " + " · ".join(
+        f"{m}: {sum(1 for r in protocol if r.get('execution_mode') == m)}"
+        for m in ("delegated", "assisted", "solo")))
+    # dormancy
+    pursuits = sorted({r.get("pursuit") for r in protocol if r.get("pursuit")})
+    if pursuits:
+        latest = {p: max(r["ts"] for r in protocol if r.get("pursuit") == p) for p in pursuits}
+        w("- **Dormancy** (plurality without forced abandonment — last touched):")
+        for p in pursuits:
+            w(f"  - {p}: {latest[p]}")
+        w("  - Threshold: 4 weeks for the eligible four and health/family/relationship; one season for the rest. "
+          "Compare against today's date manually — a dormant pursuit outranks any rubric gain.")
+    # apparatus qualification (Codex amendment 4)
+    app = [r for r in protocol if (r.get("pursuit") or "") == "apparatus"]
+    if app:
+        qual = sum(1 for r in app if r.get("apparatus_orchestrated"))
+        w(f"- **Apparatus reps** — {len(app)} logged, **{qual} qualified** (build itself orchestrated). "
+          f"Unqualified apparatus work is hand-coded construction: it does not score, and a large share of it "
+          f"means construction has displaced practice.")
+    w("")
+    w("Not derivable from this log — track by hand: **protected-block survival rate** (P10; a block eaten by "
+      "measurement work counts double).")
+    w("")
+
+    # --- reps 1-2 constraint experiment (v1.4) ---
+    rp = [r for r in protocol if r.get("review_pressure")]
+    sp = [r for r in protocol if r.get("switch_pressure")]
+    if rp or sp:
+        w("### Constraint experiment (reps 1–2): review pressure vs switching cost")
+        w("")
+        if rp:
+            qd = [r["review_pressure"].get("queue_depth_at_session_end") for r in rp]
+            qd = [x for x in qd if x is not None]
+            dfr = sum((r["review_pressure"].get("accepted_without_full_review") or 0) for r in rp)
+            w(f"- Review pressure — n={len(rp)} · queue depth {qd if qd else 'n/a'} · "
+              f"accepted-without-full-review: {dfr}")
+        if sp:
+            pt = [r["switch_pressure"].get("pursuits_touched") for r in sp]
+            pt = [x for x in pt if x is not None]
+            ro = [r["switch_pressure"].get("reorientation_min") for r in sp]
+            ro = [x for x in ro if x is not None]
+            w(f"- Switching pressure — n={len(sp)} · pursuits touched {pt if pt else 'n/a'} · "
+              f"re-orientation min {ro if ro else 'n/a'}")
+        w("- **Discriminator:** if escaped defects track queue depth → review-bound (S5 is the leverage point). "
+          "If they track switch count / re-orientation → switching-bound (batching + session architecture, mostly S3). "
+          "If both rise together they are one constraint expressed twice — say so and stop measuring separately after rep 2.")
+        w("")
+
     # --- Gate A progress ---
     families = {r["task_family"] for r in protocol}
     reviews = [r for r in protocol if r.get("grader_type") in EXTERNAL_GRADERS]
@@ -246,7 +307,9 @@ def rollup(reps):
 BLANK_FULL = {
     "ts": "YYYY-MM-DD", "project": "", "rung": "calibration-1", "task_family": "research",
     "protocol_rep": True, "faculty": "S4", "surface": "Architect",
-    "comparison_mode": "full",
+    "comparison_mode": "full", "execution_mode": "delegated", "pursuit": "job",
+    "review_pressure": {"review_min": None, "queue_depth_at_session_end": None, "accepted_without_full_review": None},
+    "switch_pressure": {"pursuits_touched": None, "reorientation_min": None, "reread_events": None},
     "architecture": "", "rejected_alt": "",
     "simple_baseline": "one capable agent, same brief + tools + sources + acceptance criteria, fair shot",
     "compute_control": None,
@@ -263,7 +326,8 @@ BLANK_FULL = {
 BLANK_COMPACT = {
     "ts": "YYYY-MM-DD", "project": "", "rung": "R1", "task_family": "infra",
     "protocol_rep": True, "faculty": "S1", "surface": "Judge",
-    "comparison_mode": "prediction_only",
+    "comparison_mode": "prediction_only", "execution_mode": "delegated", "pursuit": "apparatus",
+    "apparatus_orchestrated": True,
     "architecture": "", "rejected_alt": "",
     "predicted_winner": "orchestrated", "prediction_confidence": 50,
     "score": 3, "evidence": "",

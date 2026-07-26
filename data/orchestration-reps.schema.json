@@ -7,7 +7,7 @@
   "additionalProperties": false,
   "required": [
     "ts", "rung", "task_family", "protocol_rep", "faculty", "surface",
-    "comparison_mode", "architecture", "rejected_alt",
+    "comparison_mode", "execution_mode", "pursuit", "architecture", "rejected_alt",
     "predicted_winner", "prediction_confidence",
     "score", "evidence", "cost", "change"
   ],
@@ -41,6 +41,38 @@
     "comparison_mode": {
       "enum": ["full", "prediction_only", "audited_prediction"],
       "description": "full = both arms run. prediction_only = only chosen arm run. audited_prediction = eligible for prediction-only but randomly selected for a surprise baseline."
+    },
+    "execution_mode": {
+      "enum": ["delegated", "assisted", "solo"],
+      "description": "HOW the work was done (orthogonal to comparison_mode, which is how it was measured). delegated = agents did it, human reviewed. assisted = co-execution, agent drafts and human rewrites (Phase 0 third mode). solo = unaided, no agent in the loop at all — counts toward the P12 craft-practice floor."
+    },
+    "pursuit": {
+      "type": "string",
+      "description": "Which pursuit this served (e.g. job, investing, novel, learning, apparatus). Feeds dormancy tracking — plurality without forced abandonment."
+    },
+    "apparatus_orchestrated": {
+      "type": ["boolean", "null"],
+      "description": "Apparatus work only (P6 / Codex amendment 4): true if the build itself was orchestrated under a verification design, which is what qualifies it as a scored rep. Hand-coded apparatus is false and stays unscored."
+    },
+    "review_pressure": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "Reps 1-2 constraint experiment: is review capacity the ceiling on plurality?",
+      "properties": {
+        "review_min": { "type": ["number", "null"] },
+        "queue_depth_at_session_end": { "type": ["integer", "null"], "minimum": 0 },
+        "accepted_without_full_review": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "switch_pressure": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "Reps 1-2 constraint experiment: is switching cost the ceiling instead?",
+      "properties": {
+        "pursuits_touched": { "type": ["integer", "null"], "minimum": 0 },
+        "reorientation_min": { "type": ["number", "null"] },
+        "reread_events": { "type": ["integer", "null"], "minimum": 0 }
+      }
     },
     "architecture": { "type": "string", "description": "Topology actually run (workflow / single agent / ensemble / manager-worker / handoff / no-AI)." },
     "rejected_alt": { "type": "string", "description": "The simpler alternative considered and rejected, with the reason." },
