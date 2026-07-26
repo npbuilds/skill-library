@@ -17,7 +17,9 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Registry metadata (schema_version, last_scan, network domains)
+    // Registry metadata (schema_version, last_scan, network domains) and the
+    // usage rollup (meta/usage_rollup — the dashboard's usage aggregate,
+    // written from committed data/usage.jsonl on every sync)
     match /meta/{docId} {
       allow read: if true;
       allow write: if false;

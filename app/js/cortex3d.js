@@ -59,7 +59,8 @@
   }
 
   function buildGraphData(noData) {
-    // NO.data.usage is loaded `orderBy('timestamp', 'desc')` (newest first).
+    // NO.data.usage is merged newest-first in NO.data.computeDerived (the
+    // committed meta/usage_rollup tail plus the live Firestore tail).
     // Take the newest N from index 0, then reverse so the trail walks
     // oldest → newest (matches learning-progression direction).
     const recentUsage = (noData.usage || []).slice(0, PULSE_RECENT_N).reverse();

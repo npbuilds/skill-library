@@ -762,14 +762,24 @@ IO.data = {
     }
     const db = this._db;
 
-    const [skillsSnap, metaSnap, usageSnap, gapsSnap, evoSnap, changeSnap, evoCount] = await Promise.all([
+    const [skillsSnap, metaSnap, rollupSnap, gapsSnap, evoSnap, changeSnap, evoCount,
+           usageCount] = await Promise.all([
       db.collection('skills').get(),
       db.collection('meta').doc('registry').get(),
-      db.collection('usage').orderBy('timestamp', 'desc').get(),
+      // meta/usage_rollup, not the raw `usage` collection: that collection is
+      // written only by the Cloud Run MCP mirror, so local stdio and
+      // plugin-native loads were missing from this feed. See
+      // scripts/usage_rollup.py.
+      db.collection('meta').doc('usage_rollup').get(),
       db.collection('gaps').get(),
       db.collection('evolution_daily').orderBy('date', 'asc').get(),
       db.collection('changelogs').get(),
       db.collection('evolution').count().get(),  // true doc count, 1 read (not 27k)
+      // This panel reports literal Firestore doc counts, so it must count the
+      // real `usage` collection — which holds only cloud-mirrored events —
+      // rather than the rollup's (larger) all-writers total. Aggregation, so
+      // 1 read instead of a full scan.
+      db.collection('usage').count().get(),
     ]);
 
     // Skills
@@ -789,9 +799,45 @@ IO.data = {
     this.skillList = Object.values(skills);
     this.domains = meta.network_domains || {};
 
-    // Usage
-    this.usage = [];
-    usageSnap.forEach(d => this.usage.push(d.data()));
+    // Usage — committed rollup plus a bounded live tail of cloud events not
+    // yet exported into git. `timestamp > firestore_watermark` is the exact
+    // complement of what the pull loop has already landed in the jsonl the
+    // rollup is built from, so nothing is counted twice or missed. Awaited
+    // after the batch above because the bound is a field of the rollup.
+    this.usageRollup = rollupSnap.exists ? rollupSnap.data() : null;
+    const watermark = this.usageRollup?.firestore_watermark;
+    let tail = [];
+    if (watermark) {
+      try {
+        const tailSnap = await db.collection('usage')
+          .where('timestamp', '>', watermark)
+          .orderBy('timestamp', 'desc')
+          .get();
+        const raw = [];
+        tailSnap.forEach(d => { const r = d.data(); if (r.skill) raw.push(r); });
+        // Same per-(session, UTC day) cap the pull loop applies before landing
+        // these rows in git (--session-daily-cap, default 50). The Cloud Run
+        // endpoint is public, so without it a bot burst would show here and
+        // then vanish once the capped rows are pulled — and this page would
+        // disagree with the dashboard's totals. Rows arrive newest-first.
+        const seen = {};
+        for (const r of raw) {
+          const key = `${r.session_id || '?'}|${String(r.timestamp || '').substring(0, 10)}`;
+          seen[key] = (seen[key] || 0) + 1;
+          if (seen[key] <= 50) tail.push(r);
+        }
+      } catch (e) {
+        // The rollup alone is still valid; don't blank the feed.
+        console.warn('usage tail unavailable, showing committed rollup only:', e);
+      }
+    }
+    const src = r => (typeof r.source === 'string' && r.source.trim()) ? r.source.trim() : 'mcp';
+    this.usage = [
+      ...tail.map(e => ({ skill: e.skill, timestamp: e.timestamp, type: e.type, source: src(e) })),
+      ...((this.usageRollup?.recent) || []),
+    ].sort((a, b) => String(b.timestamp || '').localeCompare(String(a.timestamp || '')));
+    this.usageBySource = { ...((this.usageRollup?.by_source) || {}) };
+    for (const e of tail) this.usageBySource[src(e)] = (this.usageBySource[src(e)] || 0) + 1;
 
     // Gaps
     this.gaps = [];
@@ -802,6 +848,9 @@ IO.data = {
     this.evolution = [];
     evoSnap.forEach(d => this.evolution.push(d.data()));
     this.evolutionCount = evoCount.data().count;
+    // Docs in the raw `usage` collection (cloud-mirrored events only). Distinct
+    // from usageBySource, which totals all writers via the committed rollup.
+    this.usageDocCount = usageCount.data().count;
 
     // Changelogs
     this.changelogs = {};
@@ -824,10 +873,10 @@ IO.data = {
     // Collection counts
     this.collectionCounts = {
       skills: skillsSnap.size,
-      usage: usageSnap.size,
+      usage: this.usageDocCount,
       changelogs: changeSnap.size,
       gaps: gapsSnap.size,
-      meta: metaSnap.exists ? 1 : 0,
+      meta: (metaSnap.exists ? 1 : 0) + (rollupSnap.exists ? 1 : 0),
       evolution: this.evolutionCount,
     };
     this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
@@ -1328,9 +1377,12 @@ IO.changelog = {
       }
     }
 
-    // Usage events
+    // Usage events \u2014 the source (mcp|plugin) is shown because it is now
+    // load-bearing: plugin-native and local-stdio loads reach this feed only
+    // via the rollup, while cloud MCP loads also arrive in the live tail.
     for (const e of IO.data.usage) {
-      entries.push({ type: 'usage', skill: e.skill || '', date: e.timestamp || '', text: 'Used via ' + (e.type || 'tool'), icon: '\u26A1' });
+      const src = e.source || 'mcp';
+      entries.push({ type: 'usage', skill: e.skill || '', date: e.timestamp || '', text: 'Used via ' + (e.type || 'tool') + ' (' + src + ')', icon: '\u26A1' });
     }
 
     // Gap events
