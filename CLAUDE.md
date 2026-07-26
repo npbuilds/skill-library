@@ -71,6 +71,7 @@ Git is the single source of truth. Merge to main (CI green) fans out automatical
 Merge to main (CI green)
   ├─ deploy.yml         → Cloud Run image (registry + skills + search index baked in)
   ├─ sync-firestore.yml → Firestore skills/meta/changelogs (dashboard)
+  │                     + meta/usage_rollup (usage aggregate from committed jsonl)
   └─ (daily) daily-firestore.yml → evolution snapshot + health
                                  + telemetry pull → maint:green bot PR
 
@@ -78,16 +79,42 @@ Cloud MCP server: read-only tools + record_skill_feedback; usage/gap/feedback
 telemetry → Firestore (durable; local jsonl is ephemeral on Cloud Run).
 
 Usage telemetry has two producers, segmented by the `source` field:
-  source=mcp    → server.py get_skill (MCP tool calls; mirrored to Firestore)
+  source=mcp    → server.py _log_event (MCP tool calls; mirrored to Firestore)
   source=plugin → hooks/skill-invocation-telemetry.sh (Claude Code's native
                   Skill tool + slash commands, which never touch the MCP
                   server) → scripts/log_skill_invocation.py → data/usage.jsonl
 The plugin hook is registered in ~/.claude/settings.json, not this repo's
 .claude/settings.json — plugin skills are invoked from other projects, and a
 project-scoped hook would miss them (registering both would double-count).
+Its registration guards on the script existing, so an unmerged/moved checkout
+makes it a silent no-op — if source=plugin counts are flat, check that
+hooks/skill-invocation-telemetry.sh exists at the registered path.
+
+Plugin-name resolution is strict (registry names, data/skill_aliases.json,
+our own plugin prefixes). Unresolved names are written as `skill_raw`, never
+`skill`: recalibrate_scores.py divides by max_usage across every name in the
+log, so a foreign name would become the denominator and deflate every real
+skill. skill_aliases.json ships EMPTY on purpose — see
+`python3 scripts/log_skill_invocation.py --report` for what is unattributed.
 
 Structural writes: local stdio tools or /maint bot PRs only.
 Desktop: Neural Observatory.webloc ──→ https://skill-library-prod.web.app
+
+Dashboard usage (scripts/usage_rollup.py): the raw Firestore `usage` collection
+has ONE writer, the Cloud Run MCP mirror — local stdio and plugin-native loads
+(source=plugin) never reach it, yet both feed auto_score. The dashboard
+therefore reads meta/usage_rollup (a full-snapshot aggregate of committed
+data/usage.jsonl, so all writers appear, broken down by source) plus the
+`usage` docs newer than data/.telemetry_watermark for a live cloud tail. The
+watermark is the exact boundary of what the pull loop has already landed in
+git, so the two halves never overlap. NEVER push usage.jsonl into the `usage`
+collection to make it visible (`--include-telemetry` is backfill only): that
+append double-counts and gets re-pulled as duplicates. The rollup is an
+idempotent single-doc overwrite instead.
+
+INVARIANT: usage shown on the dashboard and usage behind auto_score are both
+derived from data/usage.jsonl with the same skill-load filter, so a score is
+always explainable by the usage panel.
 
 INVARIANT: merge to main converges all consumers within minutes; divergence is
 detected daily (meta/registry.synced_sha check) and alerted, never silent.
@@ -105,16 +132,6 @@ detected daily (meta/registry.synced_sha check) and alerted, never silent.
   `skill-library` in `~/.claude.json` at a local stdio server
   (`python3 mcp-server/server.py`), not the Cloud Run URL
 - Deploy app changes: `cd app && npx firebase-tools deploy --only hosting`
-- Plugin-native skill loads are attributed via `data/skill_aliases.json`
-  (invocation name → registry name). Unmapped names are logged unscored as
-  `skill_raw`; run `python3 scripts/log_skill_invocation.py --report` to see
-  what is pending a mapping. The map is empty by design: a command that
-  already calls `get_skill` is counted by the MCP path, so aliasing it would
-  double-credit the same load. Add an entry only for a command that loads a
-  library skill WITHOUT going through `get_skill`
-- Committing new `data/usage.jsonl` rows shifts usage scores, so run
-  `python3 scripts/recalibrate_scores.py` in the same commit — CI's
-  idempotency gate fails on drift over 5 points
 
 ## Auto-Trigger Skills
 

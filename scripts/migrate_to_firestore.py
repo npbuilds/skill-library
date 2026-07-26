@@ -5,6 +5,7 @@ migrate_to_firestore.py — Push local data files into Firestore.
 Reads:
   data/registry.json   → Firestore 'skills' collection + 'meta/registry' doc
   data/changelogs.json → Firestore 'changelogs' collection
+  data/usage.jsonl     → Firestore 'meta/usage_rollup' doc (always; see below)
   data/evolution.jsonl → Firestore 'evolution' collection (legacy; file retired)
                        → Firestore 'evolution_daily' collection (per-date rollup;
                          what the dashboards read, so a page load costs ~90 reads
@@ -20,8 +21,9 @@ CI mode (sync-firestore.yml runs this on every merge to main):
   python3 scripts/migrate_to_firestore.py --registry-only --prune --sha <git-sha>
 
 Flags:
-  --registry-only     Sync only skills + changelogs + meta/registry (the
-                      merge-triggered CI subset; skips evolution + telemetry).
+  --registry-only     Sync only skills + changelogs + meta/usage_rollup +
+                      meta/registry (the merge-triggered CI subset; skips
+                      evolution and the raw telemetry collections).
   --prune             With --registry-only: delete Firestore skills/changelogs
                       docs whose IDs are no longer in the registry. Refuses to
                       run if the registry holds fewer than PRUNE_SAFETY_FLOOR
@@ -36,11 +38,24 @@ Flags:
                       contains rows that ORIGINATED in Firestore — pushing
                       them back double-counts dashboard usage. Backfill/
                       recovery only; never run from CI.
+                      NOT needed to make local usage visible on the dashboard:
+                      meta/usage_rollup (below) covers that idempotently.
+
+Dashboard usage — meta/usage_rollup (see scripts/usage_rollup.py):
+  The `usage` collection has exactly one writer, the Cloud Run MCP mirror, so
+  local stdio and plugin-native loads never appeared in the dashboard even
+  though they feed auto_score. Every sync now also writes meta/usage_rollup:
+  a full-snapshot aggregate of the committed data/usage.jsonl, with a
+  source (mcp|plugin) breakdown, built with the same skill-load filter
+  recalibrate_scores.py uses. It is a single-doc OVERWRITE, so unlike
+  --include-telemetry it is idempotent, writes nothing to the `usage`
+  collection, and cannot be re-pulled as a duplicate by
+  pull_telemetry_from_firestore.py.
 
 Write ordering (failure-honest): skills + changelogs are upserted first, prune
-runs only if every upsert batch committed, and meta/registry is written LAST as
-the commit marker. A mid-run failure leaves meta/registry describing the
-previous complete snapshot.
+runs only if every upsert batch committed, meta/usage_rollup next, and
+meta/registry is written LAST as the commit marker. A mid-run failure leaves
+meta/registry describing the previous complete snapshot.
 
 Requires either:
   - GOOGLE_APPLICATION_CREDENTIALS env var pointing to a service account key, OR
@@ -54,6 +69,13 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from usage_rollup import (  # noqa: E402
+    build_skill_domain_map,
+    build_usage_rollup,
+    read_watermark,
+)
+
 try:
     import google.oauth2.credentials as oauth2_creds
 except ImportError:
@@ -61,6 +83,7 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
+WATERMARK_PATH = DATA / ".telemetry_watermark"
 
 # --prune refuses to delete anything if the registry holds fewer skills than
 # this — a truncated/corrupt registry must never be able to empty the live
@@ -306,6 +329,26 @@ def sync_registry(db, registry: dict, args) -> dict:
             keep_logs = {d["skill"] for d in changelog_docs}
             pruned += prune_collection(db, "changelogs", keep_logs, dry_run=args.dry_run)
 
+    # Usage rollup — the dashboard's usage view. Derived from the committed
+    # jsonl (which, post-pull-loop, is the union of cloud + local stdio +
+    # plugin loads), so it is the only place all three become visible. Written
+    # before meta/registry so meta/registry stays the last-write commit marker.
+    print("\n▸ Building usage rollup from usage.jsonl...")
+    rollup = build_usage_rollup(
+        parse_jsonl(DATA / "usage.jsonl"),
+        build_skill_domain_map(registry),
+        watermark=read_watermark(WATERMARK_PATH),
+    )
+    if not args.dry_run:
+        db.collection("meta").document("usage_rollup").set(rollup)
+    sources = ", ".join(f"{s}={n}" for s, n in rollup["by_source"].items()) or "none"
+    print(f"  ✓ meta/usage_rollup: {rollup['event_count']} skill-load events "
+          f"over {len(rollup['totals'])} skills [{sources}] "
+          f"{'(dry-run)' if args.dry_run else 'written'}")
+    if rollup["firestore_watermark"] is None:
+        print("  ⚠ no data/.telemetry_watermark — dashboard will show committed "
+              "history only (no live cloud tail) until the pull loop bootstraps")
+
     # meta/registry written LAST: the commit marker. If anything above raised,
     # this never runs and the dashboard's headline metadata still describes the
     # previous complete snapshot.
@@ -316,7 +359,8 @@ def sync_registry(db, registry: dict, args) -> dict:
           f"{f' [synced_sha={args.sha[:12]}…]' if args.sha else ''}")
 
     return {"skills": len(skill_docs), "changelogs": len(changelog_docs),
-            "pruned": len(pruned)}
+            "pruned": len(pruned), "usage_events": rollup["event_count"],
+            "usage_by_source": rollup["by_source"]}
 
 
 def main():
@@ -394,6 +438,9 @@ def main():
     print("═══ Migration Summary ═══")
     print(f"  Skills:     {summary['skills']}")
     print(f"  Changelogs: {summary['changelogs']}")
+    usage_sources = ", ".join(
+        f"{s}={n}" for s, n in summary["usage_by_source"].items()) or "none"
+    print(f"  Usage roll: {summary['usage_events']} events ({usage_sources})")
     if args.prune:
         print(f"  Pruned:     {summary['pruned']}")
     if not args.registry_only:

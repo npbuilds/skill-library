@@ -75,8 +75,14 @@ def _mirror_telemetry_enabled() -> bool:
 def _log_event(path: Path, event: dict) -> None:
     """Append a JSON event to a JSONL log file (with file locking).
 
-    Every record carries session_id (server-process UUID) and timestamp.
-    Caller can override session_id via the event dict but normally shouldn't.
+    Every record carries session_id (server-process UUID), source, and
+    timestamp. Caller can override session_id/source via the event dict but
+    normally shouldn't.
+
+    `source` defaults here rather than at each call site so gaps.jsonl and
+    feedback.jsonl (and usage's search events) are self-describing too — every
+    row this process writes is an MCP row by definition. The plugin-native
+    path stamps "plugin" from its own writer, scripts/log_skill_invocation.py.
 
     In remote mode (with TELEMETRY_FIRESTORE=1) the record is also mirrored to
     Firestore — the local file is ephemeral on Cloud Run, and the mirror is
@@ -84,6 +90,7 @@ def _log_event(path: Path, event: dict) -> None:
     """
     record = {
         "session_id": _SERVER_SESSION_ID,
+        "source": SOURCE_MCP,
         **event,
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
@@ -617,13 +624,9 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
         available = ", ".join(sorted(skills.keys()))
         return f"Skill '{skill_name}' not found. Available skills: {available}"
 
-    # Log usage. `source` segments this stream from the plugin-native loads
-    # recorded by hooks/skill-invocation-telemetry.sh.
-    _log_event(USAGE_LOG, {
-        "skill": skill_name,
-        "type": entry.get("type", "unknown"),
-        "source": SOURCE_MCP,
-    })
+    # Log usage. _log_event stamps source=mcp, segmenting this stream from the
+    # plugin-native loads recorded by hooks/skill-invocation-telemetry.sh.
+    _log_event(USAGE_LOG, {"skill": skill_name, "type": entry.get("type", "unknown")})
 
     skill_path = resolve_skill_path(entry, skill_name)
     if skill_path is None:

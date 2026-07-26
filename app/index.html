@@ -542,6 +542,21 @@ body::after {
   transition: background 0.2s var(--ease);
   min-height: 12px;
 }
+/* Usage-by-source chip in the heatmap panel's title row */
+.usage-source-breakdown {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.usage-source-breakdown .coverage-dot { margin-right: 3px; }
 
 /* ═══════════════════════════════════════════════
    BOTTOM PANELS (Timeline + Table)
@@ -1142,7 +1157,13 @@ body::after {
   <!-- Sidebar Stack -->
   <div class="sidebar-stack">
     <div class="no-panel" id="heatmap-panel">
-      <div class="no-panel-title">Fluency Heatmap</div>
+      <!-- The breakdown lives in the title row, not under the grid: the grid's
+           aspect-ratio cells fill the panel's fixed height, so anything below
+           it falls outside the panel's overflow:hidden box and is invisible.
+           Usage by writer (mcp|plugin) — see NO.usageSources. -->
+      <div class="no-panel-title">Fluency Heatmap
+        <span id="usage-source-breakdown" class="usage-source-breakdown"></span>
+      </div>
       <div id="heatmap-grid" class="heatmap-grid"></div>
     </div>
     <div class="no-panel" id="depth-panel">
@@ -1226,10 +1247,15 @@ NO.data = {
     }
     const db = this._db;
 
-    const [skillsSnap, metaSnap, usageSnap, gapsSnap, evoSnap, changeSnap] = await Promise.all([
+    const [skillsSnap, metaSnap, rollupSnap, gapsSnap, evoSnap, changeSnap] = await Promise.all([
       db.collection('skills').get(),
       db.collection('meta').doc('registry').get(),
-      db.collection('usage').orderBy('timestamp', 'desc').get(),
+      // Usage comes from meta/usage_rollup, NOT the raw `usage` collection.
+      // That collection has one writer (the Cloud Run MCP mirror), so local
+      // stdio and plugin-native loads were never in it — yet they feed
+      // auto_score. The rollup aggregates the committed data/usage.jsonl,
+      // which holds all three. See scripts/usage_rollup.py.
+      db.collection('meta').doc('usage_rollup').get(),
       db.collection('gaps').get(),
       db.collection('evolution_daily').orderBy('date', 'asc').get(),
       db.collection('changelogs').get(),
@@ -1251,9 +1277,11 @@ NO.data = {
     this.skillList = Object.values(skills);
     this.domains = meta.network_domains || {};
 
-    // Usage
-    this.usage = [];
-    usageSnap.forEach(d => this.usage.push(d.data()));
+    // Usage — committed rollup + a bounded live tail of cloud events not yet
+    // exported into git. Awaited after the batch above because the tail's
+    // lower bound is a field of the rollup.
+    this.usageRollup = rollupSnap.exists ? rollupSnap.data() : null;
+    this.usageTail = await this.loadUsageTail(db, this.usageRollup);
 
     // Gaps
     this.gaps = [];
@@ -1284,6 +1312,66 @@ NO.data = {
     this.computeDerived();
   },
 
+  /* Live tail: cloud usage events newer than the rollup's watermark.
+   *
+   * pull_telemetry_from_firestore.py guarantees every `usage` doc with
+   * timestamp <= data/.telemetry_watermark has already been exported into the
+   * committed jsonl the rollup is built from. So `timestamp > watermark` is an
+   * exact complement — it can neither double-count a pulled event nor miss an
+   * unpulled one — and it replaces what used to be an unbounded read of the
+   * whole collection.
+   *
+   * No watermark means the pull loop has never bootstrapped, so which cloud
+   * docs are in git is unknown. Show the rollup alone: undercounting until the
+   * loop runs is acceptable, double-counting is not.
+   */
+  async loadUsageTail(db, rollup) {
+    const watermark = rollup?.firestore_watermark;
+    if (!watermark) return [];
+    try {
+      const snap = await db.collection('usage')
+        .where('timestamp', '>', watermark)
+        .orderBy('timestamp', 'desc')
+        .get();
+      const rows = [];
+      snap.forEach(d => { const r = d.data(); if (r.skill) rows.push(r); });
+      return this.capUsageTail(rows);
+    } catch (e) {
+      // A tail failure must not blank the whole usage view — the rollup is
+      // still valid on its own.
+      console.warn('usage tail unavailable, showing committed rollup only:', e);
+      this.usageTailError = e.message || String(e);
+      return [];
+    }
+  },
+
+  /* Same per-(session, UTC day) cap the pull loop applies (its
+   * --session-daily-cap, default 50). The Cloud Run endpoint is public, so
+   * bot traffic can burst usage events; without this the live tail would show
+   * spikes that vanish once the capped rows are pulled into git. Rows arrive
+   * newest-first, so this keeps each session-day's newest N. */
+  capUsageTail(rows, cap = 50) {
+    const counts = {};
+    const kept = [];
+    let dropped = 0;
+    for (const r of rows) {
+      const key = `${r.session_id || '?'}|${String(r.timestamp || '').substring(0, 10)}`;
+      counts[key] = (counts[key] || 0) + 1;
+      if (counts[key] > cap) dropped++;
+      else kept.push(r);
+    }
+    this.usageTailDropped = dropped;
+    return kept;
+  },
+
+  /* Source bucket for one raw usage row. Mirrors normalize_source() in
+   * scripts/usage_rollup.py: rows predating the `source` field came from the
+   * MCP server, the only writer at the time. */
+  usageSource(row) {
+    const s = row.source;
+    return (typeof s === 'string' && s.trim()) ? s.trim() : 'mcp';
+  },
+
   computeDerived() {
     // Count cross-domain edges
     let crossCount = 0;
@@ -1302,22 +1390,53 @@ NO.data = {
     this.totalEdges = totalEdges;
     this.crossDomainEdges = crossCount;
 
-    // Usage counts
-    this.usageCounts = {};
-    for (const e of this.usage) {
+    // ── Usage: committed rollup + live tail ──
+    // Start from the rollup's exact all-time aggregates, then fold in the tail
+    // (disjoint from the rollup by the watermark boundary — see loadUsageTail).
+    const roll = this.usageRollup || {};
+
+    // Per-skill totals, and the same totals split by source (mcp|plugin|…).
+    this.usageCounts = { ...(roll.totals || {}) };
+    this.usageCountsBySource = {};
+    for (const [src, totals] of Object.entries(roll.totals_by_source || {})) {
+      this.usageCountsBySource[src] = { ...totals };
+    }
+    this.usageBySource = { ...(roll.by_source || {}) };
+
+    // Heatmap: domain × day. Skills with no domain are skipped, as before.
+    this.heatmapData = { ...(roll.domain_day || {}) };
+
+    for (const e of this.usageTail || []) {
+      const src = this.usageSource(e);
       this.usageCounts[e.skill] = (this.usageCounts[e.skill] || 0) + 1;
+      this.usageBySource[src] = (this.usageBySource[src] || 0) + 1;
+      const bySrc = this.usageCountsBySource[src] || (this.usageCountsBySource[src] = {});
+      bySrc[e.skill] = (bySrc[e.skill] || 0) + 1;
+
+      const d = this.skillDomain[e.skill];
+      const day = e.timestamp?.substring(0, 10);
+      if (d && day) {
+        const key = `${d}|${day}`;
+        this.heatmapData[key] = (this.heatmapData[key] || 0) + 1;
+      }
     }
 
-    // Heatmap: domain × day
-    this.heatmapData = {};
-    for (const e of this.usage) {
-      const d = this.skillDomain[e.skill];
-      if (!d) continue;
-      const day = e.timestamp?.substring(0, 10);
-      if (!day) continue;
-      const key = `${d}|${day}`;
-      this.heatmapData[key] = (this.heatmapData[key] || 0) + 1;
-    }
+    // Per-event list, newest-first — what the recency pulse (first 15) and the
+    // learning trail walk. Merged rather than concatenated: the rollup's tail
+    // includes local/plugin rows whose timestamps can exceed the watermark,
+    // so the two lists interleave in time even though their events are
+    // disjoint. Capped at the rollup's own recent_limit.
+    const limit = roll.recent_limit || 300;
+    this.usage = [
+      ...(this.usageTail || []).map(e => ({
+        skill: e.skill, timestamp: e.timestamp, source: this.usageSource(e),
+      })),
+      ...(roll.recent || []),
+    ]
+      .sort((a, b) => String(b.timestamp || '').localeCompare(String(a.timestamp || '')))
+      .slice(0, limit);
+
+    this.usageTotal = Object.values(this.usageBySource).reduce((a, b) => a + b, 0);
   }
 };
 
@@ -1374,7 +1493,15 @@ NO.detail = {
     html += this.metaItem('Words', (m.body_words || 0).toLocaleString());
     html += this.metaItem('Tokens', (m.estimated_tokens_total || 0).toLocaleString());
     html += this.metaItem('Refs', m.reference_files || 0);
-    html += this.metaItem('Used', used + 'x');
+    // Per-skill source split, so a load count is attributable to the writer
+    // that produced it (mcp = MCP server incl. local stdio; plugin = hook).
+    const srcSplit = Object.entries(NO.data.usageCountsBySource || {})
+      .map(([src, counts]) => [src, counts[name] || 0])
+      .filter(([, n]) => n > 0)
+      .sort((a, b) => b[1] - a[1])
+      .map(([src, n]) => `${NO.usageSources.labels[src] || src} ${n}`)
+      .join(' · ');
+    html += this.metaItem('Used', used + 'x' + (srcSplit ? ` (${srcSplit})` : ''));
     html += `</div>`;
 
     // Radar SVG
@@ -2290,15 +2417,16 @@ NO.heatmap = {
     const domains = NO.data.domainOrder.slice(0, 8); // Top 8 for space
     const hm = NO.data.heatmapData;
 
-    // Get last 7 unique days from usage
+    // Last 7 active days, taken from the heatmap map itself rather than from
+    // NO.data.usage: that event list is capped at the rollup's recent_limit,
+    // so it can miss older active days, whereas heatmapData is exact across
+    // the rollup's full domain×day window plus the live tail.
     const allDays = new Set();
-    for (const e of NO.data.usage) {
-      const d = e.timestamp?.substring(0, 10);
-      if (d) allDays.add(d);
-    }
+    for (const key of Object.keys(hm)) allDays.add(key.split('|')[1]);
     const days = [...allDays].sort().slice(-7);
     if (!days.length) {
       grid.innerHTML = '<div style="color:var(--text-dim);font-size:11px;padding:4px">No usage data</div>';
+      NO.usageSources.render();
       return;
     }
 
@@ -2326,6 +2454,71 @@ NO.heatmap = {
     }
 
     grid.innerHTML = html;
+    NO.usageSources.render();
+  }
+};
+
+/* ─── Usage Source Breakdown ─── */
+/* Which writer produced the usage the panel above is drawing. Worth surfacing
+ * because the sources have different visibility paths: "mcp" covers both the
+ * Cloud Run server (mirrored to Firestore, near-real-time here) and local
+ * stdio installs, while "plugin" comes from the plugin-native hook — and
+ * neither local stdio nor plugin loads reached this dashboard at all before
+ * meta/usage_rollup existed, despite both feeding auto_score. */
+NO.usageSources = {
+  labels: { mcp: 'MCP', plugin: 'Plugin' },
+  colors: { mcp: 'var(--cyan-bright)', plugin: '#ce9a6a' },
+
+  render() {
+    const el = document.getElementById('usage-source-breakdown');
+    if (!el) return;
+    const data = NO.data;
+    const bySource = data.usageBySource || {};
+    const entries = Object.entries(bySource).sort((a, b) => b[1] - a[1]);
+
+    // Provenance, surfaced as the chip's tooltip: the rollup is committed
+    // history (all writers), the tail is live cloud events not yet in git.
+    const tail = (data.usageTail || []).length;
+    const notes = [];
+    if (!data.usageRollup) notes.push('meta/usage_rollup missing — run sync-firestore.yml');
+    else {
+      notes.push(`${data.usageRollup.event_count} events from committed data/usage.jsonl`);
+      if (data.usageRollup.firestore_watermark) {
+        notes.push(`${tail} live cloud event(s) after ${data.usageRollup.firestore_watermark}`);
+      } else {
+        notes.push('no telemetry watermark — committed history only, no live tail');
+      }
+      if (data.usageRollup.recent_truncated) {
+        notes.push(`event trail capped at ${data.usageRollup.recent_limit}`);
+      }
+    }
+    if (data.usageTailDropped) {
+      notes.push(`${data.usageTailDropped} live event(s) hidden by the 50/session/day bot guard`);
+    }
+    if (data.usageTailError) notes.push('live tail unavailable — rollup only');
+    const tip = this.esc(notes.join('\n'));
+
+    if (!entries.length) {
+      el.title = tip;
+      el.innerHTML = `<span>no usage recorded</span>`;
+      return;
+    }
+
+    const total = data.usageTotal || 0;
+    el.title = tip;
+    el.innerHTML = entries.map(([src, n]) => {
+      const color = this.colors[src] || '#9a9aaa';
+      const label = this.esc(this.labels[src] || src);
+      const pct = total ? Math.round((n / total) * 100) : 0;
+      return `<span><span class="coverage-dot" style="background:${color}"></span>` +
+        `${label} ${n}<span style="opacity:0.6"> ${pct}%</span></span>`;
+    }).join('');
+    if (tail) el.innerHTML += `<span style="opacity:0.6">+${tail} live</span>`;
+  },
+
+  esc(s) {
+    return String(s).replace(/[&<>"']/g, c =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
 };
 
