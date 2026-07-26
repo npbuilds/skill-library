@@ -1,0 +1,130 @@
+name: Deploy dashboard to Firebase Hosting
+
+# Closes the last manual step in the fan-out. Merging to main already converges
+# every other consumer automatically — deploy.yml rebuilds the Cloud Run image,
+# sync-firestore.yml pushes registry + meta/usage_rollup, daily-firestore.yml
+# snapshots and pulls telemetry — but app/ waited for someone to remember
+# `cd app && npx firebase-tools deploy --only hosting`.
+#
+# The cost of that gap, observed 2026-07-26: meta/usage_rollup was live in
+# Firestore for hours while the dashboard served a build that predated it, so
+# the fix was invisible and nothing detected the divergence. The synced_sha
+# consistency check in daily-firestore.yml covers Firestore only.
+#
+# Deliberately a SEPARATE workflow from deploy.yml, matching the rationale in
+# sync-firestore.yml: a Hosting outage must not block MCP deploys, and vice
+# versa. The trade-off is that consumers can briefly diverge — which the
+# post-deploy verification below turns into a hard failure instead of silence.
+#
+# ONE-TIME PREREQ — the deploy service account needs Hosting admin, or the
+# first run fails on auth:
+#   gcloud projects add-iam-policy-binding <PROJECT> \
+#     --member="serviceAccount:<DEPLOY_SA_EMAIL>" \
+#     --role="roles/firebasehosting.admin"
+# (Same shape as the roles/datastore.user grant daily-firestore.yml documents.)
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:  # manual trigger for recovery/redeploy
+
+permissions:
+  contents: read
+  id-token: write  # required for Workload Identity Federation
+
+concurrency:
+  group: deploy-hosting
+  # Never cancel a release mid-flight. Queued runs each publish a complete
+  # snapshot of app/, so last-writer-wins converges regardless.
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: app/ → Firebase Hosting
+    runs-on: ubuntu-latest
+
+    # Only on CI success (or manual trigger); never on CI failure.
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      # Pin to the exact commit CI validated — same reasoning as deploy.yml and
+      # sync-firestore.yml. NOT $GITHUB_SHA: on workflow_run that is the
+      # default-branch HEAD at trigger time, which races with later pushes and
+      # would publish bytes that disagree with the commit we claim to deploy.
+      # fetch-depth 2 so the app/-changed check below can diff against the
+      # previous commit.
+      - name: Checkout CI-validated commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 2
+
+      # Most merges never touch app/. Skipping them keeps the Hosting release
+      # history meaningful (one release per dashboard change, not per merge)
+      # without ever skipping a merge that did change it. workflow_dispatch
+      # always deploys, so recovery from a divergence is one click.
+      - name: Did this commit change app/ ?
+        id: changed
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            echo "Manual dispatch — deploying regardless of diff."
+          elif git rev-parse HEAD~1 >/dev/null 2>&1 && git diff --quiet HEAD~1 HEAD -- app/; then
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+            echo "app/ unchanged in $(git rev-parse --short HEAD) — nothing to publish."
+          else
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+            echo "app/ changed:"
+            git diff --stat HEAD~1 HEAD -- app/ || true
+          fi
+
+      - name: Authenticate to GCP (Workload Identity Federation)
+        if: ${{ steps.changed.outputs.deploy == 'true' }}
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOY_SA_EMAIL }}
+
+      # --only hosting on purpose: firestore.rules and firestore.indexes.json
+      # also live under app/, and changing security rules or indexes is a
+      # deliberate act that should not ride along with an HTML edit.
+      # firebase-tools is pinned to a major so a breaking release cannot take
+      # the dashboard offline without a visible bump here.
+      - name: Deploy hosting
+        if: ${{ steps.changed.outputs.deploy == 'true' }}
+        working-directory: app
+        run: >
+          npx --yes firebase-tools@15 deploy --only hosting
+          --project "${{ vars.GCP_PROJECT_ID }}"
+          --non-interactive
+
+      # The other half of the 2026-07-26 failure was that nobody NOTICED the
+      # divergence. Assert the bytes actually served now match the commit we
+      # deployed, so a silently-failed release becomes a red run.
+      - name: Verify deployed bytes match this commit
+        if: ${{ steps.changed.outputs.deploy == 'true' }}
+        run: |
+          set -euo pipefail
+          BASE="https://${{ vars.GCP_PROJECT_ID }}.web.app"
+          fail=0
+          for page in index infra profile; do
+            [ -f "app/${page}.html" ] || continue
+            # Retry: a fresh release can take a few seconds to propagate.
+            for attempt in 1 2 3 4 5; do
+              curl -fsS "${BASE}/${page}.html" -o "/tmp/live-${page}.html" || true
+              if diff -q "/tmp/live-${page}.html" "app/${page}.html" >/dev/null 2>&1; then
+                echo "✓ ${page}.html matches"
+                break
+              fi
+              if [ "$attempt" = "5" ]; then
+                echo "::error::${page}.html served by Hosting does not match app/${page}.html at $(git rev-parse --short HEAD)"
+                diff "/tmp/live-${page}.html" "app/${page}.html" | head -20 || true
+                fail=1
+              else
+                sleep 5
+              fi
+            done
+          done
+          exit "$fail"
