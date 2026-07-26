@@ -273,11 +273,25 @@ BLANK_COMPACT = {
 
 AUDIT_TEMPLATE = """## Phase 2 — baseline self-audit scorecard
 
-Pre-registered guess (fill BEFORE scoring): weakest two faculties are ______ and ______.
+**Step 1 — pre-register before scoring anything.** Weakest two faculties will be ______ and ______.
+(This is calibration data point zero. Do not revise it after scoring.)
 
-Score each faculty 1-5 from **transcript evidence only** — what actually happened, not what you
-remember intending. Then run the same transcripts past a fresh-context grader with the rubric
-verbatim and record its score before reconciling.
+**Step 2 — score from transcript evidence only.** What actually happened, not what you remember
+intending. One session, timeboxed. Unaided self-assessment correlates only r~0.26-0.33 with
+objective performance, so the anchors below are the instrument — score against them, not vibes.
+
+### Anchor crib (full anchors: skill-lab/2026-07-25-orchestration-mastery-practice-plan)
+
+| | 1 | 3 | 5 |
+|---|---|---|---|
+| **S1** verification | no pass/fail criteria; accepts "done" narrative | criteria written before delegating; runs checks | ladder designed up front; demands artifacts; adversarial fresh-context reviewer |
+| **S2** decomp/spec | mega-prompts; no spec; iterates in a degraded session | explores then plans; specs large tasks | interview-to-spec; decomposition matches dependency structure; watching optional |
+| **S3** context | kitchen-sink sessions; corrects same agent 3+ times | clears between tasks; two-strikes restart | context budgeted end-to-end; isolation by design; artifacts over memory |
+| **S4** delegation/arch | defaults to a favorite topology; no sizing; rides failures | sizes 1-6h; WIP 3-5; abandons early | selects among workflow/single/ensemble/manager-worker/handoff/**no-AI** and defends the rejected simpler alternative; predicts the winner |
+| **S5** review | rubber-stamps fluent output, or line-reads everything | risk-weighted; aware of the 4 satisficing traps | review pipeline designed; cost per accepted artifact measured and engineered down |
+| **S6** trust/recovery | global trust or distrust; failure = longer prompt | capability map; re-tests on version change; detects and stops | delegates more AND intervenes more; pre-registered predictions; bounded diagnostic + changed attempt |
+
+### Scores
 
 | Run | S1 verif | S2 decomp | S3 context | S4 deleg/arch | S5 review | S6 trust/recov |
 |---|---|---|---|---|---|---|
@@ -287,17 +301,29 @@ verbatim and record its score before reconciling.
 | dataviz round | | | | | | |
 | book-1 four-lane Workflow | | | | | | |
 | **median** | | | | | | |
-| **blind grader** | | | | | | |
+| **blind grader** (score BEFORE reconciling) | | | | | | |
 
-Codex's four questions, per run:
+**Step 3 — blind grader.** Run the same transcripts past a fresh-context grader with the rubric
+verbatim, architecture identity stripped. Record its row above *before* reconciling with yours.
+Disagreement is not noise: it is direct S1 data and the first evidence on whether LLM-as-judge
+works as a calibration anchor here.
+
+### Codex's four questions, per run
 
 | Run | Why this architecture? | Simpler alternative rejected? | End state independently verifiable? | What happened when it drifted? |
 |---|---|---|---|---|
-| | | | | |
+| Archon v2.1 build | | | | |
+| Scheherazade two-critic loop | | | | |
+| conflict-design 106-agent round | | | | |
+| dataviz round | | | | |
+| book-1 four-lane Workflow | | | | |
 
-**Weakest two (observed):** ______ and ______
-**Prediction correct?** yes / partly / no  → first calibration data point
-**Ladder reordering implied:** ______
+### Output
+
+- **Weakest two (observed):** ______ and ______
+- **Pre-registration correct?** yes / partly / no  → first calibration data point
+- **Learner vs blind grader — largest gap:** ______ (which faculty, how many points, why)
+- **Ladder reordering implied:** ______ (reorder R1-R6 so the weakest two get stressed first)
 """
 
 
