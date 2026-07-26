@@ -18,6 +18,14 @@ GAPS_LOG = DATA_DIR / "gaps.jsonl"
 FEEDBACK_LOG = DATA_DIR / "feedback.jsonl"
 SKILLS_DIR = PROJECT_ROOT / "skills"
 
+# Telemetry provenance. "mcp" = the MCP server's get_skill tool; "plugin" =
+# Claude Code's native Skill tool / slash commands, captured by the
+# PostToolUse hook (hooks/skill-invocation-telemetry.sh). Events written
+# before the hook existed carry no `source` and are all MCP loads, so
+# event_source() defaults them to "mcp" rather than "unknown".
+SOURCE_MCP = "mcp"
+SOURCE_PLUGIN = "plugin"
+
 
 def record_feedback_entry(skill_name: str, rating: int, note: str = "") -> str:
     """Record feedback for a skill (standalone, no MCP server dependency)."""
@@ -69,6 +77,20 @@ def iter_skill_uses(events):
     explicit and prevents the empty-string bucket from inflating max_usage.
     """
     return (e for e in events if e.get("skill"))
+
+
+def event_source(event: dict) -> str:
+    """Provenance of a telemetry event: SOURCE_MCP or SOURCE_PLUGIN.
+
+    Pre-hook rows have no `source` field and were all written by the MCP
+    server's get_skill, so a missing field reads as "mcp".
+    """
+    return event.get("source") or SOURCE_MCP
+
+
+def source_breakdown(events) -> Counter:
+    """Count events by provenance — how much usage is MCP vs plugin-native."""
+    return Counter(event_source(e) for e in events)
 
 
 def atomic_write_registry(registry: dict) -> None:
