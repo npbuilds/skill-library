@@ -1248,7 +1248,7 @@ IO.ops = {
       { label: 'Cloud Run', value: live.cloudrun.value, dot: live.cloudrun.dot,
         tip: 'Live check of the public Cloud Run /health endpoint. 1 CPU, 2GB RAM, max 1 instance.' },
       { label: 'Firestore', value: 'online', dot: 'green',
-        tip: 'Live Firestore reads populated this page. Public reads and authenticated writes are enforced by rules.' },
+        tip: 'Live Firestore reads populated this page. Public reads are allowed; all client writes are denied by rules.' },
       { label: 'Scheduler', value: '3 configured', dot: 'green',
         tip: 'Three enabled jobs run validation, recalibration, and knowledge-base refresh on their own schedules.' },
       { label: 'Delivery', value: live.delivery.value, dot: live.delivery.dot,
