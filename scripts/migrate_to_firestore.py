@@ -94,7 +94,15 @@ PRUNE_SAFETY_FLOOR = 100
 # ── Helpers ──────────────────────────────────────────────────────────
 
 def parse_jsonl(path: Path) -> list[dict]:
-    """Parse a JSONL file into a list of dicts."""
+    """Parse a JSONL file into a list of dicts.
+
+    Non-dict rows are dropped and reported, not returned: a line like `"foo"`,
+    `[1,2]` or `null` parses without error yet has no `.get`, and every consumer
+    treats rows as mappings (build_usage_rollup's totals, and
+    pull_telemetry_from_firestore's `row.get("_fs_id")` dedupe — which runs in
+    the nightly bot-PR job). Enforcing the annotated type here covers them all;
+    see the matching guard in shared.load_log.
+    """
     if not path.exists():
         print(f"  ⚠ {path.name} not found, skipping")
         return []
@@ -103,9 +111,15 @@ def parse_jsonl(path: Path) -> list[dict]:
         if not line.strip():
             continue
         try:
-            entries.append(json.loads(line))
+            entry = json.loads(line)
         except json.JSONDecodeError as e:
             print(f"  ⚠ {path.name} line {i+1}: {e}")
+            continue
+        if isinstance(entry, dict):
+            entries.append(entry)
+        else:
+            print(f"  ⚠ {path.name} line {i+1}: expected a JSON object, "
+                  f"got {type(entry).__name__} — skipping")
     return entries
 
 

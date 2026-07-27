@@ -117,6 +117,98 @@ def test_session_daily_cap_bounds_runaway_loops():
         assert over_session_cap(other, path) is False, "cap is per session"
 
 
+def test_cap_still_applies_when_rows_scroll_far_past_the_tail():
+    """Regression: the cap used to scan only the last CAP_SCAN_LINES (2000)
+    rows, so once a session's events scrolled past that window it silently
+    stopped applying — the runaway-loop guard failed open exactly when a
+    runaway loop had made the log long. recalibrate_scores.py divides by
+    max_usage, so one inflated skill becomes the denominator and deflates every
+    other skill's usage score.
+    """
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / "usage.jsonl"
+        for i in range(50):
+            append_event(
+                {"session_id": "s1", "skill": "six-eyes", "source": "plugin",
+                 "timestamp": f"2026-07-26T00:00:{i:02d}+00:00"},
+                path,
+            )
+        # Bury them under far more than the old 2000-line window.
+        for i in range(2500):
+            append_event(
+                {"session_id": "other", "skill": "alpha", "source": "mcp",
+                 "timestamp": "2026-07-26T02:00:00+00:00"},
+                path,
+            )
+        assert over_session_cap(
+            {"session_id": "s1", "timestamp": "2026-07-26T03:00:00+00:00"}, path
+        ) is True, "cap must not fail open once the log outgrows any fixed window"
+
+
+def test_cap_survives_out_of_order_timestamps():
+    """No date-based early exit: the log is append-ORDERED but not
+    chronological — pull_telemetry_from_firestore.py appends cloud rows whose
+    timestamps predate local rows already in the file. Reaching an older date
+    while scanning backwards must not be taken to mean "today is behind us".
+    """
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / "usage.jsonl"
+        for i in range(50):
+            append_event(
+                {"session_id": "s1", "skill": "six-eyes", "source": "plugin",
+                 "timestamp": f"2026-07-26T00:00:{i:02d}+00:00"},
+                path,
+            )
+        # A later-appended row from an EARLIER day, exactly as the pull loop writes.
+        append_event(
+            {"session_id": "cloud", "skill": "alpha", "source": "mcp",
+             "timestamp": "2026-07-11T00:00:00+00:00", "_fs_id": "cloud_x_1"},
+            path,
+        )
+        assert over_session_cap(
+            {"session_id": "s1", "timestamp": "2026-07-26T03:00:00+00:00"}, path
+        ) is True, "an older trailing row must not short-circuit the scan"
+
+
+def test_cap_tolerates_corrupt_and_non_dict_lines():
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / "usage.jsonl"
+        with open(path, "a") as f:
+            f.write('{"broken json\n')
+            f.write('"a bare string"\n')
+            f.write("[1,2,3]\n")
+            f.write("\n")
+        for i in range(50):
+            append_event(
+                {"session_id": "s1", "skill": "six-eyes", "source": "plugin",
+                 "timestamp": f"2026-07-26T00:00:{i:02d}+00:00"},
+                path,
+            )
+        assert over_session_cap(
+            {"session_id": "s1", "timestamp": "2026-07-26T03:00:00+00:00"}, path
+        ) is True
+
+
+def test_backward_line_reader_matches_forward_read():
+    """The chunked reverse reader must not lose or split lines at chunk
+    boundaries — verified with a chunk size far smaller than the data."""
+    from log_skill_invocation import _iter_lines_backwards
+
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / "u.jsonl"
+        expected = [json.dumps({"n": i, "pad": "x" * (i % 37)}) for i in range(500)]
+        path.write_text("\n".join(expected) + "\n")
+        for chunk in (7, 64, 1000, 1 << 20):
+            got = list(_iter_lines_backwards(path, chunk_size=chunk))
+            assert got == list(reversed(expected)), f"chunk_size={chunk} lost/split lines"
+        # Missing file yields nothing rather than raising.
+        assert list(_iter_lines_backwards(Path(d) / "nope.jsonl")) == []
+        # No trailing newline still yields the final line.
+        p2 = Path(d) / "v.jsonl"
+        p2.write_text('{"a":1}\n{"b":2}')
+        assert list(_iter_lines_backwards(p2, chunk_size=3)) == ['{"b":2}', '{"a":1}']
+
+
 def test_cap_ignores_mcp_events():
     # The MCP server has its own path; its volume must not starve the hook.
     with tempfile.TemporaryDirectory() as d:

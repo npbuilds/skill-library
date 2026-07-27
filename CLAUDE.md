@@ -78,6 +78,8 @@ Merge to main (CI green)
   ├─ deploy.yml         → Cloud Run image (registry + skills + search index baked in)
   ├─ sync-firestore.yml → Firestore skills/meta/changelogs (dashboard)
   │                     + meta/usage_rollup (usage aggregate from committed jsonl)
+  ├─ deploy-hosting.yml → app/ → Firebase Hosting, when the commit touched app/
+  │                     (then asserts the bytes served match the commit)
   └─ (daily) daily-firestore.yml → evolution snapshot + health
                                  + telemetry pull → maint:green bot PR
 
@@ -137,7 +139,14 @@ detected daily (meta/registry.synced_sha check) and alerted, never silent.
 - The cloud MCP endpoint removes structural write tools; to use them, point
   `skill-library` in `~/.claude.json` at a local stdio server
   (`python3 mcp-server/server.py`), not the Cloud Run URL
-- Deploy app changes: `cd app && npx firebase-tools deploy --only hosting`
+- App changes deploy themselves: `deploy-hosting.yml` publishes `app/` on every
+  CI-green merge that touched it, then asserts the served bytes match the
+  commit. Hosting used to be the one consumer that waited for a human, and on
+  2026-07-26 the dashboard served a stale build for hours while Firestore was
+  already correct. Manual `cd app && npx firebase-tools deploy --only hosting`
+  is now recovery-only; prefer re-running the workflow via `workflow_dispatch`.
+  Note `--only hosting`: `firestore.rules`/`firestore.indexes.json` also live in
+  `app/` and are never deployed by CI, so rules changes stay deliberate.
 
 ## Auto-Trigger Skills
 

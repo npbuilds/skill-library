@@ -484,6 +484,53 @@ class TestLoadLog:
         result = server._load_log(log)
         assert len(result) == 2
 
+    def test_enforces_list_of_dicts(self, tmp_path):
+        """A jsonl line can parse cleanly and still not be an object.
+
+        `"foo"`, `[1,2]`, `123` and `null` are all valid JSON. Every consumer
+        treats rows as mappings, so returning one of these hands an
+        AttributeError to get_skill_stats' unattributed count, cli's
+        _show_skill_stats, source_breakdown and pull_telemetry's _fs_id dedupe.
+        The annotation says list[dict]; this pins that it is true.
+        """
+        log = tmp_path / "nondict.jsonl"
+        log.write_text(
+            '{"skill": "alpha"}\n'
+            '"a bare string"\n'
+            '[1, 2, 3]\n'
+            '123\n'
+            'null\n'
+            'true\n'
+            '{"skill": "beta"}\n'
+        )
+        result = server._load_log(log)
+        assert result == [{"skill": "alpha"}, {"skill": "beta"}], result
+        assert all(isinstance(r, dict) for r in result)
+
+    def test_stats_survive_a_non_dict_row(self, tmp_project, monkeypatch):
+        """get_skill_stats has no try/except, and its unattributed count reads
+        raw rows — a non-dict row used to raise straight out of the tool."""
+        from shared import source_breakdown
+
+        hostile = [
+            {"skill": "color-theory", "type": "knowledge", "source": "mcp",
+             "timestamp": "2026-07-01T00:00:00+00:00"},
+            {"skill_raw": "codex:review", "source": "plugin",
+             "type": "unresolved", "timestamp": "2026-07-01T01:00:00+00:00"},
+        ]
+        log = tmp_project / "data" / "usage.jsonl"
+        log.parent.mkdir(parents=True, exist_ok=True)
+        log.write_text(
+            "".join(json.dumps(r) + "\n" for r in hostile[:1])
+            + '"a bare string"\n'
+            + "".join(json.dumps(r) + "\n" for r in hostile[1:])
+        )
+        rows = server._load_log(log)
+        assert all(isinstance(r, dict) for r in rows)
+        # The two raw-row helpers must now be safe on whatever load_log returns.
+        assert sum(1 for e in rows if e.get("skill_raw")) == 1
+        assert dict(source_breakdown(rows)) == {"mcp": 1, "plugin": 1}
+
 
 class TestResolveSkillPath:
     def test_resolves_relative_location(self, tmp_project):
@@ -737,8 +784,8 @@ class TestManualHealthOverride:
         now = datetime(2026, 6, 3, tzinfo=timezone.utc)
         entry = {"manual_health": "healthy", "depends_on": [], "parent": None,
                  "last_modified": "2020-01-01"}
-        # composite 10 + never-loaded + stale would normally be "critical"
-        assert rc.classify_health("x", entry, 10, {"x": entry}, {}, now) == "healthy"
+        # composite 10 + stale would normally be "critical"
+        assert rc.classify_health(entry, 10, {"x": entry}) == "healthy"
 
     def test_classify_health_auto_without_marker(self):
         """Without a manual_health marker, classification is purely automatic."""
@@ -746,7 +793,7 @@ class TestManualHealthOverride:
         from datetime import datetime, timezone
         now = datetime(2026, 6, 3, tzinfo=timezone.utc)
         entry = {"depends_on": [], "parent": None, "last_modified": "2020-01-01"}
-        assert rc.classify_health("x", entry, 10, {"x": entry}, {}, now) == "critical"
+        assert rc.classify_health(entry, 10, {"x": entry}) == "critical"
 
 
 # ---------------------------------------------------------------------------

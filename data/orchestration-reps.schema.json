@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "orchestration-reps.schema.json",
+  "title": "Orchestration rep record (practice plan v1.2)",
+  "description": "One scored orchestration repetition. Schema mirrors the run card in vault skill-lab/2026-07-25-orchestration-mastery-practice-plan.md (v1.2). Compact subset is required always; full-comparison fields become required when comparison_mode is 'full' or 'audited_prediction'.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ts", "rung", "task_family", "protocol_rep", "faculty", "surface",
+    "comparison_mode", "execution_mode", "pursuit", "architecture", "rejected_alt",
+    "predicted_winner", "prediction_confidence",
+    "score", "evidence", "cost", "change"
+  ],
+  "properties": {
+    "ts": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+      "description": "Date the rep was scored (YYYY-MM-DD)."
+    },
+    "project": { "type": "string", "description": "Free-text project name." },
+    "rung": {
+      "type": "string",
+      "description": "calibration-1..4 (30-day cycle), R1..R6 (ladder), rep-zero (retrospective), or ad-hoc."
+    },
+    "task_family": {
+      "enum": ["research", "sequential_planning", "tool_execution", "creative_synthesis", "infra", "other"],
+      "description": "Drives Gate A item 2 (>=3 materially different task families)."
+    },
+    "protocol_rep": {
+      "type": "boolean",
+      "description": "True if run under the v1.2 protocol. False for retrospectives (excluded from Gate A counts)."
+    },
+    "faculty": {
+      "enum": ["S1", "S2", "S3", "S4", "S5", "S6"],
+      "description": "Axis 1 - practitioner faculty stressed. S1 verification, S2 decomposition/spec, S3 context, S4 delegation/architecture, S5 review, S6 trust/recovery."
+    },
+    "surface": {
+      "enum": ["Frame", "Architect", "Contract", "Observe", "Judge", "Recover", "Steward"],
+      "description": "Axis 2 - lifecycle surface where the faculty was stressed or failed."
+    },
+    "comparison_mode": {
+      "enum": ["full", "prediction_only", "audited_prediction"],
+      "description": "full = both arms run. prediction_only = only chosen arm run. audited_prediction = eligible for prediction-only but randomly selected for a surprise baseline."
+    },
+    "execution_mode": {
+      "enum": ["delegated", "assisted", "solo"],
+      "description": "HOW the work was done (orthogonal to comparison_mode, which is how it was measured). delegated = agents did it, human reviewed. assisted = co-execution, agent drafts and human rewrites (Phase 0 third mode). solo = unaided, no agent in the loop at all — counts toward the P12 craft-practice floor."
+    },
+    "pursuit": {
+      "type": "string",
+      "description": "Which pursuit this served (e.g. job, investing, novel, learning, apparatus). Feeds dormancy tracking — plurality without forced abandonment."
+    },
+    "apparatus_orchestrated": {
+      "type": ["boolean", "null"],
+      "description": "Apparatus work only (P6 / Codex amendment 4): true if the build itself was orchestrated under a verification design, which is what qualifies it as a scored rep. Hand-coded apparatus is false and stays unscored."
+    },
+    "review_pressure": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "Reps 1-2 constraint experiment: is review capacity the ceiling on plurality?",
+      "properties": {
+        "review_min": { "type": ["number", "null"] },
+        "queue_depth_at_session_end": { "type": ["integer", "null"], "minimum": 0 },
+        "accepted_without_full_review": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "switch_pressure": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "Reps 1-2 constraint experiment: is switching cost the ceiling instead?",
+      "properties": {
+        "pursuits_touched": { "type": ["integer", "null"], "minimum": 0 },
+        "reorientation_min": { "type": ["number", "null"] },
+        "reread_events": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "architecture": { "type": "string", "description": "Topology actually run (workflow / single agent / ensemble / manager-worker / handoff / no-AI)." },
+    "rejected_alt": { "type": "string", "description": "The simpler alternative considered and rejected, with the reason." },
+    "simple_baseline": { "type": ["string", "null"], "description": "Exact simpler system run, incl. its resource allowance. Required for full/audited." },
+    "compute_control": { "type": ["string", "null"], "description": "Compute-matched comparator, if the >=2x-inference trigger fired." },
+    "predicted_winner": {
+      "enum": ["orchestrated", "simple"],
+      "description": "Machine-checkable pre-run prediction. Pairs with observed_class to score calibration."
+    },
+    "architecture_prediction": { "type": ["string", "null"], "description": "Free-text rationale: task properties driving the prediction." },
+    "prediction_confidence": { "type": "number", "minimum": 0, "maximum": 100 },
+    "primary_outcome": { "type": ["string", "null"], "description": "The single predeclared result being optimized. Required for full/audited." },
+    "meaningful_margin": { "type": ["string", "null"], "description": "Decision-flipping threshold, predeclared. Required for full/audited." },
+    "grader_type": {
+      "enum": ["outcome_check", "human_blind", "model_rubric", "self_only", "none", null],
+      "description": "outcome_check and human_blind count toward Gate A item 3 (external reviews)."
+    },
+    "grader_blinded": { "type": ["boolean", "null"], "description": "Was architecture identity hidden from the grader?" },
+    "execution_order": { "type": ["string", "null"], "description": "Which arm ran first; records carryover risk." },
+    "observed_class": {
+      "enum": ["orchestrated_win", "simple_win", "inconclusive", "not_compared", null],
+      "description": "Required for full/audited. 'inconclusive' is first-class - never force it into a win column."
+    },
+    "score": { "type": "integer", "minimum": 1, "maximum": 5, "description": "Faculty score against the v1.1 rubric anchors." },
+    "evidence": { "type": "string", "minLength": 1, "description": "One line of transcript/artifact evidence justifying the score." },
+    "blind_grader_score": { "type": ["integer", "null"], "minimum": 1, "maximum": 5, "description": "Fresh-context grader's score, recorded BEFORE the learner's. Disagreement is S1 data." },
+    "recovery_test": { "type": ["string", "null"], "description": "Phase B only - the bounded failure injected, after the clean comparison was captured." },
+    "recovery_result": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "detected": { "type": "boolean" },
+        "detection_latency_min": { "type": ["number", "null"] },
+        "surface_diagnosed_correctly": { "type": ["boolean", "null"] },
+        "move": { "enum": ["repair_contract", "selective_retry", "change_topology", "rollback", "escalate", "stop", "none", null] },
+        "recovered": { "type": "boolean" },
+        "extra_human_min": { "type": ["number", "null"] },
+        "post_recovery_quality": { "type": ["string", "null"] },
+        "escaped_final_review": { "type": ["boolean", "null"] }
+      },
+      "required": ["detected", "recovered"]
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["human_min"],
+      "properties": {
+        "tokens": { "type": ["number", "null"] },
+        "model_calls": { "type": ["number", "null"] },
+        "elapsed_min": { "type": ["number", "null"] },
+        "human_min": { "type": "number", "description": "Setup + review + synthesis + rework. The metric that actually binds." },
+        "rework_min": { "type": ["number", "null"] }
+      }
+    },
+    "accepted_artifacts": { "type": ["integer", "null"], "minimum": 0, "description": "Artifacts accepted this run; denominator for review-cost-per-accepted-artifact." },
+    "escaped_defects": { "type": ["integer", "null"], "minimum": 0, "description": "Defects that survived review and were found later." },
+    "change": { "type": "string", "minLength": 1, "description": "The one change to make next time." },
+    "notes": { "type": ["string", "null"] }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "comparison_mode": { "enum": ["full", "audited_prediction"] } },
+        "required": ["comparison_mode"]
+      },
+      "then": {
+        "required": ["simple_baseline", "primary_outcome", "meaningful_margin", "grader_type", "grader_blinded", "observed_class"],
+        "properties": {
+          "simple_baseline": { "type": "string" },
+          "primary_outcome": { "type": "string" },
+          "meaningful_margin": { "type": "string" },
+          "observed_class": { "enum": ["orchestrated_win", "simple_win", "inconclusive"] }
+        }
+      }
+    }
+  ]
+}

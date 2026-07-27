@@ -199,13 +199,15 @@ tags: [session, ai-infra, reflexivity, mag7]
 ## Decisions pending
 <sizing, entry/exit, what to revisit, what to research next>
 
-## Predictions logged
-<links to log_prediction IDs, if any>
-
 ## Related
 - [[<thesis-slug>]]
 - [[<source-slug>]]
 ```
+
+(Prediction logging retired 2026-07-26 — never offer it. This template used to
+carry a `## Predictions logged` section listing `log_prediction()` IDs; it is
+removed, and must not be reinstated. The note goes here rather than inside the
+fence because everything in the fence is emitted verbatim into the vault.)
 
 ---
 
