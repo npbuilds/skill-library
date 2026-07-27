@@ -79,6 +79,21 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     "event-driven":          ["special-situations", "insider-signals", "spinoffs-restructuring"],
     "insider-signals":       ["special-situations", "event-driven", "sentiment-signals"],
     "spinoffs-restructuring":["special-situations", "intrinsic-value", "event-driven"],
+
+    # ── House Policy (added 2026-07-27, investing-house-policy/1.0) ───────
+    # Every actor that can propose or gate an intent must depend on the
+    # committed parameters. These edges are declared here, not patched into
+    # registry.json directly, so they survive re-sync. house-policy itself
+    # depends on nothing — it is the root of the policy hierarchy.
+    "dca-investor":          ["house-policy"],
+    "rebalancer":            ["house-policy"],
+    "swing-trader":          ["house-policy"],
+    "macro-overlay-trader":  ["house-policy"],
+    "options-strategist":    ["house-policy"],
+    "day-trader":            ["house-policy"],
+    "earnings-event-trader": ["house-policy"],
+    "reflexivity-trader":    ["house-policy"],
+    "executor":              ["house-policy"],
 }
 
 
