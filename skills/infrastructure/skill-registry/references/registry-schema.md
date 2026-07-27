@@ -69,9 +69,9 @@
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
 | `auto_score` | int | 0 | Computed quality score (0-100) |
-| `manual_rating` | int|null | User's rating (1-5) |
+| `manual_rating` | int|null | User's rating (1-100) |
 | `manual_notes` | string|null | User's comments |
-| `composite_score` | int | 0 | Blended score: auto*0.7 + manual_scaled*0.3 |
+| `composite_score` | int | 0 | Blended score: auto*0.60 + manual*0.40 |
 
 ### Relationships
 | Field | Type | Default | Description |

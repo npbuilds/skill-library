@@ -266,6 +266,9 @@ SCORE_WEIGHTS: dict[str, float] = {
     "feedback": 0.11,
 }
 
+AUTO_SCORE_WEIGHT = 0.60
+MANUAL_SCORE_WEIGHT = 0.40
+
 
 def combine_scores(axes: dict) -> int:
     """Weight per-axis scores into a composite, using SCORE_WEIGHTS.
@@ -274,6 +277,21 @@ def combine_scores(axes: dict) -> int:
     silently contribute zero: the caller must supply every weighted axis.
     """
     return round(sum(axes[k] * w for k, w in SCORE_WEIGHTS.items()))
+
+
+def compute_composite_score(auto_score: int, manual_rating: Optional[int]) -> int:
+    """Blend an automatic score with an optional 1-100 manual rating.
+
+    This is the only supported auto/manual blend. Keeping it next to the
+    automatic scoring model prevents metadata updates, maintenance tools, and
+    autonomous experiments from silently applying different policies.
+    """
+    if manual_rating is None:
+        return auto_score
+    return round(
+        auto_score * AUTO_SCORE_WEIGHT
+        + manual_rating * MANUAL_SCORE_WEIGHT
+    )
 
 
 def score_usage(name: str, usage_counts: Counter, max_usage: int) -> int:

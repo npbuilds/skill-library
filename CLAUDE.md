@@ -83,8 +83,9 @@ Merge to main (CI green)
   └─ (daily) daily-firestore.yml → evolution snapshot + health
                                  + telemetry pull → maint:green bot PR
 
-Cloud MCP server: read-only tools + record_skill_feedback; usage/gap/feedback
-telemetry → Firestore (durable; local jsonl is ephemeral on Cloud Run).
+Cloud MCP server: strictly read-only tools; usage/gap telemetry → Firestore
+(durable; local jsonl is ephemeral on Cloud Run). Feedback remains available
+only through trusted local stdio until an authenticated remote surface exists.
 
 Usage telemetry has two producers, segmented by the `source` field:
   source=mcp    → server.py _log_event (MCP tool calls; mirrored to Firestore)

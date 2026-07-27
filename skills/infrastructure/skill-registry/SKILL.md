@@ -116,7 +116,12 @@ For a full system-wide scan (including all installed plugins), use the Agent too
 
 ## Auto-Score Computation
 
-Read `skills/infrastructure/skill-dashboard/references/rating-rubric.md` for the canonical scoring pseudocode and weights. In brief: auto_score (0-100) is a weighted blend of token efficiency, progressive disclosure, description quality, structure, and documentation. Composite score blends auto (70%) with manual rating (30%) when available.
+Read `skills/infrastructure/skill-dashboard/references/rating-rubric.md` for
+the human-readable scoring model; `mcp-server/shared.py` is the executable
+source of truth. In brief, auto_score (0-100) blends structure, depth,
+connectivity, freshness, and feedback. Usage is retained for observability but
+has zero scoring weight. Composite score blends auto (60%) with a 1-100 manual
+rating (40%) when available.
 
 ## Output Formatting
 

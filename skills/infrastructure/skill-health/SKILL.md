@@ -84,11 +84,16 @@ Detect when two skills have overlapping trigger descriptions that could cause fa
 
 ## Auto-Score Computation
 
-Compute `auto_score` (0-100) from metrics. Read `skills/infrastructure/skill-dashboard/references/rating-rubric.md` for the detailed scoring pseudocode — it is the canonical definition.
+Compute `auto_score` (0-100) using the shared runtime scorer in
+`mcp-server/shared.py`. Read
+`skills/infrastructure/skill-dashboard/references/rating-rubric.md` for the
+human-readable model. The code is authoritative so health checks, MCP tools,
+and maintenance scripts cannot drift.
 
 After computing auto_score, update composite_score:
 - If manual_rating is null: `composite_score = auto_score`
-- If manual_rating exists: `composite_score = round(auto_score * 0.7 + (manual_rating / 5 * 100) * 0.3)`
+- If manual_rating exists (1-100):
+  `composite_score = round(auto_score * 0.60 + manual_rating * 0.40)`
 
 ## Remediation Suggestions
 

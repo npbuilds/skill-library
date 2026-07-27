@@ -8,6 +8,7 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore-compat.js"></script>
+<script src="/js/infra-manifest.js"></script>
 <style>
 /* ═══════════════════════════════════════════════
    WEATHERED CYBERPUNK THEME
@@ -646,9 +647,9 @@ body::after {
 
   <div class="io-stats-bar">
     <div><span class="stat-val" id="stat-collections">-</span><span class="stat-label">collections</span></div>
-    <div><span class="stat-val" id="stat-docs">-</span><span class="stat-label">docs</span></div>
-    <div><span class="stat-val" id="stat-tools">9</span><span class="stat-label">remote tools</span></div>
-    <div><span class="stat-val" id="stat-endpoints">3</span><span class="stat-label">active maint</span></div>
+    <div><span class="stat-val" id="stat-docs">-</span><span class="stat-label">tracked docs</span></div>
+    <div><span class="stat-val" id="stat-tools">-</span><span class="stat-label">remote tools</span></div>
+    <div><span class="stat-val" id="stat-endpoints">-</span><span class="stat-label">active maint</span></div>
   </div>
 
   <div class="io-controls">
@@ -722,6 +723,12 @@ const IO = {};
 
 /* ─── Config ─── */
 IO.config = {
+  manifest: window.INFRA_MANIFEST || {
+    workflows: 0, commands: 0, scripts: 0, agents: 0,
+    hook_scripts: 0, codex_hook_events: 0,
+    local_mcp_tools: 0, remote_mcp_tools: 0,
+    active_maintenance_endpoints: 0, firestore_collections: [],
+  },
   firebase: {
     apiKey: 'AIzaSyDzUrhgqUHedNXYlGSqq2sFISBVrc2-Bbg',
     authDomain: 'skill-library-prod.firebaseapp.com',
@@ -811,7 +818,9 @@ IO.data = {
     if (!this._db) {
       firebase.initializeApp(IO.config.firebase);
       this._db = firebase.firestore();
-      if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      const localHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      const useProduction = new URLSearchParams(location.search).get('production') === '1';
+      if (localHost && !useProduction) {
         try { this._db.useEmulator('localhost', 8080); } catch(e) {}
       }
     }
@@ -824,7 +833,7 @@ IO.data = {
     // "count is not a function" and killed this page's whole data load.
     // Counts are derived from documents already fetched instead — see
     // `evolutionCount` and `collectionCounts` below.
-    const [skillsSnap, metaSnap, rollupSnap, gapsSnap, evoSnap, changeSnap] = await Promise.all([
+    const [skillsSnap, metaSnap, rollupSnap, gapsSnap, evoSnap, changeSnap, healthSnap] = await Promise.all([
       db.collection('skills').get(),
       db.collection('meta').doc('registry').get(),
       // meta/usage_rollup, not the raw `usage` collection: that collection is
@@ -835,6 +844,7 @@ IO.data = {
       db.collection('gaps').get(),
       db.collection('evolution_daily').orderBy('date', 'asc').get(),
       db.collection('changelogs').get(),
+      db.collection('health_reports').get(),
     ]);
 
     // Skills
@@ -846,7 +856,6 @@ IO.data = {
       schema_version: meta.schema_version || 2,
       plugin_version: meta.plugin_version || '1.0.0',
       last_scan: meta.last_scan || null,
-      last_recalibration: meta.last_recalibration || null,
       skills,
       network: { domains: meta.network_domains || {} },
     };
@@ -945,6 +954,8 @@ IO.data = {
       gaps: gapsSnap.size,
       meta: (metaSnap.exists ? 1 : 0) + (rollupSnap.exists ? 1 : 0),
       evolution: this.evolutionCount,
+      evolution_daily: evoSnap.size,
+      health_reports: healthSnap.size,
     };
     this.usageOmittedFromCounts = true;
     this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
@@ -981,22 +992,24 @@ IO.tooltip = {
 IO.vitals = {
   render() {
     const strip = document.getElementById('vitals-strip');
+    const manifest = IO.config.manifest;
+    const collectionCount = manifest.firestore_collections.length;
     const items = [
       { label: 'Cloud Run', value: 'skill-library-mcp', dot: 'green',
         tip: 'Read-only remote MCP server deployed on Google Cloud Run. Serves the same canonical skill library to Claude and Codex.' },
       { label: 'Firestore', value: 'us-central1', dot: 'cyan',
-        tip: 'Real-time cloud database. 6 collections sync live to both observatory dashboards.' },
+        tip: `Real-time cloud database. ${collectionCount} collections feed the observatory dashboards and maintenance telemetry.` },
       { label: 'Scheduler', value: '3 jobs', dot: 'green',
         tip: 'Cloud Scheduler runs validation four times daily, recalibration daily, and the knowledge-base refresh weekly.' },
-      { label: 'CI/CD', value: '6 workflows', dot: 'green',
+      { label: 'CI/CD', value: `${manifest.workflows} workflows`, dot: 'green',
         tip: 'GitHub Actions runs CI, Cloud Run deploy, Firebase Hosting deploy, Firestore sync, daily maintenance, and green-PR auto-merge.' },
-      { label: 'Hooks', value: '2 active', dot: 'green',
-        tip: 'File watcher auto-registers skills on save. Pre-commit check blocks misplaced files.' },
-      { label: 'Agents', value: '3 defined', dot: 'cyan',
+      { label: 'Hooks', value: `${manifest.codex_hook_events} Codex events`, dot: 'green',
+        tip: `${manifest.hook_scripts} hook scripts cover skill changes, telemetry, research routing, secret scanning, and pre-commit validation.` },
+      { label: 'Agents', value: `${manifest.agents} defined`, dot: 'cyan',
         tip: 'Registry scanner (discovers new skills), Skill auditor (quality checks), Skill tester (validates methodology).' },
-      { label: 'Commands', value: '8 available', dot: 'cyan',
+      { label: 'Commands', value: `${manifest.commands} available`, dot: 'cyan',
         tip: 'Repository commands cover catalog/status, feedback and calibration, rating, infrastructure upgrades, research, and narrative orchestration.' },
-      { label: 'Scripts', value: '49 scripts', dot: 'cyan',
+      { label: 'Scripts', value: `${manifest.scripts} scripts`, dot: 'cyan',
         tip: 'Automation scripts for scoring, migration, graph wiring, community detection, health reports, and more.' },
     ];
     strip.innerHTML = items.map((it, i) => `
@@ -1027,13 +1040,13 @@ IO.arch = {
     { id: 'skillmd', label: 'SKILL.md', icon: '\uD83D\uDCDD', x: 0.08, y: 0.55, col: 'source', color: '#8ace5a',
       tip: 'When you write or edit a skill file, the file watcher hook automatically registers it, computes metrics, and takes an evolution snapshot.' },
     { id: 'hooks', label: 'Hooks', icon: '\uD83E\uDE9D', x: 0.08, y: 0.85, col: 'source', color: '#ceb45a',
-      tip: '2 automation hooks: the file watcher (auto-registers new skills on save) and the pre-commit check (blocks files in wrong directories).' },
+      tip: `${IO.config.manifest.hook_scripts} hook scripts cover Codex skill-change routing, research triggers, telemetry, secret scanning, and pre-commit integrity checks.` },
 
     // Column 2: Processing (x=30%)
-    { id: 'cicd', label: 'CI/CD', icon: '\u2699', subtitle: '6 workflows', x: 0.30, y: 0.12, col: 'process', color: '#8ace5a',
-      tip: '6 GitHub Actions workflows test the library, deploy Cloud Run and Firebase Hosting, sync Firestore, run daily maintenance, and auto-merge green bot PRs.' },
-    { id: 'cloudrun', label: 'Cloud Run', icon: '\u25B6', subtitle: 'MCP Server \u00B7 9 remote tools', x: 0.30, y: 0.42, col: 'process', color: '#8ace5a',
-      tip: 'The codebase defines 17 MCP tools; remote mode removes 8 structural or compute-heavy write tools. Claude and Codex receive a read-oriented 9-tool service, and the Codex plugin allowlists the 5 content-retrieval tools it needs.' },
+    { id: 'cicd', label: 'CI/CD', icon: '\u2699', subtitle: '', x: 0.30, y: 0.12, col: 'process', color: '#8ace5a',
+      tip: 'GitHub Actions test the library, deploy Cloud Run and Firebase Hosting, sync Firestore, run daily maintenance, guard leaks, and auto-merge green bot PRs.' },
+    { id: 'cloudrun', label: 'Cloud Run', icon: '\u25B6', subtitle: '', x: 0.30, y: 0.42, col: 'process', color: '#8ace5a',
+      tip: 'The public MCP runtime removes all structural and score-affecting write tools. Local stdio retains the full maintenance-capable tool set.' },
     { id: 'scheduler', label: 'Scheduler', icon: '\u23F0', subtitle: '3 jobs', x: 0.30, y: 0.68, col: 'process', color: '#8ace5a',
       tip: 'Three Cloud Scheduler jobs run validation four times daily, score recalibration daily, and knowledge-base enrichment weekly.' },
     { id: 'artregistry', label: 'Artifact Reg', icon: '\uD83D\uDCE6', x: 0.30, y: 0.90, col: 'process', color: '#8ace5a',
@@ -1041,7 +1054,7 @@ IO.arch = {
 
     // Column 3: Storage (x=55%)
     { id: 'firestore', label: 'Firestore', icon: '\uD83D\uDD25', subtitle: '', x: 0.55, y: 0.15, col: 'storage', color: '#5acece', wide: true,
-      tip: 'Cloud database holding all your skill data. 6 collections with real-time sync \u2014 when data changes here, the dashboards update instantly.' },
+      tip: 'Cloud database holding skill metadata, rollups, health reports, gaps, changelogs, and telemetry. Counts are read live whenever this page refreshes.' },
     { id: 'secrets', label: 'Secrets', icon: '\uD83D\uDD12', subtitle: '3 secrets', x: 0.55, y: 0.42, col: 'storage', color: '#5acece',
       tip: 'Secret Manager stores the GitHub bot token, the Anthropic API key, and the maintenance trigger token. Cloud Run receives them as secret references, not image contents.' },
     { id: 'registry', label: 'Registry', icon: '\uD83D\uDCCB', subtitle: '', x: 0.55, y: 0.65, col: 'storage', color: '#5acece',
@@ -1086,9 +1099,13 @@ IO.arch = {
 
     // Update dynamic subtitles
     const fNode = this.nodes.find(n => n.id === 'firestore');
-    if (fNode) fNode.subtitle = (IO.data.totalDocs || 0) + ' docs';
+    if (fNode) fNode.subtitle = (IO.data.totalDocs || 0) + ' tracked docs';
     const rNode = this.nodes.find(n => n.id === 'registry');
     if (rNode) rNode.subtitle = (IO.data.skillList.length || 0) + ' skills';
+    const ciNode = this.nodes.find(n => n.id === 'cicd');
+    if (ciNode) ciNode.subtitle = IO.config.manifest.workflows + ' workflows';
+    const cloudNode = this.nodes.find(n => n.id === 'cloudrun');
+    if (cloudNode) cloudNode.subtitle = 'MCP Server \u00B7 ' + IO.config.manifest.remote_mcp_tools + ' remote tools';
 
     const nodeMap = {};
     for (const n of this.nodes) {
@@ -1259,6 +1276,7 @@ IO.ops = {
     const maxCount = Math.max(...Object.values(counts), 1);
     const collColors = {
       skills: 'var(--cyan-bright)', evolution: 'var(--green-bright)',
+      evolution_daily: 'var(--green-faded)', health_reports: 'var(--amber-bright)',
       usage: 'var(--amber-bright)', changelogs: 'var(--magenta-bright)',
       gaps: 'var(--red-bright)', meta: 'var(--text-dim)'
     };
@@ -1314,10 +1332,13 @@ IO.ops = {
     // Last Events
     const reg = IO.data.registry || {};
     const lastScan = reg.last_scan ? new Date(reg.last_scan).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown';
-    const lastRecalib = reg.last_recalibration ? new Date(reg.last_recalibration).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown';
+    const latestSnapshot = IO.data.evolution.length
+      ? new Date(IO.data.evolution[IO.data.evolution.length - 1].date + 'T00:00:00Z')
+          .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+      : 'unknown';
     document.getElementById('ops-meta').innerHTML = [
       { label: 'Last scan', value: lastScan },
-      { label: 'Last recalib', value: lastRecalib },
+      { label: 'Latest snapshot', value: latestSnapshot },
       { label: 'Schema ver', value: reg.schema_version || 2 },
       { label: 'Plugin ver', value: reg.plugin_version || '1.0.0' },
     ].map(it => `
@@ -1539,6 +1560,8 @@ IO.changelog = {
   // Update header stats
   document.getElementById('stat-collections').textContent = IO.data.collectionsShown();
   document.getElementById('stat-docs').textContent = IO.data.totalDocs;
+  document.getElementById('stat-tools').textContent = IO.config.manifest.remote_mcp_tools;
+  document.getElementById('stat-endpoints').textContent = IO.config.manifest.active_maintenance_endpoints;
 
   // Render all panels
   IO.vitals.render();
@@ -1578,6 +1601,8 @@ refreshBtn.onclick = async () => {
     ]);
     document.getElementById('stat-collections').textContent = IO.data.collectionsShown();
     document.getElementById('stat-docs').textContent = IO.data.totalDocs;
+    document.getElementById('stat-tools').textContent = IO.config.manifest.remote_mcp_tools;
+    document.getElementById('stat-endpoints').textContent = IO.config.manifest.active_maintenance_endpoints;
     IO.vitals.render();
     IO.arch.render();
     IO.ops.render();
@@ -1626,6 +1651,8 @@ window.addEventListener('resize', () => {
       IO.data.loadAll().then(() => {
         document.getElementById('stat-collections').textContent = IO.data.collectionsShown();
         document.getElementById('stat-docs').textContent = IO.data.totalDocs;
+        document.getElementById('stat-tools').textContent = IO.config.manifest.remote_mcp_tools;
+        document.getElementById('stat-endpoints').textContent = IO.config.manifest.active_maintenance_endpoints;
         IO.vitals.render();
         IO.ops.render();
         IO.growth.render();
