@@ -2317,7 +2317,35 @@ _WRITE_TOOLS = {
     "update_skill_content",
     "deprecate_skill",
     "add_skill_dependency",
+    # Not a structural write, but must not be reachable unauthenticated: it
+    # recomputes the whole hybrid index (embeddings included), so it is a CPU
+    # burn lever for anyone who can hit the endpoint. It is also pointless in
+    # every remote deployment — the Dockerfile bakes the index at build time and
+    # the container is ephemeral, so a runtime rebuild is discarded.
+    "rebuild_search_index",
 }
+
+# Removed only when MCP_READ_ONLY=1, because the right answer differs per
+# deployment:
+#   Cloud Run  — record_skill_feedback is INTENTIONAL (CLAUDE.md: "read-only
+#                tools + record_skill_feedback"). It is how claude.ai sessions
+#                submit ratings, and the writes land in an ephemeral container
+#                and are mirrored to Firestore. Removing it there would delete a
+#                working feature.
+#   cloudflared tunnel — the same tool writes to data/feedback.jsonl in a LIVE
+#                GIT WORKING TREE, and the hostname (skills.neocortex.studio)
+#                answers unauthenticated: an HTTP 406 from FastMCP comes straight
+#                back through Cloudflare, with no Access policy in front. Since
+#                feedback is 11% of every composite score via score_feedback,
+#                and there is no rate limit or per-session cap on it (unlike the
+#                usage path's 50/session/day guard), an anonymous caller can move
+#                scores in a loop.
+# So that deployment sets MCP_READ_ONLY=1. Note this is defence in depth, not the
+# fix — putting Cloudflare Access in front of the hostname is the actual fix,
+# because it closes read access and the DoS lever too.
+_READ_ONLY_EXTRA_TOOLS = {"record_skill_feedback"}
+READ_ONLY_MODE = os.environ.get("MCP_READ_ONLY", "false").lower() in {"1", "true", "yes"}
+
 _REMOTE_MODE_CONFIGURED = False
 
 
@@ -2333,10 +2361,14 @@ def _enable_remote_mode() -> None:
         REMOTE_MODE = True
         return
 
-    for _name in _WRITE_TOOLS:
+    must_remove = set(_WRITE_TOOLS)
+    if READ_ONLY_MODE:
+        must_remove |= _READ_ONLY_EXTRA_TOOLS
+
+    for _name in must_remove:
         mcp.remove_tool(_name)
 
-    remaining_write_tools = _WRITE_TOOLS.intersection(
+    remaining_write_tools = must_remove.intersection(
         mcp._tool_manager._tools.keys()
     )
     if remaining_write_tools:
