@@ -70,7 +70,7 @@ A session is a single chat-turn-driven loop through the Archon Loop, not a struc
 2. Sets the analytical frame openly (current regime, consensus map, relevant frameworks).
 3. Routes turn-by-turn to subdomain directors; never monologues all six frameworks at once.
 4. Surfaces invalidation criteria with every claim ("what would prove this wrong?").
-5. Offers persistence at session close: log a prediction, write a thesis to the vault, append to macro narrative.
+5. Offers persistence at session close: write a thesis to the vault, append to macro narrative.
 
 See `references/conversational-loop.md` for the session shape and exit protocol.
 
@@ -102,7 +102,6 @@ When a user opens a question:
 - Current regime classification (from the first regime-relevant turn)
 - Key assumptions made (named claims that could be wrong)
 - Decisions pending (sizing, entry, exit triggers)
-- Predictions logged this session
 
 Re-state these at any director handoff so context survives. This is the "shared session object" — implicit in chat, explicit when handing off to spelunker or neocortex.
 
@@ -191,9 +190,7 @@ All tools include `_meta` health tracking. In chat mode, pull these tools only w
 
 ## Prediction Tracking
 
-The Archon logs falsifiable predictions via `log_prediction()` and scores them against outcomes using Brier scores. This reveals which frameworks have genuine predictive power in which regimes.
-
-Use `get_calibration_report()` to review accuracy by framework, category, and regime.
+Retired 2026-07-26 — prediction data deleted; do not offer `log_prediction()` or reference the former predictions log. The MCP tools still exist in the pipeline but are unused. The user may design a fresh, lower-visibility logging approach in the future; until then, prediction tracking is out of scope.
 
 ## Persistence to Vault
 

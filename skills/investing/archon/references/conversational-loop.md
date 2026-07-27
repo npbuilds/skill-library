@@ -49,9 +49,10 @@ Offer the close menu when the user signals end (any of: "let's stop here," "I ne
 Wrap-up — anything to persist?
   [a] Yes — write session synthesis to Notes/<YYYY-MM-DD>-<topic>.md
   [b] Yes + thesis — also write Notes/<topic>-thesis.md (tagged thesis)
-  [c] Yes + prediction — also call log_prediction() for calibration
-  [d] No — chat is ephemeral
+  [c] No — chat is ephemeral
 ```
+
+(Prediction logging retired 2026-07-26 — never offer it.)
 
 If [a] or [b], confirm the slug ("Persist as `2026-05-11-ai-capex`? [y / edit]") before invoking vault-writer.
 
@@ -74,9 +75,6 @@ When persisting a session, structure the body as:
 
 ## Decisions pending
 <sizing, entry/exit, what to revisit, what to research next>
-
-## Predictions logged
-<links to log_prediction IDs, if any>
 ```
 
 Keep it tight — sessions are conversation digests, not deep dives. The user can promote a session synthesis to a full thesis later by writing `Notes/<topic>-thesis.md` and linking back.
