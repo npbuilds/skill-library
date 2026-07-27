@@ -784,8 +784,8 @@ class TestManualHealthOverride:
         now = datetime(2026, 6, 3, tzinfo=timezone.utc)
         entry = {"manual_health": "healthy", "depends_on": [], "parent": None,
                  "last_modified": "2020-01-01"}
-        # composite 10 + never-loaded + stale would normally be "critical"
-        assert rc.classify_health("x", entry, 10, {"x": entry}, {}, now) == "healthy"
+        # composite 10 + stale would normally be "critical"
+        assert rc.classify_health("x", entry, 10, {"x": entry}, now) == "healthy"
 
     def test_classify_health_auto_without_marker(self):
         """Without a manual_health marker, classification is purely automatic."""
@@ -793,7 +793,7 @@ class TestManualHealthOverride:
         from datetime import datetime, timezone
         now = datetime(2026, 6, 3, tzinfo=timezone.utc)
         entry = {"depends_on": [], "parent": None, "last_modified": "2020-01-01"}
-        assert rc.classify_health("x", entry, 10, {"x": entry}, {}, now) == "critical"
+        assert rc.classify_health("x", entry, 10, {"x": entry}, now) == "critical"
 
 
 # ---------------------------------------------------------------------------

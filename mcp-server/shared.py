@@ -246,6 +246,36 @@ def score_freshness(entry: dict, now: datetime) -> int:
         return max(20, 40 - int((days_old - 90) / 30) * 5)
 
 
+# The composite weights, in ONE place. Previously these numbers were written
+# out three times — here, in recalibrate_scores.py's inline formula, and in the
+# Infra Observatory's "Scoring Model" panel (app/infra.html) — guarded by
+# nothing but a "update both together" comment. When usage went to 0% the HTML
+# copy was missed and the live dashboard advertised a 10% Usage bar for an axis
+# contributing nothing, which is exactly the failure mode a comment cannot
+# prevent. recalibrate now imports this, and scripts/test_scoring_weights.py
+# pins the HTML panel against it, so all three can no longer disagree.
+#
+# usage is 0.00 deliberately — see compute_auto_score for why it is retained as
+# observability rather than deleted.
+SCORE_WEIGHTS: dict[str, float] = {
+    "structure": 0.22,
+    "depth": 0.28,
+    "connectivity": 0.22,
+    "freshness": 0.17,
+    "usage": 0.00,
+    "feedback": 0.11,
+}
+
+
+def combine_scores(axes: dict) -> int:
+    """Weight per-axis scores into a composite, using SCORE_WEIGHTS.
+
+    Raises KeyError if an axis is missing, so adding a scoring axis cannot
+    silently contribute zero: the caller must supply every weighted axis.
+    """
+    return round(sum(axes[k] * w for k, w in SCORE_WEIGHTS.items()))
+
+
 def score_usage(name: str, usage_counts: Counter, max_usage: int) -> int:
     """Relative usage frequency."""
     uses = usage_counts.get(name, 0)
@@ -272,8 +302,38 @@ def compute_auto_score(
 ) -> int:
     """Compute the weighted composite auto_score for a registry entry.
 
-    Weights: structure 20%, depth 25%, connectivity 20%,
-             freshness 15%, usage 10%, feedback 10%.
+    Weights: structure 22%, depth 28%, connectivity 22%,
+             freshness 17%, feedback 11%.  Usage is 0% — see below.
+
+    Usage is deliberately UNWEIGHTED, not removed. score_usage is still
+    computed and still reported in recalibrate's breakdown (`U:` column) and on
+    the dashboard, because the telemetry is genuinely useful as observability —
+    it is how `biotech-venture` was caught sitting at 1 recorded load despite
+    heavy daily use, which exposed commands that skipped their get_skill. What
+    it is not is evidence of quality:
+
+      - 397 of 528 skills (75%) had zero recorded usage, across 21 active days
+        in 4 months. For those, the axis contributed a flat 0 on a 10% weight,
+        so it functioned as a uniform penalty for not having happened to be
+        loaded — which tracks how recently a skill was built, not how good it
+        is.
+      - The 10% weight put a scoring dependency on a mutable append-only log
+        written by three producers. Most of the sharp edges in this pipeline
+        exist only because of that coupling: the max_usage denominator (one
+        inflated skill deflates every other), the per-session cap, the
+        skill_raw quarantine for unresolved plugin names, and the requirement
+        that every telemetry commit carry a matching recalibration.
+
+    The remaining 10% is redistributed proportionally across the other five
+    axes (each × 100/90, rounded to sum to exactly 100), so the model's shape
+    is unchanged apart from usage's removal — this is deliberately the least
+    opinionated redistribution available.
+
+    `usage_counts` and `max_usage` are retained in the signature even though
+    they no longer affect the result: callers pass them positionally
+    (server.py:1685 passes `Counter(), 0`, and recalibrate passes real
+    counts), and keeping them means re-weighting usage later is a one-line
+    change rather than an API break.
 
     Pass `now` explicitly when scoring many skills in a loop so all skills
     get the same reference timestamp (consistent freshness scores).
@@ -283,14 +343,14 @@ def compute_auto_score(
         now = datetime.now(timezone.utc)
     metrics = entry.get("metrics", {})
     name = entry.get("name", "")
-    return round(
-        score_structure(metrics) * 0.20
-        + score_depth(metrics) * 0.25
-        + score_connectivity(entry) * 0.20
-        + score_freshness(entry, now) * 0.15
-        + score_usage(name, usage_counts, max_usage) * 0.10
-        + score_feedback(name, feedback_ratings) * 0.10
-    )
+    return combine_scores({
+        "structure": score_structure(metrics),
+        "depth": score_depth(metrics),
+        "connectivity": score_connectivity(entry),
+        "freshness": score_freshness(entry, now),
+        "usage": score_usage(name, usage_counts, max_usage),
+        "feedback": score_feedback(name, feedback_ratings),
+    })
 
 
 # ---------------------------------------------------------------------------

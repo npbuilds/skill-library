@@ -5,12 +5,16 @@ Usage:
     python3 scripts/recalibrate_scores.py [--dry-run]
 
 Factors (each 0-100, weighted):
-  Structure (20%):    section count, frontmatter completeness, description quality
-  Depth (25%):        word count sweet spot (300-5000), reference file coverage
-  Connectivity (20%): depends_on + referenced_by links (more = higher)
-  Freshness (15%):    days since last_modified (decays over 90 days)
-  Usage (10%):        load count from usage.jsonl
-  Feedback (10%):     average rating from feedback.jsonl
+  Structure (22%):    section count, frontmatter completeness, description quality
+  Depth (28%):        word count sweet spot (300-5000), reference file coverage
+  Connectivity (22%): depends_on + referenced_by links (more = higher)
+  Freshness (17%):    days since last_modified (decays over 90 days)
+  Feedback (11%):     average rating from feedback.jsonl
+  Usage (0%):         load count from usage.jsonl — computed and reported in the
+                      U: breakdown column, but UNWEIGHTED. 75% of skills had
+                      zero recorded usage over 21 active days, so the axis was a
+                      flat penalty for not having happened to be loaded rather
+                      than a quality signal. See shared.compute_auto_score.
 """
 
 import json
@@ -44,6 +48,8 @@ score_connectivity = _shared.score_connectivity
 score_freshness = _shared.score_freshness
 score_usage = _shared.score_usage
 score_feedback = _shared.score_feedback
+SCORE_WEIGHTS = _shared.SCORE_WEIGHTS
+combine_scores = _shared.combine_scores
 
 
 # ── Health classification (aggressive profile) ──────────────────────────────
@@ -75,12 +81,24 @@ def _parse_dt(value: str | None):
     return dt
 
 
-def classify_health(name, entry, composite, skills, usage_counts, now) -> str:
-    """Derive health_status from score, structural integrity, usage, and freshness.
+def classify_health(name, entry, composite, skills, now) -> str:
+    """Derive health_status from score, structural integrity, and freshness.
 
     Order matters: a manual override wins outright; then critical conditions are
     checked before warning conditions. Deprecated skills retain "warning" (their
     lifecycle marker) unless a manual override says otherwise.
+
+    Usage is deliberately NOT a factor, which is why this no longer takes
+    usage_counts. It used to return "warning" for any skill with zero recorded
+    usage ("never loaded — no evidence it earns its place"), but that cannot
+    coexist with usage being unweighted in compute_auto_score: the same signal
+    would be non-diagnostic for scoring and authoritative for health. Since 75%
+    of skills had zero recorded usage over 21 active days, the rule was mostly
+    reporting which skills happened not to be loaded in a narrow window — it
+    held 215 skills at "warning" that cleared the score threshold on every
+    other axis. Health now means: structurally sound, scoring adequately, and
+    not stale. If an "unexercised" signal is wanted, it belongs in its own
+    field rather than competing with composite_score.
     """
     # A manual override (set via update_skill_metadata) is authoritative — the
     # auto-classifier must never silently undo a human decision. Cleared by
@@ -101,11 +119,9 @@ def classify_health(name, entry, composite, skills, usage_counts, now) -> str:
     if composite < HEALTH_CRITICAL_SCORE:
         return "critical"
 
-    # ── Warning: weak score, never exercised, or gone stale ──
+    # ── Warning: weak score or gone stale ──
     if composite < HEALTH_WARNING_SCORE:
         return "warning"
-    if usage_counts.get(name, 0) == 0:
-        return "warning"  # never loaded — no evidence it earns its place
     lm = _parse_dt(entry.get("last_modified"))
     if lm is not None and (now - lm).days > HEALTH_STALE_DAYS:
         return "warning"
@@ -142,8 +158,12 @@ def main():
     for name, entry in skills.items():
         metrics = entry.get("metrics", {})
 
-        # Individual scores kept for the breakdown output.
-        # Weights here must match shared.compute_auto_score — update both together.
+        # Individual scores kept for the breakdown output. The weights are NOT
+        # repeated here — combine_scores applies shared.SCORE_WEIGHTS, so this
+        # can no longer drift from compute_auto_score. s_usage is still computed
+        # and still printed in the U: column, but carries weight 0; see
+        # compute_auto_score's docstring for why usage is observability rather
+        # than a quality signal.
         s_struct = score_structure(metrics)
         s_depth = score_depth(metrics)
         s_conn = score_connectivity(entry)
@@ -151,14 +171,14 @@ def main():
         s_usage = score_usage(name, usage_counts, max_usage)
         s_fb = score_feedback(name, feedback_ratings)
 
-        composite = round(
-            s_struct * 0.20
-            + s_depth * 0.25
-            + s_conn * 0.20
-            + s_fresh * 0.15
-            + s_usage * 0.10
-            + s_fb * 0.10
-        )
+        composite = combine_scores({
+            "structure": s_struct,
+            "depth": s_depth,
+            "connectivity": s_conn,
+            "freshness": s_fresh,
+            "usage": s_usage,
+            "feedback": s_fb,
+        })
 
         old_score = entry.get("composite_score", 0)
 
@@ -180,7 +200,7 @@ def main():
         # Health is derived from the freshly-computed composite so the two
         # never disagree. Manual quality (manual_rating) still feeds composite
         # upstream; health classification is purely automatic.
-        new_health = classify_health(name, entry, composite, skills, usage_counts, now)
+        new_health = classify_health(name, entry, composite, skills, now)
         old_health = entry.get("health_status", "healthy")
         health_dist[new_health] += 1
         if new_health != old_health:
