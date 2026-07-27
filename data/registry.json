@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-24T04:05:12Z",
+  "last_scan": "2026-07-27T03:59:46Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -6939,8 +6939,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1942,
-        "body_words": 1836,
+        "word_count": 1945,
+        "body_words": 1839,
         "description_words": 77,
         "section_count": 10,
         "reference_files": 11,
@@ -6948,8 +6948,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 101,
-        "estimated_tokens_body": 3263,
-        "estimated_tokens_total": 3364
+        "estimated_tokens_body": 3256,
+        "estimated_tokens_total": 3357
       },
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
