@@ -1,6 +1,6 @@
 # Skill Library
 
-A personal library of **528 expert-persona agent skills across 19 subject domains** (plus one internal metadata namespace), served over MCP and usable from both Claude and Codex. It is built on one idea: an agent gets sharper when you give it a *named expert's* methodology, typed inputs and outputs, and a way to cite its own evidence — then let those experts call each other.
+A personal library of **535 expert-persona agent skills across 20 subject domains** (plus one internal metadata namespace), served over MCP and usable from both Claude and Codex. It is built on one idea: an agent gets sharper when you give it a *named expert's* methodology, typed inputs and outputs, and a way to cite its own evidence — then let those experts call each other.
 
 I build these to think with. The architecture is the point; the domains are where I stress-tested it.
 
@@ -22,7 +22,7 @@ That's the through-line in all of it: **AI earns adoption when it scaffolds an e
 - **Served over MCP.** A read-only MCP server exposes the library to Claude and Codex — including `search_skills`, `get_skill`, `analyze_impact`, and a live health/telemetry loop. See `mcp-server/` and the [Codex gateway guide](docs/codex-skill-library-gateway.md).
 - **It maintains itself.** A QA loop tracks usage, gaps, and feedback, and opens PRs to keep the registry, wiring, and scores calibrated.
 
-## The 19 subject domains — one architecture, many experiments
+## The 20 subject domains — one architecture, many experiments
 
 I use the same skill-and-orchestration pattern everywhere I'm curious. The biotech and research domains are the serious work; the rest are where I pressure-test whether the architecture generalizes.
 
@@ -36,11 +36,16 @@ I use the same skill-and-orchestration pattern everywhere I'm curious. The biote
 | sommelier | 36 | | neocortex | 13 |
 | writing | 34 | | infrastructure | 12 |
 | product | 31 | | research | 11 |
-| philosophy | 29 | | (+ artifacts, narrative, internal meta) | 5 |
+| philosophy | 29 | | consumer-research | 7 |
+| (+ artifacts, narrative, internal meta) | 5 | | | |
 
 ## Browsing
 
 Each skill is a `SKILL.md` with YAML frontmatter (name, description, dependencies, evidence conventions) plus reference docs and, for many, an eval harness. Start in `skills/biotech-venture/` or `skills/research/`; `data/registry.json` is the machine-readable index of everything.
+
+## License
+
+Released under the [MIT License](LICENSE).
 
 ---
 
