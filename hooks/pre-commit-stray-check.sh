@@ -31,3 +31,11 @@ if [ -n "$STRAY_FILES" ]; then
   echo "To bypass (rare): git commit --no-verify"
   exit 1
 fi
+
+# Machinery-only leak guard (private term list; see hooks/leak-guard.sh).
+top="$(git rev-parse --show-toplevel)"
+if [ -x "$top/hooks/leak-guard.sh" ]; then
+  "$top/hooks/leak-guard.sh" staged || exit 1
+else
+  echo "leak-guard: hooks/leak-guard.sh missing in this checkout — pull main. CI is the backstop." >&2
+fi
