@@ -49,7 +49,7 @@ from shared import (
     load_log, iter_skill_uses,
     SOURCE_MCP, event_source, source_breakdown,
     atomic_write_registry,
-    compute_auto_score,
+    compute_auto_score, compute_composite_score, combine_scores,
     score_structure, score_depth, score_connectivity,
     score_freshness, score_usage, score_feedback,
     blast_radius, _get_domain,
@@ -936,9 +936,8 @@ def update_skill_metadata(
 
     if manual_rating is not None:
         entry["manual_rating"] = manual_rating
-        # Recompute composite: 60% auto + 40% manual when manual is set
         auto = entry.get("auto_score", 50)
-        entry["composite_score"] = int(auto * 0.6 + manual_rating * 0.4)
+        entry["composite_score"] = compute_composite_score(auto, manual_rating)
         changes.append(f"manual_rating={manual_rating}, composite_score={entry['composite_score']}")
 
     if manual_notes is not None:
@@ -1846,8 +1845,8 @@ def recalibrate_scores(
 ) -> str:
     """Recompute auto_score and composite_score using the multi-factor model.
 
-    Factors: structure (20%), depth (25%), connectivity (20%),
-    freshness (15%), usage (10%), feedback (10%).
+    Factors: structure (22%), depth (28%), connectivity (22%),
+    freshness (17%), feedback (11%). Usage is reported but unweighted.
 
     Never overwrites manual_rating or manual_notes. When manual_rating is set,
     composite_score = auto*0.6 + manual*0.4; otherwise composite_score = auto_score.
@@ -1894,12 +1893,16 @@ def recalibrate_scores(
         s_usage = score_usage(name, usage_counts, max_usage)
         s_fb = score_feedback(name, feedback_ratings)
 
-        new_auto = round(
-            s_struct * 0.20 + s_depth * 0.25 + s_conn * 0.20
-            + s_fresh * 0.15 + s_usage * 0.10 + s_fb * 0.10
-        )
+        new_auto = combine_scores({
+            "structure": s_struct,
+            "depth": s_depth,
+            "connectivity": s_conn,
+            "freshness": s_fresh,
+            "usage": s_usage,
+            "feedback": s_fb,
+        })
         manual = entry.get("manual_rating")
-        new_composite = int(new_auto * 0.6 + manual * 0.4) if manual is not None else new_auto
+        new_composite = compute_composite_score(new_auto, manual)
         old_composite = entry.get("composite_score", 0)
 
         changes.append({
@@ -2325,24 +2328,10 @@ _WRITE_TOOLS = {
     "rebuild_search_index",
 }
 
-# Removed only when MCP_READ_ONLY=1, because the right answer differs per
-# deployment:
-#   Cloud Run  — record_skill_feedback is INTENTIONAL (CLAUDE.md: "read-only
-#                tools + record_skill_feedback"). It is how claude.ai sessions
-#                submit ratings, and the writes land in an ephemeral container
-#                and are mirrored to Firestore. Removing it there would delete a
-#                working feature.
-#   cloudflared tunnel — the same tool writes to data/feedback.jsonl in a LIVE
-#                GIT WORKING TREE, and the hostname (skills.neocortex.studio)
-#                answers unauthenticated: an HTTP 406 from FastMCP comes straight
-#                back through Cloudflare, with no Access policy in front. Since
-#                feedback is 11% of every composite score via score_feedback,
-#                and there is no rate limit or per-session cap on it (unlike the
-#                usage path's 50/session/day guard), an anonymous caller can move
-#                scores in a loop.
-# So that deployment sets MCP_READ_ONLY=1. Note this is defence in depth, not the
-# fix — putting Cloudflare Access in front of the hostname is the actual fix,
-# because it closes read access and the DoS lever too.
+# Feedback is also removed when MCP_READ_ONLY=1. It is a score-affecting write,
+# and neither public HTTP deployment authenticates MCP callers. A future
+# authenticated feedback surface can expose it deliberately; anonymous
+# deployments must remain strictly read-only.
 _READ_ONLY_EXTRA_TOOLS = {"record_skill_feedback"}
 READ_ONLY_MODE = os.environ.get("MCP_READ_ONLY", "false").lower() in {"1", "true", "yes"}
 

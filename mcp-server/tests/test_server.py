@@ -3,6 +3,8 @@
 import json
 import os
 import threading
+from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -796,6 +798,39 @@ class TestManualHealthOverride:
         assert rc.classify_health(entry, 10, {"x": entry}) == "critical"
 
 
+class TestScoreWriterConsistency:
+    def test_metadata_update_uses_canonical_manual_blend(self, tmp_project):
+        registry = json.loads(server.REGISTRY_PATH.read_text())
+        registry["skills"]["color-theory"]["auto_score"] = 81
+        server.REGISTRY_PATH.write_text(json.dumps(registry))
+
+        server.update_skill_metadata("color-theory", manual_rating=99)
+        written = json.loads(server.REGISTRY_PATH.read_text())["skills"]["color-theory"]
+        assert written["composite_score"] == server.compute_composite_score(81, 99)
+
+    def test_mcp_recalibrate_uses_canonical_auto_and_manual_scores(self, tmp_project):
+        registry = json.loads(server.REGISTRY_PATH.read_text())
+        entry = registry["skills"]["color-theory"]
+        entry["manual_rating"] = 100
+        entry["metrics"].update({
+            "body_words": 700,
+            "description_words": 35,
+            "section_count": 5,
+            "reference_files": 1,
+        })
+        server.REGISTRY_PATH.write_text(json.dumps(registry))
+
+        server.recalibrate_scores(["color-theory"])
+        written = json.loads(server.REGISTRY_PATH.read_text())["skills"]["color-theory"]
+        expected_auto = server.compute_auto_score(
+            entry, Counter(), 1, {}, datetime.now(timezone.utc)
+        )
+        assert written["auto_score"] == expected_auto
+        assert written["composite_score"] == server.compute_composite_score(
+            expected_auto, 100
+        )
+
+
 # ---------------------------------------------------------------------------
 # session_id + search-event instrumentation (PR #1)
 # ---------------------------------------------------------------------------
@@ -897,6 +932,25 @@ class TestSessionInstrumentation:
 
 
 class TestRuntimeMode:
+    def test_read_only_remote_removes_feedback_tool(self):
+        tools = {
+            name: object()
+            for name in server._WRITE_TOOLS | server._READ_ONLY_EXTRA_TOOLS
+        }
+        tools["get_skill"] = object()
+        fake_mcp = MagicMock()
+        fake_mcp._tool_manager._tools = tools
+        fake_mcp.remove_tool.side_effect = lambda name: tools.pop(name, None)
+        with (
+            patch.object(server, "mcp", fake_mcp),
+            patch.object(server, "READ_ONLY_MODE", True),
+            patch.object(server, "REMOTE_MODE", False),
+            patch.object(server, "_REMOTE_MODE_CONFIGURED", False),
+        ):
+            server._enable_remote_mode()
+            assert "record_skill_feedback" not in tools
+            assert "get_skill" in tools
+
     @pytest.mark.parametrize("transport", ["sse", "streamable-http"])
     def test_http_transport_forces_remote_mode(self, transport):
         with patch.object(server, "REMOTE_MODE", False):

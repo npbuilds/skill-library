@@ -19,6 +19,7 @@ Conservative autonomy (v1 default): PRs open with label `maint:green`
 and wait for manual merge. Auto-merge workflow comes in a later slice.
 """
 
+import asyncio
 import hmac
 import json
 import logging
@@ -55,6 +56,7 @@ MAINT_TOKEN_HEADER = "X-Maint-Token"
 BOT_EMAIL = os.environ.get("BOT_EMAIL", "skill-library-bot@users.noreply.github.com")
 BOT_NAME = os.environ.get("BOT_NAME", "skill-library-bot")
 KB_REFRESH_LIMIT = int(os.environ.get("KB_REFRESH_LIMIT", "5"))
+MAINTENANCE_LOCK = asyncio.Lock()
 
 
 # ---------------------------------------------------------------------------
@@ -152,6 +154,17 @@ def _github_api_error(e) -> JSONResponse:
         {"error": "github_api", "status": e.response.status_code, "body": e.response.text},
         status_code=502,
     )
+
+
+def _maintenance_busy() -> JSONResponse | None:
+    """Reject overlapping maintenance work on the single Cloud Run instance."""
+    if MAINTENANCE_LOCK.locked():
+        return JSONResponse(
+            {"error": "maintenance_busy", "message": "Another maintenance job is running."},
+            status_code=409,
+            headers={"Retry-After": "60"},
+        )
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -280,10 +293,15 @@ async def _recalibrate(request: Request) -> JSONResponse:
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
+    busy = _maintenance_busy()
+    if busy is not None:
+        return busy
+    await MAINTENANCE_LOCK.acquire()
 
-    notify = get_notifier()
-    bot = _BotPR(pat, "recalibrate")
+    bot = None
     try:
+        notify = get_notifier()
+        bot = _BotPR(pat, "recalibrate")
         bot.clone()
         result = _run(
             ["python3", "scripts/recalibrate_scores.py"],
@@ -323,7 +341,9 @@ async def _recalibrate(request: Request) -> JSONResponse:
         await notify.p0(f"Unexpected failure in recalibrate: {e}", {"job": "recalibrate"})
         return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
     finally:
-        bot.cleanup()
+        if bot is not None:
+            bot.cleanup()
+        MAINTENANCE_LOCK.release()
 
 
 async def _validate(request: Request) -> JSONResponse:
@@ -335,10 +355,15 @@ async def _validate(request: Request) -> JSONResponse:
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
+    busy = _maintenance_busy()
+    if busy is not None:
+        return busy
+    await MAINTENANCE_LOCK.acquire()
 
-    notify = get_notifier()
-    bot = _BotPR(pat, "validate")
+    bot = None
     try:
+        notify = get_notifier()
+        bot = _BotPR(pat, "validate")
         bot.clone()
 
         reg = json.loads(Path(bot.tmpdir, "data/registry.json").read_text())
@@ -380,7 +405,9 @@ async def _validate(request: Request) -> JSONResponse:
         await notify.p0(f"Unexpected failure in validate: {e}", {"job": "validate"})
         return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
     finally:
-        bot.cleanup()
+        if bot is not None:
+            bot.cleanup()
+        MAINTENANCE_LOCK.release()
 
 
 async def _snapshot(request: Request) -> JSONResponse:
@@ -447,20 +474,24 @@ async def _kb_refresh(request: Request) -> JSONResponse:
     pat = _require_pat()
     if isinstance(pat, JSONResponse):
         return pat
-
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
     if not api_key:
         return JSONResponse(
             {"error": "ANTHROPIC_API_KEY not set — T1 enrichment unavailable"},
             status_code=503,
         )
+    busy = _maintenance_busy()
+    if busy is not None:
+        return busy
+    await MAINTENANCE_LOCK.acquire()
 
-    notify = get_notifier()
-    ts = _ts()
-    source_dir = tempfile.mkdtemp(prefix="maint-kb-source-")
-    vault_dir = tempfile.mkdtemp(prefix="maint-kb-vault-")
-
+    source_dir = None
+    vault_dir = None
     try:
+        notify = get_notifier()
+        ts = _ts()
+        source_dir = tempfile.mkdtemp(prefix="maint-kb-source-")
+        vault_dir = tempfile.mkdtemp(prefix="maint-kb-vault-")
         # 1. Clone source repo (skill-library)
         _run(
             ["git", "clone", "--depth", "1", "--branch", BASE_BRANCH,
@@ -534,8 +565,11 @@ async def _kb_refresh(request: Request) -> JSONResponse:
         await notify.p0(f"Unexpected failure in kb-refresh: {e}", {"job": "kb-refresh"})
         return JSONResponse({"error": "unexpected", "message": str(e)}, status_code=500)
     finally:
-        shutil.rmtree(source_dir, ignore_errors=True)
-        shutil.rmtree(vault_dir, ignore_errors=True)
+        if source_dir is not None:
+            shutil.rmtree(source_dir, ignore_errors=True)
+        if vault_dir is not None:
+            shutil.rmtree(vault_dir, ignore_errors=True)
+        MAINTENANCE_LOCK.release()
 
 
 # ---------------------------------------------------------------------------

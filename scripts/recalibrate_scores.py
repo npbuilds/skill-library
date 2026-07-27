@@ -50,6 +50,7 @@ score_usage = _shared.score_usage
 score_feedback = _shared.score_feedback
 SCORE_WEIGHTS = _shared.SCORE_WEIGHTS
 combine_scores = _shared.combine_scores
+compute_composite_score = _shared.compute_composite_score
 
 
 # ── Health classification ───────────────────────────────────────────────────
@@ -184,7 +185,7 @@ def main():
         s_usage = score_usage(name, usage_counts, max_usage)
         s_fb = score_feedback(name, feedback_ratings)
 
-        composite = combine_scores({
+        auto_score = combine_scores({
             "structure": s_struct,
             "depth": s_depth,
             "connectivity": s_conn,
@@ -192,6 +193,9 @@ def main():
             "usage": s_usage,
             "feedback": s_fb,
         })
+        composite = compute_composite_score(
+            auto_score, entry.get("manual_rating")
+        )
 
         old_score = entry.get("composite_score", 0)
 
@@ -220,7 +224,7 @@ def main():
             health_changes.append((name, old_health, new_health))
 
         if not dry_run:
-            entry["auto_score"] = composite
+            entry["auto_score"] = auto_score
             entry["composite_score"] = composite
             entry["health_status"] = new_health
 

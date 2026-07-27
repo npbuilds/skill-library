@@ -24,9 +24,8 @@ spec:
   template:
     metadata:
       annotations:
-        # One instance at a time — mirrors the maintenance idempotency
-        # requirement and keeps concurrent-bot-job scenarios impossible
-        # (Conflict Handling residual #1, #6 in the plan).
+        # One instance at a time. The app-level maintenance lock serializes
+        # bot jobs while this concurrency still serves read traffic.
         autoscaling.knative.dev/maxScale: "1"
         run.googleapis.com/cpu-throttling: "true"
     spec:
@@ -47,8 +46,16 @@ spec:
           env:
             - name: MCP_REMOTE
               value: "true"
+            # Public HTTP callers are unauthenticated. This removes every
+            # score-affecting write tool, including record_skill_feedback.
+            - name: MCP_READ_ONLY
+              value: "1"
+            - name: TELEMETRY_FIRESTORE
+              value: "1"
             - name: MAINTENANCE_AUTONOMY
               value: conservative
+            - name: GITHUB_VAULT_REPO
+              value: npbuilds/skill-library-vault
             # Force sentence-transformers / HF Hub to load the MiniLM
             # weights from the image's local cache without a revision
             # check. Required because Cloud Run cpu-throttling makes the
@@ -64,6 +71,11 @@ spec:
                 secretKeyRef:
                   key: latest
                   name: github-bot-pat
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: latest
+                  name: anthropic-api-key
             # Caller-side shared secret for /maint/* endpoints. Required
             # because the service is `--allow-unauthenticated`; without
             # this token check, anonymous callers could trigger the

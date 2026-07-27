@@ -54,7 +54,8 @@ scan() { # scan <label> ; input on stdin; prints matches, returns 1 on hit
 case "${1:-staged}" in
   staged)
     ok=0
-    git diff --cached -U0 --no-color | grep -E '^(\+|Binary)' | scan "staged changes" || ok=1
+    { git diff --cached -U0 --no-color | grep -E '^(\+|Binary)' || true; } \
+      | scan "staged changes" || ok=1
     git diff --cached --name-only | scan "staged file names" || ok=1
     [ "$ok" = "1" ] && fail "the staged commit"
     ;;
@@ -70,7 +71,9 @@ case "${1:-staged}" in
       [ "$local_sha" = "0000000000000000000000000000000000000000" ] && continue
       base="$remote_sha"
       [ "$remote_sha" = "0000000000000000000000000000000000000000" ] && base="$empty_tree"
-      git diff "$base" "$local_sha" -U0 --no-color 2>/dev/null | grep -E '^(\+|Binary|diff --git)' | scan "pushed diff ($local_sha)" || ok=1
+      { git diff "$base" "$local_sha" -U0 --no-color 2>/dev/null \
+          | grep -E '^(\+|Binary|diff --git)' || true; } \
+        | scan "pushed diff ($local_sha)" || ok=1
       git log --format=%B "$base..$local_sha" 2>/dev/null | scan "pushed commit messages" || ok=1
     done
     [ "$ok" = "1" ] && fail "the push"

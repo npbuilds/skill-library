@@ -29,13 +29,18 @@ sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "mcp-server"))
 
 from shared import (  # noqa: E402
-    SCORE_WEIGHTS, combine_scores, compute_auto_score, load_log, iter_skill_uses,
+    SCORE_WEIGHTS, combine_scores, compute_auto_score, compute_composite_score,
+    load_log, iter_skill_uses,
     score_structure, score_depth, score_connectivity, score_freshness,
     score_usage, score_feedback,
 )
 
 INFRA_HTML = ROOT / "app" / "infra.html"
 REGISTRY = ROOT / "data" / "registry.json"
+RATING_RUBRIC = (
+    ROOT / "skills" / "infrastructure" / "skill-dashboard"
+    / "references" / "rating-rubric.md"
+)
 
 
 def parse_infra_weights() -> dict:
@@ -69,6 +74,12 @@ def test_usage_is_unweighted():
     assert "usage" in SCORE_WEIGHTS, "usage must stay present, just unweighted"
 
 
+def test_manual_blend_has_one_explicit_policy():
+    assert compute_composite_score(80, None) == 80
+    assert compute_composite_score(80, 100) == 88
+    assert compute_composite_score(89, 100) == 93
+
+
 def test_infra_panel_matches_source_of_truth():
     shown = parse_infra_weights()
     expected = {k: round(v * 100) for k, v in SCORE_WEIGHTS.items()}
@@ -78,6 +89,35 @@ def test_infra_panel_matches_source_of_truth():
         f"  source of truth : {expected}"
     )
     assert sum(shown.values()) == 100, f"displayed percentages sum to {sum(shown.values())}"
+
+
+def test_public_rating_docs_match_source_of_truth():
+    rubric = RATING_RUBRIC.read_text()
+    shown = {
+        name.lower(): int(percent)
+        for name, percent in re.findall(
+            r"^\| (Structure|Depth|Connectivity|Freshness|Feedback|Usage) "
+            r"\| (\d+)% \|",
+            rubric,
+            re.MULTILINE,
+        )
+    }
+    expected = {key: round(value * 100) for key, value in SCORE_WEIGHTS.items()}
+    assert shown == expected
+
+    public_contracts = [
+        RATING_RUBRIC,
+        ROOT / "skills" / "infrastructure" / "skill-health" / "SKILL.md",
+        ROOT / "skills" / "infrastructure" / "skill-registry" / "SKILL.md",
+        ROOT / "skills" / "infrastructure" / "skill-registry"
+        / "references" / "registry-schema.md",
+        ROOT / "commands" / "skill-rate.md",
+    ]
+    combined = "\n".join(path.read_text() for path in public_contracts)
+    assert "auto_score * 0.7" not in combined
+    assert "manual_rating / 5" not in combined
+    assert "auto_score * 0.60" in combined
+    assert "manual_rating * 0.40" in combined
 
 
 def test_combine_scores_requires_every_weighted_axis():

@@ -24,6 +24,7 @@ Usage:
 """
 
 import json
+import importlib.util
 import re
 import shutil
 import subprocess
@@ -40,52 +41,23 @@ FEEDBACK_LOG  = PROJECT_ROOT / "data" / "feedback.jsonl"
 AR_LOG        = PROJECT_ROOT / "data" / "autoresearch_log.jsonl"
 
 
-# ── Scoring (inlined from recalibrate_scores.py) ─────────────────────────────
+# ── Scoring — imported from the canonical MCP/shared implementation ──────────
 
-def score_structure(metrics: dict) -> int:
-    section_count = metrics.get("section_count", 0)
-    desc_words    = metrics.get("description_words", 0)
-    body_words    = metrics.get("body_words", metrics.get("word_count", 0))
-    score = 50
-    # Density-adjusted section score (mirrors recalibrate_scores.py)
-    length_factor = max(1.0, body_words / 500)
-    adj_sc = section_count / length_factor
-    if 1.0 <= adj_sc <= 5.0:    score += 25
-    elif 0.5 <= adj_sc <= 10.0: score += 15
-    if 20 <= desc_words <= 60:    score += 25
-    elif 15 <= desc_words <= 100: score += 15
-    else:                          score += 5
-    return score
+_shared_path = PROJECT_ROOT / "mcp-server" / "shared.py"
+_shared_spec = importlib.util.spec_from_file_location("autoresearch_shared", _shared_path)
+if _shared_spec is None or _shared_spec.loader is None:
+    raise ImportError(f"Cannot locate shared scoring module at {_shared_path}")
+_shared = importlib.util.module_from_spec(_shared_spec)
+_shared_spec.loader.exec_module(_shared)
 
-def score_depth(metrics: dict) -> int:
-    body_words = metrics.get("body_words", metrics.get("word_count", 0))
-    ref_files  = metrics.get("reference_files", 0)
-    if 300 <= body_words <= 5000:    score = 75
-    elif body_words < 300:           score = max(10, int(body_words / 300 * 75))
-    else:                            score = max(40, 75 - int((body_words - 5000) / 500))
-    score += min(30, ref_files * 10)
-    return min(100, score)
-
-def score_connectivity(entry: dict) -> int:
-    total = len(entry.get("depends_on", [])) + len(entry.get("referenced_by", []))
-    if total == 0:   return 20
-    elif total <= 2: return 40
-    elif total <= 5: return 65
-    elif total <= 10: return 85
-    else:            return 100
-
-def score_freshness(entry: dict, now: datetime) -> int:
-    last_mod = entry.get("last_modified", "2020-01-01")
-    try:
-        mod_date = datetime.fromisoformat(last_mod).replace(tzinfo=timezone.utc)
-        days_old = (now - mod_date).days
-    except (ValueError, TypeError):
-        days_old = 90
-    if days_old <= 7:   return 100
-    elif days_old <= 30: return 80
-    elif days_old <= 60: return 60
-    elif days_old <= 90: return 40
-    else: return max(20, 40 - int((days_old - 90) / 30) * 5)
+score_structure = _shared.score_structure
+score_depth = _shared.score_depth
+score_connectivity = _shared.score_connectivity
+score_freshness = _shared.score_freshness
+score_usage = _shared.score_usage
+score_feedback = _shared.score_feedback
+combine_scores = _shared.combine_scores
+compute_composite_score = _shared.compute_composite_score
 
 def _load_jsonl(path: Path) -> list[dict]:
     if not path.exists(): return []
@@ -106,16 +78,22 @@ def compute_composite(entry: dict, now: datetime,
     s_depth  = score_depth(metrics)
     s_conn   = score_connectivity(entry)
     s_fresh  = score_freshness(entry, now)
-    uses     = usage_counts.get(name, 0)
-    s_usage  = min(100, int((uses / max_usage) * 80) + 20) if max_usage > 0 and uses > 0 else 0
-    ratings  = feedback_ratings.get(name, [])
-    s_fb     = int(sum(ratings) / len(ratings) * 20) if ratings else 50
-    composite = round(
-        s_struct * 0.20 + s_depth * 0.25 + s_conn * 0.20 +
-        s_fresh  * 0.15 + s_usage * 0.10 + s_fb * 0.10
+    s_usage  = score_usage(name, usage_counts, max_usage)
+    s_fb     = score_feedback(name, feedback_ratings)
+    auto_score = combine_scores({
+        "structure": s_struct,
+        "depth": s_depth,
+        "connectivity": s_conn,
+        "freshness": s_fresh,
+        "usage": s_usage,
+        "feedback": s_fb,
+    })
+    composite = compute_composite_score(
+        auto_score, entry.get("manual_rating")
     )
     breakdown = dict(structure=s_struct, depth=s_depth, connectivity=s_conn,
-                     freshness=s_fresh, usage=s_usage, feedback=s_fb)
+                     freshness=s_fresh, usage=s_usage, feedback=s_fb,
+                     auto_score=auto_score)
     return composite, breakdown
 
 
@@ -282,14 +260,16 @@ def run_experiment(
         revert_fn()
         status = "reverted"
     elif delta > 0:
-        # Persist composite score only when there's an actual improvement
+        # Persist canonical automatic and auto/manual composite scores.
         reg["skills"][skill_name]["composite_score"] = after_score
-        reg["skills"][skill_name]["auto_score"]      = after_score
+        reg["skills"][skill_name]["auto_score"]      = after_bd["auto_score"]
         reg["skills"][skill_name]["last_modified"]   = now.strftime("%Y-%m-%d")
         _save_registry(reg)
         status = "kept"
     else:
-        # Neutral — no score change, don't write registry (avoids inflating freshness)
+        # apply_fn has already mutated files/registry. Revert neutral changes so
+        # "no improvement" really means no persisted experiment.
+        revert_fn()
         status = "neutral"
 
     return dict(skill=skill_name, lever=lever, status=status,
