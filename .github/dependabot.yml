@@ -1,0 +1,38 @@
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/New_York
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: pip
+    directory: /mcp-server
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:10"
+      timezone: America/New_York
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: pip
+    directory: /archon-data
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:20"
+      timezone: America/New_York
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:30"
+      timezone: America/New_York
+    open-pull-requests-limit: 5
