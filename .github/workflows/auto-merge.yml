@@ -7,6 +7,20 @@ name: Auto-merge maintenance PRs
 # Flow: CI completes → this fires → finds the PR by SHA → checks
 # for maint:green label → merges if labeled.
 #
+# The merge MUST use the bot PAT, not GITHUB_TOKEN. GitHub does not trigger
+# workflows from pushes made with GITHUB_TOKEN (its loop-prevention rule), so
+# merging with it produced a commit on main with ZERO workflow runs: no CI, and
+# therefore none of the workflow_run consumers — sync-firestore.yml,
+# deploy.yml, deploy-hosting.yml. Every maint:green merge silently skipped the
+# entire fan-out and only converged whenever a later human merge happened to
+# carry the data downstream. Observed 2026-07-26 on 2786cf2, which landed with
+# no runs at all and left meta/usage_rollup stale.
+#
+# daily-firestore.yml already documents this trap for PR *creation* ("PRs must
+# be pushed/created with it, NOT github.token — GITHUB_TOKEN-created PRs don't
+# trigger CI, so auto-merge.yml would never fire"). The same rule applies to
+# the merge; this workflow was the missing half.
+#
 # Autonomy tiers (from plan):
 #   conservative (v1): only maint:green auto-merges
 #   standard:          also maint:yellow (add to label grep)
@@ -20,6 +34,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write  # WIF, to read the bot PAT from Secret Manager (see below)
 
 jobs:
   auto-merge:
@@ -64,13 +79,69 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
+      # The merge needs the bot PAT (see the header): a GITHUB_TOKEN merge lands
+      # a commit that triggers nothing. Reading it needs WIF + gcloud, the same
+      # path daily-firestore.yml uses. Only runs when we are actually merging,
+      # so a non-maint PR costs no auth round-trip.
+      - name: Authenticate to GCP (Workload Identity Federation)
+        if: steps.pr.outputs.skip != 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOY_SA_EMAIL }}
+
+      - name: Set up gcloud
+        if: steps.pr.outputs.skip != 'true'
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Fetch bot PAT from Secret Manager
+        if: steps.pr.outputs.skip != 'true'
+        id: pat
+        run: |
+          BOT_PAT=$(gcloud secrets versions access latest \
+            --secret=github-bot-pat --project="${{ vars.GCP_PROJECT_ID }}")
+          echo "::add-mask::$BOT_PAT"
+          echo "token=$BOT_PAT" >> "$GITHUB_OUTPUT"
+
       - name: Merge PR
         if: steps.pr.outputs.skip != 'true'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # NOT secrets.GITHUB_TOKEN — that merge triggers no downstream
+          # workflows. See the header.
+          GH_TOKEN: ${{ steps.pat.outputs.token }}
           REPO: ${{ github.repository }}
           PR: ${{ steps.pr.outputs.number }}
         run: |
           echo "Merging PR #${PR} (squash + delete branch)"
           gh pr merge "${PR}" --repo "${REPO}" --squash --delete-branch
           echo "✅ PR #${PR} auto-merged"
+
+      # A merge that fans out to nothing is the failure this workflow existed to
+      # stop being silent about. Assert CI actually picked up the squash commit,
+      # so a regression here is a red run instead of a stale dashboard nobody
+      # notices. Polls briefly: run creation is not instantaneous.
+      - name: Verify the merge commit triggered CI
+        if: steps.pr.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          SHA=$(gh api "repos/${REPO}/commits/main" --jq '.sha')
+          echo "main is now at ${SHA}"
+          # Count CI runs specifically, not any run. Every fan-out consumer
+          # (sync-firestore, deploy, deploy-hosting) triggers on `workflow_run:
+          # workflows: [CI]`, so CI is the load-bearing link — and a bare
+          # total_count can be satisfied by an unrelated workflow_dispatch
+          # against main, which would false-pass this check.
+          for attempt in 1 2 3 4 5 6; do
+            COUNT=$(gh api "repos/${REPO}/actions/runs?head_sha=${SHA}" \
+              --jq '[.workflow_runs[] | select(.name == "CI")] | length')
+            if [ "${COUNT:-0}" -gt 0 ]; then
+              echo "✓ CI triggered for ${SHA} — fan-out is live"
+              exit 0
+            fi
+            echo "  attempt ${attempt}: no CI run yet for ${SHA}, waiting..."
+            sleep 10
+          done
+          echo "::error::Merge commit ${SHA} triggered NO CI run, so the fan-out (sync-firestore, deploy, deploy-hosting) will not fire. This is the GITHUB_TOKEN loop-prevention symptom; check that the merge used the bot PAT."
+          exit 1
