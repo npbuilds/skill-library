@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import shutil
 import subprocess
 import tempfile
 from pathlib import Path
@@ -10,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 HOOK = ROOT / "hooks" / "leak-guard.sh"
+PRE_COMMIT_HOOK = ROOT / "hooks" / "pre-commit-stray-check.sh"
 
 
 def run(cmd: list[str], cwd: Path, check: bool = True):
@@ -50,6 +52,23 @@ def test_private_term_is_blocked():
     (repo / "unsafe.txt").write_text("forbidden-project\n")
     run(["git", "add", "unsafe.txt"], repo)
     result = run(["bash", str(HOOK), "staged"], repo, check=False)
+    assert result.returncode == 1
+    assert "BLOCKED" in result.stderr
+
+
+def test_pre_commit_hook_runs_leak_guard():
+    repo = make_repo()
+    hooks = repo / "hooks"
+    hooks.mkdir()
+    shutil.copy2(HOOK, hooks / HOOK.name)
+    shutil.copy2(PRE_COMMIT_HOOK, hooks / PRE_COMMIT_HOOK.name)
+    (repo / "README.md").write_text("forbidden-project\n")
+    run(["git", "add", "README.md"], repo)
+    result = run(
+        ["bash", str(hooks / PRE_COMMIT_HOOK.name)],
+        repo,
+        check=False,
+    )
     assert result.returncode == 1
     assert "BLOCKED" in result.stderr
 
