@@ -19,7 +19,7 @@ while IFS= read -r f; do
   rel="${f#"$PROJECT_ROOT"/}"
   # Explicit allowlist (no catch-all for dotfiles — .env etc. should be caught)
   case "$base" in
-    CLAUDE.md|README.md|Dockerfile|.gitignore|.dockerignore|.DS_Store) continue ;;
+    AGENTS.md|CLAUDE.md|README.md|Dockerfile|.gitignore|.dockerignore|.DS_Store) continue ;;
   esac
   # Skip gitignored files (use relative path for reliability)
   if git -C "$PROJECT_ROOT" check-ignore -q "$rel" 2>/dev/null; then

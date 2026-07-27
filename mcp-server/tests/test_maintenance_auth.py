@@ -6,15 +6,16 @@ anonymous caller and the server's GitHub bot PAT. These tests pin the three
 behaviors that matter: token missing, token wrong, token correct.
 """
 
+import asyncio
 from unittest.mock import MagicMock
 
-import pytest
 from starlette.responses import JSONResponse
 
 from maintenance import (
     MAINT_TOKEN_ENV,
     MAINT_TOKEN_HEADER,
     _check_maint_token,
+    _health,
 )
 
 
@@ -48,3 +49,11 @@ def test_wrong_header_returns_401(monkeypatch):
 def test_correct_header_passes(monkeypatch):
     monkeypatch.setenv(MAINT_TOKEN_ENV, "secret123")
     assert _check_maint_token(_request_with_header("secret123")) is None
+
+
+def test_public_health_supports_observatory_cors(monkeypatch):
+    monkeypatch.setenv("GITHUB_BOT_PAT", "configured")
+    resp = asyncio.run(_health(MagicMock()))
+    assert resp.status_code == 200
+    assert resp.headers["access-control-allow-origin"] == "*"
+    assert resp.headers["cache-control"] == "no-store"

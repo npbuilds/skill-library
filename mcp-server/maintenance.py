@@ -255,14 +255,19 @@ class _BotPR:
 
 async def _health(_request: Request) -> JSONResponse:
     """Liveness probe. Confirms the container is up and the maintenance
-    router is mounted."""
+    router is mounted. The endpoint is intentionally public, so allow the
+    Firebase-hosted observatory to read it as a live infrastructure signal."""
     return JSONResponse(
         {
             "status": "ok",
             "service": "skill-library-mcp",
             "maintenance_router": "mounted",
             "bot_pat_configured": bool(_pat()),
-        }
+        },
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control": "no-store",
+        },
     )
 
 
