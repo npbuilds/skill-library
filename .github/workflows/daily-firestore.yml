@@ -44,7 +44,7 @@ jobs:
           service_account: ${{ vars.DEPLOY_SA_EMAIL }}
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
@@ -115,7 +115,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
