@@ -10,7 +10,7 @@ description: >
   findings with explicit gaps.
 metadata:
   author: nirav
-  version: "1.0.3"
+  version: "1.0.4"
 compatibility: Designed for Claude Code
 allowed-tools: Read Write bash Glob Grep Agent WebSearch WebFetch
 ---
@@ -53,6 +53,7 @@ If the user doesn't specify depth, default to `standard`. Upgrade to `deep` if e
 |--------|------|-------|
 | "Is X true?", "What caused X?", "Verify X", fact-check | **Investigative** | Continue to Phase 2 (decompose → triangulate → synthesize) |
 | "What's the best X?", "How should we X?", "What are the options for X?", "Design X", "Optimize X" | **Generative** | Route to `agentic-researcher` |
+| "What should I buy?", "best <product> for <need/budget>", purchase comparison, "is this product/store legit?" | **Consumer purchase** | Route to `emptor` (consumer-research domain) — runs requirements elicitation, trusted-source scanning, and verification before recommending |
 
 **Generative questions** require constructing and comparing candidate solutions rather than verifying existing claims. When a generative question is detected, pass the restated question, detected domain, depth mode, and user constraints to `agentic-researcher` and present its output in Phase 6 format.
 

@@ -1,0 +1,11 @@
+{
+  "updated_at": null,
+  "global": {
+    "satisficer_lean": null,
+    "recurring_must_haves": [],
+    "trusted_merchants": [],
+    "blocked_merchants": [],
+    "budget_style": null
+  },
+  "categories": {}
+}

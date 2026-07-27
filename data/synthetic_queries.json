@@ -8325,6 +8325,125 @@
         "How does elevation affect grape ripening and wine style",
         "Explaining wine regional designations and legal classifications"
       ]
+    },
+    "decision-journal": {
+      "content_hash": "bf1d3c519aa3b1b0ee588c0fda71c9fd3b33bb005772aff9775724774b37aa3d",
+      "index_queries": [
+        "how do I track what I bought and whether it was good",
+        "record my purchase decisions and see patterns over time",
+        "keep a log of product research I do",
+        "remember what products I've tried and my satisfaction",
+        "document my buying choices for future reference",
+        "save my purchase research to avoid repeating myself",
+        "learn from past product purchases to buy better next time"
+      ],
+      "eval_queries": [
+        "capture what I researched before buying something",
+        "track my product satisfaction after 30 days",
+        "maintain a history of my buying decisions"
+      ]
+    },
+    "emptor": {
+      "content_hash": "dadf95062461889862b1a62ca2346756f0a97c1f94a372a82b3f225f0c016f44",
+      "index_queries": [
+        "what's the best laptop for programming under $1500",
+        "help me compare different coffee makers",
+        "I need to buy a monitor, which one should I get",
+        "research the top options for a new vacuum cleaner",
+        "find the best headphones for exercise",
+        "compare features of different dishwashers",
+        "what mattress should I buy for back pain relief"
+      ],
+      "eval_queries": [
+        "help me pick between these camera options",
+        "which smart home speaker is most reliable",
+        "I'm buying a printer, what do you recommend"
+      ]
+    },
+    "needs-elicitor": {
+      "content_hash": "fcb7a658cb9a744db17af492a2f11b9200cf3bc9a454bbb24b851b6b41ddea57",
+      "index_queries": [
+        "help me figure out what I actually need before shopping",
+        "I want a robot vacuum but don't know what matters",
+        "clarify my requirements for a new laptop",
+        "what features should I prioritize in a smart TV",
+        "help me define what a good office chair means to me",
+        "what do I really need in a phone",
+        "pin down my must-haves before buying anything"
+      ],
+      "eval_queries": [
+        "define my budget and priorities for a monitor",
+        "what matters most to me in a coffee maker",
+        "help me list deal-breakers for a new desk"
+      ]
+    },
+    "product-verifier": {
+      "content_hash": "5b207d33e8edd502042ea28b82d0d720f6d700bddb39b61ca62e9dc2bf75a926",
+      "index_queries": [
+        "is this microwave's cleaning claim actually true",
+        "check if this product is still available",
+        "are there any recalls on this model",
+        "verify the specs this seller is claiming",
+        "is this store trustworthy for buying electronics",
+        "confirm whether this product still works like advertised",
+        "check if this item has been discontinued"
+      ],
+      "eval_queries": [
+        "verify the battery life claim on this device",
+        "is this retailer legitimate",
+        "check for reliability issues with this specific model"
+      ]
+    },
+    "recommendation-brief": {
+      "content_hash": "c37cd35049609573dfae34b8388afca499bb2d44cc573dc1c25c69bf011d11ac",
+      "index_queries": [
+        "give me a final recommendation with your reasoning",
+        "summarize the best option with trade-offs explained",
+        "create a decision brief for this purchase",
+        "show me the top pick and why it won",
+        "build a comparison table of the finalists",
+        "what's your ranked recommendation with confidence levels",
+        "provide a summary of your evaluation process"
+      ],
+      "eval_queries": [
+        "generate the final decision brief",
+        "show me which option scored highest and by how much",
+        "create a report explaining your top recommendation"
+      ]
+    },
+    "review-forensics": {
+      "content_hash": "37e9a71bd3b73a7983db9faef203feb2ec246ccddfaaf7e1f9485403474b6d1b",
+      "index_queries": [
+        "are the reviews for this product fake",
+        "check if these Amazon reviews are authentic",
+        "detect whether this product has review manipulation",
+        "verify the reviews look genuine for this item",
+        "score the trustworthiness of these customer reviews",
+        "are these app reviews real or inflated",
+        "check for fake reviews on this product listing"
+      ],
+      "eval_queries": [
+        "tell me if these Yelp reviews seem legitimate",
+        "analyze whether these reviews appear genuine",
+        "detect review fraud on this product page"
+      ]
+    },
+    "source-trust-atlas": {
+      "content_hash": "a3ce3bcb46851357cd3e14dcfccbf68dc1814633785ac2a1ca40b98bddd1a513",
+      "index_queries": [
+        "which review sites can I trust for laptops",
+        "where should I search for reliable camera reviews",
+        "what sources are trustworthy for appliance research",
+        "rank the best places to find honest product reviews",
+        "which review platforms are most trustworthy for electronics",
+        "where do real experts review furniture products",
+        "what are the most credible sources for kitchen gadgets"
+      ],
+      "eval_queries": [
+        "which review sites have the best reputation for accuracy",
+        "what's the most trusted review source for phones",
+        "find credible review sites for what I want to buy"
+      ]
     }
   }
 }

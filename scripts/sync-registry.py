@@ -30,6 +30,20 @@ REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
 SKIP_DIRS = {".obsidian", "references", "agents", "examples"}
 
 
+def derive_referenced_by(skills: dict[str, dict]) -> dict[str, list[str]]:
+    """Build the exact reverse index implied by parent and depends_on edges."""
+    reverse: dict[str, set[str]] = {name: set() for name in skills}
+    for source, entry in skills.items():
+        targets = set(entry.get("depends_on") or [])
+        parent = entry.get("parent")
+        if parent:
+            targets.add(parent)
+        for target in targets:
+            if target in reverse and target != source:
+                reverse[target].add(source)
+    return {name: sorted(referrers) for name, referrers in reverse.items()}
+
+
 @lru_cache(maxsize=1)
 def _tracked_files() -> frozenset[str]:
     """POSIX-relative paths tracked by git (index + HEAD). Empty set if git fails."""
@@ -536,6 +550,23 @@ def sync(apply: bool = False) -> None:
         if added:
             new_depends_on[name] = added
 
+    # Build the post-sync graph in memory so dry-run mode catches reverse-index
+    # drift too. In particular, newly discovered child skills must immediately
+    # appear in their parent's referenced_by list.
+    prospective = {name: dict(entry) for name, entry in existing.items()}
+    prospective.update({name: dict(discovered[name]) for name in new_names})
+    for source, targets in new_depends_on.items():
+        if source in prospective:
+            prospective[source]["depends_on"] = sorted(
+                set(prospective[source].get("depends_on") or []) | targets
+            )
+    expected_referenced_by = derive_referenced_by(prospective)
+    referenced_by_drift = {
+        name: refs
+        for name, refs in expected_referenced_by.items()
+        if sorted(prospective[name].get("referenced_by") or []) != refs
+    }
+
     # ── Report ──
     print(f"Registry: {len(existing)} skills")
     print(f"On disk:  {len(discovered)} skills")
@@ -584,6 +615,11 @@ def sync(apply: bool = False) -> None:
             print(f"  + {src} → {', '.join(targets)}")
         if len(new_depends_on) > 5:
             print(f"    ... and {len(new_depends_on) - 5} more")
+    if referenced_by_drift:
+        print(
+            f"REFERENCED_BY DRIFT "
+            f"({len(referenced_by_drift)} reverse-index entries will be rebuilt)"
+        )
 
     # ── Apply changes ──
     if apply:
@@ -634,6 +670,17 @@ def sync(apply: bool = False) -> None:
                     entry["referenced_by"] = sorted(set(entry["referenced_by"]))
             print(f"  Added {added_edge_count} cross-reference edge(s)")
 
+        # referenced_by is denormalized data, so rebuild it from the canonical
+        # parent + depends_on edges after all additions and graph edits.
+        rebuilt_referenced_by = derive_referenced_by(existing)
+        reverse_updates = 0
+        for name, refs in rebuilt_referenced_by.items():
+            if sorted(existing[name].get("referenced_by") or []) != refs:
+                reverse_updates += 1
+            existing[name]["referenced_by"] = refs
+        if reverse_updates:
+            print(f"  Rebuilt referenced_by on {reverse_updates} entries")
+
         # Re-derive network.domains from on-disk paths so renames
         # (e.g., meta → _meta) propagate automatically.
         new_domains: dict[str, list[str]] = {}
@@ -670,6 +717,7 @@ def sync(apply: bool = False) -> None:
             + len(drift_desc)
             + len(drift_metrics)
             + sum(len(s) for s in new_depends_on.values())
+            + len(referenced_by_drift)
         )
         if total_changes:
             print(f"\nDry run complete. {total_changes} change(s) pending.")

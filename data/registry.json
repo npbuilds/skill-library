@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-27T03:59:46Z",
+  "last_scan": "2026-07-27T12:44:40Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -5197,8 +5197,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 3568,
-        "body_words": 3466,
+        "word_count": 3603,
+        "body_words": 3501,
         "description_words": 77,
         "section_count": 6,
         "reference_files": 3,
@@ -5206,8 +5206,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 101,
-        "estimated_tokens_body": 5978,
-        "estimated_tokens_total": 6079
+        "estimated_tokens_body": 6049,
+        "estimated_tokens_total": 6150
       },
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
@@ -5224,6 +5224,7 @@
         "cover-letter-craft",
         "domain-deepdives",
         "ecosystem-mapping",
+        "emptor",
         "evidence-gathering",
         "evidence-synthesizer",
         "frontier-intelligence",
@@ -5340,9 +5341,12 @@
       "referenced_by": [
         "agentic-researcher",
         "ecosystem-mapping",
+        "emptor",
         "evidence-evaluator",
         "evidence-synthesizer",
-        "source-criticism"
+        "product-verifier",
+        "source-criticism",
+        "source-trust-atlas"
       ],
       "tags": [
         "domain:research",
@@ -11154,14 +11158,18 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 75,
       "depends_on": [
         "source-triangulator"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "emptor",
+        "needs-elicitor",
+        "recommendation-brief"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -19193,19 +19201,22 @@
         "estimated_tokens_body": 3156,
         "estimated_tokens_total": 3250
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 69,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "decision-journal",
+        "emptor"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -19248,19 +19259,22 @@
         "estimated_tokens_body": 2547,
         "estimated_tokens_total": 2675
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 69,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "decision-journal",
+        "emptor"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25054,19 +25068,21 @@
         "estimated_tokens_body": 1389,
         "estimated_tokens_total": 1470
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-14T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 65,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 65,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "emptor"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -25108,19 +25124,21 @@
         "estimated_tokens_body": 1683,
         "estimated_tokens_total": 1754
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-14T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 62,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 62,
+      "composite_score": 67,
       "depends_on": [],
-      "referenced_by": [],
+      "referenced_by": [
+        "emptor"
+      ],
       "shares_references_with": [],
       "forked_from": null,
       "forked_into": [],
@@ -27471,6 +27489,410 @@
         }
       ],
       "parent": "visualization"
+    },
+    "decision-journal": {
+      "name": "decision-journal",
+      "description": "Persists purchase research and learns from outcomes: appends research runs to data/decision-journal.jsonl, purchases and 30-day check-ins to data/purchases.jsonl, maintains data/consumer-preferences.json, and mirrors briefs into the user's Obsidian vault via vault-writer when reachable. Use at the start of an emptor run (recall priors), at its end (persist the brief), and when /purchase-log or /purchase-review fire. Closes the calibration loop by resolving brief confidence against real satisfaction.",
+      "location": "skills/consumer-research/decision-journal/SKILL.md",
+      "plugin": "skill-consumer-research",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 704,
+        "body_words": 615,
+        "description_words": 65,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 85,
+        "estimated_tokens_body": 1450,
+        "estimated_tokens_total": 1535
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "vault-reader",
+        "vault-writer"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:consumer-research",
+        "layer:action"
+      ],
+      "created": "2026-07-27",
+      "last_modified": "2026-07-27",
+      "changelog": [
+        {
+          "date": "2026-07-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "emptor"
+    },
+    "emptor": {
+      "name": "emptor",
+      "description": "Orchestrates rigorous consumer purchase research from need to verified recommendation. Use when the user wants to buy something and asks \"what's the best X\", wants product options compared, or needs purchase claims verified \u2014 any consumer buying decision across electronics, appliances, software, services, and beyond. Runs requirements elicitation before any prices are seen, searches only trusted sources, verifies finalists, scores them on the user's own weighted criteria, and journals the outcome for calibration.",
+      "location": "skills/consumer-research/emptor/SKILL.md",
+      "plugin": "skill-consumer-research",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 902,
+        "body_words": 802,
+        "description_words": 73,
+        "section_count": 9,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 95,
+        "estimated_tokens_body": 1440,
+        "estimated_tokens_total": 1535
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 86,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 86,
+      "depends_on": [
+        "agentic-researcher",
+        "bias-and-funding-tracer",
+        "paywall-strategist",
+        "source-triangulator",
+        "spelunker",
+        "vault-reader",
+        "vault-writer"
+      ],
+      "referenced_by": [
+        "decision-journal",
+        "needs-elicitor",
+        "product-verifier",
+        "recommendation-brief",
+        "review-forensics",
+        "source-trust-atlas"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:consumer-research",
+        "layer:orchestrator"
+      ],
+      "created": "2026-07-27",
+      "last_modified": "2026-07-27",
+      "changelog": [
+        {
+          "date": "2026-07-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": null
+    },
+    "needs-elicitor": {
+      "name": "needs-elicitor",
+      "description": "Interviews a buyer before any product research happens: jobs-to-be-done framing, MoSCoW must-haves, deal-breakers, and a budget locked before any price is seen. Use when starting a purchase decision and the real requirements are not yet pinned down \u2014 emptor's elicit phase, or standalone when someone says \"help me figure out what I actually need\". Produces a signed-off requirements spec with weighted criteria; performs no web searching itself.",
+      "location": "skills/consumer-research/needs-elicitor/SKILL.md",
+      "plugin": "skill-consumer-research",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 690,
+        "body_words": 602,
+        "description_words": 67,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 88,
+        "estimated_tokens_body": 1048,
+        "estimated_tokens_total": 1136
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "agentic-researcher"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:consumer-research",
+        "layer:action"
+      ],
+      "created": "2026-07-27",
+      "last_modified": "2026-07-27",
+      "changelog": [
+        {
+          "date": "2026-07-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "emptor"
+    },
+    "product-verifier": {
+      "name": "product-verifier",
+      "description": "Verifies a shortlisted product's hard facts before it can be recommended: marketing claims against independent test data, current availability and discontinuation status, recall and reliability history, and merchant trustworthiness for purchase links. Use during emptor's verify phase on each finalist, or standalone when the user asks \"is this product's claim actually true?\" or \"is this store legit?\".",
+      "location": "skills/consumer-research/product-verifier/SKILL.md",
+      "plugin": "skill-consumer-research",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 614,
+        "body_words": 534,
+        "description_words": 57,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 75,
+        "estimated_tokens_body": 991,
+        "estimated_tokens_total": 1066
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 72,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 72,
+      "depends_on": [
+        "source-triangulator"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:consumer-research",
+        "layer:action"
+      ],
+      "created": "2026-07-27",
+      "last_modified": "2026-07-27",
+      "changelog": [
+        {
+          "date": "2026-07-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "emptor"
+    },
+    "recommendation-brief": {
+      "name": "recommendation-brief",
+      "description": "Assembles the final EMPTOR BRIEF for a purchase decision and runs its pre-flight audit: ranked pick with confidence-and-because clauses, trade-off map, evaluation matrix, sensitivity, forensics flags, trust-checked merchants, freshness stamps, and the feedback footer. Use during emptor's brief phase after evaluation completes, or standalone to re-render an existing evaluation into the brief contract. Rejects and regenerates rather than delivering an unauditable brief.",
+      "location": "skills/consumer-research/recommendation-brief/SKILL.md",
+      "plugin": "skill-consumer-research",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 760,
+        "body_words": 677,
+        "description_words": 62,
+        "section_count": 8,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 81,
+        "estimated_tokens_body": 1243,
+        "estimated_tokens_total": 1324
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 70,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 70,
+      "depends_on": [
+        "agentic-researcher"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:consumer-research",
+        "layer:action"
+      ],
+      "created": "2026-07-27",
+      "last_modified": "2026-07-27",
+      "changelog": [
+        {
+          "date": "2026-07-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "emptor"
+    },
+    "review-forensics": {
+      "name": "review-forensics",
+      "description": "Scores the authenticity of a product's review corpus using a five-signal ensemble (velocity, verified-purchase ratio, rating distribution, account patterns, cross-product repetition). Use when evaluating whether crowd reviews for a specific product can be trusted as evidence \u2014 typically during emptor's verify phase, or standalone when the user asks \"are these reviews fake?\". Returns a per-product authenticity verdict, never a guess: signals that cannot be checked are reported as unchecked.",
+      "location": "skills/consumer-research/review-forensics/SKILL.md",
+      "plugin": "skill-consumer-research",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 648,
+        "body_words": 557,
+        "description_words": 69,
+        "section_count": 8,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 90,
+        "estimated_tokens_body": 981,
+        "estimated_tokens_total": 1071
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 68,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 68,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:consumer-research",
+        "layer:action"
+      ],
+      "created": "2026-07-27",
+      "last_modified": "2026-07-27",
+      "changelog": [
+        {
+          "date": "2026-07-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "emptor"
+    },
+    "source-trust-atlas": {
+      "name": "source-trust-atlas",
+      "description": "Maps consumer review sources to trust tiers and routes product categories to the sources worth searching. Use when planning where to research a purchase, deciding how much weight a review source deserves, or checking whether a review is too stale to trust. Called by emptor during the source-plan phase; also useful standalone when the user asks \"which review sites can I trust for X?\".",
+      "location": "skills/consumer-research/source-trust-atlas/SKILL.md",
+      "plugin": "skill-consumer-research",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 829,
+        "body_words": 747,
+        "description_words": 64,
+        "section_count": 6,
+        "reference_files": 2,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 84,
+        "estimated_tokens_body": 1279,
+        "estimated_tokens_total": 1363
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-27T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 78,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 78,
+      "depends_on": [
+        "source-triangulator"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:consumer-research",
+        "layer:knowledge"
+      ],
+      "created": "2026-07-27",
+      "last_modified": "2026-07-27",
+      "changelog": [
+        {
+          "date": "2026-07-27",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "emptor"
     }
   },
   "network": {
@@ -27611,6 +28033,15 @@
         "wine-collecting",
         "wine-provenance",
         "world-coins"
+      ],
+      "consumer-research": [
+        "decision-journal",
+        "emptor",
+        "needs-elicitor",
+        "product-verifier",
+        "recommendation-brief",
+        "review-forensics",
+        "source-trust-atlas"
       ],
       "data-science": [
         "biostatistics",
