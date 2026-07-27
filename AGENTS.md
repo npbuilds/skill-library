@@ -2,7 +2,9 @@
 
 ## File Placement Rules
 
-**Never create files at the project root.** Every file belongs in a designated directory:
+**Never create arbitrary files at the project root.** Every file belongs in a
+designated directory; only standard repository metadata and deployment entry
+points live at the root:
 
 | Content type | Target directory | Examples |
 |---|---|---|
@@ -23,13 +25,15 @@
 | Legacy visualizations | `output/visualizations/` | Old dashboard, skill-map, diagrams |
 | Creative output | `output/art/` or `output/writing/` | Algorithmic art, fiction |
 | Exports (Obsidian, etc.) | `exports/` | Vault exports |
-| Deployment config | project root (Dockerfile only) | Dockerfile, .dockerignore |
+| Repository metadata | project root | README.md, AGENTS.md, CLAUDE.md, LICENSE |
+| Deployment config | project root | Dockerfile, .dockerignore |
 
 If you're unsure where a file goes, place it in `output/` with an appropriate subdirectory.
 
 ## Project Structure
 
 ```
+LICENSE             # MIT license for public reuse
 app/                # Neural Observatory — Firebase Hosting (live app)
   index.html        #   Dashboard with Firestore data layer
   js/               #   Firebase config, data adapter modules

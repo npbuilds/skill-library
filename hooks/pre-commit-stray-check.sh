@@ -1,6 +1,6 @@
 #!/bin/bash
 # pre-commit-stray-check.sh — Reject commits with unexpected files at project root
-# Allowlisted: config files, markdown, dotfiles, Dockerfile
+# Allowlisted: repository metadata, config files, dotfiles, Dockerfile
 set -euo pipefail
 
 # Files allowed at root (exact match)
@@ -8,6 +8,7 @@ ALLOWED_ROOT_FILES=(
   "CLAUDE\.md"
   "AGENTS\.md"
   "README\.md"
+  "LICENSE"
   "Dockerfile"
   "\.dockerignore"
   "\.gitignore"
