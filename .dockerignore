@@ -1,6 +1,7 @@
 .git
 .claude
 .DS_Store
+gha-creds-*.json
 __pycache__
 *.tmp
 *.bak

@@ -9,6 +9,7 @@ Thumbs.db
 # Temporary/backup files
 *.tmp
 *.bak
+gha-creds-*.json
 __pycache__/
 
 # Debug and build logs
