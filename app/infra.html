@@ -647,8 +647,8 @@ body::after {
   <div class="io-stats-bar">
     <div><span class="stat-val" id="stat-collections">-</span><span class="stat-label">collections</span></div>
     <div><span class="stat-val" id="stat-docs">-</span><span class="stat-label">docs</span></div>
-    <div><span class="stat-val" id="stat-tools">17</span><span class="stat-label">MCP tools</span></div>
-    <div><span class="stat-val" id="stat-endpoints">4</span><span class="stat-label">maint endpoints</span></div>
+    <div><span class="stat-val" id="stat-tools">9</span><span class="stat-label">remote tools</span></div>
+    <div><span class="stat-val" id="stat-endpoints">3</span><span class="stat-label">active maint</span></div>
   </div>
 
   <div class="io-controls">
@@ -730,6 +730,8 @@ IO.config = {
     messagingSenderId: '792932882875',
     appId: '1:792932882875:web:838c3d1c33afdfd5298c9e',
   },
+  githubRuns: 'https://api.github.com/repos/npbuilds/skill-library/actions/runs?branch=main&per_page=30',
+  cloudHealth: 'https://skill-library-mcp-ifvybw46na-uc.a.run.app/health',
   domainColors: {
     investing: '#5acece', sommelier: '#ce5aaa', writing: '#ceb45a',
     worldbuilding: '#5ace6a', 'game-theory': '#ce5a5a', design: '#8a7ace',
@@ -751,6 +753,59 @@ IO.data = {
   registry: null, skills: null, skillList: [],
   usage: [], gaps: [], evolution: [], changelogs: {},
   domains: {}, skillDomain: {}, domainOrder: [],
+  infraStatus: {
+    cloudrun: { value: 'unknown', dot: 'amber' },
+    delivery: { value: 'unknown', dot: 'amber' },
+  },
+
+  async loadInfraStatus() {
+    const [cloudResult, runsResult] = await Promise.allSettled([
+      fetch(IO.config.cloudHealth, { cache: 'no-store' }).then(r => {
+        if (!r.ok) throw new Error(`health ${r.status}`);
+        return r.json();
+      }),
+      fetch(IO.config.githubRuns, {
+        cache: 'no-store',
+        headers: { Accept: 'application/vnd.github+json' },
+      }).then(r => {
+        if (!r.ok) throw new Error(`actions ${r.status}`);
+        return r.json();
+      }),
+    ]);
+
+    this.infraStatus.cloudrun = (
+      cloudResult.status === 'fulfilled'
+      && cloudResult.value?.status === 'ok'
+    )
+      ? { value: 'healthy', dot: 'green' }
+      : { value: 'unknown', dot: 'amber' };
+
+    if (runsResult.status !== 'fulfilled') {
+      this.infraStatus.delivery = { value: 'unknown', dot: 'amber' };
+      return;
+    }
+
+    const required = [
+      'CI',
+      'Deploy to Cloud Run',
+      'Sync registry to Firestore',
+      'Deploy dashboard to Firebase Hosting',
+    ];
+    const latest = {};
+    for (const run of runsResult.value.workflow_runs || []) {
+      if (required.includes(run.name) && !latest[run.name]) latest[run.name] = run;
+    }
+    const observed = required.map(name => latest[name]).filter(Boolean);
+    if (observed.some(run => run.status !== 'completed')) {
+      this.infraStatus.delivery = { value: 'running', dot: 'amber' };
+    } else if (observed.length !== required.length) {
+      this.infraStatus.delivery = { value: 'unknown', dot: 'amber' };
+    } else if (observed.some(run => run.conclusion !== 'success')) {
+      this.infraStatus.delivery = { value: 'degraded', dot: 'red' };
+    } else {
+      this.infraStatus.delivery = { value: 'passing', dot: 'green' };
+    }
+  },
 
   async loadAll() {
     if (!this._db) {
@@ -928,20 +983,20 @@ IO.vitals = {
     const strip = document.getElementById('vitals-strip');
     const items = [
       { label: 'Cloud Run', value: 'skill-library-mcp', dot: 'green',
-        tip: 'MCP server deployed on Google Cloud Run. Handles all skill library tool calls from Claude.' },
+        tip: 'Read-only remote MCP server deployed on Google Cloud Run. Serves the same canonical skill library to Claude and Codex.' },
       { label: 'Firestore', value: 'us-central1', dot: 'cyan',
         tip: 'Real-time cloud database. 6 collections sync live to both observatory dashboards.' },
-      { label: 'Scheduler', value: 'daily 3AM ET', dot: 'green',
-        tip: 'Cloud Scheduler runs daily maintenance: re-scores all skills and opens a PR if anything changed.' },
-      { label: 'CI/CD', value: '3 workflows', dot: 'green',
-        tip: 'GitHub Actions: CI (test on push), Deploy (build + ship container), Auto-merge (land green bot PRs).' },
+      { label: 'Scheduler', value: '3 jobs', dot: 'green',
+        tip: 'Cloud Scheduler runs validation four times daily, recalibration daily, and the knowledge-base refresh weekly.' },
+      { label: 'CI/CD', value: '6 workflows', dot: 'green',
+        tip: 'GitHub Actions runs CI, Cloud Run deploy, Firebase Hosting deploy, Firestore sync, daily maintenance, and green-PR auto-merge.' },
       { label: 'Hooks', value: '2 active', dot: 'green',
         tip: 'File watcher auto-registers skills on save. Pre-commit check blocks misplaced files.' },
       { label: 'Agents', value: '3 defined', dot: 'cyan',
         tip: 'Registry scanner (discovers new skills), Skill auditor (quality checks), Skill tester (validates methodology).' },
-      { label: 'Commands', value: '5 available', dot: 'cyan',
-        tip: 'Slash commands: /skill-catalog, /skill-status, /skill-rate, /skill-infra-upgrade, /spelunker.' },
-      { label: 'Scripts', value: '24 scripts', dot: 'cyan',
+      { label: 'Commands', value: '8 available', dot: 'cyan',
+        tip: 'Repository commands cover catalog/status, feedback and calibration, rating, infrastructure upgrades, research, and narrative orchestration.' },
+      { label: 'Scripts', value: '49 scripts', dot: 'cyan',
         tip: 'Automation scripts for scoring, migration, graph wiring, community detection, health reports, and more.' },
     ];
     strip.innerHTML = items.map((it, i) => `
@@ -975,20 +1030,20 @@ IO.arch = {
       tip: '2 automation hooks: the file watcher (auto-registers new skills on save) and the pre-commit check (blocks files in wrong directories).' },
 
     // Column 2: Processing (x=30%)
-    { id: 'cicd', label: 'CI/CD', icon: '\u2699', subtitle: '3 workflows', x: 0.30, y: 0.12, col: 'process', color: '#8ace5a',
-      tip: '3 GitHub Actions workflows: CI (runs tests on every push), Deploy (builds container \u2192 Cloud Run), Auto-merge (lands bot PRs that pass CI).' },
-    { id: 'cloudrun', label: 'Cloud Run', icon: '\u25B6', subtitle: 'MCP Server \u00B7 17 tools', x: 0.30, y: 0.42, col: 'process', color: '#8ace5a',
-      tip: 'Your MCP server running in the cloud. Exposes 17 tools (search, scaffold, score, analyze, etc.) so Claude can read and manage your skill library remotely.' },
-    { id: 'scheduler', label: 'Scheduler', icon: '\u23F0', subtitle: 'daily 3AM ET', x: 0.30, y: 0.68, col: 'process', color: '#8ace5a',
-      tip: 'Cloud Scheduler triggers maintenance every day at 3 AM Eastern. It calls the recalibrate endpoint to re-score all skills and open a PR if anything drifted.' },
+    { id: 'cicd', label: 'CI/CD', icon: '\u2699', subtitle: '6 workflows', x: 0.30, y: 0.12, col: 'process', color: '#8ace5a',
+      tip: '6 GitHub Actions workflows test the library, deploy Cloud Run and Firebase Hosting, sync Firestore, run daily maintenance, and auto-merge green bot PRs.' },
+    { id: 'cloudrun', label: 'Cloud Run', icon: '\u25B6', subtitle: 'MCP Server \u00B7 9 remote tools', x: 0.30, y: 0.42, col: 'process', color: '#8ace5a',
+      tip: 'The codebase defines 17 MCP tools; remote mode removes 8 structural or compute-heavy write tools. Claude and Codex receive a read-oriented 9-tool service, and the Codex plugin allowlists the 5 content-retrieval tools it needs.' },
+    { id: 'scheduler', label: 'Scheduler', icon: '\u23F0', subtitle: '3 jobs', x: 0.30, y: 0.68, col: 'process', color: '#8ace5a',
+      tip: 'Three Cloud Scheduler jobs run validation four times daily, score recalibration daily, and knowledge-base enrichment weekly.' },
     { id: 'artregistry', label: 'Artifact Reg', icon: '\uD83D\uDCE6', x: 0.30, y: 0.90, col: 'process', color: '#8ace5a',
       tip: 'Artifact Registry stores Docker container images. When CI builds a new version of the MCP server, the image is pushed here, then Cloud Run pulls it.' },
 
     // Column 3: Storage (x=55%)
     { id: 'firestore', label: 'Firestore', icon: '\uD83D\uDD25', subtitle: '', x: 0.55, y: 0.15, col: 'storage', color: '#5acece', wide: true,
       tip: 'Cloud database holding all your skill data. 6 collections with real-time sync \u2014 when data changes here, the dashboards update instantly.' },
-    { id: 'secrets', label: 'Secrets', icon: '\uD83D\uDD12', subtitle: '2 secrets', x: 0.55, y: 0.42, col: 'storage', color: '#5acece',
-      tip: 'Secret Manager securely stores sensitive credentials: your GitHub bot token (for opening maintenance PRs) and the Anthropic API key (for AI-powered enrichment).' },
+    { id: 'secrets', label: 'Secrets', icon: '\uD83D\uDD12', subtitle: '3 secrets', x: 0.55, y: 0.42, col: 'storage', color: '#5acece',
+      tip: 'Secret Manager stores the GitHub bot token, the Anthropic API key, and the maintenance trigger token. Cloud Run receives them as secret references, not image contents.' },
     { id: 'registry', label: 'Registry', icon: '\uD83D\uDCCB', subtitle: '', x: 0.55, y: 0.65, col: 'storage', color: '#5acece',
       tip: 'registry.json \u2014 the master catalog of all skills. Contains metadata, scores, health status, and dependency graph for every skill. Local file synced to Firestore.' },
 
@@ -1171,17 +1226,18 @@ IO.arch = {
 IO.ops = {
   render() {
     // System Status
+    const live = IO.data.infraStatus;
     const statusItems = [
-      { label: 'Cloud Run', value: 'healthy', dot: 'green',
-        tip: 'MCP server responds to tool calls. 1 CPU, 1GB RAM, max 1 instance.' },
+      { label: 'Cloud Run', value: live.cloudrun.value, dot: live.cloudrun.dot,
+        tip: 'Live check of the public Cloud Run /health endpoint. 1 CPU, 2GB RAM, max 1 instance.' },
       { label: 'Firestore', value: 'online', dot: 'green',
-        tip: 'Database accepts reads (public) and writes (authenticated). Free tier.' },
-      { label: 'Scheduler', value: 'active', dot: 'green',
-        tip: 'Cron job fires daily at 3 AM Eastern. Calls /maint/recalibrate.' },
-      { label: 'CI Pipeline', value: 'passing', dot: 'green',
-        tip: 'Tests, registry validation, and score checks run on every push and PR.' },
-      { label: 'Artifact Reg', value: 'active', dot: 'green',
-        tip: 'Docker image store for MCP server container builds.' },
+        tip: 'Live Firestore reads populated this page. Public reads and authenticated writes are enforced by rules.' },
+      { label: 'Scheduler', value: '3 configured', dot: 'green',
+        tip: 'Three enabled jobs run validation, recalibration, and knowledge-base refresh on their own schedules.' },
+      { label: 'Delivery', value: live.delivery.value, dot: live.delivery.dot,
+        tip: 'Live GitHub Actions check across CI, Cloud Run deploy, Firestore sync, and Firebase Hosting deploy on main.' },
+      { label: 'Artifact Reg', value: 'configured', dot: 'cyan',
+        tip: 'Artifact Registry is the configured Docker image store; the delivery signal reports whether the latest image pipeline passed.' },
     ];
     const statusEl = document.getElementById('ops-status');
     statusEl.innerHTML = statusItems.map((it, i) => `
@@ -1467,7 +1523,10 @@ IO.changelog = {
 /* ─── Bootstrap ─── */
 (async function() {
   try {
-    await IO.data.loadAll();
+    await Promise.all([
+      IO.data.loadAll(),
+      IO.data.loadInfraStatus(),
+    ]);
   } catch (e) {
     document.querySelector('.io-grid').innerHTML =
       `<div class="io-panel" style="grid-column:1/-1;text-align:center;padding:60px">
@@ -1513,7 +1572,10 @@ refreshBtn.onclick = async () => {
   refreshStatus.classList.add('show');
 
   try {
-    await IO.data.loadAll();
+    await Promise.all([
+      IO.data.loadAll(),
+      IO.data.loadInfraStatus(),
+    ]);
     document.getElementById('stat-collections').textContent = IO.data.collectionsShown();
     document.getElementById('stat-docs').textContent = IO.data.totalDocs;
     IO.vitals.render();

@@ -1,8 +1,10 @@
 # Skill Library
 
-A personal library of **523 expert-persona agent skills across 19 domains**, served over MCP, built on one idea: an agent gets sharper when you give it a *named expert's* methodology, typed inputs and outputs, and a way to cite its own evidence — then let those experts call each other.
+A personal library of **528 expert-persona agent skills across 19 subject domains** (plus one internal metadata namespace), served over MCP and usable from both Claude and Codex. It is built on one idea: an agent gets sharper when you give it a *named expert's* methodology, typed inputs and outputs, and a way to cite its own evidence — then let those experts call each other.
 
 I build these to think with. The architecture is the point; the domains are where I stress-tested it.
+
+**Live:** [Neural Observatory](https://skill-library-prod.web.app/) · [Infrastructure map](https://skill-library-prod.web.app/infra)
 
 ## Start here — applied AI for drug development
 
@@ -17,10 +19,10 @@ That's the through-line in all of it: **AI earns adoption when it scaffolds an e
 
 - **One registry is the source of truth** (`data/registry.json`) — every skill's metadata, dependencies, and scores. CI enforces zero drift between the skill files, the registry, and the search index.
 - **Skills compose.** Orchestrator skills dispatch sub-skills through typed *Accepts / Produces* contracts wired into DAG pipelines, so a high-level ask (e.g. "diligence this asset") fans out to specialists and reassembles.
-- **Served over MCP.** A read-only MCP server exposes the library to Claude — `search_skills`, `get_skill`, `analyze_impact`, and a live health/telemetry loop. See `mcp-server/`.
+- **Served over MCP.** A read-only MCP server exposes the library to Claude and Codex — including `search_skills`, `get_skill`, `analyze_impact`, and a live health/telemetry loop. See `mcp-server/` and the [Codex gateway guide](docs/codex-skill-library-gateway.md).
 - **It maintains itself.** A QA loop tracks usage, gaps, and feedback, and opens PRs to keep the registry, wiring, and scores calibrated.
 
-## The 19 domains — one architecture, many experiments
+## The 19 subject domains — one architecture, many experiments
 
 I use the same skill-and-orchestration pattern everywhere I'm curious. The biotech and research domains are the serious work; the rest are where I pressure-test whether the architecture generalizes.
 
@@ -28,13 +30,13 @@ I use the same skill-and-orchestration pattern everywhere I'm curious. The biote
 |---|---:|---|---|---:|
 | investing | 56 | | worldbuilding | 27 |
 | collector | 54 | | binding-vow (prompt craft) | 27 |
-| world-history | 51 | | game-theory | 22 |
+| world-history | 53 | | game-theory | 22 |
 | professional-development | 42 | | design | 17 |
-| **biotech-venture** | **42** | | data-science | 14 |
+| **biotech-venture** | **42** | | data-science | 17 |
 | sommelier | 36 | | neocortex | 13 |
 | writing | 34 | | infrastructure | 12 |
 | product | 31 | | research | 11 |
-| philosophy | 29 | | (+ artifacts, narrative) | 4 |
+| philosophy | 29 | | (+ artifacts, narrative, internal meta) | 5 |
 
 ## Browsing
 

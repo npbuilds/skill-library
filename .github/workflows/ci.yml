@@ -81,6 +81,9 @@ jobs:
       - name: Install validation dependencies
         run: pip install pyyaml
 
+      - name: Validate repository file placement
+        run: bash scripts/lint-structure.sh
+
       - name: Validate registry JSON
         run: |
           python3 << 'EOF'
