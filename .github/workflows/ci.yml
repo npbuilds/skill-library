@@ -31,6 +31,9 @@ jobs:
         working-directory: mcp-server
         run: pytest tests/ -v
 
+      - name: Run Archon unit tests
+        run: PYTHONPATH=archon-data pytest archon-data/tests -v
+
       # Standalone script tests (no GCP deps — they use fakes/tmp files)
       - name: Run scripts tests
         run: |
