@@ -80,7 +80,7 @@
         "estimated_tokens_body": 2237,
         "estimated_tokens_total": 2291
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -135,7 +135,7 @@
         "estimated_tokens_body": 5971,
         "estimated_tokens_total": 6030
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -180,7 +180,7 @@
         "estimated_tokens_body": 3598,
         "estimated_tokens_total": 3658
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -224,7 +224,7 @@
         "estimated_tokens_body": 4694,
         "estimated_tokens_total": 4754
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -269,7 +269,7 @@
         "estimated_tokens_body": 6349,
         "estimated_tokens_total": 6408
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -316,7 +316,7 @@
         "estimated_tokens_body": 1761,
         "estimated_tokens_total": 1828
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -369,7 +369,7 @@
         "estimated_tokens_body": 631,
         "estimated_tokens_total": 691
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -416,7 +416,7 @@
         "estimated_tokens_body": 647,
         "estimated_tokens_total": 714
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -460,7 +460,7 @@
         "estimated_tokens_body": 6178,
         "estimated_tokens_total": 6246
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -508,7 +508,7 @@
         "estimated_tokens_body": 6692,
         "estimated_tokens_total": 6756
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -552,7 +552,7 @@
         "estimated_tokens_body": 2166,
         "estimated_tokens_total": 2233
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -600,7 +600,7 @@
         "estimated_tokens_body": 837,
         "estimated_tokens_total": 902
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 68,
@@ -687,7 +687,7 @@
         "estimated_tokens_body": 5541,
         "estimated_tokens_total": 5608
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -731,7 +731,7 @@
         "estimated_tokens_body": 2299,
         "estimated_tokens_total": 2363
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -778,7 +778,7 @@
         "estimated_tokens_body": 5781,
         "estimated_tokens_total": 5853
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -824,7 +824,7 @@
         "estimated_tokens_body": 6894,
         "estimated_tokens_total": 6958
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -912,7 +912,7 @@
         "estimated_tokens_body": 6522,
         "estimated_tokens_total": 6577
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -956,7 +956,7 @@
         "estimated_tokens_body": 1056,
         "estimated_tokens_total": 1132
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -1004,7 +1004,7 @@
         "estimated_tokens_body": 2981,
         "estimated_tokens_total": 3046
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -1093,7 +1093,7 @@
         "estimated_tokens_body": 2660,
         "estimated_tokens_total": 2723
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -1137,7 +1137,7 @@
         "estimated_tokens_body": 1138,
         "estimated_tokens_total": 1206
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -1180,7 +1180,7 @@
         "estimated_tokens_body": 4239,
         "estimated_tokens_total": 4303
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -1224,7 +1224,7 @@
         "estimated_tokens_body": 4692,
         "estimated_tokens_total": 4760
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -1269,7 +1269,7 @@
         "estimated_tokens_body": 1231,
         "estimated_tokens_total": 1300
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -1321,7 +1321,7 @@
         "estimated_tokens_body": 3463,
         "estimated_tokens_total": 3536
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -1368,7 +1368,7 @@
         "estimated_tokens_body": 3247,
         "estimated_tokens_total": 3324
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -1460,7 +1460,7 @@
         "estimated_tokens_body": 1481,
         "estimated_tokens_total": 1554
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -1646,7 +1646,7 @@
         "estimated_tokens_body": 3844,
         "estimated_tokens_total": 3915
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -1694,7 +1694,7 @@
         "estimated_tokens_body": 1352,
         "estimated_tokens_total": 1425
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 82,
@@ -1747,7 +1747,7 @@
         "estimated_tokens_body": 1199,
         "estimated_tokens_total": 1259
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -1795,7 +1795,7 @@
         "estimated_tokens_body": 1380,
         "estimated_tokens_total": 1429
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -1842,7 +1842,7 @@
         "estimated_tokens_body": 1937,
         "estimated_tokens_total": 1993
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -1891,7 +1891,7 @@
         "estimated_tokens_body": 1037,
         "estimated_tokens_total": 1091
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -1936,7 +1936,7 @@
         "estimated_tokens_body": 947,
         "estimated_tokens_total": 998
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -1984,7 +1984,7 @@
         "estimated_tokens_body": 754,
         "estimated_tokens_total": 808
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -2029,7 +2029,7 @@
         "estimated_tokens_body": 851,
         "estimated_tokens_total": 896
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -2073,7 +2073,7 @@
         "estimated_tokens_body": 543,
         "estimated_tokens_total": 594
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-17T00:00:00Z",
       "status": "active",
       "auto_score": 65,
@@ -2116,7 +2116,7 @@
         "estimated_tokens_body": 1265,
         "estimated_tokens_total": 1310
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-19T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -2165,7 +2165,7 @@
         "estimated_tokens_body": 1975,
         "estimated_tokens_total": 2018
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-19T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -2217,7 +2217,7 @@
         "estimated_tokens_body": 1847,
         "estimated_tokens_total": 1894
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-19T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -2265,7 +2265,7 @@
         "estimated_tokens_body": 878,
         "estimated_tokens_total": 945
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -2313,7 +2313,7 @@
         "estimated_tokens_body": 2989,
         "estimated_tokens_total": 3053
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-18T00:00:00Z",
       "status": "active",
       "auto_score": 83,
@@ -2372,7 +2372,7 @@
         "estimated_tokens_body": 1092,
         "estimated_tokens_total": 1156
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -2420,7 +2420,7 @@
         "estimated_tokens_body": 1250,
         "estimated_tokens_total": 1295
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -2466,7 +2466,7 @@
         "estimated_tokens_body": 1257,
         "estimated_tokens_total": 1307
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -2512,7 +2512,7 @@
         "estimated_tokens_body": 1271,
         "estimated_tokens_total": 1329
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -2558,7 +2558,7 @@
         "estimated_tokens_body": 1165,
         "estimated_tokens_total": 1229
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -2604,7 +2604,7 @@
         "estimated_tokens_body": 1560,
         "estimated_tokens_total": 1599
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -2651,7 +2651,7 @@
         "estimated_tokens_body": 1915,
         "estimated_tokens_total": 1961
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -2697,7 +2697,7 @@
         "estimated_tokens_body": 1990,
         "estimated_tokens_total": 2033
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -2745,7 +2745,7 @@
         "estimated_tokens_body": 2084,
         "estimated_tokens_total": 2139
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 83,
@@ -2803,7 +2803,7 @@
         "estimated_tokens_body": 2078,
         "estimated_tokens_total": 2142
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 83,
@@ -2859,7 +2859,7 @@
         "estimated_tokens_body": 1272,
         "estimated_tokens_total": 1323
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 80,
@@ -2961,7 +2961,7 @@
         "estimated_tokens_body": 1882,
         "estimated_tokens_total": 1934
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -3011,7 +3011,7 @@
         "estimated_tokens_body": 1823,
         "estimated_tokens_total": 1874
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 80,
@@ -3065,7 +3065,7 @@
         "estimated_tokens_body": 1659,
         "estimated_tokens_total": 1728
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -3116,7 +3116,7 @@
         "estimated_tokens_body": 1755,
         "estimated_tokens_total": 1811
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -3165,7 +3165,7 @@
         "estimated_tokens_body": 2270,
         "estimated_tokens_total": 2325
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -3211,7 +3211,7 @@
         "estimated_tokens_body": 1511,
         "estimated_tokens_total": 1562
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -3258,7 +3258,7 @@
         "estimated_tokens_body": 2766,
         "estimated_tokens_total": 2817
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 81,
@@ -3310,7 +3310,7 @@
         "estimated_tokens_body": 2143,
         "estimated_tokens_total": 2205
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -3359,7 +3359,7 @@
         "estimated_tokens_body": 2034,
         "estimated_tokens_total": 2093
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -3414,7 +3414,7 @@
         "estimated_tokens_body": 1648,
         "estimated_tokens_total": 1706
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -3462,7 +3462,7 @@
         "estimated_tokens_body": 1996,
         "estimated_tokens_total": 2047
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -3509,7 +3509,7 @@
         "estimated_tokens_body": 1562,
         "estimated_tokens_total": 1622
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -3557,7 +3557,7 @@
         "estimated_tokens_body": 1998,
         "estimated_tokens_total": 2048
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -3603,7 +3603,7 @@
         "estimated_tokens_body": 1759,
         "estimated_tokens_total": 1822
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -3650,7 +3650,7 @@
         "estimated_tokens_body": 1729,
         "estimated_tokens_total": 1785
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -3695,7 +3695,7 @@
         "estimated_tokens_body": 1854,
         "estimated_tokens_total": 1912
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -3742,7 +3742,7 @@
         "estimated_tokens_body": 2102,
         "estimated_tokens_total": 2157
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -3788,7 +3788,7 @@
         "estimated_tokens_body": 1444,
         "estimated_tokens_total": 1500
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -3832,7 +3832,7 @@
         "estimated_tokens_body": 1737,
         "estimated_tokens_total": 1786
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -3878,7 +3878,7 @@
         "estimated_tokens_body": 2222,
         "estimated_tokens_total": 2282
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 80,
@@ -3926,7 +3926,7 @@
         "estimated_tokens_body": 1838,
         "estimated_tokens_total": 1902
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -3970,7 +3970,7 @@
         "estimated_tokens_body": 1497,
         "estimated_tokens_total": 1555
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 66,
@@ -4012,7 +4012,7 @@
         "estimated_tokens_body": 1653,
         "estimated_tokens_total": 1715
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -4055,7 +4055,7 @@
         "estimated_tokens_body": 1809,
         "estimated_tokens_total": 1865
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -4099,7 +4099,7 @@
         "estimated_tokens_body": 1986,
         "estimated_tokens_total": 2045
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -4147,7 +4147,7 @@
         "estimated_tokens_body": 2035,
         "estimated_tokens_total": 2102
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -4236,7 +4236,7 @@
         "estimated_tokens_body": 3533,
         "estimated_tokens_total": 3578
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -4280,7 +4280,7 @@
         "estimated_tokens_body": 3840,
         "estimated_tokens_total": 3889
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -4327,7 +4327,7 @@
         "estimated_tokens_body": 3610,
         "estimated_tokens_total": 3665
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -4377,7 +4377,7 @@
         "estimated_tokens_body": 3767,
         "estimated_tokens_total": 3821
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -4423,7 +4423,7 @@
         "estimated_tokens_body": 3559,
         "estimated_tokens_total": 3610
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -4475,7 +4475,7 @@
         "estimated_tokens_body": 3743,
         "estimated_tokens_total": 3806
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 75,
@@ -4571,7 +4571,7 @@
         "estimated_tokens_body": 3965,
         "estimated_tokens_total": 4019
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -4620,7 +4620,7 @@
         "estimated_tokens_body": 3776,
         "estimated_tokens_total": 3843
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -4666,7 +4666,7 @@
         "estimated_tokens_body": 3753,
         "estimated_tokens_total": 3818
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -4710,7 +4710,7 @@
         "estimated_tokens_body": 1414,
         "estimated_tokens_total": 1473
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 80,
@@ -4764,7 +4764,7 @@
         "estimated_tokens_body": 1235,
         "estimated_tokens_total": 1289
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 76,
@@ -4813,7 +4813,7 @@
         "estimated_tokens_body": 1201,
         "estimated_tokens_total": 1257
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -4858,7 +4858,7 @@
         "estimated_tokens_body": 1770,
         "estimated_tokens_total": 1838
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 79,
@@ -4973,7 +4973,7 @@
         "estimated_tokens_body": 1805,
         "estimated_tokens_total": 1868
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -5023,7 +5023,7 @@
         "estimated_tokens_body": 1939,
         "estimated_tokens_total": 1999
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 80,
@@ -5080,7 +5080,7 @@
         "estimated_tokens_body": 3538,
         "estimated_tokens_total": 3635
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 78,
@@ -5127,7 +5127,7 @@
         "estimated_tokens_body": 1435,
         "estimated_tokens_total": 1490
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -5168,7 +5168,7 @@
         "estimated_tokens_body": 1372,
         "estimated_tokens_total": 1440
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -5209,7 +5209,7 @@
         "estimated_tokens_body": 5978,
         "estimated_tokens_total": 6079
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 83,
@@ -5277,7 +5277,7 @@
         "estimated_tokens_body": 1900,
         "estimated_tokens_total": 1949
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -5326,7 +5326,7 @@
         "estimated_tokens_body": 2656,
         "estimated_tokens_total": 2702
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -5375,7 +5375,7 @@
         "estimated_tokens_body": 2325,
         "estimated_tokens_total": 2379
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 73,
@@ -5455,7 +5455,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "manual_rating": null,
@@ -5506,7 +5506,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "manual_rating": null,
@@ -5552,7 +5552,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "manual_rating": null,
@@ -5601,7 +5601,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "manual_rating": null,
@@ -5658,7 +5658,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5720,7 +5720,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5766,7 +5766,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5817,7 +5817,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5868,7 +5868,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5916,7 +5916,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -5966,7 +5966,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6011,7 +6011,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6060,7 +6060,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6105,7 +6105,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6199,7 +6199,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6293,7 +6293,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6400,7 +6400,7 @@
       "source": "manual",
       "context_mode": "on_demand",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T10:01:10",
       "status": "active",
       "manual_rating": null,
@@ -6451,7 +6451,7 @@
         "estimated_tokens_body": 1738,
         "estimated_tokens_total": 1785
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -6497,7 +6497,7 @@
         "estimated_tokens_body": 1590,
         "estimated_tokens_total": 1633
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -6593,7 +6593,7 @@
         "estimated_tokens_body": 1601,
         "estimated_tokens_total": 1655
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -6622,7 +6622,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-27T02:38:26Z",
       "status": "active",
       "manual_rating": null,
@@ -6670,7 +6670,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-27T02:38:26Z",
       "status": "active",
       "manual_rating": null,
@@ -6717,7 +6717,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-27T02:38:26Z",
       "status": "active",
       "manual_rating": null,
@@ -6782,7 +6782,7 @@
         "estimated_tokens_body": 909,
         "estimated_tokens_total": 968
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -6866,7 +6866,7 @@
         "estimated_tokens_body": 4602,
         "estimated_tokens_total": 4640
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -6909,7 +6909,7 @@
         "estimated_tokens_body": 4340,
         "estimated_tokens_total": 4379
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -7021,7 +7021,7 @@
         "estimated_tokens_body": 2748,
         "estimated_tokens_total": 2804
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 76,
@@ -7068,7 +7068,7 @@
         "estimated_tokens_body": 6524,
         "estimated_tokens_total": 6567
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -7196,7 +7196,7 @@
         "estimated_tokens_body": 5611,
         "estimated_tokens_total": 5652
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -7281,7 +7281,7 @@
         "estimated_tokens_body": 5205,
         "estimated_tokens_total": 5252
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -7325,7 +7325,7 @@
         "estimated_tokens_body": 1025,
         "estimated_tokens_total": 1072
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -7457,7 +7457,7 @@
         "estimated_tokens_body": 7060,
         "estimated_tokens_total": 7099
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 67,
@@ -7502,7 +7502,7 @@
         "estimated_tokens_body": 2264,
         "estimated_tokens_total": 2320
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -7673,7 +7673,7 @@
         "estimated_tokens_body": 2095,
         "estimated_tokens_total": 2147
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 76,
@@ -7720,7 +7720,7 @@
         "estimated_tokens_body": 6770,
         "estimated_tokens_total": 6803
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 79,
@@ -7772,7 +7772,7 @@
         "estimated_tokens_body": 6693,
         "estimated_tokens_total": 6729
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -7818,7 +7818,7 @@
         "estimated_tokens_body": 6221,
         "estimated_tokens_total": 6255
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -7861,7 +7861,7 @@
         "estimated_tokens_body": 5906,
         "estimated_tokens_total": 5935
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -7903,7 +7903,7 @@
         "estimated_tokens_body": 2352,
         "estimated_tokens_total": 2398
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 75,
@@ -7949,7 +7949,7 @@
         "estimated_tokens_body": 5404,
         "estimated_tokens_total": 5451
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 75,
@@ -7996,7 +7996,7 @@
         "estimated_tokens_body": 6136,
         "estimated_tokens_total": 6177
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -8042,7 +8042,7 @@
         "estimated_tokens_body": 6543,
         "estimated_tokens_total": 6586
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 67,
@@ -8087,7 +8087,7 @@
         "estimated_tokens_body": 1558,
         "estimated_tokens_total": 1604
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 81,
@@ -8136,7 +8136,7 @@
         "estimated_tokens_body": 6571,
         "estimated_tokens_total": 6617
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -8180,7 +8180,7 @@
         "estimated_tokens_body": 4869,
         "estimated_tokens_total": 4911
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 75,
@@ -8226,7 +8226,7 @@
         "estimated_tokens_body": 4879,
         "estimated_tokens_total": 4928
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -8271,7 +8271,7 @@
         "estimated_tokens_body": 1704,
         "estimated_tokens_total": 1751
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -8317,7 +8317,7 @@
         "estimated_tokens_body": 5285,
         "estimated_tokens_total": 5328
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -8364,7 +8364,7 @@
         "estimated_tokens_body": 5629,
         "estimated_tokens_total": 5684
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -8410,7 +8410,7 @@
         "estimated_tokens_body": 4317,
         "estimated_tokens_total": 4360
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -8454,7 +8454,7 @@
         "estimated_tokens_body": 5344,
         "estimated_tokens_total": 5386
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 74,
@@ -8500,7 +8500,7 @@
         "estimated_tokens_body": 2159,
         "estimated_tokens_total": 2202
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 76,
@@ -8591,7 +8591,7 @@
         "estimated_tokens_body": 6878,
         "estimated_tokens_total": 6929
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -8634,7 +8634,7 @@
         "estimated_tokens_body": 5745,
         "estimated_tokens_total": 5794
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 69,
@@ -8721,7 +8721,7 @@
         "estimated_tokens_body": 1997,
         "estimated_tokens_total": 2047
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -8766,7 +8766,7 @@
         "estimated_tokens_body": 6102,
         "estimated_tokens_total": 6170
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -8810,7 +8810,7 @@
         "estimated_tokens_body": 6599,
         "estimated_tokens_total": 6635
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 66,
@@ -8852,7 +8852,7 @@
         "estimated_tokens_body": 5708,
         "estimated_tokens_total": 5747
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
       "auto_score": 72,
@@ -8899,7 +8899,7 @@
         "estimated_tokens_body": 1419,
         "estimated_tokens_total": 1548
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 74,
@@ -8945,7 +8945,7 @@
         "estimated_tokens_body": 3575,
         "estimated_tokens_total": 3638
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 69,
@@ -8989,7 +8989,7 @@
         "estimated_tokens_body": 1464,
         "estimated_tokens_total": 1523
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -9033,7 +9033,7 @@
         "estimated_tokens_body": 1314,
         "estimated_tokens_total": 1373
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9077,7 +9077,7 @@
         "estimated_tokens_body": 713,
         "estimated_tokens_total": 776
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9123,7 +9123,7 @@
         "estimated_tokens_body": 781,
         "estimated_tokens_total": 840
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -9174,7 +9174,7 @@
         "estimated_tokens_body": 668,
         "estimated_tokens_total": 741
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -9269,7 +9269,7 @@
         "estimated_tokens_body": 2029,
         "estimated_tokens_total": 2084
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 80,
@@ -9318,7 +9318,7 @@
         "estimated_tokens_body": 1022,
         "estimated_tokens_total": 1067
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9363,7 +9363,7 @@
         "estimated_tokens_body": 1867,
         "estimated_tokens_total": 1930
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -9406,7 +9406,7 @@
         "estimated_tokens_body": 1987,
         "estimated_tokens_total": 2046
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9451,7 +9451,7 @@
         "estimated_tokens_body": 1264,
         "estimated_tokens_total": 1320
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9497,7 +9497,7 @@
         "estimated_tokens_body": 1743,
         "estimated_tokens_total": 1802
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 67,
@@ -9541,7 +9541,7 @@
         "estimated_tokens_body": 1932,
         "estimated_tokens_total": 1994
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 67,
@@ -9584,7 +9584,7 @@
         "estimated_tokens_body": 1156,
         "estimated_tokens_total": 1212
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9629,7 +9629,7 @@
         "estimated_tokens_body": 1959,
         "estimated_tokens_total": 2022
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 75,
@@ -9676,7 +9676,7 @@
         "estimated_tokens_body": 1884,
         "estimated_tokens_total": 1940
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 67,
@@ -9720,7 +9720,7 @@
         "estimated_tokens_body": 1262,
         "estimated_tokens_total": 1320
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9766,7 +9766,7 @@
         "estimated_tokens_body": 1698,
         "estimated_tokens_total": 1763
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9811,7 +9811,7 @@
         "estimated_tokens_body": 1938,
         "estimated_tokens_total": 2010
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 77,
@@ -9860,7 +9860,7 @@
         "estimated_tokens_body": 1295,
         "estimated_tokens_total": 1364
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -9905,7 +9905,7 @@
         "estimated_tokens_body": 1871,
         "estimated_tokens_total": 1927
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -9948,7 +9948,7 @@
         "estimated_tokens_body": 2278,
         "estimated_tokens_total": 2342
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -9992,7 +9992,7 @@
         "estimated_tokens_body": 1858,
         "estimated_tokens_total": 1920
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 67,
@@ -10036,7 +10036,7 @@
         "estimated_tokens_body": 1107,
         "estimated_tokens_total": 1153
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -10122,7 +10122,7 @@
         "estimated_tokens_body": 2080,
         "estimated_tokens_total": 2145
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 67,
@@ -10166,7 +10166,7 @@
         "estimated_tokens_body": 1073,
         "estimated_tokens_total": 1124
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 72,
@@ -10212,7 +10212,7 @@
         "estimated_tokens_body": 1621,
         "estimated_tokens_total": 1685
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -10256,7 +10256,7 @@
         "estimated_tokens_body": 1835,
         "estimated_tokens_total": 1902
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 67,
@@ -10463,7 +10463,7 @@
         "estimated_tokens_body": 1522,
         "estimated_tokens_total": 1582
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 65,
@@ -10504,7 +10504,7 @@
         "estimated_tokens_body": 1702,
         "estimated_tokens_total": 1766
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
       "auto_score": 67,
@@ -10547,7 +10547,7 @@
         "estimated_tokens_body": 1955,
         "estimated_tokens_total": 2031
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
       "auto_score": 77,
@@ -10597,7 +10597,7 @@
         "estimated_tokens_body": 1562,
         "estimated_tokens_total": 1613
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
       "auto_score": 77,
@@ -10644,7 +10644,7 @@
         "estimated_tokens_body": 1248,
         "estimated_tokens_total": 1297
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
       "auto_score": 72,
@@ -10689,7 +10689,7 @@
         "estimated_tokens_body": 1430,
         "estimated_tokens_total": 1480
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
       "auto_score": 72,
@@ -10735,7 +10735,7 @@
         "estimated_tokens_body": 1452,
         "estimated_tokens_total": 1510
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
       "auto_score": 77,
@@ -10787,7 +10787,7 @@
         "estimated_tokens_body": 2075,
         "estimated_tokens_total": 2142
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
       "auto_score": 80,
@@ -10834,7 +10834,7 @@
         "estimated_tokens_body": 904,
         "estimated_tokens_total": 969
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
       "auto_score": 72,
@@ -10880,7 +10880,7 @@
         "estimated_tokens_body": 1233,
         "estimated_tokens_total": 1293
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
       "auto_score": 77,
@@ -10928,7 +10928,7 @@
         "estimated_tokens_body": 1834,
         "estimated_tokens_total": 1890
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
       "auto_score": 67,
@@ -10971,7 +10971,7 @@
         "estimated_tokens_body": 1890,
         "estimated_tokens_total": 1949
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T16:31:10",
       "status": "active",
       "auto_score": 72,
@@ -11016,7 +11016,7 @@
         "estimated_tokens_body": 1657,
         "estimated_tokens_total": 1724
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
       "auto_score": 72,
@@ -11062,7 +11062,7 @@
         "estimated_tokens_body": 1816,
         "estimated_tokens_total": 1879
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
       "auto_score": 70,
@@ -11106,7 +11106,7 @@
         "estimated_tokens_body": 1720,
         "estimated_tokens_total": 1778
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-02T16:36:31",
       "status": "active",
       "auto_score": 67,
@@ -11148,7 +11148,7 @@
         "estimated_tokens_body": 1835,
         "estimated_tokens_total": 1912
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-06T22:17:47Z",
       "status": "active",
       "deprecated_date": null,
@@ -11196,7 +11196,7 @@
         "estimated_tokens_body": 3912,
         "estimated_tokens_total": 4003
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:33:05Z",
       "status": "active",
       "deprecated_date": null,
@@ -11248,7 +11248,7 @@
         "estimated_tokens_body": 1450,
         "estimated_tokens_total": 1525
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:38:08Z",
       "status": "active",
       "deprecated_date": null,
@@ -11298,7 +11298,7 @@
         "estimated_tokens_body": 1071,
         "estimated_tokens_total": 1136
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:41:02Z",
       "status": "active",
       "deprecated_date": null,
@@ -11348,7 +11348,7 @@
         "estimated_tokens_body": 992,
         "estimated_tokens_total": 1061
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:47:19Z",
       "status": "active",
       "deprecated_date": null,
@@ -11398,7 +11398,7 @@
         "estimated_tokens_body": 707,
         "estimated_tokens_total": 762
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:50:31Z",
       "status": "active",
       "deprecated_date": null,
@@ -11447,7 +11447,7 @@
         "estimated_tokens_body": 1111,
         "estimated_tokens_total": 1167
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:50:33Z",
       "status": "active",
       "deprecated_date": null,
@@ -11542,7 +11542,7 @@
         "estimated_tokens_body": 762,
         "estimated_tokens_total": 833
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-08T23:57:33Z",
       "status": "active",
       "deprecated_date": null,
@@ -11832,7 +11832,7 @@
         "estimated_tokens_body": 1214,
         "estimated_tokens_total": 1273
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T06:59:35Z",
       "status": "active",
       "deprecated_date": null,
@@ -11885,7 +11885,7 @@
         "estimated_tokens_body": 1158,
         "estimated_tokens_total": 1210
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T06:59:37Z",
       "status": "active",
       "deprecated_date": null,
@@ -11987,7 +11987,7 @@
         "estimated_tokens_body": 1798,
         "estimated_tokens_total": 1860
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T06:59:59Z",
       "status": "active",
       "deprecated_date": null,
@@ -12038,7 +12038,7 @@
         "estimated_tokens_body": 1909,
         "estimated_tokens_total": 1961
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:00:01Z",
       "status": "active",
       "deprecated_date": null,
@@ -12087,7 +12087,7 @@
         "estimated_tokens_body": 2497,
         "estimated_tokens_total": 2559
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:00:04Z",
       "status": "active",
       "deprecated_date": null,
@@ -12140,7 +12140,7 @@
         "estimated_tokens_body": 1329,
         "estimated_tokens_total": 1379
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:13Z",
       "status": "active",
       "deprecated_date": null,
@@ -12194,7 +12194,7 @@
         "estimated_tokens_body": 1709,
         "estimated_tokens_total": 1765
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:15Z",
       "status": "active",
       "deprecated_date": null,
@@ -12245,7 +12245,7 @@
         "estimated_tokens_body": 1663,
         "estimated_tokens_total": 1721
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:17Z",
       "status": "active",
       "deprecated_date": null,
@@ -12294,7 +12294,7 @@
         "estimated_tokens_body": 1468,
         "estimated_tokens_total": 1533
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:20Z",
       "status": "active",
       "deprecated_date": null,
@@ -12390,7 +12390,7 @@
         "estimated_tokens_body": 1254,
         "estimated_tokens_total": 1317
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:26Z",
       "status": "active",
       "deprecated_date": null,
@@ -12440,7 +12440,7 @@
         "estimated_tokens_body": 1130,
         "estimated_tokens_total": 1193
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:29Z",
       "status": "active",
       "deprecated_date": null,
@@ -12492,7 +12492,7 @@
         "estimated_tokens_body": 1554,
         "estimated_tokens_total": 1613
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:32Z",
       "status": "active",
       "deprecated_date": null,
@@ -12541,7 +12541,7 @@
         "estimated_tokens_body": 1470,
         "estimated_tokens_total": 1532
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T07:36:34Z",
       "status": "active",
       "deprecated_date": null,
@@ -12685,7 +12685,7 @@
         "estimated_tokens_body": 1204,
         "estimated_tokens_total": 1259
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T09:05:10Z",
       "status": "active",
       "deprecated_date": null,
@@ -12737,7 +12737,7 @@
         "estimated_tokens_body": 1722,
         "estimated_tokens_total": 1786
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T09:05:13Z",
       "status": "active",
       "deprecated_date": null,
@@ -12789,7 +12789,7 @@
         "estimated_tokens_body": 1755,
         "estimated_tokens_total": 1815
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T09:05:16Z",
       "status": "active",
       "deprecated_date": null,
@@ -12838,7 +12838,7 @@
         "estimated_tokens_body": 1653,
         "estimated_tokens_total": 1709
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T09:05:17Z",
       "status": "active",
       "deprecated_date": null,
@@ -12938,7 +12938,7 @@
         "estimated_tokens_body": 1092,
         "estimated_tokens_total": 1155
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T09:05:21Z",
       "status": "active",
       "deprecated_date": null,
@@ -13038,7 +13038,7 @@
         "estimated_tokens_body": 1817,
         "estimated_tokens_total": 1884
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-13T09:05:26Z",
       "status": "active",
       "deprecated_date": null,
@@ -13135,7 +13135,7 @@
         "estimated_tokens_body": 1250,
         "estimated_tokens_total": 1312
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:16:48Z",
       "status": "active",
       "deprecated_date": null,
@@ -13189,7 +13189,7 @@
         "estimated_tokens_body": 1357,
         "estimated_tokens_total": 1417
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:16:52Z",
       "status": "active",
       "deprecated_date": null,
@@ -13333,7 +13333,7 @@
         "estimated_tokens_body": 1482,
         "estimated_tokens_total": 1537
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:17:01Z",
       "status": "active",
       "deprecated_date": null,
@@ -13429,7 +13429,7 @@
         "estimated_tokens_body": 1013,
         "estimated_tokens_total": 1082
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:17:08Z",
       "status": "active",
       "deprecated_date": null,
@@ -13478,7 +13478,7 @@
         "estimated_tokens_body": 1173,
         "estimated_tokens_total": 1238
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:17:11Z",
       "status": "active",
       "deprecated_date": null,
@@ -13531,7 +13531,7 @@
         "estimated_tokens_body": 1363,
         "estimated_tokens_total": 1427
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:17:14Z",
       "status": "active",
       "deprecated_date": null,
@@ -13768,7 +13768,7 @@
         "estimated_tokens_body": 1355,
         "estimated_tokens_total": 1419
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:29:07Z",
       "status": "active",
       "deprecated_date": null,
@@ -14010,7 +14010,7 @@
         "estimated_tokens_body": 1393,
         "estimated_tokens_total": 1453
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:29:22Z",
       "status": "active",
       "deprecated_date": null,
@@ -14059,7 +14059,7 @@
         "estimated_tokens_body": 1402,
         "estimated_tokens_total": 1469
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-04-14T08:29:25Z",
       "status": "active",
       "deprecated_date": null,
@@ -14410,7 +14410,7 @@
         "estimated_tokens_body": 2658,
         "estimated_tokens_total": 2760
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -14487,7 +14487,7 @@
         "estimated_tokens_body": 1935,
         "estimated_tokens_total": 2023
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -14663,7 +14663,7 @@
         "estimated_tokens_body": 1921,
         "estimated_tokens_total": 1992
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -14835,7 +14835,7 @@
         "estimated_tokens_body": 1992,
         "estimated_tokens_total": 2059
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15113,7 +15113,7 @@
         "estimated_tokens_body": 1934,
         "estimated_tokens_total": 2014
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15177,7 +15177,7 @@
         "estimated_tokens_body": 2161,
         "estimated_tokens_total": 2230
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15289,7 +15289,7 @@
         "estimated_tokens_body": 1973,
         "estimated_tokens_total": 2033
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15344,7 +15344,7 @@
         "estimated_tokens_body": 649,
         "estimated_tokens_total": 711
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15404,7 +15404,7 @@
         "estimated_tokens_body": 465,
         "estimated_tokens_total": 525
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15630,7 +15630,7 @@
         "estimated_tokens_body": 706,
         "estimated_tokens_total": 777
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15798,7 +15798,7 @@
         "estimated_tokens_body": 2446,
         "estimated_tokens_total": 2505
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -15965,7 +15965,7 @@
         "estimated_tokens_body": 2169,
         "estimated_tokens_total": 2240
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -16197,7 +16197,7 @@
         "estimated_tokens_body": 1184,
         "estimated_tokens_total": 1260
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -16586,7 +16586,7 @@
         "estimated_tokens_body": 2332,
         "estimated_tokens_total": 2407
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -16700,7 +16700,7 @@
         "estimated_tokens_body": 1561,
         "estimated_tokens_total": 1613
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -16760,7 +16760,7 @@
         "estimated_tokens_body": 1863,
         "estimated_tokens_total": 1925
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -16875,7 +16875,7 @@
         "estimated_tokens_body": 1884,
         "estimated_tokens_total": 1960
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17105,7 +17105,7 @@
         "estimated_tokens_body": 1739,
         "estimated_tokens_total": 1798
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17215,7 +17215,7 @@
         "estimated_tokens_body": 1970,
         "estimated_tokens_total": 2048
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17338,7 +17338,7 @@
         "estimated_tokens_body": 483,
         "estimated_tokens_total": 551
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17400,7 +17400,7 @@
         "estimated_tokens_body": 579,
         "estimated_tokens_total": 641
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17514,7 +17514,7 @@
         "estimated_tokens_body": 472,
         "estimated_tokens_total": 528
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17576,7 +17576,7 @@
         "estimated_tokens_body": 706,
         "estimated_tokens_total": 774
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17635,7 +17635,7 @@
         "estimated_tokens_body": 3465,
         "estimated_tokens_total": 3569
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
@@ -17929,7 +17929,7 @@
         "estimated_tokens_body": 746,
         "estimated_tokens_total": 813
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-21T00:00:00Z",
       "status": "active",
       "auto_score": 70,
@@ -17971,7 +17971,7 @@
         "estimated_tokens_body": 2990,
         "estimated_tokens_total": 3066
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T04:40:33Z",
       "status": "active",
       "deprecated_date": null,
@@ -18056,7 +18056,7 @@
         "estimated_tokens_body": 1257,
         "estimated_tokens_total": 1315
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T04:47:08Z",
       "status": "active",
       "deprecated_date": null,
@@ -18105,7 +18105,7 @@
         "estimated_tokens_body": 1392,
         "estimated_tokens_total": 1448
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T04:47:49Z",
       "status": "active",
       "deprecated_date": null,
@@ -18154,7 +18154,7 @@
         "estimated_tokens_body": 1565,
         "estimated_tokens_total": 1627
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T04:48:35Z",
       "status": "active",
       "deprecated_date": null,
@@ -18203,7 +18203,7 @@
         "estimated_tokens_body": 1791,
         "estimated_tokens_total": 1843
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T04:49:29Z",
       "status": "active",
       "deprecated_date": null,
@@ -18261,7 +18261,7 @@
         "estimated_tokens_body": 1908,
         "estimated_tokens_total": 1972
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T04:50:25Z",
       "status": "active",
       "deprecated_date": null,
@@ -18312,7 +18312,7 @@
         "estimated_tokens_body": 1928,
         "estimated_tokens_total": 2003
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:08:55Z",
       "status": "active",
       "deprecated_date": null,
@@ -18380,7 +18380,7 @@
         "estimated_tokens_body": 2177,
         "estimated_tokens_total": 2248
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:10:49Z",
       "status": "active",
       "deprecated_date": null,
@@ -18432,7 +18432,7 @@
         "estimated_tokens_body": 1948,
         "estimated_tokens_total": 2016
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:11:43Z",
       "status": "active",
       "deprecated_date": null,
@@ -18485,7 +18485,7 @@
         "estimated_tokens_body": 1053,
         "estimated_tokens_total": 1117
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:12:42Z",
       "status": "active",
       "deprecated_date": null,
@@ -18536,7 +18536,7 @@
         "estimated_tokens_body": 1147,
         "estimated_tokens_total": 1203
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:13:16Z",
       "status": "active",
       "deprecated_date": null,
@@ -18587,7 +18587,7 @@
         "estimated_tokens_body": 1329,
         "estimated_tokens_total": 1389
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:31:24Z",
       "status": "active",
       "deprecated_date": null,
@@ -18652,7 +18652,7 @@
         "estimated_tokens_body": 1756,
         "estimated_tokens_total": 1821
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:32:14Z",
       "status": "active",
       "deprecated_date": null,
@@ -18713,7 +18713,7 @@
         "estimated_tokens_body": 1763,
         "estimated_tokens_total": 1826
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:33:11Z",
       "status": "active",
       "deprecated_date": null,
@@ -18777,7 +18777,7 @@
         "estimated_tokens_body": 2363,
         "estimated_tokens_total": 2428
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-10T15:34:18Z",
       "status": "active",
       "deprecated_date": null,
@@ -18828,7 +18828,7 @@
         "estimated_tokens_body": 1828,
         "estimated_tokens_total": 1887
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-11T03:09:09Z",
       "status": "active",
       "deprecated_date": null,
@@ -18883,7 +18883,7 @@
         "estimated_tokens_body": 1611,
         "estimated_tokens_total": 1689
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-11T03:09:56Z",
       "status": "active",
       "deprecated_date": null,
@@ -18939,7 +18939,7 @@
         "estimated_tokens_body": 1772,
         "estimated_tokens_total": 1856
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-11T03:10:35Z",
       "status": "active",
       "deprecated_date": null,
@@ -18988,7 +18988,7 @@
         "estimated_tokens_body": 1644,
         "estimated_tokens_total": 1712
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-11T03:11:23Z",
       "status": "active",
       "deprecated_date": null,
@@ -19040,7 +19040,7 @@
         "estimated_tokens_body": 1929,
         "estimated_tokens_total": 1985
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-11T03:12:15Z",
       "status": "active",
       "deprecated_date": null,
@@ -19092,7 +19092,7 @@
         "estimated_tokens_body": 1727,
         "estimated_tokens_total": 1799
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-11T03:13:05Z",
       "status": "active",
       "deprecated_date": null,
@@ -19142,7 +19142,7 @@
         "estimated_tokens_body": 1262,
         "estimated_tokens_total": 1314
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-05-11T03:13:46Z",
       "status": "active",
       "deprecated_date": null,
@@ -19303,7 +19303,7 @@
         "estimated_tokens_body": 3220,
         "estimated_tokens_total": 3357
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -20050,7 +20050,7 @@
         "estimated_tokens_body": 1544,
         "estimated_tokens_total": 1633
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -20330,7 +20330,7 @@
         "estimated_tokens_body": 1032,
         "estimated_tokens_total": 1116
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -20665,7 +20665,7 @@
         "estimated_tokens_body": 1807,
         "estimated_tokens_total": 1893
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21001,7 +21001,7 @@
         "estimated_tokens_body": 2005,
         "estimated_tokens_total": 2087
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21064,7 +21064,7 @@
         "estimated_tokens_body": 1950,
         "estimated_tokens_total": 2023
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21121,7 +21121,7 @@
         "estimated_tokens_body": 2067,
         "estimated_tokens_total": 2126
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21178,7 +21178,7 @@
         "estimated_tokens_body": 2250,
         "estimated_tokens_total": 2317
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21235,7 +21235,7 @@
         "estimated_tokens_body": 2203,
         "estimated_tokens_total": 2266
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21292,7 +21292,7 @@
         "estimated_tokens_body": 905,
         "estimated_tokens_total": 964
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21516,7 +21516,7 @@
         "estimated_tokens_body": 1129,
         "estimated_tokens_total": 1192
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -21740,7 +21740,7 @@
         "estimated_tokens_body": 865,
         "estimated_tokens_total": 911
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-11T00:00:00Z",
       "status": "active",
@@ -22349,7 +22349,7 @@
         "estimated_tokens_body": 1886,
         "estimated_tokens_total": 1959
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22411,7 +22411,7 @@
         "estimated_tokens_body": 1963,
         "estimated_tokens_total": 2038
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22475,7 +22475,7 @@
         "estimated_tokens_body": 2009,
         "estimated_tokens_total": 2090
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22543,7 +22543,7 @@
         "estimated_tokens_body": 1785,
         "estimated_tokens_total": 1865
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22609,7 +22609,7 @@
         "estimated_tokens_body": 2254,
         "estimated_tokens_total": 2332
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22674,7 +22674,7 @@
         "estimated_tokens_body": 1797,
         "estimated_tokens_total": 1895
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22739,7 +22739,7 @@
         "estimated_tokens_body": 2476,
         "estimated_tokens_total": 2554
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22809,7 +22809,7 @@
         "estimated_tokens_body": 2016,
         "estimated_tokens_total": 2101
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22881,7 +22881,7 @@
         "estimated_tokens_body": 2022,
         "estimated_tokens_total": 2108
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -22951,7 +22951,7 @@
         "estimated_tokens_body": 1987,
         "estimated_tokens_total": 2062
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23020,7 +23020,7 @@
         "estimated_tokens_body": 2224,
         "estimated_tokens_total": 2300
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23084,7 +23084,7 @@
         "estimated_tokens_body": 1743,
         "estimated_tokens_total": 1827
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23152,7 +23152,7 @@
         "estimated_tokens_body": 1959,
         "estimated_tokens_total": 2031
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23217,7 +23217,7 @@
         "estimated_tokens_body": 1350,
         "estimated_tokens_total": 1443
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23276,7 +23276,7 @@
         "estimated_tokens_body": 2306,
         "estimated_tokens_total": 2377
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23337,7 +23337,7 @@
         "estimated_tokens_body": 1528,
         "estimated_tokens_total": 1606
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23396,7 +23396,7 @@
         "estimated_tokens_body": 1841,
         "estimated_tokens_total": 1913
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23461,7 +23461,7 @@
         "estimated_tokens_body": 1595,
         "estimated_tokens_total": 1675
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23521,7 +23521,7 @@
         "estimated_tokens_body": 2122,
         "estimated_tokens_total": 2212
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23584,7 +23584,7 @@
         "estimated_tokens_body": 1979,
         "estimated_tokens_total": 2056
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23648,7 +23648,7 @@
         "estimated_tokens_body": 1989,
         "estimated_tokens_total": 2077
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23712,7 +23712,7 @@
         "estimated_tokens_body": 3282,
         "estimated_tokens_total": 3385
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23774,7 +23774,7 @@
         "estimated_tokens_body": 2058,
         "estimated_tokens_total": 2133
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23836,7 +23836,7 @@
         "estimated_tokens_body": 1816,
         "estimated_tokens_total": 1901
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23907,7 +23907,7 @@
         "estimated_tokens_body": 1593,
         "estimated_tokens_total": 1669
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -23966,7 +23966,7 @@
         "estimated_tokens_body": 1449,
         "estimated_tokens_total": 1546
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24026,7 +24026,7 @@
         "estimated_tokens_body": 2204,
         "estimated_tokens_total": 2285
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24089,7 +24089,7 @@
         "estimated_tokens_body": 2147,
         "estimated_tokens_total": 2229
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24154,7 +24154,7 @@
         "estimated_tokens_body": 2053,
         "estimated_tokens_total": 2128
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24222,7 +24222,7 @@
         "estimated_tokens_body": 2152,
         "estimated_tokens_total": 2221
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24285,7 +24285,7 @@
         "estimated_tokens_body": 1915,
         "estimated_tokens_total": 2016
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24347,7 +24347,7 @@
         "estimated_tokens_body": 2156,
         "estimated_tokens_total": 2241
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24409,7 +24409,7 @@
         "estimated_tokens_body": 1925,
         "estimated_tokens_total": 2007
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24476,7 +24476,7 @@
         "estimated_tokens_body": 1990,
         "estimated_tokens_total": 2065
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24538,7 +24538,7 @@
         "estimated_tokens_body": 1945,
         "estimated_tokens_total": 2018
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24601,7 +24601,7 @@
         "estimated_tokens_body": 2058,
         "estimated_tokens_total": 2138
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24666,7 +24666,7 @@
         "estimated_tokens_body": 2077,
         "estimated_tokens_total": 2157
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24731,7 +24731,7 @@
         "estimated_tokens_body": 2188,
         "estimated_tokens_total": 2279
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24799,7 +24799,7 @@
         "estimated_tokens_body": 2187,
         "estimated_tokens_total": 2267
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24862,7 +24862,7 @@
         "estimated_tokens_body": 1994,
         "estimated_tokens_total": 2072
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24924,7 +24924,7 @@
         "estimated_tokens_body": 1824,
         "estimated_tokens_total": 1908
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -24984,7 +24984,7 @@
         "estimated_tokens_body": 2224,
         "estimated_tokens_total": 2317
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-05-13T00:00:00Z",
       "status": "active",
@@ -25440,7 +25440,7 @@
         "estimated_tokens_body": 513,
         "estimated_tokens_total": 586
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-06-03T00:00:00Z",
       "status": "active",
@@ -26813,7 +26813,7 @@
         "estimated_tokens_body": 4793,
         "estimated_tokens_total": 4871
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-06-27T00:00:00Z",
       "status": "active",
