@@ -28,8 +28,8 @@ mcp-server/codex-marketplace/
         └── agents/openai.yaml
 ```
 
-Only the gateway skill is installed natively. The 522 canonical skills are
-loaded on demand, avoiding a large discovery and context footprint.
+Only the gateway skill is installed natively. The canonical skill collection
+is loaded on demand, avoiding a large discovery and context footprint.
 
 ## Install
 
@@ -121,5 +121,5 @@ treats Claude `allowed-tools` metadata as compatibility information rather than
 authorization.
 
 The canonical skill library and all Claude workflow surfaces remain the source
-of truth. Platform-specific behavior belongs in the thin gateway, not in 522
+of truth. Platform-specific behavior belongs in the thin gateway, not in
 duplicated skill variants.
