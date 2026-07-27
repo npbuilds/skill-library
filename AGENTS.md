@@ -38,7 +38,7 @@ app/                # Neural Observatory — Firebase Hosting (live app)
   index.html        #   Dashboard with Firestore data layer
   js/               #   Firebase config, data adapter modules
   firebase.json     #   Hosting + Firestore emulator config
-  firestore.rules   #   Security rules (public read, auth write)
+  firestore.rules   #   Security rules (public read, deny client writes)
 skills/             # Skill SKILL.md files organized by domain
 data/               # Local data (registry.json, JSONL logs)
 mcp-server/         # MCP server for skill library (Cloud Run)
