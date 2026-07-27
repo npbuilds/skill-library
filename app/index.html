@@ -2509,11 +2509,31 @@ NO.usageSources = {
     el.innerHTML = entries.map(([src, n]) => {
       const color = this.colors[src] || '#9a9aaa';
       const label = this.esc(this.labels[src] || src);
-      const pct = total ? Math.round((n / total) * 100) : 0;
       return `<span><span class="coverage-dot" style="background:${color}"></span>` +
-        `${label} ${n}<span style="opacity:0.6"> ${pct}%</span></span>`;
+        `${label} ${n}<span style="opacity:0.6"> ${this.formatPct(n, total)}</span></span>`;
     }).join('');
     if (tail) el.innerHTML += `<span style="opacity:0.6">+${tail} live</span>`;
+  },
+
+  /* Percentage of total, never rounded into a lie.
+   *
+   * Plain Math.round breaks at both ends of a lopsided split, which is the
+   * normal shape here. The first real plugin-native load rendered as
+   * "Plugin 1 0%" (1/546 rounds down) next to "MCP 545 100%" (545/546 rounds
+   * up). Both are wrong in the way that matters: one says a bucket that
+   * exists is empty, the other says a bucket that isn't everything is
+   * everything — and together they read as "plugin capture isn't working" at
+   * the exact moment it started working.
+   *
+   * 0% and 100% are therefore reserved for the exact cases; anything that
+   * would round into them is clamped to "<1%" / ">99%". */
+  formatPct(n, total) {
+    if (!total || n <= 0) return '0%';
+    if (n >= total) return '100%';
+    const pct = Math.round((n / total) * 100);
+    if (pct <= 0) return '<1%';
+    if (pct >= 100) return '>99%';
+    return pct + '%';
   },
 
   esc(s) {
