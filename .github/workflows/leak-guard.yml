@@ -1,0 +1,58 @@
+name: leak-guard
+# Machinery-only backstop: fails if any tracked file or recent commit message
+# matches the PRIVATE term list held in the LEAK_TERMS repo secret (one term
+# per line, '#' comments allowed). The list itself never appears in this repo,
+# and this job never echoes matched text — file paths and counts only.
+on:
+  push:
+  pull_request:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 25
+      - name: Scan tree and messages against private term list
+        env:
+          LEAK_TERMS: ${{ secrets.LEAK_TERMS }}
+        run: |
+          set -uo pipefail
+          if [ -z "${LEAK_TERMS:-}" ]; then
+            echo "LEAK_TERMS secret not available (fork PR?) — skipping."
+            exit 0
+          fi
+          pattern="$(printf '%s\n' "$LEAK_TERMS" \
+            | grep -v '^\s*#' | grep -v '^\s*$' \
+            | sed -e 's/[][\.|$(){}?+*^\/]/\\&/g' | paste -sd'|' -)"
+          [ -z "$pattern" ] && { echo "empty term list — skipping"; exit 0; }
+          rx="\\b(${pattern})\\b"
+          fail=0
+          # 1) full tracked tree (content + paths)
+          files="$(git ls-files | xargs grep -l -i -E "$rx" 2>/dev/null || true)"
+          if [ -n "$files" ]; then
+            echo "::error::leak-guard: private-term matches in tracked files (content not shown):"
+            echo "$files"
+            fail=1
+          fi
+          paths="$(git ls-files | grep -i -E "$rx" || true)"
+          if [ -n "$paths" ]; then
+            echo "::error::leak-guard: private-term matches in file PATHS:"
+            echo "$paths"
+            fail=1
+          fi
+          # 2) recent commit messages (last 25)
+          if git log -25 --format='%H %B%n---' | grep -i -q -E "$rx"; then
+            shas="$(git log -25 --format='%H%x09%B' | grep -i -E "$rx" | cut -f1 | sort -u || true)"
+            echo "::error::leak-guard: private-term matches in commit messages (SHAs only):"
+            git log -25 --format='%H' | while read -r sha; do
+              if git log -1 --format=%B "$sha" | grep -i -q -E "$rx"; then echo "$sha"; fi
+            done
+            fail=1
+          fi
+          if [ "$fail" = "1" ]; then
+            echo "::error::This repo is machinery-only. Remove the flagged content or scrub the message."
+            exit 1
+          fi
+          echo "leak-guard: clean."

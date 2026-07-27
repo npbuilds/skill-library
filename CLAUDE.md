@@ -1,5 +1,11 @@
 # Skill Building Project
 
+## Machinery-Only Repo (public)
+
+This repo is **public** and carries machinery only. No creative-project content may enter it — not in code, fixtures, tests, docs, file names, commit messages, or PR titles/bodies. That includes project/world names, character names, coined terms, prose samples, and private workspace paths. Eval fixtures that need real project content live in the private workspace, never here; drivers stay project-agnostic (content arrives only via runtime args).
+
+Enforced twice: locally by `hooks/leak-guard.sh` (pre-commit, commit-msg, and pre-push git hooks; reads a private term list via `git config leakguard.file` — the list itself is never committed) and in CI by `.github/workflows/leak-guard.yml` (term list held in the `LEAK_TERMS` repo secret; the job reports file paths only, never matched text). If the guard blocks you, move the content out — bypassing (`LEAK_GUARD_SKIP=1`) is for false positives only.
+
 ## File Placement Rules
 
 **Never create files at the project root.** Every file belongs in a designated directory:
