@@ -52,37 +52,45 @@ SCORE_WEIGHTS = _shared.SCORE_WEIGHTS
 combine_scores = _shared.combine_scores
 
 
-# ── Health classification (aggressive profile) ──────────────────────────────
+# ── Health classification ───────────────────────────────────────────────────
 # health_status was historically only ever set to "healthy" at creation and
 # flipped to "warning" when a skill was hand-edited or deprecated — so nothing
 # ever surfaced silent degradation. These thresholds let recalibration derive
-# health from the same signals it already computes. "Aggressive" is intentional:
-# it favours surfacing borderline skills over false reassurance.
+# health from the same signals it already computes.
+#
+# The profile used to be "aggressive", favouring over-surfacing. Measured on the
+# real library that produced 469 warnings out of 528 (89%), which is not a
+# maintenance queue — it is noise with no discrimination left in it. The causes,
+# decomposed:
+#
+#   warning from low score only :   2
+#   warning from staleness only : 246
+#   warning from both           : 221
+#   healthy                     :  59
+#
+# So the score threshold was almost inert (moving it 70 -> 60 changed 2 skills)
+# and an absolute staleness veto was doing all the work. That veto is removed —
+# see classify_health — because freshness is ALREADY 17% of the composite, so
+# age was counted twice: once proportionately in the score, once as a binary
+# gate. It was also structurally doomed on a write-once knowledge library: every
+# skill eventually crosses any fixed age, so the signal trends to "everything is
+# unhealthy". At 60 days it was there already, four months in.
+#
+# Removing the veto does not lose the staleness signal, it routes it through the
+# score, where score_freshness decays to 20 at ~270 days — a ~13.6 point drag at
+# 17% weight, enough to push a weak skill under the warning bar on its own.
+#
+# With age no longer vetoing, the score threshold becomes the real knob, so it
+# is set where it discriminates: 65 flags the weakest ~quartile (p25 of the
+# current distribution is 65; min 58, median 71.5, max 90) — an actionable
+# queue of 127 rather than 469. It is an absolute bar, not a percentile, so
+# improving a skill's score genuinely clears it.
 HEALTH_CRITICAL_SCORE = 50   # composite below this → critical
-HEALTH_WARNING_SCORE = 70    # composite below this → warning
-HEALTH_STALE_DAYS = 60       # last_modified older than this → warning
+HEALTH_WARNING_SCORE = 65    # composite below this → warning
 
 
-def _parse_dt(value: str | None):
-    """Parse an ISO-8601 or YYYY-MM-DD timestamp into an aware datetime."""
-    if not value:
-        return None
-    dt = None
-    try:
-        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    except ValueError:
-        try:
-            dt = datetime.strptime(value, "%Y-%m-%d")
-        except ValueError:
-            return None
-    # Normalise to UTC-aware so arithmetic against an aware `now` is safe.
-    if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
-    return dt
-
-
-def classify_health(name, entry, composite, skills, now) -> str:
-    """Derive health_status from score, structural integrity, and freshness.
+def classify_health(entry, composite, skills) -> str:
+    """Derive health_status from structural integrity and composite score.
 
     Order matters: a manual override wins outright; then critical conditions are
     checked before warning conditions. Deprecated skills retain "warning" (their
@@ -96,9 +104,14 @@ def classify_health(name, entry, composite, skills, now) -> str:
     of skills had zero recorded usage over 21 active days, the rule was mostly
     reporting which skills happened not to be loaded in a narrow window — it
     held 215 skills at "warning" that cleared the score threshold on every
-    other axis. Health now means: structurally sound, scoring adequately, and
-    not stale. If an "unexercised" signal is wanted, it belongs in its own
+    other axis. If an "unexercised" signal is wanted, it belongs in its own
     field rather than competing with composite_score.
+
+    Staleness is likewise not a factor, which is why this no longer takes
+    `now` and is a pure function of the entry plus the skill graph — health
+    is fully reproducible from the registry, with no dependence on when it
+    is evaluated. `name` is gone for the same reason usage_counts is.
+    Health means: structurally sound and scoring adequately.
     """
     # A manual override (set via update_skill_metadata) is authoritative — the
     # auto-classifier must never silently undo a human decision. Cleared by
@@ -119,11 +132,11 @@ def classify_health(name, entry, composite, skills, now) -> str:
     if composite < HEALTH_CRITICAL_SCORE:
         return "critical"
 
-    # ── Warning: weak score or gone stale ──
+    # ── Warning: weak score ──
+    # No staleness veto: freshness is already 17% of the composite, so age is
+    # accounted for proportionately in `composite` rather than as a second,
+    # binary gate. See the HEALTH_* constants for the measurements behind this.
     if composite < HEALTH_WARNING_SCORE:
-        return "warning"
-    lm = _parse_dt(entry.get("last_modified"))
-    if lm is not None and (now - lm).days > HEALTH_STALE_DAYS:
         return "warning"
 
     return "healthy"
@@ -200,7 +213,7 @@ def main():
         # Health is derived from the freshly-computed composite so the two
         # never disagree. Manual quality (manual_rating) still feeds composite
         # upstream; health classification is purely automatic.
-        new_health = classify_health(name, entry, composite, skills, now)
+        new_health = classify_health(entry, composite, skills)
         old_health = entry.get("health_status", "healthy")
         health_dist[new_health] += 1
         if new_health != old_health:
