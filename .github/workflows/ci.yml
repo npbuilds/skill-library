@@ -38,6 +38,7 @@ jobs:
           python3 scripts/test_pull_telemetry.py
           python3 scripts/test_usage_rollup.py
           python3 scripts/test_log_skill_invocation.py
+          python3 scripts/test_scoring_weights.py
 
   retrieval-eval:
     name: Retrieval Regression Gate

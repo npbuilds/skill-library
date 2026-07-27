@@ -1225,13 +1225,18 @@ IO.ops = {
         </div>` : '');
 
     // Scoring Model
+    // MUST match shared.SCORE_WEIGHTS in mcp-server/shared.py, which is the
+    // single source of truth. This array is a display copy the browser cannot
+    // import from Python, so scripts/test_scoring_weights.py parses it and
+    // fails CI if the two disagree \u2014 previously they silently did, and this
+    // panel advertised a 10% Usage bar after usage had gone to 0%.
     const scoringFactors = [
-      { name: 'Structure', pct: 20, tip: 'Section count, frontmatter quality, description clarity' },
-      { name: 'Depth', pct: 25, tip: 'Word count sweet spot (300-5000 words), reference file count' },
-      { name: 'Connectivity', pct: 20, tip: 'Number of depends_on + referenced_by edges in the skill graph' },
-      { name: 'Freshness', pct: 15, tip: 'Days since last modified \u2014 decays over 90 days' },
-      { name: 'Usage', pct: 10, tip: 'How often this skill gets loaded via MCP tools' },
-      { name: 'Feedback', pct: 10, tip: 'Average rating from manual 1-5 star feedback' },
+      { name: 'Structure', pct: 22, tip: 'Section count, frontmatter quality, description clarity' },
+      { name: 'Depth', pct: 28, tip: 'Word count sweet spot (300-5000 words), reference file count' },
+      { name: 'Connectivity', pct: 22, tip: 'Number of depends_on + referenced_by edges in the skill graph' },
+      { name: 'Freshness', pct: 17, tip: 'Days since last modified \u2014 decays over 90 days' },
+      { name: 'Feedback', pct: 11, tip: 'Average rating from manual 1-5 star feedback' },
+      { name: 'Usage', pct: 0, tip: 'Skill loads from usage.jsonl (MCP + plugin hook). Recorded and charted, but UNWEIGHTED: 75% of skills had zero loads over 21 active days, so it measured what happened to be invoked rather than skill quality. Kept as observability \u2014 it is how biotech-venture was caught at 1 load despite heavy use.' },
     ];
     const scoringEl = document.getElementById('ops-scoring');
     scoringEl.innerHTML = scoringFactors.map((f, i) => `
