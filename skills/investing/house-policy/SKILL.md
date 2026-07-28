@@ -8,8 +8,8 @@ description: >
   the answer is "unstated", never an improvised default.
 metadata:
   author: nirav
-  version: "1.0.0"
-  policy_version: "investing-house-policy/1.0"
+  version: "1.1.0"
+  policy_version: "investing-house-policy/1.1"
   authored: 2026-07-27
 compatibility: Designed for Claude Code
 allowed-tools: Read
@@ -53,18 +53,25 @@ effective_cap = min( book_max_position_pct ,
 
 - `book_max_position_pct` = **15%** of total book **[executor]**
 - `max_concurrent_positions` (book) = **8** **[executor]**
+- `max_gross_exposure` = **100%** of book value — **no leverage**; cash is the residual with no
+  minimum. Position caps alone permit 8 × 15% = 120%, so this constraint is what actually
+  bounds total risk. **[executor]**
 - Default stop-loss = **−5%** from entry unless the intent states a thesis-invalidation level **[agent]**
 
 ### Sleeve allocation
 
-| Sleeve | Share | Strategist max | Effective cap |
-|---|---:|---:|---:|
-| dca-investor | 55% | 50% | **15.0%** (book cap binds) |
-| rebalancer | 30% | 70% | **15.0%** (book cap binds) |
-| swing-trader | 5% | 25% | **1.25%** |
-| macro-overlay-trader | 5% | 70% | **3.5%** |
-| options-strategist | 5% | 25% | **1.25%** |
-| day-trader · earnings-event-trader · reflexivity-trader | **0%** | — | **0** (kill-listed) |
+| Sleeve | Class | Share | Strategist max | Effective cap |
+|---|---|---:|---:|---:|
+| dca-investor | **core** | 55% | 50% | **15.0%** (book cap binds) |
+| rebalancer | **core** | 30% | 70% | **15.0%** (book cap binds) |
+| swing-trader | **tactical** | 5% | 25% | **1.25%** |
+| macro-overlay-trader | **tactical** | 5% | 70% | **3.5%** |
+| options-strategist | **tactical** | 5% | 25% | **1.25%** |
+| day-trader · earnings-event-trader · reflexivity-trader | — | **0%** | — | **0** (kill-listed) |
+
+**Core** sleeves run systematic processes — scheduled contribution and drift correction back to
+committed targets. **Tactical** sleeves open discretionary positions on a view. The distinction
+is load-bearing in §6.
 
 Kill-listed strategists have sleeve 0 and `do_not_promote: true`; both conditions are
 AND-gated at the executor. **[executor]**
@@ -87,11 +94,39 @@ that cannot name their reference probability are LOW by definition.
 
 Committed weights: **Value 25% · Momentum 20% · Quality 25% · Low Vol 15% · Broad Market 15%.** **[agent]**
 
-- Regime tilts: within **±10%** of baseline; maximum tilt doubles a favored factor, minimum
-  halves a challenged one; unclear signal → revert to baseline.
-- Rebalance trigger: **25% relative drift** from intended exposure (Value outside 18.75–31.25%,
-  Momentum outside 15–25%, Low Vol outside 11.25–18.75%).
-- Cadence: **quarterly** check; trigger fires only on breach.
+### Tilt envelope
+
+Regime tilts move a factor by at most **±10 percentage points** from baseline. A factor is
+**never** permitted outside this envelope, whatever any drift band would otherwise allow:
+
+| Factor | Baseline | Permitted range |
+|---|---:|---|
+| Value | 25% | 15–35% |
+| Momentum | 20% | 10–30% |
+| Quality | 25% | 15–35% |
+| Low Vol | 15% | 5–25% |
+| Broad Market | 15% | 5–25% |
+
+- Tilts must **fund each other** — weights sum to 100% at all times; a tilt up requires an
+  offsetting tilt down.
+- Unclear regime signal → revert to baseline.
+- Tilts persist until reverted deliberately or by the unclear-signal rule; they do not expire.
+
+### Rebalancing
+
+The **active target** is the current tilted weight (baseline if untilted). Rebalancing restores
+the active target — it does not silently undo a tilt.
+
+Trigger fires on whichever comes first:
+
+1. **25% relative drift** from the active target — e.g. untilted Value (25%) outside 18.75–31.25%;
+   Value tilted to 35% outside 26.25–43.75%; **or**
+2. **exit from the tilt envelope** above.
+
+Rule 2 clips rule 1: a factor tilted to its 35% ceiling has an effective band of 26.25–35%,
+because the envelope binds tighter than the drift band on the upside.
+
+Cadence: **quarterly** check; trigger fires only on breach.
 
 ## 6. Drawdown gates
 
@@ -100,7 +135,7 @@ Measured peak-to-trough on book equity. **[executor]**
 | State | Threshold | Behavior |
 |---|---|---|
 | Normal | ≥ −10% | unrestricted |
-| **Restricted** | < −10% | no new tactical positions; **policy may not be loosened** |
+| **Restricted** | < −10% | no new **tactical** positions (§3 class column: swing-trader, macro-overlay-trader, options-strategist); **core sleeves continue** — scheduled contribution and drift correction are not new risk-taking; **policy may not be loosened** |
 | **Halt** | < −20% | no new positions of any kind; written review required to exit |
 
 ## 7. Negative constraints
@@ -142,6 +177,8 @@ predictions factory reports it.
 | Date | Version | Change | Direction | Rationale |
 |---|---|---|---|---|
 | 2026-07-27 | 1.0.0 | Initial authorship | — | Track A found policy scattered across five conflicting layers; this consolidates and supplies the six missing committed values |
+| 2026-07-27 | 1.0.1 | Defined **core** vs **tactical** sleeve classes in §3; §6 Restricted now names which sleeves halt and states that core sleeves continue | clarifying (PATCH) | "tactical" appeared once in §6 and was never defined — a reader could have frozen routine rebalancing during a drawdown, which the gate never intended. Same-day pre-merge correction; treated as completing authorship, not an amendment |
+| 2026-07-27 | 1.1.0 | §3 adds `max_gross_exposure` 100%, no leverage. §5 rewritten: tilt envelope is **±10 percentage points** (the "double/halve" language removed as a mis-description of the source's own examples), tilts must fund each other, active target defined, rebalance trigger clipped by the envelope | tightening + clarifying (MINOR) | Three defects found in a self-audit: caps alone permitted 120% gross; the tilt rule carried three incompatible bounds at once; "intended exposure" was undefined under an active tilt. The envelope-clips-band rule resolves an interaction the two fixes would otherwise have created (a tilted band reaching 43.75% past a 35% ceiling) |
 
 ## Connections
 

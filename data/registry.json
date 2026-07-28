@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-27T15:34:20Z",
+  "last_scan": "2026-07-28T15:33:45Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -29,10 +29,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 89,
+      "auto_score": 86,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 89,
+      "composite_score": 86,
       "depends_on": [
         "archon",
         "data-science-orchestrator"
@@ -5434,8 +5434,8 @@
         "estimated_tokens_body": 2963,
         "estimated_tokens_total": 3031
       },
-      "auto_score": 87,
-      "composite_score": 87,
+      "auto_score": 84,
+      "composite_score": 84,
       "referenced_by": [
         "narrative-craft",
         "narrative-keeper",
@@ -6263,8 +6263,8 @@
         "estimated_tokens_body": 1471,
         "estimated_tokens_total": 1527
       },
-      "auto_score": 84,
-      "composite_score": 84,
+      "auto_score": 80,
+      "composite_score": 80,
       "referenced_by": [
         "prose-editor",
         "quality-critic",
@@ -9285,10 +9285,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 62,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 62,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -26488,10 +26488,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 71,
       "depends_on": [
         "character-belief-tracker"
       ],
@@ -26547,10 +26547,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "character-belief-tracker"
       ],
@@ -26606,10 +26606,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 71,
       "depends_on": [],
       "referenced_by": [
         "scheherazade"
@@ -26662,10 +26662,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 84,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 81,
       "depends_on": [
         "character-belief-tracker",
         "extrapolation-engine",
@@ -26725,10 +26725,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "house-policy"
       ],
@@ -26782,10 +26782,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "house-policy"
       ],
@@ -26839,10 +26839,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "house-policy"
       ],
@@ -26896,10 +26896,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 71,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 68,
       "depends_on": [
         "house-policy"
       ],
@@ -26953,10 +26953,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "house-policy"
       ],
@@ -27010,10 +27010,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 74,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
+      "composite_score": 71,
       "depends_on": [
         "house-policy"
       ],
@@ -27067,10 +27067,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "house-policy"
       ],
@@ -27124,10 +27124,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "house-policy"
       ],
@@ -27181,10 +27181,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 73,
       "depends_on": [
         "house-policy"
       ],
@@ -27303,10 +27303,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -27358,10 +27358,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -27975,8 +27975,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 974,
-        "body_words": 892,
+        "word_count": 1409,
+        "body_words": 1327,
         "description_words": 60,
         "section_count": 11,
         "reference_files": 0,
@@ -27984,8 +27984,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 1459,
-        "estimated_tokens_total": 1537
+        "estimated_tokens_body": 2142,
+        "estimated_tokens_total": 2220
       },
       "health_status": "healthy",
       "issues": [],
@@ -27994,10 +27994,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 82,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 84,
       "depends_on": [],
       "referenced_by": [
         "day-trader",
@@ -28018,7 +28018,7 @@
         "layer:knowledge"
       ],
       "created": "2026-07-27",
-      "last_modified": "2026-07-27",
+      "last_modified": "2026-07-28",
       "changelog": [
         {
           "date": "2026-07-27",
@@ -28027,6 +28027,175 @@
         }
       ],
       "parent": "archon"
+    },
+    "prediction-auditor": {
+      "name": "prediction-auditor",
+      "description": "Scan prediction-bearing notes without writing them, validate event and hash integrity, derive current state, render local audit views, and export reproducible normalized datasets with source and Git provenance. Use when the user wants to inspect, filter, verify, or reuse their prediction record.",
+      "location": "skills/predictions/prediction-auditor/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 271,
+        "body_words": 216,
+        "description_words": 42,
+        "section_count": 4,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 55,
+        "estimated_tokens_body": 394,
+        "estimated_tokens_total": 449
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-28T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 68,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 68,
+      "depends_on": [],
+      "referenced_by": [
+        "predictions-factory"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:predictions",
+        "level:action"
+      ],
+      "created": "2026-07-28",
+      "last_modified": "2026-07-28",
+      "changelog": [
+        {
+          "date": "2026-07-28",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "predictions-factory"
+    },
+    "prediction-records": {
+      "name": "prediction-records",
+      "description": "Create and maintain canonical append-only prediction records in host notes. Use when committing a confirmed forecast, recording a panel skip, revising a forecast, proposing or confirming a resolution, correcting a resolution, or voiding scoring eligibility. Enforce actor separation, idempotency, path confinement, and evidence-bearing resolution; never overwrite history.",
+      "location": "skills/predictions/prediction-records/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 341,
+        "body_words": 281,
+        "description_words": 47,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 62,
+        "estimated_tokens_body": 496,
+        "estimated_tokens_total": 558
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-28T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 68,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 68,
+      "depends_on": [],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:predictions",
+        "level:action"
+      ],
+      "created": "2026-07-28",
+      "last_modified": "2026-07-28",
+      "changelog": [
+        {
+          "date": "2026-07-28",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "predictions-factory"
+    },
+    "predictions-factory": {
+      "name": "predictions-factory",
+      "description": "Route work across the general prediction suite: creating auditable forecasts, revising them, resolving them, inspecting integrity, or exporting a reusable dataset. Use for predictions in any domain, with investing prioritized as the first adapter. Never treat model-inferred candidates as confirmed personal forecasts or place canonical prediction history in a second store.",
+      "location": "skills/predictions/predictions-factory/SKILL.md",
+      "plugin": "skill-infra",
+      "type": "orchestrator",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 384,
+        "body_words": 320,
+        "description_words": 51,
+        "section_count": 5,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 67,
+        "estimated_tokens_body": 553,
+        "estimated_tokens_total": 620
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-28T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 80,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 80,
+      "depends_on": [
+        "prediction-auditor"
+      ],
+      "referenced_by": [
+        "prediction-auditor",
+        "prediction-records"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:predictions",
+        "level:orchestrator"
+      ],
+      "created": "2026-07-28",
+      "last_modified": "2026-07-28",
+      "changelog": [
+        {
+          "date": "2026-07-28",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": null
     }
   },
   "network": {
@@ -28360,6 +28529,11 @@
         "steel-man-forge",
         "thought-experiment-lab",
         "values-excavator"
+      ],
+      "predictions": [
+        "prediction-auditor",
+        "prediction-records",
+        "predictions-factory"
       ],
       "product": [
         "adaptation-observer",
