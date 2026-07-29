@@ -2,31 +2,33 @@
 name: house-policy
 description: >
   The committed investing parameters — scope, authority, position-cap hierarchy, risk gates,
-  factor targets, and the amendment procedure. Load before any sizing, rebalancing, or
+  factor targets, and the amendment procedure. Use before any sizing, rebalancing, or
   risk-limit decision, and whenever a strategist or Archon proposes an action. This file
   holds decided values, not ranges or advice; where it is silent, no policy exists yet and
   the answer is "unstated", never an improvised default.
 metadata:
   author: nirav
-  version: "1.1.0"
+  version: "1.1.1"
   policy_version: "investing-house-policy/1.1"
   authored: 2026-07-27
 compatibility: Designed for Claude Code
 allowed-tools: Read
 ---
 
-# House Policy — Investing v1.0
+# House Policy — Investing v1.1
 
-Committed parameters for the paper book. Every line is either **[executor]** — enforced by a
-deterministic gate outside the model — or **[agent]** — honored by judgment and therefore
-advisory. LLM-read policy is not enforcement; treat **[agent]** lines as intent that a
-sufficiently confused session could violate, and **[executor]** lines as invariants.
+Committed parameters for the paper book. Every line is either **[policy]** — a binding
+requirement for compliant paper-book behavior — or **[agent]** — guidance honored by judgment.
+Neither label claims machine enforcement. The current `_shared/executor` is an LLM-executed
+broker-routing skill, not deterministic policy-as-code, and it does not implement the
+book-level limits below. Until a paper-book gate enforces them, automated actions must not be
+described as policy-compliant merely because this skill was loaded.
 
 ## 1. Scope
 
 - Governs the **Archon $1M paper book only**. Real accounts are outside this document's
-  binding scope as of v1.0. **[agent]**
-- Claude Code is **analyst-only**; live placement never originates here, in any mode. **[executor]**
+  binding scope as of v1.1. **[agent]**
+- Claude Code is **analyst-only**; live placement never originates here, in any mode. **[policy]**
 - Factor targets (§5) describe intended allocation policy; enforcement applies to the paper
   book. Real-account adherence is by intention, not gate. **[agent]**
 
@@ -44,18 +46,18 @@ Archon never overrides Risk Architecture to chase returns. **[agent]**
 ## 3. Position-cap hierarchy
 
 Two layers bind simultaneously; the **tighter always wins**. A downstream layer may be
-stricter than this policy, never looser. **[executor]**
+stricter than this policy, never looser. **[policy]**
 
 ```
 effective_cap = min( book_max_position_pct ,
                      sleeve_share × strategist_max_position_pct )
 ```
 
-- `book_max_position_pct` = **15%** of total book **[executor]**
-- `max_concurrent_positions` (book) = **8** **[executor]**
+- `book_max_position_pct` = **15%** of total book **[policy]**
+- `max_concurrent_positions` (book) = **8** **[policy]**
 - `max_gross_exposure` = **100%** of book value — **no leverage**; cash is the residual with no
   minimum. Position caps alone permit 8 × 15% = 120%, so this constraint is what actually
-  bounds total risk. **[executor]**
+  bounds total risk. **[policy]**
 - Default stop-loss = **−5%** from entry unless the intent states a thesis-invalidation level **[agent]**
 
 ### Sleeve allocation
@@ -74,7 +76,7 @@ committed targets. **Tactical** sleeves open discretionary positions on a view. 
 is load-bearing in §6.
 
 Kill-listed strategists have sleeve 0 and `do_not_promote: true`; both conditions are
-AND-gated at the executor. **[executor]**
+AND-gated at the executor. **[policy]**
 
 ## 4. Sizing basis
 
@@ -130,7 +132,7 @@ Cadence: **quarterly** check; trigger fires only on breach.
 
 ## 6. Drawdown gates
 
-Measured peak-to-trough on book equity. **[executor]**
+Measured peak-to-trough on book equity. **[policy]**
 
 | State | Threshold | Behavior |
 |---|---|---|
@@ -140,7 +142,7 @@ Measured peak-to-trough on book equity. **[executor]**
 
 ## 7. Negative constraints
 
-Not authorized under v1.0, regardless of apparent opportunity: **[executor]**
+Not authorized under v1.1, regardless of apparent opportunity: **[policy]**
 
 - live placement from Claude Code, in any mode
 - options intents outside an `options-trader` profile (which does not exist)
@@ -168,9 +170,9 @@ strategist requesting more room · short-horizon market moves.
 
 ## 9. Review cadence
 
-Quarterly review against: book drawdown state, factor drift, cap breaches (should be zero —
-any breach is an executor bug, not a policy question), and the conversion gap once the
-predictions factory reports it.
+Quarterly review against: book drawdown state, factor drift, gross exposure, and cap breaches.
+Until a deterministic paper-book gate exists, any breach is an enforcement gap to close, not
+evidence that the policy parameter should be loosened.
 
 ## Change log
 
@@ -179,10 +181,12 @@ predictions factory reports it.
 | 2026-07-27 | 1.0.0 | Initial authorship | — | Track A found policy scattered across five conflicting layers; this consolidates and supplies the six missing committed values |
 | 2026-07-27 | 1.0.1 | Defined **core** vs **tactical** sleeve classes in §3; §6 Restricted now names which sleeves halt and states that core sleeves continue | clarifying (PATCH) | "tactical" appeared once in §6 and was never defined — a reader could have frozen routine rebalancing during a drawdown, which the gate never intended. Same-day pre-merge correction; treated as completing authorship, not an amendment |
 | 2026-07-27 | 1.1.0 | §3 adds `max_gross_exposure` 100%, no leverage. §5 rewritten: tilt envelope is **±10 percentage points** (the "double/halve" language removed as a mis-description of the source's own examples), tilts must fund each other, active target defined, rebalance trigger clipped by the envelope | tightening + clarifying (MINOR) | Three defects found in a self-audit: caps alone permitted 120% gross; the tilt rule carried three incompatible bounds at once; "intended exposure" was undefined under an active tilt. The envelope-clips-band rule resolves an interaction the two fixes would otherwise have created (a tilted band reaching 43.75% past a 35% ceiling) |
+| 2026-07-28 | 1.1.1 | Replaced the misleading `[executor]` label with `[policy]`, documented the current enforcement gap, aligned visible version text, and removed the unavailable predictions-factory dependency | clarifying (PATCH) | Registry dependency edges and LLM instructions are not deterministic enforcement. The policy must distinguish committed requirements from implemented controls. |
 
 ## Connections
 
-- `_shared/executor` — the only deterministic gate; enforces §3, §6, §7
+- `_shared/executor` — current broker-routing skill; it does **not** yet enforce the paper-book
+  limits in §3 or §6 and is outside this policy's binding real-account scope
 - `archon/references/portfolio-rules.md` — runtime profile; must not contradict §3
-- `predictions-factory` — supplies the reference probabilities §4 requires
+- Named references in §4 are recorded at decision time; no prediction runtime is required
 - Track A inventory and Track B (IPS canon + policy-as-code) in vault `skill-lab/`
