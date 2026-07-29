@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-28T15:33:45Z",
+  "last_scan": "2026-07-29T01:35:49Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -4584,7 +4584,9 @@
         "statistical-analysis",
         "statistical-testing"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "sentiment-signals"
+      ],
       "tags": [
         "domain:data-science",
         "subdomain:ml-engineering",
@@ -14847,10 +14849,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 67,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15070,10 +15072,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15125,10 +15127,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16091,10 +16093,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16146,10 +16148,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 80,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 77,
       "depends_on": [],
       "referenced_by": [
         "frontier-conviction-scorer",
@@ -16206,10 +16208,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 80,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "modality-lifecycle",
@@ -16486,10 +16488,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -26429,10 +26431,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "mechanism-risk-adjuster"
       ],
@@ -27989,7 +27991,7 @@
       },
       "health_status": "healthy",
       "issues": [],
-      "last_checked": "2026-07-27T00:00:00Z",
+      "last_checked": "2026-07-29T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
@@ -28017,185 +28019,16 @@
         "domain:investing",
         "layer:knowledge"
       ],
-      "created": "2026-07-27",
-      "last_modified": "2026-07-28",
+      "created": "2026-07-29",
+      "last_modified": "2026-07-29",
       "changelog": [
         {
-          "date": "2026-07-27",
+          "date": "2026-07-29",
           "action": "created",
           "note": "Auto-discovered by sync-registry.py"
         }
       ],
       "parent": "archon"
-    },
-    "prediction-auditor": {
-      "name": "prediction-auditor",
-      "description": "Scan prediction-bearing notes without writing them, validate event and hash integrity, derive current state, render local audit views, and export reproducible normalized datasets with source and Git provenance. Use when the user wants to inspect, filter, verify, or reuse their prediction record.",
-      "location": "skills/predictions/prediction-auditor/SKILL.md",
-      "plugin": "skill-infra",
-      "type": "action",
-      "source": "self",
-      "context_mode": "inline",
-      "invocation": "both",
-      "version": "1.0.0",
-      "metrics": {
-        "word_count": 271,
-        "body_words": 216,
-        "description_words": 42,
-        "section_count": 4,
-        "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_metadata": 55,
-        "estimated_tokens_body": 394,
-        "estimated_tokens_total": 449
-      },
-      "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-07-28T00:00:00Z",
-      "status": "active",
-      "deprecated_date": null,
-      "replacement_skill": null,
-      "deprecation_reason": null,
-      "auto_score": 68,
-      "manual_rating": null,
-      "manual_notes": null,
-      "composite_score": 68,
-      "depends_on": [],
-      "referenced_by": [
-        "predictions-factory"
-      ],
-      "shares_references_with": [],
-      "forked_from": null,
-      "forked_into": [],
-      "tags": [
-        "domain:predictions",
-        "level:action"
-      ],
-      "created": "2026-07-28",
-      "last_modified": "2026-07-28",
-      "changelog": [
-        {
-          "date": "2026-07-28",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": "predictions-factory"
-    },
-    "prediction-records": {
-      "name": "prediction-records",
-      "description": "Create and maintain canonical append-only prediction records in host notes. Use when committing a confirmed forecast, recording a panel skip, revising a forecast, proposing or confirming a resolution, correcting a resolution, or voiding scoring eligibility. Enforce actor separation, idempotency, path confinement, and evidence-bearing resolution; never overwrite history.",
-      "location": "skills/predictions/prediction-records/SKILL.md",
-      "plugin": "skill-infra",
-      "type": "action",
-      "source": "self",
-      "context_mode": "inline",
-      "invocation": "both",
-      "version": "1.0.0",
-      "metrics": {
-        "word_count": 341,
-        "body_words": 281,
-        "description_words": 47,
-        "section_count": 5,
-        "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_metadata": 62,
-        "estimated_tokens_body": 496,
-        "estimated_tokens_total": 558
-      },
-      "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-07-28T00:00:00Z",
-      "status": "active",
-      "deprecated_date": null,
-      "replacement_skill": null,
-      "deprecation_reason": null,
-      "auto_score": 68,
-      "manual_rating": null,
-      "manual_notes": null,
-      "composite_score": 68,
-      "depends_on": [],
-      "referenced_by": [],
-      "shares_references_with": [],
-      "forked_from": null,
-      "forked_into": [],
-      "tags": [
-        "domain:predictions",
-        "level:action"
-      ],
-      "created": "2026-07-28",
-      "last_modified": "2026-07-28",
-      "changelog": [
-        {
-          "date": "2026-07-28",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": "predictions-factory"
-    },
-    "predictions-factory": {
-      "name": "predictions-factory",
-      "description": "Route work across the general prediction suite: creating auditable forecasts, revising them, resolving them, inspecting integrity, or exporting a reusable dataset. Use for predictions in any domain, with investing prioritized as the first adapter. Never treat model-inferred candidates as confirmed personal forecasts or place canonical prediction history in a second store.",
-      "location": "skills/predictions/predictions-factory/SKILL.md",
-      "plugin": "skill-infra",
-      "type": "orchestrator",
-      "source": "self",
-      "context_mode": "inline",
-      "invocation": "both",
-      "version": "1.0.0",
-      "metrics": {
-        "word_count": 384,
-        "body_words": 320,
-        "description_words": 51,
-        "section_count": 5,
-        "reference_files": 0,
-        "example_files": 0,
-        "script_files": 0,
-        "template_files": 0,
-        "estimated_tokens_metadata": 67,
-        "estimated_tokens_body": 553,
-        "estimated_tokens_total": 620
-      },
-      "health_status": "healthy",
-      "issues": [],
-      "last_checked": "2026-07-28T00:00:00Z",
-      "status": "active",
-      "deprecated_date": null,
-      "replacement_skill": null,
-      "deprecation_reason": null,
-      "auto_score": 80,
-      "manual_rating": null,
-      "manual_notes": null,
-      "composite_score": 80,
-      "depends_on": [
-        "prediction-auditor"
-      ],
-      "referenced_by": [
-        "prediction-auditor",
-        "prediction-records"
-      ],
-      "shares_references_with": [],
-      "forked_from": null,
-      "forked_into": [],
-      "tags": [
-        "domain:predictions",
-        "level:orchestrator"
-      ],
-      "created": "2026-07-28",
-      "last_modified": "2026-07-28",
-      "changelog": [
-        {
-          "date": "2026-07-28",
-          "action": "created",
-          "note": "Auto-discovered by sync-registry.py"
-        }
-      ],
-      "parent": null
     }
   },
   "network": {
