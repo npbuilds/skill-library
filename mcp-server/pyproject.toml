@@ -8,7 +8,12 @@ version = "0.1.0"
 description = "MCP server and CLI for a local skill library"
 requires-python = ">=3.12"
 dependencies = [
-    "mcp>=1.0.0",
+    # Upper bound is load-bearing: mcp 2.0.0 (released 2026-07-28) moved
+    # mcp.server.fastmcp, which server.py imports at module scope. Without the
+    # bound, CI resolves the latest release and every job fails at import —
+    # main went red without a single commit touching it. Remove only after
+    # migrating the import and verifying against 2.x.
+    "mcp>=1.0.0,<2.0.0",
     "click>=8.0",
 ]
 
