@@ -4,12 +4,16 @@
 from __future__ import annotations
 
 import re
+import tomllib
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
 WORKFLOW = (ROOT / ".github" / "workflows" / "deploy.yml").read_text()
 SERVICE = (ROOT / "cloudrun" / "service.yaml").read_text()
+DOCKERFILE = (ROOT / "Dockerfile").read_text()
+MCP_PROJECT = tomllib.loads((ROOT / "mcp-server" / "pyproject.toml").read_text())
+ARCHON_PROJECT = tomllib.loads((ROOT / "archon-data" / "pyproject.toml").read_text())
 
 
 def _workflow_names(flag: str) -> set[str]:
@@ -40,6 +44,13 @@ def test_concurrency_and_instance_limit_are_pinned():
     assert "--max-instances=1" in WORKFLOW
     assert "containerConcurrency: 8" in SERVICE
     assert 'autoscaling.knative.dev/maxScale: "1"' in SERVICE
+
+
+def test_mcp_major_version_is_bounded_in_every_install_path():
+    expected = "mcp>=1.0.0,<2.0.0"
+    assert f'"{expected}"' in DOCKERFILE
+    assert expected in MCP_PROJECT["project"]["dependencies"]
+    assert expected in ARCHON_PROJECT["project"]["dependencies"]
 
 
 def main() -> None:

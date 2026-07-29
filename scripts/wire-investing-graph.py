@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Wire up depends_on + referenced_by links for all 37 investing knowledge skills.
+"""Wire canonical depends_on + referenced_by links for investing skills.
 
 This is the 'autoresearch' connectivity pass — adds cross-skill dependencies
 so the scoring formula's connectivity dimension (20% weight) can reward skills
@@ -12,7 +12,6 @@ Run:
 
 import json
 import sys
-from collections import defaultdict
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -111,6 +110,29 @@ def _detect_cycles(dep_map: dict[str, list[str]]) -> list[tuple[str, str]]:
     return cycles
 
 
+def desired_dependencies(entry: dict, declared: list[str]) -> list[str]:
+    """Return canonical capability edges, keeping hierarchy in `parent` only."""
+    desired = set(declared)
+    parent = entry.get("parent")
+    if parent:
+        desired.discard(parent)
+    return sorted(desired)
+
+
+def derive_referenced_by(skills: dict[str, dict]) -> dict[str, list[str]]:
+    """Rebuild the exact reverse index from parent and capability edges."""
+    reverse: dict[str, set[str]] = {name: set() for name in skills}
+    for source, entry in skills.items():
+        targets = set(entry.get("depends_on") or [])
+        parent = entry.get("parent")
+        if parent:
+            targets.add(parent)
+        for target in targets:
+            if target in reverse and target != source:
+                reverse[target].add(source)
+    return {name: sorted(referrers) for name, referrers in reverse.items()}
+
+
 def main() -> None:
     dry_run = "--apply" not in sys.argv
 
@@ -127,43 +149,46 @@ def main() -> None:
 
     skills = registry["skills"]
 
-    # Capture before-state
-    before: dict[str, tuple[list, list]] = {
-        name: (list(entry.get("depends_on", [])), list(entry.get("referenced_by", [])))
+    changes: list[str] = []
+    prospective = {
+        name: {
+            **entry,
+            "depends_on": list(entry.get("depends_on") or []),
+            "referenced_by": list(entry.get("referenced_by") or []),
+        }
         for name, entry in skills.items()
     }
-
-    # Build the full referenced_by index from the dependency map
-    referenced_by_index: dict[str, set[str]] = defaultdict(set)
-    for skill, deps in DEPENDENCY_MAP.items():
-        for dep in deps:
-            referenced_by_index[dep].add(skill)
-
-    changes: list[str] = []
 
     for skill_name, deps in DEPENDENCY_MAP.items():
         if skill_name not in skills:
             print(f"  SKIP (not in registry): {skill_name}")
             continue
-        entry = skills[skill_name]
+        entry = prospective[skill_name]
         old_deps = set(entry.get("depends_on", []))
-        new_deps = set(deps)
+        canonical = desired_dependencies(entry, deps)
+        new_deps = set(canonical)
         if old_deps != new_deps:
             changes.append(f"  {skill_name}: depends_on {sorted(old_deps)} → {sorted(new_deps)}")
-        if not dry_run:
-            entry["depends_on"] = sorted(deps)
+        entry["depends_on"] = canonical
 
-    # Update referenced_by for every skill that appears as a dependency target
-    for target_name, referrers in referenced_by_index.items():
-        if target_name not in skills:
-            continue
-        entry = skills[target_name]
+    # referenced_by is denormalized data. Rebuild it from the complete
+    # prospective graph so removed edges cannot survive as stale referrers.
+    expected_referenced_by = derive_referenced_by(prospective)
+    for target_name, referrers in expected_referenced_by.items():
+        entry = prospective[target_name]
         old_refs = set(entry.get("referenced_by", []))
-        new_refs = old_refs | referrers  # additive — never remove existing refs
+        new_refs = set(referrers)
         if old_refs != new_refs:
-            changes.append(f"  {target_name}: referenced_by += {sorted(new_refs - old_refs)}")
-        if not dry_run:
-            entry["referenced_by"] = sorted(new_refs)
+            changes.append(
+                f"  {target_name}: referenced_by "
+                f"{sorted(old_refs)} → {sorted(new_refs)}"
+            )
+        entry["referenced_by"] = referrers
+
+    if not dry_run:
+        for name, entry in prospective.items():
+            skills[name]["depends_on"] = entry["depends_on"]
+            skills[name]["referenced_by"] = entry["referenced_by"]
 
     # Report
     print(f"{'DRY RUN — ' if dry_run else ''}Connectivity pass for investing skills")

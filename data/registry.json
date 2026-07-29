@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-29T01:58:09Z",
+  "last_scan": "2026-07-29T02:14:46Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -27966,7 +27966,7 @@
     },
     "house-policy": {
       "name": "house-policy",
-      "description": "The committed investing parameters \u2014 scope, authority, position-cap hierarchy, risk gates, factor targets, and the amendment procedure. Load before any sizing, rebalancing, or risk-limit decision, and whenever a strategist or Archon proposes an action. This file holds decided values, not ranges or advice; where it is silent, no policy exists yet and the answer is \"unstated\", never an improvised default.",
+      "description": "The committed investing parameters \u2014 scope, authority, position-cap hierarchy, risk gates, factor targets, and the amendment procedure. Use before any sizing, rebalancing, or risk-limit decision, and whenever a strategist or Archon proposes an action. This file holds decided values, not ranges or advice; where it is silent, no policy exists yet and the answer is \"unstated\", never an improvised default.",
       "location": "skills/investing/house-policy/SKILL.md",
       "plugin": "skill-investing",
       "type": "knowledge",
@@ -27975,8 +27975,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1409,
-        "body_words": 1327,
+        "word_count": 1503,
+        "body_words": 1421,
         "description_words": 60,
         "section_count": 11,
         "reference_files": 0,
@@ -27984,8 +27984,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 2142,
-        "estimated_tokens_total": 2220
+        "estimated_tokens_body": 2315,
+        "estimated_tokens_total": 2393
       },
       "health_status": "healthy",
       "issues": [],

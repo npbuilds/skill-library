@@ -23,7 +23,7 @@ RUN apt-get update \
 #   sentence-transformers -> vector signal in HybridSearchIndex (MiniLM)
 COPY mcp-server/pyproject.toml mcp-server/
 RUN pip install --no-cache-dir \
-      "mcp>=1.0.0" "httpx>=0.25" "anthropic>=0.30" \
+      "mcp>=1.0.0,<2.0.0" "httpx>=0.25" "anthropic>=0.30" \
       "rank-bm25>=0.2.2" "numpy>=1.24.0" \
       "google-cloud-firestore>=2.14"
 RUN pip install --no-cache-dir \
