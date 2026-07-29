@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-29T01:35:49Z",
+  "last_scan": "2026-07-29T01:58:09Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -4584,9 +4584,7 @@
         "statistical-analysis",
         "statistical-testing"
       ],
-      "referenced_by": [
-        "sentiment-signals"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:data-science",
         "subdomain:ml-engineering",
@@ -28362,11 +28360,6 @@
         "steel-man-forge",
         "thought-experiment-lab",
         "values-excavator"
-      ],
-      "predictions": [
-        "prediction-auditor",
-        "prediction-records",
-        "predictions-factory"
       ],
       "product": [
         "adaptation-observer",
