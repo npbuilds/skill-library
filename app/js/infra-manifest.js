@@ -18,6 +18,6 @@ window.INFRA_MANIFEST = Object.freeze({
   "local_mcp_tools": 17,
   "remote_mcp_tools": 8,
   "schema_version": 1,
-  "scripts": 55,
+  "scripts": 56,
   "workflows": 7
 });

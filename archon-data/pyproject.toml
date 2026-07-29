@@ -7,7 +7,10 @@ name = "archon-data"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
-    "mcp>=1.0.0",
+    # Archon imports mcp.server.fastmcp at module scope. MCP 2.x moved that
+    # module, so standalone Archon installs need the same compatibility bound
+    # as the skill-library server until both runtimes migrate together.
+    "mcp>=1.0.0,<2.0.0",
     "yfinance>=0.2.0",
     "requests>=2.31.0",
     "fredapi>=0.5.0",
