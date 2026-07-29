@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-27T13:46:45Z",
+  "last_scan": "2026-07-29T01:58:09Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -4584,9 +4584,7 @@
         "statistical-analysis",
         "statistical-testing"
       ],
-      "referenced_by": [
-        "sentiment-signals"
-      ],
+      "referenced_by": [],
       "tags": [
         "domain:data-science",
         "subdomain:ml-engineering",
@@ -6830,15 +6828,19 @@
         "estimated_tokens_body": 6693,
         "estimated_tokens_total": 6736
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 62,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 62,
-      "depends_on": [],
-      "referenced_by": [],
+      "composite_score": 66,
+      "depends_on": [
+        "sentiment-signals"
+      ],
+      "referenced_by": [
+        "sentiment-signals"
+      ],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -6977,6 +6979,7 @@
         "equity-literacy",
         "executor",
         "geopolitical-overlay",
+        "house-policy",
         "macro-overlay-trader",
         "market-microstructure",
         "offer-negotiation",
@@ -7243,17 +7246,20 @@
         "estimated_tokens_body": 4047,
         "estimated_tokens_total": 4088
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 63,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 69,
       "depends_on": [
+        "factor-exposure",
         "regime-intelligence"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "factor-exposure"
+      ],
       "parent": "asset-universe",
       "tags": [
         "domain:investing",
@@ -7779,14 +7785,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 76,
       "depends_on": [
-        "asset-allocation"
+        "asset-allocation",
+        "equities"
       ],
       "referenced_by": [
+        "equities",
         "passive-flow-dynamics",
         "performance-attribution",
         "quality-compounders"
@@ -7960,14 +7968,19 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 75,
-      "depends_on": [],
+      "depends_on": [
+        "reflexivity-theory",
+        "sentiment-signals"
+      ],
       "referenced_by": [
         "behavioral-game-theory",
         "belief-auditor",
         "bias-detector",
         "drawdown-psychology",
         "historical-pattern-recognition",
-        "second-level-thinking"
+        "reflexivity-theory",
+        "second-level-thinking",
+        "sentiment-signals"
       ],
       "parent": "reflexivity-sentiment",
       "tags": [
@@ -8003,15 +8016,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 76,
       "depends_on": [
-        "macro-cycles"
+        "macro-cycles",
+        "market-psychology"
       ],
       "referenced_by": [
         "frontier-intelligence",
+        "market-psychology",
         "mindshare-tracker",
         "second-level-thinking"
       ],
@@ -8049,15 +8064,18 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 67,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 71,
       "depends_on": [
-        "drift-detection"
+        "alt-data-monitoring",
+        "market-psychology"
       ],
       "referenced_by": [
+        "alt-data-monitoring",
         "insider-signals",
+        "market-psychology",
         "signaling-screening"
       ],
       "parent": "reflexivity-sentiment",
@@ -8143,15 +8161,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 72,
       "depends_on": [
+        "macro-cycles",
         "monetary-regime"
       ],
       "referenced_by": [
-        "fixed-income"
+        "fixed-income",
+        "macro-cycles"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8187,15 +8207,20 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 80,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
-      "depends_on": [],
+      "composite_score": 80,
+      "depends_on": [
+        "fiscal-regime",
+        "monetary-regime"
+      ],
       "referenced_by": [
         "commodities",
         "currencies",
+        "fiscal-regime",
         "great-power-dynamics",
+        "monetary-regime",
         "money-and-financial-systems",
         "reflexivity-theory"
       ],
@@ -8233,15 +8258,18 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
-      "depends_on": [],
+      "composite_score": 77,
+      "depends_on": [
+        "macro-cycles"
+      ],
       "referenced_by": [
         "currencies",
         "fiscal-regime",
         "fixed-income",
+        "macro-cycles",
         "money-and-financial-systems"
       ],
       "parent": "regime-intelligence",
@@ -8324,18 +8352,20 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 76,
       "depends_on": [
-        "regime-intelligence"
+        "regime-intelligence",
+        "tail-risk"
       ],
       "referenced_by": [
         "alternatives",
         "asset-allocation",
         "fixed-income",
-        "hedging-architecture"
+        "hedging-architecture",
+        "tail-risk"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8417,15 +8447,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 72,
       "depends_on": [
-        "portfolio-construction"
+        "portfolio-construction",
+        "tail-risk"
       ],
       "referenced_by": [
-        "drawdown-psychology"
+        "drawdown-psychology",
+        "tail-risk"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8461,17 +8493,22 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 74,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 74,
-      "depends_on": [],
+      "composite_score": 79,
+      "depends_on": [
+        "correlation-regimes",
+        "position-sizing"
+      ],
       "referenced_by": [
+        "correlation-regimes",
         "counterfactual-reasoner",
         "drawdown-psychology",
         "hedging-architecture",
         "model-evaluation",
-        "options-mechanics"
+        "options-mechanics",
+        "position-sizing"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8598,14 +8635,19 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
-      "depends_on": [],
+      "composite_score": 76,
+      "depends_on": [
+        "insider-signals",
+        "spinoffs-restructuring"
+      ],
       "referenced_by": [
         "auction-theory",
-        "complexity-premium"
+        "complexity-premium",
+        "insider-signals",
+        "spinoffs-restructuring"
       ],
       "parent": "special-situations",
       "tags": [
@@ -8646,9 +8688,11 @@
       "manual_notes": null,
       "composite_score": 69,
       "depends_on": [
+        "event-driven",
         "sentiment-signals"
       ],
       "referenced_by": [
+        "event-driven",
         "information-economics",
         "signaling-screening"
       ],
@@ -8683,17 +8727,20 @@
         "estimated_tokens_body": 5372,
         "estimated_tokens_total": 5419
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 63,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
+      "composite_score": 69,
       "depends_on": [
+        "event-driven",
         "intrinsic-value"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "event-driven"
+      ],
       "parent": "special-situations",
       "tags": [
         "domain:investing",
@@ -8773,14 +8820,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 72,
       "depends_on": [
+        "quality-compounders",
         "second-level-thinking"
       ],
       "referenced_by": [
+        "quality-compounders",
         "spinoffs-restructuring"
       ],
       "parent": "value-quality",
@@ -8817,14 +8866,17 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 66,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
+      "composite_score": 72,
       "depends_on": [
-        "factor-exposure"
+        "factor-exposure",
+        "intrinsic-value"
       ],
-      "referenced_by": [],
+      "referenced_by": [
+        "intrinsic-value"
+      ],
       "parent": "value-quality",
       "tags": [
         "domain:investing",
@@ -14795,10 +14847,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 67,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15018,10 +15070,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15073,10 +15125,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16039,10 +16091,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -16094,10 +16146,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 80,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 77,
       "depends_on": [],
       "referenced_by": [
         "frontier-conviction-scorer",
@@ -16154,10 +16206,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 80,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "modality-lifecycle",
@@ -16434,10 +16486,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 70,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -26377,10 +26429,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "mechanism-risk-adjuster"
       ],
@@ -26673,11 +26725,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [],
+      "composite_score": 73,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -26728,11 +26782,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [],
+      "composite_score": 73,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -26783,11 +26839,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [],
+      "composite_score": 73,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -26831,18 +26889,20 @@
         "estimated_tokens_body": 4793,
         "estimated_tokens_total": 4871
       },
-      "health_status": "warning",
+      "health_status": "healthy",
       "issues": [],
       "last_checked": "2026-06-27T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 63,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 63,
-      "depends_on": [],
+      "composite_score": 68,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -26893,11 +26953,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [],
+      "composite_score": 73,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -26948,11 +27010,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 66,
+      "auto_score": 71,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 66,
-      "depends_on": [],
+      "composite_score": 71,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -27003,11 +27067,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [],
+      "composite_score": 73,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -27058,11 +27124,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [],
+      "composite_score": 73,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -27113,11 +27181,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 73,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
-      "depends_on": [],
+      "composite_score": 73,
+      "depends_on": [
+        "house-policy"
+      ],
       "referenced_by": [],
       "shares_references_with": [],
       "forked_from": null,
@@ -27893,6 +27963,70 @@
         }
       ],
       "parent": "emptor"
+    },
+    "house-policy": {
+      "name": "house-policy",
+      "description": "The committed investing parameters \u2014 scope, authority, position-cap hierarchy, risk gates, factor targets, and the amendment procedure. Load before any sizing, rebalancing, or risk-limit decision, and whenever a strategist or Archon proposes an action. This file holds decided values, not ranges or advice; where it is silent, no policy exists yet and the answer is \"unstated\", never an improvised default.",
+      "location": "skills/investing/house-policy/SKILL.md",
+      "plugin": "skill-investing",
+      "type": "knowledge",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 1409,
+        "body_words": 1327,
+        "description_words": 60,
+        "section_count": 11,
+        "reference_files": 0,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 78,
+        "estimated_tokens_body": 2142,
+        "estimated_tokens_total": 2220
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-07-29T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 84,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 84,
+      "depends_on": [],
+      "referenced_by": [
+        "day-trader",
+        "dca-investor",
+        "earnings-event-trader",
+        "executor",
+        "macro-overlay-trader",
+        "options-strategist",
+        "rebalancer",
+        "reflexivity-trader",
+        "swing-trader"
+      ],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:investing",
+        "layer:knowledge"
+      ],
+      "created": "2026-07-29",
+      "last_modified": "2026-07-29",
+      "changelog": [
+        {
+          "date": "2026-07-29",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "archon"
     }
   },
   "network": {
@@ -28145,6 +28279,7 @@
         "geopolitical-overlay",
         "great-power-dynamics",
         "hedging-architecture",
+        "house-policy",
         "insider-signals",
         "intrinsic-value",
         "liquidity-topology",
