@@ -73,6 +73,44 @@ def pct(n, d):
     return f"{100 * n / d:.0f}%" if d else "n/a"
 
 
+def case_observations(reps):
+    """Non-protocol records that still carry real, artifact-verified evidence.
+
+    protocol_rep is a single boolean, but auditability is not: reps 1-2 have complete artifact
+    bundles for every claim EXCEPT the cost clause, which needs a human-attention measurement
+    nobody took. Excluding them from Gate A is right; making them invisible is not - it hides
+    two fault-injection cases and two decided comparisons. Reported here, counted nowhere.
+    """
+    cases = [r for r in reps if not r.get("protocol_rep")
+             and (r.get("comparison_mode") in COMPARED or r.get("recovery_result"))]
+    if not cases:
+        return []
+    out = []
+    w = out.append
+    w("### Case observations (evidence, not protocol reps)")
+    w("")
+    w("Artifact-verified but excluded from every Gate A count above. Present so the ledger and the "
+      "written record agree.")
+    w("")
+    for r in cases:
+        w(f"- `{r['rung']}` {r['ts']} · {r['faculty']}@{r['surface']} · {r['task_family']} · "
+          f"scored {r['score']}/5")
+        if r.get("comparison_mode") in COMPARED:
+            w(f"  - predicted **{r['predicted_winner']}** at {r['prediction_confidence']}% → "
+              f"observed **{r.get('observed_class')}** (grader: {r.get('grader_type')}"
+              f"{', blinded' if r.get('grader_blinded') else ''})")
+        rr = r.get("recovery_result") or {}
+        if rr:
+            w(f"  - recovery: detected {rr.get('detected')}, recovered {rr.get('recovered')}, "
+              f"move `{rr.get('move')}`, escaped final review {rr.get('escaped_final_review')}")
+        cost = r.get("cost") or {}
+        if cost.get("human_min") is None:
+            w(f"  - ⚠ `human_min` {cost.get('human_min_basis', 'missing')} — no cost-clause claim "
+              f"can rest on this rep")
+    w("")
+    return out
+
+
 def rollup(reps):
     protocol = [r for r in reps if r.get("protocol_rep")]
     excluded = len(reps) - len(protocol)
@@ -94,6 +132,7 @@ def rollup(reps):
                 if not r.get("protocol_rep"):
                     w(f"- `{r['rung']}` ({r['ts']}) — {r['faculty']} scored {r['score']}/5 — {r['change'][:110]}")
             w("")
+        out.extend(case_observations(reps))
         return "\n".join(out)
 
     # --- practitioner (leading) ---
@@ -137,11 +176,19 @@ def rollup(reps):
         w("_No full comparisons yet — architecture-prediction accuracy is unmeasurable until a counterfactual is run._")
         w("")
 
-    # review cost per accepted artifact
-    art = sum(r.get("accepted_artifacts") or 0 for r in protocol)
-    human = sum((r.get("cost") or {}).get("human_min") or 0 for r in protocol)
+    # review cost per accepted artifact — only over reps that actually measured it.
+    # Summing null-as-zero would report a confident total built partly from reps that never held a stopwatch.
+    measured = [r for r in protocol if (r.get("cost") or {}).get("human_min") is not None]
+    unmeasured = len(protocol) - len(measured)
+    art = sum(r.get("accepted_artifacts") or 0 for r in measured)
+    human = sum((r.get("cost") or {}).get("human_min") or 0 for r in measured)
     if art:
-        w(f"**Review cost per accepted artifact:** {human / art:.0f} human-min ({human:.0f} min / {art} artifacts)")
+        w(f"**Review cost per accepted artifact:** {human / art:.0f} human-min "
+          f"({human:.0f} min / {art} artifacts, over {len(measured)} rep(s) that measured it)")
+        w("")
+    if unmeasured:
+        w(f"⚠ **{unmeasured} protocol rep(s) never measured `human_min`.** Human attention is the binding "
+          f"metric and the basis of every cost-clause win — a rep that did not time it cannot support one.")
         w("")
 
     # --- system (ultimate) ---
@@ -158,7 +205,8 @@ def rollup(reps):
         w(f"- Inconclusive rate: **{pct(len(inconclusive), len(compared))}**{flag}")
     defects = sum(r.get("escaped_defects") or 0 for r in protocol)
     w(f"- Escaped defects: **{defects}**")
-    w(f"- Total human attention: **{human:.0f} min**")
+    w(f"- Total human attention: **{human:.0f} min**"
+      + (f" (over {len(measured)}/{len(protocol)} reps; {unmeasured} unmeasured and excluded)" if unmeasured else ""))
     rec = [r for r in protocol if r.get("recovery_result")]
     if rec:
         recovered = sum(1 for r in rec if r["recovery_result"].get("recovered"))
@@ -283,6 +331,7 @@ def rollup(reps):
     w("")
     w("Gate B (publishable skill) is assessed separately: B1 cross-runtime portability, B2 human usability.")
     w("")
+    out.extend(case_observations(reps))
 
     # --- changes ledger: the anti-ritual guard ---
     recent = protocol[-3:]
