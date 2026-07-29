@@ -120,12 +120,32 @@
       "additionalProperties": false,
       "required": ["human_min"],
       "properties": {
-        "tokens": { "type": ["number", "null"] },
+        "tokens": { "type": ["number", "null"], "description": "Name the metric in token_metric — 'tokens' alone is ambiguous between output-only and input+cache+output, and the two differ by several multiples on pipeline topologies." },
+        "token_metric": {
+          "enum": ["output", "input_output", "input_cache_output", null],
+          "description": "Which token measure the tokens field holds. Added after reps 1-2 reported input_cache_output as if it were output, understating rep 2's orchestrated/simple ratio by 3.7x."
+        },
         "model_calls": { "type": ["number", "null"] },
         "elapsed_min": { "type": ["number", "null"] },
-        "human_min": { "type": "number", "description": "Setup + review + synthesis + rework. The metric that actually binds." },
+        "human_min": {
+          "type": ["number", "null"],
+          "description": "Setup + review + synthesis + rework. The metric that actually binds. Null ONLY when it was never instrumented, and then human_min_basis must say so — a guessed number here silently satisfies cost-based win conditions that were never measured."
+        },
+        "human_min_basis": {
+          "enum": ["measured", "contemporaneous_estimate", "post_hoc_estimate", "unmeasured", null],
+          "description": "Provenance of human_min. Only 'measured' and 'contemporaneous_estimate' may support a cost-clause win; 'post_hoc_estimate' and 'unmeasured' force the comparison to inconclusive."
+        },
         "rework_min": { "type": ["number", "null"] }
-      }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "human_min": { "type": "null" } }, "required": ["human_min"] },
+          "then": {
+            "required": ["human_min_basis"],
+            "properties": { "human_min_basis": { "enum": ["unmeasured"] } }
+          }
+        }
+      ]
     },
     "accepted_artifacts": { "type": ["integer", "null"], "minimum": 0, "description": "Artifacts accepted this run; denominator for review-cost-per-accepted-artifact." },
     "escaped_defects": { "type": ["integer", "null"], "minimum": 0, "description": "Defects that survived review and were found later." },
