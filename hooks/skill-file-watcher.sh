@@ -108,7 +108,4 @@ print('true' if sys.argv[2] in reg.get('skills', {}) else 'false')
       echo "  Run: python3 scripts/suggest-bridges.py $SKILL_NAME --apply"
     fi
   fi
-
-  # Append evolution snapshot for this skill (dashboard time-series)
-  python3 "$PLUGIN_ROOT/scripts/snapshot_evolution.py" --event=hook 2>/dev/null || true
 fi

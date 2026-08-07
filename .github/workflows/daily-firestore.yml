@@ -2,8 +2,8 @@ name: Daily maintenance (Firestore)
 
 # Daily maintenance jobs that write straight to Firestore instead of committing
 # to git — the git-bloat remediation (Phases 1-2). Replaces the old
-# /maint/snapshot and /maint/sentinel flows that appended data/evolution.jsonl /
-# data/health/*.json and committed them, bloating git history.
+# /maint/snapshot and /maint/sentinel flows that committed per-skill history and
+# dated health files, bloating git history.
 #
 # Runs in CI (not the public Cloud Run service) so Firestore writes use the
 # WIF-authenticated CI service account and the Cloud Run runtime SA can stay
@@ -29,7 +29,7 @@ concurrency:
 
 jobs:
   maintenance:
-    name: Snapshot + health → Firestore
+    name: Aggregate + health → Firestore
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -51,17 +51,29 @@ jobs:
       - name: Install dependencies
         run: pip install google-cloud-firestore
 
-      - name: Write daily evolution snapshot to Firestore
-        run: python3 scripts/snapshot_to_firestore.py --event scheduled --project "${{ vars.GCP_PROJECT_ID }}"
+      # Strict pre-write gate: never derive an aggregate from newer Git data
+      # while Firestore skills/meta still describe an older commit.
+      - name: Check git↔Firestore divergence
+        id: divergence
+        run: |
+          for attempt in 1 2 3 4 5; do
+            if python3 scripts/check_firestore_divergence.py \
+              --project "${{ vars.GCP_PROJECT_ID }}" --require-head; then
+              exit 0
+            fi
+            if [ "$attempt" = "5" ]; then
+              echo "::error::Firestore did not converge to HEAD after 5 attempts."
+              exit 1
+            fi
+            echo "Firestore sync still converging; retrying in 30 seconds..."
+            sleep 30
+          done
+
+      - name: Write daily evolution aggregate to Firestore
+        run: python3 scripts/snapshot_to_firestore.py --project "${{ vars.GCP_PROJECT_ID }}"
 
       - name: Write daily health report to Firestore
         run: python3 scripts/health-report.py --firestore --project "${{ vars.GCP_PROJECT_ID }}"
-
-      # Split-brain detection: sync-firestore.yml stamps synced_sha on every
-      # merge-triggered sync; alert if Firestore has silently fallen behind git.
-      - name: Check git↔Firestore divergence
-        id: divergence
-        run: python3 scripts/check_firestore_divergence.py --project "${{ vars.GCP_PROJECT_ID }}"
 
       - name: Open alert issue on divergence
         if: ${{ failure() && steps.divergence.outcome == 'failure' }}
@@ -74,7 +86,7 @@ jobs:
             gh issue create --repo "$GITHUB_REPOSITORY" \
               --title "Firestore has diverged from main (synced_sha check failed)" \
               --label "firestore-divergence" \
-              --body "The daily divergence check failed: Firestore meta/registry.synced_sha does not match a recent main HEAD. See the failed run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID — recover by re-running sync-firestore.yml via workflow_dispatch."
+              --body "The daily pre-write check failed: Firestore meta/registry.synced_sha does not exactly match main HEAD, so no aggregate or health write was attempted. See the failed run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID — recover by re-running sync-firestore.yml via workflow_dispatch."
           else
             echo "Open firestore-divergence issue already exists; not duplicating."
           fi

@@ -70,20 +70,17 @@ edit "win" by flattering the judge rather than improving real calibration.
 - `task_score_quality` holds the **quality** suite result (same object shape:
   `verdict/val/test/lift/no_skill_test/backend/last_run/report` + `suite`).
 
-Every existing consumer keeps working untouched, because they only read
-`task_score`: `snapshot_evolution.py` (now also carries null-safe
-`task_score_quality_test`/`_verdict`), the app detail-panel guard
-(`if (s.task_score …)`), and `migrate_to_firestore.py` (`dict(skill)` passthrough
-copies the new sibling key automatically). The writer is
+Every current consumer keeps working untouched: the app detail-panel guard
+reads `task_score` (`if (s.task_score …)`), while `migrate_to_firestore.py`
+copies both sibling keys through its `dict(skill)` pass-through. The writer is
 `common.write_task_score(skill, obj, key="task_score_quality")`; `evaluate.py
 --suite quality` selects the key, the `eval/quality-tasks.yaml` task file, and the
 `<skill>-quality.gonogo.md` report.
 
 **Alternative considered (rejected for now): make `task_score` a dict of named
 suites**, e.g. `task_score = {"contract": {...}, "quality": {...}}`. Cleaner
-long-term, but it breaks the current app guard and `snapshot_evolution` field
-reads (`task_score.test`), and would require a coordinated migration of every
-consumer. Recommend revisiting only if a third+ suite appears.
+long-term, but it breaks the current app guard and would require a coordinated
+migration of every consumer. Recommend revisiting only if a third+ suite appears.
 
 ## Known limitations / variance risks
 
@@ -121,7 +118,7 @@ consumer. Recommend revisiting only if a third+ suite appears.
 
 - `scripts/skillopt/quality.py` — grader (calibration + citation gate; diagnostic judge); `--selftest`.
 - `skills/research/spelunker/eval/quality-tasks.yaml` — 15 labeled claims + judge config (train/val/test).
-- Wiring: `grader.grade_one` (checker `quality`), `runner.score_skill` (judge backend), `common.write_task_score(key=)`, `evaluate.py --suite quality`, `snapshot_evolution.py` (null-safe carry).
+- Wiring: `grader.grade_one` (checker `quality`), `runner.score_skill` (judge backend), `common.write_task_score(key=)`, `evaluate.py --suite quality`, registry pass-through to Firestore.
 
 ## How to run the full suite later (not yet run)
 

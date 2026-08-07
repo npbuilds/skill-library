@@ -11,8 +11,8 @@ Loop per step:
   2. apply within the textual learning-rate budget
   3. re-run the frozen val split
   4. accept only if val task_score STRICTLY improves; else revert + buffer it
-Accepted edits bump metadata.version + add a registry changelog entry and emit a
-`skillopt` evolution.jsonl event. A final slow/meta pass consolidates the doc.
+Accepted edits bump metadata.version and add a registry changelog entry. A final
+slow/meta pass consolidates the document.
 
 Usage:
     python3 scripts/skillopt/optimize.py                 # run (mock LLM by default)
@@ -31,7 +31,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common  # noqa: E402
 from common import (  # noqa: E402
     SKILL_NAME, SKILL_PATH, BASELINE_SNAPSHOT, OPTIMIZED_SNAPSHOT,
-    LOG_PATH, REJECTED_PATH, EVOLUTION_LOG,
+    LOG_PATH, REJECTED_PATH,
     read_skill_body, write_skill_body, append_jsonl, load_jsonl,
     load_registry, save_registry, ensure_dirs, now_iso, today,
 )
@@ -86,27 +86,6 @@ def _mirror_frontmatter_version(version: str) -> None:
     new_fm, n = re.subn(r'(version:\s*)"[^"]*"', rf'\g<1>"{version}"', fm, count=1)
     if n:
         SKILL_PATH.write_text(new_fm + body)
-
-
-def emit_evolution_event(edit: Edit, val_before: float, val_after: float, version: str | None) -> None:
-    reg = load_registry()
-    entry = reg["skills"].get(SKILL_NAME, {})
-    metrics = entry.get("metrics", {})
-    append_jsonl(EVOLUTION_LOG, {
-        "skill": SKILL_NAME,
-        "date": now_iso(),
-        "event": "skillopt",
-        "auto_score": entry.get("auto_score"),
-        "composite_score": entry.get("composite_score"),
-        "health": entry.get("health_status", "healthy"),
-        "word_count": metrics.get("word_count"),
-        "connections": len(entry.get("depends_on", [])) + len(entry.get("referenced_by", [])),
-        "reference_files": metrics.get("reference_files"),
-        "version": version,
-        "edit": edit.summary(),
-        "val_task_score_before": val_before,
-        "val_task_score_after": val_after,
-    })
 
 
 # ── Reset ──────────────────────────────────────────────────────────────────────
@@ -227,7 +206,6 @@ def optimize(epochs: int = 2, dry_run: bool = False) -> None:
                         note=f"Added '{edit.id}' ({edit.target}); val {start_val:.1f}->{new_val:.1f}",
                         val_after=new_val,
                     )
-                    emit_evolution_event(edit, best_val - delta, new_val, version)
                 _log({"status": "accepted", "edit": edit.summary(), "version": version,
                       "val_before": round(best_val - delta, 2), "val_after": new_val,
                       "delta": delta, "train_score": train_score, "epoch": epoch}, dry_run)

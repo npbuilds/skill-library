@@ -14,7 +14,6 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
-EVOLUTION_LOG = PROJECT_ROOT / "data" / "evolution.jsonl"
 SKILLOPT_DIR = PROJECT_ROOT / "data" / "skillopt"
 
 # The harness is reusable across skills: choose the target with SKILLOPT_SKILL.
@@ -126,14 +125,15 @@ def write_task_score(skill_name: str, task_score: dict, key: str = "task_score")
     """Idempotently store the LATEST task_score object on a registry skill.
 
     `task_score` is a SEPARATE signal from auto_score/composite_score — this
-    never touches the composite/auto math. Latest-only by design (full history
-    lives in data/evolution.jsonl). Returns False if the skill is unknown.
+    never touches the composite/auto math. Latest-only by design; accepted-edit
+    history remains in the SkillOpt log and registry changelog. Returns False if
+    the skill is unknown.
 
     `key` selects the registry field: the default `task_score` holds the
     structural-CONTRACT suite result; a second suite (e.g. research-quality)
     writes a SIBLING key like `task_score_quality`. Sibling keys keep every
-    existing consumer (snapshot_evolution, app guard, migrate passthrough)
-    working unchanged, since they only read `task_score`.
+    existing app and migration consumers working unchanged, since they only
+    read `task_score`.
     """
     reg = load_registry()
     entry = reg["skills"].get(skill_name)

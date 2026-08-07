@@ -44,7 +44,7 @@ jobs:
           python3 scripts/test_scoring_weights.py
           python3 scripts/test_scoring_writers.py
           python3 scripts/test_codex_hooks.py
-          python3 scripts/test_aggregate_evolution_daily.py
+          python3 scripts/test_evolution_daily.py
           python3 scripts/test_cloudrun_config.py
           python3 scripts/test_wire_investing_graph.py
           python3 scripts/test_leak_guard.py
