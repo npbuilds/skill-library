@@ -80,7 +80,7 @@ Merge to main (CI green)
   │                     + meta/usage_rollup (usage aggregate from committed jsonl)
   ├─ deploy-hosting.yml → app/ → Firebase Hosting, when the commit touched app/
   │                     (then asserts the bytes served match the commit)
-  └─ (daily) daily-firestore.yml → evolution snapshot + health
+  └─ (daily) daily-firestore.yml → aggregate evolution + health
                                  + telemetry pull → maint:green bot PR
 
 Cloud MCP server: strictly read-only tools; usage/gap telemetry → Firestore

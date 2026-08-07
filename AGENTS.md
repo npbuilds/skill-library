@@ -75,7 +75,7 @@ Git is the single source of truth. Merge to main (CI green) fans out automatical
 Merge to main (CI green)
   ├─ deploy.yml         → Cloud Run image (registry + skills + search index baked in)
   ├─ sync-firestore.yml → Firestore skills/meta/changelogs (dashboard)
-  └─ (daily) daily-firestore.yml → evolution snapshot + health
+  └─ (daily) daily-firestore.yml → aggregate evolution + health
                                  + telemetry pull → maint:green bot PR
 
 Cloud MCP server: strictly read-only tools; usage/gap telemetry → Firestore

@@ -17,6 +17,9 @@ window.INFRA_MANIFEST = Object.freeze({
   "hook_scripts": 7,
   "local_mcp_tools": 17,
   "remote_mcp_tools": 8,
+  "retired_firestore_collections": [
+    "evolution"
+  ],
   "schema_version": 1,
   "scripts": 56,
   "workflows": 7

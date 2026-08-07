@@ -31,13 +31,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // Evolution snapshots (raw)
-    match /evolution/{snapshotId} {
-      allow read: if true;
-      allow write: if false;
-    }
-
-    // Evolution per-date rollup — what the dashboards read
+    // Aggregate evolution history — one domain-score rollup per date
     match /evolution_daily/{date} {
       allow read: if true;
       allow write: if false;

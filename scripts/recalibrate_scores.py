@@ -272,11 +272,9 @@ def main():
             sys.exit(1)
         print(f"\nRegistry updated.")
 
-        # Evolution snapshots are no longer appended here. They persist to
-        # Firestore via the "Daily maintenance (Firestore)" GitHub Action
-        # (scripts/snapshot_to_firestore.py). data/evolution.jsonl is gitignored,
-        # so appending during recalibration would be discarded dead work and
-        # would silently drop the snapshot instead of persisting it.
+        # Evolution history is aggregate-only. The daily Firestore workflow
+        # derives one domain rollup from this updated registry; recalibration
+        # never writes per-skill history.
     elif dry_run:
         print("\n(dry run — no changes written)")
 

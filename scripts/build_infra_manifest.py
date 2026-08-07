@@ -21,6 +21,7 @@ COLLECTIONS = [
     "health_reports",
     "usage",
 ]
+RETIRED_COLLECTIONS = ["evolution"]
 
 
 def _count_files(directory: Path, suffixes: set[str] | None = None) -> int:
@@ -72,6 +73,7 @@ def build_manifest() -> dict:
         "remote_mcp_tools": remote_tools,
         "active_maintenance_endpoints": 3,
         "firestore_collections": COLLECTIONS,
+        "retired_firestore_collections": RETIRED_COLLECTIONS,
     }
 
 

@@ -5,7 +5,7 @@ Exposes scheduled-maintenance endpoints alongside the MCP server:
   GET  /health                -> liveness check
   POST /maint/recalibrate     -> run recalibrate_scores.py; open bot PR if drift
   POST /maint/validate        -> spot-check skill structure; return report (no PR)
-  POST /maint/snapshot        -> run snapshot_evolution.py; open bot PR
+  POST /maint/snapshot        -> retired no-op; daily aggregate runs in CI
   POST /maint/sentinel        -> run health-report.py; open bot PR with report
 
 Only mounted when REMOTE_MODE is true. Intended to be triggered by
@@ -411,10 +411,10 @@ async def _validate(request: Request) -> JSONResponse:
 
 
 async def _snapshot(request: Request) -> JSONResponse:
-    """Retired. Evolution snapshots now write straight to Firestore from a
+    """Retired. A daily evolution aggregate now writes straight to Firestore from a
     scheduled GitHub Action (.github/workflows/daily-firestore.yml via
-    scripts/snapshot_to_firestore.py), instead of appending data/evolution.jsonl
-    and opening a PR. That old flow was the dominant driver of git-history bloat.
+    scripts/snapshot_to_firestore.py). The old per-skill JSONL flow was the
+    dominant driver of git-history bloat.
 
     The endpoint is kept as a no-op so a Cloud Scheduler job still pointed here
     degrades gracefully; remove that scheduler trigger at your convenience.
@@ -428,9 +428,9 @@ async def _snapshot(request: Request) -> JSONResponse:
     return JSONResponse(
         {
             "status": "retired",
-            "message": "Evolution snapshots moved to Firestore via the "
+            "message": "Evolution aggregation moved to Firestore via the "
                        "'Daily maintenance (Firestore)' GitHub Action; this "
-                       "endpoint no longer appends evolution.jsonl or opens a PR.",
+                       "endpoint no longer writes per-skill history or opens a PR.",
         }
     )
 

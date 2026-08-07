@@ -728,6 +728,7 @@ IO.config = {
     hook_scripts: 0, codex_hook_events: 0,
     local_mcp_tools: 0, remote_mcp_tools: 0,
     active_maintenance_endpoints: 0, firestore_collections: [],
+    retired_firestore_collections: [],
   },
   firebase: {
     apiKey: 'AIzaSyDzUrhgqUHedNXYlGSqq2sFISBVrc2-Bbg',
@@ -832,7 +833,7 @@ IO.data = {
     // AggregateField in the namespace. `db.collection(x).count()` throws
     // "count is not a function" and killed this page's whole data load.
     // Counts are derived from documents already fetched instead — see
-    // `evolutionCount` and `collectionCounts` below.
+    // `collectionCounts` below.
     const [skillsSnap, metaSnap, rollupSnap, gapsSnap, evoSnap, changeSnap, healthSnap] = await Promise.all([
       db.collection('skills').get(),
       db.collection('meta').doc('registry').get(),
@@ -907,17 +908,9 @@ IO.data = {
     this.gaps = [];
     gapsSnap.forEach(d => this.gaps.push(d.data()));
 
-    // Evolution — daily rollup docs ({date, count, domains}); the raw
-    // collection's size is summed from their `count` fields just below.
+    // Aggregate evolution history — one doc per date ({date, count, domains}).
     this.evolution = [];
     evoSnap.forEach(d => this.evolution.push(d.data()));
-    // Raw `evolution` doc count, derived rather than aggregated. Each
-    // evolution_daily doc's `count` is that date's deduped raw-row count (see
-    // build_evolution_daily in migrate_to_firestore.py), keyed on the same
-    // (skill, date, event) tuple the raw collection is keyed on — so summing
-    // them reproduces the raw doc count from ~90 docs we already hold, with no
-    // extra reads and no aggregation API.
-    this.evolutionCount = this.evolution.reduce((n, e) => n + (e.count || 0), 0);
 
     // Changelogs
     this.changelogs = {};
@@ -953,7 +946,6 @@ IO.data = {
       changelogs: changeSnap.size,
       gaps: gapsSnap.size,
       meta: (metaSnap.exists ? 1 : 0) + (rollupSnap.exists ? 1 : 0),
-      evolution: this.evolutionCount,
       evolution_daily: evoSnap.size,
       health_reports: healthSnap.size,
     };
@@ -961,16 +953,15 @@ IO.data = {
     this.totalDocs = Object.values(this.collectionCounts).reduce((a, b) => a + b, 0);
   },
 
-  /* Number of collections the Firestore panel actually lists.
-   *
-   * NOT Object.keys(collectionCounts).length: `usage` is rendered as an extra
-   * "n/a" row (it has no countable value, see above), so keying the header off
-   * collectionCounts alone reported 5 while the panel showed 6 — a dashboard
-   * about data integrity disagreeing with itself one panel apart. Both the
-   * header stat and the panel derive from this. */
+  /* Number of collections the Firestore panel actually lists, including rows
+   * intentionally shown as n/a (`usage` and retired collections pending
+   * deletion). Both the header stat and the panel derive from this. */
   collectionsShown() {
+    const retired = IO.config.manifest.retired_firestore_collections || [];
+    const retiredNotCounted = retired.filter(name => !(name in (this.collectionCounts || {}))).length;
     return Object.keys(this.collectionCounts || {}).length
-      + (this.usageOmittedFromCounts ? 1 : 0);
+      + (this.usageOmittedFromCounts ? 1 : 0)
+      + retiredNotCounted;
   }
 };
 
@@ -1038,7 +1029,7 @@ IO.arch = {
     { id: 'github', label: 'GitHub', icon: '\u27E8\u27E9', x: 0.08, y: 0.20, col: 'source', color: '#8ace5a',
       tip: 'Your code repository on GitHub. All skill files, scripts, and configs live here. Changes pushed here trigger automated workflows.' },
     { id: 'skillmd', label: 'SKILL.md', icon: '\uD83D\uDCDD', x: 0.08, y: 0.55, col: 'source', color: '#8ace5a',
-      tip: 'When you write or edit a skill file, the file watcher hook automatically registers it, computes metrics, and takes an evolution snapshot.' },
+      tip: 'When you write or edit a skill file, the file watcher hook automatically registers it and computes fresh metrics. The scheduled aggregate captures the updated score.' },
     { id: 'hooks', label: 'Hooks', icon: '\uD83E\uDE9D', x: 0.08, y: 0.85, col: 'source', color: '#ceb45a',
       tip: `${IO.config.manifest.hook_scripts} hook scripts cover Codex skill-change routing, research triggers, telemetry, secret scanning, and pre-commit integrity checks.` },
 
@@ -1075,7 +1066,7 @@ IO.arch = {
     { from: 'artregistry', to: 'cloudrun', tip: 'Cloud Run pulls the latest image' },
     // Skill authoring flow
     { from: 'skillmd', to: 'hooks', tip: 'File watcher detects SKILL.md saves' },
-    { from: 'hooks', to: 'registry', tip: 'Auto-registers skill + takes snapshot' },
+    { from: 'hooks', to: 'registry', tip: 'Auto-registers skill + refreshes metrics' },
     // MCP server connections
     { from: 'cloudrun', to: 'firestore', tip: 'MCP server reads/writes skill data' },
     { from: 'cloudrun', to: 'registry', tip: 'Server loads registry for tool calls' },
@@ -1275,11 +1266,20 @@ IO.ops = {
     const counts = IO.data.collectionCounts || {};
     const maxCount = Math.max(...Object.values(counts), 1);
     const collColors = {
-      skills: 'var(--cyan-bright)', evolution: 'var(--green-bright)',
-      evolution_daily: 'var(--green-faded)', health_reports: 'var(--amber-bright)',
+      skills: 'var(--cyan-bright)', evolution: 'var(--green-faded)',
+      evolution_daily: 'var(--green-bright)',
+      health_reports: 'var(--amber-bright)',
       usage: 'var(--amber-bright)', changelogs: 'var(--magenta-bright)',
       gaps: 'var(--red-bright)', meta: 'var(--text-dim)'
     };
+    const retiredRows = (IO.config.manifest.retired_firestore_collections || [])
+      .filter(name => !(name in counts))
+      .map(name => `
+        <div class="io-coll-item" style="opacity:0.6">
+          <span class="io-coll-name">${name}</span>
+          <span class="io-coll-count" title="Retired raw history still exists pending verified backup and controlled deletion. The dashboards do not read it.">retired</span>
+          <div class="io-coll-bar-wrap"></div>
+        </div>`).join('');
     document.getElementById('ops-collections').innerHTML = Object.entries(counts)
       .sort((a, b) => b[1] - a[1])
       .map(([name, count]) => `
@@ -1291,6 +1291,7 @@ IO.ops = {
           </div>
         </div>
       `).join('')
+      + retiredRows
       + (IO.data.usageOmittedFromCounts ? `
         <div class="io-coll-item" style="opacity:0.6">
           <span class="io-coll-name">usage</span>
@@ -1332,13 +1333,13 @@ IO.ops = {
     // Last Events
     const reg = IO.data.registry || {};
     const lastScan = reg.last_scan ? new Date(reg.last_scan).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'unknown';
-    const latestSnapshot = IO.data.evolution.length
+    const latestAggregate = IO.data.evolution.length
       ? new Date(IO.data.evolution[IO.data.evolution.length - 1].date + 'T00:00:00Z')
           .toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
       : 'unknown';
     document.getElementById('ops-meta').innerHTML = [
       { label: 'Last scan', value: lastScan },
-      { label: 'Latest snapshot', value: latestSnapshot },
+      { label: 'Latest aggregate', value: latestAggregate },
       { label: 'Schema ver', value: reg.schema_version || 2 },
       { label: 'Plugin ver', value: reg.plugin_version || '1.0.0' },
     ].map(it => `
@@ -1357,7 +1358,7 @@ IO.growth = {
       { label: 'Write', cls: 'cyan', tip: 'You create or edit a SKILL.md file' },
       { label: 'Watcher', cls: 'green', tip: 'File watcher hook auto-detects the save' },
       { label: 'Registry', cls: 'cyan', count: (IO.data.skillList.length || 0) + ' skills', tip: 'Skill gets registered with metadata and metrics' },
-      { label: 'Snapshot', cls: 'green', count: (IO.data.evolutionCount || 0) + ' snapshots', tip: 'Point-in-time score snapshot saved for tracking growth' },
+      { label: 'Aggregate', cls: 'green', count: (IO.data.evolution.length || 0) + ' days', tip: 'The daily job stores one domain-level score aggregate directly from the registry' },
       { label: 'Score', cls: 'cyan', tip: 'Daily recalibration computes composite score from 6 factors' },
       { label: 'Bot PR', cls: 'green', tip: 'If scores drifted, a bot opens a pull request with the changes' },
       { label: 'CI', cls: 'cyan', tip: 'Automated tests validate the changes' },
@@ -1506,8 +1507,7 @@ IO.changelog = {
       entries.push({ type: 'gap', skill: '', date: e.timestamp || '', text: gapText, icon: '\uD83D\uDD0D' });
     }
 
-    // Recent evolution events \u2014 one per snapshot day; count is pre-aggregated
-    // in the evolution_daily rollup.
+    // Recent evolution events — one per stored aggregate day.
     for (const e of IO.data.evolution) {
       const date = (e.date || '').substring(0, 10);
       if (!date) continue;

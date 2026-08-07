@@ -6,12 +6,12 @@ Reads:
   data/registry.json   → Firestore 'skills' collection + 'meta/registry' doc
   data/changelogs.json → Firestore 'changelogs' collection
   data/usage.jsonl     → Firestore 'meta/usage_rollup' doc (always; see below)
-  data/evolution.jsonl → Firestore 'evolution' collection (legacy; file retired)
-                       → Firestore 'evolution_daily' collection (per-date rollup;
-                         what the dashboards read, so a page load costs ~90 reads
-                         instead of the full ~27k evolution docs)
   data/usage.jsonl     → Firestore 'usage' collection    (--include-telemetry only)
   data/gaps.jsonl      → Firestore 'gaps' collection     (--include-telemetry only)
+
+Daily aggregate evolution is intentionally outside this migration. The scheduled
+scripts/snapshot_to_firestore.py job writes one evolution_daily document directly
+from registry.json; no raw per-skill evolution collection is maintained.
 
 Usage:
   pip install google-cloud-firestore
@@ -22,8 +22,8 @@ CI mode (sync-firestore.yml runs this on every merge to main):
 
 Flags:
   --registry-only     Sync only skills + changelogs + meta/usage_rollup +
-                      meta/registry (the merge-triggered CI subset; skips
-                      evolution and the raw telemetry collections).
+                      meta/registry (the merge-triggered CI subset; skips the
+                      raw telemetry collections).
   --prune             With --registry-only: delete Firestore skills/changelogs
                       docs whose IDs are no longer in the registry. Refuses to
                       run if the registry holds fewer than PRUNE_SAFETY_FLOOR
@@ -199,72 +199,6 @@ def build_skill_docs(registry: dict) -> list[dict]:
     return docs
 
 
-def evo_id(doc: dict) -> str:
-    """Deterministic Firestore doc ID for an evolution row: skill_date_event.
-    Same key `build_evolution_daily` dedupes on, so the raw `evolution`
-    collection and the daily rollup stay consistent."""
-    skill = doc.get("skill", "unknown")
-    date = (doc.get("date") or "unknown")[:10]
-    event = doc.get("event", "snapshot")
-    return f"{skill}_{date}_{event}"
-
-
-def build_evolution_daily(evolution: list[dict], registry: dict) -> list[dict]:
-    """Roll up raw evolution rows into one summary doc per date.
-
-    The dashboards only need, per date: a snapshot count and the average
-    composite_score per domain (for the stacked growth chart). Reading the raw
-    `evolution` collection (~27k docs and growing) on every page load is the
-    dominant Firestore read cost; this rollup (~one doc per active day) is what
-    they read instead.
-
-    Semantics are kept identical to what the client used to compute from the raw
-    docs: rows are first deduped by (skill, date, event) — the same key
-    `evo_id()` uses, so the deduped set matches the Firestore `evolution`
-    collection exactly — then grouped by date. `count` is the number of deduped
-    rows that day; `domains[<domain>]` is the mean composite_score over that
-    day's rows in that domain (missing scores count as 0, matching the old
-    client `e.composite_score || 0`).
-
-    Returns docs shaped: {date, count, domains: {<domain>: <avg>, ...}}.
-    Use id_fn=lambda d: d["date"] when writing.
-    """
-    network_domains = registry.get("network", {}).get("domains", {})
-    skill_domain = {}
-    for domain, names in network_domains.items():
-        for name in names:
-            skill_domain[name] = domain
-
-    # Dedup by (skill, date, event), last write wins — mirrors evo_id().
-    deduped: dict[tuple, dict] = {}
-    for row in evolution:
-        skill = row.get("skill", "unknown")
-        date = (row.get("date") or "")[:10]
-        if not date:
-            continue
-        event = row.get("event", "snapshot")
-        deduped[(skill, date, event)] = row
-
-    # Group by date → per-domain score lists + total count.
-    by_date: dict[str, dict] = {}
-    for (skill, date, _event), row in deduped.items():
-        bucket = by_date.setdefault(date, {"count": 0, "scores": {}})
-        bucket["count"] += 1
-        domain = skill_domain.get(skill, "unknown")
-        bucket["scores"].setdefault(domain, []).append(row.get("composite_score") or 0)
-
-    docs = []
-    for date in sorted(by_date):
-        bucket = by_date[date]
-        domains = {
-            d: round(sum(vals) / len(vals), 2)
-            for d, vals in bucket["scores"].items()
-            if vals
-        }
-        docs.append({"date": date, "count": bucket["count"], "domains": domains})
-    return docs
-
-
 def build_meta_doc(registry: dict, synced_sha: str | None = None) -> dict:
     """meta/registry doc with explicit/computed fields + pass-through for unknown top-level keys."""
     skills = registry.get("skills", {})
@@ -417,21 +351,9 @@ def main():
     registry = json.loads(registry_path.read_text())
     summary = sync_registry(db, registry, args)
 
-    usage, gaps, evolution, evolution_daily = [], [], [], []
+    usage, gaps = [], []
     if not args.registry_only:
-        # ── 2. Evolution snapshots (legacy local file; Firestore-native
-        # via daily-firestore.yml — this is a no-op when the file is gone)
-        print("\n▸ Loading evolution.jsonl...")
-        evolution = parse_jsonl(DATA / "evolution.jsonl")
-        batch_write(db, "evolution", evolution, id_fn=evo_id, dry_run=args.dry_run)
-
-        # Per-date rollup the dashboards actually read (keeps a page load at
-        # ~90 reads instead of the full evolution collection).
-        evolution_daily = build_evolution_daily(evolution, registry)
-        batch_write(db, "evolution_daily", evolution_daily,
-                    id_fn=lambda d: d["date"], dry_run=args.dry_run)
-
-        # ── 3. Telemetry (opt-in only — auto-ID docs duplicate on re-run,
+        # ── 2. Telemetry (opt-in only — auto-ID docs duplicate on re-run,
         # and post-Phase-3 local jsonl contains rows that ORIGINATED in
         # Firestore; pushing them back double-counts dashboard usage) ──
         if args.include_telemetry:
@@ -457,11 +379,9 @@ def main():
     print(f"  Usage roll: {summary['usage_events']} events ({usage_sources})")
     if args.prune:
         print(f"  Pruned:     {summary['pruned']}")
-    if not args.registry_only:
-        print(f"  Evolution:  {len(evolution)} raw → {len(evolution_daily)} daily rollup")
-        if args.include_telemetry:
-            print(f"  Usage:      {len(usage)}")
-            print(f"  Gaps:       {len(gaps)}")
+    if not args.registry_only and args.include_telemetry:
+        print(f"  Usage:      {len(usage)}")
+        print(f"  Gaps:       {len(gaps)}")
     if args.dry_run:
         print("\n  ⚠ DRY RUN — no data was written to Firestore")
         print("  Remove --dry-run to execute the migration")
