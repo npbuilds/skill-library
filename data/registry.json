@@ -6838,9 +6838,7 @@
       "depends_on": [
         "sentiment-signals"
       ],
-      "referenced_by": [
-        "sentiment-signals"
-      ],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7246,20 +7244,18 @@
         "estimated_tokens_body": 4047,
         "estimated_tokens_total": 4088
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 69,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 63,
       "depends_on": [
         "factor-exposure",
         "regime-intelligence"
       ],
-      "referenced_by": [
-        "factor-exposure"
-      ],
+      "referenced_by": [],
       "parent": "asset-universe",
       "tags": [
         "domain:investing",
@@ -7785,13 +7781,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
-        "asset-allocation",
-        "equities"
+        "asset-allocation"
       ],
       "referenced_by": [
         "equities",
@@ -7968,10 +7963,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 74,
-      "depends_on": [
-        "reflexivity-theory",
-        "sentiment-signals"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "behavioral-game-theory",
         "belief-auditor",
@@ -8016,17 +8008,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "macro-cycles",
         "market-psychology"
       ],
       "referenced_by": [
         "frontier-intelligence",
-        "market-psychology",
         "mindshare-tracker",
         "second-level-thinking"
       ],
@@ -8064,18 +8055,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 67,
       "depends_on": [
-        "alt-data-monitoring",
         "market-psychology"
       ],
       "referenced_by": [
         "alt-data-monitoring",
         "insider-signals",
-        "market-psychology",
         "signaling-screening"
       ],
       "parent": "reflexivity-sentiment",
@@ -8170,8 +8159,7 @@
         "monetary-regime"
       ],
       "referenced_by": [
-        "fixed-income",
-        "macro-cycles"
+        "fixed-income"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8211,10 +8199,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 79,
-      "depends_on": [
-        "fiscal-regime",
-        "monetary-regime"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "commodities",
         "currencies",
@@ -8258,10 +8243,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "macro-cycles"
       ],
@@ -8269,7 +8254,6 @@
         "currencies",
         "fiscal-regime",
         "fixed-income",
-        "macro-cycles",
         "money-and-financial-systems"
       ],
       "parent": "regime-intelligence",
@@ -8364,8 +8348,7 @@
         "alternatives",
         "asset-allocation",
         "fixed-income",
-        "hedging-architecture",
-        "tail-risk"
+        "hedging-architecture"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8456,8 +8439,7 @@
         "tail-risk"
       ],
       "referenced_by": [
-        "drawdown-psychology",
-        "tail-risk"
+        "drawdown-psychology"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8497,10 +8479,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 79,
-      "depends_on": [
-        "correlation-regimes",
-        "position-sizing"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "correlation-regimes",
         "counterfactual-reasoner",
@@ -8635,14 +8614,11 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
-      "depends_on": [
-        "insider-signals",
-        "spinoffs-restructuring"
-      ],
+      "composite_score": 72,
+      "depends_on": [],
       "referenced_by": [
         "auction-theory",
         "complexity-premium",
@@ -8692,7 +8668,6 @@
         "sentiment-signals"
       ],
       "referenced_by": [
-        "event-driven",
         "information-economics",
         "signaling-screening"
       ],
@@ -8727,20 +8702,18 @@
         "estimated_tokens_body": 5372,
         "estimated_tokens_total": 5419
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 69,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 63,
       "depends_on": [
         "event-driven",
         "intrinsic-value"
       ],
-      "referenced_by": [
-        "event-driven"
-      ],
+      "referenced_by": [],
       "parent": "special-situations",
       "tags": [
         "domain:investing",
@@ -8825,7 +8798,6 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "quality-compounders",
         "second-level-thinking"
       ],
       "referenced_by": [
@@ -8866,17 +8838,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 66,
       "depends_on": [
         "factor-exposure",
         "intrinsic-value"
       ],
-      "referenced_by": [
-        "intrinsic-value"
-      ],
+      "referenced_by": [],
       "parent": "value-quality",
       "tags": [
         "domain:investing",
