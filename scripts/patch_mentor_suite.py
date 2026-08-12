@@ -28,6 +28,12 @@ DEPS = {
     "negotiation-leverage": ["mentor"],
     "feedback-loops": ["mentor"],
 
+    # Standalone action leaves (parent: mentor via sync-registry inference).
+    # NOTE: registry depends_on has drifted from this table since the cycle
+    # cleanups — rerunning this script rewrites all 43 lists, not just new
+    # entries. Reconcile DEPS with data/registry.json before the next run.
+    "ariadne": ["vault-writer"],
+
     # personal-positioning leaves
     "narrative-architecture": [
         "personal-positioning", "design", "brand-foundations", "brand-voice", "minto-scqa"
