@@ -14,171 +14,159 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 REG = ROOT / "data" / "registry.json"
 
-# Map of skill_name -> list of depends_on entries
+# Map of skill_name -> list of depends_on entries.
+#
+# CONVENTION (reconciled with data/registry.json 2026-08-11): depends_on never
+# includes a skill's own structural parent — the parent/child edge lives in the
+# `parent` field, and duplicating it here created the cycles removed in the
+# registry cleanups (3cd9717, 7082150). This script does a blind overwrite of
+# every list below, so DEPS must stay byte-identical to the registry's
+# depends_on for these skills; a bare run should always be a no-op
+# (git diff data/registry.json empty). Durable edge changes go in BOTH places.
 DEPS = {
     # Orchestrator
     "mentor": [],
 
     # Directors
-    "personal-positioning": ["mentor"],
-    "interview-mastery": ["mentor"],
-    "network-cultivation": ["mentor"],
-    "trajectory-design": ["mentor"],
-    "executive-presence": ["mentor"],
-    "negotiation-leverage": ["mentor"],
-    "feedback-loops": ["mentor"],
+    "personal-positioning": [],
+    "interview-mastery": [],
+    "network-cultivation": [],
+    "trajectory-design": [],
+    "executive-presence": [],
+    "negotiation-leverage": [],
+    "feedback-loops": [],
 
     # Standalone action leaves (parent: mentor via sync-registry inference).
-    # NOTE: registry depends_on has drifted from this table since the cycle
-    # cleanups — rerunning this script rewrites all 43 lists, not just new
-    # entries. Reconcile DEPS with data/registry.json before the next run.
     "ariadne": ["vault-writer"],
 
     # personal-positioning leaves
-    "narrative-architecture": [
-        "personal-positioning", "design", "brand-foundations", "brand-voice", "minto-scqa"
-    ],
+    "narrative-architecture": ["brand-foundations", "brand-voice", "minto-scqa"],
     "linkedin-optimization": [
-        "personal-positioning", "narrative-architecture", "credibility-translation",
-        "audience-tuning", "prose-editor", "audience-classifier"
+        "audience-classifier", "audience-tuning", "credibility-translation",
+        "narrative-architecture", "prose-editor"
     ],
     "public-portfolio": [
-        "personal-positioning", "narrative-architecture", "linkedin-optimization",
-        "credibility-translation", "prose-editor", "asclepius", "the-loom", "spelunker"
+        "asclepius", "credibility-translation", "linkedin-optimization",
+        "narrative-architecture", "prose-editor", "spelunker", "the-loom"
     ],
     "credibility-translation": [
-        "personal-positioning", "narrative-architecture", "asclepius", "audience-classifier"
+        "asclepius", "audience-classifier", "narrative-architecture"
     ],
     "audience-tuning": [
-        "personal-positioning", "audience-classifier", "narrative-architecture",
-        "credibility-translation", "cover-letter-craft", "behavioral-frameworks",
-        "prose-editor"
+        "audience-classifier", "behavioral-frameworks", "cover-letter-craft",
+        "credibility-translation", "narrative-architecture", "prose-editor"
     ],
     "resume-craft": [
-        "personal-positioning", "narrative-architecture", "credibility-translation",
-        "audience-tuning", "linkedin-optimization", "cover-letter-craft", "prose-editor",
-        "asclepius"
+        "asclepius", "audience-tuning", "cover-letter-craft", "credibility-translation",
+        "linkedin-optimization", "narrative-architecture", "prose-editor"
     ],
     "cover-letter-craft": [
-        "personal-positioning", "spelunker", "credibility-translation",
-        "narrative-architecture", "bluf-shaper", "audience-classifier", "prose-editor",
-        "asclepius"
+        "asclepius", "audience-classifier", "bluf-shaper", "credibility-translation",
+        "narrative-architecture", "prose-editor", "spelunker"
     ],
 
     # interview-mastery leaves
     "behavioral-frameworks": [
-        "interview-mastery", "credibility-translation", "narrative-architecture",
-        "minto-scqa", "asclepius"
+        "asclepius", "credibility-translation", "minto-scqa", "narrative-architecture"
     ],
     "domain-deepdives": [
-        "interview-mastery", "asclepius", "clinical-development", "regulatory-strategy",
-        "asset-valuation", "probability-of-success", "deal-synthesis", "vc-interview-prep",
-        "executive-interview-prep", "behavioral-frameworks", "spelunker",
-        "credibility-translation", "the-loom"
+        "asclepius", "asset-valuation", "behavioral-frameworks", "clinical-development",
+        "credibility-translation", "deal-synthesis", "executive-interview-prep",
+        "probability-of-success", "regulatory-strategy", "spelunker", "the-loom",
+        "vc-interview-prep"
     ],
     "vc-interview-prep": [
-        "interview-mastery", "asclepius", "deal-synthesis", "probability-of-success",
-        "asset-valuation", "regulatory-strategy", "behavioral-frameworks",
-        "credibility-translation", "cover-letter-craft", "spelunker", "ecosystem-mapping"
+        "asclepius", "asset-valuation", "behavioral-frameworks", "cover-letter-craft",
+        "credibility-translation", "deal-synthesis", "ecosystem-mapping",
+        "probability-of-success", "regulatory-strategy", "spelunker"
     ],
     "executive-interview-prep": [
-        "interview-mastery", "executive-communication", "behavioral-frameworks",
-        "asclepius", "credibility-translation", "role-archetype-mapping"
+        "asclepius", "behavioral-frameworks", "credibility-translation",
+        "executive-communication", "role-archetype-mapping"
     ],
     "panel-and-case": [
-        "interview-mastery", "vc-interview-prep", "executive-interview-prep",
-        "behavioral-frameworks", "domain-deepdives", "asclepius", "deal-synthesis",
-        "asset-valuation", "executive-communication", "bluf-shaper", "minto-scqa"
+        "asclepius", "asset-valuation", "behavioral-frameworks", "bluf-shaper",
+        "deal-synthesis", "domain-deepdives", "executive-communication",
+        "executive-interview-prep", "minto-scqa", "vc-interview-prep"
     ],
 
     # network-cultivation leaves
     "cold-outreach": [
-        "network-cultivation", "relationship-stewardship", "ecosystem-mapping",
-        "credibility-translation", "cover-letter-craft", "prose-editor", "spelunker"
+        "cover-letter-craft", "credibility-translation", "ecosystem-mapping",
+        "prose-editor", "relationship-stewardship", "spelunker"
     ],
-    "relationship-stewardship": [
-        "network-cultivation", "ecosystem-mapping", "the-loom", "prose-editor"
-    ],
+    "relationship-stewardship": ["ecosystem-mapping", "prose-editor", "the-loom"],
     "mentorship-design": [
-        "network-cultivation", "cold-outreach", "relationship-stewardship",
-        "ecosystem-mapping", "advisor-board", "role-archetype-mapping", "the-loom"
+        "advisor-board", "cold-outreach", "ecosystem-mapping",
+        "relationship-stewardship", "role-archetype-mapping", "the-loom"
     ],
     "ecosystem-mapping": [
-        "network-cultivation", "spelunker", "source-triangulator", "cover-letter-craft",
-        "asclepius", "the-loom"
+        "asclepius", "cover-letter-craft", "source-triangulator", "spelunker", "the-loom"
     ],
     "introductions-and-referrals": [
-        "network-cultivation", "ecosystem-mapping", "relationship-stewardship",
-        "cold-outreach", "credibility-translation", "narrative-architecture",
-        "audience-tuning", "prose-editor"
+        "audience-tuning", "cold-outreach", "credibility-translation",
+        "ecosystem-mapping", "narrative-architecture", "prose-editor",
+        "relationship-stewardship"
     ],
 
     # trajectory-design leaves
     "role-archetype-mapping": [
-        "trajectory-design", "narrative-architecture", "ecosystem-mapping",
-        "vc-interview-prep"
+        "ecosystem-mapping", "narrative-architecture", "vc-interview-prep"
     ],
-    "optionality-architecture": [
-        "trajectory-design", "role-archetype-mapping", "archon", "the-loom"
-    ],
-    "idp-and-okrs": ["trajectory-design", "role-archetype-mapping", "the-loom"],
+    "optionality-architecture": ["archon", "role-archetype-mapping", "the-loom"],
+    "idp-and-okrs": ["role-archetype-mapping", "the-loom"],
     "skill-gap-analysis": [
-        "trajectory-design", "role-archetype-mapping", "idp-and-okrs", "advisor-board",
-        "public-portfolio"
+        "advisor-board", "idp-and-okrs", "public-portfolio", "role-archetype-mapping"
     ],
     "pivot-sequencing": [
-        "trajectory-design", "role-archetype-mapping", "skill-gap-analysis",
-        "optionality-architecture", "idp-and-okrs", "public-portfolio", "ecosystem-mapping"
+        "ecosystem-mapping", "idp-and-okrs", "optionality-architecture",
+        "public-portfolio", "role-archetype-mapping", "skill-gap-analysis"
     ],
 
     # executive-presence leaves
     "executive-communication": [
-        "executive-presence", "bluf-shaper", "executive-distiller", "minto-scqa",
-        "audience-classifier", "cover-letter-craft", "prose-editor"
+        "audience-classifier", "bluf-shaper", "cover-letter-craft",
+        "executive-distiller", "minto-scqa", "prose-editor"
     ],
     "meeting-mastery": [
-        "executive-presence", "executive-communication", "board-readiness",
-        "panel-and-case", "bluf-shaper", "audience-classifier", "the-loom"
+        "audience-classifier", "bluf-shaper", "board-readiness",
+        "executive-communication", "panel-and-case", "the-loom"
     ],
     "public-speaking": [
-        "executive-presence", "executive-communication", "meeting-mastery",
-        "public-portfolio", "audience-tuning", "minto-scqa", "prose-editor"
+        "audience-tuning", "executive-communication", "meeting-mastery", "minto-scqa",
+        "prose-editor", "public-portfolio"
     ],
     "board-readiness": [
-        "executive-presence", "executive-communication", "equity-literacy",
-        "executive-interview-prep", "archon", "asclepius", "role-archetype-mapping"
+        "archon", "asclepius", "equity-literacy", "executive-communication",
+        "executive-interview-prep", "role-archetype-mapping"
     ],
 
     # negotiation-leverage leaves
-    "offer-negotiation": [
-        "negotiation-leverage", "optionality-architecture", "archon", "bluf-shaper"
-    ],
+    "offer-negotiation": ["archon", "bluf-shaper", "optionality-architecture"],
     "equity-literacy": [
-        "negotiation-leverage", "offer-negotiation", "archon", "asset-valuation",
-        "optionality-architecture"
+        "archon", "asset-valuation", "offer-negotiation", "optionality-architecture"
     ],
     "title-and-scope": [
-        "negotiation-leverage", "offer-negotiation", "equity-literacy",
-        "role-archetype-mapping", "optionality-architecture", "board-readiness",
-        "narrative-architecture"
+        "board-readiness", "equity-literacy", "narrative-architecture",
+        "offer-negotiation", "optionality-architecture", "role-archetype-mapping"
     ],
     "exit-and-transition": [
-        "negotiation-leverage", "equity-literacy", "offer-negotiation",
-        "optionality-architecture", "narrative-architecture", "relationship-stewardship"
+        "equity-literacy", "narrative-architecture", "offer-negotiation",
+        "optionality-architecture", "relationship-stewardship"
     ],
 
     # feedback-loops leaves
     "360-feedback-design": [
-        "feedback-loops", "advisor-board", "reflection-and-journaling",
-        "skill-gap-analysis", "idp-and-okrs"
+        "advisor-board", "idp-and-okrs", "reflection-and-journaling",
+        "skill-gap-analysis"
     ],
     "performance-review-craft": [
-        "feedback-loops", "resume-craft", "credibility-translation", "audience-tuning",
-        "360-feedback-design", "reflection-and-journaling", "idp-and-okrs", "prose-editor"
+        "360-feedback-design", "audience-tuning", "credibility-translation",
+        "idp-and-okrs", "prose-editor", "reflection-and-journaling", "resume-craft"
     ],
-    "advisor-board": ["feedback-loops", "relationship-stewardship", "idp-and-okrs", "the-loom"],
+    "advisor-board": ["idp-and-okrs", "relationship-stewardship", "the-loom"],
     "reflection-and-journaling": [
-        "feedback-loops", "the-loom", "advisor-board", "idp-and-okrs", "prose-editor"
+        "advisor-board", "idp-and-okrs", "prose-editor", "the-loom"
     ],
 
 }
