@@ -42,7 +42,7 @@ DEFAULT_INDEX_FILE = "_index.md"
 DEFAULT_STALE_DAYS = 21
 OPEN_STATUSES = {"open", "in-progress"}
 
-FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*(?:\n|\Z)", re.DOTALL)
 
 
 def parse_frontmatter(text: str) -> dict:
@@ -53,10 +53,11 @@ def parse_frontmatter(text: str) -> dict:
     if yaml is not None:
         try:
             data = yaml.safe_load(block)
-            return data if isinstance(data, dict) else {}
+            if isinstance(data, dict):
+                return data
         except yaml.YAMLError:
-            return {}
-    # Fallback without PyYAML: top-level scalar keys only, which covers the
+            pass  # e.g. unquoted [[wikilinks]] — fall through, don't drop the thread
+    # Line-based fallback: top-level scalar keys only, which covers the
     # thread-note contract (type/status/next_step/last_touched/snooze_until).
     data = {}
     for line in block.splitlines():
@@ -171,7 +172,8 @@ def main() -> int:
         return emit({"configured": False, "error": str(e)},
                     f"ariadne: unreadable config {config_path}: {e}")
 
-    vaults = config.get("vaults", [])
+    vaults = [v for v in config.get("vaults", []) if isinstance(v, dict) and v.get("path")]
+    skipped = len(config.get("vaults", [])) - len(vaults)
     if args.vault:
         needle = args.vault.lower()
         vaults = [v for v in vaults
@@ -197,6 +199,7 @@ def main() -> int:
         "triage_cap": config.get("triage_cap", 5),
         "stale_total": stale_total,
         "oldest_days": oldest,
+        "invalid_vault_entries": skipped,
         "vaults": reports,
     }
     if args.json:
@@ -211,6 +214,9 @@ def main() -> int:
             print(f"  {t['days_stale']:>4}d  {t['thread']}  — {t['next_step'] or '(no next step)'}")
     print(f"\n{stale_total} stale thread(s) total"
           + (f", oldest {oldest}d" if stale_total else "") + ".")
+    if skipped:
+        print(f"warning: {skipped} config vault entr{'y' if skipped == 1 else 'ies'} "
+              "skipped (missing 'path').")
     return 0
 
 
