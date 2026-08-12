@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-08-12T01:14:37Z",
+  "last_scan": "2026-08-12T01:20:41Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -28045,7 +28045,7 @@
         "body_words": 835,
         "description_words": 85,
         "section_count": 5,
-        "reference_files": 0,
+        "reference_files": 1,
         "example_files": 0,
         "script_files": 0,
         "template_files": 0,
@@ -28060,10 +28060,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 75,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 75,
       "depends_on": [
         "vault-writer"
       ],
