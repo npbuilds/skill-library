@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-07-29T02:14:46Z",
+  "last_scan": "2026-08-11T03:14:43Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2911,10 +2911,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 88,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 88,
+      "composite_score": 84,
       "depends_on": [
         "world-bible",
         "worldbuilding-orchestrator"
@@ -3313,10 +3313,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [
         "classical-games",
         "ethics"
@@ -7964,10 +7964,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 74,
       "depends_on": [
         "reflexivity-theory",
         "sentiment-signals"
@@ -8207,10 +8207,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 79,
       "depends_on": [
         "fiscal-regime",
         "monetary-regime"
@@ -8258,10 +8258,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [
         "macro-cycles"
       ],
@@ -11262,10 +11262,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 73,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 73,
+      "composite_score": 72,
       "depends_on": [
         "point-of-view",
         "concrete-detail"
@@ -11314,10 +11314,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [
         "character-interiority",
         "dialogue"
@@ -11364,10 +11364,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 67,
       "depends_on": [
         "diction",
         "concrete-detail"
@@ -11414,10 +11414,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [
         "narrative-arc",
         "pacing"
@@ -11464,10 +11464,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [
         "cultures-societies",
         "geography-ecology"
@@ -11513,10 +11513,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 67,
       "depends_on": [
         "naming-system",
         "cultures-societies"
@@ -11562,10 +11562,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -11602,16 +11602,16 @@
         "estimated_tokens_body": 762,
         "estimated_tokens_total": 833
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-04-08T23:57:33Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 64,
       "depends_on": [],
       "referenced_by": [
         "scheherazade"
@@ -11749,10 +11749,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -12006,10 +12006,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -27975,8 +27975,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1503,
-        "body_words": 1421,
+        "word_count": 2289,
+        "body_words": 2207,
         "description_words": 60,
         "section_count": 11,
         "reference_files": 0,
@@ -27984,8 +27984,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 2315,
-        "estimated_tokens_total": 2393
+        "estimated_tokens_body": 3600,
+        "estimated_tokens_total": 3678
       },
       "health_status": "healthy",
       "issues": [],
@@ -27994,10 +27994,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 81,
+      "auto_score": 84,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 84,
       "depends_on": [],
       "referenced_by": [
         "day-trader",
@@ -28018,7 +28018,7 @@
         "layer:knowledge"
       ],
       "created": "2026-07-29",
-      "last_modified": "2026-07-29",
+      "last_modified": "2026-08-11",
       "changelog": [
         {
           "date": "2026-07-29",
