@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-08-12T01:20:41Z",
+  "last_scan": "2026-08-13T04:04:44Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -6548,10 +6548,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 86,
+      "auto_score": 83,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 86,
+      "composite_score": 83,
       "depends_on": [
         "classical-games",
         "cultures-societies",
@@ -27947,8 +27947,8 @@
       "invocation": "both",
       "version": "1.0.0",
       "metrics": {
-        "word_count": 1503,
-        "body_words": 1421,
+        "word_count": 2289,
+        "body_words": 2207,
         "description_words": 60,
         "section_count": 11,
         "reference_files": 0,
@@ -27956,8 +27956,8 @@
         "script_files": 0,
         "template_files": 0,
         "estimated_tokens_metadata": 78,
-        "estimated_tokens_body": 2315,
-        "estimated_tokens_total": 2393
+        "estimated_tokens_body": 3600,
+        "estimated_tokens_total": 3678
       },
       "health_status": "healthy",
       "issues": [],
