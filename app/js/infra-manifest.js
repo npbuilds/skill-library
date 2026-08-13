@@ -3,7 +3,7 @@ window.INFRA_MANIFEST = Object.freeze({
   "active_maintenance_endpoints": 3,
   "agents": 3,
   "codex_hook_events": 2,
-  "commands": 11,
+  "commands": 12,
   "firestore_collections": [
     "skills",
     "changelogs",
@@ -14,13 +14,13 @@ window.INFRA_MANIFEST = Object.freeze({
     "health_reports",
     "usage"
   ],
-  "hook_scripts": 7,
+  "hook_scripts": 8,
   "local_mcp_tools": 17,
   "remote_mcp_tools": 8,
   "retired_firestore_collections": [
     "evolution"
   ],
   "schema_version": 1,
-  "scripts": 56,
+  "scripts": 57,
   "workflows": 7
 });

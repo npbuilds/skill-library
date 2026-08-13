@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-08-11T03:14:43Z",
+  "last_scan": "2026-08-13T04:04:44Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -3014,10 +3014,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 79,
       "depends_on": [
         "cultures-societies",
         "world-bible",
@@ -3261,10 +3261,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 81,
+      "auto_score": 80,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 81,
+      "composite_score": 80,
       "depends_on": [
         "regime-intelligence"
       ],
@@ -3881,8 +3881,8 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
-      "composite_score": 80,
+      "auto_score": 79,
+      "composite_score": 79,
       "depends_on": [
         "insider-signals",
         "sentiment-signals"
@@ -4478,10 +4478,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 74,
       "depends_on": [
         "model-evaluation",
         "statistical-analysis",
@@ -4711,10 +4711,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-25T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 79,
       "depends_on": [
         "data-science-orchestrator"
       ],
@@ -6548,10 +6548,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 86,
+      "auto_score": 83,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 86,
+      "composite_score": 83,
       "depends_on": [
         "classical-games",
         "cultures-societies",
@@ -6838,9 +6838,7 @@
       "depends_on": [
         "sentiment-signals"
       ],
-      "referenced_by": [
-        "sentiment-signals"
-      ],
+      "referenced_by": [],
       "parent": "adaptive-monitoring",
       "tags": [
         "domain:investing",
@@ -7246,20 +7244,18 @@
         "estimated_tokens_body": 4047,
         "estimated_tokens_total": 4088
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 69,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 63,
       "depends_on": [
         "factor-exposure",
         "regime-intelligence"
       ],
-      "referenced_by": [
-        "factor-exposure"
-      ],
+      "referenced_by": [],
       "parent": "asset-universe",
       "tags": [
         "domain:investing",
@@ -7785,13 +7781,12 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
-        "asset-allocation",
-        "equities"
+        "asset-allocation"
       ],
       "referenced_by": [
         "equities",
@@ -7968,10 +7963,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 74,
-      "depends_on": [
-        "reflexivity-theory",
-        "sentiment-signals"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "behavioral-game-theory",
         "belief-auditor",
@@ -8016,17 +8008,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "macro-cycles",
         "market-psychology"
       ],
       "referenced_by": [
         "frontier-intelligence",
-        "market-psychology",
         "mindshare-tracker",
         "second-level-thinking"
       ],
@@ -8064,18 +8055,16 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 71,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 67,
       "depends_on": [
-        "alt-data-monitoring",
         "market-psychology"
       ],
       "referenced_by": [
         "alt-data-monitoring",
         "insider-signals",
-        "market-psychology",
         "signaling-screening"
       ],
       "parent": "reflexivity-sentiment",
@@ -8170,8 +8159,7 @@
         "monetary-regime"
       ],
       "referenced_by": [
-        "fixed-income",
-        "macro-cycles"
+        "fixed-income"
       ],
       "parent": "regime-intelligence",
       "tags": [
@@ -8211,10 +8199,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 79,
-      "depends_on": [
-        "fiscal-regime",
-        "monetary-regime"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "commodities",
         "currencies",
@@ -8258,10 +8243,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
+      "composite_score": 72,
       "depends_on": [
         "macro-cycles"
       ],
@@ -8269,7 +8254,6 @@
         "currencies",
         "fiscal-regime",
         "fixed-income",
-        "macro-cycles",
         "money-and-financial-systems"
       ],
       "parent": "regime-intelligence",
@@ -8364,8 +8348,7 @@
         "alternatives",
         "asset-allocation",
         "fixed-income",
-        "hedging-architecture",
-        "tail-risk"
+        "hedging-architecture"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8456,8 +8439,7 @@
         "tail-risk"
       ],
       "referenced_by": [
-        "drawdown-psychology",
-        "tail-risk"
+        "drawdown-psychology"
       ],
       "parent": "risk-architecture",
       "tags": [
@@ -8497,10 +8479,7 @@
       "manual_rating": null,
       "manual_notes": null,
       "composite_score": 79,
-      "depends_on": [
-        "correlation-regimes",
-        "position-sizing"
-      ],
+      "depends_on": [],
       "referenced_by": [
         "correlation-regimes",
         "counterfactual-reasoner",
@@ -8635,14 +8614,11 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 76,
+      "auto_score": 72,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 76,
-      "depends_on": [
-        "insider-signals",
-        "spinoffs-restructuring"
-      ],
+      "composite_score": 72,
+      "depends_on": [],
       "referenced_by": [
         "auction-theory",
         "complexity-premium",
@@ -8692,7 +8668,6 @@
         "sentiment-signals"
       ],
       "referenced_by": [
-        "event-driven",
         "information-economics",
         "signaling-screening"
       ],
@@ -8727,20 +8702,18 @@
         "estimated_tokens_body": 5372,
         "estimated_tokens_total": 5419
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 69,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 63,
       "depends_on": [
         "event-driven",
         "intrinsic-value"
       ],
-      "referenced_by": [
-        "event-driven"
-      ],
+      "referenced_by": [],
       "parent": "special-situations",
       "tags": [
         "domain:investing",
@@ -8825,7 +8798,6 @@
       "manual_notes": null,
       "composite_score": 72,
       "depends_on": [
-        "quality-compounders",
         "second-level-thinking"
       ],
       "referenced_by": [
@@ -8866,17 +8838,15 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T04:11:39Z",
       "status": "active",
-      "auto_score": 72,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 66,
       "depends_on": [
         "factor-exposure",
         "intrinsic-value"
       ],
-      "referenced_by": [
-        "intrinsic-value"
-      ],
+      "referenced_by": [],
       "parent": "value-quality",
       "tags": [
         "domain:investing",
@@ -9182,10 +9152,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-28T00:00:00Z",
       "status": "active",
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "character-belief-tracker",
@@ -9328,10 +9298,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T00:00:00Z",
       "status": "active",
-      "auto_score": 80,
+      "auto_score": 79,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 80,
+      "composite_score": 79,
       "depends_on": [],
       "referenced_by": [
         "decision-theory",
@@ -12153,10 +12123,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [
         "market-psychology"
       ],
@@ -12954,10 +12924,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 63,
       "depends_on": [
         "strategy-and-grand-strategy",
         "warfare-through-the-ages"
@@ -13154,10 +13124,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -14174,10 +14144,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 63,
       "depends_on": [
         "source-criticism"
       ],
@@ -14223,10 +14193,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -14270,10 +14240,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 64,
+      "auto_score": 63,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 64,
+      "composite_score": 63,
       "depends_on": [
         "schools-of-thought"
       ],
@@ -15642,10 +15612,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 60,
+      "auto_score": 59,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 60,
+      "composite_score": 59,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -19260,12 +19230,13 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 69,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 69,
+      "composite_score": 74,
       "depends_on": [],
       "referenced_by": [
+        "ariadne",
         "decision-journal",
         "emptor"
       ],
@@ -23791,6 +23762,7 @@
       "composite_score": 75,
       "depends_on": [],
       "referenced_by": [
+        "ariadne",
         "executive-presence",
         "feedback-loops",
         "interview-mastery",
@@ -27994,10 +27966,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 84,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 84,
+      "composite_score": 81,
       "depends_on": [],
       "referenced_by": [
         "day-trader",
@@ -28018,7 +27990,7 @@
         "layer:knowledge"
       ],
       "created": "2026-07-29",
-      "last_modified": "2026-08-11",
+      "last_modified": "2026-07-29",
       "changelog": [
         {
           "date": "2026-07-29",
@@ -28027,6 +27999,62 @@
         }
       ],
       "parent": "archon"
+    },
+    "ariadne": {
+      "name": "ariadne",
+      "description": "Personal project-manager for working-idea threads. Sweeps configured project vaults' ideas ledgers for open threads gone stale, surfaces them one line each, then runs a capped interactive triage \u2014 advance / sharpen / snooze / drop \u2014 writing every decision back to the thread note and the ledger. Use when surfacing stale threads, reviewing an ideas ledger, running a cross-vault thread review, or when the session-start nudge reports stale threads. The contract: threads never go stale silently, and drop happens only on the user's explicit word.",
+      "location": "skills/professional-development/ariadne/SKILL.md",
+      "plugin": "skill-professional-development",
+      "type": "action",
+      "source": "self",
+      "context_mode": "inline",
+      "invocation": "both",
+      "version": "1.0.0",
+      "metrics": {
+        "word_count": 945,
+        "body_words": 835,
+        "description_words": 85,
+        "section_count": 5,
+        "reference_files": 1,
+        "example_files": 0,
+        "script_files": 0,
+        "template_files": 0,
+        "estimated_tokens_metadata": 111,
+        "estimated_tokens_body": 1366,
+        "estimated_tokens_total": 1477
+      },
+      "health_status": "healthy",
+      "issues": [],
+      "last_checked": "2026-08-12T00:00:00Z",
+      "status": "active",
+      "deprecated_date": null,
+      "replacement_skill": null,
+      "deprecation_reason": null,
+      "auto_score": 75,
+      "manual_rating": null,
+      "manual_notes": null,
+      "composite_score": 75,
+      "depends_on": [
+        "vault-writer"
+      ],
+      "referenced_by": [],
+      "shares_references_with": [],
+      "forked_from": null,
+      "forked_into": [],
+      "tags": [
+        "domain:professional-development",
+        "layer:action"
+      ],
+      "created": "2026-08-12",
+      "last_modified": "2026-08-12",
+      "changelog": [
+        {
+          "date": "2026-08-12",
+          "action": "created",
+          "note": "Auto-discovered by sync-registry.py"
+        }
+      ],
+      "parent": "mentor"
     }
   },
   "network": {
@@ -28397,6 +28425,7 @@
       "professional-development": [
         "360-feedback-design",
         "advisor-board",
+        "ariadne",
         "audience-tuning",
         "behavioral-frameworks",
         "board-readiness",
