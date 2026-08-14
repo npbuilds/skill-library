@@ -5,10 +5,20 @@ After scripts/sync-registry.py --apply, this script:
   1. Sets mentor's parent to null (orchestrator)
   2. Sets each director's parent to "mentor"
   3. Populates depends_on lists per the plan's cross-suite integration table
-  4. Mirrors entries into referenced_by on the dependency target side
+  4. Rebuilds the referenced_by reverse index from the full graph
+
+DEPS lists may include a skill's own parent for readability; the apply pass
+strips it (same convention as scripts/wire-investing-graph.py), because the
+`parent` field is the canonical hierarchy encoding (STYLE_GUIDE #7) and
+echoing it in depends_on creates cycles.
+
+Run:
+    python3 scripts/patch_mentor_suite.py          # dry-run
+    python3 scripts/patch_mentor_suite.py --apply  # write registry.json
 """
 
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -29,14 +39,11 @@ DEPS = {
     "feedback-loops": ["mentor"],
 
     # Standalone action leaves (parent: mentor via sync-registry inference).
-    # NOTE: registry depends_on has drifted from this table since the cycle
-    # cleanups — rerunning this script rewrites all 43 lists, not just new
-    # entries. Reconcile DEPS with data/registry.json before the next run.
     "ariadne": ["vault-writer"],
 
     # personal-positioning leaves
     "narrative-architecture": [
-        "personal-positioning", "design", "brand-foundations", "brand-voice", "minto-scqa"
+        "personal-positioning", "brand-foundations", "brand-voice", "minto-scqa"
     ],
     "linkedin-optimization": [
         "personal-positioning", "narrative-architecture", "credibility-translation",
@@ -192,60 +199,95 @@ DIRECTORS = [
 ]
 
 
+def desired_dependencies(entry: dict, declared: list[str], known: set[str]) -> list[str]:
+    """Return canonical capability edges: resolved, parent-stripped, sorted."""
+    desired = {d for d in declared if d in known}
+    parent = entry.get("parent")
+    if parent:
+        desired.discard(parent)
+    return sorted(desired)
+
+
+def derive_referenced_by(skills: dict[str, dict]) -> dict[str, list[str]]:
+    """Rebuild the exact reverse index from parent and capability edges."""
+    reverse: dict[str, set[str]] = {name: set() for name in skills}
+    for source, entry in skills.items():
+        targets = set(entry.get("depends_on") or [])
+        parent = entry.get("parent")
+        if parent:
+            targets.add(parent)
+        for target in targets:
+            if target in reverse and target != source:
+                reverse[target].add(source)
+    return {name: sorted(referrers) for name, referrers in reverse.items()}
+
+
 def main():
+    dry_run = "--apply" not in sys.argv
+
     with open(REG) as f:
         reg = json.load(f)
     skills = reg["skills"]
+    known = set(skills)
 
-    patched = 0
+    changes: list[str] = []
     missing_deps = []
 
-    # 1. Mentor: parent = None, depends_on = []
-    if "mentor" in skills:
+    # 1. Mentor: parent = None (orchestrator root)
+    if "mentor" in skills and skills["mentor"].get("parent") is not None:
+        changes.append(f"  mentor: parent {skills['mentor'].get('parent')!r} → None")
         skills["mentor"]["parent"] = None
-        skills["mentor"]["depends_on"] = []
-        patched += 1
 
     # 2. Directors: parent = mentor
     for d in DIRECTORS:
-        if d in skills:
+        if d in skills and skills[d].get("parent") != "mentor":
+            changes.append(f"  {d}: parent {skills[d].get('parent')!r} → 'mentor'")
             skills[d]["parent"] = "mentor"
-            patched += 1
 
-    # 3. depends_on for each Mentor-suite skill
+    # 3. depends_on for each Mentor-suite skill (canonical: parent-stripped, sorted)
     for skill_name, deps in DEPS.items():
         if skill_name not in skills:
             missing_deps.append(skill_name)
             continue
-        # Filter: keep only deps that resolve in the registry
-        resolved = [d for d in deps if d in skills]
-        unresolved = [d for d in deps if d not in skills]
-        skills[skill_name]["depends_on"] = resolved
+        entry = skills[skill_name]
+        unresolved = [d for d in deps if d not in known]
         if unresolved:
             print(f"  WARN: {skill_name} has unresolved deps: {unresolved}")
+        canonical = desired_dependencies(entry, deps, known)
+        old = sorted(entry.get("depends_on") or [])
+        if old != canonical:
+            changes.append(f"  {skill_name}: depends_on {old} → {canonical}")
+        entry["depends_on"] = canonical
 
-    # 4. Mirror referenced_by on the target side
-    # For each skill in DEPS, for each resolved dep, add skill to dep's referenced_by
-    for skill_name, deps in DEPS.items():
-        if skill_name not in skills:
-            continue
-        for dep in skills[skill_name].get("depends_on", []):
-            if dep in skills:
-                rb = skills[dep].get("referenced_by", [])
-                if skill_name not in rb:
-                    rb.append(skill_name)
-                    rb.sort()
-                    skills[dep]["referenced_by"] = rb
+    # 4. referenced_by is denormalized data. Rebuild it from the complete
+    # graph so removed edges cannot survive as stale referrers.
+    for target_name, referrers in derive_referenced_by(skills).items():
+        entry = skills[target_name]
+        if sorted(entry.get("referenced_by") or []) != referrers:
+            changes.append(
+                f"  {target_name}: referenced_by "
+                f"{sorted(entry.get('referenced_by') or [])} → {referrers}"
+            )
+        entry["referenced_by"] = referrers
 
     if missing_deps:
         print(f"  WARN: {len(missing_deps)} skills in DEPS not in registry: {missing_deps}")
 
-    with open(REG, "w") as f:
-        json.dump(reg, f, indent=2)
-        f.write("\n")
+    print(f"{'DRY RUN — ' if dry_run else ''}Mentor-suite patch")
+    print(f"  Skills in DEPS: {len(DEPS)}")
+    print(f"  Registry modifications: {len(changes)}")
+    for line in changes[:40]:
+        print(line)
+    if len(changes) > 40:
+        print(f"  ... and {len(changes) - 40} more")
 
-    print(f"\nPatched {patched} parent overrides and {len(DEPS)} depends_on lists.")
-    print("Done.")
+    if not dry_run:
+        with open(REG, "w") as f:
+            json.dump(reg, f, indent=2)
+            f.write("\n")
+        print("\nRegistry updated.")
+    else:
+        print("\nRun with --apply to write changes.")
 
 
 if __name__ == "__main__":
