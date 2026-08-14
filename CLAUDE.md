@@ -109,6 +109,16 @@ skill. skill_aliases.json ships EMPTY on purpose — see
 Structural writes: local stdio tools or /maint bot PRs only.
 Desktop: Neural Observatory.webloc ──→ https://skill-library-prod.web.app
 
+Local usage backlog: the local writers (Claude Desktop stdio server, launchd
+remote server, plugin hook) append to the primary checkout's data/usage.jsonl
+and never mirror to Firestore, so those rows exist nowhere else and CI cannot
+sweep them — the backlog accumulates as an uncommitted working-tree diff.
+Land it with `bash scripts/land_usage_backlog.sh` (validates append-only +
+dedups vs origin/main by (session_id, timestamp), recalibrates, branches,
+PRs, merges on CI green, returns the checkout to a clean main). Run from the
+primary checkout, never a worktree; `--dry-run` reports without changing
+anything.
+
 Dashboard usage (scripts/usage_rollup.py): the raw Firestore `usage` collection
 has ONE writer, the Cloud Run MCP mirror — local stdio and plugin-native loads
 (source=plugin) never reach it, yet both feed auto_score. The dashboard
