@@ -680,3 +680,17 @@
 {"_fs_id": "bb37c8eb83b845cfbf4bb91edd8bdaab_2026-08-12T01:09:36.419956+00:00_1", "session_id": "bb37c8eb83b845cfbf4bb91edd8bdaab", "skill": "paradigm-designer", "source": "mcp", "timestamp": "2026-08-12T01:09:36.419956+00:00", "type": "knowledge"}
 {"_fs_id": "13757d60e8ec4d8e9f5aecfaad4c198b_2026-08-13T15:15:48.736365+00:00_0", "session_id": "13757d60e8ec4d8e9f5aecfaad4c198b", "skill": "quality-compounders", "source": "mcp", "timestamp": "2026-08-13T15:15:48.736365+00:00", "type": "knowledge"}
 {"_fs_id": "13757d60e8ec4d8e9f5aecfaad4c198b_2026-08-13T15:15:55.103331+00:00_1", "session_id": "13757d60e8ec4d8e9f5aecfaad4c198b", "skill": "secular-themes", "source": "mcp", "timestamp": "2026-08-13T15:15:55.103331+00:00", "type": "knowledge"}
+{"session_id": "99144744d63846aca2461bc7af8dceb8", "source": "mcp", "type": "search", "result_count": 20, "query": "pos-calculator probability of success", "timestamp": "2026-07-29T03:30:00.793308+00:00"}
+{"session_id": "47b26ad4-5244-4a86-ac49-40a920f32d2a", "source": "plugin", "timestamp": "2026-08-05T01:40:36.334188+00:00", "skill_raw": "update-config", "type": "unresolved"}
+{"session_id": "87d6a3c7-a2b5-4f69-9d79-c43fcb626cc8", "source": "plugin", "timestamp": "2026-08-07T22:39:32.174939+00:00", "skill_raw": "claude-api", "type": "unresolved"}
+{"session_id": "d44830056404494fbae775fef35b43b1", "source": "mcp", "type": "search", "result_count": 5, "query": "obsidian", "timestamp": "2026-08-07T22:52:37.679535+00:00"}
+{"session_id": "d44830056404494fbae775fef35b43b1", "source": "mcp", "skill": "vault-writer", "type": "action", "timestamp": "2026-08-07T22:52:43.158169+00:00"}
+{"session_id": "d44830056404494fbae775fef35b43b1", "source": "mcp", "skill": "vault-reader", "type": "action", "timestamp": "2026-08-07T22:52:44.854216+00:00"}
+{"session_id": "d44830056404494fbae775fef35b43b1", "source": "mcp", "type": "search", "result_count": 20, "query": "obsidian_get_file_contents obsidian_simple_search obsidian_append_content mcp-obsidian MCP tools", "timestamp": "2026-08-07T22:52:53.406390+00:00"}
+{"session_id": "f1521faa3e4746bfbc4f70b7b93b3619", "source": "mcp", "type": "search", "result_count": 20, "query": "story premise conflict architecture stakes", "timestamp": "2026-08-11T02:42:24.975416+00:00"}
+{"session_id": "f1521faa3e4746bfbc4f70b7b93b3619", "source": "mcp", "type": "search", "result_count": 20, "query": "character design POV ensemble romance", "timestamp": "2026-08-11T02:42:26.909000+00:00"}
+{"session_id": "f1521faa3e4746bfbc4f70b7b93b3619", "source": "mcp", "type": "search", "result_count": 20, "query": "worldbuilding conflict escalation war geopolitics", "timestamp": "2026-08-11T02:42:29.099506+00:00"}
+{"session_id": "f1521faa3e4746bfbc4f70b7b93b3619", "source": "mcp", "skill": "conflict-design", "type": "knowledge", "timestamp": "2026-08-11T02:42:41.652356+00:00"}
+{"session_id": "f1521faa3e4746bfbc4f70b7b93b3619", "source": "mcp", "skill": "revolutions-and-regime-change", "type": "knowledge", "timestamp": "2026-08-11T02:42:44.226051+00:00"}
+{"session_id": "f1521faa3e4746bfbc4f70b7b93b3619", "source": "mcp", "skill": "character-design", "type": "knowledge", "timestamp": "2026-08-11T02:42:46.255728+00:00"}
+{"session_id": "f1521faa3e4746bfbc4f70b7b93b3619", "source": "mcp", "type": "search", "result_count": 20, "query": "feedback", "timestamp": "2026-08-14T12:08:54.173411+00:00"}
