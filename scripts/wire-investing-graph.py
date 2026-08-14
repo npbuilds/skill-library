@@ -24,7 +24,9 @@ REGISTRY_PATH = PROJECT_ROOT / "data" / "registry.json"
 
 DEPENDENCY_MAP: dict[str, list[str]] = {
     # ── Regime Intelligence ───────────────────────────────────────────────
-    "macro-cycles":        ["regime-intelligence", "monetary-regime", "fiscal-regime"],
+    # macro-cycles is the foundational sink of this cluster (highest in-degree);
+    # its links to monetary/fiscal live in its Related Skills prose, not here.
+    "macro-cycles":        ["regime-intelligence"],
     "monetary-regime":     ["regime-intelligence", "macro-cycles"],
     "fiscal-regime":       ["regime-intelligence", "macro-cycles", "monetary-regime"],
 
@@ -32,21 +34,21 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
     "correlation-regimes": ["risk-architecture", "regime-intelligence", "tail-risk"],
     "drawdown-psychology": ["risk-architecture", "position-sizing", "tail-risk", "market-psychology"],
     "position-sizing":     ["risk-architecture", "tail-risk", "portfolio-construction"],
-    "tail-risk":           ["risk-architecture", "correlation-regimes", "position-sizing"],
+    "tail-risk":           ["risk-architecture"],
 
     # ── Portfolio Construction ────────────────────────────────────────────
     "asset-allocation":    ["portfolio-construction", "regime-intelligence", "risk-architecture", "correlation-regimes"],
-    "factor-exposure":     ["portfolio-construction", "equities", "asset-allocation"],
+    "factor-exposure":     ["portfolio-construction", "asset-allocation"],
     "hedging-architecture":["portfolio-construction", "tail-risk", "correlation-regimes"],
     "tax-optimization":    ["portfolio-construction", "asset-allocation"],
 
     # ── Reflexivity & Sentiment ───────────────────────────────────────────
-    "market-psychology":   ["reflexivity-sentiment", "reflexivity-theory", "sentiment-signals"],
+    "market-psychology":   ["reflexivity-sentiment"],
     "reflexivity-theory":  ["reflexivity-sentiment", "market-psychology", "macro-cycles"],
-    "sentiment-signals":   ["reflexivity-sentiment", "market-psychology", "alt-data-monitoring"],
+    "sentiment-signals":   ["reflexivity-sentiment", "market-psychology"],
 
     # ── Value & Quality ───────────────────────────────────────────────────
-    "intrinsic-value":     ["value-quality", "second-level-thinking", "quality-compounders"],
+    "intrinsic-value":     ["value-quality", "second-level-thinking"],
     "quality-compounders": ["value-quality", "intrinsic-value", "factor-exposure"],
     "second-level-thinking":["value-quality", "market-psychology", "reflexivity-theory"],
 
@@ -75,7 +77,7 @@ DEPENDENCY_MAP: dict[str, list[str]] = {
 
     # ── Special Situations ────────────────────────────────────────────────
     "complexity-premium":    ["special-situations", "second-level-thinking", "event-driven"],
-    "event-driven":          ["special-situations", "insider-signals", "spinoffs-restructuring"],
+    "event-driven":          ["special-situations"],
     "insider-signals":       ["special-situations", "event-driven", "sentiment-signals"],
     "spinoffs-restructuring":["special-situations", "intrinsic-value", "event-driven"],
 
