@@ -117,7 +117,10 @@ Land it with `bash scripts/land_usage_backlog.sh` (validates append-only +
 dedups vs origin/main by (session_id, timestamp), recalibrates, branches,
 PRs, merges on CI green, returns the checkout to a clean main). Run from the
 primary checkout, never a worktree; `--dry-run` reports without changing
-anything.
+anything. A daily launchd job runs the sweep at 09:30 local
+(studio.neocortex.usage-backlog-sweep, installed by
+scripts/install_usage_backlog_launchd.sh — re-run it if the checkout moves;
+logs at ~/Library/Logs/usage-backlog-sweep.log).
 
 Dashboard usage (scripts/usage_rollup.py): the raw Firestore `usage` collection
 has ONE writer, the Cloud Run MCP mirror — local stdio and plugin-native loads
