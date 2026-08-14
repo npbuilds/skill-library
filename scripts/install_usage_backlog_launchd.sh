@@ -43,9 +43,21 @@ if [ ! -f "$PROJECT_ROOT/scripts/land_usage_backlog.sh" ]; then
   exit 1
 fi
 
-# gh and the user's python3 live outside launchd's minimal default PATH.
+# The job must NOT run /bin/bash directly: macOS TCC silently denies launchd
+# background jobs run by Apple platform binaries any access to protected
+# folders (Desktop/Documents) — exit 126, no prompt. A user-installed python
+# can hold a Files & Folders grant that the child bash inherits, so the job
+# runs land_usage_backlog_launcher.py instead. Override the interpreter with
+# SWEEP_LAUNCHER=/path/to/python if the default python3 lacks the grant.
+LAUNCHER="${SWEEP_LAUNCHER:-$(command -v python3)}"
+if [ -z "$LAUNCHER" ] || [ ! -x "$LAUNCHER" ]; then
+  echo "ERROR: no usable python3 found (set SWEEP_LAUNCHER=/path/to/python)." >&2
+  exit 1
+fi
+
+# gh and the launcher's python live outside launchd's minimal default PATH.
 JOB_PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
-PY_DIR="$(dirname "$(command -v python3)")"
+PY_DIR="$(dirname "$LAUNCHER")"
 case ":$JOB_PATH:" in *":$PY_DIR:"*) ;; *) JOB_PATH="$PY_DIR:$JOB_PATH" ;; esac
 
 mkdir -p "$HOME/Library/LaunchAgents" "$HOME/Library/Logs"
@@ -59,8 +71,8 @@ cat > "$PLIST" <<EOF
 
     <key>ProgramArguments</key>
     <array>
-        <string>/bin/bash</string>
-        <string>$PROJECT_ROOT/scripts/land_usage_backlog.sh</string>
+        <string>$LAUNCHER</string>
+        <string>$PROJECT_ROOT/scripts/land_usage_backlog_launcher.py</string>
     </array>
 
     <key>WorkingDirectory</key>
@@ -97,6 +109,7 @@ launchctl bootout "$DOMAIN" "$PLIST" 2>/dev/null || true
 launchctl bootstrap "$DOMAIN" "$PLIST"
 
 echo "Installed $LABEL:"
+echo "  launcher: $LAUNCHER"
 echo "  sweeps:   $PROJECT_ROOT/data/usage.jsonl"
 echo "  schedule: daily 09:30 local"
 echo "  log:      $LOG"
