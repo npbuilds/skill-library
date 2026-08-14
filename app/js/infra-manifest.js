@@ -21,6 +21,6 @@ window.INFRA_MANIFEST = Object.freeze({
     "evolution"
   ],
   "schema_version": 1,
-  "scripts": 59,
+  "scripts": 60,
   "workflows": 7
 });
