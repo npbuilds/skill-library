@@ -11921,10 +11921,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "comparative-analysis-engine",
@@ -12023,10 +12023,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "source-triangulator"
       ],
@@ -12074,10 +12074,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "rhetoric"
       ],
@@ -12176,10 +12176,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "decolonization-and-sovereignty",
@@ -12230,10 +12230,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "historical-pattern-recognition"
       ],
@@ -12281,10 +12281,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [
         "conflict-design"
@@ -12330,10 +12330,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "cooperative-games"
       ],
@@ -12426,10 +12426,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "applied-history",
         "historical-pattern-recognition"
@@ -12528,10 +12528,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "geopolitical-overlay"
       ],
@@ -12577,10 +12577,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "macro-cycles",
         "monetary-regime"
@@ -12825,10 +12825,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [
         "battle-analysis"
@@ -12874,10 +12874,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "information-economics",
         "signaling-screening"
@@ -13074,10 +13074,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "political-history",
         "political-philosophy"
@@ -13171,10 +13171,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "comparative-analysis-engine",
@@ -13225,10 +13225,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "civilizations",
         "time-series"
@@ -13369,10 +13369,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "statistical-analysis"
       ],
@@ -13465,10 +13465,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "applied-history"
       ],
@@ -13567,10 +13567,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "religion-design"
       ],
@@ -13804,10 +13804,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "americas-and-oceania",
@@ -14046,10 +14046,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [
         "debate-simulator"
@@ -14095,10 +14095,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "historical-pattern-recognition"
       ],
@@ -14447,10 +14447,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 82,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 81,
       "depends_on": [],
       "referenced_by": [
         "asset-valuation",
@@ -14524,10 +14524,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 74,
       "depends_on": [
         "probability-of-success"
       ],
@@ -14700,10 +14700,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [],
       "referenced_by": [
         "biomarker-enrichment",
@@ -15150,10 +15150,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 74,
       "depends_on": [
         "asset-valuation",
         "probability-of-success"
@@ -15214,10 +15214,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [],
       "referenced_by": [
         "investment-memo-writer"
@@ -15319,17 +15319,17 @@
         "estimated_tokens_body": 1973,
         "estimated_tokens_total": 2033
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 64,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -15441,10 +15441,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [
         "surface"
       ],
@@ -15667,10 +15667,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [],
       "referenced_by": [
         "emerging-target-radar",
@@ -15835,10 +15835,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [
         "diligence-scorecard"
       ],
@@ -16234,10 +16234,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "prose-orchestrator"
       ],
@@ -16737,10 +16737,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 74,
       "depends_on": [],
       "referenced_by": [
         "frontier-conviction-scorer",
@@ -16797,10 +16797,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 75,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 74,
       "depends_on": [
         "pos-base-rates"
       ],
@@ -16912,10 +16912,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [
         "clinical-development"
       ],
@@ -17135,17 +17135,17 @@
         "estimated_tokens_body": 1739,
         "estimated_tokens_total": 1798
       },
-      "health_status": "healthy",
+      "health_status": "warning",
       "issues": [],
       "last_checked": "2026-04-14T00:00:00Z",
       "status": "active",
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 65,
+      "auto_score": 64,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 65,
+      "composite_score": 64,
       "depends_on": [],
       "referenced_by": [],
       "shares_references_with": [],
@@ -17252,10 +17252,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [
         "clinical-development"
       ],
@@ -17551,10 +17551,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 77,
+      "auto_score": 76,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 77,
+      "composite_score": 76,
       "depends_on": [
         "seed"
       ],
@@ -17672,10 +17672,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 82,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 81,
       "depends_on": [
         "infrastructure-orchestrator",
         "neocortex"
