@@ -6548,10 +6548,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 83,
+      "auto_score": 80,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 83,
+      "composite_score": 80,
       "depends_on": [
         "classical-games",
         "cultures-societies",
@@ -28030,10 +28030,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 72,
+      "auto_score": 68,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 72,
+      "composite_score": 68,
       "depends_on": [
         "vault-writer"
       ],
