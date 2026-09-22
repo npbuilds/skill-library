@@ -2748,10 +2748,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 83,
+      "auto_score": 82,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 83,
+      "composite_score": 82,
       "depends_on": [
         "worldbuilding-orchestrator"
       ],
@@ -5534,8 +5534,8 @@
         "estimated_tokens_body": 1529,
         "estimated_tokens_total": 1593
       },
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 70,
+      "composite_score": 70,
       "referenced_by": [
         "design-principles",
         "syntax-patterns",
@@ -5603,7 +5603,7 @@
       "context_mode": "inline",
       "invocation": "both",
       "version": "1.0.0",
-      "health_status": "healthy",
+      "health_status": "warning",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
       "manual_rating": null,
@@ -5632,8 +5632,8 @@
         "estimated_tokens_body": 2182,
         "estimated_tokens_total": 2240
       },
-      "auto_score": 65,
-      "composite_score": 65,
+      "auto_score": 64,
+      "composite_score": 64,
       "referenced_by": [],
       "tags": [
         "domain:writing",
@@ -6598,10 +6598,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 68,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 67,
       "depends_on": [
         "history-builder",
         "world-bible",
@@ -6650,8 +6650,8 @@
         "estimated_tokens_body": 3369,
         "estimated_tokens_total": 3438
       },
-      "auto_score": 71,
-      "composite_score": 71,
+      "auto_score": 70,
+      "composite_score": 70,
       "referenced_by": [
         "brand-voice",
         "prose-writer",
