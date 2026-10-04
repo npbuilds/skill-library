@@ -10626,10 +10626,10 @@
       "health_status": "healthy",
       "last_checked": "2026-04-02T15:44:21",
       "status": "active",
-      "auto_score": 75,
+      "auto_score": 74,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 75,
+      "composite_score": 74,
       "depends_on": [
         "clarity-engine"
       ],
@@ -26027,10 +26027,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 78,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 77,
       "depends_on": [
         "foresight",
         "frontier-antenna",
@@ -26094,10 +26094,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 70,
+      "auto_score": 69,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 70,
+      "composite_score": 69,
       "depends_on": [
         "reflexivity-theory",
         "secular-themes"
@@ -26154,10 +26154,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 71,
+      "auto_score": 70,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 71,
+      "composite_score": 70,
       "depends_on": [
         "pos-base-rates",
         "spelunker"
@@ -26274,10 +26274,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 78,
+      "auto_score": 77,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 78,
+      "composite_score": 77,
       "depends_on": [
         "frontier-intelligence",
         "mechanism-risk-adjuster",
@@ -26341,10 +26341,10 @@
       "deprecated_date": null,
       "replacement_skill": null,
       "deprecation_reason": null,
-      "auto_score": 68,
+      "auto_score": 67,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 68,
+      "composite_score": 67,
       "depends_on": [
         "pipeline-mapper",
         "spelunker"
