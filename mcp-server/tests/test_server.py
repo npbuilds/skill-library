@@ -1013,3 +1013,53 @@ class TestRuntimeMode:
         # Post-filter: only the get_skill event remains
         assert len(skill_uses) == 1
         assert skill_uses[0]["skill"] == "color-theory"
+
+
+class TestPortableRetrieval:
+    def test_search_never_seeds_from_shared_history(self, tmp_project):
+        index = MagicMock(is_ready=True)
+        index.search.return_value = []
+        with patch.object(server, '_get_search_index', return_value=index), patch.object(server, 'load_log', side_effect=AssertionError('Shared history read')):
+            server.search_skills('color')
+        index.search.assert_called_once_with('color', recent_skills=[], limit=20)
+
+    def test_remote_events_are_not_shared_sessions(self, tmp_project):
+        with patch.object(server, 'REMOTE_MODE', True):
+            server._log_event(server.USAGE_LOG, {'skill': 'color-theory'})
+            server._log_event(server.USAGE_LOG, {'skill': 'data-wrangling'})
+        events = [json.loads(line) for line in server.USAGE_LOG.read_text().splitlines()]
+        assert events[0]['session_id'] != events[1]['session_id']
+        assert {e['instance_id'] for e in events} == {server._SERVER_SESSION_ID}
+        assert {e['attribution_scope'] for e in events} == {'anonymous_event'}
+
+    def test_selective_files_and_containment(self, tmp_project):
+        root = tmp_project / 'skills/design/color-theory'
+        (root / 'assets').mkdir()
+        (root / 'assets/image.bin').write_bytes(b'\xff\x00')
+        (root / 'assets/link').symlink_to(tmp_project / 'data/registry.json')
+        (root / '.private').write_text('secret')
+        listing = json.loads(server.list_skill_files('color-theory'))
+        names = {f['path'] for f in listing['files']}
+        assert 'assets/image.bin' in names
+        assert 'assets/link' not in names
+        assert '.private' not in names
+        result = json.loads(server.get_skill_file('color-theory', 'references/color-wheel.md'))
+        assert result['encoding'] == 'utf-8'
+        assert 'Reference content' in result['content']
+        result = json.loads(server.get_skill_file('color-theory', 'assets/image.bin'))
+        assert result['encoding'] == 'base64'
+        for path in ['../SKILL.md', '/etc/passwd', '.private']:
+            assert 'Invalid' in server.get_skill_file('color-theory', path)
+        assert 'Symlinks' in server.get_skill_file('color-theory', 'assets/link')
+        (root / 'assets/large').write_bytes(b'a' * (256 * 1024 + 1))
+        assert 'exceeds' in server.get_skill_file('color-theory', 'assets/large')
+
+    def test_minimal_load_omits_agent_definitions(self, tmp_project):
+        registry = server.load_registry()
+        registry['skills']['color-theory']['type'] = 'orchestrator'
+        server.REGISTRY_PATH.write_text(json.dumps(registry))
+        agents = tmp_project / 'skills/design/color-theory/agents'
+        agents.mkdir()
+        (agents / 'worker.md').write_text('Unique agent instructions')
+        assert 'Unique agent instructions' not in server.get_skill('color-theory', False)
+        assert 'Unique agent instructions' in server.get_skill('color-theory', True)

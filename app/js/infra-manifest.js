@@ -15,12 +15,12 @@ window.INFRA_MANIFEST = Object.freeze({
     "usage"
   ],
   "hook_scripts": 8,
-  "local_mcp_tools": 17,
-  "remote_mcp_tools": 8,
+  "local_mcp_tools": 19,
+  "remote_mcp_tools": 10,
   "retired_firestore_collections": [
     "evolution"
   ],
   "schema_version": 1,
-  "scripts": 61,
+  "scripts": 63,
   "workflows": 7
 });

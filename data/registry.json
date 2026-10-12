@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "plugin_version": "1.0.0",
-  "last_scan": "2026-08-13T04:04:44Z",
+  "last_scan": "2026-10-12T12:56:17Z",
   "skills": {
     "bacchus": {
       "name": "bacchus",
@@ -2894,7 +2894,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "metrics": {
         "word_count": 1753,
         "body_words": 1686,
@@ -3345,7 +3345,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.0.5",
       "metrics": {
         "word_count": 1230,
         "body_words": 1165,
@@ -5193,7 +5193,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.0.4",
       "metrics": {
         "word_count": 3603,
         "body_words": 3501,
@@ -6531,7 +6531,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "metrics": {
         "word_count": 1203,
         "body_words": 1143,
@@ -6941,7 +6941,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "2.1.0",
       "metrics": {
         "word_count": 1945,
         "body_words": 1839,
@@ -8911,7 +8911,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "metrics": {
         "word_count": 869,
         "body_words": 754,
@@ -13784,7 +13784,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "metrics": {
         "word_count": 816,
         "body_words": 749,
@@ -17651,7 +17651,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "metrics": {
         "word_count": 2005,
         "body_words": 1902,
@@ -17945,7 +17945,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "metrics": {
         "word_count": 499,
         "body_words": 432,
@@ -17987,7 +17987,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "metrics": {
         "word_count": 1753,
         "body_words": 1670,
@@ -18603,7 +18603,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "metrics": {
         "word_count": 904,
         "body_words": 839,
@@ -18729,7 +18729,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "1.0.2",
       "metrics": {
         "word_count": 1082,
         "body_words": 1015,
@@ -26676,7 +26676,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 802,
         "body_words": 615,
@@ -26733,7 +26733,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 1143,
         "body_words": 926,
@@ -26790,7 +26790,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 693,
         "body_words": 506,
@@ -26847,7 +26847,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 2523,
         "body_words": 2428,
@@ -26904,7 +26904,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 690,
         "body_words": 520,
@@ -26961,7 +26961,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 1010,
         "body_words": 863,
@@ -27018,7 +27018,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 751,
         "body_words": 609,
@@ -27075,7 +27075,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 787,
         "body_words": 575,
@@ -27132,7 +27132,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "0.1.0",
       "metrics": {
         "word_count": 725,
         "body_words": 603,
@@ -27945,7 +27945,7 @@
       "source": "self",
       "context_mode": "inline",
       "invocation": "both",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "metrics": {
         "word_count": 2289,
         "body_words": 2207,

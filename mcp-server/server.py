@@ -14,6 +14,8 @@ Usage:
   MCP_REMOTE=true python server.py              # remote via env var
 """
 
+import base64
+import hashlib
 import fcntl
 import json
 import logging
@@ -26,11 +28,8 @@ from pathlib import Path
 from mcp.server.fastmcp import FastMCP
 from mcp.server.fastmcp.server import TransportSecuritySettings
 
-# One UUID per server process. Stamped onto every log event so downstream
-# scripts (derive_coactivation, etc.) can group co-retrievals by session.
-# Process == session; restart resets. Stdio: one session per Claude Desktop
-# run. HTTP: one session per Cloud Run instance lifetime (with concurrent
-# requests sharing the same id — coactivation tolerates an approximate signal).
+# Instance identity is not a remote user/task session. Local stdio retains
+# legacy process-session attribution; anonymous HTTP events are event-scoped.
 _SERVER_SESSION_ID = uuid.uuid4().hex
 
 # ---------------------------------------------------------------------------
@@ -75,9 +74,9 @@ def _mirror_telemetry_enabled() -> bool:
 def _log_event(path: Path, event: dict) -> None:
     """Append a JSON event to a JSONL log file (with file locking).
 
-    Every record carries session_id (server-process UUID), source, and
-    timestamp. Caller can override session_id/source via the event dict but
-    normally shouldn't.
+    Records distinguish instance identity from attribution scope. Anonymous
+    remote events use a unique event ID as their legacy session key so
+    downstream consumers cannot infer cross-caller coactivation.
 
     `source` defaults here rather than at each call site so gaps.jsonl and
     feedback.jsonl (and usage's search events) are self-describing too — every
@@ -89,7 +88,9 @@ def _log_event(path: Path, event: dict) -> None:
     what the telemetry pull loop exports back into git.
     """
     record = {
-        "session_id": _SERVER_SESSION_ID,
+        "session_id": uuid.uuid4().hex if REMOTE_MODE else _SERVER_SESSION_ID,
+        "instance_id": _SERVER_SESSION_ID,
+        "attribution_scope": "anonymous_event" if REMOTE_MODE else "stdio_process",
         "source": SOURCE_MCP,
         **event,
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -479,20 +480,9 @@ def search_skills(query: str) -> str:
     # --- Try hybrid search first ---
     idx = _get_search_index()
     if idx is not None and idx.is_ready:
-        # Get recent skills for graph proximity signal
+        # A server process or shared usage file is not a task context. Keep
+        # default searches independent of other callers and previous tasks.
         recent_skills: list[str] = []
-        try:
-            usage_events = load_log(USAGE_LOG)
-            seen: set[str] = set()
-            for e in reversed(usage_events):
-                s = e.get("skill", "")
-                if s and s not in seen:
-                    seen.add(s)
-                    recent_skills.append(s)
-                if len(recent_skills) >= 10:
-                    break
-        except Exception:
-            pass
 
         hybrid_results = idx.search(query, recent_skills=recent_skills, limit=20)
 
@@ -648,7 +638,7 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
                     parts.append(read_file_safe(str(ref_file)))
 
     # Also read agent files for orchestrator skills
-    if entry.get("type") == "orchestrator":
+    if include_references and entry.get("type") == "orchestrator":
         agents_dir = Path(skill_path).parent / "agents"
         if agents_dir.exists():
             agent_files = sorted(agents_dir.glob("*.md"))
@@ -659,6 +649,81 @@ def get_skill(skill_name: str, include_references: bool = True) -> str:
                     parts.append(read_file_safe(str(agent_file)))
 
     return "".join(parts)
+
+
+@mcp.tool()
+def list_skill_files(skill_name: str) -> str:
+    """List supporting files for selective retrieval with get_skill_file.
+
+    Paths are relative to the skill directory. Hidden files and symlinks are
+    excluded. File hashes identify the exact bytes available at this revision.
+    """
+    try:
+        entry = load_registry().get("skills", {}).get(skill_name)
+        if not entry:
+            return f"Skill '{skill_name}' not found."
+        path = resolve_skill_path(entry, skill_name)
+        if path is None:
+            return f"Skill file not found for '{skill_name}'."
+        root = Path(path).parent.resolve()
+        files = []
+        for candidate in sorted(root.rglob("*")):
+            relative = candidate.relative_to(root)
+            if any(part.startswith(".") or part == "__pycache__" for part in relative.parts):
+                continue
+            if candidate.is_symlink() or any(p.is_symlink() for p in candidate.parents if p != root and root in p.parents):
+                continue
+            if candidate.is_file() and candidate.resolve().is_relative_to(root):
+                with candidate.open("rb") as handle:
+                    digest = hashlib.file_digest(handle, "sha256").hexdigest()
+                files.append({"path": relative.as_posix(), "bytes": candidate.stat().st_size,
+                              "sha256": digest})
+        return json.dumps({"skill": skill_name, "files": files})
+    except (RuntimeError, OSError) as e:
+        return f"Unable to list skill files: {e}"
+
+
+@mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})
+def get_skill_file(skill_name: str, relative_path: str) -> str:
+    """Read one listed skill file as UTF-8 or base64 for binary assets.
+
+    Paths must remain inside the skill directory; symlinks and hidden files
+    are unavailable. Files over 256 KiB must be obtained via a native export.
+    """
+    try:
+        entry = load_registry().get("skills", {}).get(skill_name)
+        if not entry:
+            return f"Skill '{skill_name}' not found."
+        path = resolve_skill_path(entry, skill_name)
+        if path is None:
+            return f"Skill file not found for '{skill_name}'."
+        root = Path(path).parent.resolve()
+        relative = Path(relative_path)
+        if relative.is_absolute() or any(p in {"..", "__pycache__"} or p.startswith(".") for p in relative.parts):
+            return "Invalid skill-relative path."
+        candidate = root / relative
+        cursor = root
+        for part in relative.parts:
+            cursor = cursor / part
+            if cursor.is_symlink():
+                return "Symlinks are not available through skill file retrieval."
+        if not candidate.resolve().is_relative_to(root) or not candidate.is_file():
+            return "Skill file not found."
+        if candidate.stat().st_size > 256 * 1024:
+            return "File exceeds 256 KiB; use a native skill export."
+        with candidate.open("rb") as handle:
+            content = handle.read(256 * 1024 + 1)
+        if len(content) > 256 * 1024:
+            return "File exceeds 256 KiB; use a native skill export."
+        try:
+            value, encoding = content.decode("utf-8"), "utf-8"
+        except UnicodeDecodeError:
+            value, encoding = base64.b64encode(content).decode("ascii"), "base64"
+        return json.dumps({"skill": skill_name, "path": relative.as_posix(),
+                           "encoding": encoding, "content": value,
+                           "sha256": hashlib.sha256(content).hexdigest()})
+    except (RuntimeError, OSError) as e:
+        return f"Unable to read skill file: {e}"
 
 
 @mcp.tool(meta={"anthropic/maxResultSizeChars": 500000})

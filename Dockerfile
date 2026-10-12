@@ -64,6 +64,10 @@ status = idx.build(); \
 print(f'Pre-built index: {status}'); \
 assert status.get('vectors'), f'Embedding pre-build failed: {status}'"
 
+# Immutable source identity, supplied by the CI-validated checkout.
+ARG SOURCE_REVISION=unknown
+ENV SOURCE_REVISION=$SOURCE_REVISION
+
 # Cloud Run sets PORT env var; default to 8080
 ENV PORT=8080
 ENV MCP_REMOTE=true

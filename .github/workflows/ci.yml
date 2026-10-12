@@ -49,6 +49,7 @@ jobs:
           python3 scripts/test_wire_investing_graph.py
           python3 scripts/test_patch_mentor_suite.py
           python3 scripts/test_leak_guard.py
+          python3 scripts/test_portable_skills.py
           python3 scripts/build_infra_manifest.py --check
 
   retrieval-eval:

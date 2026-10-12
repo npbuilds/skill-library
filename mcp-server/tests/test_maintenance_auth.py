@@ -7,6 +7,7 @@ behaviors that matter: token missing, token wrong, token correct.
 """
 
 import asyncio
+import json
 from unittest.mock import MagicMock
 
 from starlette.responses import JSONResponse
@@ -85,3 +86,14 @@ def test_kb_refresh_missing_api_key_does_not_leak_lock(monkeypatch):
     response = asyncio.run(_kb_refresh(_request_with_header("secret123")))
     assert response.status_code == 503
     assert not MAINTENANCE_LOCK.locked()
+
+
+def test_health_exposes_content_identity(monkeypatch):
+    import hashlib
+    import maintenance
+    from pathlib import Path
+    monkeypatch.setenv("SOURCE_REVISION", "test-revision")
+    result = json.loads(asyncio.run(_health(MagicMock())).body)
+    assert result["source_revision"] == "test-revision"
+    expected = hashlib.sha256((Path(maintenance.__file__).resolve().parent.parent / "data/registry.json").read_bytes()).hexdigest()
+    assert result["registry_sha256"] == expected

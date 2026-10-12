@@ -18,6 +18,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from pull_telemetry_from_firestore import append_events, cap_usage_events
 
 
+def test_anonymous_events_retain_volume_cap():
+    events = [(str(i), {"session_id": str(i), "instance_id": "shared-instance",
+                        "attribution_scope": "anonymous_event",
+                        "timestamp": "2026-10-12T00:00:00Z"}) for i in range(80)]
+    kept, dropped = cap_usage_events(events, cap=50)
+    assert len(kept) == 50
+    assert dropped == 30
+
+
 def test_cap_bounds_per_session_per_day():
     events = []
     # 60 events from one session on one day, 3 from another session same day,
@@ -92,6 +101,7 @@ def test_append_survives_a_non_dict_row_in_the_local_log():
 def main():
     tests = [
         test_cap_bounds_per_session_per_day,
+        test_anonymous_events_retain_volume_cap,
         test_append_dedupes_on_fs_id,
         test_dry_run_writes_nothing,
         test_append_survives_a_non_dict_row_in_the_local_log,
