@@ -719,9 +719,16 @@ def get_skill_file(skill_name: str, relative_path: str) -> str:
             value, encoding = content.decode("utf-8"), "utf-8"
         except UnicodeDecodeError:
             value, encoding = base64.b64encode(content).decode("ascii"), "base64"
-        return json.dumps({"skill": skill_name, "path": relative.as_posix(),
-                           "encoding": encoding, "content": value,
-                           "sha256": hashlib.sha256(content).hexdigest()})
+        payload = {"skill": skill_name, "path": relative.as_posix(),
+                   "encoding": encoding, "content": value,
+                   "sha256": hashlib.sha256(content).hexdigest()}
+        serialized = json.dumps(payload, ensure_ascii=False)
+        # JSON escaping can expand valid UTF-8 control characters sixfold.
+        # Base64 keeps the response below the advertised result-size limit.
+        if len(serialized) > 480000:
+            payload.update(encoding="base64", content=base64.b64encode(content).decode("ascii"))
+            serialized = json.dumps(payload, ensure_ascii=False)
+        return serialized
     except (RuntimeError, OSError) as e:
         return f"Unable to read skill file: {e}"
 

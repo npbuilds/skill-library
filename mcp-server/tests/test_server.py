@@ -1051,6 +1051,12 @@ class TestPortableRetrieval:
         for path in ['../SKILL.md', '/etc/passwd', '.private']:
             assert 'Invalid' in server.get_skill_file('color-theory', path)
         assert 'Symlinks' in server.get_skill_file('color-theory', 'assets/link')
+        (root / 'assets/escaped').write_bytes(b'\x00' * (256 * 1024))
+        escaped = server.get_skill_file('color-theory', 'assets/escaped')
+        assert len(escaped) < 500000
+        decoded = json.loads(escaped)
+        assert decoded['encoding'] == 'base64'
+        assert server.base64.b64decode(decoded['content']) == b'\x00' * (256 * 1024)
         (root / 'assets/large').write_bytes(b'a' * (256 * 1024 + 1))
         assert 'exceeds' in server.get_skill_file('color-theory', 'assets/large')
 
