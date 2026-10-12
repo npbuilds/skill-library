@@ -28,7 +28,8 @@ def package(source: Path, output: Path, root: Path = ROOT) -> dict:
     if not name or Path(name).name != name or name in {".", ".."}:
         raise ValueError("Invalid skill name")
     registry_path = root / "data/registry.json"
-    registry = json.loads(registry_path.read_text()) if registry_path.exists() else {}
+    registry_text = registry_path.read_text() if registry_path.exists() else None
+    registry = json.loads(registry_text) if registry_text is not None else {}
     entry = registry.get("skills", {}).get(name, {})
     # A matching name alone cannot establish provenance for an external skill.
     if entry and (root / entry.get("location", "")).resolve() != source / "SKILL.md":
@@ -70,6 +71,11 @@ def package(source: Path, output: Path, root: Path = ROOT) -> dict:
             if digest != hashlib.sha256(path.read_bytes()).hexdigest():
                 raise ValueError(f"Source changed while packaging: {relative}")
             hashes[relative.as_posix()] = digest
+        if (stage / "SKILL.md").read_text() != text:
+            raise ValueError("Skill metadata changed while packaging; retry the export")
+        current_registry = registry_path.read_text() if registry_path.exists() else None
+        if current_registry != registry_text:
+            raise ValueError("Registry metadata changed while packaging; retry the export")
         warnings = ["Dependency metadata describes registry relationships, not a verified execution closure.",
                     "Host tools and repository-external resources have not been validated."]
         if dependencies:

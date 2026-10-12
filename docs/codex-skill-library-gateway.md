@@ -131,7 +131,8 @@ duplicated skill variants.
 `get_skill(name, include_references=false)` returns the main instructions only.
 Use `list_skill_files` to discover relative supporting-file paths and hashes,
 then `get_skill_file` to load a single reference, agent, script, template, or
-asset. Text uses UTF-8; binary content is base64 in the returned JSON. Files over
+asset. Text normally uses UTF-8; binary content or text whose JSON escaping
+would exceed the response limit uses base64 in the returned JSON. Files over
 256 KiB require a native export. Hidden files and symlinks are excluded.
 
 `bash scripts/package-skill.sh <skill-dir> [output-dir]` generates a complete

@@ -51,6 +51,22 @@ class PortableSkillsTest(unittest.TestCase):
                     sync.sync()
                 self.assertNotIn('Registry is in sync.', capture.getvalue())
 
+    def test_metadata_change_during_export_is_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source = root / 'sample'
+            source.mkdir()
+            (source / 'SKILL.md').write_text('---\nname: sample\nversion: 1.0\n---\n')
+            original_copy = package_skill.shutil.copy2
+            def mutate_then_copy(path, target):
+                if path.name == 'SKILL.md':
+                    path.write_text(path.read_text().replace('1.0', '2.0'))
+                return original_copy(path, target)
+            with patch.object(package_skill.shutil, 'copy2', mutate_then_copy):
+                with self.assertRaisesRegex(ValueError, 'metadata changed'):
+                    package_skill.package(source, root / 'exports', root)
+            self.assertFalse((root / 'exports/sample-export').exists())
+
     def test_complete_export_and_safe_rerun(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
