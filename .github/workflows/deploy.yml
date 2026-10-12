@@ -63,7 +63,7 @@ jobs:
       # Build in the GH runner (not Cloud Build). Avoids the post-2024
       # Cloud Build service-account setup dance on new projects.
       - name: Build image
-        run: docker build -t "${{ steps.image.outputs.uri }}" .
+        run: docker build --build-arg SOURCE_REVISION="${{ steps.image.outputs.sha }}" -t "${{ steps.image.outputs.uri }}" .
 
       - name: Push image
         run: docker push "${{ steps.image.outputs.uri }}"
@@ -102,6 +102,33 @@ jobs:
             exit 1
           fi
           echo "✓ Runtime SA verified: $DEPLOYED_SA"
+
+      - name: Verify deployed content matches validated source
+        env:
+          EXPECTED_SHA: ${{ steps.image.outputs.sha }}
+        run: |
+          export SERVICE_URL=$(gcloud run services describe "${{ env.SERVICE_NAME }}" \
+            --region="${{ vars.GCP_REGION }}" \
+            --project="${{ vars.GCP_PROJECT_ID }}" \
+            --format='value(status.url)')
+          python3 - <<'PYTHON'
+          import hashlib, json, os, time, urllib.request
+          from pathlib import Path
+          expected_digest = hashlib.sha256(Path("data/registry.json").read_bytes()).hexdigest()
+          for attempt in range(6):
+              try:
+                  with urllib.request.urlopen(os.environ["SERVICE_URL"] + "/health", timeout=10) as response:
+                      health = json.load(response)
+                  if (health.get("source_revision") == os.environ["EXPECTED_SHA"]
+                          and health.get("registry_sha256") == expected_digest):
+                      print("Deployed source revision and registry bytes match the validated checkout")
+                      break
+              except (OSError, ValueError) as error:
+                  print(f"Health check not ready: {error}")
+              if attempt == 5:
+                  raise SystemExit("Deployed content did not converge to the validated checkout")
+              time.sleep(5)
+          PYTHON
 
       - name: Report deploy
         run: |

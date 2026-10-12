@@ -8,7 +8,9 @@
         "search_skills",
         "get_skill",
         "get_skill_details",
-        "get_system_overview"
+        "get_system_overview",
+        "list_skill_files",
+        "get_skill_file"
       ],
       "default_tools_approval_mode": "approve"
     }

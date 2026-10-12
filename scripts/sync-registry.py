@@ -84,6 +84,30 @@ def extract_yaml_frontmatter(text: str) -> dict | None:
     return result if result else None
 
 
+def declared_version(text: str) -> str | None:
+    """Read metadata.version (or legacy top-level version), retaining labels.
+
+    Numeric major/minor versions get a zero patch component so 1.0 and
+    1.0.0 do not cause cosmetic drift. No version means registry ownership.
+    """
+    fm = re.match(r"^---\s*\n(.*?)\n---", text, re.DOTALL)
+    if not fm:
+        return None
+    block = fm.group(1)
+    metadata = re.search(r"^metadata:\s*\n((?:[ \t]+[^\n]*(?:\n|$))+)", block, re.MULTILINE)
+    match = None
+    if metadata:
+        match = re.search(r"^[ \t]+version:[ \t]*(.+)$", metadata.group(1), re.MULTILINE)
+    if not match:
+        match = re.search(r"^version:[ \t]*(.+)$", block, re.MULTILINE)
+    if not match:
+        return None
+    value = match.group(1).split(" #", 1)[0].strip().strip("\"'")
+    if not value:
+        return None
+    return value + ".0" if re.fullmatch(r"\d+\.\d+", value) else value
+
+
 def extract_inline_metadata(text: str) -> dict:
     """Extract metadata from inline patterns like '## skill-metadata' blocks or bold labels."""
     meta = {}
@@ -192,7 +216,7 @@ def compute_metrics(text: str, skill_dir: Path) -> dict:
         if not d.is_dir():
             return 0
         tracked = _tracked_files()
-        if not tracked:  # git unavailable — fall back to raw filesystem count
+        if not tracked or not skill_dir.is_relative_to(PROJECT_ROOT):  # standalone export or no git
             return sum(1 for f in d.iterdir() if f.is_file() and f.name != ".gitkeep")
         return sum(
             1 for f in d.iterdir()
@@ -445,7 +469,7 @@ def discover_skills() -> dict[str, dict]:
             "source": "self",
             "context_mode": "inline",
             "invocation": "both",
-            "version": "1.0.0",
+            "version": declared_version(text) or "1.0.0",
             "metrics": metrics,
             "health_status": "healthy",
             "issues": [],
@@ -506,9 +530,13 @@ def sync(apply: bool = False) -> None:
     # ── Find description / metrics drift on existing entries ──
     drift_desc: list[tuple[str, str, str]] = []
     drift_metrics: list[str] = []
+    drift_versions: dict[str, str] = {}
     for name in set(discovered) & set(existing):
         cur = existing[name]
         new = discovered[name]
+        version = declared_version((PROJECT_ROOT / new["location"]).read_text())
+        if version is not None and str(cur.get("version", "")) != version:
+            drift_versions[name] = version
         cur_desc = (cur.get("description") or "").strip()
         new_desc = (new.get("description") or "").strip()
         if new_desc and cur_desc != new_desc:
@@ -605,6 +633,8 @@ def sync(apply: bool = False) -> None:
             print(f"  ~ {name}: {len(old)} → {len(new)} chars")
         if len(drift_desc) > 5:
             print(f"    ... and {len(drift_desc) - 5} more")
+    if drift_versions:
+        print(f"VERSION DRIFT ({len(drift_versions)} entries will be refreshed)")
     if drift_metrics:
         print(f"METRICS DRIFT ({len(drift_metrics)} entries will be refreshed)")
     if new_depends_on:
@@ -636,6 +666,9 @@ def sync(apply: bool = False) -> None:
             existing[name]["description"] = new_desc
         if drift_desc:
             print(f"  Refreshed description on {len(drift_desc)} entries")
+
+        for name, version in drift_versions.items():
+            existing[name]["version"] = version
 
         for name in drift_metrics:
             existing[name]["metrics"] = discovered[name]["metrics"]
@@ -703,6 +736,7 @@ def sync(apply: bool = False) -> None:
         print(
             f"\nRegistry updated: {len(new_names)} added, "
             f"{len(mismatches)} locations fixed, "
+            f"{len(drift_versions)} versions refreshed, "
             f"{len(drift_desc)} descriptions refreshed, "
             f"{len(drift_metrics)} metrics refreshed."
         )
@@ -713,6 +747,8 @@ def sync(apply: bool = False) -> None:
     else:
         total_changes = (
             len(new_names)
+            + len(ghost_names)
+            + len(drift_versions)
             + len(mismatches)
             + len(drift_desc)
             + len(drift_metrics)

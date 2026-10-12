@@ -29,6 +29,8 @@ def test_plugin_limits_autoapproval_to_gateway_read_surface():
         "search_skills",
         "get_skill",
         "get_skill_details",
+        "list_skill_files",
+        "get_skill_file",
         "get_system_overview",
     }
     assert server["default_tools_approval_mode"] == "approve"

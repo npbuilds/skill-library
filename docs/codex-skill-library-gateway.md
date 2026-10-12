@@ -65,12 +65,14 @@ The plugin connects to:
 https://skill-library-mcp-ifvybw46na-uc.a.run.app/mcp
 ```
 
-The plugin exposes only these five content-retrieval tools to Codex:
+The plugin exposes only these seven content-retrieval tools to Codex:
 
 - `list_skills`
 - `search_skills`
 - `get_skill`
 - `get_skill_details`
+- `list_skill_files`
+- `get_skill_file`
 - `get_system_overview`
 
 These allowlisted tools use approval mode `approve` so non-interactive Codex CLI
@@ -123,3 +125,30 @@ authorization.
 The canonical skill library and all Claude workflow surfaces remain the source
 of truth. Platform-specific behavior belongs in the thin gateway, not in
 duplicated skill variants.
+
+## Portable delivery
+
+`get_skill(name, include_references=false)` returns the main instructions only.
+Use `list_skill_files` to discover relative supporting-file paths and hashes,
+then `get_skill_file` to load a single reference, agent, script, template, or
+asset. Text normally uses UTF-8; binary content or text whose JSON escaping
+would exceed the response limit uses base64 in the returned JSON. Files over
+256 KiB require a native export. Hidden files and symlinks are excluded.
+
+`bash scripts/package-skill.sh <skill-dir> [output-dir]` generates a complete
+snapshot of non-hidden authored files, including nested supporting directories.
+The manifest derives versions and dependency relationships from existing source
+metadata, records the Git revision and relevant working-tree state, and hashes
+each authored file. Generated installation notes and the manifest itself are
+not included in that authored-file hash map. Declared related skills remain
+external; the bundle explicitly does not claim a verified execution closure.
+Review its warnings when choosing a host. No extra metadata authoring is required.
+
+Search does not derive task context from shared telemetry. HTTP events carry an
+instance ID and `anonymous_event` attribution with a unique legacy session key
+per event; this prevents unrelated callers from being grouped as one session.
+Local stdio retains `stdio_process` attribution, which is not a task identifier.
+
+For rollout, deploy the server changes before running the existing plugin update
+script so installed clients can discover the two added read tools. Repository
+configuration updates alone do not update an already-installed plugin cache.

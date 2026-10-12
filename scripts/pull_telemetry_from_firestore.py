@@ -91,11 +91,16 @@ def fetch_new_events(db, collection: str, watermark: str) -> list[tuple[str, dic
 def cap_usage_events(
     events: list[tuple[str, dict]], cap: int
 ) -> tuple[list[tuple[str, dict]], int]:
-    """Cap usage events per (session_id, UTC day). Returns (kept, dropped_count)."""
+    """Cap usage by session/day, or instance/day for anonymous event IDs.
+
+    Instance grouping is only a volume cap, never task/coactivation attribution.
+    """
     counts: dict[tuple, int] = {}
     kept, dropped = [], 0
     for doc_id, record in events:
-        key = (record.get("session_id", "?"), str(record.get("timestamp", ""))[:10])
+        anonymous = record.get("attribution_scope") == "anonymous_event"
+        identity = record.get("instance_id", "?") if anonymous else record.get("session_id", "?")
+        key = ("instance" if anonymous else "session", identity, str(record.get("timestamp", ""))[:10])
         counts[key] = counts.get(key, 0) + 1
         if counts[key] > cap:
             dropped += 1

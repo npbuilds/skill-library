@@ -20,6 +20,7 @@ and wait for manual merge. Auto-merge workflow comes in a later slice.
 """
 
 import asyncio
+import hashlib
 import hmac
 import json
 import logging
@@ -266,6 +267,14 @@ class _BotPR:
 # Endpoints
 # ---------------------------------------------------------------------------
 
+def _registry_digest() -> str | None:
+    try:
+        with (Path(__file__).resolve().parent.parent / "data/registry.json").open("rb") as handle:
+            return hashlib.file_digest(handle, "sha256").hexdigest()
+    except OSError:
+        return None
+
+
 async def _health(_request: Request) -> JSONResponse:
     """Liveness probe. Confirms the container is up and the maintenance
     router is mounted. The endpoint is intentionally public, so allow the
@@ -274,6 +283,8 @@ async def _health(_request: Request) -> JSONResponse:
         {
             "status": "ok",
             "service": "skill-library-mcp",
+            "source_revision": os.environ.get("SOURCE_REVISION", "unknown"),
+            "registry_sha256": _registry_digest(),
             "maintenance_router": "mounted",
             "bot_pat_configured": bool(_pat()),
         },
