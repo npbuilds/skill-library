@@ -2748,10 +2748,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-22T00:00:00Z",
       "status": "active",
-      "auto_score": 82,
+      "auto_score": 81,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 82,
+      "composite_score": 81,
       "depends_on": [
         "worldbuilding-orchestrator"
       ],
@@ -5534,8 +5534,8 @@
         "estimated_tokens_body": 1529,
         "estimated_tokens_total": 1593
       },
-      "auto_score": 70,
-      "composite_score": 70,
+      "auto_score": 69,
+      "composite_score": 69,
       "referenced_by": [
         "design-principles",
         "syntax-patterns",
@@ -6598,10 +6598,10 @@
       "health_status": "healthy",
       "last_checked": "2026-03-26T00:00:00Z",
       "status": "active",
-      "auto_score": 67,
+      "auto_score": 66,
       "manual_rating": null,
       "manual_notes": null,
-      "composite_score": 67,
+      "composite_score": 66,
       "depends_on": [
         "history-builder",
         "world-bible",
